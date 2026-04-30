@@ -26,7 +26,7 @@
 | Prior bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
 | Last bounded item | `DEL-02-02 - Unit system and dimensional-analysis core contract` |
-| Last bounded item commit | Not committed; file-state handling requires CHANGE |
+| Last bounded item commit | `a458cba schema: tighten unit system contract` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -253,8 +253,8 @@ Remaining open items:
   temperature semantics, gauge/absolute pressure semantics, angle/rotation
   treatment, canonical calculation basis, schema file layout, diagnostic-code
   namespace, and human decision owner remain `TBD` or decision-gated.
-- Deliverable file-state changes are not committed; route staging/commit
-  through `CHANGE` if the human approves.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `a458cba schema: tighten unit system contract`.
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -278,9 +278,9 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Route current file-state handling through `CHANGE` if the human wants the
-   `DEL-02-02` bounded item staged/committed. Do not commit without explicit
-   `APPROVE:` action list.
+1. Route the `DEL-02-02` handoff correction commit through `CHANGE` if the
+   human wants the updated commit hash captured in git. Do not commit without
+   explicit `APPROVE:` action list.
 2. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.
