@@ -1,34 +1,40 @@
 ---
 doc_id: PLAN-DEV-001-PRODUCT-DEVELOPMENT-DISPATCH
 doc_kind: plan.workflow
-status: draft_for_human_review
+status: current_post_dag_control_plane_basis
 created: 2026-04-30
+updated: 2026-04-30
 authority: human_requested
 active_decomposition: docs/_Decomposition/SOFTWARE_DECOMP.md
 active_revision: "0.4"
 depends_on:
   - execution/_DAG/DAG-001/
+  - execution/_DAG/DAG-001/APPROVAL_RECORD.md
 ---
 
 # DEV-001 Product Development Dispatch Plan
 
 ## Purpose
 
-This plan bridges the completed `DAG-001` coordination draft into governed software-product development.
+This plan bridges the approved `DAG-001` coordination basis into governed
+software-product development.
 
 It answers:
 
-> What has to happen before `WORKING_ITEMS` and `TASK` begin implementing OpenPipeStress deliverables as product code and supporting artifacts?
+> What must happen before `WORKING_ITEMS` and `TASK` begin implementing
+> OpenPipeStress deliverables as product code and supporting artifacts?
 
-It does not itself implement product code, edit deliverable production documents, compute blocker queues, or mark lifecycle states.
+It does not itself implement product code, edit deliverable production
+documents, mutate deliverable-local dependency registers, or mark lifecycle
+states.
 
 ## Current State
 
-`DAG-001` exists under:
+`DAG-001` is approved under:
 
-`execution/_DAG/DAG-001/`
+`execution/_DAG/DAG-001/APPROVAL_RECORD.md`
 
-Current DAG facts from `execution/_DAG/DAG-001/DAG_Audit.md`:
+Current aggregate DAG facts:
 
 | Fact | State |
 |---|---:|
@@ -43,6 +49,7 @@ Current DAG facts from `execution/_DAG/DAG-001/DAG_Audit.md`:
 | Self-dependencies | 0 |
 | Duplicate active edges | 0 |
 | Orphan nodes | 0 |
+| `DependencyEdges.csv` schema validation | PASS |
 
 Current lifecycle distribution from `_STATUS.md`:
 
@@ -51,74 +58,126 @@ Current lifecycle distribution from `_STATUS.md`:
 | `SEMANTIC_READY` | 13 |
 | `OPEN` | 60 |
 
+Current blocker queue:
+
+| Queue fact | Count |
+|---|---:|
+| Advisory `UNBLOCKED` deliverables | 17 |
+| Advisory `BLOCKED` deliverables | 56 |
+
 Important state constraints:
 
+- `DAG-001` aggregate `DependencyEdges.csv` is the active graph authority for
+  DEV-001 coordination.
+- Blocker computation is enabled from approved `ACTIVE` DAG edges only.
+- `CANDIDATE` edges are retained as non-gating pending later
+  `RECONCILIATION`.
 - `PKG-00` remains `SEMANTIC_READY`, not `ISSUED`.
-- `PKG-00` architecture-basis material may be injected into future sealed briefs through `SCA-001`.
-- Existing deliverable-local `Dependencies.csv` files are absent (`0 / 73`).
-- Existing `_DEPENDENCIES.md` files are stubs with dependency extraction `NOT_RUN_YET`.
-- Blocker computation remains disabled until a human-approved acyclic DAG exists.
+- `PKG-00` architecture-basis material is injected into sealed briefs through
+  `SCA-001` / applicable `AB-00-*` rows.
+- `PKG-00` may be excluded from implementation graph participation and does not
+  require deliverable-local `Dependencies.csv` files.
+- Non-`PKG-00` local `Dependencies.csv` files exist, but are stale and
+  non-authoritative for sequencing until reconciled or refreshed.
 
-## Required Control Sequence
+## Graph Authority
 
-Product-development implementation should not begin through broad autonomous code-writing fan-out yet.
+Use `execution/_DAG/DAG-001/DependencyEdges.csv` as the active coordination
+graph. Use only rows with `Status=ACTIVE` for blocker computation, dependency
+order, and pilot eligibility checks.
 
-The required sequence is:
+Do not use `Status=CANDIDATE` rows for blocker queues, wave placement,
+readiness claims, schedule, staffing, or priority. Candidate rows remain
+decision inputs for later `RECONCILIATION`.
 
-1. **REVIEW DAG-001**
-   - Scope: `execution/_DAG/DAG-001/`
-   - Focus: edge evidence quality, v3.1 schema conformance, active/candidate separation, and whether architecture-basis edges are appropriately scoped.
-   - Output: review summary and findings.
+### DEV-001 Projection
 
-2. **RECONCILE Candidate And Cross-Package Questions**
-   - Scope: candidate warning SCCs and unresolved questions from `DAG_Audit.md`.
-   - Required issues:
-     - `DEL-04-04` / `DEL-04-06` nonlinear diagnostics ordering.
-     - `DEL-10-02` / `DEL-12-01` / `DEL-12-05` adapter, storage, and threat-model ordering.
-     - `DEL-08-05` / `DEL-11-04` protected-content linter and invented example fixture ordering.
-     - `DEL-09-05` / `DEL-10-04` release-gate and CI implementation ordering.
-     - load-case algebra versus rule expression engine reuse.
-   - Output: promote, reject, or retain each candidate edge with rationale.
+A DEV-001 implementation projection may be computed as a derived view:
 
-3. **Run Dependency Closure Audit**
-   - Because `AUDIT_DEP_CLOSURE` currently expects deliverable-local `Dependencies.csv`, choose one audit route:
-     - adapt or wrap the audit to consume aggregate `DependencyEdges.csv`; or
-     - materialize DAG-001 edges into deliverable-local `Dependencies.csv` files through a separately approved workflow.
-   - Do not silently edit deliverable dependency registers during this plan.
+- exclude `PKG-00` nodes;
+- exclude `ARCHITECTURE_BASIS` edges;
+- retain `SCA-001` / `AB-00-*` brief-injection requirements outside the graph.
 
-4. **Human DAG Approval Gate**
-   - Human project authority accepts DAG-001 as the development coordination basis, or requests amendment.
-   - Record the decision in `execution/_DAG/DAG-001/APPROVAL_RECORD.md` or in a `CHANGE`-managed snapshot that explicitly points to the approved DAG files and review/reconciliation evidence.
-   - Only after this gate may blocker/unblocked queue computation be enabled.
+Observed projection facts from the approved aggregate graph:
 
-5. **Update Coordination Handoff State**
-   - After approval is recorded, update `execution/_Coordination/NEXT_INSTANCE_STATE.md` with:
-     - the accepted DAG pointer;
-     - the approval record path;
-     - the selected first development tranche;
-     - any remaining candidate edges or rejected edge decisions;
-     - whether blocker queue computation is still disabled or explicitly enabled by the human.
-   - Do this before starting deliverable-local `WORKING_ITEMS` sessions.
+| Projection fact | State |
+|---|---:|
+| Nodes | 65 |
+| Active edges | 227 |
+| Cycle status | ACYCLIC |
+| Waves | 11 |
 
-6. **Begin Wave-Based Product Development**
-   - Use `TopologicalWaves.md` as dependency order only.
-   - Do not treat waves as schedule, staffing, priority, readiness, or professional approval.
+This projection is not a replacement graph. It is only a cleaner implementation
+view for downstream execution planning.
 
-## Dispatch Model
+## Local Dependency Register Policy
 
-### Role Ownership
+The pre-DAG reconciliation run found that local dependency registers are not
+safe as the sequencing authority:
+
+- one 9-node local active SCC;
+- three bidirectional active pairs;
+- row-value/schema hygiene issues;
+- two local active edges retained as `CANDIDATE` in `DAG-001`;
+- 78 local active pairs absent from `DAG-001`.
+
+Policy for DEV-001:
+
+- local non-`PKG-00` `Dependencies.csv` files are evidence-only until refreshed
+  or reconciled;
+- do not silently edit local dependency registers;
+- if local registers are needed later, route ambiguity to `RECONCILIATION` and
+  approved file repairs to `CHANGE`;
+- if aggregate DAG auditing is needed, use `AUDIT_DEP_CLOSURE` through a wrapper
+  or tool path that consumes aggregate `DAG-001` artifacts.
+
+## Role Ownership
 
 | Role | Responsibility |
 |---|---|
-| `ORCHESTRATOR` | Maintains control-plane visibility, wave/tranche selection, and next-session routing. |
-| `WORKING_ITEMS` | Runs one deliverable-local working session and may dispatch bounded `TASK` subagents. |
+| `ORCHESTRATOR` | Maintains control-plane visibility, graph/projection routing, pilot gate, and next-session handoff. |
+| `WORKING_ITEMS` | Runs one approved deliverable-local working session and may dispatch bounded `TASK` subagents. |
 | `TASK` | Executes one sealed deliverable brief within explicit scope and write targets. |
-| `REVIEW` | Checks deliverable outputs and DAG/governance evidence before advancement. |
-| `RECONCILIATION` | Resolves cross-package conflicts, candidate cycles, stale assumptions, and dependency ambiguity. |
+| `REVIEW` | Checks deliverable outputs and governance evidence before advancement. |
+| `RECONCILIATION` | Resolves candidate edges, local-register divergence, stale assumptions, and dependency ambiguity. |
 | `AUDIT_*` | Runs bounded structural, dependency, governance, and epistemic checks. |
-| `CHANGE` | Owns file-state reports, staging, commits, and snapshots when requested. |
+| `CHANGE` | Owns approved file-state edits, git state reports, staging, commits, and snapshots. |
 
-### Dispatch Rule
+## Post-Approval Control Sequence
+
+Product-development implementation should not begin through broad autonomous
+fan-out. The required sequence is:
+
+1. **Keep control plane aligned**
+   - Confirm `NEXT_INSTANCE_PROMPT.md`, `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`,
+     this plan, and `SOFTWARE_DECOMP.md` all reflect approved `DAG-001` state.
+   - Keep local registers non-authoritative unless a later human ruling changes
+     the policy.
+
+2. **Use approved queue evidence**
+   - Consume `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` for advisory
+     blocked/unblocked state.
+   - Do not recompute queues inside `WORKING_ITEMS` or `TASK` unless that is the
+     explicit approved assignment.
+
+3. **Human pilot launch gate**
+   - The human must explicitly approve launch of the first pilot session.
+   - Current pilot candidate: `DEL-01-01 - Project governance baseline`.
+   - Handoff surface:
+     `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`.
+
+4. **Run one pilot**
+   - Start one `WORKING_ITEMS` session for `DEL-01-01`.
+   - Dispatch at most one bounded `TASK` from that session.
+   - Stay within the authorized write targets and guardrails recorded in the
+     pilot dispatch brief.
+
+5. **Review pilot behavior**
+   - Check sealed-scope behavior, write-scope behavior, evidence/test output,
+     and handoff-state update.
+   - Expand to additional Wave 2 / Wave 3 deliverables only after human review.
+
+## Dispatch Rule
 
 Each product-development `TASK` must be sealed to exactly one deliverable.
 
@@ -136,24 +195,12 @@ Every implementation brief must include:
 - resolved architecture baseline and remaining implementation-level TBDs
 - protected-data and professional-boundary guardrails
 
-### Concurrency Model
-
-After DAG approval, development may fan out only within a human-selected tranche.
-
-Default dispatch policy:
-
-- one `WORKING_ITEMS` session per active deliverable;
-- one or more bounded `TASK` subagents only inside that deliverable's sealed write scope;
-- no cross-deliverable writes by a `TASK`;
-- no package-wide bulk implementation unless each deliverable has a separate sealed brief;
-- rerun dependency extraction or DAG update only for touched deliverables, unless the human authorizes a full refresh.
-- no automatic broad fan-out immediately after DAG approval; prove the dispatch loop with a small pilot first.
-
 ## Initial Development Tranche
 
-The first implementation tranche should prove the dispatch mechanics before broad fan-out.
+The first implementation tranche should prove the dispatch mechanics before
+broad fan-out.
 
-Recommended sequence after DAG approval:
+Recommended sequence:
 
 1. **Wave 2 / governance and schema foundations**
    - `DEL-01-01` Project governance baseline.
@@ -166,19 +213,15 @@ Recommended sequence after DAG approval:
    - `DEL-02-03` Code-neutral analysis boundary model.
 
 3. **Wave 4 / persistence, extension, solver kernel, status, and rule schema**
-   - Enter only after Wave 2 and Wave 3 predecessor outputs are sufficient for sealed briefs.
+   - Enter only after Wave 2 and Wave 3 predecessor outputs are sufficient for
+     sealed briefs.
    - Prefer a small pilot subset before larger parallel implementation.
 
-Do not skip foundation waves because later GUI, solver, or packaging work is more product-visible.
-
-`SEMANTIC_READY` is not equivalent to implemented software. For `PKG-02`, the next product-development work is translation of existing semantic/document artifacts into actual schemas, contracts, modules, tests, fixtures, and evidence where authorized by a sealed brief. It is not a rerun of the four-document initialization tranche unless a later review explicitly requests that.
-
-Initial pilot recommendation:
-
-1. Run one `WORKING_ITEMS` session for `DEL-01-01` or `DEL-02-01`.
-2. Dispatch at most one bounded `TASK` subagent from that session.
-3. Review the resulting sealed brief quality, write-scope behavior, test/evidence output, and handoff update before opening additional parallel sessions.
-4. Expand to the rest of Wave 2/3 only after the pilot proves the control loop.
+`SEMANTIC_READY` is not equivalent to implemented software. For `PKG-02`, the
+next product-development work is translation of existing semantic/document
+artifacts into actual schemas, contracts, modules, tests, fixtures, and evidence
+where authorized by a sealed brief. It is not a rerun of four-document
+initialization unless later review explicitly requests that.
 
 ## Sealed TASK Brief Template
 
@@ -205,8 +248,9 @@ RuntimeOverrides:
   DecompositionPath: docs/_Decomposition/SOFTWARE_DECOMP.md
   DecompositionRevision: "0.4"
   DAGPath: execution/_DAG/DAG-001/DependencyEdges.csv
+  DAGApprovalRecord: execution/_DAG/DAG-001/APPROVAL_RECORD.md
   CoordinationMode: FULL_GRAPH
-  BlockerComputation: DISABLED_UNTIL_HUMAN_APPROVED_DAG
+  BlockerComputation: ENABLED_ACTIVE_EDGES_ONLY
   ScopeChangeID: SCA-001
 
 CustomInstructions:
@@ -215,7 +259,8 @@ CustomInstructions:
   - Treat protected standards/code data as out of scope.
   - Unknown engineering values remain `TBD`.
   - Do not claim certification, approval, sealing, or code compliance for reliance.
-  - Do not edit files outside this deliverable folder.
+  - Do not edit files outside this deliverable folder unless explicitly authorized in the sealed brief.
+  - Do not recompute or mutate blocker queues unless explicitly assigned.
 
 AllowedWriteTargets:
   - <deliverable-local implementation files>
@@ -230,56 +275,46 @@ ExpectedOutputs:
 
 EXCLUSIONS:
   - No protected standards text, tables, examples, or proprietary engineering values.
-  - No edits outside the sealed deliverable path.
+  - No edits outside the sealed write scope.
   - No lifecycle state transition unless explicitly authorized by the human.
-  - No blocked/unblocked queue computation.
+  - No local dependency-register edits unless explicitly assigned.
 ```
-
-## Acceptance Checks For DEV-001 Handoff
-
-This plan is ready to hand to a next session agent when:
-
-- DAG-001 output paths are explicitly listed.
-- REVIEW, RECONCILIATION, AUDIT, human approval, and implementation dispatch are separated.
-- The required DAG approval record location is explicit.
-- The coordination handoff update after DAG approval is explicit.
-- The role boundary among `ORCHESTRATOR`, `WORKING_ITEMS`, and `TASK` is explicit.
-- The first tranche is identified without treating it as a schedule or readiness queue.
-- The first tranche starts as a pilot, not broad automatic fan-out.
-- The sealed `TASK` brief template is available for future dispatches.
-- The plan confirms no product-code implementation occurs before DAG approval.
 
 ## Next Session Starter Prompt
 
 ```markdown
-Continue as ORCHESTRATOR for the OpenPipeStress SOFTWARE workflow.
+Continue as ORCHESTRATOR for the OpenPipeStress DEV-001 control plane.
 
 Read:
 1. INIT.md
 2. AGENTS.md
 3. agents/AGENT_ORCHESTRATOR.md
 4. agents/AGENT_WORKING_ITEMS.md
-5. agents/AGENT_TASK.md
-6. agents/AGENT_REVIEW.md
-7. agents/AGENT_RECONCILIATION.md
-8. agents/AGENT_AUDIT_DEP_CLOSURE.md
-9. docs/CONTRACT.md
+5. agents/AGENT_RECONCILIATION.md
+6. agents/AGENT_AUDIT_DEP_CLOSURE.md
+7. agents/AGENT_CHANGE.md
+8. docs/CONTRACT.md
+9. docs/IP_AND_DATA_BOUNDARY.md
 10. docs/_Decomposition/SOFTWARE_DECOMP.md
-11. execution/_Coordination/NEXT_INSTANCE_PROMPT.md
-12. execution/_Coordination/NEXT_INSTANCE_STATE.md
-13. execution/_DAG/DAG-001/DAG_Audit.md
-14. execution/_DAG/DAG-001/Cycle_Report.md
-15. execution/_DAG/DAG-001/TopologicalWaves.md
-16. plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
+11. execution/_Coordination/_COORDINATION.md
+12. execution/_Coordination/NEXT_INSTANCE_PROMPT.md
+13. execution/_Coordination/NEXT_INSTANCE_STATE.md
+14. execution/_DAG/DAG-001/APPROVAL_RECORD.md
+15. execution/_DAG/DAG-001/DAG_Audit.md
+16. execution/_DAG/DAG-001/Cycle_Report.md
+17. execution/_DAG/DAG-001/TopologicalWaves.md
+18. execution/_DAG/DAG-001/DependencyEdges.csv
+19. execution/_Coordination/DEV-001_BLOCKER_QUEUE.md
+20. execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md
+21. plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
 
 Objective:
-Prepare DAG-001 for human approval and product-development dispatch.
+Confirm the active control state and ask for the next human gate:
+pilot launch, reconciliation, aggregate-DAG audit wrapper, or pause.
 
-Do not implement product code yet.
-Run the control sequence from DEV-001:
-REVIEW DAG-001, route candidate loops to RECONCILIATION, determine the dependency-closure audit route, record human DAG approval if granted, update NEXT_INSTANCE_STATE.md with the accepted DAG and selected pilot tranche, and prepare the first sealed WORKING_ITEMS/TASK dispatch only after approval is recorded.
-
-Confirm explicitly that no blocker queue is computed until the human approves the acyclic DAG.
+Do not launch WORKING_ITEMS, dispatch TASK, edit deliverable-local dependency
+registers, change lifecycle state, or implement product code unless the human
+explicitly approves that next action.
 ```
 
 ## Non-Goals
@@ -288,7 +323,7 @@ This plan does not:
 
 - authorize immediate product-code implementation;
 - mark `PKG-00` or any deliverable as `ISSUED`;
-- compute blocked/unblocked queues;
+- promote candidate edges;
 - mutate deliverable-local dependency registers;
 - bulk-edit production documents;
 - resolve protected engineering values or code-specific data;
