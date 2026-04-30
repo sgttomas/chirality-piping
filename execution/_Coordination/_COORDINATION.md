@@ -13,6 +13,7 @@
 **Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
 **Last bounded item:** `DEL-02-01 - Canonical domain model schema`
+**Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
 **Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, `DAG-001`, and the latest human gate
 
 ## Human Rulings
@@ -34,6 +35,7 @@
 - 2026-04-30 - Accept the completed `DEL-01-01` pilot pattern and authorize exactly one next bounded DAG item: `DEL-02-01 - Canonical domain model schema`; broad fan-out remains prohibited.
 - 2026-04-30 - Complete `DEL-02-01 - Canonical domain model schema` as commit `7b256f3 schema: tighten canonical domain model contract`, with handoff correction commit `8f57f85 docs: record del-02-01 commit handoff`.
 - 2026-04-30 - Treat `NEXT_INSTANCE_PROMPT.md` as stable control-loop protocol. Agents derive the current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted `DAG-001` artifacts, the blocker queue when explicitly current, and the latest human approval gate instead of hard-coded next-deliverable language.
+- 2026-04-30 - Treat `init/NEXT_SESSION_PROMPT.md` as a stable bootstrap entrypoint. It should direct fresh sessions into the coordination protocol and mutable handoff state, not encode the next deliverable objective.
 
 ## Operating Rules
 
@@ -46,3 +48,4 @@
 - Treat non-`PKG-00` deliverable-local `Dependencies.csv` files as synchronized mirrors/evidence, not as independent sequencing authority. Resolve dependency ambiguity through `RECONCILIATION`; apply any committed file-state repairs through `CHANGE`.
 - Keep dependency proposals labeled `PROPOSAL` until accepted by the human project authority.
 - Keep `NEXT_INSTANCE_PROMPT.md` objective-neutral. Put mutable item state and immediate handoff facts in `NEXT_INSTANCE_STATE.md`; put durable coordination rulings here.
+- Keep `init/NEXT_SESSION_PROMPT.md` objective-neutral. Use it only as the fresh-session bootstrap into the coordination control loop.

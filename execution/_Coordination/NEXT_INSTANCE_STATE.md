@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-04-30
-**Actor:** ORCHESTRATOR prompt-protocol revision
+**Actor:** ORCHESTRATOR bootstrap-prompt revision
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-01` handoff; awaiting next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-01` handoff; bootstrap and control-loop prompts objective-neutral; awaiting next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -25,6 +25,7 @@
 | Last bounded item | `DEL-02-01 - Canonical domain model schema` |
 | Last bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
+| Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
 ## DAG Evidence
@@ -193,7 +194,12 @@ Remaining open items:
 - DEL-02-01 handoff correction was committed through CHANGE approval as
   `8f57f85 docs: record del-02-01 commit handoff`.
 
-## Next-Instance Prompt Posture
+## Bootstrap and Next-Instance Prompt Posture
+
+`init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint, not an
+item-specific next-objective record. It should direct fresh sessions into the
+coordination protocol and mutable handoff state, then require the agent to
+derive the objective from current evidence and the latest human gate.
 
 `execution/_Coordination/NEXT_INSTANCE_PROMPT.md` is stable control-loop
 protocol, not an item-specific next-objective record. Current objective
@@ -201,10 +207,10 @@ selection must be derived from this mutable state file,
 `execution/_Coordination/_COORDINATION.md`, accepted `DAG-001` artifacts, the
 blocker queue when explicitly current, and the latest human approval gate.
 
-This revision affects only coordination handoff surfaces. The `DEL-02-01`
-dispatch brief and deliverable `MEMORY.md` remain historical evidence for the
-completed bounded item and should not be rewritten just to reflect the prompt
-posture.
+This prompt-posture revision affects only bootstrap and coordination handoff
+surfaces. The `DEL-02-01` dispatch brief and deliverable `MEMORY.md` remain
+historical evidence for the completed bounded item and should not be rewritten
+just to reflect the prompt posture.
 
 ## Immediate Next Actions
 
