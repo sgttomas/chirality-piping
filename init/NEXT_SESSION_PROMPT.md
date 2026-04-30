@@ -1,139 +1,125 @@
 ---
 doc_id: OPS-NEXT-SESSION-PROMPT
 doc_kind: init.next_session_prompt
-status: ready_for_clean_session_pkg12_finish_and_review
+status: ready_for_dev001_acceptance_gate_and_del0101_pilot
 updated: 2026-04-30
-assignment: orchestrator_finish_pkg12_then_review_reconcile_audit
+assignment: dev001_acceptance_gate_then_del0101_pilot
 approved_decomposition: docs/_Decomposition/SOFTWARE_DECOMP.md
 approved_revision: "0.4"
-scope: finish PKG-12, then REVIEW/RECONCILIATION/AUDIT
-exclude_scope: PKG-00
+scope: DEV-001 hardened control plane, human acceptance gate, DEL-01-01 pilot handoff
+next_workflow: ORCHESTRATOR gate; WORKING_ITEMS only after human acceptance
+exclude_scope: broad fan-out, candidate edge promotion, lifecycle transitions, product solver implementation
 ---
 
-# NEXT SESSION PROMPT - Finish PKG-12 and Post-Setup Checks
+# NEXT SESSION PROMPT - DEV-001 Acceptance Gate And DEL-01-01 Pilot
 
 Continue as `ORCHESTRATOR` for the OpenPipeStress SOFTWARE workflow in a fresh session.
 
-The prior session completed and package-validated `PKG-01` through `PKG-11` for the setup workflow. Do not restart those packages unless validation in this new session finds a concrete defect that requires remediation.
+The previous session hardened the DEV-001 dependency control plane and pushed it to `origin/main`.
 
-`PKG-12` was started in the prior session but encountered agent-thread-limit/background-agent behavior. Treat the current `PKG-12` state carefully as described below.
+Pushed commit:
 
-## First Action - Required Reading
+- `24b8012 chore: harden dependency control plane`
 
-Before dispatching any TASK, editing files, or summarizing a plan, read:
+## Current Ground Truth
+
+Treat these as current unless contradicted by newer filesystem or git evidence:
+
+- `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4` remains the active decomposition basis.
+- `DAG-001` remains the execution sequencing and blocker-computation authority.
+- Non-`PKG-00` local `Dependencies.csv` files are synchronized mirrors/evidence from `DAG-001`, not independent sequencing authority.
+- `PKG-00` remains architecture context only and does not receive local `Dependencies.csv` files.
+- Architecture-basis rows targeting `PKG-00` remain preserved in non-`PKG-00` local mirrors as injected context evidence.
+- `CANDIDATE` edges remain non-gating and require later `RECONCILIATION` plus `CHANGE` before promotion.
+- DEV-001 hardening verification passed for targeted tests, aggregate DAG audit, local register schema checks, and local closure audit.
+- The broad repo test suite still had unrelated publication-test failures; do not treat those as blockers to the dependency-control-plane hardening unless the next task enters publication tooling.
+
+## Required Reading
+
+Before acting, read:
 
 1. `INIT.md`
 2. `AGENTS.md`
 3. `agents/AGENT_ORCHESTRATOR.md`
-4. `agents/AGENT_TASK.md`
-5. `agents/AGENT_REVIEW.md`
-6. `agents/AGENT_RECONCILIATION.md`
-7. `agents/AGENT_AUDIT_DEP_CLOSURE.md`
-8. `docs/CONTRACT.md`
-9. `docs/_Decomposition/SOFTWARE_DECOMP.md`
-10. `docs/_Registers/Deliverables.csv`
-11. `docs/_Registers/ScopeLedger.csv`
-12. `docs/_Registers/ContextBudgetQA.csv`
-13. `skills/four-documents/SKILL.md`
-14. `skills/semantic-matrix-build/SKILL.md`
-15. `skills/lens-register/SKILL.md`
-16. `skills/dependency-extract/SKILL.md`
+4. `agents/AGENT_WORKING_ITEMS.md`
+5. `agents/AGENT_TASK.md`
+6. `agents/AGENT_REVIEW.md`
+7. `agents/AGENT_RECONCILIATION.md`
+8. `agents/AGENT_CHANGE.md`
+9. `docs/CONTRACT.md`
+10. `docs/IP_AND_DATA_BOUNDARY.md`
+11. `docs/AGENTIC_DEVELOPMENT_WORKFLOW.md`
+12. `docs/_Decomposition/SOFTWARE_DECOMP.md`
+13. `docs/_Registers/Deliverables.csv`
+14. `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
+15. `execution/_DAG/DAG-001/DEV-001_Aggregate_DAG_Audit.md`
+16. `execution/_DAG/DAG-001/evidence/dev001_aggregate_dag_audit.json`
+17. `execution/_DAG/DAG-001/evidence/dev001_local_materialization_summary.json`
+18. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
+19. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
+20. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+21. `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`
+22. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
-After this read list is complete, explicitly report that reading is complete, summarize the governing constraints, and state the execution plan.
+After reading, state that reading is complete, summarize the governing constraints, and check `git status --short`.
 
-## Current Known State
+## First Gate
 
-Completed and package-validated in the prior session:
+Do not launch `WORKING_ITEMS`, dispatch `TASK`, or edit `DEL-01-01` targets until the human project authority accepts the pushed DEV-001 hardening state.
 
-- `PKG-01` through `PKG-07`
-- `PKG-08`
-- `PKG-09`
-- `PKG-10`
-- `PKG-11`
+If the human has not explicitly accepted the hardening state in the new session, ask for that acceptance directly and stop before dispatch.
 
-`PKG-00` remains out of scope. Use it only as prior architecture-runway evidence where the decomposition says to inject `AB-00-*` constraints.
+If accepted, record the acceptance in the session closeout and proceed to the `DEL-01-01` pilot handoff.
 
-Known tool/process issue:
+## DEL-01-01 Pilot Rule
 
-- `tools/validation/validate_id_format.sh` still expects legacy three-digit IDs and rejects current OpenPipeStress IDs such as `PKG-12` and `DEL-12-01`. Treat this as a tooling mismatch unless the canonical registers change.
+Use `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md` as the controlling pilot brief.
 
-## PKG-12 Handoff State
+Pilot constraints:
 
-The prior session deleted the four-document artifacts from all five `PKG-12` deliverable folders because they were created in error:
+- `ORCHESTRATOR` owns the dispatch gate.
+- `WORKING_ITEMS` owns the actual deliverable work after the acceptance gate.
+- Use one `WORKING_ITEMS` session for `DEL-01-01`.
+- Dispatch at most one bounded `TASK` from that session.
+- Do not do broad fan-out.
+- Do not promote candidate edges.
+- Do not recompute or alter the blocker queue unless explicitly assigned.
+- Do not change lifecycle state unless explicitly authorized.
 
-- `Datasheet.md`
-- `Specification.md`
-- `Guidance.md`
-- `Procedure.md`
+Authorized repo-level write targets for the `DEL-01-01` pilot:
 
-Then only `DEL-12-01` was visibly relaunched. It recreated the four documents and reached `SEMANTIC_READY` on disk with fresh run records. The visible worker was shut down after the filesystem showed completion.
+- `docs/CONTRACT.md`
+- `docs/DIRECTIVE.md`
+- `governance/MAINTAINERS.md`
 
-Current expected `PKG-12` state at handoff:
+Deliverable path:
 
-- `DEL-12-01_Local-first storage and private data paths`
-  - Has recreated four documents.
-  - Has `Dependencies.csv`, `_DEPENDENCIES.md`, `_SEMANTIC.md`, `_SEMANTIC_LENSING.md`, `_STATUS.md`.
-  - Has fresh run records for the five required phases.
-  - Needs verification in the new session before accepting as complete.
-- `DEL-12-02_Private data redaction and export controls`
-  - Has stale non-four-document artifacts from the failed/background run.
-  - Four documents should still be absent.
-  - Treat all existing setup artifacts as stale and overwrite them by rerunning the full TASK workflow.
-- `DEL-12-03_Telemetry off-by-default design`
-  - Has stale non-four-document artifacts from the failed/background run.
-  - Four documents should still be absent.
-  - Treat all existing setup artifacts as stale and overwrite them by rerunning the full TASK workflow.
-- `DEL-12-04_Secret and private-library handling`
-  - Has stale non-four-document artifacts and stale run records from the failed/background run.
-  - Four documents should still be absent.
-  - Treat all existing setup artifacts as stale and overwrite them by rerunning the full TASK workflow.
-- `DEL-12-05_Security threat model`
-  - Has stale non-four-document artifacts and stale run records from the failed/background run.
-  - Four documents should still be absent.
-  - Treat all existing setup artifacts as stale and overwrite them by rerunning the full TASK workflow.
+- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-01_Project governance baseline`
 
-Before dispatching `PKG-12`, inspect the package folders and confirm this state. If a file state differs, report it and adapt conservatively.
+Applicable architecture basis:
 
-## Required PKG-12 Workflow
+- `AB-00-01`
+- `AB-00-02`
+- `AB-00-06`
+- `AB-00-08`
 
-For each `PKG-12` deliverable, dispatch bounded `TASK` work with explicit sealed scope and explicit write scope. Existing artifacts inside the assigned deliverable folder may be overwritten. Do not edit repo-level product artifacts.
+## Guardrails
 
-Required sequence per deliverable:
+- No protected standards text, protected code data, proprietary engineering values, private project data, real secrets, or private libraries.
+- No certification, sealing, approval, code-compliance, or professional-reliance claims.
+- No lifecycle transition without explicit human authorization.
+- No broad implementation work outside `DEL-01-01`.
+- Keep candidate edges non-gating.
+- Preserve `DAG-001` as sequencing authority and local `Dependencies.csv` files as mirrors/evidence.
+- Route dependency ambiguity to `RECONCILIATION`.
+- Route committed file-state changes through `CHANGE`.
 
-1. `four-documents` with `RUN_PASSES=P1_P2`
-2. `semantic-matrix-build`
-3. `lens-register`
-4. `four-documents` with `RUN_PASSES=P3_ONLY`
-5. `dependency-extract`
+## Expected Closeout
 
-Recommended start:
+Closeout must include:
 
-1. Verify `DEL-12-01` artifacts and run `validate_dependencies_schema.py` on its `Dependencies.csv`.
-2. If `DEL-12-01` passes, do not rerun it.
-3. Relaunch `DEL-12-02` through `DEL-12-05` as clean TASK dispatches, allowing overwrite inside each deliverable folder.
-4. If any spawn call reports thread-limit or failed launch, stop dispatching immediately and inspect filesystem state before continuing.
-
-## PKG-12 Guardrails
-
-- No product implementation during this workflow.
-- Do not mark any deliverable `ISSUED`.
-- Preserve local-first design; no cloud operation unless separately approved.
-- Telemetry default is no telemetry. Any telemetry design requires explicit human approval and must be opt-in.
-- Do not create real secrets, real private libraries, real private project data, or protected standards content.
-- Do not claim legal sufficiency, engineering certification, code compliance, approval, seal, or professional reliance.
-- Keep all edits inside the assigned deliverable folder unless the human explicitly expands scope.
-
-## After PKG-12
-
-When `PKG-12` is complete:
-
-1. Run package-level validation for `PKG-12`:
-   - all five `_STATUS.md` files show `Current State: SEMANTIC_READY`;
-   - every `Dependencies.csv` passes `tools/validation/validate_dependencies_schema.py`;
-   - scan for `MatrixError: [1-9]`, `MATRIX_ERROR`, `run-status: PENDING`, `run-status: FAILED`, `FAILED_INPUTS`, `OPS-K_MISSING`, and `Current State: ISSUED`.
-2. Run REVIEW over the setup evidence.
-3. Run RECONCILIATION over cross-package dependencies, stale assumptions, terminology conflicts, and `PROPOSAL` dependency rows.
-4. Run AUDIT dependency-closure checks.
-5. Report package/deliverable completion, validation results, review/reconciliation/audit findings, and remaining human rulings.
-
-Do not resume product implementation until REVIEW, RECONCILIATION, and AUDIT are complete.
+- whether human acceptance of DEV-001 hardening was granted;
+- whether `DEL-01-01` pilot was launched or held;
+- exact files changed, if any;
+- tests/audits run and their results;
+- any remaining human rulings or blockers.
