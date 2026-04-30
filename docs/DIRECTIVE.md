@@ -102,9 +102,23 @@ Agents and software must stop and escalate to a human when:
 - a user request would require copying protected code text, tables, figures, or examples into public artifacts;
 - a claim would overstate what the available evidence supports.
 
-## 6. Reference basis
+## 6. Governance baseline
 
-- `INTENT.md` and `PRD.md` define the product intent and product requirements.
-- `PROFESSIONAL_ENGINEERING.md` and `CHIRALITY_FRAMEWORK.md` define the professional-accountability lens: AI/software assists; humans warrant and authenticate.
-- `AGENT_SOFTWARE_DECOMP.md` defines the decomposition method: flat packages, small deliverables, stable IDs, context envelopes, and coverage telemetry.
+OpenPipeStress is intended to be a free and open-source project. The exact open-source license, contributor certification mechanism, release signing process, maintainer roster, and maintainer quorum remain `TBD` until the human project authority records those decisions.
 
+Governance artifacts must preserve these boundaries:
+
+- Maintainer approval is project governance only; it is not professional engineering approval of a piping calculation.
+- Release labels describe software maturity and validation evidence only; they must not imply code compliance, certification, endorsement, sealing, or project-specific engineering acceptance.
+- Public contribution review must check source, provenance, redistribution rights, protected-content risk, private-data risk, and test evidence before merge.
+- Public releases must include known limitations, validation status, data-boundary notices, and professional-responsibility notices.
+- Private rule packs, material data, component data, owner standards, and project models remain user-controlled unless the user intentionally exports or contributes them with documented rights.
+
+The maintainer policy skeleton is `governance/MAINTAINERS.md`. It records active governance roles, decision surfaces, release gates, and unresolved `TBD` policy choices.
+
+## 7. Reference basis
+
+- `docs/INTENT.md` and `docs/PRD.md` define the product intent and product requirements.
+- `docs/CONTRACT.md` and `docs/TYPES.md` define the current professional-accountability vocabulary and invariant boundaries; the dedicated professional-responsibility policy remains future `DEL-01-04` work.
+- `agents/AGENT_SOFTWARE_DECOMP.md` defines the decomposition method: flat packages, small deliverables, stable IDs, context envelopes, and coverage telemetry.
+- `governance/MAINTAINERS.md` defines the current maintainer-policy skeleton and records unresolved governance decisions as `TBD`.

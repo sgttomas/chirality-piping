@@ -40,6 +40,10 @@ This document defines binding invariants for agentic development of OpenPipeStre
 |OPS-K-REPORT-2|Public report templates and examples must not reproduce protected standards content.|Report protected-content linter; human review|
 |OPS-K-PRIV-1|Private project, material, component, and rule-pack data must not be transmitted or committed publicly by default.|Storage policy; telemetry config; CI checks|
 |OPS-K-PRIV-2|Telemetry is off by default and cannot include private engineering/code data.|Security review; telemetry tests|
+|OPS-K-GOV-1|The project is intended to be free and open source, but the exact license remains `TBD` until recorded by the human project authority.|Maintainer policy; release review|
+|OPS-K-GOV-2|Maintainer authority, release authority, and public-governance decisions must be recorded in public governance artifacts before they are treated as project policy.|Maintainer policy; decision records|
+|OPS-K-GOV-3|Public releases must disclose scope, validation status, known limitations, data-boundary constraints, and professional-responsibility limitations.|Release checklist; human review gate|
+|OPS-K-GOV-4|Maintainers must apply IP, provenance, privacy, and protected-content review before accepting public repository contributions.|Contribution review; protected-content gate|
 |OPS-K-AGENT-1|Agents must not invent engineering values, scope, source citations, or legal conclusions; unknowns become `TBD`.|Agent instructions; review|
 |OPS-K-AGENT-2|Agents must surface conflicts and gaps rather than silently resolving them.|Review; conflict/open issue registers|
 |OPS-K-AGENT-3|Type 2 execution requires sealed context and explicit deliverable scope.|Agentic workflow; orchestration|
@@ -56,6 +60,7 @@ This document defines binding invariants for agentic development of OpenPipeStre
 | Report generation | OPS-K-AUTH-1, OPS-K-MECH-2, OPS-K-REPORT-1, OPS-K-REPORT-2 |
 | Human review gate | OPS-K-AUTH-1, OPS-K-AUTH-2, OPS-K-AGENT-4 |
 | Security/privacy review | OPS-K-PRIV-1, OPS-K-PRIV-2, OPS-K-RULE-2 |
+| Maintainer/release governance | OPS-K-GOV-1, OPS-K-GOV-2, OPS-K-GOV-3, OPS-K-GOV-4, OPS-K-IP-1, OPS-K-IP-2, OPS-K-IP-3, OPS-K-AUTH-1 |
 
 ## 3. Retired invariants
 

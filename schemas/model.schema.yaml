@@ -1,0 +1,1177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpipestress.org/schemas/model.schema.yaml",
+  "title": "OpenPipeStress Canonical Domain Model Schema",
+  "description": "Code-neutral canonical project/model schema for OpenPipeStress. It describes public structure only; code-specific, proprietary, protected, or project-private engineering values are user-supplied and provenance-marked.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "project": {
+      "$ref": "#/$defs/Project"
+    }
+  },
+  "$defs": {
+    "AnalysisStatus": {
+      "type": "string",
+      "enum": [
+        "MODEL_INCOMPLETE",
+        "MECHANICS_SOLVED",
+        "RULE_INPUTS_INCOMPLETE",
+        "USER_RULE_CHECKED",
+        "USER_RULE_FAILED",
+        "HUMAN_REVIEW_REQUIRED",
+        "HUMAN_APPROVED_FOR_PROJECT"
+      ]
+    },
+    "Axis": {
+      "type": "string",
+      "enum": [
+        "X",
+        "Y",
+        "Z",
+        "UX",
+        "UY",
+        "UZ",
+        "RX",
+        "RY",
+        "RZ"
+      ]
+    },
+    "Checksum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha512",
+            "TBD"
+          ]
+        },
+        "canonicalization": {
+          "type": "string",
+          "enum": [
+            "JCS",
+            "NONE",
+            "TBD"
+          ]
+        },
+        "payload_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Combination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "basis",
+        "terms"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "basis": {
+          "type": "string",
+          "enum": [
+            "mechanics",
+            "user_rule_pack",
+            "owner_design_basis",
+            "TBD"
+          ]
+        },
+        "terms": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "load_case_ref",
+              "factor"
+            ],
+            "properties": {
+              "load_case_ref": {
+                "$ref": "#/$defs/Reference"
+              },
+              "factor": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "component_type",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "component_type": {
+          "type": "string",
+          "enum": [
+            "bend",
+            "branch",
+            "reducer",
+            "valve",
+            "flange",
+            "expansion_joint",
+            "rigid",
+            "other",
+            "TBD"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Quantity"
+          }
+        },
+        "mechanics_modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UserSuppliedValue"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "CoordinateSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "axes"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "cartesian",
+            "TBD"
+          ]
+        },
+        "axes": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/Axis"
+          }
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "class",
+        "severity",
+        "source",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "type": "string",
+          "enum": [
+            "SOLVE_BLOCKING",
+            "RULE_CHECK_BLOCKING",
+            "PROVENANCE_WARNING",
+            "ASSUMPTION_WARNING",
+            "NONLINEAR_WARNING",
+            "IP_BOUNDARY_WARNING"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "blocking"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_object": {
+          "$ref": "#/$defs/Reference"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Element": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "element_type",
+        "start_node_ref",
+        "end_node_ref",
+        "material_ref",
+        "section_ref"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "element_type": {
+          "type": "string",
+          "enum": [
+            "straight_pipe",
+            "frame",
+            "rigid",
+            "component_link",
+            "TBD"
+          ]
+        },
+        "start_node_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "end_node_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "material_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "section_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "component_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "local_coordinate_system": {
+          "$ref": "#/$defs/CoordinateSystem"
+        },
+        "result_stations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Quantity"
+          }
+        }
+      }
+    },
+    "Id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]*$"
+    },
+    "LoadCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "load_type",
+        "loads",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "load_type": {
+          "type": "string",
+          "enum": [
+            "weight",
+            "pressure",
+            "temperature",
+            "imposed_displacement",
+            "hydrotest",
+            "wind",
+            "seismic",
+            "user_occasional",
+            "other",
+            "TBD"
+          ]
+        },
+        "loads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LoadRecord"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "LoadRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_ref",
+        "quantity"
+      ],
+      "properties": {
+        "target_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "direction": {
+          "$ref": "#/$defs/Axis"
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "properties",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Quantity"
+          }
+        },
+        "user_supplied_values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UserSuppliedValue"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "coordinate_system",
+        "nodes",
+        "elements",
+        "materials",
+        "sections"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "coordinate_system": {
+          "$ref": "#/$defs/CoordinateSystem"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Node"
+          }
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Element"
+          }
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Component"
+          }
+        },
+        "materials": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Material"
+          }
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Section"
+          }
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Support"
+          }
+        },
+        "load_cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LoadCase"
+          }
+        },
+        "combinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Combination"
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Result"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "coordinates",
+        "degrees_of_freedom"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "coordinates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "x",
+            "y",
+            "z"
+          ],
+          "properties": {
+            "x": {
+              "$ref": "#/$defs/Quantity"
+            },
+            "y": {
+              "$ref": "#/$defs/Quantity"
+            },
+            "z": {
+              "$ref": "#/$defs/Quantity"
+            }
+          }
+        },
+        "degrees_of_freedom": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "UX",
+            "UY",
+            "UZ",
+            "RX",
+            "RY",
+            "RZ"
+          ],
+          "properties": {
+            "UX": {
+              "$ref": "#/$defs/DofState"
+            },
+            "UY": {
+              "$ref": "#/$defs/DofState"
+            },
+            "UZ": {
+              "$ref": "#/$defs/DofState"
+            },
+            "RX": {
+              "$ref": "#/$defs/DofState"
+            },
+            "RY": {
+              "$ref": "#/$defs/DofState"
+            },
+            "RZ": {
+              "$ref": "#/$defs/DofState"
+            }
+          }
+        },
+        "imposed_displacement_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        }
+      }
+    },
+    "DofState": {
+      "type": "string",
+      "enum": [
+        "free",
+        "restrained",
+        "coupled",
+        "imposed",
+        "TBD"
+      ]
+    },
+    "PrivacyClass": {
+      "type": "string",
+      "enum": [
+        "public",
+        "private",
+        "mixed",
+        "TBD"
+      ]
+    },
+    "Project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "unit_system",
+        "privacy_class",
+        "models",
+        "report_settings"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "unit_system": {
+          "$ref": "#/$defs/UnitSystem"
+        },
+        "privacy_class": {
+          "$ref": "#/$defs/PrivacyClass"
+        },
+        "storage_policy": {
+          "type": "string",
+          "enum": [
+            "user_controlled_private",
+            "public_example",
+            "TBD"
+          ]
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Model"
+          }
+        },
+        "rule_pack_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RulePackRef"
+          }
+        },
+        "report_settings": {
+          "$ref": "#/$defs/ReportSettings"
+        },
+        "reports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Report"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Checksum"
+          }
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_name",
+        "source_location",
+        "source_license",
+        "contributor",
+        "contributor_certification",
+        "redistribution_status",
+        "review_status"
+      ],
+      "properties": {
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor_certification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "quarantined"
+          ]
+        }
+      }
+    },
+    "Quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit",
+        "dimension"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "length",
+            "angle",
+            "area",
+            "second_moment_area",
+            "volume",
+            "mass",
+            "density",
+            "force",
+            "moment",
+            "pressure",
+            "stress",
+            "temperature",
+            "temperature_difference",
+            "stiffness",
+            "rotational_stiffness",
+            "acceleration",
+            "time",
+            "dimensionless",
+            "TBD"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object_type",
+        "id"
+      ],
+      "properties": {
+        "object_type": {
+          "type": "string",
+          "enum": [
+            "Project",
+            "Model",
+            "Node",
+            "Element",
+            "Component",
+            "Material",
+            "Section",
+            "Support",
+            "LoadCase",
+            "Combination",
+            "RulePackRef",
+            "Result",
+            "Report",
+            "ReportSettings",
+            "Diagnostic",
+            "external",
+            "TBD"
+          ]
+        },
+        "id": {
+          "$ref": "#/$defs/Id"
+        }
+      }
+    },
+    "Report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "settings_ref",
+        "model_ref",
+        "analysis_statuses",
+        "professional_boundary_notice"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "settings_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "model_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "input_manifest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Checksum"
+          }
+        },
+        "analysis_statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisStatus"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "rule_pack_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RulePackRef"
+          }
+        },
+        "provenance_summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Provenance"
+          }
+        },
+        "professional_boundary_notice": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ReportSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "include_input_manifest",
+        "include_provenance_summary",
+        "include_professional_boundary_notice"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "include_input_manifest": {
+          "type": "boolean"
+        },
+        "include_provenance_summary": {
+          "type": "boolean"
+        },
+        "include_professional_boundary_notice": {
+          "type": "boolean"
+        },
+        "result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "rule_pack_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "result_type",
+        "model_ref",
+        "analysis_statuses"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "result_type": {
+          "type": "string",
+          "enum": [
+            "displacement",
+            "reaction",
+            "element_force",
+            "element_moment",
+            "stress",
+            "rule_check",
+            "diagnostic_summary",
+            "TBD"
+          ]
+        },
+        "model_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "load_case_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "combination_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "target_ref",
+              "quantity"
+            ],
+            "properties": {
+              "target_ref": {
+                "$ref": "#/$defs/Reference"
+              },
+              "quantity": {
+                "$ref": "#/$defs/Quantity"
+              }
+            }
+          }
+        },
+        "analysis_statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisStatus"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "RulePackRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "redistribution_status",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "source_notice": {
+          "type": "string"
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected"
+          ]
+        },
+        "required_input_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "section_type",
+        "properties",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "section_type": {
+          "type": "string",
+          "enum": [
+            "pipe",
+            "rigid",
+            "custom",
+            "TBD"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Quantity"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "support_type",
+        "target_ref",
+        "directions"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "support_type": {
+          "type": "string",
+          "enum": [
+            "anchor",
+            "guide",
+            "line_stop",
+            "restraint",
+            "spring",
+            "gap",
+            "friction",
+            "other",
+            "TBD"
+          ]
+        },
+        "target_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "directions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Axis"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/Quantity"
+          }
+        },
+        "active_state_result_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "UnitSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "base_units"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "description": {
+          "type": "string"
+        },
+        "base_units": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "length",
+            "mass",
+            "force",
+            "temperature",
+            "angle"
+          ],
+          "properties": {
+            "length": {
+              "type": "string",
+              "minLength": 1
+            },
+            "mass": {
+              "type": "string",
+              "minLength": 1
+            },
+            "force": {
+              "type": "string",
+              "minLength": 1
+            },
+            "temperature": {
+              "type": "string",
+              "minLength": 1
+            },
+            "angle": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "UserSuppliedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "quantity",
+        "provenance"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quantity": {
+          "$ref": "#/$defs/Quantity"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    }
+  }
+}

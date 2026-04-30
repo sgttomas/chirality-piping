@@ -4,20 +4,30 @@
 **Dependency tracking mode:** FULL_GRAPH
 **External schedule / coordination artifact:** N/A
 **Default maturity threshold:** SEMANTIC_READY
-**DAG status:** DEFERRED
-**Blocker computation:** DISABLED until a human-approved acyclic DAG exists
+**DAG status:** APPROVED_FOR_DEVELOPMENT_COORDINATION_BASIS
+**Accepted DAG:** `execution/_DAG/DAG-001/`
+**DAG approval record:** `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
+**Blocker computation:** ENABLED from approved `ACTIVE` DAG edges only; `CANDIDATE` edges excluded
+**Default blocker maturity threshold:** SEMANTIC_READY
 
 ## Human Rulings
 
 - 2026-04-30 - Use a Full DAG coordination representation for the OpenPipeStress SOFTWARE workflow.
-- 2026-04-30 - Do not author or infer dependency edges yet.
+- 2026-04-30 - Superseded by `DAG-001` approval: the prior hold on authoring or inferring dependency edges applied before the governed DAG-authoring pass.
 - 2026-04-30 - Use `SEMANTIC_READY` as the development-phase readiness threshold before downstream workflow proceeds.
 - 2026-04-30 - Treat implementation-phase dependency planning as a separate future DAG over the implementation plan, not the current decomposition scaffold.
 - 2026-04-30 - Add `PKG-00 - Software Architecture Runway` as the first workflow gate before `PKG-01` through `PKG-12`.
+- 2026-04-30 - Approve `DAG-001` active acyclic edge set as the OpenPipeStress SOFTWARE development coordination basis.
+- 2026-04-30 - Retain all `DAG-001` candidate edges as non-gating candidates pending later `RECONCILIATION`; do not promote candidate edges through this approval.
+- 2026-04-30 - Select `DEL-01-01` as the first DEV-001 pilot dispatch candidate.
+- 2026-04-30 - ORCHESTRATOR resolves the `DEL-01-01` write-scope gate and owns the control plane; `WORKING_ITEMS` is the persona for actual deliverable work.
+- 2026-04-30 - Authorize repo-level write targets for the `DEL-01-01` pilot: `docs/CONTRACT.md`, `docs/DIRECTIVE.md`, and `governance/MAINTAINERS.md`.
+- 2026-04-30 - Enable blocker queue computation from the approved active DAG only.
 
 ## Operating Rules
 
-- Report lifecycle state while the DAG is deferred.
-- Do not compute blocked/unblocked states until a human-approved acyclic DAG exists.
-- Do not advance `PKG-01` through `PKG-12` package-level document drafting or implementation planning until `PKG-00` reaches the selected architecture readiness threshold or the human explicitly changes the gate.
+- Report lifecycle state and approved DAG coordination facts.
+- Compute blocked/unblocked states only from approved `ACTIVE` DAG edges, current filesystem lifecycle states, and the `SEMANTIC_READY` maturity threshold unless a later human ruling changes the rule.
+- Do not use `CANDIDATE` edges for blocker queues, wave placement, readiness claims, schedule, staffing, or priority.
+- `PKG-00` has reached the selected architecture readiness threshold; downstream product-development work still requires one sealed deliverable scope and explicit write targets.
 - Keep dependency proposals labeled `PROPOSAL` until accepted by the human project authority.

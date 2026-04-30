@@ -97,7 +97,28 @@ The software must not use `CODE_COMPLIANT` as an automatic status.
 | `UNKNOWN_SOURCE` | Source not documented; cannot be relied on without review. |
 | `PROTECTED_CONTENT_SUSPECTED` | Quarantine and escalate before public use. |
 
-## 8. Lifecycle states for development deliverables
+## 8. Canonical domain object registry
+
+The canonical machine-readable domain model is `schemas/model.schema.yaml`. That schema uses JSON Schema 2020-12 and is intentionally code-neutral: it defines public object structure, identifiers, references, unit-bearing values, provenance, diagnostics, results, and report settings, but it does not bundle protected standards data, proprietary catalog values, code-specific allowables, SIF/flexibility tables, or compliance rules.
+
+| Object | Registry meaning | Boundary note |
+|---|---|---|
+| `Project` | Project container for units, privacy/storage posture, models, rule-pack references, report settings, reports, diagnostics, and hashes. | Project-private engineering data remains user controlled unless intentionally contributed with documented rights. |
+| `Model` | Centerline model container for nodes, elements, components, materials, sections, supports, load cases, combinations, results, and diagnostics. | Solver and GUI behavior are downstream consumers, not encoded as claims in the schema. |
+| `Node` | Addressable point with unit-aware coordinates and six-degree-of-freedom state fields. | Missing imposed values or constraints are findings, not silent defaults. |
+| `Element` | Analytical member connecting node references with material, section, optional component, local-coordinate, and result-station hooks. | Mechanics implementation remains separate from schema structure. |
+| `Component` | Piping-specific object such as bend, branch, reducer, valve, flange, expansion joint, rigid, or other user-defined component. | User modifiers and code/manufacturer values require provenance and may be private. |
+| `Material` | User/private or permissively sourced material record with unit-bearing properties and provenance. | Public schema does not provide protected material allowables or code tables. |
+| `Section` | Pipe/section record with unit-bearing properties and provenance. | Protected dimensional tables and proprietary catalog data are not public defaults. |
+| `Support` | Restraint/support record with target reference, directions, unit-bearing properties, and active-state result hook. | Nonlinear solution behavior and convergence semantics are solver-owned. |
+| `LoadCase` | Primitive loading record with target references, units, and provenance. | Code-specific load requirements are user/rule-pack supplied. |
+| `Combination` | Algebraic grouping of load-case factors with an explicit basis. | No public code-specific combination defaults are implied. |
+| `RulePackRef` | Reference to a user/public rule-pack by identity, version, checksum, source notice, redistribution status, and required-input links. | Rule formulas, protected interpretations, and evaluator implementation are outside this schema. |
+| `Result` | Mechanical, diagnostic, stress, reaction, or user-rule-check result envelope with analysis statuses and unit-aware values. | Result statuses do not mean automatic code compliance. |
+| `ReportSettings` | Report configuration for manifests, provenance summaries, notices, result references, and rule-pack references. | Report rendering and professional acceptance records remain separate workflows. |
+| `Report` | Auditable report-facing record for manifests, hashes, statuses, diagnostics, rule-pack refs, provenance summary, and professional-boundary notice. | Reports are decision support and must not claim certification, sealing, or professional approval by the software. |
+
+## 9. Lifecycle states for development deliverables
 
 ```text
 OPEN → INITIALIZED → IN_PROGRESS → CHECKING → ISSUED

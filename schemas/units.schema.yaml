@@ -1,0 +1,653 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpipestress.org/schemas/units.schema.yaml",
+  "title": "OpenPipeStress Unit System and Dimensional Analysis Schema",
+  "description": "Strict JSON syntax schema for unit systems, dimensions, unit-bearing quantities, conversion declarations, dimension-check records, and unit diagnostics. It defines structure only and does not bundle protected standards data, proprietary engineering values, or code-specific defaults.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "unit_system",
+    "dimension_records",
+    "quantity_records",
+    "conversion_declarations",
+    "dimension_checks",
+    "diagnostics"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "unit_system": {
+      "$ref": "#/$defs/UnitSystemRecord"
+    },
+    "dimension_records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/DimensionRecord"
+      }
+    },
+    "quantity_records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/QuantityRecord"
+      }
+    },
+    "conversion_declarations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ConversionDeclaration"
+      }
+    },
+    "dimension_checks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DimensionCheckRecord"
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/UnitDiagnostic"
+      }
+    }
+  },
+  "$defs": {
+    "Actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_type",
+        "actor_id"
+      ],
+      "properties": {
+        "actor_type": {
+          "type": "string",
+          "enum": [
+            "software",
+            "agent",
+            "human",
+            "external_system",
+            "TBD"
+          ]
+        },
+        "actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_name": {
+          "type": "string"
+        }
+      }
+    },
+    "ConversionDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conversion_id",
+        "source_unit_ref",
+        "target_unit_ref",
+        "dimension_id",
+        "transform_kind",
+        "factor_representation",
+        "provenance",
+        "review_status"
+      ],
+      "properties": {
+        "conversion_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "source_unit_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "target_unit_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "transform_kind": {
+          "type": "string",
+          "description": "Conversion form. Offset/reference conversions must be explicit and may remain unsupported until approved.",
+          "enum": [
+            "identity",
+            "multiplicative",
+            "affine",
+            "nonlinear",
+            "unsupported_TBD"
+          ]
+        },
+        "factor_representation": {
+          "type": "string",
+          "description": "Human-reviewed expression or external reference for the conversion factor. This field is structural; public records require provenance and review before reliance.",
+          "minLength": 1
+        },
+        "offset_representation": {
+          "type": "string",
+          "description": "Required only for reviewed affine conversions; otherwise omit or mark the declaration unsupported_TBD."
+        },
+        "valid_for_quantity_kind": {
+          "$ref": "#/$defs/QuantityKind"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
+    },
+    "DiagnosticClass": {
+      "type": "string",
+      "enum": [
+        "SOLVE_BLOCKING",
+        "RULE_CHECK_BLOCKING",
+        "PROVENANCE_WARNING",
+        "ASSUMPTION_WARNING",
+        "IP_BOUNDARY_WARNING",
+        "UNIT_CONTRACT_ERROR",
+        "TBD"
+      ]
+    },
+    "DimensionCheckRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check_id",
+        "operation",
+        "input_quantity_refs",
+        "expected_dimension_id",
+        "outcome",
+        "diagnostics"
+      ],
+      "properties": {
+        "check_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "addition",
+            "subtraction",
+            "comparison",
+            "conversion",
+            "multiplication",
+            "division",
+            "power",
+            "schema_validation",
+            "import_validation",
+            "export_validation",
+            "rule_evaluation",
+            "TBD"
+          ]
+        },
+        "input_quantity_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "expected_dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "actual_dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "pass",
+            "fail",
+            "blocked",
+            "TBD"
+          ]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitDiagnostic"
+          }
+        }
+      }
+    },
+    "DimensionId": {
+      "type": "string",
+      "enum": [
+        "dimensionless",
+        "length",
+        "mass",
+        "time",
+        "temperature",
+        "temperature_interval",
+        "angle",
+        "rotation",
+        "force",
+        "moment",
+        "pressure",
+        "stress",
+        "area",
+        "volume",
+        "density",
+        "linear_stiffness",
+        "rotational_stiffness",
+        "displacement",
+        "velocity",
+        "acceleration",
+        "TBD"
+      ]
+    },
+    "DimensionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension_id",
+        "name",
+        "dimension_vector",
+        "status"
+      ],
+      "properties": {
+        "dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "dimension_vector": {
+          "$ref": "#/$defs/DimensionVector"
+        },
+        "derived_from": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DimensionId"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "proposed",
+            "unsupported_TBD",
+            "TBD"
+          ]
+        }
+      }
+    },
+    "DimensionVector": {
+      "type": "object",
+      "description": "Base-dimension exponent vector. Values are dimensional exponents, not engineering data or conversion constants.",
+      "additionalProperties": false,
+      "required": [
+        "length",
+        "mass",
+        "time",
+        "temperature",
+        "angle",
+        "electric_current",
+        "substance_amount",
+        "luminous_intensity"
+      ],
+      "properties": {
+        "length": {
+          "type": "integer"
+        },
+        "mass": {
+          "type": "integer"
+        },
+        "time": {
+          "type": "integer"
+        },
+        "temperature": {
+          "type": "integer"
+        },
+        "angle": {
+          "type": "integer"
+        },
+        "electric_current": {
+          "type": "integer"
+        },
+        "substance_amount": {
+          "type": "integer"
+        },
+        "luminous_intensity": {
+          "type": "integer"
+        }
+      }
+    },
+    "Id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_name",
+        "source_location",
+        "source_license",
+        "contributor",
+        "contributor_certification",
+        "redistribution_status",
+        "review_status"
+      ],
+      "properties": {
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor_certification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "TBD"
+          ]
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
+    },
+    "QuantityKind": {
+      "type": "string",
+      "enum": [
+        "absolute",
+        "interval",
+        "relative",
+        "ratio",
+        "percentage",
+        "coefficient",
+        "dimensionless",
+        "unit_bearing",
+        "TBD"
+      ]
+    },
+    "QuantityRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quantity_id",
+        "quantity_kind",
+        "magnitude",
+        "unit_ref",
+        "dimension_id",
+        "unit_required",
+        "missing_unit_behavior",
+        "provenance"
+      ],
+      "properties": {
+        "quantity_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "quantity_kind": {
+          "$ref": "#/$defs/QuantityKind"
+        },
+        "magnitude": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "unit_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "unit_required": {
+          "type": "boolean",
+          "description": "False is allowed only for explicitly classified dimensionless, ratio, percentage, or coefficient quantities."
+        },
+        "missing_unit_behavior": {
+          "type": "string",
+          "enum": [
+            "diagnostic_blocking",
+            "diagnostic_warning",
+            "not_applicable_explicit_dimensionless",
+            "TBD"
+          ]
+        },
+        "entered_representation": {
+          "type": "string",
+          "description": "Optional user-entered text preserved for audit or round-trip behavior."
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref_type",
+        "ref_id"
+      ],
+      "properties": {
+        "ref_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref_id": {
+          "$ref": "#/$defs/Id"
+        }
+      }
+    },
+    "ReviewStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected",
+        "quarantined",
+        "TBD"
+      ]
+    },
+    "UnitDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id",
+        "symbol",
+        "dimension_id",
+        "quantity_kind",
+        "provenance",
+        "review_status"
+      ],
+      "properties": {
+        "unit_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Aliases are declarations only. Runtime parsers must reject ambiguous aliases.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "dimension_id": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "quantity_kind": {
+          "$ref": "#/$defs/QuantityKind"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
+    },
+    "UnitDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "diagnostic_id",
+        "code",
+        "diagnostic_class",
+        "severity",
+        "message",
+        "source",
+        "affected_refs"
+      ],
+      "properties": {
+        "diagnostic_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "UNIT_MISSING",
+            "UNIT_UNKNOWN",
+            "UNIT_AMBIGUOUS",
+            "DIMENSION_MISMATCH",
+            "CONVERSION_UNSUPPORTED",
+            "CONVERSION_PROVENANCE_MISSING",
+            "OFFSET_OR_REFERENCE_UNRESOLVED",
+            "DIMENSIONLESS_CLASSIFICATION_REQUIRED",
+            "PROTECTED_UNIT_DATA_SUSPECTED",
+            "TBD"
+          ]
+        },
+        "diagnostic_class": {
+          "$ref": "#/$defs/DiagnosticClass"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "blocking",
+            "TBD"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Actor"
+        },
+        "affected_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "UnitSystemRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_system_id",
+        "name",
+        "basis",
+        "storage_convention",
+        "base_dimensions",
+        "units",
+        "provenance",
+        "review_status"
+      ],
+      "properties": {
+        "unit_system_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "type": "string",
+          "enum": [
+            "project_declared",
+            "user_supplied",
+            "public_permissive",
+            "private_library",
+            "TBD"
+          ]
+        },
+        "storage_convention": {
+          "type": "string",
+          "description": "Persist explicit unit metadata and preserve enough entered representation for audit, round trip, and deterministic canonical JSON handling where payloads are hashed.",
+          "enum": [
+            "entered_units_preserved",
+            "canonical_units_only",
+            "entered_and_canonical",
+            "TBD"
+          ]
+        },
+        "base_dimensions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/DimensionId"
+          },
+          "uniqueItems": true
+        },
+        "units": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UnitDefinition"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpipestress.org/schemas/project_persistence.schema.yaml",
+  "title": "OpenPipeStress Project Persistence Envelope Schema",
+  "description": "Strict JSON syntax schema for versioned project persistence. The envelope defines deterministic JSON round-trip, migration status, canonical hash metadata, private-data markers, and a model payload governed by the canonical model schema. Physical project packaging remains TBD.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "hash",
+    "migration"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "document_kind": {
+      "const": "openpipestress.project_persistence"
+    },
+    "physical_container": {
+      "$ref": "#/$defs/PhysicalContainer"
+    },
+    "project": {
+      "$ref": "#/$defs/ProjectEnvelope"
+    },
+    "hash": {
+      "$ref": "#/$defs/HashMetadata"
+    },
+    "migration": {
+      "$ref": "#/$defs/MigrationStatus"
+    },
+    "round_trip_manifest": {
+      "$ref": "#/$defs/RoundTripManifest"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Diagnostic"
+      }
+    }
+  },
+  "$defs": {
+    "ArtifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref_kind",
+        "ref"
+      ],
+      "properties": {
+        "ref_kind": {
+          "type": "string",
+          "enum": [
+            "schema",
+            "model_payload",
+            "rule_pack",
+            "private_library",
+            "report",
+            "external_file",
+            "TBD"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hash": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "private_data": {
+          "$ref": "#/$defs/PrivateDataMarker"
+        }
+      }
+    },
+    "Checksum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha512",
+            "TBD"
+          ]
+        },
+        "canonicalization": {
+          "type": "string",
+          "enum": [
+            "JCS",
+            "NONE",
+            "TBD"
+          ]
+        },
+        "payload_ref": {
+          "$ref": "#/$defs/ArtifactRef"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "class",
+        "severity",
+        "source",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "type": "string",
+          "enum": [
+            "SCHEMA_VALIDATION",
+            "MIGRATION",
+            "UNIT_METADATA",
+            "PROVENANCE_WARNING",
+            "RULE_CHECK_BLOCKING",
+            "IP_BOUNDARY_WARNING",
+            "PRIVATE_DATA",
+            "PROFESSIONAL_BOUNDARY",
+            "TBD"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "blocking"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_ref": {
+          "$ref": "#/$defs/ArtifactRef"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {
+          "type": "string"
+        }
+      }
+    },
+    "HashMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalization",
+        "project_payload_hash",
+        "hash_manifest"
+      ],
+      "properties": {
+        "canonicalization": {
+          "const": "JCS"
+        },
+        "project_payload_hash": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "hash_manifest": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Checksum"
+          }
+        },
+        "excluded_fields": {
+          "type": "array",
+          "description": "Volatile or environment-specific fields excluded from deterministic payload comparison. Entries require a documented basis; unresolved exclusions remain TBD.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "Id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_.:-]*$"
+    },
+    "MigrationStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source_schema_version",
+        "target_schema_version"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "current",
+            "migration_needed",
+            "migrated",
+            "unsupported_schema",
+            "failed",
+            "newer_than_supported",
+            "TBD"
+          ]
+        },
+        "source_schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "target_schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "migration_framework": {
+          "const": "TBD"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        }
+      }
+    },
+    "ModelPayload": {
+      "description": "Canonical model payload. This schema delegates model structure to schemas/model.schema.yaml and does not redefine that model contract.",
+      "allOf": [
+        {
+          "$ref": "model.schema.yaml"
+        }
+      ]
+    },
+    "PhysicalContainer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "const": "TBD"
+        },
+        "decision_ref": {
+          "type": "string",
+          "enum": [
+            "TBD"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateDataMarker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "redistribution_status",
+        "default_transmission_allowed"
+      ],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_project",
+            "private_rule_pack",
+            "private_library",
+            "protected_suspected",
+            "unknown",
+            "TBD"
+          ]
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "TBD"
+          ]
+        },
+        "default_transmission_allowed": {
+          "const": false
+        },
+        "quarantine_required": {
+          "type": "boolean"
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "quarantined",
+            "TBD"
+          ]
+        }
+      }
+    },
+    "ProjectEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id",
+        "unit_system_ref",
+        "model_payload",
+        "private_data"
+      ],
+      "properties": {
+        "project_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "unit_system_ref": {
+          "$ref": "#/$defs/ArtifactRef"
+        },
+        "model_payload": {
+          "$ref": "#/$defs/ModelPayload"
+        },
+        "rule_pack_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RulePackRef"
+          }
+        },
+        "provenance_manifest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProvenanceRecord"
+          }
+        },
+        "private_data": {
+          "$ref": "#/$defs/PrivateDataMarker"
+        }
+      }
+    },
+    "ProvenanceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_name",
+        "source_location",
+        "source_license",
+        "contributor",
+        "contributor_certification",
+        "redistribution_status",
+        "review_status"
+      ],
+      "properties": {
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor_certification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "TBD"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "quarantined",
+            "TBD"
+          ]
+        }
+      }
+    },
+    "RoundTripManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "serialization",
+        "semantic_equality"
+      ],
+      "properties": {
+        "serialization": {
+          "type": "string",
+          "enum": [
+            "canonical_json_jcs",
+            "TBD"
+          ]
+        },
+        "semantic_equality": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "model_content",
+              "unit_metadata",
+              "loads",
+              "rule_pack_refs",
+              "provenance_metadata",
+              "reproducibility_metadata",
+              "TBD"
+            ]
+          }
+        },
+        "volatile_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "RulePackRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_pack_id",
+        "version",
+        "checksum",
+        "source_note",
+        "private_data"
+      ],
+      "properties": {
+        "rule_pack_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "source_note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_input_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactRef"
+          }
+        },
+        "private_data": {
+          "$ref": "#/$defs/PrivateDataMarker"
+        }
+      }
+    }
+  }
+}
