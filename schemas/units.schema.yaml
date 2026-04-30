@@ -12,6 +12,9 @@
     "quantity_records",
     "conversion_declarations",
     "dimension_checks",
+    "operation_rules",
+    "test_obligations",
+    "open_decisions",
     "diagnostics"
   ],
   "properties": {
@@ -45,6 +48,26 @@
       "type": "array",
       "items": {
         "$ref": "#/$defs/DimensionCheckRecord"
+      }
+    },
+    "operation_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/OperationRule"
+      }
+    },
+    "test_obligations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/TestObligation"
+      }
+    },
+    "open_decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/OpenDecision"
       }
     },
     "diagnostics": {
@@ -176,6 +199,7 @@
             "multiplication",
             "division",
             "power",
+            "dimensionless_classification",
             "schema_validation",
             "import_validation",
             "export_validation",
@@ -324,6 +348,154 @@
       "type": "string",
       "minLength": 1,
       "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"
+    },
+    "OpenDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "topic",
+        "status",
+        "blocking_scope",
+        "required_before",
+        "owner",
+        "notes"
+      ],
+      "properties": {
+        "decision_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "topic": {
+          "type": "string",
+          "enum": [
+            "unit_catalog",
+            "conversion_source_set",
+            "base_dimension_vector",
+            "derived_dimension_rules",
+            "dimensionless_classification",
+            "numeric_representation",
+            "conversion_tolerance_policy",
+            "offset_temperature_semantics",
+            "gauge_absolute_pressure_semantics",
+            "angle_rotation_treatment",
+            "canonical_calculation_basis",
+            "schema_file_layout",
+            "diagnostic_code_namespace",
+            "decision_owner",
+            "TBD"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open_TBD",
+            "proposed",
+            "accepted",
+            "rejected",
+            "deferred",
+            "TBD"
+          ]
+        },
+        "blocking_scope": {
+          "type": "string",
+          "enum": [
+            "schema_freeze",
+            "runtime_implementation",
+            "conversion_execution",
+            "public_data_acceptance",
+            "downstream_consumer",
+            "release_gate",
+            "none",
+            "TBD"
+          ]
+        },
+        "required_before": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner": {
+          "$ref": "#/$defs/Actor"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "OperationRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "compatibility_rule",
+        "unsupported_behavior",
+        "diagnostic_codes",
+        "review_status"
+      ],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "addition",
+            "subtraction",
+            "comparison",
+            "conversion",
+            "multiplication",
+            "division",
+            "power",
+            "dimensionless_classification",
+            "schema_validation",
+            "import_validation",
+            "export_validation",
+            "rule_evaluation",
+            "TBD"
+          ]
+        },
+        "compatibility_rule": {
+          "type": "string",
+          "description": "Machine-readable enough for implementers to route checks; not a protected formula source.",
+          "enum": [
+            "same_dimension_required",
+            "derived_dimension_required",
+            "explicit_dimensionless_classification_required",
+            "unit_registry_lookup_required",
+            "provenance_review_required",
+            "unsupported_until_decision",
+            "TBD"
+          ]
+        },
+        "produces_dimension": {
+          "type": "string",
+          "enum": [
+            "same_as_inputs",
+            "derived_from_inputs",
+            "declared_expected_dimension",
+            "dimensionless_if_explicit",
+            "not_applicable",
+            "TBD"
+          ]
+        },
+        "unsupported_behavior": {
+          "type": "string",
+          "enum": [
+            "blocking_diagnostic",
+            "warning_diagnostic",
+            "quarantine_if_protected_suspected",
+            "defer_TBD",
+            "TBD"
+          ]
+        },
+        "diagnostic_codes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/UnitDiagnosticCode"
+          }
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
     },
     "Provenance": {
       "type": "object",
@@ -538,19 +710,7 @@
           "$ref": "#/$defs/Id"
         },
         "code": {
-          "type": "string",
-          "enum": [
-            "UNIT_MISSING",
-            "UNIT_UNKNOWN",
-            "UNIT_AMBIGUOUS",
-            "DIMENSION_MISMATCH",
-            "CONVERSION_UNSUPPORTED",
-            "CONVERSION_PROVENANCE_MISSING",
-            "OFFSET_OR_REFERENCE_UNRESOLVED",
-            "DIMENSIONLESS_CLASSIFICATION_REQUIRED",
-            "PROTECTED_UNIT_DATA_SUSPECTED",
-            "TBD"
-          ]
+          "$ref": "#/$defs/UnitDiagnosticCode"
         },
         "diagnostic_class": {
           "$ref": "#/$defs/DiagnosticClass"
@@ -585,6 +745,22 @@
           "$ref": "#/$defs/Provenance"
         }
       }
+    },
+    "UnitDiagnosticCode": {
+      "type": "string",
+      "enum": [
+        "UNIT_MISSING",
+        "UNIT_UNKNOWN",
+        "UNIT_AMBIGUOUS",
+        "DIMENSION_MISMATCH",
+        "CONVERSION_UNSUPPORTED",
+        "CONVERSION_PROVENANCE_MISSING",
+        "OFFSET_OR_REFERENCE_UNRESOLVED",
+        "DIMENSIONLESS_CLASSIFICATION_REQUIRED",
+        "PROTECTED_UNIT_DATA_SUSPECTED",
+        "CONVERSION_TEST_GATED",
+        "TBD"
+      ]
     },
     "UnitSystemRecord": {
       "type": "object",
@@ -646,6 +822,82 @@
         },
         "review_status": {
           "$ref": "#/$defs/ReviewStatus"
+        }
+      }
+    },
+    "TestObligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "test_id",
+        "test_kind",
+        "required_for",
+        "fixture_data_policy",
+        "gating_status",
+        "evidence_ref"
+      ],
+      "properties": {
+        "test_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "test_kind": {
+          "type": "string",
+          "enum": [
+            "schema_parse",
+            "quantity_required_fields",
+            "dimension_vector_shape",
+            "dimension_compatibility",
+            "dimension_mismatch_rejection",
+            "dimensionless_classification",
+            "conversion_identity",
+            "conversion_round_trip",
+            "conversion_gated_pending_constants",
+            "alias_ambiguity_rejection",
+            "diagnostic_shape",
+            "provenance_required",
+            "canonical_json_hash_stability",
+            "import_export_validation",
+            "rule_evaluation_unit_mismatch",
+            "forbidden_default_scan",
+            "protected_content_scan",
+            "TBD"
+          ]
+        },
+        "required_for": {
+          "type": "string",
+          "enum": [
+            "schema_contract",
+            "runtime_contract",
+            "adapter_contract",
+            "rule_pack_contract",
+            "persistence_contract",
+            "report_contract",
+            "release_gate",
+            "TBD"
+          ]
+        },
+        "fixture_data_policy": {
+          "type": "string",
+          "enum": [
+            "invented_only",
+            "public_permissive_required",
+            "private_only",
+            "no_numeric_conversion_constants_until_approved",
+            "TBD"
+          ]
+        },
+        "gating_status": {
+          "type": "string",
+          "enum": [
+            "executable_now",
+            "blocked_pending_decision",
+            "blocked_pending_fixture_source",
+            "blocked_pending_runtime",
+            "TBD"
+          ]
+        },
+        "evidence_ref": {
+          "$ref": "#/$defs/Reference"
         }
       }
     }

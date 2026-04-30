@@ -30,6 +30,19 @@ Required operation behavior:
 
 The schema models dimensions with stable identifiers and exponent vectors. The first-pass vocabulary includes common mechanics dimensions such as length, mass, time, temperature, angle, force, moment, pressure, stress, area, volume, density, stiffness, displacement, velocity, and acceleration. This vocabulary is a contract surface for checking structure; it is not a source of engineering design values.
 
+## Operation Rules
+
+The unit contract records dimensional operation rules explicitly. Implementations must not hide compatibility behavior in adapters, GUI code, report rendering, or rule-pack evaluation.
+
+Required operation categories are:
+
+- same-dimension operations: addition, subtraction, comparison, and conversion;
+- derived-dimension operations: multiplication, division, and power where implemented;
+- boundary validation operations: schema validation, import validation, export validation, and rule evaluation;
+- explicit classification operations for dimensionless, ratio, percentage, and coefficient values.
+
+Unsupported operation semantics are represented as blocking diagnostics or `TBD` decisions. Deterministic conversion tests that require numeric conversion constants remain gated until the unit catalog, factor representation, and tolerance policy are accepted.
+
 ## Conversion Provenance
 
 Conversion declarations are records, not hidden constants. Each conversion declaration must identify:
@@ -55,6 +68,22 @@ Missing solve-required or rule-check-required units are findings, never silent d
 
 The schema diagnostic codes include missing unit, unknown unit, ambiguous unit, dimension mismatch, unsupported conversion, missing conversion provenance, unresolved offset/reference semantics, required dimensionless classification, and suspected protected unit data.
 
+## Open Decisions
+
+The following decisions remain contract-visible and must not be filled by implementation convenience:
+
+- unit catalog and conversion source set;
+- base dimension vector and derived-dimension rules;
+- dimensionless, ratio, percentage, coefficient, angle, and rotation semantics;
+- numeric representation for magnitudes and conversion factors;
+- conversion tolerance policy;
+- offset temperature and gauge/absolute pressure behavior;
+- canonical calculation basis and storage shape;
+- schema file layout and diagnostic-code namespace;
+- human decision owner or review gate for these topics.
+
+Each accepted decision that affects public schemas, persistent files, or external contracts should be recorded through the project ADR or equivalent decision-record discipline.
+
 ## Downstream Obligations
 
 Solver, load, stress, rule-pack, report, GUI, API, and adapter implementations must preserve this boundary:
@@ -64,6 +93,6 @@ Solver, load, stress, rule-pack, report, GUI, API, and adapter implementations m
 - imports and exports must reject or flag missing, ambiguous, or incompatible units;
 - rule evaluators must be unit-aware and deterministic;
 - reports must disclose unit-system identity, diagnostics, assumptions, and provenance where relevant;
-- tests must cover schema parsing, required dimensions, required quantity fields, incompatible dimensions, missing-unit diagnostics, deterministic conversion behavior once constants are approved, and absence of silent defaults.
+- tests must cover schema parsing, required dimensions, required quantity fields, operation rules, incompatible dimensions, dimensionless classification, missing-unit diagnostics, alias ambiguity rejection once a namespace is approved, deterministic conversion behavior once constants are approved, and absence of silent defaults.
 
 Open decisions remain `TBD`: final unit catalog, conversion constants, numeric representation, tolerances, offset temperature behavior, gauge pressure behavior, angle/rotation treatment, canonical calculation units, alias policy, and human decision owner.

@@ -92,6 +92,9 @@ def main():
         "quantity_records",
         "conversion_declarations",
         "dimension_checks",
+        "operation_rules",
+        "test_obligations",
+        "open_decisions",
         "diagnostics",
     }
     assert required_root <= set(schema["required"])
@@ -133,7 +136,71 @@ def main():
         "review_status",
     } <= set(conversion["required"])
 
-    diagnostic_codes = set(defs["UnitDiagnostic"]["properties"]["code"]["enum"])
+    operation = defs["OperationRule"]
+    assert {
+        "operation",
+        "compatibility_rule",
+        "unsupported_behavior",
+        "diagnostic_codes",
+        "review_status",
+    } <= set(operation["required"])
+    assert {
+        "same_dimension_required",
+        "derived_dimension_required",
+        "explicit_dimensionless_classification_required",
+        "unsupported_until_decision",
+    } <= set(operation["properties"]["compatibility_rule"]["enum"])
+    assert {
+        "addition",
+        "subtraction",
+        "comparison",
+        "conversion",
+        "multiplication",
+        "division",
+        "power",
+        "dimensionless_classification",
+        "import_validation",
+        "export_validation",
+        "rule_evaluation",
+    } <= set(operation["properties"]["operation"]["enum"])
+
+    test_obligation = defs["TestObligation"]
+    assert {
+        "test_id",
+        "test_kind",
+        "required_for",
+        "fixture_data_policy",
+        "gating_status",
+        "evidence_ref",
+    } <= set(test_obligation["required"])
+    assert "conversion_gated_pending_constants" in test_obligation["properties"]["test_kind"]["enum"]
+    assert (
+        "no_numeric_conversion_constants_until_approved"
+        in test_obligation["properties"]["fixture_data_policy"]["enum"]
+    )
+    assert "blocked_pending_decision" in test_obligation["properties"]["gating_status"]["enum"]
+
+    open_decision = defs["OpenDecision"]
+    assert {
+        "decision_id",
+        "topic",
+        "status",
+        "blocking_scope",
+        "required_before",
+        "owner",
+        "notes",
+    } <= set(open_decision["required"])
+    assert {
+        "unit_catalog",
+        "base_dimension_vector",
+        "dimensionless_classification",
+        "conversion_tolerance_policy",
+        "offset_temperature_semantics",
+        "gauge_absolute_pressure_semantics",
+        "diagnostic_code_namespace",
+    } <= set(open_decision["properties"]["topic"]["enum"])
+
+    diagnostic_codes = set(defs["UnitDiagnosticCode"]["enum"])
     assert {
         "UNIT_MISSING",
         "UNIT_UNKNOWN",
@@ -142,7 +209,9 @@ def main():
         "CONVERSION_UNSUPPORTED",
         "DIMENSIONLESS_CLASSIFICATION_REQUIRED",
         "PROTECTED_UNIT_DATA_SUSPECTED",
+        "CONVERSION_TEST_GATED",
     } <= diagnostic_codes
+    assert defs["UnitDiagnostic"]["properties"]["code"]["$ref"] == "#/$defs/UnitDiagnosticCode"
 
     all_text = "\n".join(walk_strings(schema)).lower()
     for forbidden in FORBIDDEN_DEFAULT_TERMS:

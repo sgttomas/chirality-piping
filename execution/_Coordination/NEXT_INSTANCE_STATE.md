@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-04-30
-**Actor:** ORCHESTRATOR bootstrap-prompt revision
+**Actor:** ORCHESTRATOR DEL-02-02 bounded execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-01` handoff; bootstrap and control-loop prompts objective-neutral; awaiting next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-02` bounded execution; awaiting CHANGE routing for file-state handling/commit and the next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -22,9 +22,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Last bounded item | `DEL-02-01 - Canonical domain model schema` |
-| Last bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
+| Prior bounded item | `DEL-02-01 - Canonical domain model schema` |
+| Prior bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
+| Last bounded item | `DEL-02-02 - Unit system and dimensional-analysis core contract` |
+| Last bounded item commit | Not committed; file-state handling requires CHANGE |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -194,6 +196,66 @@ Remaining open items:
 - DEL-02-01 handoff correction was committed through CHANGE approval as
   `8f57f85 docs: record del-02-01 commit handoff`.
 
+## DEL-02-02 Bounded Item Closeout
+
+Human project authority authorized exactly one bounded DEV-001 dispatch:
+`DEL-02-02 - Unit system and dimensional-analysis core contract`. Broad
+fan-out, lifecycle transition, and candidate-edge promotion were not
+authorized.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-02.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
+  `DEL-00-07`, `DEL-00-08`, and `DEL-02-01`.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `schemas/units.schema.yaml`
+- `core/units/README.md`
+- `docs/SPEC.md`
+- `tests/test_units_schema.py`
+- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-02_Unit system and dimensional-analysis core contract/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-02.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `python3 tests/test_units_schema.py` passed.
+- `python3 tests/test_model_schema.py` passed.
+- `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tests/test_persistence_schema.py` passed.
+- `python3 tests/test_analysis_boundary_schema.py` passed.
+- `python3 tests/test_plugin_manifest_schema.py` passed.
+- `git diff --check` passed.
+- Focused forbidden-claim/protected-code-name scan over affected DEL-02-02
+  product surfaces found only negative boundary statements and provenance field
+  names, not product certification/compliance claims.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, or automatic code-compliance/certification/sealing
+  claims were introduced.
+
+Remaining open items:
+
+- Unit catalog and conversion source set remain `TBD`.
+- Base dimension vector, derived-dimension rules, dimensionless
+  classification, numeric representation, conversion tolerance policy, offset
+  temperature semantics, gauge/absolute pressure semantics, angle/rotation
+  treatment, canonical calculation basis, schema file layout, diagnostic-code
+  namespace, and human decision owner remain `TBD` or decision-gated.
+- Deliverable file-state changes are not committed; route staging/commit
+  through `CHANGE` if the human approves.
+
 ## Bootstrap and Next-Instance Prompt Posture
 
 `init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint, not an
@@ -216,17 +278,20 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Apply the latest human gate. If no new item is explicitly authorized,
+1. Route current file-state handling through `CHANGE` if the human wants the
+   `DEL-02-02` bounded item staged/committed. Do not commit without explicit
+   `APPROVE:` action list.
+2. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.
-2. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
+3. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
    `_COORDINATION.md`, `DAG-001`, `DEV-001_BLOCKER_QUEUE.*`, and
    `docs/_Registers/Deliverables.csv`.
-3. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
+4. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
    before any `WORKING_ITEMS` or `TASK` execution.
-4. Decide separately whether to track or ignore the untracked pre-DAG
+5. Decide separately whether to track or ignore the untracked pre-DAG
    reconciliation artifacts through CHANGE.
-5. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
+6. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
    pre-DAG artifact handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is authorized by the

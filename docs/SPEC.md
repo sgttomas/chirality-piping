@@ -83,9 +83,50 @@ Minimum domain objects:
 | `RulePack` | User-defined code/design-basis check | required inputs, formulas, allowables, status, checksum |
 | `Report` | Auditable calculation output | input manifest, warnings, results, rule-pack refs, notices |
 
-## 4. Solver core requirements
+## 4. Unit system and dimensional analysis
 
-### 4.1 Degrees of freedom
+The domain core owns the unit contract. Every physical value that crosses a
+schema, application-service, solver, import/export, report, or rule-evaluation
+boundary must carry explicit unit metadata unless the field is explicitly
+classified as dimensionless, ratio, percentage, or coefficient.
+
+The unit contract is represented by `schemas/units.schema.yaml` and the
+`core/units` module contract. It defines:
+
+- unit-system records, unit definitions, dimensions, and dimension vectors;
+- unit-bearing quantity records with magnitude, unit reference, dimension,
+  missing-unit behavior, and provenance;
+- conversion declarations with transform kind, provenance, redistribution
+  status, and review status;
+- dimension-check records and unit diagnostics;
+- operation rules for same-dimension operations, derived-dimension operations,
+  schema/import/export validation, and rule evaluation;
+- test obligations and open decisions that block downstream schema/API freeze
+  where decisions remain `TBD`.
+
+Dimensionless values are not a fallback for missing units. Missing or ambiguous
+unit metadata on a unit-bearing physical value is a diagnostic, and solve- or
+rule-check-required missing unit data must not be silently supplied.
+
+Conversion data is governed data. Public unit or conversion records require
+provenance, redistribution status, contributor certification, and review
+status. Suspected protected standards content, proprietary vendor data, or
+undocumented commercial data must be quarantined and escalated under the
+project IP/data-boundary policy.
+
+Deterministic conversion tests that require numeric constants remain gated until
+the project has accepted the unit catalog, conversion source set, numeric
+representation, and tolerance policy. Until accepted, unsupported conversion
+semantics such as offset temperature, gauge versus absolute pressure, and
+angle/rotation treatment remain explicit `TBD` decisions or blocking
+diagnostics.
+
+Unit checks support mechanics and rule evaluation. They do not certify, seal,
+approve, authenticate, or declare engineering code compliance for reliance.
+
+## 5. Solver core requirements
+
+### 5.1 Degrees of freedom
 
 Each node carries six degrees of freedom:
 
@@ -93,29 +134,29 @@ Each node carries six degrees of freedom:
 Ux, Uy, Uz, Rx, Ry, Rz
 ```
 
-### 4.2 Straight pipe/frame element
+### 5.2 Straight pipe/frame element
 
 The straight-pipe element shall support axial, torsional, and bending stiffness in local coordinates, local-to-global transformation, thermal strain, distributed loads, and element end-force recovery.
 
-### 4.3 Bend and component treatment
+### 5.3 Bend and component treatment
 
 The open core shall provide fields and mechanics interfaces for bends, branches, reducers, valves, flanges, expansion joints, and rigid elements. User-supplied SIFs, flexibility factors, stress indices, manufacturer stiffnesses, and local data are inputs, not public defaults.
 
-### 4.4 Nonlinear supports
+### 5.4 Nonlinear supports
 
 Nonlinear supports shall use an active-set or equivalent iterative method. Results must record active/inactive states, gaps, lift-off, friction state, convergence tolerance, iteration count, and non-convergence warnings.
 
-### 4.5 Numerical quality
+### 5.5 Numerical quality
 
 Solver results must be deterministic for the same model, units, solver version, and rule-pack inputs. Sparse-solver settings, tolerances, and conditioning warnings must be reportable.
 
-## 5. Loads and stress recovery
+## 6. Loads and stress recovery
 
 Primitive loads include weight, pressure, temperature, imposed displacement, hydrotest, wind, seismic, and user occasional loads. Code-specific load combinations are not public defaults; they are user rule-pack or project inputs.
 
 Stress recovery shall calculate open mechanics quantities such as axial stress, bending stress, torsional shear stress, pressure membrane stresses, and resultants. Code-category equations are rule-pack mappings.
 
-## 6. Rule-pack evaluator
+## 7. Rule-pack evaluator
 
 Rule packs are private or user-owned design-basis artifacts. The public project ships schemas and invented examples only.
 
@@ -137,7 +178,7 @@ report_notice: string
 
 The evaluator must be sandboxed, unit-aware, deterministic, and incapable of arbitrary code execution.
 
-## 7. GUI requirements
+## 8. GUI requirements
 
 The GUI shall expose:
 
@@ -162,7 +203,7 @@ Missing data warnings must distinguish:
 | `NONLINEAR_WARNING` | Convergence or active-state uncertainty exists. |
 | `IP_BOUNDARY_WARNING` | Public contribution/report may contain protected or private data. |
 
-## 8. Reporting and audit
+## 9. Reporting and audit
 
 Reports must include:
 
@@ -179,7 +220,7 @@ Reports must include:
 
 Reports must not reproduce protected code text, protected standards tables, or proprietary formulas in public templates/examples.
 
-## 9. Verification and validation mechanics
+## 10. Verification and validation mechanics
 
 The project shall maintain:
 
@@ -190,7 +231,7 @@ The project shall maintain:
 - report reproducibility tests;
 - public validation manual using original/public/permissive examples only.
 
-## 10. Agentic development mechanics
+## 11. Agentic development mechanics
 
 Downstream implementation should use the decomposition package as the source of work identity:
 
@@ -210,7 +251,7 @@ PKG-XX_<PackageLabel>/
 
 Each deliverable must be executable by a bounded Type 2 specialist. If a deliverable becomes cross-domain or too large, it must be split or explicitly accepted as a human-approved open issue.
 
-## 11. Acceptance semantics
+## 12. Acceptance semantics
 
 A software increment may be accepted for development use only when:
 
