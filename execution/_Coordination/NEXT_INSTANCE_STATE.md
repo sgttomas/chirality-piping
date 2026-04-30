@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-04-30
-**Actor:** ORCHESTRATOR / WORKING_ITEMS bounded DEL-02-01 closeout
+**Actor:** ORCHESTRATOR prompt-protocol revision
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 single-item execution for `DEL-02-01`; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-01` handoff; awaiting next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -21,9 +21,11 @@
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
-| Pilot pattern | Accepted by human project authority for one next bounded item |
-| Current bounded item | `DEL-02-01 - Canonical domain model schema` |
-| Current bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
+| Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
+| Last bounded item | `DEL-02-01 - Canonical domain model schema` |
+| Last bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
+| DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
+| Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
 ## DAG Evidence
 
@@ -186,20 +188,40 @@ Remaining open items:
 - `C-02-01-002` stale metadata pointer remains unresolved in local references.
 - The physical project package/container and migration framework remain owned by
   persistence work unless later human authority changes that boundary.
-- File-state changes were committed through CHANGE approval as
+- Deliverable file-state changes were committed through CHANGE approval as
   `7b256f3 schema: tighten canonical domain model contract`.
+- DEL-02-01 handoff correction was committed through CHANGE approval as
+  `8f57f85 docs: record del-02-01 commit handoff`.
+
+## Next-Instance Prompt Posture
+
+`execution/_Coordination/NEXT_INSTANCE_PROMPT.md` is stable control-loop
+protocol, not an item-specific next-objective record. Current objective
+selection must be derived from this mutable state file,
+`execution/_Coordination/_COORDINATION.md`, accepted `DAG-001` artifacts, the
+blocker queue when explicitly current, and the latest human approval gate.
+
+This revision affects only coordination handoff surfaces. The `DEL-02-01`
+dispatch brief and deliverable `MEMORY.md` remain historical evidence for the
+completed bounded item and should not be rewritten just to reflect the prompt
+posture.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route the `DEL-02-01` file-state patch through CHANGE for staging/commit
-   approval, or request a revision.
-2. Decide separately whether to track or ignore the untracked pre-DAG
+1. Apply the latest human gate. If no new item is explicitly authorized,
+   present or await a bounded choice rather than selecting one solely from the
+   prompt.
+2. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
+   `_COORDINATION.md`, `DAG-001`, `DEV-001_BLOCKER_QUEUE.*`, and
+   `docs/_Registers/Deliverables.csv`.
+3. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
+   before any `WORKING_ITEMS` or `TASK` execution.
+4. Decide separately whether to track or ignore the untracked pre-DAG
    reconciliation artifacts through CHANGE.
-3. After `DEL-02-01` is reviewed/committed or revised, human project authority
-   must choose the next gate: another one-item bounded tranche,
-   `RECONCILIATION`, pre-DAG artifact handling, or pause.
+5. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
+   pre-DAG artifact handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is authorized by the
 `DEL-02-01` dispatch.
