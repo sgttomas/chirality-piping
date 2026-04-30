@@ -23,7 +23,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted by human project authority for one next bounded item |
 | Current bounded item | `DEL-02-01 - Canonical domain model schema` |
-| Current bounded item commit | Not committed in this session |
+| Current bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
 
 ## DAG Evidence
 
@@ -186,7 +186,8 @@ Remaining open items:
 - `C-02-01-002` stale metadata pointer remains unresolved in local references.
 - The physical project package/container and migration framework remain owned by
   persistence work unless later human authority changes that boundary.
-- File-state changes are uncommitted pending CHANGE approval.
+- File-state changes were committed through CHANGE approval as
+  `7b256f3 schema: tighten canonical domain model contract`.
 
 ## Immediate Next Actions
 
