@@ -3,7 +3,7 @@
 **Last Updated:** 2026-04-30
 **Actor:** ORCHESTRATOR DEL-02-03 bounded execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-03` bounded execution and commit; awaiting handoff correction commit and the next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-03` bounded execution, commit, and handoff correction commit; awaiting the next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -28,6 +28,7 @@
 | DEL-02-02 handoff correction commit | `ce94de3 docs: record del-02-02 commit handoff` |
 | Last bounded item | `DEL-02-03 - Code-neutral analysis boundary model` |
 | Last bounded item commit | `abc1306 schema: tighten analysis boundary model` |
+| DEL-02-03 handoff correction commit | `f19cf2a docs: record del-02-03 commit handoff` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -316,6 +317,8 @@ Remaining open items:
   report manifests remains `TBD`.
 - Deliverable file-state changes were committed through CHANGE approval as
   `abc1306 schema: tighten analysis boundary model`.
+- DEL-02-03 handoff correction was committed through CHANGE approval as
+  `f19cf2a docs: record del-02-03 commit handoff`.
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -339,20 +342,17 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Route the `DEL-02-03` handoff correction commit through `CHANGE` if the
-   human wants the updated commit hash captured in git. Do not commit without
-   explicit `APPROVE:` action list.
-2. Apply the latest human gate. If no new item is explicitly authorized,
+1. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.
-3. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
+2. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
    `_COORDINATION.md`, `DAG-001`, `DEV-001_BLOCKER_QUEUE.*`, and
    `docs/_Registers/Deliverables.csv`.
-4. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
+3. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
    before any `WORKING_ITEMS` or `TASK` execution.
-5. Decide separately whether to track or ignore the untracked pre-DAG
+4. Decide separately whether to track or ignore the untracked pre-DAG
    reconciliation artifacts through CHANGE.
-6. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
+5. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
    pre-DAG artifact handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is authorized by the
