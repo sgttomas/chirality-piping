@@ -1,7 +1,13 @@
 # Status: DEL-09-03 Nonlinear support regression suite
 
-**Current State:** OPEN
+**Current State:** SEMANTIC_READY
 **Last Updated:** 2026-04-30
 
 ## History
+
 - 2026-04-30 - State set to OPEN (PREPARATION)
+- 2026-04-30 - State set to INITIALIZED (TASK+four-documents, RUN_PASSES=P1_P2)
+- 2026-04-30 - State set/verified as SEMANTIC_READY (TASK+semantic-matrix-build)
+- 2026-04-30 - Semantic lensing register generated (TASK+lens-register)
+- 2026-04-30 - Pass 3 semantic enrichment applied with TBD/open-issue preservation (TASK+four-documents, RUN_PASSES=P3_ONLY)
+- 2026-04-30 - Dependency register generated and schema-validated; legacy ID-format validator mismatch recorded as warning (TASK+dependency-extract)

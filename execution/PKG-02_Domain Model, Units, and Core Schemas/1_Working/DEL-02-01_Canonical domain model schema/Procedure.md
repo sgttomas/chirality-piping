@@ -106,7 +106,17 @@ Records produced by document drafting/enrichment runs:
 - `Procedure.md`
 - `_run_records/TASK_RUN_2026-04-30_0120.md`
 - `_run_records/TASK_RUN_2026-04-30_0141.md`
+- `_run_records/TASK_RUN_2026-04-30_0941.md`
+- `_run_records/TASK_RUN_2026-04-30_0941_001.md`
+- `_run_records/TASK_RUN_2026-04-30_0941_002.md`
+- `_run_records/TASK_RUN_2026-04-30_0941_003.md`
 - `_STATUS.md` safe lifecycle update, if a Pass 1+2 run completes from `OPEN`; Pass 3 does not update `_STATUS.md`
+
+Records produced by dependency extraction:
+
+- `Dependencies.csv`
+- `_DEPENDENCIES.md`
+- `_run_records/TASK_RUN_2026-04-30_0941_004.md`
 
 Records expected from future implementation/review work:
 
