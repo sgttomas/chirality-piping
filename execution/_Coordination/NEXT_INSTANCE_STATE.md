@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-04-30
-**Actor:** ORCHESTRATOR DEL-02-02 bounded execution
+**Actor:** ORCHESTRATOR DEL-02-03 bounded execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-02` bounded execution; awaiting CHANGE routing for file-state handling/commit and the next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-03` bounded execution; awaiting CHANGE routing for file-state handling/commit and the next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -22,11 +22,12 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Prior bounded item | `DEL-02-01 - Canonical domain model schema` |
-| Prior bounded item commit | `7b256f3 schema: tighten canonical domain model contract` |
+| Prior bounded item | `DEL-02-02 - Unit system and dimensional-analysis core contract` |
+| Prior bounded item commit | `a458cba schema: tighten unit system contract` |
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
-| Last bounded item | `DEL-02-02 - Unit system and dimensional-analysis core contract` |
-| Last bounded item commit | `a458cba schema: tighten unit system contract` |
+| DEL-02-02 handoff correction commit | `ce94de3 docs: record del-02-02 commit handoff` |
+| Last bounded item | `DEL-02-03 - Code-neutral analysis boundary model` |
+| Last bounded item commit | pending `CHANGE` routing |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -256,6 +257,66 @@ Remaining open items:
 - Deliverable file-state changes were committed through CHANGE approval as
   `a458cba schema: tighten unit system contract`.
 
+## DEL-02-03 Bounded Item Closeout
+
+Human project authority authorized exactly one bounded DAG item of
+ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-02-03 - Code-neutral
+analysis boundary model` because it completes the immediate PKG-02 Wave 3
+foundation after `DEL-02-01` and `DEL-02-02`.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-03.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
+  `DEL-00-07`, `DEL-00-08`, and `DEL-02-01`.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `schemas/analysis_boundary.schema.yaml`
+- `docs/architecture/code_neutral_analysis_boundary.md`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `tests/test_analysis_boundary_schema.py`
+- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-03_Code-neutral analysis boundary model/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-03.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `python3 tests/test_analysis_boundary_schema.py` passed.
+- `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tests/test_model_schema.py` passed.
+- `python3 tests/test_units_schema.py` passed.
+- `python3 tests/test_persistence_schema.py` passed.
+- `python3 tests/test_plugin_manifest_schema.py` passed.
+- `git diff --check` passed.
+- Focused forbidden-claim scan over affected DEL-02-03 product surfaces found
+  only negative boundary statements and test-denylist literals, not product
+  certification/compliance claims.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, or automatic code-compliance/certification/sealing
+  claims were introduced.
+
+Remaining open items:
+
+- Exact persistence location for human acceptance records remains `TBD`.
+- Exact stale-record invalidation workflow when bound hashes change remains
+  `TBD`.
+- Exact integration point between the boundary schema, result envelopes, and
+  report manifests remains `TBD`.
+- Deliverable file-state changes are not committed yet and should be routed
+  through `CHANGE` if the human wants this bounded item captured in git.
+
 ## Bootstrap and Next-Instance Prompt Posture
 
 `init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint, not an
@@ -278,9 +339,9 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Route the `DEL-02-02` handoff correction commit through `CHANGE` if the
-   human wants the updated commit hash captured in git. Do not commit without
-   explicit `APPROVE:` action list.
+1. Route the `DEL-02-03` bounded item through `CHANGE` if the human wants the
+   file-state changes staged and committed. Do not commit without explicit
+   `APPROVE:` action list.
 2. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.

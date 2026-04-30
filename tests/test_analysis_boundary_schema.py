@@ -43,6 +43,13 @@ REQUIRED_PROVENANCE_FIELDS = {
     "review_status",
 }
 
+REQUIRED_FORBIDDEN_CLAIMS = {
+    "code_compliance",
+    "certification",
+    "sealing",
+    "professional_acceptance",
+}
+
 
 def load_schema():
     with SCHEMA_PATH.open(encoding="utf-8") as schema_file:
@@ -60,6 +67,25 @@ def required_at(schema, definition_name):
 def main():
     schema = load_schema()
     defs = schema["$defs"]
+
+    assert "authority_model" in schema["required"]
+    authority_model = defs["AuthorityModel"]
+    assert authority_model["properties"]["mechanics_authority"]["const"] == (
+        "solver_result_only"
+    )
+    assert authority_model["properties"]["rule_check_authority"]["const"] == (
+        "software_computation_using_user_data"
+    )
+    assert authority_model["properties"]["human_acceptance_authority"]["const"] == (
+        "external_hash_bound_human_record_only"
+    )
+    assert authority_model["properties"]["automatic_status_scope"]["items"][
+        "$ref"
+    ].endswith("/AutomaticAnalysisStatus")
+    forbidden_claim_values = set(
+        authority_model["properties"]["forbidden_software_claims"]["items"]["enum"]
+    )
+    assert REQUIRED_FORBIDDEN_CLAIMS <= forbidden_claim_values
 
     automatic = enum_at(schema, "AutomaticAnalysisStatus")
     assert automatic.isdisjoint(FORBIDDEN_AUTOMATIC)

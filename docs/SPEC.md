@@ -124,6 +124,28 @@ diagnostics.
 Unit checks support mechanics and rule evaluation. They do not certify, seal,
 approve, authenticate, or declare engineering code compliance for reliance.
 
+### 4.1 Code-neutral analysis boundary
+
+The analysis boundary is represented by
+`schemas/analysis_boundary.schema.yaml`. It separates three authority domains:
+
+- mechanics solve authority: solver results and diagnostics only;
+- user-rule-check authority: software computation using user-supplied rule-pack
+  data, rule-pack version, checksum, source notice, redistribution status, and
+  provenance;
+- human acceptance authority: external project records bound to reviewed
+  evidence hashes.
+
+Software-generated statuses may report `MODEL_INCOMPLETE`, `MECHANICS_SOLVED`,
+`RULE_INPUTS_INCOMPLETE`, `USER_RULE_CHECKED`, `USER_RULE_FAILED`, and
+`HUMAN_REVIEW_REQUIRED`. Software must not emit human approval, certification,
+sealing, authentication, or code-compliance labels as automatic analysis
+statuses.
+
+Missing solve-required inputs and missing rule-check-required inputs are
+explicit findings with diagnostics and provenance. They are not defaulted by the
+solver, rule-pack evaluator, adapters, reports, or GUI.
+
 ## 5. Solver core requirements
 
 ### 5.1 Degrees of freedom

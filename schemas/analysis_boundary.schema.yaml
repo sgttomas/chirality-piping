@@ -9,6 +9,7 @@
     "schema_version",
     "boundary_id",
     "subject_ref",
+    "authority_model",
     "mechanics_solve",
     "user_rule_check",
     "missing_inputs",
@@ -26,6 +27,9 @@
     },
     "subject_ref": {
       "$ref": "#/$defs/Reference"
+    },
+    "authority_model": {
+      "$ref": "#/$defs/AuthorityModel"
     },
     "mechanics_solve": {
       "$ref": "#/$defs/MechanicsSolveBoundary"
@@ -68,6 +72,50 @@
         "HUMAN_REVIEW_REQUIRED",
         "HUMAN_APPROVED_FOR_PROJECT"
       ]
+    },
+    "AuthorityModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mechanics_authority",
+        "rule_check_authority",
+        "human_acceptance_authority",
+        "automatic_status_scope",
+        "forbidden_software_claims"
+      ],
+      "properties": {
+        "mechanics_authority": {
+          "const": "solver_result_only"
+        },
+        "rule_check_authority": {
+          "const": "software_computation_using_user_data"
+        },
+        "human_acceptance_authority": {
+          "const": "external_hash_bound_human_record_only"
+        },
+        "automatic_status_scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/AutomaticAnalysisStatus"
+          }
+        },
+        "forbidden_software_claims": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string",
+            "enum": [
+              "code_compliance",
+              "certification",
+              "sealing",
+              "professional_acceptance",
+              "authentication",
+              "TBD"
+            ]
+          }
+        }
+      }
     },
     "AutomaticAnalysisStatus": {
       "type": "string",

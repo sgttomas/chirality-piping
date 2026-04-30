@@ -14,6 +14,10 @@ This document defines the rules implemented by `schemas/analysis_boundary.schema
 
 ## Boundary Rules
 
+- Every boundary record declares an explicit authority model:
+  `solver_result_only` for mechanics, `software_computation_using_user_data`
+  for user-rule checks, and `external_hash_bound_human_record_only` for human
+  acceptance.
 - The mechanics solver computes open mechanics results only: model validation findings, displacements, reactions, forces, moments, stresses, convergence facts, and diagnostics.
 - A mechanics result is not a code check, pass/fail result, professional acceptance, certification, sealing, approval, authentication, or compliance claim.
 - User-rule checks require an explicit user-supplied rule-pack reference with version, checksum, source notice, redistribution status, and provenance.
@@ -33,6 +37,23 @@ The public model may carry references, checksums, source notices, provenance met
 `RULE_INPUTS_INCOMPLETE`, `USER_RULE_CHECKED`, and `USER_RULE_FAILED` are user-rule outcomes. They depend on user-supplied rule-pack data and remain software computations using user data.
 
 `HUMAN_REVIEW_REQUIRED` remains true for professional use. `HUMAN_APPROVED_FOR_PROJECT` is reserved for an external human acceptance record and must not appear as an automatic software status.
+
+## Schema Surface
+
+`schemas/analysis_boundary.schema.yaml` requires:
+
+- `authority_model`, which records the mechanics, user-rule, and human
+  acceptance authority domains;
+- `mechanics_solve`, which is limited to model-incomplete or mechanics-solved
+  solver states;
+- `user_rule_check`, which is limited to rule-inputs-incomplete,
+  user-rule-checked, or user-rule-failed states and requires a user-supplied
+  rule-pack reference;
+- `missing_inputs`, which carries explicit diagnostics and provenance for
+  missing solve or rule-check inputs;
+- `human_acceptance_refs`, which are references to external records with bound
+  evidence hashes;
+- `professional_boundary`, whose claim fields are fixed false for software.
 
 ## Remaining TBDs
 

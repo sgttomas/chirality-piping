@@ -63,6 +63,12 @@ Deliverable IDs are coupled to package IDs: `DEL-04-02` belongs to `PKG-04`. IDs
 
 The software must not use `CODE_COMPLIANT` as an automatic status.
 
+The code-neutral analysis boundary is the data-model surface that keeps these
+statuses from collapsing into one another. `schemas/analysis_boundary.schema.yaml`
+requires an explicit authority model: mechanics statuses come from solver
+results, user-rule statuses come from user-supplied rule-pack computation, and
+human acceptance is an external hash-bound project record only.
+
 ## 5. Epistemic labels
 
 | Label | Meaning |
@@ -122,6 +128,13 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `Result` | Mechanical, diagnostic, stress, reaction, or user-rule-check result envelope with analysis statuses and unit-aware values. | Result statuses do not mean automatic code compliance. |
 | `ReportSettings` | Report configuration for manifests, provenance summaries, notices, result references, and rule-pack references. | Report rendering and professional acceptance records remain separate workflows. |
 | `Report` | Auditable report-facing record for manifests, hashes, statuses, diagnostics, rule-pack refs, provenance summary, and professional-boundary notice. | Reports are decision support and must not claim certification, sealing, or professional approval by the software. |
+
+Companion boundary schemas:
+
+| Schema | Purpose | Boundary note |
+|---|---|---|
+| `schemas/analysis_boundary.schema.yaml` | Separates mechanics solve authority, user-rule-check authority, missing-input findings, diagnostics, and external human acceptance references. | Human acceptance is reference-only and hash-bound; it is not emitted by solver or rule-pack computation. |
+| `schemas/analysis_status.schema.yaml` | Defines result-envelope status semantics and external human acceptance records. | `HUMAN_APPROVED_FOR_PROJECT` is not an automatic software status. |
 
 ## 9. Lifecycle states for development deliverables
 
