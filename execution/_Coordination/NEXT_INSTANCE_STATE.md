@@ -3,7 +3,7 @@
 **Last Updated:** 2026-04-30
 **Actor:** ORCHESTRATOR DEL-02-03 bounded execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-03` bounded execution; awaiting CHANGE routing for file-state handling/commit and the next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-03` bounded execution and commit; awaiting handoff correction commit and the next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -27,7 +27,7 @@
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
 | DEL-02-02 handoff correction commit | `ce94de3 docs: record del-02-02 commit handoff` |
 | Last bounded item | `DEL-02-03 - Code-neutral analysis boundary model` |
-| Last bounded item commit | pending `CHANGE` routing |
+| Last bounded item commit | `abc1306 schema: tighten analysis boundary model` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -314,8 +314,8 @@ Remaining open items:
   `TBD`.
 - Exact integration point between the boundary schema, result envelopes, and
   report manifests remains `TBD`.
-- Deliverable file-state changes are not committed yet and should be routed
-  through `CHANGE` if the human wants this bounded item captured in git.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `abc1306 schema: tighten analysis boundary model`.
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -339,9 +339,9 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Route the `DEL-02-03` bounded item through `CHANGE` if the human wants the
-   file-state changes staged and committed. Do not commit without explicit
-   `APPROVE:` action list.
+1. Route the `DEL-02-03` handoff correction commit through `CHANGE` if the
+   human wants the updated commit hash captured in git. Do not commit without
+   explicit `APPROVE:` action list.
 2. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.
