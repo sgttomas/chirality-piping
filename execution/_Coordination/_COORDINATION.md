@@ -11,7 +11,8 @@
 **Default blocker maturity threshold:** SEMANTIC_READY
 **Active graph authority:** aggregate `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
-**Current pilot state:** `DEL-01-01` pilot completed; next gate is pilot review before any additional bounded DAG item
+**Current pilot state:** `DEL-01-01` pilot completed and accepted for the next bounded item
+**Current bounded item:** `DEL-02-01 - Canonical domain model schema`
 
 ## Human Rulings
 
@@ -29,6 +30,7 @@
 - 2026-04-30 - Treat `PKG-00` as prerequisite architecture context processed through `SCOPE_CHANGE` and injected into downstream deliverable contexts; it may be left out of implementation dependency graphs and does not require deliverable-local `Dependencies.csv` files.
 - 2026-04-30 - Accept the pushed DEV-001 hardening state in-session and authorize the `DEL-01-01` pilot handoff.
 - 2026-04-30 - Complete the `DEL-01-01` pilot as commit `7650cf6 docs: tighten maintainer governance gates`; next execution should not broaden beyond one gated tranche without human review of the pilot behavior.
+- 2026-04-30 - Accept the completed `DEL-01-01` pilot pattern and authorize exactly one next bounded DAG item: `DEL-02-01 - Canonical domain model schema`; broad fan-out remains prohibited.
 
 ## Operating Rules
 

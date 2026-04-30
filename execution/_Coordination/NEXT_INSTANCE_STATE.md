@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-04-30
-**Actor:** ORCHESTRATOR / WORKING_ITEMS / CHANGE pilot closeout
+**Actor:** ORCHESTRATOR / WORKING_ITEMS bounded DEL-02-01 closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-DEL-01-01 pilot; awaiting pilot review and next DAG gate
+**Current Mode:** DEV-001 single-item execution for `DEL-02-01`; no broad fan-out
 
 ## Active Control State
 
@@ -21,6 +21,9 @@
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
+| Pilot pattern | Accepted by human project authority for one next bounded item |
+| Current bounded item | `DEL-02-01 - Canonical domain model schema` |
+| Current bounded item commit | Not committed in this session |
 
 ## DAG Evidence
 
@@ -129,22 +132,76 @@ Remaining working tree note:
   `execution/_Reconciliation/DepClosure/CLOSURE_PRE_DEPENDENCIES_DAG_2026-04-30_1508/`.
   These predate the pilot and should be handled by a separate CHANGE decision.
 
+## DEL-02-01 Bounded Item Closeout
+
+Human project authority accepted the completed `DEL-01-01` pilot pattern and
+authorized exactly one next bounded DAG item: `DEL-02-01 - Canonical domain
+model schema`. Broad fan-out remains prohibited.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-01.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  architecture-basis rows only.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `schemas/model.schema.yaml`
+- `docs/TYPES.md`
+- `tests/test_model_schema.py`
+- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-01_Canonical domain model schema/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-01.md`
+- `execution/_Coordination/_COORDINATION.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `python3 tests/test_model_schema.py` passed.
+- `python3 tests/test_units_schema.py` passed.
+- `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tests/test_persistence_schema.py` passed.
+- `python3 tests/test_analysis_boundary_schema.py` passed.
+- `python3 tests/test_plugin_manifest_schema.py` passed.
+- `git diff --check` passed.
+- Focused forbidden-schema-text scan over `schemas/model.schema.yaml` found no
+  `CODE_COMPLIANT`, protected-code-name, certification/sealing, or automatic
+  compliance phrases.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering values,
+  private data, or automatic code-compliance/certification/sealing claims were
+  introduced.
+
+Remaining open items:
+
+- `C-02-01-001` objective mapping remains unresolved: `DEL-02-01` owns
+  `OBJ-001`; `SOW-041` also maps `OBJ-012` in the scope ledger.
+- `C-02-01-002` stale metadata pointer remains unresolved in local references.
+- The physical project package/container and migration framework remain owned by
+  persistence work unless later human authority changes that boundary.
+- File-state changes are uncommitted pending CHANGE approval.
+
 ## Immediate Next Actions
 
-Human project authority must choose the next action:
+Immediate next action:
 
-1. review the `DEL-01-01` pilot behavior and decide whether the pilot pattern is
-   acceptable for the next gated tranche;
-2. if accepted, authorize one next bounded DAG item, likely a Wave 2 foundation
-   such as `DEL-02-01 - Canonical domain model schema`, using a sealed
-   `WORKING_ITEMS` session and at most one bounded `TASK`;
-3. send candidate-edge or local-register ambiguity to `RECONCILIATION`;
-4. decide whether to track or ignore the untracked pre-DAG reconciliation
-   artifacts through CHANGE;
-5. pause with no further execution.
+1. Route the `DEL-02-01` file-state patch through CHANGE for staging/commit
+   approval, or request a revision.
+2. Decide separately whether to track or ignore the untracked pre-DAG
+   reconciliation artifacts through CHANGE.
+3. After `DEL-02-01` is reviewed/committed or revised, human project authority
+   must choose the next gate: another one-item bounded tranche,
+   `RECONCILIATION`, pre-DAG artifact handling, or pause.
 
-Do not start broad DAG execution until the pilot behavior is reviewed and the
-next bounded tranche is explicitly authorized.
+Do not start broad DAG execution. No additional DAG item is authorized by the
+`DEL-02-01` dispatch.
 
 ## Guardrails
 

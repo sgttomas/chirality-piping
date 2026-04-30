@@ -1,0 +1,38 @@
+# MEMORY: DEL-02-01 Canonical domain model schema
+
+## Session 2026-04-30
+
+Human ruling consumed:
+
+- Accepted the completed `DEL-01-01` pilot pattern.
+- Authorized exactly one next bounded DAG item: `DEL-02-01`.
+- Explicitly prohibited broad fan-out.
+
+Bounded write scope used:
+
+- `schemas/model.schema.yaml`
+- `docs/TYPES.md`
+- `tests/test_model_schema.py`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-01.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+- `execution/_Coordination/_COORDINATION.md`
+- this `MEMORY.md`
+
+Work notes:
+
+- Preserved JSON Schema 2020-12 and strict JSON syntax in `schemas/model.schema.yaml`.
+- Tightened canonical schema requirements for model collections, unit-bearing quantities, diagnostics, hash payload scope, result/report evidence, rule-pack references, support/load provenance, and common object coverage.
+- Updated `docs/TYPES.md` Section 8 with schema syntax and common-record vocabulary.
+- Added focused stdlib checks in `tests/test_model_schema.py`.
+
+Guardrails preserved:
+
+- No lifecycle state transition.
+- No `Dependencies.csv`, `_DEPENDENCIES.md`, `DAG-001`, candidate-edge, or blocker-queue edits.
+- No protected standards text, protected tables, proprietary values, private data, or automatic compliance/certification/sealing claims introduced.
+
+Open items:
+
+- `C-02-01-001` objective mapping remains unresolved: `DEL-02-01` owns `OBJ-001`; `SOW-041` also maps `OBJ-012` in the scope ledger.
+- `C-02-01-002` stale metadata pointer remains unresolved in local references.
+- Physical project container and migration framework remain owned by persistence work unless later human authority changes that boundary.

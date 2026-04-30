@@ -99,7 +99,7 @@ The software must not use `CODE_COMPLIANT` as an automatic status.
 
 ## 8. Canonical domain object registry
 
-The canonical machine-readable domain model is `schemas/model.schema.yaml`. That schema uses JSON Schema 2020-12 and is intentionally code-neutral: it defines public object structure, identifiers, references, unit-bearing values, provenance, diagnostics, results, and report settings, but it does not bundle protected standards data, proprietary catalog values, code-specific allowables, SIF/flexibility tables, or compliance rules.
+The canonical machine-readable domain model is `schemas/model.schema.yaml`. That schema uses JSON Schema 2020-12, is written as strict JSON syntax in a `.yaml` path, and is intentionally code-neutral: it defines public object structure, identifiers, references, unit-bearing values, provenance, diagnostics, results, and report settings, but it does not bundle protected standards data, proprietary catalog values, code-specific allowables, SIF/flexibility tables, or compliance rules.
 
 | Object | Registry meaning | Boundary note |
 |---|---|---|
@@ -114,6 +114,11 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `LoadCase` | Primitive loading record with target references, units, and provenance. | Code-specific load requirements are user/rule-pack supplied. |
 | `Combination` | Algebraic grouping of load-case factors with an explicit basis. | No public code-specific combination defaults are implied. |
 | `RulePackRef` | Reference to a user/public rule-pack by identity, version, checksum, source notice, redistribution status, and required-input links. | Rule formulas, protected interpretations, and evaluator implementation are outside this schema. |
+| `Quantity` | Unit-bearing value record with magnitude, unit, dimension, and provenance. | Dimensionless values must be explicit; missing or incompatible units are findings, not hidden defaults. |
+| `Provenance` | Source, license, contributor, redistribution, and review-status record used by reliance-affecting public/private data. | Unknown or suspected protected sources must remain reviewable and cannot be treated as accepted public data. |
+| `Reference` | Typed stable-object reference used instead of positional coupling where editing, solving, reporting, or audit depends on identity. | External references remain explicit and do not bypass schema validation. |
+| `Diagnostic` | Result-envelope warning/finding record with code, class, severity, source, affected object, message, remediation, and provenance. | Diagnostics expose missing data and boundary risks without becoming compliance claims. |
+| `Checksum` | Hash metadata record with algorithm, canonicalization, payload reference, and value. | JSON payload hashes use the JCS-compatible basis where applicable; physical package/container details remain owned by persistence work. |
 | `Result` | Mechanical, diagnostic, stress, reaction, or user-rule-check result envelope with analysis statuses and unit-aware values. | Result statuses do not mean automatic code compliance. |
 | `ReportSettings` | Report configuration for manifests, provenance summaries, notices, result references, and rule-pack references. | Report rendering and professional acceptance records remain separate workflows. |
 | `Report` | Auditable report-facing record for manifests, hashes, statuses, diagnostics, rule-pack refs, provenance summary, and professional-boundary notice. | Reports are decision support and must not claim certification, sealing, or professional approval by the software. |
