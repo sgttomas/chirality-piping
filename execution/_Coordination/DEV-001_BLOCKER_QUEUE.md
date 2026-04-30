@@ -3,6 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
+updated: 2026-04-30
 source_graph: execution/_DAG/DAG-001/DependencyEdges.csv
 lifecycle_source: filesystem_STATUS_files
 maturity_threshold: SEMANTIC_READY
@@ -32,28 +33,27 @@ This blocker queue is an advisory coordination view only. It is not a schedule, 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Filesystem lifecycle `SEMANTIC_READY` | 13 |
-| Filesystem lifecycle `OPEN` | 60 |
-| Advisory `UNBLOCKED` deliverables | 17 |
-| Advisory `BLOCKED` deliverables | 56 |
+| Filesystem lifecycle `SEMANTIC_READY` | 73 |
+| Advisory `UNBLOCKED` deliverables | 73 |
+| Advisory `BLOCKED` deliverables | 0 |
 
 ## Package Summary
 
 | PackageID | UNBLOCKED | BLOCKED |
 |---|---:|---:|
 | `PKG-00` | 8 | 0 |
-| `PKG-01` | 1 | 3 |
+| `PKG-01` | 4 | 0 |
 | `PKG-02` | 5 | 0 |
-| `PKG-03` | 0 | 8 |
-| `PKG-04` | 1 | 5 |
-| `PKG-05` | 1 | 4 |
-| `PKG-06` | 0 | 5 |
-| `PKG-07` | 0 | 7 |
-| `PKG-08` | 0 | 5 |
-| `PKG-09` | 0 | 5 |
-| `PKG-10` | 1 | 4 |
-| `PKG-11` | 0 | 5 |
-| `PKG-12` | 0 | 5 |
+| `PKG-03` | 8 | 0 |
+| `PKG-04` | 6 | 0 |
+| `PKG-05` | 5 | 0 |
+| `PKG-06` | 5 | 0 |
+| `PKG-07` | 7 | 0 |
+| `PKG-08` | 5 | 0 |
+| `PKG-09` | 5 | 0 |
+| `PKG-10` | 5 | 0 |
+| `PKG-11` | 5 | 0 |
+| `PKG-12` | 5 | 0 |
 
 ## Unblocked Deliverables
 
@@ -69,15 +69,71 @@ These deliverables have no active upstream dependency below `SEMANTIC_READY`. Th
 | `DEL-00-06` | `PKG-00` | `SEMANTIC_READY` | 0 | Diagnostics, warning, and result-envelope contract |
 | `DEL-00-07` | `PKG-00` | `SEMANTIC_READY` | 0 | API boundary and adapter contract map |
 | `DEL-00-08` | `PKG-00` | `SEMANTIC_READY` | 0 | Layered software test and acceptance strategy |
-| `DEL-01-01` | `PKG-01` | `OPEN` | 4 | Project governance baseline |
+| `DEL-01-01` | `PKG-01` | `SEMANTIC_READY` | 4 | Project governance baseline |
+| `DEL-01-02` | `PKG-01` | `SEMANTIC_READY` | 5 | Copyright and protected-data boundary policy |
+| `DEL-01-03` | `PKG-01` | `SEMANTIC_READY` | 6 | Contributor certification workflow |
+| `DEL-01-04` | `PKG-01` | `SEMANTIC_READY` | 5 | Professional responsibility and product-claims policy |
 | `DEL-02-01` | `PKG-02` | `SEMANTIC_READY` | 7 | Canonical domain model schema |
 | `DEL-02-02` | `PKG-02` | `SEMANTIC_READY` | 8 | Unit system and dimensional-analysis core contract |
 | `DEL-02-03` | `PKG-02` | `SEMANTIC_READY` | 8 | Code-neutral analysis boundary model |
 | `DEL-02-04` | `PKG-02` | `SEMANTIC_READY` | 10 | Plugin and extension domain contracts |
 | `DEL-02-05` | `PKG-02` | `SEMANTIC_READY` | 10 | Project persistence and round-trip serialization |
-| `DEL-04-01` | `PKG-04` | `OPEN` | 8 | 3D frame stiffness kernel |
-| `DEL-05-04` | `PKG-05` | `OPEN` | 6 | Analysis status semantics |
-| `DEL-10-01` | `PKG-10` | `OPEN` | 11 | Public API and plugin boundary |
+| `DEL-03-01` | `PKG-03` | `SEMANTIC_READY` | 10 | Material library schema with provenance |
+| `DEL-03-02` | `PKG-03` | `SEMANTIC_READY` | 10 | Pipe section and component library schema |
+| `DEL-03-03` | `PKG-03` | `SEMANTIC_READY` | 9 | Bend and elbow component model fields |
+| `DEL-03-04` | `PKG-03` | `SEMANTIC_READY` | 9 | Branch connection component model fields |
+| `DEL-03-05` | `PKG-03` | `SEMANTIC_READY` | 9 | Rigid component models for valves, flanges, reducers, and specialty items |
+| `DEL-03-06` | `PKG-03` | `SEMANTIC_READY` | 9 | Expansion joint component model |
+| `DEL-03-07` | `PKG-03` | `SEMANTIC_READY` | 11 | Public/private library import provenance checker |
+| `DEL-03-08` | `PKG-03` | `SEMANTIC_READY` | 9 | Pipe section property and mass-property calculator |
+| `DEL-04-01` | `PKG-04` | `SEMANTIC_READY` | 8 | 3D frame stiffness kernel |
+| `DEL-04-02` | `PKG-04` | `SEMANTIC_READY` | 8 | Straight pipe element |
+| `DEL-04-03` | `PKG-04` | `SEMANTIC_READY` | 8 | Linear support and restraint models |
+| `DEL-04-04` | `PKG-04` | `SEMANTIC_READY` | 8 | Nonlinear support active-set solver |
+| `DEL-04-05` | `PKG-04` | `SEMANTIC_READY` | 7 | Sparse solver performance harness |
+| `DEL-04-06` | `PKG-04` | `SEMANTIC_READY` | 8 | Solver diagnostics and singularity detection |
+| `DEL-05-01` | `PKG-05` | `SEMANTIC_READY` | 9 | Primitive load case engine |
+| `DEL-05-02` | `PKG-05` | `SEMANTIC_READY` | 8 | Load-case algebra engine |
+| `DEL-05-03` | `PKG-05` | `SEMANTIC_READY` | 10 | Fundamental stress recovery module |
+| `DEL-05-04` | `PKG-05` | `SEMANTIC_READY` | 6 | Analysis status semantics |
+| `DEL-05-05` | `PKG-05` | `SEMANTIC_READY` | 8 | Concentrated and distributed user load application |
+| `DEL-06-01` | `PKG-06` | `SEMANTIC_READY` | 12 | Rule-pack schema |
+| `DEL-06-02` | `PKG-06` | `SEMANTIC_READY` | 9 | Sandboxed unit-aware expression evaluator |
+| `DEL-06-03` | `PKG-06` | `SEMANTIC_READY` | 10 | Required-input completeness checker |
+| `DEL-06-04` | `PKG-06` | `SEMANTIC_READY` | 9 | Private rule-pack lifecycle and checksum handling |
+| `DEL-06-05` | `PKG-06` | `SEMANTIC_READY` | 11 | Invented non-code example rule pack |
+| `DEL-07-01` | `PKG-07` | `SEMANTIC_READY` | 15 | 3D viewport and centerline editor |
+| `DEL-07-02` | `PKG-07` | `SEMANTIC_READY` | 10 | Model tree and property inspector |
+| `DEL-07-03` | `PKG-07` | `SEMANTIC_READY` | 13 | Material, component, and rule-pack editors |
+| `DEL-07-04` | `PKG-07` | `SEMANTIC_READY` | 11 | Missing-data warning and blocking UX |
+| `DEL-07-05` | `PKG-07` | `SEMANTIC_READY` | 10 | Results viewer |
+| `DEL-07-06` | `PKG-07` | `SEMANTIC_READY` | 13 | Accessibility and usability baseline |
+| `DEL-07-07` | `PKG-07` | `SEMANTIC_READY` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-08-01` | `PKG-08` | `SEMANTIC_READY` | 14 | Calculation report generator |
+| `DEL-08-02` | `PKG-08` | `SEMANTIC_READY` | 9 | Audit manifest and model hash |
+| `DEL-08-03` | `PKG-08` | `SEMANTIC_READY` | 11 | Warnings, assumptions, and provenance report section |
+| `DEL-08-04` | `PKG-08` | `SEMANTIC_READY` | 11 | Result export format |
+| `DEL-08-05` | `PKG-08` | `SEMANTIC_READY` | 10 | Report protected-content linter |
+| `DEL-09-01` | `PKG-09` | `SEMANTIC_READY` | 9 | Mechanics benchmark suite |
+| `DEL-09-02` | `PKG-09` | `SEMANTIC_READY` | 8 | Stress recovery benchmark suite |
+| `DEL-09-03` | `PKG-09` | `SEMANTIC_READY` | 6 | Nonlinear support regression suite |
+| `DEL-09-04` | `PKG-09` | `SEMANTIC_READY` | 8 | Validation manual skeleton |
+| `DEL-09-05` | `PKG-09` | `SEMANTIC_READY` | 9 | Release quality gate checklist |
+| `DEL-10-01` | `PKG-10` | `SEMANTIC_READY` | 11 | Public API and plugin boundary |
+| `DEL-10-02` | `PKG-10` | `SEMANTIC_READY` | 12 | Import/export adapter framework |
+| `DEL-10-03` | `PKG-10` | `SEMANTIC_READY` | 11 | Local FEA handoff data contract |
+| `DEL-10-04` | `PKG-10` | `SEMANTIC_READY` | 11 | Build, packaging, and CI/CD pipeline |
+| `DEL-10-05` | `PKG-10` | `SEMANTIC_READY` | 13 | Headless CLI and structured I/O analysis runner |
+| `DEL-11-01` | `PKG-11` | `SEMANTIC_READY` | 10 | User guide skeleton |
+| `DEL-11-02` | `PKG-11` | `SEMANTIC_READY` | 11 | Developer guide for solver and rule packs |
+| `DEL-11-03` | `PKG-11` | `SEMANTIC_READY` | 9 | Theory notes: classical to modern centerline analysis |
+| `DEL-11-04` | `PKG-11` | `SEMANTIC_READY` | 10 | Invented educational example models |
+| `DEL-11-05` | `PKG-11` | `SEMANTIC_READY` | 8 | Contributor tutorial and onboarding |
+| `DEL-12-01` | `PKG-12` | `SEMANTIC_READY` | 10 | Local-first storage and private data paths |
+| `DEL-12-02` | `PKG-12` | `SEMANTIC_READY` | 13 | Private data redaction and export controls |
+| `DEL-12-03` | `PKG-12` | `SEMANTIC_READY` | 9 | Telemetry off-by-default design |
+| `DEL-12-04` | `PKG-12` | `SEMANTIC_READY` | 11 | Secret and private-library handling |
+| `DEL-12-05` | `PKG-12` | `SEMANTIC_READY` | 10 | Security threat model |
 
 ## Selected Pilot Check
 
@@ -85,12 +141,12 @@ These deliverables have no active upstream dependency below `SEMANTIC_READY`. Th
 |---|---|
 | Deliverable | `DEL-01-01` - Project governance baseline |
 | Package | `PKG-01` |
-| Lifecycle | `OPEN` |
+| Lifecycle | `SEMANTIC_READY` |
 | Active upstream dependencies | 4 |
 | Blocking upstream dependencies | 0 |
 | Advisory state | `UNBLOCKED` |
 
-`DEL-01-01` remains a valid pilot candidate under the approved active-edge blocker computation. Its repo-level write targets remain limited to `docs/CONTRACT.md`, `docs/DIRECTIVE.md`, and `governance/MAINTAINERS.md` by the human ruling recorded in `execution/_DAG/DAG-001/APPROVAL_RECORD.md` and `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`.
+`DEL-01-01` remains completed as the DEV-001 pilot and is not a standing authorization for broad DAG execution. The next implementation step requires human review of the pilot behavior and explicit authorization of one bounded tranche.
 
 ## Candidate Edges Excluded
 
@@ -111,4 +167,3 @@ Candidate edges remain non-gating pending later `RECONCILIATION` and were not us
 ## Machine-Readable Queue
 
 Full per-deliverable queue rows are recorded in `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`.
-

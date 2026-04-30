@@ -79,17 +79,22 @@ evidence and should not be treated as current sequencing authority.
 
 ## Current Blocker Queue
 
-`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` records:
+`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed from current
+filesystem `_STATUS.md` files and approved active `DAG-001` edges after the
+`DEL-01-01` pilot closeout. It records:
 
 | Queue fact | Count |
 |---|---:|
-| Advisory `UNBLOCKED` deliverables | 17 |
-| Advisory `BLOCKED` deliverables | 56 |
+| Filesystem lifecycle `SEMANTIC_READY` | 73 |
+| Advisory `UNBLOCKED` deliverables | 73 |
+| Advisory `BLOCKED` deliverables | 0 |
 | Candidate edges used | 0 |
 
-`DEL-01-01` is advisory `UNBLOCKED` under approved active-DAG blocker
-computation. This is not a lifecycle approval, schedule, priority, staffing
-decision, or professional approval.
+All deliverables currently meet the `SEMANTIC_READY` maturity threshold used by
+the advisory blocker queue. This means there are no active-DAG maturity
+blockers under the current threshold. It is not a lifecycle approval, schedule,
+priority, staffing decision, implementation completeness claim, or professional
+approval.
 
 ## DEL-01-01 Pilot Closeout
 

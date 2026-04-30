@@ -55,15 +55,14 @@ Current lifecycle distribution from `_STATUS.md`:
 
 | Lifecycle state | Count |
 |---|---:|
-| `SEMANTIC_READY` | 13 |
-| `OPEN` | 60 |
+| `SEMANTIC_READY` | 73 |
 
 Current blocker queue:
 
 | Queue fact | Count |
 |---|---:|
-| Advisory `UNBLOCKED` deliverables | 17 |
-| Advisory `BLOCKED` deliverables | 56 |
+| Advisory `UNBLOCKED` deliverables | 73 |
+| Advisory `BLOCKED` deliverables | 0 |
 
 Important state constraints:
 
@@ -77,8 +76,10 @@ Important state constraints:
   `SCA-001` / applicable `AB-00-*` rows.
 - `PKG-00` may be excluded from implementation graph participation and does not
   require deliverable-local `Dependencies.csv` files.
-- Non-`PKG-00` local `Dependencies.csv` files exist, but are stale and
-  non-authoritative for sequencing until reconciled or refreshed.
+- Non-`PKG-00` local `Dependencies.csv` files are synchronized mirrors/evidence
+  materialized from `DAG-001`; they are not independent sequencing authority.
+- The `DEL-01-01` pilot completed as commit
+  `7650cf6 docs: tighten maintainer governance gates`.
 
 ## Graph Authority
 
@@ -112,21 +113,21 @@ view for downstream execution planning.
 
 ## Local Dependency Register Policy
 
-The pre-DAG reconciliation run found that local dependency registers are not
-safe as the sequencing authority:
+The DEV-001 hardening pass refreshed non-`PKG-00` local dependency registers
+from `DAG-001` and closed the local-register divergence that existed before the
+approved aggregate DAG.
 
-- one 9-node local active SCC;
-- three bidirectional active pairs;
-- row-value/schema hygiene issues;
-- two local active edges retained as `CANDIDATE` in `DAG-001`;
-- 78 local active pairs absent from `DAG-001`.
+Current policy for DEV-001:
 
-Policy for DEV-001:
-
-- local non-`PKG-00` `Dependencies.csv` files are evidence-only until refreshed
-  or reconciled;
-- do not silently edit local dependency registers;
-- if local registers are needed later, route ambiguity to `RECONCILIATION` and
+- aggregate `DAG-001` remains the sequencing and blocker-computation authority;
+- local non-`PKG-00` `Dependencies.csv` files are synchronized mirrors/evidence,
+  not independent graph authority;
+- `PKG-00` remains architecture context only and does not receive local
+  `Dependencies.csv` files;
+- architecture-basis rows targeting `PKG-00` remain preserved in non-`PKG-00`
+  mirrors as injected context evidence;
+- `CANDIDATE` rows remain non-gating;
+- if dependency ambiguity appears later, route it to `RECONCILIATION` and route
   approved file repairs to `CHANGE`;
 - if aggregate DAG auditing is needed, use `AUDIT_DEP_CLOSURE` through a wrapper
   or tool path that consumes aggregate `DAG-001` artifacts.
@@ -160,22 +161,20 @@ fan-out. The required sequence is:
    - Do not recompute queues inside `WORKING_ITEMS` or `TASK` unless that is the
      explicit approved assignment.
 
-3. **Human pilot launch gate**
-   - The human must explicitly approve launch of the first pilot session.
-   - Current pilot candidate: `DEL-01-01 - Project governance baseline`.
-   - Handoff surface:
-     `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`.
-
-4. **Run one pilot**
-   - Start one `WORKING_ITEMS` session for `DEL-01-01`.
-   - Dispatch at most one bounded `TASK` from that session.
-   - Stay within the authorized write targets and guardrails recorded in the
-     pilot dispatch brief.
-
-5. **Review pilot behavior**
+3. **Review completed pilot behavior**
+   - `DEL-01-01 - Project governance baseline` was completed as the first
+     bounded pilot.
+   - Pilot commit: `7650cf6 docs: tighten maintainer governance gates`.
    - Check sealed-scope behavior, write-scope behavior, evidence/test output,
      and handoff-state update.
    - Expand to additional Wave 2 / Wave 3 deliverables only after human review.
+
+4. **Authorize one next bounded item**
+   - The human must explicitly approve the next deliverable or tranche.
+   - Use one `WORKING_ITEMS` session per deliverable and at most one bounded
+     `TASK` unless a later human gate authorizes a broader pattern.
+   - Prepare a fresh sealed brief from `DAG-001`, the deliverables register,
+     applicable `AB-00-*` rows, and the target deliverable's local context.
 
 ## Dispatch Rule
 
@@ -203,8 +202,9 @@ broad fan-out.
 Recommended sequence:
 
 1. **Wave 2 / governance and schema foundations**
-   - `DEL-01-01` Project governance baseline.
-   - `DEL-02-01` Canonical domain model schema.
+   - `DEL-01-01` Project governance baseline — completed pilot.
+   - `DEL-02-01` Canonical domain model schema — likely next bounded item if
+     the human accepts the pilot pattern.
 
 2. **Wave 3 / data boundary, units, and status semantics foundations**
    - `DEL-01-02` Copyright and protected-data boundary policy.
@@ -310,7 +310,8 @@ Read:
 
 Objective:
 Confirm the active control state and ask for the next human gate:
-pilot launch, reconciliation, aggregate-DAG audit wrapper, or pause.
+pilot review, next bounded DAG item, reconciliation, pre-DAG artifact handling,
+or pause.
 
 Do not launch WORKING_ITEMS, dispatch TASK, edit deliverable-local dependency
 registers, change lifecycle state, or implement product code unless the human

@@ -1,25 +1,28 @@
 ---
 doc_id: OPS-NEXT-SESSION-PROMPT
 doc_kind: init.next_session_prompt
-status: ready_for_dev001_acceptance_gate_and_del0101_pilot
+status: ready_for_post_pilot_dev001_next_dag_gate
 updated: 2026-04-30
-assignment: dev001_acceptance_gate_then_del0101_pilot
+assignment: dev001_post_pilot_next_bounded_dag_gate
 approved_decomposition: docs/_Decomposition/SOFTWARE_DECOMP.md
 approved_revision: "0.4"
-scope: DEV-001 hardened control plane, human acceptance gate, DEL-01-01 pilot handoff
-next_workflow: ORCHESTRATOR gate; WORKING_ITEMS only after human acceptance
-exclude_scope: broad fan-out, candidate edge promotion, lifecycle transitions, product solver implementation
+scope: DEV-001 hardened control plane, completed DEL-01-01 pilot, next bounded DAG gate
+next_workflow: ORCHESTRATOR gate; WORKING_ITEMS only after human next-item authorization
+exclude_scope: broad fan-out, candidate edge promotion, lifecycle transitions without approval, unsealed implementation
 ---
 
-# NEXT SESSION PROMPT - DEV-001 Acceptance Gate And DEL-01-01 Pilot
+# NEXT SESSION PROMPT - DEV-001 Post-Pilot Next DAG Gate
 
 Continue as `ORCHESTRATOR` for the OpenPipeStress SOFTWARE workflow in a fresh session.
 
-The previous session hardened the DEV-001 dependency control plane and pushed it to `origin/main`.
+The DEV-001 dependency control plane was hardened, accepted by the human project
+authority, and used for the first `DEL-01-01` pilot.
 
-Pushed commit:
+Relevant commits:
 
 - `24b8012 chore: harden dependency control plane`
+- `7650cf6 docs: tighten maintainer governance gates`
+- `df6d0d2 docs: update dev001 pilot handoff state`
 
 ## Current Ground Truth
 
@@ -32,6 +35,9 @@ Treat these as current unless contradicted by newer filesystem or git evidence:
 - Architecture-basis rows targeting `PKG-00` remain preserved in non-`PKG-00` local mirrors as injected context evidence.
 - `CANDIDATE` edges remain non-gating and require later `RECONCILIATION` plus `CHANGE` before promotion.
 - DEV-001 hardening verification passed for targeted tests, aggregate DAG audit, local register schema checks, and local closure audit.
+- `DEL-01-01` pilot was launched and completed as a bounded governance-file patch.
+- Current blocker queue has been refreshed from current filesystem `_STATUS.md`: 73 `SEMANTIC_READY`, 73 advisory `UNBLOCKED`, 0 advisory `BLOCKED`; this is not implementation completeness or approval.
+- Broad DAG execution is not authorized by default. The next session must ask for or consume a human gate for exactly one next bounded item or another explicit route.
 - The broad repo test suite still had unrelated publication-test failures; do not treat those as blockers to the dependency-control-plane hardening unless the next task enters publication tooling.
 
 ## Required Reading
@@ -58,57 +64,51 @@ Before acting, read:
 18. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
 19. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
 20. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-21. `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`
-22. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
+21. `execution/_Coordination/_COORDINATION.md`
+22. `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`
+23. `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+24. `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`
+25. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
 After reading, state that reading is complete, summarize the governing constraints, and check `git status --short`.
 
 ## First Gate
 
-Do not launch `WORKING_ITEMS`, dispatch `TASK`, or edit `DEL-01-01` targets until the human project authority accepts the pushed DEV-001 hardening state.
+Do not launch a new `WORKING_ITEMS` session, dispatch `TASK`, edit product artifacts,
+or change lifecycle state until the human project authority approves the next
+bounded action.
 
-If the human has not explicitly accepted the hardening state in the new session, ask for that acceptance directly and stop before dispatch.
+The next safe choices are:
 
-If accepted, record the acceptance in the session closeout and proceed to the `DEL-01-01` pilot handoff.
+- review the completed `DEL-01-01` pilot behavior;
+- authorize one next bounded DAG item, likely `DEL-02-01 - Canonical domain model schema`;
+- route candidate-edge or dependency ambiguity to `RECONCILIATION`;
+- decide whether to track or ignore the untracked pre-DAG reconciliation artifacts through `CHANGE`;
+- pause with no execution.
 
-## DEL-01-01 Pilot Rule
+If a next DAG item is authorized, prepare a fresh sealed handoff brief from
+`DAG-001`, `docs/_Registers/Deliverables.csv`, applicable `AB-00-*`
+architecture-basis rows, and the target deliverable's local context.
 
-Use `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md` as the controlling pilot brief.
+## Post-Pilot Rule
 
-Pilot constraints:
+Pilot-derived constraints:
 
 - `ORCHESTRATOR` owns the dispatch gate.
-- `WORKING_ITEMS` owns the actual deliverable work after the acceptance gate.
-- Use one `WORKING_ITEMS` session for `DEL-01-01`.
-- Dispatch at most one bounded `TASK` from that session.
+- `WORKING_ITEMS` owns actual deliverable work after the human next-item gate.
+- Use one `WORKING_ITEMS` session per authorized deliverable.
+- Dispatch at most one bounded `TASK` from that session unless the human explicitly broadens the pattern.
 - Do not do broad fan-out.
 - Do not promote candidate edges.
-- Do not recompute or alter the blocker queue unless explicitly assigned.
+- Do not recompute or alter the blocker queue unless explicitly assigned after this refresh.
 - Do not change lifecycle state unless explicitly authorized.
-
-Authorized repo-level write targets for the `DEL-01-01` pilot:
-
-- `docs/CONTRACT.md`
-- `docs/DIRECTIVE.md`
-- `governance/MAINTAINERS.md`
-
-Deliverable path:
-
-- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-01_Project governance baseline`
-
-Applicable architecture basis:
-
-- `AB-00-01`
-- `AB-00-02`
-- `AB-00-06`
-- `AB-00-08`
 
 ## Guardrails
 
 - No protected standards text, protected code data, proprietary engineering values, private project data, real secrets, or private libraries.
 - No certification, sealing, approval, code-compliance, or professional-reliance claims.
 - No lifecycle transition without explicit human authorization.
-- No broad implementation work outside `DEL-01-01`.
+- No broad implementation work outside the next approved sealed deliverable.
 - Keep candidate edges non-gating.
 - Preserve `DAG-001` as sequencing authority and local `Dependencies.csv` files as mirrors/evidence.
 - Route dependency ambiguity to `RECONCILIATION`.
@@ -118,8 +118,8 @@ Applicable architecture basis:
 
 Closeout must include:
 
-- whether human acceptance of DEV-001 hardening was granted;
-- whether `DEL-01-01` pilot was launched or held;
+- whether the completed `DEL-01-01` pilot pattern was accepted for the next step;
+- whether a next bounded DAG item was launched or held;
 - exact files changed, if any;
 - tests/audits run and their results;
 - any remaining human rulings or blockers.

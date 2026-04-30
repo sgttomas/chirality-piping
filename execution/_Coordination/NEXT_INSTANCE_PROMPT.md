@@ -2,10 +2,10 @@
 
 Continue as `ORCHESTRATOR` for the OpenPipeStress SOFTWARE workflow.
 
-The current objective is post-DAG DEV-001 control-plane routing. Do not launch
-`WORKING_ITEMS`, dispatch `TASK`, start `PKG-01` / `DEL-01-01`, edit
-deliverable-local dependency registers, or change lifecycle state unless the
-human explicitly approves that next action.
+The current objective is post-`DEL-01-01` pilot control-plane routing. Do not
+launch a new `WORKING_ITEMS` session, dispatch `TASK`, start another deliverable,
+edit deliverable-local dependency registers, or change lifecycle state unless
+the human explicitly approves that next action.
 
 ## Current Ground Truth
 
@@ -22,12 +22,16 @@ human explicitly approves that next action.
   its applicable `AB-00-*` rows are injected into sealed briefs instead of
   being treated as implementation graph work.
 - `PKG-00` does not require deliverable-local `Dependencies.csv` files.
-- Non-`PKG-00` deliverable-local `Dependencies.csv` files are present but are
-  not the graph authority for sequencing. Treat them as stale/non-authoritative
-  evidence until reconciled or refreshed.
-- Selected pilot candidate: `DEL-01-01 - Project governance baseline`.
-- `DEL-01-01` write-scope authorization is recorded in
-  `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`.
+- Non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
+  mirrors/evidence materialized from `DAG-001`, not independent sequencing
+  authority.
+- The `DEL-01-01 - Project governance baseline` pilot was accepted, launched,
+  completed, and committed as `7650cf6 docs: tighten maintainer governance
+  gates`.
+- The current mutable handoff is
+  `execution/_Coordination/NEXT_INSTANCE_STATE.md`.
+- The next gate is pilot review and authorization of at most one next bounded
+  DAG item; broad DAG execution is not authorized by default.
 
 ## First Action - Required Reading
 
@@ -54,8 +58,8 @@ Before planning a next action, read:
 19. `execution/_DAG/DAG-001/DependencyEdges.csv`
 20. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 21. `execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md`
-22. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_PRE_DEPENDENCIES_DAG.md`
-23. `execution/_Reconciliation/DepClosure/CLOSURE_PRE_DEPENDENCIES_DAG_2026-04-30_1508/RUN_SUMMARY.md`
+22. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
+23. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
 24. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
 After reading, state that reading is complete, summarize the active control
@@ -79,14 +83,21 @@ state, and ask for or consume the next human approval gate.
 
 The next safe step is a human choice among:
 
-1. approve launch of the `DEL-01-01` pilot handoff to `WORKING_ITEMS`;
-2. route candidate-edge or local-register ambiguity to `RECONCILIATION`;
-3. route aggregate-DAG audit wrapper work to `AUDIT_DEP_CLOSURE` tooling;
-4. pause with no execution.
+1. review the completed `DEL-01-01` pilot behavior and decide whether its
+   bounded execution pattern is acceptable;
+2. if accepted, authorize one next bounded DAG item, likely a Wave 2 foundation
+   such as `DEL-02-01 - Canonical domain model schema`, through a sealed
+   `WORKING_ITEMS` session and at most one bounded `TASK`;
+3. route candidate-edge or local-register ambiguity to `RECONCILIATION`;
+4. decide whether the untracked pre-DAG reconciliation artifacts should be
+   tracked or ignored through `CHANGE`;
+5. pause with no execution.
 
-If the human approves the `DEL-01-01` pilot, use
-`execution/_Coordination/DEV-001_PILOT_DISPATCH_DEL-01-01.md` as the handoff
-surface and do not expand beyond its authorized write targets.
+If the human approves the next DAG item, prepare a fresh sealed handoff brief
+from `DAG-001`, `docs/_Registers/Deliverables.csv`, applicable `AB-00-*`
+architecture-basis rows, and the target deliverable's local context. Do not
+reuse the `DEL-01-01` pilot brief as an implementation brief for other
+deliverables.
 
 ## Hard Stops
 

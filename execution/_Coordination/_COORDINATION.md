@@ -10,7 +10,8 @@
 **Blocker computation:** ENABLED from approved `ACTIVE` DAG edges only; `CANDIDATE` edges excluded
 **Default blocker maturity threshold:** SEMANTIC_READY
 **Active graph authority:** aggregate `execution/_DAG/DAG-001/DependencyEdges.csv`
-**Local dependency registers:** evidence-only until reconciled or refreshed; not sequencing authority
+**Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
+**Current pilot state:** `DEL-01-01` pilot completed; next gate is pilot review before any additional bounded DAG item
 
 ## Human Rulings
 
@@ -26,6 +27,8 @@
 - 2026-04-30 - Authorize repo-level write targets for the `DEL-01-01` pilot: `docs/CONTRACT.md`, `docs/DIRECTIVE.md`, and `governance/MAINTAINERS.md`.
 - 2026-04-30 - Enable blocker queue computation from the approved active DAG only.
 - 2026-04-30 - Treat `PKG-00` as prerequisite architecture context processed through `SCOPE_CHANGE` and injected into downstream deliverable contexts; it may be left out of implementation dependency graphs and does not require deliverable-local `Dependencies.csv` files.
+- 2026-04-30 - Accept the pushed DEV-001 hardening state in-session and authorize the `DEL-01-01` pilot handoff.
+- 2026-04-30 - Complete the `DEL-01-01` pilot as commit `7650cf6 docs: tighten maintainer governance gates`; next execution should not broaden beyond one gated tranche without human review of the pilot behavior.
 
 ## Operating Rules
 
@@ -35,5 +38,5 @@
 - `PKG-00` has reached the selected architecture readiness threshold; downstream product-development work still requires one sealed deliverable scope and explicit write targets.
 - Do not require local dependency registers for `PKG-00`; use the scope-change/context-injection record as the evidence surface for `PKG-00` architecture basis.
 - Treat a DEV-001 implementation projection that excludes `PKG-00` nodes and `ARCHITECTURE_BASIS` edges as a derived coordination view only; it does not replace `DAG-001` or remove `AB-00-*` brief injection.
-- Treat non-`PKG-00` deliverable-local `Dependencies.csv` files as stale/non-authoritative for sequencing until `RECONCILIATION` or an approved refresh closes their divergence from `DAG-001`.
+- Treat non-`PKG-00` deliverable-local `Dependencies.csv` files as synchronized mirrors/evidence, not as independent sequencing authority. Resolve dependency ambiguity through `RECONCILIATION`; apply any committed file-state repairs through `CHANGE`.
 - Keep dependency proposals labeled `PROPOSAL` until accepted by the human project authority.
