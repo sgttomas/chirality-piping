@@ -45,7 +45,7 @@ Maintainers must:
 
 ## 3. Contribution Review Gates
 
-Every public contribution should pass these gates before merge:
+Every public contribution must pass these gates before merge or have an explicit recorded maintainer deferral:
 
 | Gate | Required check |
 |---|---|
@@ -56,12 +56,25 @@ Every public contribution should pass these gates before merge:
 | Product claims | User-facing text does not claim certification, approval, endorsement, sealing, or code compliance for reliance. |
 | Privacy | Telemetry, bug reports, examples, and exports do not include private engineering data by default. |
 
+Public data contributions must also record these evidence slots before acceptance:
+
+| Evidence slot | Required value |
+|---|---|
+| Source identity | Source name and source location, or `TBD` if the source is still under review. |
+| Redistribution basis | License or redistribution status, including whether the data is public, private-only, unknown, or suspected protected content. |
+| Contributor certification | Contributor statement that the data is original, invented, public-domain, permissively licensed, or otherwise redistributable. |
+| Review disposition | `pending`, `accepted`, `rejected`, `quarantined`, or `TBD` with a reason. |
+| Quarantine status | Required when protected standards content, proprietary data, or private project data is suspected. |
+| Private-data risk | Review note confirming whether the contribution can expose private project, rule-pack, material, component, owner-standard, or company design-basis data. |
+
 ## 4. Release Policy Skeleton
 
 A public release must not be published until maintainers complete a release review covering:
 
+- release scope, changed surfaces, and any excluded or deferred work;
 - selected license and notices; if the license remains `TBD`, no public source release may be published without a recorded human exception;
 - validation status and known limitations;
+- data-boundary constraints and professional-responsibility notices;
 - protected-content and provenance review for public examples, templates, and bundled data;
 - private-data and telemetry review;
 - reproducibility evidence such as version, commit, build, schema, model, and rule-pack checksum behavior where applicable;
