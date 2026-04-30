@@ -176,6 +176,17 @@ fan-out. The required sequence is:
    - Prepare a fresh sealed brief from `DAG-001`, the deliverables register,
      applicable `AB-00-*` rows, and the target deliverable's local context.
 
+5. **Close the session handoff loop**
+   - Update `execution/_Coordination/NEXT_INSTANCE_STATE.md` before ending any
+     session that changes program state.
+   - Update `_COORDINATION.md` only for durable human rulings or coordination
+     policy changes.
+   - Update `NEXT_INSTANCE_PROMPT.md` only for control-loop protocol changes.
+   - Refresh `DEV-001_BLOCKER_QUEUE.*` only when explicitly assigned or when a
+     lifecycle/DAG change makes the current queue stale.
+   - Route commits through `CHANGE`; if approval is needed, stop with an
+     explicit `APPROVE:` action list.
+
 ## Dispatch Rule
 
 Each product-development `TASK` must be sealed to exactly one deliverable.

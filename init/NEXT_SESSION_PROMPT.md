@@ -103,6 +103,29 @@ Pilot-derived constraints:
 - Do not recompute or alter the blocker queue unless explicitly assigned after this refresh.
 - Do not change lifecycle state unless explicitly authorized.
 
+## Session Conclusion Protocol
+
+Before ending the session, close the stateful handoff loop:
+
+1. Update `execution/_Coordination/NEXT_INSTANCE_STATE.md` so it reflects the
+   new ground truth for touched deliverables, lifecycle changes, file changes,
+   commit hashes, tests/audits, human rulings, open TBDs, blockers, and
+   immediate next actions.
+2. Update `execution/_Coordination/_COORDINATION.md` only if the session creates
+   a durable human ruling or changes coordination mode, graph authority, or
+   dispatch policy.
+3. Update `execution/_Coordination/NEXT_INSTANCE_PROMPT.md` only if the
+   control-loop protocol changes.
+4. Refresh `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` only if explicitly
+   assigned or if a lifecycle/DAG change makes the current queue stale.
+5. Route staging and commits through `CHANGE`. If approval is needed, stop with
+   an explicit `APPROVE:` command list.
+
+This is the continuous-loop handoff: `ORCHESTRATOR` controls routing,
+`WORKING_ITEMS` performs deliverable-session wrap-up and updates
+`NEXT_INSTANCE_STATE.md` under `agents/AGENT_WORKING_ITEMS.md` Phase 5, and
+`CHANGE` performs approved file-state commits.
+
 ## Guardrails
 
 - No protected standards text, protected code data, proprietary engineering values, private project data, real secrets, or private libraries.

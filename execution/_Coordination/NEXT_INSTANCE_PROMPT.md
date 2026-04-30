@@ -99,6 +99,37 @@ architecture-basis rows, and the target deliverable's local context. Do not
 reuse the `DEL-01-01` pilot brief as an implementation brief for other
 deliverables.
 
+## Session Conclusion Protocol
+
+Every session that changes program state must close the control loop before it
+ends.
+
+Required closeout actions:
+
+1. Update `execution/_Coordination/NEXT_INSTANCE_STATE.md` with the new ground
+   truth:
+   - deliverable(s) touched and current lifecycle states;
+   - exact files changed and commit hashes, if committed;
+   - tests, audits, scans, and their results;
+   - blocker queue status, only if it was explicitly refreshed;
+   - new human rulings, accepted assumptions, remaining TBDs, and blockers;
+   - immediate next actions for the following session.
+2. Update `execution/_Coordination/_COORDINATION.md` only when a durable human
+   ruling, coordination mode, graph authority, or dispatch policy changes.
+3. Update `execution/_Coordination/NEXT_INSTANCE_PROMPT.md` only when the
+   control-loop protocol itself changes.
+4. Refresh `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` only when the
+   human explicitly assigns a refresh or when a lifecycle/DAG change makes the
+   existing queue stale.
+5. Route all committed file-state changes through `CHANGE`. If approval is
+   needed, stop with an explicit `APPROVE:` command list instead of committing.
+
+This handoff rule is backed by `agents/AGENT_WORKING_ITEMS.md` Phase 5, which
+defines session handoff to `NEXT_INSTANCE_STATE.md` as part of wrap-up when the
+control loop is active. ORCHESTRATOR owns routing and protocol visibility;
+WORKING_ITEMS owns deliverable-session handoff updates; CHANGE owns staging and
+commits after explicit approval.
+
 ## Hard Stops
 
 - No product implementation without a sealed deliverable scope and human gate.
