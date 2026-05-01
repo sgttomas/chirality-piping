@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-01-04 bounded item closeout
+**Actor:** ORCHESTRATOR CHANGE-approved DEL-01-04 handoff correction
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-01-04` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-01-04` bounded item and handoff correction committed; clean git state; no broad fan-out
 
 ## Active Control State
 
@@ -31,8 +31,10 @@
 | DEL-02-04 handoff correction commit | `a37a0a1 docs: record del-02-04 commit handoff` |
 | Last bounded item | `DEL-01-04 - Professional responsibility and product-claims policy` |
 | Last bounded item commit | `65f3119 docs: add professional boundary policy` |
-| Current authorized item | `None beyond DEL-01-04 closeout / CHANGE handling` |
+| DEL-01-04 handoff correction commit | `1a996ac docs: record del-01-04 commit handoff` |
+| Current authorized item | `None; awaiting next human gate` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md` |
+| Git state at handoff correction | Clean working tree on `main` at `1a996ac` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -608,19 +610,20 @@ Remaining open items:
 - Release-label vocabulary and final release policy language remain `TBD`.
 - Deliverable file-state changes were committed through CHANGE approval as
   `65f3119 docs: add professional boundary policy`.
+- DEL-01-04 handoff correction was committed through CHANGE approval as
+  `1a996ac docs: record del-01-04 commit handoff`.
+- Git state after the handoff correction was clean on `main` at `1a996ac`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route this post-commit handoff correction through `CHANGE`; do not stage or
-   commit without an explicit `APPROVE:` action list.
-2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+1. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-01-04 handoff correction handling.
+authorized.
 
 ## Guardrails
 
