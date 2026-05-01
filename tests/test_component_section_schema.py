@@ -170,6 +170,13 @@ def main():
         "bend_included_angle",
         "bend_plane_orientation",
         "bend_geometry_source_reference",
+        "branch_run_size",
+        "branch_header_size",
+        "branch_connection_angle",
+        "branch_connection_type",
+        "branch_reinforcement_area",
+        "branch_reinforcement_reference",
+        "branch_geometry_source_reference",
         "weight",
         "center_of_gravity",
         "stiffness",
@@ -188,6 +195,9 @@ def main():
         "COMPONENT_MODIFIER_NOT_PUBLIC",
         "BEND_GEOMETRY_INCOMPLETE",
         "BEND_RULE_INPUT_MISSING",
+        "BRANCH_GEOMETRY_INCOMPLETE",
+        "BRANCH_REINFORCEMENT_DATA_MISSING",
+        "BRANCH_RULE_INPUT_MISSING",
     } <= enum_at(component_schema, "ComponentDiagnosticCode")
     assert {
         "contract_id",
@@ -212,6 +222,12 @@ def main():
     assert "bend_centerline_radius" in bend_contract["geometry_field_kinds"]
     assert "sif_user_value" in bend_contract["rule_modifier_field_kinds"]
     assert bend_contract["protected_value_policy"] == "schema_slots_only"
+    branch_contract = fixture["component_family_contracts"][1]
+    assert branch_contract["component_types"] == ["branch"]
+    assert "branch_run_size" in branch_contract["geometry_field_kinds"]
+    assert "branch_reinforcement_reference" in branch_contract["source_metadata_field_kinds"]
+    assert "sif_user_value" in branch_contract["rule_modifier_field_kinds"]
+    assert branch_contract["protected_value_policy"] == "schema_slots_only"
     assert fixture["component_records"][0]["redistribution_status"] == "TBD"
     fixture_field_kinds = {
         field["field_kind"] for field in fixture["component_records"][0]["fields"]
@@ -224,6 +240,18 @@ def main():
     )
     assert fixture["component_records"][0]["completeness"][0]["status"] == "incomplete"
     assert fixture["component_diagnostics"][0]["code"] == "BEND_GEOMETRY_INCOMPLETE"
+    branch_record = fixture["component_records"][1]
+    assert branch_record["component_type"] == "branch"
+    branch_field_kinds = {field["field_kind"] for field in branch_record["fields"]}
+    assert "branch_run_size" in branch_field_kinds
+    assert "branch_header_size" in branch_field_kinds
+    assert "branch_connection_angle" in branch_field_kinds
+    assert "branch_reinforcement_reference" in branch_field_kinds
+    assert "sif_user_value" in branch_field_kinds
+    assert branch_record["fields"][-1]["public_repository_value_policy"] == "no_public_code_specific_values"
+    assert branch_record["completeness"][0]["status"] == "incomplete"
+    assert branch_record["completeness"][0]["diagnostic_code"] == "BRANCH_RULE_INPUT_MISSING"
+    assert fixture["component_diagnostics"][1]["code"] == "BRANCH_RULE_INPUT_MISSING"
 
     all_text = "\n".join(
         [

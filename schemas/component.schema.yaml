@@ -217,6 +217,9 @@
         "COMPONENT_CATALOG_VALUE_NOT_PUBLIC",
         "BEND_GEOMETRY_INCOMPLETE",
         "BEND_RULE_INPUT_MISSING",
+        "BRANCH_GEOMETRY_INCOMPLETE",
+        "BRANCH_REINFORCEMENT_DATA_MISSING",
+        "BRANCH_RULE_INPUT_MISSING",
         "TBD"
       ]
     },
@@ -337,6 +340,13 @@
         "bend_end_a_orientation",
         "bend_end_b_orientation",
         "branch_size",
+        "branch_run_size",
+        "branch_header_size",
+        "branch_connection_angle",
+        "branch_connection_type",
+        "branch_reinforcement_area",
+        "branch_reinforcement_reference",
+        "branch_geometry_source_reference",
         "end_a_size",
         "end_b_size",
         "weight",

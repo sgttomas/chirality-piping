@@ -204,6 +204,36 @@
       },
       "protected_value_policy": "schema_slots_only",
       "review_status": "pending"
+    },
+    {
+      "contract_id": "contract.component.branch",
+      "component_types": [
+        "branch"
+      ],
+      "geometry_field_kinds": [
+        "branch_run_size",
+        "branch_header_size",
+        "branch_connection_angle",
+        "branch_connection_type"
+      ],
+      "rule_modifier_field_kinds": [
+        "sif_user_value",
+        "flexibility_factor_user_value",
+        "branch_reinforcement_area"
+      ],
+      "source_metadata_field_kinds": [
+        "branch_geometry_source_reference",
+        "branch_reinforcement_reference",
+        "manufacturer_reference"
+      ],
+      "mechanics_interface": {
+        "model_role": "centerline_component",
+        "geometry_basis": "user_entered_centerline_geometry",
+        "solver_consumption": "mechanics_geometry_and_user_flexibility",
+        "rule_check_consumption": "user_rule_pack_inputs_only"
+      },
+      "protected_value_policy": "schema_slots_only",
+      "review_status": "pending"
     }
   ],
   "component_records": [
@@ -290,6 +320,126 @@
         "review_status": "pending"
       },
       "review_status": "pending"
+    },
+    {
+      "component_id": "comp.invented.branch.alpha",
+      "name": "Invented Branch Component Alpha",
+      "component_type": "branch",
+      "privacy_class": "public_schema_only",
+      "redistribution_status": "TBD",
+      "fields": [
+        {
+          "field_id": "comp.invented.branch.alpha.run-size",
+          "field_kind": "branch_run_size",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no branch run size supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.branch.alpha.header-size",
+          "field_kind": "branch_header_size",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no branch header size supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.branch.alpha.connection-angle",
+          "field_kind": "branch_connection_angle",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no branch angle value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.branch.alpha.reinforcement-reference",
+          "field_kind": "branch_reinforcement_reference",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "rule_check",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no branch reinforcement data supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.branch.alpha.sif",
+          "field_kind": "sif_user_value",
+          "value_status": "missing",
+          "public_repository_value_policy": "no_public_code_specific_values",
+          "required_for": "rule_check",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no branch SIF or flexibility value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        }
+      ],
+      "completeness": [
+        {
+          "finding_id": "comp.invented.branch.alpha.incomplete",
+          "required_for": "rule_check",
+          "status": "incomplete",
+          "missing_field_kinds": [
+            "branch_run_size",
+            "branch_header_size",
+            "branch_connection_angle",
+            "branch_reinforcement_reference",
+            "sif_user_value",
+            "flexibility_factor_user_value"
+          ],
+          "diagnostic_code": "BRANCH_RULE_INPUT_MISSING"
+        }
+      ],
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented non-engineering fixture; not for project use",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      },
+      "review_status": "pending"
     }
   ],
   "component_field_definitions": [
@@ -319,6 +469,42 @@
       "required_for": "rule_check",
       "public_fixture_policy": "private_values_only",
       "review_status": "pending"
+    },
+    {
+      "field_kind": "branch_run_size",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "branch_header_size",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "branch_connection_angle",
+      "dimension_id": "angle",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "branch_reinforcement_reference",
+      "dimension_id": "reference",
+      "quantity_kind": "reference",
+      "unit_required": false,
+      "required_for": "rule_check",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
     }
   ],
   "component_completeness_rules": [
@@ -337,6 +523,25 @@
       "required_for": "rule_check",
       "missing_behavior": "diagnostic_blocking",
       "diagnostic_code": "BEND_RULE_INPUT_MISSING",
+      "review_status": "pending"
+    },
+    {
+      "rule_id": "rule.component.branch.rule-inputs",
+      "applies_to": "rule_check",
+      "component_types": [
+        "branch"
+      ],
+      "required_field_kinds": [
+        "branch_run_size",
+        "branch_header_size",
+        "branch_connection_angle",
+        "branch_reinforcement_reference",
+        "sif_user_value",
+        "flexibility_factor_user_value"
+      ],
+      "required_for": "rule_check",
+      "missing_behavior": "diagnostic_blocking",
+      "diagnostic_code": "BRANCH_RULE_INPUT_MISSING",
       "review_status": "pending"
     }
   ],
@@ -360,6 +565,26 @@
         "redistribution_status": "TBD",
         "review_status": "pending"
       }
+    },
+    {
+      "diagnostic_id": "diag.component.branch.fixture.incomplete",
+      "code": "BRANCH_RULE_INPUT_MISSING",
+      "severity": "blocking",
+      "affected_ref": {
+        "ref_type": "component",
+        "ref_id": "comp.invented.branch.alpha"
+      },
+      "message": "Invented fixture intentionally omits branch geometry, reinforcement, and user rule-check values.",
+      "remediation": "Supply reviewed user values with provenance before mechanics or rule-check use.",
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented diagnostic fixture",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      }
     }
   ],
   "component_open_decisions": [
@@ -370,6 +595,14 @@
       "blocking_scope": "public_component_values",
       "owner": "human project authority",
       "notes": "Public component fixture values remain omitted unless source and redistribution policy is accepted."
+    },
+    {
+      "decision_id": "comp.dec.branch-source-policy",
+      "topic": "accepted_component_source_catalog",
+      "status": "open",
+      "blocking_scope": "public_branch_component_values",
+      "owner": "human project authority",
+      "notes": "Public branch connection geometry, reinforcement, SIF, and flexibility values remain omitted until source and redistribution policy is accepted."
     }
   ]
 }

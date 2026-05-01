@@ -170,6 +170,9 @@ The section and component library contracts are represented by
 - bend/elbow family contracts for user-entered centerline radius, included
   angle, plane/orientation metadata, source references, and user-supplied SIF
   or flexibility-factor slots;
+- branch-connection family contracts for user-entered run/header geometry,
+  connection angle/type slots, reinforcement source slots, and user-supplied
+  SIF or flexibility-factor slots;
 - explicit public repository value policies for SIF, flexibility, proprietary
   catalog, and user/private values;
 - completeness rules and diagnostics for solve-required, property-calculation,
@@ -186,6 +189,12 @@ Bend and elbow records define schema slots and mechanics-interface metadata
 only. Public repository fixtures may show the shape of bend geometry fields but
 must not supply protected bend tables, code-specific SIF or flexibility values,
 or proprietary catalog geometry as defaults.
+
+Branch connection records define schema slots and mechanics-interface metadata
+only. Public repository fixtures may show the shape of branch geometry and
+reinforcement-reference fields but must not supply protected branch tables,
+code-specific SIF or flexibility values, reinforcement values, or proprietary
+catalog geometry as defaults.
 
 ### 4.3 Code-neutral analysis boundary
 

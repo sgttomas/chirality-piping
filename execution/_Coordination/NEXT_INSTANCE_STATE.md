@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** CHANGE / ORCHESTRATOR DEL-03-03 commit handoff
+**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-04 bounded item closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-03` bounded item committed through CHANGE approval; one next bounded DAG item authorized by human project authority; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-04` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
 
 ## Active Control State
 
@@ -40,10 +40,14 @@
 | DEL-03-01 handoff correction commit | `f749a1c docs: record del-03-01 commit handoff` |
 | Previous bounded item | `DEL-03-02 - Pipe section and component library schema` |
 | Previous bounded item commit | `f0fdeac schema: add section and component library contracts` |
-| Last bounded item | `DEL-03-03 - Bend and elbow component model fields` |
-| Last bounded item commit | `7a84472 schema: add bend elbow component contract` |
-| Current authorized item | Human project authority authorized exactly one next bounded DAG item of ORCHESTRATOR's choosing after DEL-03-03 handoff correction and push |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-03.md` |
+| Previous bounded item | `DEL-03-03 - Bend and elbow component model fields` |
+| Previous bounded item commit | `7a84472 schema: add bend elbow component contract` |
+| DEL-03-03 handoff correction commit | `753b096 docs: record del-03-03 commit handoff` |
+| DEL-03-03 pushed state | `main` pushed to `origin/main` through CHANGE approval on 2026-05-01 |
+| Last bounded item | `DEL-03-04 - Branch connection component model fields` |
+| Last bounded item commit | `Pending CHANGE approval` |
+| Current authorized item | `None beyond DEL-03-04 closeout / CHANGE handling` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-04.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -877,18 +881,91 @@ Remaining open items:
 - Deliverable file-state changes were committed through CHANGE approval as
   `7a84472 schema: add bend elbow component contract`.
 
+Handoff correction:
+
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md` was updated to record the
+  `DEL-03-03` commit and pushed state.
+- Handoff correction commit:
+  `753b096 docs: record del-03-03 commit handoff`.
+- `main` was pushed to `origin/main` through CHANGE approval on 2026-05-01.
+
+## DEL-03-04 Bounded Item Closeout
+
+Human project authority authorized exactly one next bounded DAG item of
+ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-03-04 - Branch connection
+component model fields` because it is the next bounded PKG-03 component-family
+slice after the generic component schema and bend/elbow fields. ORCHESTRATOR /
+WORKING_ITEMS completed the bounded item inside the explicit write scope.
+Broad fan-out, lifecycle transition, candidate-edge promotion, blocker-queue
+refresh, and dependency-register edits were not performed.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-04.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
+  `DEL-00-08`, `DEL-03-02`, `DEL-02-02`, and `DEL-01-02`.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `schemas/component.schema.yaml`
+- `fixtures/component/invented_section_component_library_valid.json`
+- `tests/test_component_section_schema.py`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-04_Branch connection component model fields/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-04.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `python3 -m json.tool schemas/component.schema.yaml` passed.
+- `python3 -m json.tool fixtures/component/invented_section_component_library_valid.json` passed.
+- `python3 tests/test_component_section_schema.py` passed.
+- Existing schema tests passed: `test_material_schema.py`,
+  `test_model_schema.py`, `test_units_schema.py`, `test_persistence_schema.py`,
+  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
+  `test_analysis_boundary_schema.py`.
+- `git diff --check` passed.
+- Focused forbidden-claim/protected-content scan over affected DEL-03-04
+  product surfaces found only negative boundary statements and test-denylist
+  literals, not product certification/compliance claims or protected branch
+  component data.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, or automatic code-compliance/certification/sealing
+  claims were introduced.
+
+Remaining open items:
+
+- Accepted public branch connection source catalogs remain `TBD`.
+- Public branch fixture value policy remains `TBD`.
+- Exact solver use of user-supplied branch flexibility inputs remains `TBD`.
+- Concrete branch import formats remain `TBD`.
+- Downstream component editor behavior remains future GUI work.
+- Deliverable file-state changes are awaiting CHANGE approval.
+
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Commit this `DEL-03-03` handoff correction through CHANGE approval.
-2. Push `main` to `origin/main` through CHANGE approval.
-3. ORCHESTRATOR may select exactly one next bounded DAG item and prepare a fresh
-   sealed dispatch brief from `DAG-001`, `docs/_Registers/Deliverables.csv`,
-   applicable `AB-00-*` rows, and the target deliverable's local context.
+1. Route `DEL-03-04` file-state handling through `CHANGE`; do not stage or
+   commit without an explicit `APPROVE:` action list.
+2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+   artifact handling if it appears in file-state evidence, authorize exactly one
+   next bounded DAG item, route `CHANGE` for push or other file-state handling,
+   or pause.
 
-Do not start broad DAG execution. No additional DAG item is authorized beyond
-the single next bounded item approved by the human project authority.
+Do not start broad DAG execution. No additional DAG item is currently
+authorized beyond DEL-03-04 closeout / CHANGE handling.
 
 ## Guardrails
 
