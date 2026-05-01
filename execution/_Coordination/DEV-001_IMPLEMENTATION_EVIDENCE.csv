@@ -1,0 +1,17 @@
+DeliverableID,PackageID,EvidenceState,EvidenceKind,Commit,CommitSubject,CommittedDate,HandoffCommit,Notes
+DEL-01-01,PKG-01,COMMITTED,BOUNDED_ITEM_COMMIT,7650cf6,docs: tighten maintainer governance gates,2026-04-30,,DEV-001 pilot bounded item.
+DEL-01-02,PKG-01,COMMITTED,BOUNDED_ITEM_COMMIT,0d729cf,docs: tighten protected data boundary,2026-04-30,,DEV-001 bounded governance item.
+DEL-01-03,PKG-01,COMMITTED,BOUNDED_ITEM_COMMIT,df461f8,docs: add contributor certification workflow,2026-04-30,,DEV-001 bounded governance item.
+DEL-01-04,PKG-01,COMMITTED,BOUNDED_ITEM_COMMIT,65f3119,docs: add professional boundary policy,2026-04-30,474b56d,DEV-001 bounded governance item; later handoff state recorded separately.
+DEL-02-01,PKG-02,COMMITTED,BOUNDED_ITEM_COMMIT,7b256f3,schema: tighten canonical domain model contract,2026-04-30,8f57f85,DEV-001 bounded schema item.
+DEL-02-02,PKG-02,COMMITTED,BOUNDED_ITEM_COMMIT,a458cba,schema: tighten unit system contract,2026-04-30,ce94de3,DEV-001 bounded schema item.
+DEL-02-03,PKG-02,COMMITTED,BOUNDED_ITEM_COMMIT,abc1306,schema: tighten analysis boundary model,2026-04-30,f19cf2a,DEV-001 bounded schema item.
+DEL-02-04,PKG-02,COMMITTED,BOUNDED_ITEM_COMMIT,ef44f4c,schema: tighten plugin extension contract,2026-04-30,a37a0a1,DEV-001 bounded schema item.
+DEL-02-05,PKG-02,COMMITTED,BOUNDED_ITEM_COMMIT,742016e,schema: tighten project persistence contract,2026-04-30,4e18a0f,DEV-001 bounded schema item.
+DEL-03-01,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,3793e87,schema: add material library provenance contract,2026-04-30,f749a1c,DEV-001 bounded library schema item.
+DEL-03-02,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,f0fdeac,schema: add section and component library contracts,2026-04-30,,DEV-001 bounded component schema item.
+DEL-03-03,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,7a84472,schema: add bend elbow component contract,2026-04-30,753b096,DEV-001 bounded component schema item.
+DEL-03-04,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,ae693b6,schema: add branch component contract,2026-04-30,,DEV-001 bounded component schema item.
+DEL-03-05,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,d8ee0db,schema: add rigid component contract,2026-04-30,fd695c0,DEV-001 bounded component schema item.
+DEL-03-06,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,f15cbc6,schema: add expansion joint component contract,2026-05-01,,DEV-001 bounded component schema item.
+DEL-03-07,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,4d880b3,core: add library import provenance checker,2026-05-01,,DEV-001 bounded library import implementation item.

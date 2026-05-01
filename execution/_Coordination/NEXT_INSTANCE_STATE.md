@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-07 bounded item closeout
+**Actor:** ORCHESTRATOR DEV-001 implementation-readiness queue and bootstrap prompt refresh
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-07` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 implementation-readiness blocker queue and next-session bootstrap prompt refreshed; no broad fan-out
 
 ## Active Control State
 
@@ -13,9 +13,10 @@
 | Accepted graph | `execution/_DAG/DAG-001/` |
 | Graph approval | `execution/_DAG/DAG-001/APPROVAL_RECORD.md` |
 | Active graph authority | Aggregate `DAG-001` `DependencyEdges.csv` |
-| Blocker computation | Enabled from approved `ACTIVE` DAG edges only |
+| Blocker computation | Enabled from approved `ACTIVE` DAG edges only; implementation-readiness semantics |
 | Candidate edges | Retained as non-gating pending `RECONCILIATION` |
-| Maturity threshold | `SEMANTIC_READY` |
+| Semantic context threshold | `SEMANTIC_READY` |
+| Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
 | Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` |
 | Selected pilot | `DEL-01-01 - Project governance baseline` |
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
@@ -52,11 +53,12 @@
 | Previous bounded item | `DEL-03-06 - Expansion joint component model` |
 | Previous bounded item commit | `f15cbc6 schema: add expansion joint component contract` |
 | Last bounded item | `DEL-03-07 - Public/private library import provenance checker` |
-| Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-03-07 closeout / CHANGE handling` |
+| Last bounded item commit | `4d880b3 core: add library import provenance checker` |
+| DEL-03-07 commit state | Committed on `main`; git remote state is governed by the latest `git status --short --branch` evidence |
+| Current authorized item | `None beyond CHANGE file-state handling for the implementation-readiness queue/bootstrap refresh` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
-| Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
+| Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
 ## DAG Evidence
 
@@ -115,22 +117,31 @@ evidence and should not be treated as current sequencing authority.
 
 ## Current Blocker Queue
 
-`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed from current
-filesystem `_STATUS.md` files and approved active `DAG-001` edges after the
-`DEL-01-01` pilot closeout. It records:
+`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
+2026-05-01 as an implementation-readiness view. It reads approved active
+`DAG-001` edges and `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+`FromDeliverableID` is treated as the downstream consumer blocked by
+`TargetDeliverableID`, the upstream provider.
+
+Semantic readiness answers whether task context is prepared. Implementation
+readiness answers whether a consumer can safely rely on committed upstream
+artifacts. `SEMANTIC_READY` no longer satisfies DEV-001 implementation
+blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` | 73 |
-| Advisory `UNBLOCKED` deliverables | 73 |
-| Advisory `BLOCKED` deliverables | 0 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
+| Implementation evidence records | 16 |
+| Committed implementation evidence | 16 |
+| PKG-00 architecture-basis edges satisfied by baseline | 388 |
+| Implementation `UNBLOCKED` deliverables | 33 |
+| Implementation `BLOCKED` deliverables | 40 |
 | Candidate edges used | 0 |
 
-All deliverables currently meet the `SEMANTIC_READY` maturity threshold used by
-the advisory blocker queue. This means there are no active-DAG maturity
-blockers under the current threshold. It is not a lifecycle approval, schedule,
-priority, staffing decision, implementation completeness claim, or professional
-approval.
+The queue now contains blockers for consumers whose upstream providers do not
+yet have `COMMITTED` implementation evidence. It is not a lifecycle approval,
+schedule, priority, staffing decision, implementation completeness claim, or
+professional approval.
 
 ## Completed Bounded Item History (Compacted)
 
@@ -174,11 +185,20 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 
 - `NEXT_INSTANCE_PROMPT.md` is stable control-loop protocol. Agents derive the
   current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted
-  `DAG-001` artifacts, current blocker evidence when explicitly current, and
-  the latest human approval gate.
+  `DAG-001` artifacts, current implementation-readiness queue/evidence, and the
+  latest human approval gate.
 - `init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint. It routes
   fresh sessions into the coordination protocol and mutable handoff state, not
   a hard-coded next deliverable objective.
+
+2026-05-01 clarification:
+
+- `init/NEXT_SESSION_PROMPT.md` now states DEV-001 dependency direction and
+  readiness rules directly.
+- It explicitly separates semantic readiness (`SEMANTIC_READY` context
+  readiness) from implementation readiness (`COMMITTED` upstream evidence).
+- It removes ambiguous wording around "current blocker evidence" and states
+  that queue refresh is driven by DAG/evidence changes.
 
 ## DEL-03-07 Bounded Item Closeout
 
@@ -197,6 +217,12 @@ Dispatch evidence:
   `DEL-00-08`, `DEL-03-01`, `DEL-03-02`, `DEL-01-02`, `DEL-01-03`, and
   `DEL-02-04`.
 - `CANDIDATE` rows were not promoted or used as gates.
+
+Commit evidence:
+
+- Product commit: `4d880b3 core: add library import provenance checker`.
+- This state file records the product commit; the implementation-readiness
+  queue/bootstrap refresh is a coordination change routed through `CHANGE`.
 
 Files changed in this bounded item:
 
@@ -240,21 +266,20 @@ Remaining open items:
   or legal review matters.
 - UI/editor presentation of import findings remains future GUI work.
 - Downstream adapter framework integration remains future interop work.
-- Deliverable file-state changes are awaiting CHANGE approval.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-03-07` file-state handling through `CHANGE`; do not stage or
-   commit without an explicit `APPROVE:` action list.
+1. Complete requested `CHANGE` file-state handling for the
+   implementation-readiness queue/bootstrap refresh.
 2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, route `CHANGE` for push or other file-state handling,
    or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-03-07 closeout / CHANGE handling.
+authorized beyond implementation-readiness queue refresh / CHANGE handling.
 
 ## Guardrails
 

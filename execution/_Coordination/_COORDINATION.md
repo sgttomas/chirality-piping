@@ -3,16 +3,17 @@
 **Representation:** Full graph
 **Dependency tracking mode:** FULL_GRAPH
 **External schedule / coordination artifact:** N/A
-**Default maturity threshold:** SEMANTIC_READY
+**Semantic context maturity threshold:** SEMANTIC_READY
 **DAG status:** APPROVED_FOR_DEVELOPMENT_COORDINATION_BASIS
 **Accepted DAG:** `execution/_DAG/DAG-001/`
 **DAG approval record:** `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
-**Blocker computation:** ENABLED from approved `ACTIVE` DAG edges only; `CANDIDATE` edges excluded
-**Default blocker maturity threshold:** SEMANTIC_READY
+**Blocker computation:** ENABLED from approved `ACTIVE` DAG edges only; `CANDIDATE` edges excluded; DEV-001 uses implementation-readiness semantics
+**Default blocker satisfaction threshold:** `COMMITTED` implementation evidence
+**Implementation evidence register:** `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 **Active graph authority:** aggregate `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
-**Last bounded item:** `DEL-02-01 - Canonical domain model schema`
+**Last bounded item:** `DEL-03-07 - Public/private library import provenance checker`
 **Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
 **Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, `DAG-001`, and the latest human gate
 
@@ -36,11 +37,15 @@
 - 2026-04-30 - Complete `DEL-02-01 - Canonical domain model schema` as commit `7b256f3 schema: tighten canonical domain model contract`, with handoff correction commit `8f57f85 docs: record del-02-01 commit handoff`.
 - 2026-04-30 - Treat `NEXT_INSTANCE_PROMPT.md` as stable control-loop protocol. Agents derive the current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted `DAG-001` artifacts, the blocker queue when explicitly current, and the latest human approval gate instead of hard-coded next-deliverable language.
 - 2026-04-30 - Treat `init/NEXT_SESSION_PROMPT.md` as a stable bootstrap entrypoint. It should direct fresh sessions into the coordination protocol and mutable handoff state, not encode the next deliverable objective.
+- 2026-05-01 - Replace DEV-001 blocker queue semantics with an implementation-readiness view: `FromDeliverableID` is the downstream consumer blocked by `TargetDeliverableID`; only `COMMITTED` implementation evidence satisfies non-architecture upstreams; `SEMANTIC_READY` remains context readiness only; `PKG-00` `ARCHITECTURE_BASIS` edges are satisfied by the accepted architecture baseline; `CANDIDATE` edges remain excluded.
 
 ## Operating Rules
 
 - Report lifecycle state and approved DAG coordination facts.
-- Compute blocked/unblocked states only from approved `ACTIVE` DAG edges, current filesystem lifecycle states, and the `SEMANTIC_READY` maturity threshold unless a later human ruling changes the rule.
+- Semantic readiness answers: is the task context prepared for bounded dispatch/review?
+- Implementation readiness answers: can this item safely consume committed upstream artifacts?
+- DEV-001 dispatch uses implementation readiness after the 2026-05-01 blocker-queue replacement.
+- Compute implementation blocked/unblocked states only from approved `ACTIVE` DAG edges, the DEV-001 implementation evidence register, the `COMMITTED` evidence threshold, and satisfied `PKG-00` architecture-basis edges unless a later human ruling changes the rule.
 - Do not use `CANDIDATE` edges for blocker queues, wave placement, readiness claims, schedule, staffing, or priority.
 - `PKG-00` has reached the selected architecture readiness threshold; downstream product-development work still requires one sealed deliverable scope and explicit write targets.
 - Do not require local dependency registers for `PKG-00`; use the scope-change/context-injection record as the evidence surface for `PKG-00` architecture basis.

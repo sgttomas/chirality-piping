@@ -2,7 +2,7 @@
 doc_id: OPS-NEXT-SESSION-PROMPT
 doc_kind: init.next_session_prompt
 status: evergreen_bootstrap_protocol
-updated: 2026-04-30
+updated: 2026-05-01
 assignment: orchestrator_bootstrap_current_control_state
 approved_decomposition: docs/_Decomposition/SOFTWARE_DECOMP.md
 approved_revision: "0.4"
@@ -13,42 +13,17 @@ exclude_scope: broad fan-out, candidate edge promotion, lifecycle transitions wi
 
 # NEXT SESSION PROMPT - DEV-001 Control-Loop Bootstrap
 
-Continue as `ORCHESTRATOR` for the OpenPipeStress SOFTWARE workflow in a fresh session.
+Bootstrap in read-only `ORCHESTRATOR` posture until the required reading is
+complete. This file is only the bootstrap entrypoint. It does not name or
+authorize the next deliverable.
 
-This prompt is a stable bootstrap entrypoint. It is not the source of the next
-deliverable objective. Derive the current objective from the coordination
-protocol, mutable handoff state, accepted `DAG-001` artifacts, current blocker
-evidence when explicitly current, git/filesystem evidence, and the latest human
-approval gate.
+A fresh session must recover the current objective from the coordination files,
+git/filesystem evidence, and the latest explicit human gate before planning or
+editing.
 
-## Current Ground Truth
+## Read First
 
-Treat these as stable bootstrap facts unless contradicted by newer filesystem or
-git evidence:
-
-- `execution/_Coordination/NEXT_INSTANCE_PROMPT.md` defines the live
-  control-loop protocol.
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md` is the mutable handoff truth
-  for the current objective, last completed bounded item, commits, tests, open
-  items, and immediate next actions.
-- `execution/_Coordination/_COORDINATION.md` records durable coordination
-  rulings, graph authority, and dispatch policy.
-- `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4` remains the active decomposition basis.
-- `DAG-001` remains the execution sequencing and blocker-computation authority.
-- Non-`PKG-00` local `Dependencies.csv` files are synchronized mirrors/evidence from `DAG-001`, not independent sequencing authority.
-- `PKG-00` remains architecture context only and does not receive local `Dependencies.csv` files.
-- Architecture-basis rows targeting `PKG-00` remain preserved in non-`PKG-00` local mirrors as injected context evidence.
-- `CANDIDATE` edges remain non-gating and require later `RECONCILIATION` plus `CHANGE` before promotion.
-- Broad DAG execution is not authorized by default. A fresh session must ask for
-  or consume a human gate for exactly one next bounded item or another explicit
-  route.
-- This file should not name the next deliverable. Use it to enter the
-  coordination loop, then discover the objective from the state and approved
-  control-plane documents.
-
-## Required Reading
-
-Before acting, read:
+Read these files before planning or editing:
 
 1. `INIT.md`
 2. `AGENTS.md`
@@ -57,45 +32,79 @@ Before acting, read:
 5. `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 6. `execution/_Coordination/_COORDINATION.md`
 
-Then follow the required-reading list and operating rules in
-`execution/_Coordination/NEXT_INSTANCE_PROMPT.md`. Read any active, latest, or
-historically relevant dispatch brief named by `NEXT_INSTANCE_STATE.md`.
+Then follow the fuller required-reading list in
+`execution/_Coordination/NEXT_INSTANCE_PROMPT.md`, including any dispatch brief
+named by `NEXT_INSTANCE_STATE.md`.
 
 After reading, state that reading is complete, summarize the active control
-state and governing constraints, and check `git status --short`.
+state and governing constraints, and check `git status --short`. Continue as
+`ORCHESTRATOR` only after this grounding step is complete.
+
+## State Sources
+
+- Live protocol: `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`.
+- Mutable handoff truth: `execution/_Coordination/NEXT_INSTANCE_STATE.md`.
+- Durable coordination rulings: `execution/_Coordination/_COORDINATION.md`.
+- Accepted graph authority: `execution/_DAG/DAG-001/DependencyEdges.csv`.
+- Implementation evidence: `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- Current computed queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+  and `.csv`.
+- Active decomposition: `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`.
+
+## Dependency Direction
+
+Use this direction consistently:
+
+- `FromDeliverableID` is the downstream consumer.
+- `TargetDeliverableID` is the upstream provider.
+- Therefore `FromDeliverableID` is blocked by `TargetDeliverableID`.
+
+Use only `Status=ACTIVE` edges for blocker computation. `Status=CANDIDATE`
+edges are non-gating until promoted through `RECONCILIATION` and `CHANGE`.
+
+## Readiness Rules
+
+Keep semantic readiness and implementation readiness separate:
+
+- Semantic readiness answers: is the deliverable context prepared for bounded
+  dispatch or review?
+- Implementation readiness answers: can this deliverable safely consume
+  committed upstream artifacts?
+- `SEMANTIC_READY` is context readiness only. It does not satisfy DEV-001
+  implementation blockers.
+- Non-architecture upstream providers satisfy implementation blockers only when
+  they have `COMMITTED` evidence in
+  `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- `PKG-00` `ARCHITECTURE_BASIS` edges are satisfied by the accepted
+  architecture baseline, not by implementation evidence.
+
+## Authority Boundaries
+
+- `DAG-001` is the sequencing and blocker-computation authority.
+- Non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
+  mirrors/evidence from `DAG-001`, not independent sequencing authority.
+- `PKG-00` remains architecture context only and does not receive local
+  `Dependencies.csv` files.
+- Architecture-basis rows targeting `PKG-00` remain injected context evidence.
+- Broad DAG execution is not authorized by default.
 
 ## First Gate
 
-Do not launch a new `WORKING_ITEMS` session, dispatch `TASK`, edit product artifacts,
-or change lifecycle state until the human project authority approves the next
-bounded action.
+Do not launch `WORKING_ITEMS`, dispatch `TASK`, edit product artifacts, change
+lifecycle state, promote candidate edges, or start a new deliverable until the
+human project authority approves the next bounded action.
 
-The next safe choices must be derived from the current coordination state and
-the latest human instruction. Valid routes include:
+Valid next routes are:
 
 - authorize exactly one bounded DAG item through a fresh sealed dispatch brief;
 - route candidate-edge or dependency ambiguity to `RECONCILIATION`;
-- route file-state handling, staging, or commits through `CHANGE`;
 - route bounded graph/tool checks through the applicable `AUDIT_*` agent;
-- decide whether to track or ignore the untracked pre-DAG reconciliation artifacts through `CHANGE`;
+- route file-state handling, staging, commits, or pushes through `CHANGE`;
 - pause with no execution.
 
-If a next DAG item is authorized, prepare a fresh sealed handoff brief from
+If one DAG item is authorized, prepare a fresh sealed handoff brief from
 `DAG-001`, `docs/_Registers/Deliverables.csv`, applicable `AB-00-*`
 architecture-basis rows, and the target deliverable's local context.
-
-## Bounded Dispatch Rule
-
-Execution constraints:
-
-- `ORCHESTRATOR` owns the dispatch gate.
-- `WORKING_ITEMS` owns actual deliverable work only after the human next-item gate.
-- Use one `WORKING_ITEMS` session per authorized deliverable.
-- Dispatch at most one bounded `TASK` from that session unless the human explicitly broadens the pattern.
-- Do not start broad fan-out.
-- Do not promote candidate edges.
-- Do not recompute or alter the blocker queue unless explicitly assigned or made stale by a lifecycle/DAG change.
-- Do not change lifecycle state unless explicitly authorized.
 
 ## Session Conclusion Protocol
 
@@ -112,7 +121,8 @@ Before ending the session, close the stateful handoff loop:
    control-loop protocol changes.
 4. Update `init/NEXT_SESSION_PROMPT.md` only if the bootstrap protocol changes.
 5. Refresh `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` only if explicitly
-   assigned or if a lifecycle/DAG change makes the current queue stale.
+   assigned or if a DAG/evidence change makes the current implementation queue
+   stale.
 6. Route staging and commits through `CHANGE`. If approval is needed, stop with
    an explicit `APPROVE:` command list.
 
@@ -123,20 +133,14 @@ This is the continuous-loop handoff: `ORCHESTRATOR` controls routing,
 
 ## Guardrails
 
-- No protected standards text, protected code data, proprietary engineering values, private project data, real secrets, or private libraries.
-- No certification, sealing, approval, code-compliance, or professional-reliance claims.
+- No protected standards text, protected code data, proprietary engineering
+  values, private project data, real secrets, or private libraries.
+- No certification, sealing, approval, code-compliance, or professional-reliance
+  claims.
 - No lifecycle transition without explicit human authorization.
 - No broad implementation work outside the next approved sealed deliverable.
 - Keep candidate edges non-gating.
-- Preserve `DAG-001` as sequencing authority and local `Dependencies.csv` files as mirrors/evidence.
+- Preserve `DAG-001` as sequencing authority and local `Dependencies.csv` files
+  as mirrors/evidence.
 - Route dependency ambiguity to `RECONCILIATION`.
 - Route committed file-state changes through `CHANGE`.
-
-## Expected Closeout
-
-Closeout must include:
-
-- whether a next bounded DAG item or other explicit route was launched or held;
-- exact files changed, if any;
-- tests/audits run and their results;
-- any remaining human rulings or blockers.

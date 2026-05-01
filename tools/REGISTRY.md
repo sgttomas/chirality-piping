@@ -143,6 +143,7 @@ Tools for deterministic extraction of Millenia Engineering Piping Class PDF spec
 |------|----------|---------|--------|---------|
 | `analyze_dep_closure.py` | Python 3 | Full dependency graph analysis: schema, orphans, cycles (SCC), hubs, bidirectional pairs, coverage | EXECUTION_ROOT, --output-dir | closure_summary.json + 6 CSV reports |
 | `accumulate_supersession_map.py` | Python 3 | Deterministically accumulate cumulative `Supersession_Map.csv` rows from accepted prior maps plus current SCA delta rows, with optional check-mode comparison for closure audit | repeatable `[--prior-map]`, repeatable `[--delta]`, `--output-map`, `[--allow-empty]`, `[--check-map]`, `[--output-findings]` | Cumulative `Supersession_Map.csv`; optional findings CSV; exit 0/1/2 |
+| `build_dev001_blocker_queue.py` | Python 3 | Build the DEV-001 implementation-readiness blocker queue from active `DAG-001` edges and committed implementation evidence | `[--dag-dir]`, `[--evidence]`, `[--csv-out]`, `[--markdown-out]` | `DEV-001_BLOCKER_QUEUE.csv` and `.md` |
 
 ---
 

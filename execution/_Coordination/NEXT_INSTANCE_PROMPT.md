@@ -22,6 +22,12 @@ state unless the human explicitly approves that next action.
 - `DAG-001` active edge set is approved for development coordination.
 - Blocker computation is enabled from approved `ACTIVE` `DAG-001` edges only;
   `CANDIDATE` edges remain non-gating.
+- DEV-001 blocker computation uses implementation-readiness semantics:
+  `FromDeliverableID` is blocked by `TargetDeliverableID`, and non-architecture
+  upstreams require `COMMITTED` evidence in
+  `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- `SEMANTIC_READY` remains context readiness and does not satisfy
+  implementation blockers by itself.
 - Current blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
   and `.csv`.
 - `PKG-00` remains `SEMANTIC_READY`, not `ISSUED`.
@@ -60,11 +66,12 @@ Before planning a next action, read:
 18. `execution/_DAG/DAG-001/TopologicalWaves.md`
 19. `execution/_DAG/DAG-001/DependencyEdges.csv`
 20. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-21. Any active, latest, or historically relevant dispatch brief named by
+21. `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+22. Any active, latest, or historically relevant dispatch brief named by
     `NEXT_INSTANCE_STATE.md`.
-22. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
-23. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
-24. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
+23. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
+24. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
+25. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
 After reading, state that reading is complete, summarize the active control
 state, and ask for or consume the next human approval gate.
@@ -125,8 +132,8 @@ Required closeout actions:
 3. Update `execution/_Coordination/NEXT_INSTANCE_PROMPT.md` only when the
    control-loop protocol itself changes.
 4. Refresh `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` only when the
-   human explicitly assigns a refresh or when a lifecycle/DAG change makes the
-   existing queue stale.
+   human explicitly assigns a refresh or when a DAG/evidence change makes the
+   existing implementation-readiness queue stale.
 5. Route all committed file-state changes through `CHANGE`. If approval is
    needed, stop with an explicit `APPROVE:` command list instead of committing.
 
