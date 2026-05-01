@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 18 |
-| Committed implementation evidence | 18 |
+| Implementation evidence records | 19 |
+| Committed implementation evidence | 19 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
 | PKG-00 architecture-basis edges satisfied | 388 |
-| Implementation `UNBLOCKED` deliverables | 36 |
-| Implementation `BLOCKED` deliverables | 37 |
+| Implementation `UNBLOCKED` deliverables | 37 |
+| Implementation `BLOCKED` deliverables | 36 |
 
 ## Package Summary
 
@@ -50,7 +50,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-01` | 4 | 0 |
 | `PKG-02` | 5 | 0 |
 | `PKG-03` | 8 | 0 |
-| `PKG-04` | 4 | 2 |
+| `PKG-04` | 5 | 1 |
 | `PKG-05` | 1 | 4 |
 | `PKG-06` | 1 | 4 |
 | `PKG-07` | 2 | 5 |
@@ -94,7 +94,8 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-04-01` | `PKG-04` | `COMMITTED` `1506cc0` | 8 | 3D frame stiffness kernel |
 | `DEL-04-02` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Straight pipe element |
 | `DEL-04-03` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Linear support and restraint models |
-| `DEL-04-06` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Solver diagnostics and singularity detection |
+| `DEL-04-05` | `PKG-04` | `MISSING_EVIDENCE` | 7 | Sparse solver performance harness |
+| `DEL-04-06` | `PKG-04` | `COMMITTED` `fdb0252` | 8 | Solver diagnostics and singularity detection |
 | `DEL-05-04` | `PKG-05` | `MISSING_EVIDENCE` | 6 | Analysis status semantics |
 | `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
@@ -110,7 +111,6 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-04-02` - Straight pipe element | `PKG-04` | `MISSING_EVIDENCE` | 4 | `DEL-05-03`; `DEL-09-01`; `DEL-09-02`; `DEL-11-03` | `DAG-001-E0454`; `DAG-001-E0533`; `DAG-001-E0539`; `DAG-001-E0587` |
 | `DEL-04-03` - Linear support and restraint models | `PKG-04` | `MISSING_EVIDENCE` | 3 | `DEL-04-04`; `DEL-05-01`; `DEL-09-01` | `DAG-001-E0441`; `DAG-001-E0449`; `DAG-001-E0534` |
 | `DEL-04-04` - Nonlinear support active-set solver | `PKG-04` | `MISSING_EVIDENCE` | 1 | `DEL-09-03` | `DAG-001-E0541` |
-| `DEL-04-06` - Solver diagnostics and singularity detection | `PKG-04` | `MISSING_EVIDENCE` | 7 | `DEL-04-04`; `DEL-04-05`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07`; `DEL-08-03`; `DEL-09-03` | `DAG-001-E0443`; `DAG-001-E0445`; `DAG-001-E0498`; `DAG-001-E0501`; `DAG-001-E0504`; `DAG-001-E0518`; `DAG-001-E0542` |
 | `DEL-05-01` - Primitive load case engine | `PKG-05` | `MISSING_EVIDENCE` | 6 | `DEL-05-02`; `DEL-05-03`; `DEL-05-05`; `DEL-07-07`; `DEL-09-01`; `DEL-10-05` | `DAG-001-E0451`; `DAG-001-E0456`; `DAG-001-E0459`; `DAG-001-E0503`; `DAG-001-E0535`; `DAG-001-E0568` |
 | `DEL-05-03` - Fundamental stress recovery module | `PKG-05` | `MISSING_EVIDENCE` | 5 | `DEL-07-05`; `DEL-08-01`; `DEL-08-04`; `DEL-09-02`; `DEL-10-03` | `DAG-001-E0499`; `DAG-001-E0516`; `DAG-001-E0523`; `DAG-001-E0537`; `DAG-001-E0563` |
 | `DEL-05-04` - Analysis status semantics | `PKG-05` | `MISSING_EVIDENCE` | 9 | `DEL-05-02`; `DEL-05-03`; `DEL-06-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07`; `DEL-08-01`; `DEL-08-03`; `DEL-08-04` | `DAG-001-E0453`; `DAG-001-E0458`; `DAG-001-E0471`; `DAG-001-E0496`; `DAG-001-E0500`; `DAG-001-E0505`; `DAG-001-E0517`; `DAG-001-E0519`; `DAG-001-E0524` |
@@ -143,8 +143,7 @@ These deliverables have no active upstream implementation dependency below the `
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-04-04` | `PKG-04` | 2 | `DEL-04-03`; `DEL-04-06` | Nonlinear support active-set solver |
-| `DEL-04-05` | `PKG-04` | 1 | `DEL-04-06` | Sparse solver performance harness |
+| `DEL-04-04` | `PKG-04` | 1 | `DEL-04-03` | Nonlinear support active-set solver |
 | `DEL-05-01` | `PKG-05` | 1 | `DEL-04-03` | Primitive load case engine |
 | `DEL-05-02` | `PKG-05` | 2 | `DEL-05-01`; `DEL-05-04` | Load-case algebra engine |
 | `DEL-05-03` | `PKG-05` | 3 | `DEL-04-02`; `DEL-05-01`; `DEL-05-04` | Fundamental stress recovery module |
@@ -154,18 +153,18 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-04` | `PKG-06` | 1 | `DEL-06-01` | Private rule-pack lifecycle and checksum handling |
 | `DEL-06-05` | `PKG-06` | 2 | `DEL-06-01`; `DEL-06-02` | Invented non-code example rule pack |
 | `DEL-07-03` | `PKG-07` | 3 | `DEL-06-01`; `DEL-06-04`; `DEL-12-01` | Material, component, and rule-pack editors |
-| `DEL-07-04` | `PKG-07` | 3 | `DEL-05-04`; `DEL-06-03`; `DEL-04-06` | Missing-data warning and blocking UX |
-| `DEL-07-05` | `PKG-07` | 3 | `DEL-05-03`; `DEL-05-04`; `DEL-04-06` | Results viewer |
+| `DEL-07-04` | `PKG-07` | 2 | `DEL-05-04`; `DEL-06-03` | Missing-data warning and blocking UX |
+| `DEL-07-05` | `PKG-07` | 2 | `DEL-05-03`; `DEL-05-04` | Results viewer |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-07-07` | `PKG-07` | 3 | `DEL-05-01`; `DEL-04-06`; `DEL-05-04` | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-07-07` | `PKG-07` | 2 | `DEL-05-01`; `DEL-05-04` | Solve execution UX: progress, cancellation, and diagnostics |
 | `DEL-08-01` | `PKG-08` | 5 | `DEL-05-03`; `DEL-05-04`; `DEL-06-04`; `DEL-08-02`; `DEL-08-03` | Calculation report generator |
 | `DEL-08-02` | `PKG-08` | 1 | `DEL-06-04` | Audit manifest and model hash |
-| `DEL-08-03` | `PKG-08` | 2 | `DEL-04-06`; `DEL-05-04` | Warnings, assumptions, and provenance report section |
+| `DEL-08-03` | `PKG-08` | 1 | `DEL-05-04` | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | 2 | `DEL-05-03`; `DEL-05-04` | Result export format |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
 | `DEL-09-01` | `PKG-09` | 3 | `DEL-04-02`; `DEL-04-03`; `DEL-05-01` | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | 2 | `DEL-05-03`; `DEL-04-02` | Stress recovery benchmark suite |
-| `DEL-09-03` | `PKG-09` | 2 | `DEL-04-04`; `DEL-04-06` | Nonlinear support regression suite |
+| `DEL-09-03` | `PKG-09` | 1 | `DEL-04-04` | Nonlinear support regression suite |
 | `DEL-09-04` | `PKG-09` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 4 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |
 | `DEL-10-02` | `PKG-10` | 3 | `DEL-10-01`; `DEL-12-01`; `DEL-12-05` | Import/export adapter framework |
