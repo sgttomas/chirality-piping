@@ -125,6 +125,10 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `Reference` | Typed stable-object reference used instead of positional coupling where editing, solving, reporting, or audit depends on identity. | External references remain explicit and do not bypass schema validation. |
 | `Diagnostic` | Result-envelope warning/finding record with code, class, severity, source, affected object, message, remediation, and provenance. | Diagnostics expose missing data and boundary risks without becoming compliance claims. |
 | `Checksum` | Hash metadata record with algorithm, canonicalization, payload reference, and value. | JSON payload hashes use the JCS-compatible basis where applicable; physical package/container details remain owned by persistence work. |
+| `ProjectPersistenceEnvelope` | Versioned create/open/save envelope with schema version, project payload, migration status, hash metadata, diagnostics, round-trip manifest, validation profile, and service-operation contract records. | Delegates model structure to `schemas/model.schema.yaml`; physical project package/container remains `TBD`. |
+| `PersistenceOperation` | Application-service contract record for create, open, save, validate, version-check, and migrate operations. | Operations must not bypass schema, unit, provenance, rule-pack reference, private-data, protected-content, or professional-boundary checks. |
+| `RoundTripManifest` | Persistence comparison record naming semantic equality categories, serialization basis, volatile fields, and normalization rules. | Round trips preserve engineering-relevant data and do not insert silent defaults. |
+| `HumanAcceptanceRef` | External human-review or project-acceptance reference bound to specific hashes. | Invalidates on bound-hash changes and is not an automatic software approval, certification, sealing, authentication, or code-compliance status. |
 | `Result` | Mechanical, diagnostic, stress, reaction, or user-rule-check result envelope with analysis statuses and unit-aware values. | Result statuses do not mean automatic code compliance. |
 | `ReportSettings` | Report configuration for manifests, provenance summaries, notices, result references, and rule-pack references. | Report rendering and professional acceptance records remain separate workflows. |
 | `Report` | Auditable report-facing record for manifests, hashes, statuses, diagnostics, rule-pack refs, provenance summary, and professional-boundary notice. | Reports are decision support and must not claim certification, sealing, or professional approval by the software. |
@@ -135,6 +139,7 @@ Companion boundary schemas:
 |---|---|---|
 | `schemas/analysis_boundary.schema.yaml` | Separates mechanics solve authority, user-rule-check authority, missing-input findings, diagnostics, and external human acceptance references. | Human acceptance is reference-only and hash-bound; it is not emitted by solver or rule-pack computation. |
 | `schemas/analysis_status.schema.yaml` | Defines result-envelope status semantics and external human acceptance records. | `HUMAN_APPROVED_FOR_PROJECT` is not an automatic software status. |
+| `schemas/project_persistence.schema.yaml` | Defines the versioned project persistence envelope, round-trip manifest, migration status, hash metadata, validation profile, service operations, private-data markers, and external human acceptance references. | Public fixtures must not contain protected standards data, private rule content, proprietary values, or automatic compliance/professional-approval claims. |
 
 ## 9. Lifecycle states for development deliverables
 

@@ -32,6 +32,9 @@ Every persisted project envelope must include:
 - `migration`: current, stale, unsupported, migrated, failed, newer-than-supported, or `TBD` migration state.
 
 Optional but expected fields include `document_kind`, `physical_container`, `round_trip_manifest`, and `diagnostics`.
+`validation_profile` records the required validation gates, and
+`service_operations` records the application-service operation contract for
+create/open/save/validate/version-check/migrate behavior.
 
 ## Deterministic Serialization
 
@@ -55,6 +58,12 @@ JSON payload hashes use canonical JSON with JCS-compatible canonicalization. The
 Hashes must identify what was hashed: project payload, model payload, rule-pack reference metadata, input manifest, report-facing manifest, or external artifact reference. A hash over environment-local paths, timestamps, UI session state, or other volatile fields is not a reproducibility hash unless the volatile-field treatment is explicitly documented.
 
 Human review records, if added by later work, must bind to specific model, rule-pack, result, and report hashes. They do not survive content changes and do not imply software certification or automatic code compliance.
+
+The schema records payload scope on checksum records. JSON payload scopes can be
+classified as project envelope, project payload, model payload, rule-pack
+reference, input manifest, report manifest, or external artifact. Non-JSON and
+binary artifact partitioning remains `TBD` and must not be guessed by
+persistence implementations.
 
 ## Migration Status
 
@@ -90,6 +99,40 @@ Persistence operations are application-service boundaries:
 - Migrate project: returns a migrated envelope or structured failure diagnostics. Migration tooling remains `TBD`.
 
 Adapters and plugins may translate storage formats, but they must not bypass schema validation, unit checks, provenance checks, diagnostics, private-data controls, protected-content screening, or professional-boundary restrictions.
+
+The schema exposes this service contract through `PersistenceOperation` records.
+Each operation declares its application-service boundary, minimum inputs,
+minimum outputs, diagnostic classes, and `bypass_prohibited = true`.
+
+## Validation Profile
+
+The validation profile requires:
+
+- schema validation;
+- delegation to `schemas/model.schema.yaml` for model payload structure;
+- unit metadata checks;
+- provenance checks;
+- rule-pack reference checks;
+- protected-content checks;
+- private-data checks;
+- professional-boundary checks;
+- telemetry defaulting to off.
+
+These checks are not optional convenience validations. They are the persistence
+boundary that prevents storage, adapters, imports, exports, and future project
+containers from bypassing the OpenPipeStress data and authority constraints.
+
+## Human Acceptance References
+
+Persisted projects may carry external human-review or project-acceptance
+references only as hash-bound records. Such records must identify the external
+acceptance reference, the authority kind, the binding hashes, and
+`invalidates_on_hash_change = true`.
+
+Human acceptance references are not solver outputs, rule-pack outputs,
+certification, sealing, authentication, or automatic code-compliance statuses.
+The exact storage location and workflow for project acceptance records remains
+`TBD` until a later authorized deliverable resolves it.
 
 ## Remaining TBDs
 

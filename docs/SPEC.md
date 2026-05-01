@@ -146,6 +146,39 @@ Missing solve-required inputs and missing rule-check-required inputs are
 explicit findings with diagnostics and provenance. They are not defaulted by the
 solver, rule-pack evaluator, adapters, reports, or GUI.
 
+### 4.2 Project persistence and round-trip serialization
+
+The project persistence envelope is represented by
+`schemas/project_persistence.schema.yaml`. It is a versioned, schema-governed
+JSON document contract for create/open/save, version checks, migration status,
+canonical hash metadata, private-data markers, diagnostics, and deterministic
+round-trip manifests. The envelope delegates model structure to
+`schemas/model.schema.yaml` rather than redefining model objects.
+
+Persistence service operations are application-service boundaries. Create,
+open, save, validate, version-check, and migrate flows must return structured
+outputs and diagnostics; adapters and plugins must not bypass schema
+validation, unit metadata checks, provenance checks, rule-pack reference checks,
+private-data controls, protected-content screening, or professional-boundary
+checks.
+
+JSON payload hashes use the accepted JCS-compatible canonical JSON basis where
+the payload is JSON. Hash records must identify payload scope, such as project
+envelope, project payload, model payload, rule-pack reference, input manifest,
+report manifest, or external artifact. Non-JSON and binary payload partitioning
+remains `TBD` and must be explicit in hash or round-trip manifests.
+
+Round-trip acceptance compares semantic equality for model content, unit
+metadata, loads, rule-pack references, provenance metadata, reproducibility
+metadata, and documented volatile-field exclusions. Round trips must not insert
+silent engineering defaults for units, provenance, rule-pack values, material
+data, component data, SIF/flexibility inputs, allowables, or load basis values.
+
+Optional human acceptance references, when present in persisted projects, are
+external and hash-bound. They invalidate on bound-hash changes and do not imply
+software certification, sealing, authentication, professional approval, or
+automatic code compliance.
+
 ## 5. Solver core requirements
 
 ### 5.1 Degrees of freedom

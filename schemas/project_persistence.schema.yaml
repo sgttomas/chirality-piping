@@ -34,6 +34,15 @@
     "round_trip_manifest": {
       "$ref": "#/$defs/RoundTripManifest"
     },
+    "validation_profile": {
+      "$ref": "#/$defs/ValidationProfile"
+    },
+    "service_operations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/PersistenceOperation"
+      }
+    },
     "diagnostics": {
       "type": "array",
       "items": {
@@ -102,6 +111,19 @@
         "payload_ref": {
           "$ref": "#/$defs/ArtifactRef"
         },
+        "payload_scope": {
+          "type": "string",
+          "enum": [
+            "project_envelope",
+            "project_payload",
+            "model_payload",
+            "rule_pack_reference",
+            "input_manifest",
+            "report_manifest",
+            "external_artifact",
+            "TBD"
+          ]
+        },
         "value": {
           "type": "string",
           "minLength": 1
@@ -168,7 +190,8 @@
       "required": [
         "canonicalization",
         "project_payload_hash",
-        "hash_manifest"
+        "hash_manifest",
+        "payload_partition_status"
       ],
       "properties": {
         "canonicalization": {
@@ -183,6 +206,14 @@
           "items": {
             "$ref": "#/$defs/Checksum"
           }
+        },
+        "payload_partition_status": {
+          "type": "string",
+          "enum": [
+            "json_payloads_defined",
+            "non_json_or_binary_partition_TBD",
+            "TBD"
+          ]
         },
         "excluded_fields": {
           "type": "array",
@@ -212,6 +243,7 @@
           "enum": [
             "current",
             "migration_needed",
+            "stale",
             "migrated",
             "unsupported_schema",
             "failed",
@@ -264,6 +296,108 @@
         },
         "notes": {
           "type": "string"
+        }
+      }
+    },
+    "HumanAcceptanceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_ref",
+        "authority_kind",
+        "binding_hashes",
+        "invalidates_on_hash_change"
+      ],
+      "properties": {
+        "acceptance_ref": {
+          "$ref": "#/$defs/ArtifactRef"
+        },
+        "authority_kind": {
+          "type": "string",
+          "enum": [
+            "external_human_review",
+            "external_project_acceptance",
+            "TBD"
+          ]
+        },
+        "binding_hashes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Checksum"
+          }
+        },
+        "invalidates_on_hash_change": {
+          "const": true
+        },
+        "professional_boundary_notice": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "PersistenceOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation",
+        "boundary",
+        "minimum_inputs",
+        "minimum_outputs",
+        "diagnostic_classes"
+      ],
+      "properties": {
+        "operation": {
+          "type": "string",
+          "enum": [
+            "create_project",
+            "open_project",
+            "save_project",
+            "validate_project",
+            "version_check",
+            "migrate_project",
+            "TBD"
+          ]
+        },
+        "boundary": {
+          "const": "application_service"
+        },
+        "minimum_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "minimum_outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "diagnostic_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "SCHEMA_VALIDATION",
+              "MIGRATION",
+              "UNIT_METADATA",
+              "PROVENANCE_WARNING",
+              "RULE_CHECK_BLOCKING",
+              "IP_BOUNDARY_WARNING",
+              "PRIVATE_DATA",
+              "PROFESSIONAL_BOUNDARY",
+              "TBD"
+            ]
+          }
+        },
+        "bypass_prohibited": {
+          "const": true
         }
       }
     },
@@ -352,6 +486,12 @@
         },
         "private_data": {
           "$ref": "#/$defs/PrivateDataMarker"
+        },
+        "human_acceptance_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/HumanAcceptanceRef"
+          }
         }
       }
     },
@@ -447,6 +587,18 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "normalization_rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "schema_approved_only",
+              "no_silent_engineering_defaults",
+              "documented_volatile_field_exclusion",
+              "TBD"
+            ]
+          }
         }
       }
     },
@@ -486,6 +638,57 @@
         },
         "private_data": {
           "$ref": "#/$defs/PrivateDataMarker"
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "TBD"
+          ]
+        }
+      }
+    },
+    "ValidationProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_validation",
+        "model_schema_delegation",
+        "unit_metadata_check",
+        "provenance_check",
+        "private_data_check",
+        "professional_boundary_check"
+      ],
+      "properties": {
+        "schema_validation": {
+          "const": true
+        },
+        "model_schema_delegation": {
+          "const": "schemas/model.schema.yaml"
+        },
+        "unit_metadata_check": {
+          "const": true
+        },
+        "provenance_check": {
+          "const": true
+        },
+        "rule_pack_reference_check": {
+          "const": true
+        },
+        "protected_content_check": {
+          "const": true
+        },
+        "private_data_check": {
+          "const": true
+        },
+        "professional_boundary_check": {
+          "const": true
+        },
+        "telemetry_default": {
+          "const": "off"
         }
       }
     }
