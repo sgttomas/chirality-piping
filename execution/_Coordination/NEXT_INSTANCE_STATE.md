@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-01-03 bounded item closeout
+**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-01 bounded item closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-01-03` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-01` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
 
 ## Active Control State
 
@@ -29,14 +29,16 @@
 | DEL-02-03 handoff correction commit | `f19cf2a docs: record del-02-03 commit handoff` |
 | DEL-02-05 handoff correction commit | `4e18a0f docs: record del-02-05 commit handoff` |
 | DEL-02-04 handoff correction commit | `a37a0a1 docs: record del-02-04 commit handoff` |
-| Prior bounded item | `DEL-01-04 - Professional responsibility and product-claims policy` |
-| Prior bounded item commit | `65f3119 docs: add professional boundary policy` |
+| Previous governance item | `DEL-01-04 - Professional responsibility and product-claims policy` |
+| Previous governance item commit | `65f3119 docs: add professional boundary policy` |
 | DEL-01-04 handoff correction commit | `1a996ac docs: record del-01-04 commit handoff` |
 | DEL-01-04 clean handoff state commit | `474b56d docs: record del-01-04 clean handoff state` |
-| Last bounded item | `DEL-01-03 - Contributor certification workflow` |
+| Prior bounded item | `DEL-01-03 - Contributor certification workflow` |
+| Prior bounded item commit | `df461f8 docs: add contributor certification workflow` |
+| Last bounded item | `DEL-03-01 - Material library schema with provenance` |
 | Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-01-03 closeout / CHANGE handling` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md` |
+| Current authorized item | `None beyond DEL-03-01 closeout / CHANGE handling` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -670,18 +672,81 @@ Remaining open items:
   `TBD`.
 - Deliverable file-state changes are awaiting CHANGE approval.
 
+Deliverable file-state changes were committed through CHANGE approval as
+`df461f8 docs: add contributor certification workflow`.
+
+## DEL-03-01 Bounded Item Closeout
+
+Human project authority authorized exactly one next bounded DAG item:
+`DEL-03-01 - Material library schema with provenance`. ORCHESTRATOR /
+WORKING_ITEMS completed the bounded item inside the explicit write scope.
+Broad fan-out, lifecycle transition, candidate-edge promotion, blocker-queue
+refresh, and dependency-register edits were not performed.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
+  `DEL-00-08`, `DEL-02-01`, `DEL-02-02`, `DEL-01-02`, and `DEL-01-03`.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `schemas/material.schema.yaml`
+- `fixtures/material/invented_material_library_valid.json`
+- `tests/test_material_schema.py`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-01_Material library schema with provenance/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `python3 tests/test_material_schema.py` passed.
+- Existing schema tests passed: `test_model_schema.py`,
+  `test_units_schema.py`, `test_persistence_schema.py`,
+  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
+  `test_analysis_boundary_schema.py`.
+- `git diff --check` over affected files passed.
+- Focused forbidden-claim/protected-code-name scan over affected DEL-03-01
+  product surfaces found only negative boundary statements and diagnostic/test
+  denylist literals, not product certification/compliance claims or protected
+  material tables.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, or automatic code-compliance/certification/sealing
+  claims were introduced.
+
+Remaining open items:
+
+- Accepted public material source catalog remains `TBD`.
+- Public material fixture value policy remains `TBD`.
+- Temperature interpolation policy remains `TBD`.
+- Allowable-value storage and review workflow details remain `TBD`.
+- Concrete material editor behavior remains future GUI work.
+- Deliverable file-state changes are awaiting CHANGE approval.
+
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-01-03` file-state handling through `CHANGE`; do not stage or
+1. Route `DEL-03-01` file-state handling through `CHANGE`; do not stage or
    commit without an explicit `APPROVE:` action list.
 2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-01-03 closeout / CHANGE handling.
+authorized beyond DEL-03-01 closeout / CHANGE handling.
 
 ## Guardrails
 

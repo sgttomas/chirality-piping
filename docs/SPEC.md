@@ -124,6 +124,32 @@ diagnostics.
 Unit checks support mechanics and rule evaluation. They do not certify, seal,
 approve, authenticate, or declare engineering code compliance for reliance.
 
+## 4.1 Material library schema
+
+Material library records are governed data. The public schema may define
+material identity, temperature-dependent property slots, allowable-value slots,
+unit metadata, provenance, redistribution status, review status, and
+completeness findings. The public repository must not bundle protected material
+allowable tables, code-specific allowable values, proprietary catalog data, or
+private user material libraries as defaults.
+
+The material-library contract is represented by `schemas/material.schema.yaml`.
+It defines:
+
+- material-library metadata, privacy class, and provenance;
+- material records with unit-bearing property slots and review status;
+- allowable slots for private or reviewed user-rule data without public
+  protected/code-specific values;
+- completeness rules and diagnostics for missing solve-required or
+  rule-check-required material data;
+- open decisions for public fixture policy, accepted source catalogs,
+  allowable-value storage, and temperature interpolation.
+
+Public material fixtures must be invented non-engineering examples or
+permissively sourced records with completed review evidence. Missing or
+unreviewed material values remain explicit findings; they are not supplied by
+silent defaults.
+
 ### 4.1 Code-neutral analysis boundary
 
 The analysis boundary is represented by

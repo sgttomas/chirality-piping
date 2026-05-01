@@ -118,7 +118,7 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `Node` | Addressable point with unit-aware coordinates and six-degree-of-freedom state fields. | Missing imposed values or constraints are findings, not silent defaults. |
 | `Element` | Analytical member connecting node references with material, section, optional component, local-coordinate, and result-station hooks. | Mechanics implementation remains separate from schema structure. |
 | `Component` | Piping-specific object such as bend, branch, reducer, valve, flange, expansion joint, rigid, or other user-defined component. | User modifiers and code/manufacturer values require provenance and may be private. |
-| `Material` | User/private or permissively sourced material record with unit-bearing properties and provenance. | Public schema does not provide protected material allowables or code tables. |
+| `Material` | User/private or permissively sourced material record with unit-bearing properties, allowable slots, completeness findings, and provenance. | Public schema does not provide protected material allowables, code tables, or proprietary catalog values. |
 | `Section` | Pipe/section record with unit-bearing properties and provenance. | Protected dimensional tables and proprietary catalog data are not public defaults. |
 | `Support` | Restraint/support record with target reference, directions, unit-bearing properties, and active-state result hook. | Nonlinear solution behavior and convergence semantics are solver-owned. |
 | `LoadCase` | Primitive loading record with target references, units, and provenance. | Code-specific load requirements are user/rule-pack supplied. |
