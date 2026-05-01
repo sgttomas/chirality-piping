@@ -6,9 +6,14 @@
 - **Local Register:** `Dependencies.csv`
 - **Rows:** 9 total; 9 ACTIVE; 0 CANDIDATE.
 - **Generated:** 2026-04-30
+- **Local Annotation:** 2026-05-01 implementation evidence pass marked the
+  non-architecture upstream rows satisfied in the local mirror after
+  `DEL-05-01` implementation commit `e3c9695`.
 
 ## Authority Boundary
 - Aggregate `DAG-001` remains the sequencing and blocker-computation authority.
 - This local register is a synchronized mirror/evidence surface, not an independent graph authority.
+- The local satisfaction annotations do not replace aggregate `DAG-001` as the
+  sequencing authority and do not promote candidate edges.
 - `CANDIDATE` rows remain non-gating until later RECONCILIATION plus CHANGE approval.
 - `PKG-00` architecture-basis rows are preserved here as injected context evidence; `PKG-00` does not receive local dependency registers.

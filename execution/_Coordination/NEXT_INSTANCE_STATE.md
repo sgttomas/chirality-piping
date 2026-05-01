@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** CHANGE coordination evidence refresh for DEL-04-04
+**Actor:** WORKING_ITEMS implementation for DEL-05-01
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-04-04 implementation evidence committed; blocker queue refreshed; awaiting next human gate
+**Current Mode:** DEL-05-01 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed; coordination commit pending
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-04-04 implementation evidence and blocker queue refresh` |
-| Latest state commit | `c910723 coordination: record del-04-04 implementation evidence` |
-| Previous completed task archive status | `DEL-04-04 implementation` moved into the compact task archive table |
-| Current authorized item | None beyond this approved evidence/queue refresh |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-04-04.md` |
+| Latest state task | `DEL-05-01 implementation` |
+| Latest state commit | Implementation commit `e3c9695`; coordination commit pending |
+| Previous completed task archive status | `DEL-05-01 sealed dispatch brief preparation` moved into the compact task archive table |
+| Current authorized item | None beyond this approved implementation/evidence/queue/lifecycle/commit pass |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -86,10 +86,18 @@ Post-materialization evidence:
 The older pre-DAG reconciliation artifacts are still present as untracked local
 evidence and should not be treated as current sequencing authority.
 
+2026-05-01 local annotation:
+
+- `DEL-05-01` local dependency mirror was annotated after implementation commit
+  `e3c9695`; non-architecture upstream rows `DAG-001-E0446` through
+  `DAG-001-E0449` now record `SATISFIED` local satisfaction evidence.
+- This local annotation does not replace aggregate `DAG-001` as sequencing
+  authority and does not promote candidate edges.
+
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-01 after `DEL-04-04` implementation evidence was added. It reads approved active
+2026-05-01 after `DEL-05-01` implementation evidence was added. It reads approved active
 `DAG-001` edges and `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
 `TargetDeliverableID`, the upstream provider.
@@ -101,12 +109,13 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
-| Implementation evidence records | 23 |
-| Committed implementation evidence | 23 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 72 |
+| Filesystem lifecycle `CHECKING` (display only) | 1 |
+| Implementation evidence records | 24 |
+| Committed implementation evidence | 24 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 40 |
-| Implementation `BLOCKED` deliverables | 33 |
+| Implementation `UNBLOCKED` deliverables | 42 |
+| Implementation `BLOCKED` deliverables | 31 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
@@ -168,6 +177,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-04-03` implementation | Completed; `d227a27 core: add linear support models` | `core/solver/linear_supports/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Linear-support, frame-kernel, diagnostics, and straight-pipe cargo tests passed; `git diff --check`; focused protected-content/prohibited-claim scan | Canonical calculation unit basis, conversion constants, support coordinate convention, rigid-restraint numerical method, constraint-elimination or penalty strategy, sparse-solver integration, and final result-envelope integration remain `TBD`. |
 | `DEL-04-03` implementation evidence and blocker queue refresh | Completed; `217d4bd coordination: record del-04-03 implementation evidence` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | `build_dev001_blocker_queue.py`; `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue changed to 39 unblocked / 34 blocked | Newly unblocked `DEL-04-04` and `DEL-05-01`; no next product deliverable was authorized by the queue refresh. |
 | `DEL-04-04` implementation | Completed; `d3c3533 core: add nonlinear support active-set model` | `core/solver/nonlinear_supports/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Nonlinear-support, linear-support, diagnostics, and frame-kernel cargo tests passed; `cargo fmt --check`; `git diff --check`; focused protected-content/prohibited-claim scan | Canonical calculation unit basis, conversion constants, final support coordinate convention, rigid-restraint numerical method, constraint-elimination or penalty strategy, sparse-solver integration, production residual/tolerance policy, and final result-envelope integration remain `TBD`. |
+| `DEL-04-04` implementation evidence and blocker queue refresh | Completed; `c910723 coordination: record del-04-04 implementation evidence` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | `build_dev001_blocker_queue.py`; `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue changed to 40 unblocked / 33 blocked | `DEL-04-04` no longer appears as a missing upstream blocker; newly unblocked `DEL-09-03`; no next product deliverable was authorized by the queue refresh. |
+| `DEL-05-01` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-05-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -190,48 +201,85 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-04-04 Implementation Evidence And Queue Refresh
+## Latest State - DEL-05-01 Implementation
 
-Human project authority authorized recording committed implementation evidence
-and refreshing the implementation-readiness blocker queue for:
+Human project authority authorized implementation of:
 
-- `DEL-04-04 - Nonlinear support active-set solver`
+- `DEL-05-01 - Primitive load case engine`
 
 Files changed in this task:
 
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- `core/loads/primitive_loads/.gitignore`
+- `core/loads/primitive_loads/Cargo.toml`
+- `core/loads/primitive_loads/README.md`
+- `core/loads/primitive_loads/src/lib.rs`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-01_Primitive load case engine/MEMORY.md`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-01_Primitive load case engine/Dependencies.csv`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-01_Primitive load case engine/_DEPENDENCIES.md`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-01_Primitive load case engine/_STATUS.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-05-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Evidence/queue summary:
+Implementation summary:
 
-- Added `DEL-04-04` as `COMMITTED` implementation evidence for commit
-  `d3c3533 core: add nonlinear support active-set model`.
-- Rebuilt `DEV-001_BLOCKER_QUEUE.*` from approved active `DAG-001` edges and
-  the implementation evidence register.
-- Queue changed from 39 unblocked / 34 blocked to 40 unblocked / 33 blocked.
-- `DEL-04-04` no longer appears as a missing upstream blocker.
-- `DEL-09-03 - Nonlinear support regression suite` is now an unblocked
-  DAG-ready candidate, subject to explicit future human gate.
-- Candidate edges remain excluded; no lifecycle state, dependency-register,
-  `DAG-001`, product-code, protected-data, or professional-claim changes were
-  made by this coordination refresh.
+- Added the `open_pipe_stress_primitive_loads` Rust crate for mechanics-only
+  primitive load categories: weight, pressure, thermal, imposed displacement,
+  hydrotest, wind, seismic, and occasional.
+- The crate prepares deterministic nodal, element-uniform, and
+  imposed-displacement solver-boundary contributions while preserving explicit
+  dimension intent.
+- Missing targets, missing magnitudes, out-of-range targets, invalid
+  dimensions, invalid directions, and unsupported target/category combinations
+  are deterministic findings, not silent defaults.
+- Updated `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, and the
+  dispatch brief to reflect the bounded implementation.
+- Committed the implementation as `e3c9695 core: add primitive load case
+  engine`.
+- Recorded `DEL-05-01` as `COMMITTED` implementation evidence in
+  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue changed to 42 unblocked / 31
+  blocked.
+- Updated `DEL-05-01` lifecycle from `SEMANTIC_READY` to `CHECKING`.
+- Annotated the `DEL-05-01` local dependency mirror for satisfied
+  non-architecture upstream rows.
+- This task did not change `DAG-001`, promote candidate edges, introduce
+  protected data, or make professional/code compliance claims.
 
 Verification:
 
-- `python3 tools/coordination/build_dev001_blocker_queue.py` produced
-  unblocked=40, blocked=33, active_edges=615, candidate_edges_excluded=9.
+- `cargo fmt --manifest-path core/loads/primitive_loads/Cargo.toml --check`
+  passed.
+- `cargo test --manifest-path core/loads/primitive_loads/Cargo.toml` passed:
+  9 tests.
+- `cargo test --manifest-path core/solver/straight_pipe/Cargo.toml` passed:
+  6 tests.
+- `cargo test --manifest-path core/solver/linear_supports/Cargo.toml` passed:
+  8 tests.
+- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
+  unblocked=42, blocked=31, active_edges=615, candidate_edges_excluded=9.
 - `python3 -m pytest tools/coordination` passed: 10 tests.
 - `python3 tools/validation/validate_dependencies_schema.py
   execution/_DAG/DAG-001/DependencyEdges.csv` passed.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-01_Primitive load case engine/Dependencies.csv"`
+  passed.
 - `python3 tools/coordination/audit_dag.py --strict --dag-dir
   execution/_DAG/DAG-001` passed.
 - `git diff --check` passed.
 
 Remaining open items:
 
-- No next product deliverable is authorized by this evidence refresh.
+- Coordination/evidence/lifecycle/queue changes are pending commit at the time
+  this state entry was edited.
+- Canonical calculation unit basis, conversion constants, final result-envelope
+  integration, concrete application-service API, load-case storage
+  representation, wind/seismic dynamic treatment, and production tolerance
+  policy remain `TBD`.
 
 ## Immediate Next Actions
 
@@ -242,7 +290,7 @@ Immediate next action:
    for file-state handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized by this evidence refresh.
+authorized by this implementation.
 
 ## Guardrails
 
