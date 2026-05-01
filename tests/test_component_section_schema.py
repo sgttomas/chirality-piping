@@ -177,6 +177,11 @@ def main():
         "branch_reinforcement_area",
         "branch_reinforcement_reference",
         "branch_geometry_source_reference",
+        "rigid_body_length",
+        "connection_end_a_reference",
+        "connection_end_b_reference",
+        "stiffness_behavior_reference",
+        "rigid_component_source_reference",
         "weight",
         "center_of_gravity",
         "stiffness",
@@ -198,6 +203,10 @@ def main():
         "BRANCH_GEOMETRY_INCOMPLETE",
         "BRANCH_REINFORCEMENT_DATA_MISSING",
         "BRANCH_RULE_INPUT_MISSING",
+        "RIGID_COMPONENT_GEOMETRY_INCOMPLETE",
+        "RIGID_COMPONENT_MASS_DATA_MISSING",
+        "RIGID_COMPONENT_STIFFNESS_DATA_MISSING",
+        "RIGID_COMPONENT_CATALOG_VALUE_NOT_PUBLIC",
     } <= enum_at(component_schema, "ComponentDiagnosticCode")
     assert {
         "contract_id",
@@ -228,6 +237,16 @@ def main():
     assert "branch_reinforcement_reference" in branch_contract["source_metadata_field_kinds"]
     assert "sif_user_value" in branch_contract["rule_modifier_field_kinds"]
     assert branch_contract["protected_value_policy"] == "schema_slots_only"
+    rigid_contract = fixture["component_family_contracts"][2]
+    assert {"valve", "flange", "reducer", "rigid", "specialty"} <= set(
+        rigid_contract["component_types"]
+    )
+    assert "rigid_body_length" in rigid_contract["geometry_field_kinds"]
+    assert "connection_end_a_reference" in rigid_contract["geometry_field_kinds"]
+    assert "weight" in rigid_contract["rule_modifier_field_kinds"]
+    assert "center_of_gravity" in rigid_contract["rule_modifier_field_kinds"]
+    assert "stiffness" in rigid_contract["rule_modifier_field_kinds"]
+    assert rigid_contract["protected_value_policy"] == "schema_slots_only"
     assert fixture["component_records"][0]["redistribution_status"] == "TBD"
     fixture_field_kinds = {
         field["field_kind"] for field in fixture["component_records"][0]["fields"]
@@ -252,6 +271,24 @@ def main():
     assert branch_record["completeness"][0]["status"] == "incomplete"
     assert branch_record["completeness"][0]["diagnostic_code"] == "BRANCH_RULE_INPUT_MISSING"
     assert fixture["component_diagnostics"][1]["code"] == "BRANCH_RULE_INPUT_MISSING"
+    rigid_record = fixture["component_records"][2]
+    assert rigid_record["component_type"] == "rigid"
+    rigid_field_kinds = {field["field_kind"] for field in rigid_record["fields"]}
+    assert "rigid_body_length" in rigid_field_kinds
+    assert "connection_end_a_reference" in rigid_field_kinds
+    assert "weight" in rigid_field_kinds
+    assert "center_of_gravity" in rigid_field_kinds
+    assert "stiffness" in rigid_field_kinds
+    assert (
+        rigid_record["fields"][2]["public_repository_value_policy"]
+        == "no_public_proprietary_catalog_values"
+    )
+    assert rigid_record["completeness"][0]["status"] == "incomplete"
+    assert (
+        rigid_record["completeness"][0]["diagnostic_code"]
+        == "RIGID_COMPONENT_GEOMETRY_INCOMPLETE"
+    )
+    assert fixture["component_diagnostics"][2]["code"] == "RIGID_COMPONENT_GEOMETRY_INCOMPLETE"
 
     all_text = "\n".join(
         [

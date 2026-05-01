@@ -234,6 +234,41 @@
       },
       "protected_value_policy": "schema_slots_only",
       "review_status": "pending"
+    },
+    {
+      "contract_id": "contract.component.rigid-semirigid",
+      "component_types": [
+        "valve",
+        "flange",
+        "reducer",
+        "rigid",
+        "specialty"
+      ],
+      "geometry_field_kinds": [
+        "rigid_body_length",
+        "end_a_size",
+        "end_b_size",
+        "connection_end_a_reference",
+        "connection_end_b_reference"
+      ],
+      "rule_modifier_field_kinds": [
+        "weight",
+        "center_of_gravity",
+        "stiffness",
+        "stiffness_behavior_reference"
+      ],
+      "source_metadata_field_kinds": [
+        "rigid_component_source_reference",
+        "manufacturer_reference"
+      ],
+      "mechanics_interface": {
+        "model_role": "rigid_placeholder",
+        "geometry_basis": "user_entered_centerline_geometry",
+        "solver_consumption": "mechanics_geometry_and_user_flexibility",
+        "rule_check_consumption": "user_rule_pack_inputs_only"
+      },
+      "protected_value_policy": "schema_slots_only",
+      "review_status": "pending"
     }
   ],
   "component_records": [
@@ -440,6 +475,126 @@
         "review_status": "pending"
       },
       "review_status": "pending"
+    },
+    {
+      "component_id": "comp.invented.rigid.alpha",
+      "name": "Invented Rigid Component Alpha",
+      "component_type": "rigid",
+      "privacy_class": "public_schema_only",
+      "redistribution_status": "TBD",
+      "fields": [
+        {
+          "field_id": "comp.invented.rigid.alpha.body-length",
+          "field_kind": "rigid_body_length",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no rigid component length supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.rigid.alpha.end-a",
+          "field_kind": "connection_end_a_reference",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no connection end data supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.rigid.alpha.weight",
+          "field_kind": "weight",
+          "value_status": "missing",
+          "public_repository_value_policy": "no_public_proprietary_catalog_values",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no manufacturer weight value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.rigid.alpha.cog",
+          "field_kind": "center_of_gravity",
+          "value_status": "missing",
+          "public_repository_value_policy": "no_public_proprietary_catalog_values",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no center of gravity value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.rigid.alpha.stiffness",
+          "field_kind": "stiffness",
+          "value_status": "missing",
+          "public_repository_value_policy": "private_user_supplied_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no semi-rigid stiffness value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        }
+      ],
+      "completeness": [
+        {
+          "finding_id": "comp.invented.rigid.alpha.incomplete",
+          "required_for": "mechanics_solve",
+          "status": "incomplete",
+          "missing_field_kinds": [
+            "rigid_body_length",
+            "connection_end_a_reference",
+            "connection_end_b_reference",
+            "weight",
+            "center_of_gravity",
+            "stiffness"
+          ],
+          "diagnostic_code": "RIGID_COMPONENT_GEOMETRY_INCOMPLETE"
+        }
+      ],
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented non-engineering fixture; not for project use",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      },
+      "review_status": "pending"
     }
   ],
   "component_field_definitions": [
@@ -505,6 +660,60 @@
       "required_for": "rule_check",
       "public_fixture_policy": "schema_shape_only",
       "review_status": "pending"
+    },
+    {
+      "field_kind": "rigid_body_length",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "connection_end_a_reference",
+      "dimension_id": "reference",
+      "quantity_kind": "reference",
+      "unit_required": false,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "connection_end_b_reference",
+      "dimension_id": "reference",
+      "quantity_kind": "reference",
+      "unit_required": false,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "weight",
+      "dimension_id": "force",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "center_of_gravity",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "stiffness",
+      "dimension_id": "stiffness",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
     }
   ],
   "component_completeness_rules": [
@@ -542,6 +751,28 @@
       "required_for": "rule_check",
       "missing_behavior": "diagnostic_blocking",
       "diagnostic_code": "BRANCH_RULE_INPUT_MISSING",
+      "review_status": "pending"
+    },
+    {
+      "rule_id": "rule.component.rigid.minimum",
+      "applies_to": "mechanics_solve",
+      "component_types": [
+        "valve",
+        "flange",
+        "reducer",
+        "rigid",
+        "specialty"
+      ],
+      "required_field_kinds": [
+        "rigid_body_length",
+        "connection_end_a_reference",
+        "connection_end_b_reference",
+        "weight",
+        "center_of_gravity"
+      ],
+      "required_for": "mechanics_solve",
+      "missing_behavior": "diagnostic_blocking",
+      "diagnostic_code": "RIGID_COMPONENT_GEOMETRY_INCOMPLETE",
       "review_status": "pending"
     }
   ],
@@ -585,6 +816,26 @@
         "redistribution_status": "TBD",
         "review_status": "pending"
       }
+    },
+    {
+      "diagnostic_id": "diag.component.rigid.fixture.incomplete",
+      "code": "RIGID_COMPONENT_GEOMETRY_INCOMPLETE",
+      "severity": "blocking",
+      "affected_ref": {
+        "ref_type": "component",
+        "ref_id": "comp.invented.rigid.alpha"
+      },
+      "message": "Invented fixture intentionally omits rigid component geometry, mass, center of gravity, and stiffness values.",
+      "remediation": "Supply reviewed user or public-permissive component values with provenance before mechanics use.",
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented diagnostic fixture",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      }
     }
   ],
   "component_open_decisions": [
@@ -603,6 +854,14 @@
       "blocking_scope": "public_branch_component_values",
       "owner": "human project authority",
       "notes": "Public branch connection geometry, reinforcement, SIF, and flexibility values remain omitted until source and redistribution policy is accepted."
+    },
+    {
+      "decision_id": "comp.dec.rigid-source-policy",
+      "topic": "accepted_component_source_catalog",
+      "status": "open",
+      "blocking_scope": "public_rigid_component_values",
+      "owner": "human project authority",
+      "notes": "Public valve, flange, reducer, rigid, and specialty component dimensions, weights, centers of gravity, and stiffness values remain omitted until source and redistribution policy is accepted."
     }
   ]
 }

@@ -173,6 +173,9 @@ The section and component library contracts are represented by
 - branch-connection family contracts for user-entered run/header geometry,
   connection angle/type slots, reinforcement source slots, and user-supplied
   SIF or flexibility-factor slots;
+- rigid/semi-rigid component family contracts for valves, flanges, reducers,
+  rigid parts, and specialty items using user-entered dimensions, weights,
+  centers of gravity, stiffness behavior, and source references;
 - explicit public repository value policies for SIF, flexibility, proprietary
   catalog, and user/private values;
 - completeness rules and diagnostics for solve-required, property-calculation,
@@ -195,6 +198,12 @@ only. Public repository fixtures may show the shape of branch geometry and
 reinforcement-reference fields but must not supply protected branch tables,
 code-specific SIF or flexibility values, reinforcement values, or proprietary
 catalog geometry as defaults.
+
+Rigid and semi-rigid component records define schema slots and
+mechanics-interface metadata only. Public repository fixtures may show the
+shape of valve, flange, reducer, rigid, and specialty-item fields but must not
+supply protected dimensional/rating tables, manufacturer weights, centers of
+gravity, stiffness values, or proprietary catalog geometry as defaults.
 
 ### 4.3 Code-neutral analysis boundary
 

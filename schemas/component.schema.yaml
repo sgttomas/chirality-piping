@@ -220,6 +220,10 @@
         "BRANCH_GEOMETRY_INCOMPLETE",
         "BRANCH_REINFORCEMENT_DATA_MISSING",
         "BRANCH_RULE_INPUT_MISSING",
+        "RIGID_COMPONENT_GEOMETRY_INCOMPLETE",
+        "RIGID_COMPONENT_MASS_DATA_MISSING",
+        "RIGID_COMPONENT_STIFFNESS_DATA_MISSING",
+        "RIGID_COMPONENT_CATALOG_VALUE_NOT_PUBLIC",
         "TBD"
       ]
     },
@@ -347,6 +351,11 @@
         "branch_reinforcement_area",
         "branch_reinforcement_reference",
         "branch_geometry_source_reference",
+        "rigid_body_length",
+        "connection_end_a_reference",
+        "connection_end_b_reference",
+        "stiffness_behavior_reference",
+        "rigid_component_source_reference",
         "end_a_size",
         "end_b_size",
         "weight",
