@@ -30,7 +30,7 @@
 | DEL-02-05 handoff correction commit | `4e18a0f docs: record del-02-05 commit handoff` |
 | DEL-02-04 handoff correction commit | `a37a0a1 docs: record del-02-04 commit handoff` |
 | Last bounded item | `DEL-01-04 - Professional responsibility and product-claims policy` |
-| Last bounded item commit | `TBD - uncommitted, awaiting CHANGE approval` |
+| Last bounded item commit | `65f3119 docs: add professional boundary policy` |
 | Current authorized item | `None beyond DEL-01-04 closeout / CHANGE handling` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
@@ -606,25 +606,21 @@ Remaining open items:
 - Exact storage and invalidation workflow for human acceptance records remains
   `TBD`.
 - Release-label vocabulary and final release policy language remain `TBD`.
-- Deliverable file-state changes are uncommitted and must be routed through
-  `CHANGE` before any commit.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `65f3119 docs: add professional boundary policy`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-01-04` file-state handling through `CHANGE`; do not stage or
+1. Route this post-commit handoff correction through `CHANGE`; do not stage or
    commit without an explicit `APPROVE:` action list.
-2. If committing is approved, include the DEL-01-04 product/evidence files and
-   this handoff update in the CHANGE inventory.
-3. After CHANGE completes, record the commit hash in this state file through an
-   approved handoff correction if needed.
-4. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
-   pre-DAG artifact handling if it appears in file-state evidence, authorize
-   exactly one next bounded DAG item, or pause.
+2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+   artifact handling if it appears in file-state evidence, authorize exactly one
+   next bounded DAG item, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-01-04 CHANGE handling.
+authorized beyond DEL-01-04 handoff correction handling.
 
 ## Guardrails
 
