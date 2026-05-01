@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-01 bounded item closeout
+**Actor:** ORCHESTRATOR control-state correction after CHANGE commit evidence
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-01` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-01` bounded item committed; awaiting next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -36,8 +36,8 @@
 | Prior bounded item | `DEL-01-03 - Contributor certification workflow` |
 | Prior bounded item commit | `df461f8 docs: add contributor certification workflow` |
 | Last bounded item | `DEL-03-01 - Material library schema with provenance` |
-| Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-03-01 closeout / CHANGE handling` |
+| Last bounded item commit | `3793e87 schema: add material library provenance contract` |
+| Current authorized item | `None; awaiting next human gate` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
@@ -733,20 +733,23 @@ Remaining open items:
 - Temperature interpolation policy remains `TBD`.
 - Allowable-value storage and review workflow details remain `TBD`.
 - Concrete material editor behavior remains future GUI work.
-- Deliverable file-state changes are awaiting CHANGE approval.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `3793e87 schema: add material library provenance contract`.
+- ORCHESTRATOR checked git state after reading the bootstrap on 2026-05-01:
+  working tree clean on `main` at `3793e87`, ahead of `origin/main` by 8
+  commits.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-03-01` file-state handling through `CHANGE`; do not stage or
-   commit without an explicit `APPROVE:` action list.
-2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
-   artifact handling if it appears in file-state evidence, authorize exactly one
-   next bounded DAG item, or pause.
+1. Human project authority may authorize exactly one next bounded DAG item,
+   route `RECONCILIATION`, route `AUDIT_*`, route `CHANGE` for push or other
+   file-state handling, route pre-DAG artifact handling if it appears in
+   file-state evidence, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-03-01 closeout / CHANGE handling.
+authorized after the committed DEL-03-01 closeout.
 
 ## Guardrails
 
