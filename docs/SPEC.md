@@ -343,6 +343,14 @@ Nonlinear supports shall use an active-set or equivalent iterative method. Resul
 
 Solver results must be deterministic for the same model, units, solver version, and rule-pack inputs. Sparse-solver settings, tolerances, and conditioning warnings must be reportable.
 
+The solver diagnostics slice is `core/solver/diagnostics`. It maps
+frame-kernel failures into deterministic solver diagnostic records for singular
+systems, invalid restraints, invalid topology, invalid numeric inputs,
+conditioning warnings/failures, nonconvergence, and explicit sparse-solver or
+tolerance-policy `TBD` states. These diagnostics are mechanics-solver findings
+only; they do not perform rule-pack checks, professional review, certification,
+sealing, or code-compliance assessment.
+
 ## 6. Loads and stress recovery
 
 Primitive loads include weight, pressure, temperature, imposed displacement, hydrotest, wind, seismic, and user occasional loads. Code-specific load combinations are not public defaults; they are user rule-pack or project inputs.

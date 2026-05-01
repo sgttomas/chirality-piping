@@ -1,0 +1,12 @@
+[package]
+name = "open_pipe_stress_solver_diagnostics"
+version = "0.1.0"
+edition = "2021"
+description = "Code-neutral solver diagnostics for OpenPipeStress"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+open_pipe_stress_frame_kernel = { path = "../frame_kernel" }
