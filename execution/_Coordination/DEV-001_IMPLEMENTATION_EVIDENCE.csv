@@ -16,3 +16,4 @@ DEL-03-05,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,d8ee0db,schema: add rigid compone
 DEL-03-06,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,f15cbc6,schema: add expansion joint component contract,2026-05-01,,DEV-001 bounded component schema item.
 DEL-03-07,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,4d880b3,core: add library import provenance checker,2026-05-01,,DEV-001 bounded library import implementation item.
 DEL-03-08,PKG-03,COMMITTED,BOUNDED_ITEM_COMMIT,9712e98,core: add pipe section property calculator,2026-05-01,,DEV-001 bounded pipe section property calculator item.
+DEL-04-01,PKG-04,COMMITTED,BOUNDED_ITEM_COMMIT,1506cc0,core: complete frame stiffness kernel,2026-04-30,,DEV-001 bounded frame stiffness kernel item; sparse solver library and tolerance policy remain later TBDs.

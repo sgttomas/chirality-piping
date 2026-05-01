@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-04-30
+updated: 2026-05-01
 source_graph: execution/_DAG/DAG-001/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 17 |
-| Committed implementation evidence | 17 |
+| Implementation evidence records | 18 |
+| Committed implementation evidence | 18 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
 | PKG-00 architecture-basis edges satisfied | 388 |
-| Implementation `UNBLOCKED` deliverables | 33 |
-| Implementation `BLOCKED` deliverables | 40 |
+| Implementation `UNBLOCKED` deliverables | 36 |
+| Implementation `BLOCKED` deliverables | 37 |
 
 ## Package Summary
 
@@ -50,7 +50,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-01` | 4 | 0 |
 | `PKG-02` | 5 | 0 |
 | `PKG-03` | 8 | 0 |
-| `PKG-04` | 1 | 5 |
+| `PKG-04` | 4 | 2 |
 | `PKG-05` | 1 | 4 |
 | `PKG-06` | 1 | 4 |
 | `PKG-07` | 2 | 5 |
@@ -91,7 +91,10 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-03-06` | `PKG-03` | `COMMITTED` `f15cbc6` | 9 | Expansion joint component model |
 | `DEL-03-07` | `PKG-03` | `COMMITTED` `4d880b3` | 11 | Public/private library import provenance checker |
 | `DEL-03-08` | `PKG-03` | `COMMITTED` `9712e98` | 9 | Pipe section property and mass-property calculator |
-| `DEL-04-01` | `PKG-04` | `MISSING_EVIDENCE` | 8 | 3D frame stiffness kernel |
+| `DEL-04-01` | `PKG-04` | `COMMITTED` `1506cc0` | 8 | 3D frame stiffness kernel |
+| `DEL-04-02` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Straight pipe element |
+| `DEL-04-03` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Linear support and restraint models |
+| `DEL-04-06` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Solver diagnostics and singularity detection |
 | `DEL-05-04` | `PKG-05` | `MISSING_EVIDENCE` | 6 | Analysis status semantics |
 | `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
@@ -104,7 +107,6 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-04-01` - 3D frame stiffness kernel | `PKG-04` | `MISSING_EVIDENCE` | 13 | `DEL-04-02`; `DEL-04-03`; `DEL-04-04`; `DEL-04-05`; `DEL-04-06`; `DEL-05-01`; `DEL-05-05`; `DEL-07-07`; `DEL-09-01`; `DEL-10-03`; `DEL-10-05`; `DEL-11-02`; `DEL-11-03` | `DAG-001-E0432`; `DAG-001-E0435`; `DAG-001-E0438`; `DAG-001-E0442`; `DAG-001-E0444`; `DAG-001-E0448`; `DAG-001-E0460`; `DAG-001-E0502`; `DAG-001-E0532`; `DAG-001-E0562`; `DAG-001-E0567`; `DAG-001-E0582`; `DAG-001-E0586` |
 | `DEL-04-02` - Straight pipe element | `PKG-04` | `MISSING_EVIDENCE` | 4 | `DEL-05-03`; `DEL-09-01`; `DEL-09-02`; `DEL-11-03` | `DAG-001-E0454`; `DAG-001-E0533`; `DAG-001-E0539`; `DAG-001-E0587` |
 | `DEL-04-03` - Linear support and restraint models | `PKG-04` | `MISSING_EVIDENCE` | 3 | `DEL-04-04`; `DEL-05-01`; `DEL-09-01` | `DAG-001-E0441`; `DAG-001-E0449`; `DAG-001-E0534` |
 | `DEL-04-04` - Nonlinear support active-set solver | `PKG-04` | `MISSING_EVIDENCE` | 1 | `DEL-09-03` | `DAG-001-E0541` |
@@ -141,15 +143,12 @@ These deliverables have no active upstream implementation dependency below the `
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-04-02` | `PKG-04` | 1 | `DEL-04-01` | Straight pipe element |
-| `DEL-04-03` | `PKG-04` | 1 | `DEL-04-01` | Linear support and restraint models |
-| `DEL-04-04` | `PKG-04` | 3 | `DEL-04-03`; `DEL-04-01`; `DEL-04-06` | Nonlinear support active-set solver |
-| `DEL-04-05` | `PKG-04` | 2 | `DEL-04-01`; `DEL-04-06` | Sparse solver performance harness |
-| `DEL-04-06` | `PKG-04` | 1 | `DEL-04-01` | Solver diagnostics and singularity detection |
-| `DEL-05-01` | `PKG-05` | 2 | `DEL-04-01`; `DEL-04-03` | Primitive load case engine |
+| `DEL-04-04` | `PKG-04` | 2 | `DEL-04-03`; `DEL-04-06` | Nonlinear support active-set solver |
+| `DEL-04-05` | `PKG-04` | 1 | `DEL-04-06` | Sparse solver performance harness |
+| `DEL-05-01` | `PKG-05` | 1 | `DEL-04-03` | Primitive load case engine |
 | `DEL-05-02` | `PKG-05` | 2 | `DEL-05-01`; `DEL-05-04` | Load-case algebra engine |
 | `DEL-05-03` | `PKG-05` | 3 | `DEL-04-02`; `DEL-05-01`; `DEL-05-04` | Fundamental stress recovery module |
-| `DEL-05-05` | `PKG-05` | 2 | `DEL-05-01`; `DEL-04-01` | Concentrated and distributed user load application |
+| `DEL-05-05` | `PKG-05` | 1 | `DEL-05-01` | Concentrated and distributed user load application |
 | `DEL-06-02` | `PKG-06` | 1 | `DEL-06-01` | Sandboxed unit-aware expression evaluator |
 | `DEL-06-03` | `PKG-06` | 2 | `DEL-06-01`; `DEL-05-04` | Required-input completeness checker |
 | `DEL-06-04` | `PKG-06` | 1 | `DEL-06-01` | Private rule-pack lifecycle and checksum handling |
@@ -158,24 +157,24 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` | `PKG-07` | 3 | `DEL-05-04`; `DEL-06-03`; `DEL-04-06` | Missing-data warning and blocking UX |
 | `DEL-07-05` | `PKG-07` | 3 | `DEL-05-03`; `DEL-05-04`; `DEL-04-06` | Results viewer |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-07-07` | `PKG-07` | 4 | `DEL-04-01`; `DEL-05-01`; `DEL-04-06`; `DEL-05-04` | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-07-07` | `PKG-07` | 3 | `DEL-05-01`; `DEL-04-06`; `DEL-05-04` | Solve execution UX: progress, cancellation, and diagnostics |
 | `DEL-08-01` | `PKG-08` | 5 | `DEL-05-03`; `DEL-05-04`; `DEL-06-04`; `DEL-08-02`; `DEL-08-03` | Calculation report generator |
 | `DEL-08-02` | `PKG-08` | 1 | `DEL-06-04` | Audit manifest and model hash |
 | `DEL-08-03` | `PKG-08` | 2 | `DEL-04-06`; `DEL-05-04` | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | 2 | `DEL-05-03`; `DEL-05-04` | Result export format |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
-| `DEL-09-01` | `PKG-09` | 4 | `DEL-04-01`; `DEL-04-02`; `DEL-04-03`; `DEL-05-01` | Mechanics benchmark suite |
+| `DEL-09-01` | `PKG-09` | 3 | `DEL-04-02`; `DEL-04-03`; `DEL-05-01` | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | 2 | `DEL-05-03`; `DEL-04-02` | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | 2 | `DEL-04-04`; `DEL-04-06` | Nonlinear support regression suite |
 | `DEL-09-04` | `PKG-09` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 4 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |
 | `DEL-10-02` | `PKG-10` | 3 | `DEL-10-01`; `DEL-12-01`; `DEL-12-05` | Import/export adapter framework |
-| `DEL-10-03` | `PKG-10` | 3 | `DEL-10-01`; `DEL-04-01`; `DEL-05-03` | Local FEA handoff data contract |
+| `DEL-10-03` | `PKG-10` | 2 | `DEL-10-01`; `DEL-05-03` | Local FEA handoff data contract |
 | `DEL-10-04` | `PKG-10` | 4 | `DEL-09-05`; `DEL-10-05`; `DEL-08-05`; `DEL-12-05` | Build, packaging, and CI/CD pipeline |
-| `DEL-10-05` | `PKG-10` | 5 | `DEL-10-01`; `DEL-04-01`; `DEL-05-01`; `DEL-08-04`; `DEL-08-02` | Headless CLI and structured I/O analysis runner |
+| `DEL-10-05` | `PKG-10` | 4 | `DEL-10-01`; `DEL-05-01`; `DEL-08-04`; `DEL-08-02` | Headless CLI and structured I/O analysis runner |
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
-| `DEL-11-02` | `PKG-11` | 3 | `DEL-04-01`; `DEL-06-01`; `DEL-10-01` | Developer guide for solver and rule packs |
-| `DEL-11-03` | `PKG-11` | 3 | `DEL-04-01`; `DEL-04-02`; `DEL-09-01` | Theory notes: classical to modern centerline analysis |
+| `DEL-11-02` | `PKG-11` | 2 | `DEL-06-01`; `DEL-10-01` | Developer guide for solver and rule packs |
+| `DEL-11-03` | `PKG-11` | 2 | `DEL-04-02`; `DEL-09-01` | Theory notes: classical to modern centerline analysis |
 | `DEL-11-04` | `PKG-11` | 4 | `DEL-06-05`; `DEL-09-01`; `DEL-09-02`; `DEL-08-05` | Invented educational example models |
 | `DEL-12-01` | `PKG-12` | 1 | `DEL-12-05` | Local-first storage and private data paths |
 | `DEL-12-02` | `PKG-12` | 5 | `DEL-12-05`; `DEL-12-01`; `DEL-08-01`; `DEL-08-04`; `DEL-06-04` | Private data redaction and export controls |
