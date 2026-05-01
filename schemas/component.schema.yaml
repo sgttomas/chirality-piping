@@ -8,6 +8,7 @@
   "required": [
     "schema_version",
     "component_library",
+    "component_family_contracts",
     "component_records",
     "field_definitions",
     "completeness_rules",
@@ -21,6 +22,13 @@
     },
     "component_library": {
       "$ref": "#/$defs/LibraryMetadata"
+    },
+    "component_family_contracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ComponentFamilyContract"
+      }
     },
     "component_records": {
       "type": "array",
@@ -207,8 +215,71 @@
         "COMPONENT_PROTECTED_CONTENT_SUSPECTED",
         "COMPONENT_MODIFIER_NOT_PUBLIC",
         "COMPONENT_CATALOG_VALUE_NOT_PUBLIC",
+        "BEND_GEOMETRY_INCOMPLETE",
+        "BEND_RULE_INPUT_MISSING",
         "TBD"
       ]
+    },
+    "ComponentFamilyContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_id",
+        "component_types",
+        "geometry_field_kinds",
+        "rule_modifier_field_kinds",
+        "source_metadata_field_kinds",
+        "mechanics_interface",
+        "protected_value_policy",
+        "review_status"
+      ],
+      "properties": {
+        "contract_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "component_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ComponentType"
+          }
+        },
+        "geometry_field_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ComponentFieldKind"
+          }
+        },
+        "rule_modifier_field_kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComponentFieldKind"
+          }
+        },
+        "source_metadata_field_kinds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ComponentFieldKind"
+          }
+        },
+        "mechanics_interface": {
+          "$ref": "#/$defs/ComponentMechanicsInterface"
+        },
+        "protected_value_policy": {
+          "type": "string",
+          "enum": [
+            "schema_slots_only",
+            "user_supplied_with_provenance",
+            "public_permissive_reviewed_only",
+            "private_library_only",
+            "TBD"
+          ]
+        },
+        "review_status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      }
     },
     "ComponentFieldDefinition": {
       "type": "object",
@@ -259,6 +330,12 @@
         "wall_thickness",
         "bend_radius",
         "bend_angle",
+        "bend_centerline_radius",
+        "bend_included_angle",
+        "bend_tangent_length",
+        "bend_plane_orientation",
+        "bend_end_a_orientation",
+        "bend_end_b_orientation",
         "branch_size",
         "end_a_size",
         "end_b_size",
@@ -269,6 +346,7 @@
         "movement_limit",
         "sif_user_value",
         "flexibility_factor_user_value",
+        "bend_geometry_source_reference",
         "manufacturer_reference",
         "user_defined",
         "TBD"
@@ -339,6 +417,53 @@
         "TBD"
       ]
     },
+    "ComponentMechanicsInterface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_role",
+        "geometry_basis",
+        "solver_consumption",
+        "rule_check_consumption"
+      ],
+      "properties": {
+        "model_role": {
+          "type": "string",
+          "enum": [
+            "centerline_component",
+            "local_detail_reference",
+            "rigid_placeholder",
+            "TBD"
+          ]
+        },
+        "geometry_basis": {
+          "type": "string",
+          "enum": [
+            "user_entered_centerline_geometry",
+            "private_library_record",
+            "public_permissive_reviewed_record",
+            "TBD"
+          ]
+        },
+        "solver_consumption": {
+          "type": "string",
+          "enum": [
+            "mechanics_geometry_only",
+            "mechanics_geometry_and_user_flexibility",
+            "not_solver_consumed",
+            "TBD"
+          ]
+        },
+        "rule_check_consumption": {
+          "type": "string",
+          "enum": [
+            "user_rule_pack_inputs_only",
+            "not_rule_checked",
+            "TBD"
+          ]
+        }
+      }
+    },
     "ComponentRecord": {
       "type": "object",
       "additionalProperties": false,
@@ -394,6 +519,7 @@
       "type": "string",
       "enum": [
         "bend",
+        "elbow",
         "branch",
         "reducer",
         "valve",

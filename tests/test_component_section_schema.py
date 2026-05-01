@@ -134,6 +134,7 @@ def main():
     assert {
         "schema_version",
         "component_library",
+        "component_family_contracts",
         "component_records",
         "field_definitions",
         "completeness_rules",
@@ -153,6 +154,7 @@ def main():
     } <= required_at(component_schema, "ComponentRecord")
     assert {
         "bend",
+        "elbow",
         "branch",
         "reducer",
         "valve",
@@ -164,6 +166,10 @@ def main():
         "TBD",
     } <= enum_at(component_schema, "ComponentType")
     assert {
+        "bend_centerline_radius",
+        "bend_included_angle",
+        "bend_plane_orientation",
+        "bend_geometry_source_reference",
         "weight",
         "center_of_gravity",
         "stiffness",
@@ -180,7 +186,19 @@ def main():
         "COMPONENT_PROVENANCE_MISSING",
         "COMPONENT_PROTECTED_CONTENT_SUSPECTED",
         "COMPONENT_MODIFIER_NOT_PUBLIC",
+        "BEND_GEOMETRY_INCOMPLETE",
+        "BEND_RULE_INPUT_MISSING",
     } <= enum_at(component_schema, "ComponentDiagnosticCode")
+    assert {
+        "contract_id",
+        "component_types",
+        "geometry_field_kinds",
+        "rule_modifier_field_kinds",
+        "source_metadata_field_kinds",
+        "mechanics_interface",
+        "protected_value_policy",
+        "review_status",
+    } <= required_at(component_schema, "ComponentFamilyContract")
 
     assert fixture["section_library"]["library_scope"] == "public_schema_fixture"
     assert fixture["section_records"][0]["redistribution_status"] == "TBD"
@@ -189,13 +207,23 @@ def main():
     assert fixture["section_diagnostics"][0]["code"] == "SECTION_DIMENSION_MISSING"
 
     assert fixture["component_library"]["library_scope"] == "public_schema_fixture"
+    bend_contract = fixture["component_family_contracts"][0]
+    assert {"bend", "elbow"} <= set(bend_contract["component_types"])
+    assert "bend_centerline_radius" in bend_contract["geometry_field_kinds"]
+    assert "sif_user_value" in bend_contract["rule_modifier_field_kinds"]
+    assert bend_contract["protected_value_policy"] == "schema_slots_only"
     assert fixture["component_records"][0]["redistribution_status"] == "TBD"
+    fixture_field_kinds = {
+        field["field_kind"] for field in fixture["component_records"][0]["fields"]
+    }
+    assert "bend_centerline_radius" in fixture_field_kinds
+    assert "bend_included_angle" in fixture_field_kinds
     assert (
         fixture["component_records"][0]["fields"][0]["public_repository_value_policy"]
-        == "no_public_code_specific_values"
+        == "schema_shape_only"
     )
     assert fixture["component_records"][0]["completeness"][0]["status"] == "incomplete"
-    assert fixture["component_diagnostics"][0]["code"] == "COMPONENT_FIELD_MISSING"
+    assert fixture["component_diagnostics"][0]["code"] == "BEND_GEOMETRY_INCOMPLETE"
 
     all_text = "\n".join(
         [

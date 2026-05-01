@@ -167,6 +167,9 @@ The section and component library contracts are represented by
 - component-library metadata, component field slots for dimensions, weights,
   centers of gravity, stiffness, effective area, movement limits, and user
   modifier inputs;
+- bend/elbow family contracts for user-entered centerline radius, included
+  angle, plane/orientation metadata, source references, and user-supplied SIF
+  or flexibility-factor slots;
 - explicit public repository value policies for SIF, flexibility, proprietary
   catalog, and user/private values;
 - completeness rules and diagnostics for solve-required, property-calculation,
@@ -178,6 +181,11 @@ Public section/component fixtures must be invented non-engineering examples or
 schema-shape-only records unless a public-permissive source has completed
 review evidence. Missing or unreviewed section/component values remain explicit
 findings; they are not supplied by silent defaults.
+
+Bend and elbow records define schema slots and mechanics-interface metadata
+only. Public repository fixtures may show the shape of bend geometry fields but
+must not supply protected bend tables, code-specific SIF or flexibility values,
+or proprietary catalog geometry as defaults.
 
 ### 4.3 Code-neutral analysis boundary
 

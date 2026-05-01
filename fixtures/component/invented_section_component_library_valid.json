@@ -176,6 +176,36 @@
     },
     "review_status": "pending"
   },
+  "component_family_contracts": [
+    {
+      "contract_id": "contract.component.bend-elbow",
+      "component_types": [
+        "bend",
+        "elbow"
+      ],
+      "geometry_field_kinds": [
+        "bend_centerline_radius",
+        "bend_included_angle",
+        "bend_plane_orientation"
+      ],
+      "rule_modifier_field_kinds": [
+        "sif_user_value",
+        "flexibility_factor_user_value"
+      ],
+      "source_metadata_field_kinds": [
+        "bend_geometry_source_reference",
+        "manufacturer_reference"
+      ],
+      "mechanics_interface": {
+        "model_role": "centerline_component",
+        "geometry_basis": "user_entered_centerline_geometry",
+        "solver_consumption": "mechanics_geometry_only",
+        "rule_check_consumption": "user_rule_pack_inputs_only"
+      },
+      "protected_value_policy": "schema_slots_only",
+      "review_status": "pending"
+    }
+  ],
   "component_records": [
     {
       "component_id": "comp.invented.bend.alpha",
@@ -184,6 +214,40 @@
       "privacy_class": "public_schema_only",
       "redistribution_status": "TBD",
       "fields": [
+        {
+          "field_id": "comp.invented.bend.alpha.centerline-radius",
+          "field_kind": "bend_centerline_radius",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no bend radius value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.bend.alpha.included-angle",
+          "field_kind": "bend_included_angle",
+          "value_status": "missing",
+          "public_repository_value_policy": "schema_shape_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no bend angle value supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
         {
           "field_id": "comp.invented.bend.alpha.sif",
           "field_kind": "sif_user_value",
@@ -209,9 +273,11 @@
           "status": "incomplete",
           "missing_field_kinds": [
             "sif_user_value",
-            "flexibility_factor_user_value"
+            "flexibility_factor_user_value",
+            "bend_centerline_radius",
+            "bend_included_angle"
           ],
-          "diagnostic_code": "COMPONENT_FIELD_MISSING"
+          "diagnostic_code": "BEND_GEOMETRY_INCOMPLETE"
         }
       ],
       "provenance": {
@@ -227,6 +293,24 @@
     }
   ],
   "component_field_definitions": [
+    {
+      "field_kind": "bend_centerline_radius",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "bend_included_angle",
+      "dimension_id": "angle",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "schema_shape_only",
+      "review_status": "pending"
+    },
     {
       "field_kind": "sif_user_value",
       "dimension_id": "dimensionless",
@@ -245,19 +329,21 @@
         "bend"
       ],
       "required_field_kinds": [
+        "bend_centerline_radius",
+        "bend_included_angle",
         "sif_user_value",
         "flexibility_factor_user_value"
       ],
       "required_for": "rule_check",
       "missing_behavior": "diagnostic_blocking",
-      "diagnostic_code": "COMPONENT_FIELD_MISSING",
+      "diagnostic_code": "BEND_RULE_INPUT_MISSING",
       "review_status": "pending"
     }
   ],
   "component_diagnostics": [
     {
       "diagnostic_id": "diag.component.fixture.incomplete",
-      "code": "COMPONENT_FIELD_MISSING",
+      "code": "BEND_GEOMETRY_INCOMPLETE",
       "severity": "blocking",
       "affected_ref": {
         "ref_type": "component",
