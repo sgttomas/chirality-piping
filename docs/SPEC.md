@@ -335,6 +335,28 @@ errors, not silent defaults.
 
 The open core shall provide fields and mechanics interfaces for bends, branches, reducers, valves, flanges, expansion joints, and rigid elements. User-supplied SIFs, flexibility factors, stress indices, manufacturer stiffnesses, and local data are inputs, not public defaults.
 
+### 5.3.1 Linear supports and restraints
+
+The linear support and restraint slice is `core/solver/linear_supports`. It
+models anchors, guides, line stops, vertical supports, linear springs, and
+imposed displacement boundary data as explicit mechanics-boundary inputs for
+the frame-kernel six-DOF order. It prepares restrained DOFs, linear spring
+entries, imposed displacement entries, and deterministic findings for missing
+or invalid solve-required support data.
+
+Support quantities retain dimension intent, including translational stiffness,
+rotational stiffness, displacement, and rotation. Unit conversion constants,
+canonical calculation units, support coordinate-frame convention,
+constraint-elimination or penalty strategy, sparse-solver integration, and
+final result-envelope integration remain `TBD` until accepted through later
+gates.
+
+The linear support slice does not implement nonlinear gap, lift-off, one-way,
+friction, or active-set behavior; that behavior remains assigned to
+`DEL-04-04`. It also does not provide public support stiffness defaults,
+catalog values, protected standards data, rule-pack checks, load-case algebra,
+or professional/code-compliance claims.
+
 ### 5.4 Nonlinear supports
 
 Nonlinear supports shall use an active-set or equivalent iterative method. Results must record active/inactive states, gaps, lift-off, friction state, convergence tolerance, iteration count, and non-convergence warnings.

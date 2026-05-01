@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-04-03
 doc_kind: coordination.dispatch_brief
-status: prepared_not_launched
+status: launched_single_bounded_item
 created: 2026-05-01
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -21,11 +21,10 @@ write_scope: explicit_bounded_targets
 The human project authority authorized preparation of a sealed dispatch brief
 for `DEL-04-03 - Linear support and restraint models`.
 
-This brief preparation is not implementation and is not broad fan-out. It does
-not authorize lifecycle transitions, candidate-edge promotion,
-dependency-register edits, blocker-queue refresh, or work on any other
-deliverable. Implementation may begin only after a separate human gate accepts
-this brief and authorizes the bounded item.
+The human project authority subsequently authorized bounded implementation of
+this sealed item. This is not broad fan-out and does not authorize lifecycle
+transitions, candidate-edge promotion, dependency-register edits,
+blocker-queue refresh, or work on any other deliverable.
 
 ## Deliverable Identity
 
