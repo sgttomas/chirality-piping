@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-01
 **Actor:** ORCHESTRATOR DEL-02-04 bounded execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 post-`DEL-02-04` bounded execution; awaiting CHANGE routing for file-state handling/commit and the next human gate; no broad fan-out
+**Current Mode:** DEV-001 post-`DEL-02-04` bounded execution committed; awaiting the next human gate; no broad fan-out
 
 ## Active Control State
 
@@ -29,7 +29,7 @@
 | DEL-02-03 handoff correction commit | `f19cf2a docs: record del-02-03 commit handoff` |
 | DEL-02-05 handoff correction commit | `4e18a0f docs: record del-02-05 commit handoff` |
 | Last bounded item | `DEL-02-04 - Plugin and extension domain contracts` |
-| Last bounded item commit | pending `CHANGE` routing |
+| Last bounded item commit | `ef44f4c schema: tighten plugin extension contract` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -449,8 +449,10 @@ Remaining open items:
 - Canonicalization edge cases for non-JSON payloads remain `TBD`.
 - CI gates for plugin submission, protected-content screening, and
   security/privacy review remain `TBD`.
-- Deliverable file-state changes are not committed yet and should be routed
-  through `CHANGE` if the human wants this bounded item captured in git.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `ef44f4c schema: tighten plugin extension contract`.
+- Git state was clean after that commit when checked by ORCHESTRATOR on
+  2026-05-01.
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -474,20 +476,17 @@ just to reflect the prompt posture.
 
 Immediate next action:
 
-1. Route the `DEL-02-04` bounded item through `CHANGE` if the human wants the
-   file-state changes staged and committed. Do not commit without explicit
-   `APPROVE:` action list.
-2. Apply the latest human gate. If no new item is explicitly authorized,
+1. Apply the latest human gate. If no new item is explicitly authorized,
    present or await a bounded choice rather than selecting one solely from the
    prompt.
-3. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
+2. Derive any proposed next objective from `NEXT_INSTANCE_STATE.md`,
    `_COORDINATION.md`, `DAG-001`, `DEV-001_BLOCKER_QUEUE.*`, and
    `docs/_Registers/Deliverables.csv`.
-4. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
+3. If exactly one DAG item is authorized, prepare a fresh sealed dispatch brief
    before any `WORKING_ITEMS` or `TASK` execution.
-5. Decide separately whether to track or ignore the untracked pre-DAG
-   reconciliation artifacts through CHANGE.
-6. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
+4. Decide separately whether to track or ignore any pre-DAG reconciliation
+   artifacts through CHANGE if they reappear in file-state evidence.
+5. Human project authority may instead route `RECONCILIATION`, `AUDIT_*`,
    pre-DAG artifact handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is authorized by the
