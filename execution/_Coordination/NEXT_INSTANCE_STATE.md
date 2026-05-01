@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR control-plane evidence refresh after DEL-04-02 commit
+**Actor:** ORCHESTRATOR sealed dispatch brief preparation for DEL-04-03
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-04-02 implementation committed as `b0516e5`; implementation evidence and blocker queue refreshed in working tree; awaiting CHANGE review/commit
+**Current Mode:** DEL-04-03 dispatch brief prepared in working tree; awaiting CHANGE review/commit or human implementation gate
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-04-02 implementation evidence and blocker queue refresh` |
+| Latest state task | `DEL-04-03 sealed dispatch brief preparation` |
 | Latest state commit | Uncommitted; route through `CHANGE` if accepted |
-| Previous completed task archive status | `DEL-04-05 evidence refresh and DEL-04-02 implementation` moved into the compact task archive table |
-| Current authorized item | `DEL-04-02` implementation evidence and blocker queue refresh after commit |
-| Current dispatch brief | N/A - control-plane evidence refresh |
+| Previous completed task archive status | `DEL-04-02 implementation evidence and blocker queue refresh` moved into the compact task archive table |
+| Current authorized item | `DEL-04-03 - Linear support and restraint models` brief preparation only |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-04-03.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -163,6 +163,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-04-06` implementation evidence and queue refresh | Completed; `5ec31c7 coordination: record del-04-06 implementation evidence` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue changed to 37 unblocked / 36 blocked | Newly unblocked `DEL-04-05`; no next product deliverable was authorized by the queue refresh. |
 | `DEL-04-05` implementation | Completed; `75f6688 core: add solver performance harness` | `core/solver/performance_harness/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | `cargo fmt --manifest-path core/solver/performance_harness/Cargo.toml --check`; performance-harness tests passed 6 tests; diagnostics and frame-kernel tests passed; `git diff --check` | Sparse numerical library, release timing/memory thresholds, practical model-size bands, conditioning gate policy, hardware-normalized methodology, CI gate policy, and sparse-adapter integration remain `TBD`. |
 | `DEL-04-05` evidence refresh and `DEL-04-02` implementation | Completed; `b0516e5 core: add straight pipe element` | `core/solver/straight_pipe/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state/evidence/queue | Queue refresh after `DEL-04-05`; straight-pipe, frame-kernel, and performance-harness cargo tests passed; `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check` | Canonical calculation unit basis, conversion constants, primitive load-case application of weight, downstream stress recovery, and final result-envelope integration remain `TBD`. |
+| `DEL-04-02` implementation evidence and blocker queue refresh | Completed; `275747e coordination: record del-04-02 implementation evidence` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | `build_dev001_blocker_queue.py`; `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue remained 37 unblocked / 36 blocked | `DEL-04-02` no longer appears as a missing upstream blocker; no next product deliverable was authorized by the queue refresh. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -185,62 +186,61 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-04-02 Implementation Evidence And Blocker Queue Refresh
+## Latest State - DEL-04-03 Sealed Dispatch Brief Preparation
 
-The prior bounded item is now committed:
+Human project authority authorized sealed dispatch brief preparation for:
 
-- `DEL-04-02 - Straight pipe element`
-- Commit: `b0516e5 core: add straight pipe element`
+- `DEL-04-03 - Linear support and restraint models`
 
-This control-plane follow-up recorded the committed implementation evidence for
-`DEL-04-02` and refreshed the DEV-001 implementation-readiness blocker queue.
+This brief preparation does not launch implementation. It records the bounded
+scope, active DAG preconditions, applicable `AB-00-*` architecture basis, future
+write targets, and acceptance criteria for a possible next implementation gate.
 
 Files changed in this task:
 
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-04-03.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Evidence and queue summary:
+Brief summary:
 
-- Added `DEL-04-02` as `COMMITTED` implementation evidence for
-  `b0516e5 core: add straight pipe element`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*` from approved active `DAG-001` edges and
-  the implementation evidence register.
-- Implementation evidence records increased from 20 to 21.
-- Implementation `UNBLOCKED` deliverables remained 37; `BLOCKED` deliverables
-  remained 36 because downstream consumers of `DEL-04-02` still have other
-  missing upstream implementation evidence.
-- `DEL-04-02` no longer appears as a missing upstream blocker.
-- Candidate edges remained excluded.
+- `DEL-04-03` is `UNBLOCKED` in the implementation-readiness queue and has
+  `MISSING_EVIDENCE` only for its own implementation.
+- Active upstream implementation preconditions are satisfied by `DEL-04-01`
+  (`1506cc0`), `DEL-02-01` (`7b256f3`), `DEL-02-02` (`a458cba`), and
+  `PKG-00` architecture-basis edges satisfied by the accepted baseline.
+- The future implementation write scope is limited to
+  `core/solver/linear_supports/`, `docs/SPEC.md`, `docs/TYPES.md`,
+  DEL-04-03 `MEMORY.md`, the dispatch brief, and this state file.
+- Candidate edges, dependency registers, lifecycle states, and blocker queues
+  were not changed by brief preparation.
 
 Verification:
 
-- `python3 tools/coordination/build_dev001_blocker_queue.py` passed and
-  regenerated the queue.
+- `git diff --check` pending before closeout.
 
 Remaining open items:
 
-- This evidence refresh and handoff update are uncommitted until routed through
+- This dispatch brief and handoff update are uncommitted until routed through
   `CHANGE`.
-- Canonical calculation unit basis, conversion constants, primitive load-case
-  application of weight, downstream stress recovery, and final result-envelope
+- Implementation of `DEL-04-03` is not authorized until a separate human gate.
+- Canonical calculation unit basis, conversion constants, support coordinate
+  convention, rigid-restraint numerical method, constraint-elimination or
+  penalty strategy, sparse-solver integration, and final result-envelope
   integration remain `TBD`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route the `DEL-04-02` implementation evidence and blocker-queue refresh
-   through `CHANGE` for staging and commit if the human project authority
-   accepts it.
-2. Human project authority may then authorize exactly one next bounded DAG
-   item, route another `RECONCILIATION`, `AUDIT_*`, artifact handling, route
-   `CHANGE` for file-state handling, or pause.
+1. Route the `DEL-04-03` dispatch brief and handoff update through `CHANGE` for
+   staging and commit if the human project authority accepts it.
+2. Human project authority may then authorize the bounded `DEL-04-03`
+   implementation, authorize exactly one different DAG item, route
+   `RECONCILIATION`, `AUDIT_*`, artifact handling, route `CHANGE` for
+   file-state handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized by this evidence refresh.
+authorized by this dispatch-brief preparation.
 
 ## Guardrails
 
