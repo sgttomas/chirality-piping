@@ -360,6 +360,14 @@ it does not modify solver logic, choose the production sparse numerical
 library, set release timing or memory thresholds, import proprietary benchmark
 models, or make professional/code-compliance claims.
 
+The straight-pipe element slice is `core/solver/straight_pipe`. It adapts
+explicit section properties into the frame-kernel element boundary, exposes
+mass/weight-per-length hooks for later load-case work, and recovers local
+mechanical element forces from element or model displacement vectors. Inputs
+must come from governed unit/provenance/section-property paths; the slice does
+not provide public pipe tables, material defaults, code-specific values, stress
+checks, load combinations, or professional/code-compliance claims.
+
 ## 6. Loads and stress recovery
 
 Primitive loads include weight, pressure, temperature, imposed displacement, hydrotest, wind, seismic, and user occasional loads. Code-specific load combinations are not public defaults; they are user rule-pack or project inputs.

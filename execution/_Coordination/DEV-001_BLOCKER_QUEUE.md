@@ -35,8 +35,8 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 19 |
-| Committed implementation evidence | 19 |
+| Implementation evidence records | 20 |
+| Committed implementation evidence | 20 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 37 |
@@ -94,7 +94,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-04-01` | `PKG-04` | `COMMITTED` `1506cc0` | 8 | 3D frame stiffness kernel |
 | `DEL-04-02` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Straight pipe element |
 | `DEL-04-03` | `PKG-04` | `MISSING_EVIDENCE` | 8 | Linear support and restraint models |
-| `DEL-04-05` | `PKG-04` | `MISSING_EVIDENCE` | 7 | Sparse solver performance harness |
+| `DEL-04-05` | `PKG-04` | `COMMITTED` `75f6688` | 7 | Sparse solver performance harness |
 | `DEL-04-06` | `PKG-04` | `COMMITTED` `fdb0252` | 8 | Solver diagnostics and singularity detection |
 | `DEL-05-04` | `PKG-05` | `MISSING_EVIDENCE` | 6 | Analysis status semantics |
 | `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
