@@ -423,6 +423,16 @@ compliance claims. Wind and seismic loads are currently represented only as
 user-supplied equivalent mechanics loads; dynamic or code-procedure generation
 remains `TBD`.
 
+The load-case algebra slice is `core/loads/load_case_algebra`. It combines
+explicit primitive-load or result-state operands using user-defined factors,
+subtraction, and range envelopes while preserving unit/dimension intent and
+analysis-status boundaries. Missing operands, incompatible dimensions,
+non-finite factors, duplicate operands, unsupported expression shapes, and
+human-approval status are deterministic findings, not silent defaults. This
+slice does not provide code-specific public combination defaults, a general
+rule-pack expression evaluator, stress recovery, protected standards data, or
+professional/code-compliance claims.
+
 Stress recovery shall calculate open mechanics quantities such as axial stress, bending stress, torsional shear stress, pressure membrane stresses, and resultants. Code-category equations are rule-pack mappings.
 
 ## 7. Rule-pack evaluator

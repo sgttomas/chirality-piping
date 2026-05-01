@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** WORKING_ITEMS implementation for DEL-05-04
+**Actor:** WORKING_ITEMS implementation for DEL-05-02
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-05-04 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
+**Current Mode:** DEL-05-02 implemented, lifecycle moved to CHECKING, evidence/queue pending implementation commit
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-05-04 implementation` |
-| Latest state commit | Implementation commit `dbaf21e`; evidence/queue/state in this commit |
-| Previous completed task archive status | `DEL-05-04 sealed dispatch brief preparation` moved into the compact task archive table |
-| Current authorized item | None beyond this approved lifecycle/evidence/queue alignment pass |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-04.md` |
+| Latest state task | `DEL-05-02 implementation` |
+| Latest state commit | Implementation pending commit |
+| Previous completed task archive status | `DEL-05-02 sealed dispatch brief preparation` moved into the compact task archive table |
+| Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -181,6 +181,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-05-01` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-05-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 | `DEL-05-01` implementation | Completed; implementation `e3c9695`; evidence/queue/lifecycle `0c81eea` | `core/loads/primitive_loads/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Primitive-load, straight-pipe, and linear-support cargo tests passed; `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue changed to 42 unblocked / 31 blocked | Canonical calculation unit basis, conversion constants, final result-envelope integration, concrete application-service API, load-case storage representation, wind/seismic dynamic treatment, and production tolerance policy remain `TBD`. |
 | `DEL-05-04` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-05-04.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
+| `DEL-05-04` implementation | Completed; implementation `dbaf21e`; evidence/queue/lifecycle `1551342` | Analysis-status schema/docs/tests, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Analysis-status, analysis-boundary, model, and persistence schema scripts passed; coordination tests passed; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue changed to 46 unblocked / 27 blocked | Result-envelope integration, non-JSON payload hash canonicalization, human acceptance workflow ownership, storage location, and UI presentation remain `TBD`. |
+| `DEL-05-02` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-05-02.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; dispatch brief prepared from `DAG-001`, `Deliverables.csv`, applicable `AB-00-*` rows, local context, blocker queue, and committed upstream evidence | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -203,83 +205,68 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-05-04 Implementation
+## Latest State - DEL-05-02 Implementation
 
 Human project authority authorized implementation of:
 
-- `DEL-05-04 - Analysis status semantics`
+- `DEL-05-02 - Load-case algebra engine`
 
 Files changed in this task:
 
-- `schemas/analysis_status.schema.yaml`
-- `docs/architecture/analysis_status_semantics.md`
+- `core/loads/load_case_algebra/.gitignore`
+- `core/loads/load_case_algebra/Cargo.toml`
+- `core/loads/load_case_algebra/README.md`
+- `core/loads/load_case_algebra/src/lib.rs`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `tests/test_analysis_status_schema.py`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-04_Analysis status semantics/MEMORY.md`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-04_Analysis status semantics/Dependencies.csv`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-04_Analysis status semantics/_STATUS.md`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-05-04.md`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/MEMORY.md`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/Dependencies.csv`
+- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/_STATUS.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-05-02.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Implementation summary:
 
-- Strengthened `schemas/analysis_status.schema.yaml` so external human
-  acceptance records require a human actor and cannot carry
-  `HUMAN_APPROVED_FOR_PROJECT` when the record is not accepted.
-- Added explicit false professional-boundary fields for software approval and
-  authentication claims, alongside existing compliance, certification, and
-  sealing claim fields.
-- Updated status-semantics documentation, `docs/SPEC.md`, and `docs/TYPES.md`
-  to preserve the mechanics/rule/human authority boundary.
-- Expanded analysis-status schema tests for human actor constraints,
-  accepted/non-accepted human record branching, and professional-boundary
-  constants.
-- Added deliverable `MEMORY.md` and updated the dispatch brief implementation
-  summary.
-- Committed the implementation as `dbaf21e schema: tighten analysis status
-  semantics`.
-- Updated `DEL-05-04` lifecycle from `SEMANTIC_READY` to `CHECKING`.
-- Annotated the `DEL-05-04` local dependency mirror for the satisfied
-  non-architecture upstream `DEL-02-03`.
-- Recorded `DEL-05-04` as `COMMITTED` implementation evidence in
-  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue changed to 46 unblocked / 27
-  blocked.
-- `DAG-001` was validated but not changed. Candidate edges were not promoted.
-- This task did not introduce protected data or make professional/code
-  compliance claims.
+- Added the `open_pipe_stress_load_case_algebra` Rust crate for deterministic
+  user-defined linear combinations, result-state subtraction, and min/max range
+  envelopes over compatible mechanics quantities.
+- Reused the primitive-load `LoadDimension` vocabulary to preserve
+  unit/dimension intent without introducing conversion constants, public unit
+  catalogs, or hidden defaults.
+- Preserved analysis-status boundaries, including rejection of external human
+  approval as an automatic algebra output.
+- Reported missing operands, duplicate operands, non-finite factors,
+  incompatible dimensions, missing result states, empty expressions, and
+  status-boundary violations as deterministic findings.
+- Updated `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, and the
+  dispatch brief to reflect the bounded implementation.
+- Updated `DEL-05-02` lifecycle from `SEMANTIC_READY` to `CHECKING`.
+- Annotated the `DEL-05-02` local dependency mirror for satisfied
+  non-architecture upstreams `DEL-05-01`, `DEL-02-02`, and `DEL-05-04`.
+- This task has not yet recorded implementation evidence or refreshed the
+  blocker queue because the implementation commit hash must exist first.
+- `DAG-001` has not been changed; candidate edge `DAG-001-E0616` remains
+  non-gating.
 
 Verification:
 
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
-  unblocked=46, blocked=27, active_edges=615, candidate_edges_excluded=9.
-- `python3 -m pytest tools/coordination` passed: 10 tests.
-- `python3 tools/validation/validate_dependencies_schema.py
-  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-04_Analysis status semantics/Dependencies.csv"`
+- `cargo fmt --manifest-path core/loads/load_case_algebra/Cargo.toml --check`
   passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
+- `cargo test --manifest-path core/loads/load_case_algebra/Cargo.toml` passed:
+  8 tests.
+- `cargo test --manifest-path core/loads/primitive_loads/Cargo.toml` passed:
+  9 tests.
 - `git diff --check` passed.
-- `python3 -m pytest tests/test_analysis_status_schema.py
-  tests/test_analysis_boundary_schema.py tests/test_model_schema.py` collected
-  no tests because these schema checks are executable assertion scripts.
 
 Remaining open items:
 
-- Evidence/queue/state alignment is pending commit in this change set.
-- Exact integration points between the status schema and final result envelope,
-  non-JSON payload hash canonicalization, human acceptance workflow ownership,
-  storage location, and UI presentation remain `TBD`.
+- Implementation is pending commit.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` and `DEV-001_BLOCKER_QUEUE.*` are
+  pending update after the implementation commit exists.
+- Canonical calculation unit basis, conversion constants, final result-envelope
+  integration, concrete application-service API, persistence representation,
+  general expression grammar/library, rule-pack evaluator reuse, and production
+  tolerance policy remain `TBD`.
 
 ## Immediate Next Actions
 
