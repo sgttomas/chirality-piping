@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** RECONCILIATION / AUDIT_DEP_CLOSURE bounded completed-archive audit
+**Actor:** CHANGE state correction for completed-archive reconciliation commit evidence
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** Completed-archive reconciliation run written; awaiting CHANGE handling
+**Current Mode:** Completed-archive reconciliation committed; awaiting next human gate
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEV001 completed archive reconciliation` |
-| Latest state commit | Uncommitted; route through `CHANGE` if accepted |
+| Latest state commit | `2328331 reconcile completed archive dependencies` |
 | Previous completed task archive status | `DEL-03-08` moved into the compact task archive table |
 | Current authorized item | `RECONCILIATION` with `AUDIT_DEP_CLOSURE` over completed archive product deliverables was authorized and completed |
 | Current dispatch brief | `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Brief.md` |
@@ -223,10 +223,10 @@ Known informational finding:
   local registers are synchronized mirrors/evidence and aggregate `DAG-001`
   remains the sequencing authority.
 
-Remaining open items:
+Commit evidence:
 
-- Reconciliation artifacts and this handoff update are uncommitted until routed
-  through `CHANGE`.
+- Reconciliation artifacts and the related handoff update were committed as
+  `2328331 reconcile completed archive dependencies`.
 - No product deliverable, lifecycle transition, candidate-edge promotion,
   dependency-register mutation, or blocker-queue refresh was authorized or
   performed by this reconciliation run.
@@ -235,10 +235,7 @@ Remaining open items:
 
 Immediate next action:
 
-1. Route the completed-archive reconciliation artifacts and
-   `NEXT_INSTANCE_STATE.md` handoff update through `CHANGE` for staging and
-   commit if the human project authority accepts them.
-2. Human project authority may then route another `RECONCILIATION`, `AUDIT_*`,
+1. Human project authority may route another `RECONCILIATION`, `AUDIT_*`,
    artifact handling, authorize exactly one next bounded DAG item, route
    `CHANGE` for file-state handling, or pause.
 
