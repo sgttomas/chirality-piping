@@ -361,6 +361,20 @@ or professional/code-compliance claims.
 
 Nonlinear supports shall use an active-set or equivalent iterative method. Results must record active/inactive states, gaps, lift-off, friction state, convergence tolerance, iteration count, and non-convergence warnings.
 
+The nonlinear support active-set slice is `core/solver/nonlinear_supports`. It
+models one-way supports, gap/lift-off/contact state, and friction stick/slip
+classification as explicit mechanics-boundary decisions driven by supplied
+trial displacement and reaction data. It records active-set changes, residual
+state, convergence, iteration limits, and nonconvergence diagnostics through
+the solver diagnostics contract.
+
+This slice does not assemble the global nonlinear system, select a sparse
+solver, define release-quality tolerance policy, perform load-case algebra,
+provide public support/catalog defaults, run rule-pack checks, or make
+professional/code-compliance claims. Sign conventions for activation and gap
+closure remain explicit model/solver inputs rather than hidden defaults; final
+support coordinate convention and production solve integration remain `TBD`.
+
 ### 5.5 Numerical quality
 
 Solver results must be deterministic for the same model, units, solver version, and rule-pack inputs. Sparse-solver settings, tolerances, and conditioning warnings must be reportable.
