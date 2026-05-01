@@ -269,6 +269,34 @@
       },
       "protected_value_policy": "schema_slots_only",
       "review_status": "pending"
+    },
+    {
+      "contract_id": "contract.component.expansion-joint",
+      "component_types": [
+        "expansion_joint"
+      ],
+      "geometry_field_kinds": [
+        "connection_end_a_reference",
+        "connection_end_b_reference",
+        "effective_area",
+        "movement_limit"
+      ],
+      "rule_modifier_field_kinds": [
+        "stiffness",
+        "hardware_flag",
+        "hardware_reference"
+      ],
+      "source_metadata_field_kinds": [
+        "manufacturer_reference"
+      ],
+      "mechanics_interface": {
+        "model_role": "centerline_component",
+        "geometry_basis": "private_library_record",
+        "solver_consumption": "mechanics_geometry_and_user_flexibility",
+        "rule_check_consumption": "user_rule_pack_inputs_only"
+      },
+      "protected_value_policy": "schema_slots_only",
+      "review_status": "pending"
     }
   ],
   "component_records": [
@@ -595,6 +623,124 @@
         "review_status": "pending"
       },
       "review_status": "pending"
+    },
+    {
+      "component_id": "comp.invented.expansion.alpha",
+      "name": "Invented Expansion Joint Component Alpha",
+      "component_type": "expansion_joint",
+      "privacy_class": "public_schema_only",
+      "redistribution_status": "TBD",
+      "fields": [
+        {
+          "field_id": "comp.invented.expansion.alpha.stiffness",
+          "field_kind": "stiffness",
+          "value_status": "missing",
+          "public_repository_value_policy": "private_user_supplied_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no expansion joint stiffness supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.expansion.alpha.effective-area",
+          "field_kind": "effective_area",
+          "value_status": "missing",
+          "public_repository_value_policy": "private_user_supplied_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no expansion joint effective area supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.expansion.alpha.movement-limit",
+          "field_kind": "movement_limit",
+          "value_status": "missing",
+          "public_repository_value_policy": "private_user_supplied_only",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no expansion joint movement limit supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.expansion.alpha.hardware",
+          "field_kind": "hardware_reference",
+          "value_status": "missing",
+          "public_repository_value_policy": "no_public_proprietary_catalog_values",
+          "required_for": "mechanics_solve",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no expansion joint hardware data supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        },
+        {
+          "field_id": "comp.invented.expansion.alpha.manufacturer",
+          "field_kind": "manufacturer_reference",
+          "value_status": "missing",
+          "public_repository_value_policy": "no_public_proprietary_catalog_values",
+          "required_for": "component_library_import",
+          "provenance": {
+            "source_name": "OpenPipeStress schema slot",
+            "source_location": "schemas/component.schema.yaml",
+            "source_license": "TBD",
+            "contributor": "OpenPipeStress",
+            "contributor_certification": "schema slot only; no manufacturer catalog data supplied",
+            "redistribution_status": "TBD",
+            "review_status": "pending"
+          },
+          "review_status": "pending"
+        }
+      ],
+      "completeness": [
+        {
+          "finding_id": "comp.invented.expansion.alpha.incomplete",
+          "required_for": "mechanics_solve",
+          "status": "incomplete",
+          "missing_field_kinds": [
+            "stiffness",
+            "effective_area",
+            "movement_limit",
+            "hardware_reference"
+          ],
+          "diagnostic_code": "EXPANSION_JOINT_STIFFNESS_DATA_MISSING"
+        }
+      ],
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented non-engineering fixture; not for project use",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      },
+      "review_status": "pending"
     }
   ],
   "component_field_definitions": [
@@ -714,6 +860,42 @@
       "required_for": "mechanics_solve",
       "public_fixture_policy": "private_values_only",
       "review_status": "pending"
+    },
+    {
+      "field_kind": "effective_area",
+      "dimension_id": "area",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "movement_limit",
+      "dimension_id": "length",
+      "quantity_kind": "unit_bearing",
+      "unit_required": true,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "hardware_reference",
+      "dimension_id": "reference",
+      "quantity_kind": "reference",
+      "unit_required": false,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
+    },
+    {
+      "field_kind": "hardware_flag",
+      "dimension_id": "dimensionless",
+      "quantity_kind": "dimensionless",
+      "unit_required": false,
+      "required_for": "mechanics_solve",
+      "public_fixture_policy": "private_values_only",
+      "review_status": "pending"
     }
   ],
   "component_completeness_rules": [
@@ -773,6 +955,24 @@
       "required_for": "mechanics_solve",
       "missing_behavior": "diagnostic_blocking",
       "diagnostic_code": "RIGID_COMPONENT_GEOMETRY_INCOMPLETE",
+      "review_status": "pending"
+    },
+    {
+      "rule_id": "rule.component.expansion-joint.minimum",
+      "applies_to": "mechanics_solve",
+      "component_types": [
+        "expansion_joint"
+      ],
+      "required_field_kinds": [
+        "stiffness",
+        "effective_area",
+        "movement_limit",
+        "hardware_reference",
+        "manufacturer_reference"
+      ],
+      "required_for": "mechanics_solve",
+      "missing_behavior": "diagnostic_blocking",
+      "diagnostic_code": "EXPANSION_JOINT_STIFFNESS_DATA_MISSING",
       "review_status": "pending"
     }
   ],
@@ -836,6 +1036,26 @@
         "redistribution_status": "TBD",
         "review_status": "pending"
       }
+    },
+    {
+      "diagnostic_id": "diag.component.expansion.fixture.incomplete",
+      "code": "EXPANSION_JOINT_STIFFNESS_DATA_MISSING",
+      "severity": "blocking",
+      "affected_ref": {
+        "ref_type": "component",
+        "ref_id": "comp.invented.expansion.alpha"
+      },
+      "message": "Invented fixture intentionally omits expansion joint stiffness, effective area, movement limits, and hardware data.",
+      "remediation": "Supply reviewed user, manufacturer, or private-library values with provenance before mechanics use.",
+      "provenance": {
+        "source_name": "OpenPipeStress invented fixture",
+        "source_location": "fixtures/component/invented_section_component_library_valid.json",
+        "source_license": "TBD",
+        "contributor": "OpenPipeStress",
+        "contributor_certification": "invented diagnostic fixture",
+        "redistribution_status": "TBD",
+        "review_status": "pending"
+      }
     }
   ],
   "component_open_decisions": [
@@ -862,6 +1082,14 @@
       "blocking_scope": "public_rigid_component_values",
       "owner": "human project authority",
       "notes": "Public valve, flange, reducer, rigid, and specialty component dimensions, weights, centers of gravity, and stiffness values remain omitted until source and redistribution policy is accepted."
+    },
+    {
+      "decision_id": "comp.dec.expansion-joint-source-policy",
+      "topic": "accepted_component_source_catalog",
+      "status": "open",
+      "blocking_scope": "public_expansion_joint_component_values",
+      "owner": "human project authority",
+      "notes": "Public expansion joint stiffnesses, effective areas, movement limits, hardware data, and manufacturer references remain omitted until source and redistribution policy is accepted."
     }
   ]
 }

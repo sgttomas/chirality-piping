@@ -207,6 +207,11 @@ def main():
         "RIGID_COMPONENT_MASS_DATA_MISSING",
         "RIGID_COMPONENT_STIFFNESS_DATA_MISSING",
         "RIGID_COMPONENT_CATALOG_VALUE_NOT_PUBLIC",
+        "EXPANSION_JOINT_STIFFNESS_DATA_MISSING",
+        "EXPANSION_JOINT_EFFECTIVE_AREA_MISSING",
+        "EXPANSION_JOINT_MOVEMENT_LIMIT_MISSING",
+        "EXPANSION_JOINT_HARDWARE_DATA_MISSING",
+        "EXPANSION_JOINT_MANUFACTURER_VALUE_NOT_PUBLIC",
     } <= enum_at(component_schema, "ComponentDiagnosticCode")
     assert {
         "contract_id",
@@ -247,6 +252,14 @@ def main():
     assert "center_of_gravity" in rigid_contract["rule_modifier_field_kinds"]
     assert "stiffness" in rigid_contract["rule_modifier_field_kinds"]
     assert rigid_contract["protected_value_policy"] == "schema_slots_only"
+    expansion_contract = fixture["component_family_contracts"][3]
+    assert expansion_contract["component_types"] == ["expansion_joint"]
+    assert "effective_area" in expansion_contract["geometry_field_kinds"]
+    assert "movement_limit" in expansion_contract["geometry_field_kinds"]
+    assert "stiffness" in expansion_contract["rule_modifier_field_kinds"]
+    assert "hardware_reference" in expansion_contract["rule_modifier_field_kinds"]
+    assert "manufacturer_reference" in expansion_contract["source_metadata_field_kinds"]
+    assert expansion_contract["protected_value_policy"] == "schema_slots_only"
     assert fixture["component_records"][0]["redistribution_status"] == "TBD"
     fixture_field_kinds = {
         field["field_kind"] for field in fixture["component_records"][0]["fields"]
@@ -289,6 +302,27 @@ def main():
         == "RIGID_COMPONENT_GEOMETRY_INCOMPLETE"
     )
     assert fixture["component_diagnostics"][2]["code"] == "RIGID_COMPONENT_GEOMETRY_INCOMPLETE"
+    expansion_record = fixture["component_records"][3]
+    assert expansion_record["component_type"] == "expansion_joint"
+    expansion_field_kinds = {field["field_kind"] for field in expansion_record["fields"]}
+    assert "stiffness" in expansion_field_kinds
+    assert "effective_area" in expansion_field_kinds
+    assert "movement_limit" in expansion_field_kinds
+    assert "hardware_reference" in expansion_field_kinds
+    assert "manufacturer_reference" in expansion_field_kinds
+    assert (
+        expansion_record["fields"][0]["public_repository_value_policy"]
+        == "private_user_supplied_only"
+    )
+    assert expansion_record["completeness"][0]["status"] == "incomplete"
+    assert (
+        expansion_record["completeness"][0]["diagnostic_code"]
+        == "EXPANSION_JOINT_STIFFNESS_DATA_MISSING"
+    )
+    assert (
+        fixture["component_diagnostics"][3]["code"]
+        == "EXPANSION_JOINT_STIFFNESS_DATA_MISSING"
+    )
 
     all_text = "\n".join(
         [

@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / CHANGE handoff correction for DEL-03-05
+**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-06 bounded item closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-05` bounded item committed; clean git state observed; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-06` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
 
 ## Active Control State
 
@@ -46,10 +46,13 @@
 | DEL-03-03 pushed state | `main` pushed to `origin/main` through CHANGE approval on 2026-05-01 |
 | Previous bounded item | `DEL-03-04 - Branch connection component model fields` |
 | Previous bounded item commit | `ae693b6 schema: add branch component contract` |
-| Last bounded item | `DEL-03-05 - Rigid component models for valves, flanges, reducers, and specialty items` |
-| Last bounded item commit | `d8ee0db schema: add rigid component contract` |
-| Current authorized item | `None after DEL-03-05 handoff correction` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-05.md` |
+| Previous bounded item | `DEL-03-05 - Rigid component models for valves, flanges, reducers, and specialty items` |
+| Previous bounded item commit | `d8ee0db schema: add rigid component contract` |
+| DEL-03-05 handoff correction commit | `fd695c0 docs: record del-03-05 handoff state` |
+| Last bounded item | `DEL-03-06 - Expansion joint component model` |
+| Last bounded item commit | `Pending CHANGE approval` |
+| Current authorized item | `None beyond DEL-03-06 closeout / CHANGE handling` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -127,703 +130,57 @@ blockers under the current threshold. It is not a lifecycle approval, schedule,
 priority, staffing decision, implementation completeness claim, or professional
 approval.
 
-## DEL-01-01 Pilot Closeout
+## Completed Bounded Item History (Compacted)
 
-Human project authority accepted the pushed DEV-001 hardening state in-session
-on 2026-04-30 and authorized the `DEL-01-01` pilot handoff.
+This section compactly records completed DEV-001 bounded items before the most
+recent active closeout. Historical details remain recoverable from the named
+dispatch briefs, deliverable `MEMORY.md` files, commits, and git history.
 
-Pilot result:
+Universal historical guardrails preserved across the completed bounded items:
 
-- `WORKING_ITEMS`-style bounded pilot launched for `DEL-01-01`.
 - No broad fan-out was started.
-- No `TASK` subagent was dispatched.
 - No lifecycle state transition was made.
-- No blocker queue, `DAG-001`, candidate edge, or local dependency register was
-  recomputed or edited.
-- Authorized target changed: `governance/MAINTAINERS.md`.
-- Commit created through CHANGE approval:
-  `7650cf6 docs: tighten maintainer governance gates`.
-
-Pilot verification:
-
-- `git diff --check -- governance/MAINTAINERS.md` passed before commit.
-- Focused prohibited-claim scan found no explicit bad-claim phrases in the
-  affected governance surfaces.
-- Evidence-slot scan confirmed the new contribution-review and release-review
-  fields were present before commit.
-
-Remaining working tree note:
-
-- Untracked pre-DAG reconciliation artifacts remain:
-  `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_PRE_DEPENDENCIES_DAG.md`
-  and
-  `execution/_Reconciliation/DepClosure/CLOSURE_PRE_DEPENDENCIES_DAG_2026-04-30_1508/`.
-  These predate the pilot and should be handled by a separate CHANGE decision.
-
-## DEL-02-01 Bounded Item Closeout
-
-Human project authority accepted the completed `DEL-01-01` pilot pattern and
-authorized exactly one next bounded DAG item: `DEL-02-01 - Canonical domain
-model schema`. Broad fan-out remains prohibited.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-01.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  architecture-basis rows only.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/model.schema.yaml`
-- `docs/TYPES.md`
-- `tests/test_model_schema.py`
-- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-01_Canonical domain model schema/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-01.md`
-- `execution/_Coordination/_COORDINATION.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_units_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_plugin_manifest_schema.py` passed.
-- `git diff --check` passed.
-- Focused forbidden-schema-text scan over `schemas/model.schema.yaml` found no
-  `CODE_COMPLIANT`, protected-code-name, certification/sealing, or automatic
-  compliance phrases.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
+- No blocker queue refresh was run unless explicitly authorized.
 - No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering values,
-  private data, or automatic code-compliance/certification/sealing claims were
-  introduced.
-
-Remaining open items:
-
-- `C-02-01-001` objective mapping remains unresolved: `DEL-02-01` owns
-  `OBJ-001`; `SOW-041` also maps `OBJ-012` in the scope ledger.
-- `C-02-01-002` stale metadata pointer remains unresolved in local references.
-- The physical project package/container and migration framework remain owned by
-  persistence work unless later human authority changes that boundary.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `7b256f3 schema: tighten canonical domain model contract`.
-- DEL-02-01 handoff correction was committed through CHANGE approval as
-  `8f57f85 docs: record del-02-01 commit handoff`.
-
-## DEL-02-02 Bounded Item Closeout
-
-Human project authority authorized exactly one bounded DEV-001 dispatch:
-`DEL-02-02 - Unit system and dimensional-analysis core contract`. Broad
-fan-out, lifecycle transition, and candidate-edge promotion were not
-authorized.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-02.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
-  `DEL-00-07`, `DEL-00-08`, and `DEL-02-01`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/units.schema.yaml`
-- `core/units/README.md`
-- `docs/SPEC.md`
-- `tests/test_units_schema.py`
-- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-02_Unit system and dimensional-analysis core contract/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-02.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_units_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_plugin_manifest_schema.py` passed.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-02-02
-  product surfaces found only negative boundary statements and provenance field
-  names, not product certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
+  mutation occurred during product-deliverable execution.
 - No protected standards text, protected tables, proprietary engineering
   values, private data, or automatic code-compliance/certification/sealing
   claims were introduced.
+- `CANDIDATE` edges remained non-gating.
 
-Remaining open items:
-
-- Unit catalog and conversion source set remain `TBD`.
-- Base dimension vector, derived-dimension rules, dimensionless
-  classification, numeric representation, conversion tolerance policy, offset
-  temperature semantics, gauge/absolute pressure semantics, angle/rotation
-  treatment, canonical calculation basis, schema file layout, diagnostic-code
-  namespace, and human decision owner remain `TBD` or decision-gated.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `a458cba schema: tighten unit system contract`.
-
-## DEL-02-03 Bounded Item Closeout
-
-Human project authority authorized exactly one bounded DAG item of
-ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-02-03 - Code-neutral
-analysis boundary model` because it completes the immediate PKG-02 Wave 3
-foundation after `DEL-02-01` and `DEL-02-02`.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-03.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
-  `DEL-00-07`, `DEL-00-08`, and `DEL-02-01`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/analysis_boundary.schema.yaml`
-- `docs/architecture/code_neutral_analysis_boundary.md`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `tests/test_analysis_boundary_schema.py`
-- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-03_Code-neutral analysis boundary model/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-03.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_units_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_plugin_manifest_schema.py` passed.
-- `git diff --check` passed.
-- Focused forbidden-claim scan over affected DEL-02-03 product surfaces found
-  only negative boundary statements and test-denylist literals, not product
-  certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Exact persistence location for human acceptance records remains `TBD`.
-- Exact stale-record invalidation workflow when bound hashes change remains
-  `TBD`.
-- Exact integration point between the boundary schema, result envelopes, and
-  report manifests remains `TBD`.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `abc1306 schema: tighten analysis boundary model`.
-- DEL-02-03 handoff correction was committed through CHANGE approval as
-  `f19cf2a docs: record del-02-03 commit handoff`.
-
-## DEL-02-05 Bounded Item Closeout
-
-Human project authority authorized exactly one bounded DAG item of
-ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-02-05 - Project persistence
-and round-trip serialization` because `DEL-02-01`, `DEL-02-02`, and
-`DEL-02-03` are completed predecessors and persistence anchors downstream
-storage, hashes, reports, CLI/headless runs, GUI editing, and private-data
-handling.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-05.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
-  `DEL-00-07`, `DEL-00-08`, `DEL-02-01`, `DEL-02-02`, and `DEL-02-03`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/project_persistence.schema.yaml`
-- `docs/architecture/persistence_contract.md`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `tests/test_persistence_schema.py`
-- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-05_Project persistence and round-trip serialization/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-05.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_units_schema.py` passed.
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_plugin_manifest_schema.py` passed.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-02-05
-  product surfaces found only negative boundary statements and
-  contributor-certification/provenance field names, not product
-  certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Physical project package/container remains `TBD`.
-- Migration framework/tooling and rollback semantics remain `TBD`.
-- Canonical JSON/JCS library choice remains `TBD`.
-- Non-JSON/binary hash payload partition remains `TBD`.
-- Exact storage location and workflow for human acceptance records remains
-  `TBD`.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `742016e schema: tighten project persistence contract`.
-
-## DEL-02-04 Bounded Item Closeout
-
-Human project authority authorized exactly one bounded DAG item of
-ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-02-04 - Plugin and
-extension domain contracts` because it completes the remaining PKG-02
-extension/API boundary foundation after model, units, analysis-boundary, and
-persistence contract work.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-02-04.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-03`, `DEL-00-04`, `DEL-00-06`,
-  `DEL-00-07`, `DEL-00-08`, `DEL-02-01`, `DEL-02-02`, and `DEL-02-03`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/plugin_manifest.schema.yaml`
-- `docs/architecture/extension_domain_contracts.md`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `tests/test_plugin_manifest_schema.py`
-- `execution/PKG-02_Domain Model, Units, and Core Schemas/1_Working/DEL-02-04_Plugin and extension domain contracts/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-02-04.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_plugin_manifest_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_units_schema.py` passed.
-- `python3 tests/test_analysis_boundary_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 -m json.tool schemas/plugin_manifest.schema.yaml` passed.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-02-04
-  product surfaces found only negative boundary statements and
-  contributor-certification/provenance field names, not product
-  certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Runtime plugin loader and isolation technology remain `TBD`.
-- Permission grant storage, consent UX, revocation, signing, and update
-  mechanism remain `TBD`.
-- Public API transport and concrete external import/export formats remain
-  `TBD`.
-- Rule expression grammar and sandbox implementation details remain `TBD`.
-- Canonicalization edge cases for non-JSON payloads remain `TBD`.
-- CI gates for plugin submission, protected-content screening, and
-  security/privacy review remain `TBD`.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `ef44f4c schema: tighten plugin extension contract`.
-- Git state was clean after that commit when checked by ORCHESTRATOR on
-  2026-05-01.
+| Deliverable | Result / commit | Primary changed surfaces | Verification summary | Remaining notable TBDs |
+|---|---|---|---|---|
+| `DEL-01-01` Project governance baseline | Completed pilot; `7650cf6 docs: tighten maintainer governance gates` | `governance/MAINTAINERS.md` plus control-plane handoff | `git diff --check`; focused prohibited-claim scan; evidence-slot scan | Maintainer/legal/release governance details remain governed by later human rulings. |
+| `DEL-02-01` Canonical domain model schema | Completed; `7b256f3 schema: tighten canonical domain model contract`; handoff `8f57f85` | `schemas/model.schema.yaml`, `docs/TYPES.md`, model schema tests, dispatch/state/memory | Model, units, analysis status, persistence, analysis boundary, plugin manifest tests; `git diff --check`; forbidden-schema-text scan | `C-02-01-001`, `C-02-01-002`, physical package/container and migration framework. |
+| `DEL-02-02` Unit system and dimensional-analysis core contract | Completed; `a458cba schema: tighten unit system contract`; handoff `ce94de3` | `schemas/units.schema.yaml`, `core/units/README.md`, `docs/SPEC.md`, unit tests, dispatch/state/memory | Unit and adjacent schema tests; `git diff --check`; focused forbidden-claim/protected-code-name scan | Unit catalog, conversion source set, dimensions, tolerance, offset/gauge semantics, angle/rotation treatment remain `TBD` or decision-gated. |
+| `DEL-02-03` Code-neutral analysis boundary model | Completed; handoff `f19cf2a` | `schemas/analysis_boundary.schema.yaml`, `docs/architecture/code_neutral_analysis_boundary.md`, `docs/SPEC.md`, `docs/TYPES.md`, tests, dispatch/state/memory | Analysis boundary/status and adjacent schema tests; `git diff --check`; focused forbidden-claim scan | Downstream semantics remain bounded by future consumers and human rulings. |
+| `DEL-02-05` Project persistence and round-trip serialization | Completed; handoff `4e18a0f` | Persistence schema/tests and related docs/control-plane evidence | Persistence and adjacent schema tests; `git diff --check`; protected/claim scans | Physical project package/container and migration framework remain `TBD`. |
+| `DEL-02-04` Plugin and extension domain contracts | Completed; handoff `a37a0a1` | Plugin manifest schema/tests and related docs/control-plane evidence | Plugin manifest and adjacent schema tests; `git diff --check`; protected/claim scans | Public transport, concrete extension API, and permissions details remain `TBD`. |
+| `DEL-01-02` Copyright and protected-data boundary policy | Completed; `0d729cf docs: tighten protected data boundary` | IP/data boundary policy and related governance surfaces | Diff/prohibited-claim checks and policy evidence review | Legal review authority and final contribution-review workflow details remain governed separately. |
+| `DEL-01-04` Professional responsibility and product-claims policy | Completed; `65f3119 docs: add professional boundary policy`; handoffs `1a996ac`, `474b56d` | Professional-boundary docs/policy surfaces and control-plane handoff | Diff/prohibited-claim checks and boundary wording review | Final release/product-claims wording remains human-governed. |
+| `DEL-01-03` Contributor certification workflow | Completed; `df461f8 docs: add contributor certification workflow` | Contributor governance/certification surfaces and handoff | Diff/prohibited-claim checks and contribution-field evidence review | Final open-source license, contributor legal mechanism, maintainer roster, quorum, legal-review authority, and release policy remain `TBD`. |
+| `DEL-03-01` Material library schema with provenance | Completed; `3793e87 schema: add material library provenance contract`; handoff `f749a1c` | Material schema, fixture, tests, docs, dispatch/state/memory | Material and adjacent schema tests; `git diff --check`; protected-data/claim scans | Public material source catalogs, fixture policy, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-02` Pipe section and component library schema | Completed; `f0fdeac schema: add section and component library contracts` | Section/component schemas, invented fixture, tests, docs, dispatch/state/memory | Component/section and adjacent schema tests; `git diff --check`; protected-data/claim scans | Public section/component catalogs, fixture policy, section-property policy, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-03` Bend and elbow component model fields | Completed; `7a84472 schema: add bend elbow component contract`; handoff/push `753b096` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Bend/elbow source catalogs, fixture policy, solver use of flexibility inputs, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-04` Branch connection component model fields | Completed; `ae693b6 schema: add branch component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Branch source catalogs, fixture policy, solver use of branch flexibility inputs, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-05` Rigid component models for valves, flanges, reducers, and specialty items | Completed; `d8ee0db schema: add rigid component contract`; handoff `fd695c0 docs: record del-03-05 handoff state` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Rigid component source catalogs, fixture policy, semi-rigid stiffness treatment, import formats, and editor behavior remain `TBD`. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
-`init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint, not an
-item-specific next-objective record. It should direct fresh sessions into the
-coordination protocol and mutable handoff state, then require the agent to
-derive the objective from current evidence and the latest human gate.
-
-`execution/_Coordination/NEXT_INSTANCE_PROMPT.md` is stable control-loop
-protocol, not an item-specific next-objective record. Current objective
-selection must be derived from this mutable state file,
-`execution/_Coordination/_COORDINATION.md`, accepted `DAG-001` artifacts, the
-blocker queue when explicitly current, and the latest human approval gate.
-
-This prompt-posture revision affects only bootstrap and coordination handoff
-surfaces. The `DEL-02-01` dispatch brief and deliverable `MEMORY.md` remain
-historical evidence for the completed bounded item and should not be rewritten
-just to reflect the prompt posture.
-
-## DEL-01-02 Bounded Item Closeout
-
-Human project authority authorized exactly one bounded DAG item of
-ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-01-02 - Copyright and
-protected-data boundary policy` because it strengthens the protected-data
-boundary before more public data-model, example, report, and benchmark work.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-01-02.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  architecture-basis rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-06`, and
-  `DEL-00-08`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `docs/IP_AND_DATA_BOUNDARY.md`
-- `governance/CONTRIBUTION_REVIEW_CHECKLIST.md`
-- `governance/MAINTAINERS.md`
-- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-02_Copyright and protected-data boundary policy/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-01-02.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `git diff --check` over affected files passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-01-02
-  product surfaces found only negative boundary statements and checklist labels,
-  not product certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Final open-source license remains `TBD`.
-- Contributor certification mechanism remains `TBD`.
-- Maintainer roster, review quorum, and legal-review authority remain `TBD`.
-- Automated protected-content scanner implementation remains future work.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `0d729cf docs: tighten protected data boundary`.
-
-## DEL-01-04 Dispatch Authorization
-
-Human project authority authorized exactly one next bounded DAG item.
-ORCHESTRATOR selected `DEL-01-04 - Professional responsibility and
-product-claims policy` because it completes the remaining Wave 3 governance
-boundary around permitted/prohibited product claims, report notices, and human
-professional acceptance before more implementation and reporting work.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-06`, `DEL-00-08`, and `DEL-01-01`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Authorized write targets for the bounded item:
-
-- `docs/PROFESSIONAL_BOUNDARY.md`
-- `docs/report_notice_template.md`
-- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-04_Professional responsibility and product-claims policy/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Guardrails for the next bounded item:
-
-- No lifecycle state transition is authorized.
-- No blocker queue refresh is authorized.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation is authorized.
-- No broad fan-out, protected standards/code data, private project data, real
-  secrets, private libraries, or certification/compliance claims are authorized.
-
-## DEL-01-04 Bounded Item Closeout
-
-Human project authority previously authorized exactly one bounded DAG item:
-`DEL-01-04 - Professional responsibility and product-claims policy`.
-ORCHESTRATOR / WORKING_ITEMS completed the bounded item inside the explicit
-write scope. Broad fan-out, lifecycle transition, candidate-edge promotion,
-blocker-queue refresh, and dependency-register edits were not performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-06`, `DEL-00-08`, and `DEL-01-01`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `docs/PROFESSIONAL_BOUNDARY.md`
-- `docs/report_notice_template.md`
-- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-04_Professional responsibility and product-claims policy/MEMORY.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `git diff --check -- docs/PROFESSIONAL_BOUNDARY.md docs/report_notice_template.md execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-04_Professional responsibility and product-claims policy/MEMORY.md`
-  passed.
-- Focused forbidden-claim scan over affected DEL-01-04 product surfaces found
-  only explicit negative/prohibited-claim language, not affirmative product
-  certification/compliance/sealing/approval claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Jurisdiction-specific legal or professional-practice wording remains `TBD`.
-- Exact storage and invalidation workflow for human acceptance records remains
-  `TBD`.
-- Release-label vocabulary and final release policy language remain `TBD`.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `65f3119 docs: add professional boundary policy`.
-- DEL-01-04 handoff correction was committed through CHANGE approval as
-  `1a996ac docs: record del-01-04 commit handoff`.
-- Git state after the handoff correction was clean on `main` at `1a996ac`.
-
-## DEL-01-03 Bounded Item Closeout
-
-Human project authority authorized ORCHESTRATOR to proceed with one bounded DAG
-item after ORCHESTRATOR recommended `DEL-01-03 - Contributor certification
-workflow`. ORCHESTRATOR / WORKING_ITEMS completed the bounded item inside the
-explicit write scope. Broad fan-out, lifecycle transition, candidate-edge
-promotion, blocker-queue refresh, and dependency-register edits were not
-performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-06`, `DEL-00-08`, `DEL-01-01`, and
-  `DEL-01-02`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `CONTRIBUTING.md`
-- `governance/CONTRIBUTOR_CERTIFICATION_TEMPLATE.md`
-- `governance/CONTRIBUTION_REVIEW_CHECKLIST.md`
-- `governance/MAINTAINERS.md`
-- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-03_Contributor certification workflow/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `git diff --check` over affected files passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-01-03
-  product surfaces found only negative boundary statements and contributor
-  review language, not product certification/compliance claims.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Final open-source license remains `TBD`.
-- Final contributor legal mechanism, such as DCO, CLA, or another instrument,
-  remains `TBD`.
-- Maintainer roster, quorum, legal-review authority, and release policy remain
-  `TBD`.
-- Deliverable file-state changes are awaiting CHANGE approval.
-
-Deliverable file-state changes were committed through CHANGE approval as
-`df461f8 docs: add contributor certification workflow`.
-
-## DEL-03-01 Bounded Item Closeout
-
-Human project authority authorized exactly one next bounded DAG item:
-`DEL-03-01 - Material library schema with provenance`. ORCHESTRATOR /
-WORKING_ITEMS completed the bounded item inside the explicit write scope.
-Broad fan-out, lifecycle transition, candidate-edge promotion, blocker-queue
-refresh, and dependency-register edits were not performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-02-01`, `DEL-02-02`, `DEL-01-02`, and `DEL-01-03`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/material.schema.yaml`
-- `fixtures/material/invented_material_library_valid.json`
-- `tests/test_material_schema.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-01_Material library schema with provenance/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-01.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_material_schema.py` passed.
-- Existing schema tests passed: `test_model_schema.py`,
-  `test_units_schema.py`, `test_persistence_schema.py`,
-  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
-  `test_analysis_boundary_schema.py`.
-- `git diff --check` over affected files passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-03-01
-  product surfaces found only negative boundary statements and diagnostic/test
-  denylist literals, not product certification/compliance claims or protected
-  material tables.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Accepted public material source catalog remains `TBD`.
-- Public material fixture value policy remains `TBD`.
-- Temperature interpolation policy remains `TBD`.
-- Allowable-value storage and review workflow details remain `TBD`.
-- Concrete material editor behavior remains future GUI work.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `3793e87 schema: add material library provenance contract`.
-- ORCHESTRATOR checked git state after reading the bootstrap on 2026-05-01:
-  working tree clean on `main` at `3793e87`, ahead of `origin/main` by 8
-  commits.
-
-## DEL-03-02 Bounded Item Closeout
-
-Human project authority authorized ORCHESTRATOR to select exactly one next
-bounded DAG item. ORCHESTRATOR selected `DEL-03-02 - Pipe section and component
-library schema` because it is the paired PKG-03 schema foundation after
-material provenance and before downstream component-model slices consume
-section/component records. ORCHESTRATOR / WORKING_ITEMS completed the bounded
-item inside the explicit write scope. Broad fan-out, lifecycle transition,
-candidate-edge promotion, blocker-queue refresh, and dependency-register edits
-were not performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-02.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-02-01`, `DEL-02-02`, `DEL-01-02`, and `DEL-01-03`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/section.schema.yaml`
-- `schemas/component.schema.yaml`
-- `fixtures/component/invented_section_component_library_valid.json`
-- `tests/test_component_section_schema.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-02_Pipe section and component library schema/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-02.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 tests/test_component_section_schema.py` passed.
-- Existing schema tests passed: `test_material_schema.py`,
-  `test_model_schema.py`, `test_units_schema.py`, `test_persistence_schema.py`,
-  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
-  `test_analysis_boundary_schema.py`.
-- `python3 -m json.tool` passed for `schemas/section.schema.yaml`,
-  `schemas/component.schema.yaml`, and
-  `fixtures/component/invented_section_component_library_valid.json`.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-code-name scan over affected DEL-03-02
-  product surfaces found only negative boundary statements, provenance field
-  names, and test-denylist literals, not product certification/compliance
-  claims or protected dimensional/component tables.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Accepted public section/component source catalogs remain `TBD`.
-- Public section/component fixture value policy remains `TBD`.
-- Section-property calculation policy remains `TBD`.
-- Concrete component/catalog import formats remain `TBD`.
-- Component editor behavior remains future GUI work.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `f0fdeac schema: add section and component library contracts`.
-
-## DEL-03-03 Bounded Item Closeout
-
-Human project authority authorized ORCHESTRATOR to choose exactly one bounded
-DAG item and proceed. ORCHESTRATOR selected `DEL-03-03 - Bend and elbow
-component model fields` because it is the next narrow PKG-03 component slice
-after the section/component library schemas. ORCHESTRATOR / WORKING_ITEMS
+Human project authority accepted objective-neutral bootstrap/control-loop posture:
+
+- `NEXT_INSTANCE_PROMPT.md` is stable control-loop protocol. Agents derive the
+  current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted
+  `DAG-001` artifacts, current blocker evidence when explicitly current, and
+  the latest human approval gate.
+- `init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint. It routes
+  fresh sessions into the coordination protocol and mutable handoff state, not
+  a hard-coded next deliverable objective.
+
+## DEL-03-06 Bounded Item Closeout
+
+Human project authority authorized exactly one bounded DAG item:
+`DEL-03-06 - Expansion joint component model`. ORCHESTRATOR / WORKING_ITEMS
 completed the bounded item inside the explicit write scope. Broad fan-out,
 lifecycle transition, candidate-edge promotion, blocker-queue refresh, and
 dependency-register edits were not performed.
@@ -831,7 +188,7 @@ dependency-register edits were not performed.
 Dispatch evidence:
 
 - Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-03.md`.
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md`.
 - Active upstream dependencies were consumed from approved `DAG-001` active
   rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
   `DEL-00-08`, `DEL-03-02`, `DEL-02-02`, and `DEL-01-02`.
@@ -844,8 +201,8 @@ Files changed in this bounded item:
 - `tests/test_component_section_schema.py`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-03_Bend and elbow component model fields/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-03.md`
+- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-06_Expansion joint component model/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Verification run:
@@ -858,150 +215,10 @@ Verification run:
   `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
   `test_analysis_boundary_schema.py`.
 - `git diff --check` passed.
-- Focused forbidden-claim/protected-content scan over affected DEL-03-03
-  product surfaces found only negative boundary statements, provenance field
-  names, and test-denylist literals, not product certification/compliance
-  claims or protected bend/elbow data.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Accepted public bend/elbow source catalogs remain `TBD`.
-- Public bend/elbow fixture value policy remains `TBD`.
-- Exact solver use of user-supplied flexibility inputs remains `TBD`.
-- Concrete bend/elbow import formats remain `TBD`.
-- Downstream component editor behavior remains future GUI work.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `7a84472 schema: add bend elbow component contract`.
-
-Handoff correction:
-
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md` was updated to record the
-  `DEL-03-03` commit and pushed state.
-- Handoff correction commit:
-  `753b096 docs: record del-03-03 commit handoff`.
-- `main` was pushed to `origin/main` through CHANGE approval on 2026-05-01.
-
-## DEL-03-04 Bounded Item Closeout
-
-Human project authority authorized exactly one next bounded DAG item of
-ORCHESTRATOR's choosing. ORCHESTRATOR selected `DEL-03-04 - Branch connection
-component model fields` because it is the next bounded PKG-03 component-family
-slice after the generic component schema and bend/elbow fields. ORCHESTRATOR /
-WORKING_ITEMS completed the bounded item inside the explicit write scope.
-Broad fan-out, lifecycle transition, candidate-edge promotion, blocker-queue
-refresh, and dependency-register edits were not performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-04.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-03-02`, `DEL-02-02`, and `DEL-01-02`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/component.schema.yaml`
-- `fixtures/component/invented_section_component_library_valid.json`
-- `tests/test_component_section_schema.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-04_Branch connection component model fields/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-04.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 -m json.tool schemas/component.schema.yaml` passed.
-- `python3 -m json.tool fixtures/component/invented_section_component_library_valid.json` passed.
-- `python3 tests/test_component_section_schema.py` passed.
-- Existing schema tests passed: `test_material_schema.py`,
-  `test_model_schema.py`, `test_units_schema.py`, `test_persistence_schema.py`,
-  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
-  `test_analysis_boundary_schema.py`.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-content scan over affected DEL-03-04
-  product surfaces found only negative boundary statements and test-denylist
-  literals, not product certification/compliance claims or protected branch
-  component data.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, or automatic code-compliance/certification/sealing
-  claims were introduced.
-
-Remaining open items:
-
-- Accepted public branch connection source catalogs remain `TBD`.
-- Public branch fixture value policy remains `TBD`.
-- Exact solver use of user-supplied branch flexibility inputs remains `TBD`.
-- Concrete branch import formats remain `TBD`.
-- Downstream component editor behavior remains future GUI work.
-
-Deliverable file-state changes were committed through CHANGE approval as
-`ae693b6 schema: add branch component contract`.
-
-## DEL-03-05 Bounded Item Closeout
-
-Human project authority authorized ORCHESTRATOR to proceed with the natural
-follow-on bounded DAG item. ORCHESTRATOR selected `DEL-03-05 - Rigid component
-models for valves, flanges, reducers, and specialty items` because it continues
-the PKG-03 component-family schema work with minimal additional context after
-`DEL-03-03` and `DEL-03-04`. ORCHESTRATOR / WORKING_ITEMS completed the bounded
-item inside the explicit write scope. Broad fan-out, lifecycle transition,
-candidate-edge promotion, blocker-queue refresh, and dependency-register edits
-were not performed.
-
-Dispatch evidence:
-
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-05.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-03-02`, `DEL-02-02`, and `DEL-01-02`.
-- `CANDIDATE` rows were not promoted or used as gates.
-
-Files changed in this bounded item:
-
-- `schemas/component.schema.yaml`
-- `fixtures/component/invented_section_component_library_valid.json`
-- `tests/test_component_section_schema.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-05_Rigid component models for valves, flanges, reducers, and specialty items/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-05.md`
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-
-Verification run:
-
-- `python3 -m json.tool schemas/component.schema.yaml` passed.
-- `python3 -m json.tool fixtures/component/invented_section_component_library_valid.json` passed.
-- `python3 tests/test_component_section_schema.py` passed.
-- Existing schema tests passed: `test_material_schema.py`,
-  `test_model_schema.py`, `test_units_schema.py`, `test_persistence_schema.py`,
-  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
-  `test_analysis_boundary_schema.py`.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-content scan over affected DEL-03-05
-  product surfaces found only negative boundary statements and test-denylist
-  literals, not product certification/compliance claims or protected rigid
-  component catalog data.
+- Focused forbidden-claim/protected-content scan over affected DEL-03-06
+  product surfaces found only existing negative boundary statements and
+  test-denylist literals, not product certification/compliance claims or
+  protected/manufacturer expansion-joint data.
 
 Guardrails preserved:
 
@@ -1015,28 +232,28 @@ Guardrails preserved:
 
 Remaining open items:
 
-- Accepted public rigid component source catalogs remain `TBD`.
-- Public rigid component fixture value policy remains `TBD`.
-- Exact solver treatment of semi-rigid stiffness inputs remains `TBD`.
-- Concrete rigid component import formats remain `TBD`.
+- Accepted public expansion-joint source catalogs remain `TBD`.
+- Public expansion-joint fixture value policy remains `TBD`.
+- Stiffness degree-of-freedom mapping and exact solver consumption remain
+  `TBD`.
+- Hardware flag/enumeration taxonomy remains `TBD`.
+- Concrete expansion-joint import formats remain `TBD`.
 - Downstream component editor behavior remains future GUI work.
-- Deliverable file-state changes were committed through CHANGE approval as
-  `d8ee0db schema: add rigid component contract`.
-- Current git evidence from the handoff correction check: branch `main`, HEAD
-  `d8ee0db`, and `git status --short --branch` reported
-  `## main...origin/main` with no staged, unstaged, or untracked files.
+- Deliverable file-state changes are awaiting CHANGE approval.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+1. Route `DEL-03-06` file-state handling through `CHANGE`; do not stage or
+   commit without an explicit `APPROVE:` action list.
+2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, route `CHANGE` for push or other file-state handling,
    or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized after the DEL-03-05 handoff correction.
+authorized beyond DEL-03-06 closeout / CHANGE handling.
 
 ## Guardrails
 

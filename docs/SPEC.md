@@ -176,6 +176,9 @@ The section and component library contracts are represented by
 - rigid/semi-rigid component family contracts for valves, flanges, reducers,
   rigid parts, and specialty items using user-entered dimensions, weights,
   centers of gravity, stiffness behavior, and source references;
+- expansion-joint family contracts for user/manufacturer-supplied stiffnesses,
+  effective area, movement limits, hardware references, and manufacturer
+  provenance slots;
 - explicit public repository value policies for SIF, flexibility, proprietary
   catalog, and user/private values;
 - completeness rules and diagnostics for solve-required, property-calculation,
@@ -204,6 +207,12 @@ mechanics-interface metadata only. Public repository fixtures may show the
 shape of valve, flange, reducer, rigid, and specialty-item fields but must not
 supply protected dimensional/rating tables, manufacturer weights, centers of
 gravity, stiffness values, or proprietary catalog geometry as defaults.
+
+Expansion joint component records define schema slots and mechanics-interface
+metadata only. Public repository fixtures may show stiffness, effective-area,
+movement-limit, hardware, and manufacturer-reference field shapes but must not
+supply manufacturer values, proprietary catalog data, private library values,
+or invented engineering defaults.
 
 ### 4.3 Code-neutral analysis boundary
 
