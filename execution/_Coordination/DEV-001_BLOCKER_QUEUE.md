@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-05-01
+updated: 2026-04-30
 source_graph: execution/_DAG/DAG-001/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,8 +35,8 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 16 |
-| Committed implementation evidence | 16 |
+| Implementation evidence records | 17 |
+| Committed implementation evidence | 17 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 33 |
@@ -90,7 +90,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-03-05` | `PKG-03` | `COMMITTED` `d8ee0db` | 9 | Rigid component models for valves, flanges, reducers, and specialty items |
 | `DEL-03-06` | `PKG-03` | `COMMITTED` `f15cbc6` | 9 | Expansion joint component model |
 | `DEL-03-07` | `PKG-03` | `COMMITTED` `4d880b3` | 11 | Public/private library import provenance checker |
-| `DEL-03-08` | `PKG-03` | `MISSING_EVIDENCE` | 9 | Pipe section property and mass-property calculator |
+| `DEL-03-08` | `PKG-03` | `COMMITTED` `9712e98` | 9 | Pipe section property and mass-property calculator |
 | `DEL-04-01` | `PKG-04` | `MISSING_EVIDENCE` | 8 | 3D frame stiffness kernel |
 | `DEL-05-04` | `PKG-05` | `MISSING_EVIDENCE` | 6 | Analysis status semantics |
 | `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
@@ -104,7 +104,6 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-03-08` - Pipe section property and mass-property calculator | `PKG-03` | `MISSING_EVIDENCE` | 3 | `DEL-04-02`; `DEL-05-03`; `DEL-09-02` | `DAG-001-E0433`; `DAG-001-E0455`; `DAG-001-E0538` |
 | `DEL-04-01` - 3D frame stiffness kernel | `PKG-04` | `MISSING_EVIDENCE` | 13 | `DEL-04-02`; `DEL-04-03`; `DEL-04-04`; `DEL-04-05`; `DEL-04-06`; `DEL-05-01`; `DEL-05-05`; `DEL-07-07`; `DEL-09-01`; `DEL-10-03`; `DEL-10-05`; `DEL-11-02`; `DEL-11-03` | `DAG-001-E0432`; `DAG-001-E0435`; `DAG-001-E0438`; `DAG-001-E0442`; `DAG-001-E0444`; `DAG-001-E0448`; `DAG-001-E0460`; `DAG-001-E0502`; `DAG-001-E0532`; `DAG-001-E0562`; `DAG-001-E0567`; `DAG-001-E0582`; `DAG-001-E0586` |
 | `DEL-04-02` - Straight pipe element | `PKG-04` | `MISSING_EVIDENCE` | 4 | `DEL-05-03`; `DEL-09-01`; `DEL-09-02`; `DEL-11-03` | `DAG-001-E0454`; `DAG-001-E0533`; `DAG-001-E0539`; `DAG-001-E0587` |
 | `DEL-04-03` - Linear support and restraint models | `PKG-04` | `MISSING_EVIDENCE` | 3 | `DEL-04-04`; `DEL-05-01`; `DEL-09-01` | `DAG-001-E0441`; `DAG-001-E0449`; `DAG-001-E0534` |
@@ -142,14 +141,14 @@ These deliverables have no active upstream implementation dependency below the `
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-04-02` | `PKG-04` | 2 | `DEL-04-01`; `DEL-03-08` | Straight pipe element |
+| `DEL-04-02` | `PKG-04` | 1 | `DEL-04-01` | Straight pipe element |
 | `DEL-04-03` | `PKG-04` | 1 | `DEL-04-01` | Linear support and restraint models |
 | `DEL-04-04` | `PKG-04` | 3 | `DEL-04-03`; `DEL-04-01`; `DEL-04-06` | Nonlinear support active-set solver |
 | `DEL-04-05` | `PKG-04` | 2 | `DEL-04-01`; `DEL-04-06` | Sparse solver performance harness |
 | `DEL-04-06` | `PKG-04` | 1 | `DEL-04-01` | Solver diagnostics and singularity detection |
 | `DEL-05-01` | `PKG-05` | 2 | `DEL-04-01`; `DEL-04-03` | Primitive load case engine |
 | `DEL-05-02` | `PKG-05` | 2 | `DEL-05-01`; `DEL-05-04` | Load-case algebra engine |
-| `DEL-05-03` | `PKG-05` | 4 | `DEL-04-02`; `DEL-03-08`; `DEL-05-01`; `DEL-05-04` | Fundamental stress recovery module |
+| `DEL-05-03` | `PKG-05` | 3 | `DEL-04-02`; `DEL-05-01`; `DEL-05-04` | Fundamental stress recovery module |
 | `DEL-05-05` | `PKG-05` | 2 | `DEL-05-01`; `DEL-04-01` | Concentrated and distributed user load application |
 | `DEL-06-02` | `PKG-06` | 1 | `DEL-06-01` | Sandboxed unit-aware expression evaluator |
 | `DEL-06-03` | `PKG-06` | 2 | `DEL-06-01`; `DEL-05-04` | Required-input completeness checker |
@@ -166,7 +165,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-08-04` | `PKG-08` | 2 | `DEL-05-03`; `DEL-05-04` | Result export format |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
 | `DEL-09-01` | `PKG-09` | 4 | `DEL-04-01`; `DEL-04-02`; `DEL-04-03`; `DEL-05-01` | Mechanics benchmark suite |
-| `DEL-09-02` | `PKG-09` | 3 | `DEL-05-03`; `DEL-03-08`; `DEL-04-02` | Stress recovery benchmark suite |
+| `DEL-09-02` | `PKG-09` | 2 | `DEL-05-03`; `DEL-04-02` | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | 2 | `DEL-04-04`; `DEL-04-06` | Nonlinear support regression suite |
 | `DEL-09-04` | `PKG-09` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 4 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |

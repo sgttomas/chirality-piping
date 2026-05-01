@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-01
 **Actor:** ORCHESTRATOR / WORKING_ITEMS bounded DEL-03-08 execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-03-08 bounded item implemented; awaiting CHANGE routing for commit/evidence update
+**Current Mode:** DEL-03-08 bounded item committed; evidence and blocker queue refreshed
 
 ## Active Control State
 
@@ -24,9 +24,9 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-03-08 - Pipe section property and mass-property calculator` |
-| Latest state commit | `Uncommitted working-tree update unless later routed through CHANGE` |
+| Latest state commit | `9712e98 core: add pipe section property calculator` |
 | Previous completed task archive status | `NEXT_INSTANCE_STATE rotating handoff documentation` moved into the compact task archive table |
-| Current authorized item | `DEL-03-08 - Pipe section property and mass-property calculator` was authorized and implemented in this working tree |
+| Current authorized item | `DEL-03-08 - Pipe section property and mass-property calculator` was authorized, implemented, and committed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-08.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -89,7 +89,7 @@ evidence and should not be treated as current sequencing authority.
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-01 as an implementation-readiness view. It reads approved active
+2026-05-01 after `DEL-03-08` implementation evidence was added. It reads approved active
 `DAG-001` edges and `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
 `TargetDeliverableID`, the upstream provider.
@@ -102,8 +102,8 @@ blockers by itself.
 | Queue fact | Count |
 |---|---:|
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 73 |
-| Implementation evidence records | 16 |
-| Committed implementation evidence | 16 |
+| Implementation evidence records | 17 |
+| Committed implementation evidence | 17 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 33 |
 | Implementation `BLOCKED` deliverables | 40 |
@@ -125,7 +125,8 @@ Universal historical guardrails preserved across the completed bounded items:
 
 - No broad fan-out was started.
 - No lifecycle state transition was made.
-- No blocker queue refresh was run unless explicitly authorized.
+- No blocker queue refresh was run unless explicitly authorized or a committed
+  implementation-evidence change made the queue stale.
 - No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
   mutation occurred during product-deliverable execution.
 - No protected standards text, protected tables, proprietary engineering
@@ -188,6 +189,9 @@ Files changed in this task:
 
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-03-08.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-08_Pipe section property and mass-property calculator/MEMORY.md`
 - `core/section_properties/calculator.py`
 - `core/section_properties/README.md`
@@ -220,22 +224,31 @@ Verification run:
 - Focused protected-content/claim scan found only boundary language and
   required provenance field names.
 
+Commit and queue refresh:
+
+- Product implementation commit: `9712e98 core: add pipe section property
+  calculator`.
+- Added `DEL-03-08` to
+  `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
+  `COMMITTED`.
+- Refreshed `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` and `.csv` with
+  `tools/coordination/build_dev001_blocker_queue.py`.
+- Refreshed queue records 17 implementation evidence rows, 17 committed
+  evidence rows, 33 implementation-unblocked deliverables, and 40
+  implementation-blocked deliverables.
+
 Remaining open items:
 
-- Implementation evidence and blocker queue were not refreshed because this
-  work is not yet committed.
-- After commit, route a DEV-001 evidence/queue refresh if the committed
-  `DEL-03-08` result should satisfy downstream blockers.
+- The post-commit evidence/queue/handoff correction is uncommitted until routed
+  through `CHANGE`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route this `DEL-03-08` update through `CHANGE` for staging and commit if the
-   human project authority accepts the patch.
-2. After commit, update implementation evidence and refresh the blocker queue
-   if the committed `DEL-03-08` evidence should unblock downstream items.
-3. Human project authority may then route `RECONCILIATION`, `AUDIT_*`, artifact
+1. Route the post-commit evidence/queue/handoff correction through `CHANGE` for
+   staging and commit if the human project authority accepts it.
+2. Human project authority may then route `RECONCILIATION`, `AUDIT_*`, artifact
    handling, authorize exactly one next bounded DAG item, route `CHANGE` for
    file-state handling, or pause.
 
