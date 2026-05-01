@@ -408,6 +408,21 @@ checks, load combinations, or professional/code-compliance claims.
 
 Primitive loads include weight, pressure, temperature, imposed displacement, hydrotest, wind, seismic, and user occasional loads. Code-specific load combinations are not public defaults; they are user rule-pack or project inputs.
 
+The primitive load case slice is `core/loads/primitive_loads`. It records
+weight, pressure, thermal, imposed-displacement, hydrotest, wind, seismic, and
+occasional primitive loads as explicit mechanics inputs with dimension intent,
+target references, and deterministic findings for missing or invalid
+solve-required data. It prepares nodal, element-uniform, and
+imposed-displacement contributions for later load-case algebra, stress
+recovery, GUI, and headless execution consumers.
+
+This slice does not define code-specific load combinations, wind/seismic design
+procedures, pressure stress formulas, public catalog defaults, protected
+standards data, rule-pack checks, result envelopes, or professional/code
+compliance claims. Wind and seismic loads are currently represented only as
+user-supplied equivalent mechanics loads; dynamic or code-procedure generation
+remains `TBD`.
+
 Stress recovery shall calculate open mechanics quantities such as axial stress, bending stress, torsional shear stress, pressure membrane stresses, and resultants. Code-category equations are rule-pack mappings.
 
 ## 7. Rule-pack evaluator
