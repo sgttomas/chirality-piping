@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR NEXT_INSTANCE_STATE rotating handoff documentation
+**Actor:** ORCHESTRATOR / WORKING_ITEMS bounded DEL-03-08 execution
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** NEXT_INSTANCE_STATE handoff rotation rule documented; no broad fan-out
+**Current Mode:** DEL-03-08 bounded item implemented; awaiting CHANGE routing for commit/evidence update
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `NEXT_INSTANCE_STATE rotating handoff documentation` |
+| Latest state task | `DEL-03-08 - Pipe section property and mass-property calculator` |
 | Latest state commit | `Uncommitted working-tree update unless later routed through CHANGE` |
-| Previous completed task archive status | `DEL-03-07` and `DEV-001 implementation-readiness queue/bootstrap refresh` moved into the compact task archive table |
-| Current authorized item | `None` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md` |
+| Previous completed task archive status | `NEXT_INSTANCE_STATE rotating handoff documentation` moved into the compact task archive table |
+| Current authorized item | `DEL-03-08 - Pipe section property and mass-property calculator` was authorized and implemented in this working tree |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-08.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -152,6 +152,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-03-06` Expansion joint component model | Completed; `f15cbc6 schema: add expansion joint component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Expansion-joint source catalogs, fixture policy, stiffness mapping, hardware taxonomy, import formats, and editor behavior remain `TBD`. |
 | `DEL-03-07` Public/private library import provenance checker | Completed; `4d880b3 core: add library import provenance checker` | `core/library_import/`, `tests/test_library_import_provenance.py`, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | Library import provenance test; adjacent schema tests; `git diff --check`; focused forbidden-claim/protected-content scan | Concrete external import formats, legal/license interpretation, UI presentation, and downstream adapter integration remain future work. |
 | `DEV-001` implementation-readiness queue/bootstrap refresh | Completed; `cf1bf12 coordination: add implementation readiness queue` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, queue builder/tests, coordination prompts/state, tool registry | `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue contained 40 blocked implementation items | Future queue refreshes must be driven by DAG/evidence changes; no next product deliverable is authorized by this archive row. |
+| `NEXT_INSTANCE_STATE` rotating handoff documentation | Completed; `817f677 docs: clarify next instance handoff rotation` | `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`, `execution/_Coordination/NEXT_INSTANCE_STATE.md`, `execution/_Coordination/_COORDINATION.md`, `init/NEXT_SESSION_PROMPT.md` | `git diff --check`; committed cleanly | No next product deliverable was authorized by the documentation update. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -174,54 +175,72 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - NEXT_INSTANCE_STATE Rotation Documentation
+## Latest State - DEL-03-08 Pipe Section Property and Mass-Property Calculator
 
-Human project authority clarified the handoff convention: after each task is
-complete, `NEXT_INSTANCE_STATE.md` must move the previous latest task into the
-compact archive table, then summarize the just-completed task as the latest
-state.
+Human project authority authorized exactly one bounded DEV-001 item:
+`DEL-03-08 - Pipe section property and mass-property calculator`.
 
-This task updates the control-loop documentation to make that convention
-explicit and applies it to the current state file.
+This bounded item implements a pure-Python circular pipe section calculator for
+user-entered dimensions and densities. The calculator rejects missing,
+incompatible, or invalid inputs with diagnostics instead of supplying defaults.
 
 Files changed in this task:
 
-- `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-- `execution/_Coordination/_COORDINATION.md`
-- `init/NEXT_SESSION_PROMPT.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-08.md`
+- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-08_Pipe section property and mass-property calculator/MEMORY.md`
+- `core/section_properties/calculator.py`
+- `core/section_properties/README.md`
+- `tests/test_section_properties.py`
+- `tests/test_component_section_schema.py`
+- `schemas/section.schema.yaml`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
 
-State rotation performed:
+Implementation summary:
 
-- `DEL-03-07 - Public/private library import provenance checker` is now in the
-  completed task archive table.
-- `DEV-001 implementation-readiness queue/bootstrap refresh` is now in the
-  completed task archive table.
-- The latest-state summary now describes this
-  `NEXT_INSTANCE_STATE` rotation-documentation task.
+- Added `calculate_pipe_section_properties` for inside diameter, metal area,
+  moment of inertia, section modulus, torsional constant, contents volume per
+  length, and optional mass-per-length components.
+- Added blocking diagnostics for missing dimensions, mixed units, incompatible
+  dimensions, and invalid geometry.
+- Added schema diagnostic hooks for calculation-invalid and
+  dimension-inconsistent section findings.
+- Documented the calculator boundary: no pipe schedule tables, material
+  defaults, catalog values, unit conversion constants, protected dimensional
+  tables, proprietary values, or code-specific values.
 
 Verification run:
 
-- `git diff --check` passed for this documentation-only update.
+- `python3 tests/test_section_properties.py` passed.
+- `python3 tests/test_component_section_schema.py` passed.
+- `python3 tests/test_library_import_provenance.py` passed.
+- `for t in tests/test_*.py; do python3 "$t" || exit 1; done` passed.
+- `git diff --check` passed.
+- Focused protected-content/claim scan found only boundary language and
+  required provenance field names.
 
 Remaining open items:
 
-- No next product deliverable is authorized by this documentation update.
-- If this documentation update should be preserved in git, route it through
-  `CHANGE` for staging, commit, and push.
+- Implementation evidence and blocker queue were not refreshed because this
+  work is not yet committed.
+- After commit, route a DEV-001 evidence/queue refresh if the committed
+  `DEL-03-08` result should satisfy downstream blockers.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. If desired, route this `NEXT_INSTANCE_STATE` rotation-documentation update
-   through `CHANGE`.
-2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
-   artifact handling if it appears in file-state evidence, authorize exactly one
-   next bounded DAG item, route `CHANGE` for file-state handling, or pause.
+1. Route this `DEL-03-08` update through `CHANGE` for staging and commit if the
+   human project authority accepts the patch.
+2. After commit, update implementation evidence and refresh the blocker queue
+   if the committed `DEL-03-08` evidence should unblock downstream items.
+3. Human project authority may then route `RECONCILIATION`, `AUDIT_*`, artifact
+   handling, authorize exactly one next bounded DAG item, route `CHANGE` for
+   file-state handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized by this documentation update.
+authorized by this bounded implementation.
 
 ## Guardrails
 

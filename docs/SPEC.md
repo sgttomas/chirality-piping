@@ -191,6 +191,16 @@ schema-shape-only records unless a public-permissive source has completed
 review evidence. Missing or unreviewed section/component values remain explicit
 findings; they are not supplied by silent defaults.
 
+The pipe section property calculator is represented by
+`core/section_properties/calculator.py`. It calculates circular pipe section
+properties and mass-per-length values from user-entered dimensions and density
+inputs only. It does not provide pipe schedule tables, protected dimensional
+tables, material defaults, catalog values, unit conversion constants, or
+code-specific values. Unit-bearing inputs must already carry compatible unit and
+dimension metadata; otherwise the calculator returns blocking diagnostics such
+as `SECTION_UNIT_MISSING`, `SECTION_DIMENSION_INCONSISTENT`, or
+`SECTION_CALCULATION_INPUT_INVALID`.
+
 The library import provenance checker is represented by
 `core/library_import/provenance_checker.py`. It validates already-parsed
 material, section, and component library payloads for required provenance,

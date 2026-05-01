@@ -128,6 +128,8 @@ def main():
         "SECTION_UNIT_MISSING",
         "SECTION_PROVENANCE_MISSING",
         "SECTION_PROTECTED_CONTENT_SUSPECTED",
+        "SECTION_CALCULATION_INPUT_INVALID",
+        "SECTION_DIMENSION_INCONSISTENT",
         "SECTION_CATALOG_VALUE_NOT_PUBLIC",
     } <= enum_at(section_schema, "SectionDiagnosticCode")
 
