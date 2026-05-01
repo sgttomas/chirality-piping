@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR CHANGE-approved DEL-01-04 handoff correction
+**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-01-03 bounded item closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-01-04` bounded item and handoff correction committed; clean git state; no broad fan-out
+**Current Mode:** DEV-001 `DEL-01-03` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
 
 ## Active Control State
 
@@ -22,19 +22,21 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Prior bounded item | `DEL-01-02 - Copyright and protected-data boundary policy` |
-| Prior bounded item commit | `0d729cf docs: tighten protected data boundary` |
+| Earlier bounded item | `DEL-01-02 - Copyright and protected-data boundary policy` |
+| Earlier bounded item commit | `0d729cf docs: tighten protected data boundary` |
 | DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
 | DEL-02-02 handoff correction commit | `ce94de3 docs: record del-02-02 commit handoff` |
 | DEL-02-03 handoff correction commit | `f19cf2a docs: record del-02-03 commit handoff` |
 | DEL-02-05 handoff correction commit | `4e18a0f docs: record del-02-05 commit handoff` |
 | DEL-02-04 handoff correction commit | `a37a0a1 docs: record del-02-04 commit handoff` |
-| Last bounded item | `DEL-01-04 - Professional responsibility and product-claims policy` |
-| Last bounded item commit | `65f3119 docs: add professional boundary policy` |
+| Prior bounded item | `DEL-01-04 - Professional responsibility and product-claims policy` |
+| Prior bounded item commit | `65f3119 docs: add professional boundary policy` |
 | DEL-01-04 handoff correction commit | `1a996ac docs: record del-01-04 commit handoff` |
-| Current authorized item | `None; awaiting next human gate` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-01-04.md` |
-| Git state at handoff correction | Clean working tree on `main` at `1a996ac` |
+| DEL-01-04 clean handoff state commit | `474b56d docs: record del-01-04 clean handoff state` |
+| Last bounded item | `DEL-01-03 - Contributor certification workflow` |
+| Last bounded item commit | `Pending CHANGE approval` |
+| Current authorized item | `None beyond DEL-01-03 closeout / CHANGE handling` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -614,16 +616,72 @@ Remaining open items:
   `1a996ac docs: record del-01-04 commit handoff`.
 - Git state after the handoff correction was clean on `main` at `1a996ac`.
 
+## DEL-01-03 Bounded Item Closeout
+
+Human project authority authorized ORCHESTRATOR to proceed with one bounded DAG
+item after ORCHESTRATOR recommended `DEL-01-03 - Contributor certification
+workflow`. ORCHESTRATOR / WORKING_ITEMS completed the bounded item inside the
+explicit write scope. Broad fan-out, lifecycle transition, candidate-edge
+promotion, blocker-queue refresh, and dependency-register edits were not
+performed.
+
+Dispatch evidence:
+
+- Fresh sealed dispatch brief:
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md`.
+- Active upstream dependencies were consumed from approved `DAG-001` active
+  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-06`, `DEL-00-08`, `DEL-01-01`, and
+  `DEL-01-02`.
+- `CANDIDATE` rows were not promoted or used as gates.
+
+Files changed in this bounded item:
+
+- `CONTRIBUTING.md`
+- `governance/CONTRIBUTOR_CERTIFICATION_TEMPLATE.md`
+- `governance/CONTRIBUTION_REVIEW_CHECKLIST.md`
+- `governance/MAINTAINERS.md`
+- `execution/PKG-01_Governance, IP Boundary, and Professional Responsibility/1_Working/DEL-01-03_Contributor certification workflow/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-01-03.md`
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Verification run:
+
+- `git diff --check` over affected files passed.
+- Focused forbidden-claim/protected-code-name scan over affected DEL-01-03
+  product surfaces found only negative boundary statements and contributor
+  review language, not product certification/compliance claims.
+
+Guardrails preserved:
+
+- No lifecycle state transition was made.
+- No blocker queue refresh was run.
+- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
+  mutation occurred.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, or automatic code-compliance/certification/sealing
+  claims were introduced.
+
+Remaining open items:
+
+- Final open-source license remains `TBD`.
+- Final contributor legal mechanism, such as DCO, CLA, or another instrument,
+  remains `TBD`.
+- Maintainer roster, quorum, legal-review authority, and release policy remain
+  `TBD`.
+- Deliverable file-state changes are awaiting CHANGE approval.
+
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+1. Route `DEL-01-03` file-state handling through `CHANGE`; do not stage or
+   commit without an explicit `APPROVE:` action list.
+2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized.
+authorized beyond DEL-01-03 closeout / CHANGE handling.
 
 ## Guardrails
 

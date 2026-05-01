@@ -10,6 +10,8 @@ refs:
     to: OPS-IP-DATA-BOUNDARY
   - rel: informs
     to: OPS-MAINTAINERS
+  - rel: uses_template
+    to: OPS-CONTRIBUTOR-CERTIFICATION-TEMPLATE
 ---
 
 # Contribution Review Checklist
@@ -29,6 +31,7 @@ Use this checklist before accepting contributions that add or modify public data
 | Related deliverable / issue / PR | `TBD` |
 | Changed paths | `TBD` |
 | Contribution type | `code`, `schema`, `documentation`, `example`, `benchmark`, `data`, `template`, `other` |
+| Contributor certification record | `governance/CONTRIBUTOR_CERTIFICATION_TEMPLATE.md` or equivalent |
 | Review date | `TBD` |
 
 ## 2. Source And Rights Evidence
@@ -40,10 +43,16 @@ Use this checklist before accepting contributions that add or modify public data
 | Source type | `invented`, `original`, `public_domain`, `permissive_license`, `private_user_supplied`, `proprietary_with_permission`, `unknown`, `protected_suspected` |
 | Source license / redistribution basis | `TBD` |
 | Contributor certification | `TBD` |
+| Contributor certification statement accepted for review | `yes`, `no`, `TBD` |
 | Redistribution status | `public_permissive`, `private_only`, `unknown`, `protected_suspected`, `rejected` |
 | Evidence attachment / note | `TBD` |
 
 Acceptance requires a recorded source, redistribution basis, contributor certification, and reviewer disposition. `unknown`, `protected_suspected`, or missing evidence cannot be accepted as public data.
+
+Use `governance/CONTRIBUTOR_CERTIFICATION_TEMPLATE.md` for the default
+contributor certification record unless a maintainer-approved form preserves
+the same source, rights, redistribution, protected-content, private-data, and
+review fields. The final project-wide legal mechanism remains `TBD`.
 
 ## 3. Protected-Content Screen
 
@@ -83,6 +92,7 @@ Allowed result values are `pass`, `fail`, `pending`, `not_applicable`, and `esca
 | Required tests / scans run | `TBD` |
 | Protected-content scan result | `TBD` |
 | Schema / provenance validation result | `TBD` |
+| Contributor certification template review | `TBD` |
 | Documentation review result | `TBD` |
 | Explicit deferrals | `TBD` |
 
