@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** CHANGE state correction for completed-archive reconciliation commit evidence
+**Actor:** ORCHESTRATOR DEL-04-01 sealed brief preparation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** Completed-archive reconciliation committed; awaiting next human gate
+**Current Mode:** DEL-04-01 sealed brief prepared; awaiting WORKING_ITEMS/TASK implementation gate or CHANGE handling
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEV001 completed archive reconciliation` |
-| Latest state commit | `2328331 reconcile completed archive dependencies` |
-| Previous completed task archive status | `DEL-03-08` moved into the compact task archive table |
-| Current authorized item | `RECONCILIATION` with `AUDIT_DEP_CLOSURE` over completed archive product deliverables was authorized and completed |
-| Current dispatch brief | `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Brief.md` |
+| Latest state task | `DEL-04-01 sealed dispatch brief preparation` |
+| Latest state commit | Uncommitted; route through `CHANGE` if accepted |
+| Previous completed task archive status | `DEV001 completed archive reconciliation` moved into the compact task archive table |
+| Current authorized item | `DEL-04-01 - 3D frame stiffness kernel` sealed brief prepared only |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-04-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -155,6 +155,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-03-08` Pipe section property and mass-property calculator | Completed; `9712e98 core: add pipe section property calculator`; evidence/handoff `4a68ada coordination: record del-03-08 implementation evidence` | `core/section_properties/`, section schema/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory/evidence/queue | Section property, component-section, library import, and full test sweep passed; `git diff --check`; protected-content/claim scan | Unit catalog/conversion constants, public pipe section source catalogs, physical project package/container, GUI/editor presentation, and solver consumption policy remain `TBD`. |
 | `DEV-001` implementation-readiness queue/bootstrap refresh | Completed; `cf1bf12 coordination: add implementation readiness queue` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, queue builder/tests, coordination prompts/state, tool registry | `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue contained 40 blocked implementation items | Future queue refreshes must be driven by DAG/evidence changes; no next product deliverable is authorized by this archive row. |
 | `NEXT_INSTANCE_STATE` rotating handoff documentation | Completed; `817f677 docs: clarify next instance handoff rotation` | `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`, `execution/_Coordination/NEXT_INSTANCE_STATE.md`, `execution/_Coordination/_COORDINATION.md`, `init/NEXT_SESSION_PROMPT.md` | `git diff --check`; committed cleanly | No next product deliverable was authorized by the documentation update. |
+| `DEV001 completed archive reconciliation` | Completed; `2328331 reconcile completed archive dependencies`; commit-state correction `556e13e coordination: record completed archive reconciliation commit` | `execution/_Reconciliation/` completed-archive audit artifacts and `NEXT_INSTANCE_STATE.md` | 16 scoped local registers audited; 130 dependency rows loaded; 16 schema-valid registers; 0 orphans; 0 active SCCs; 0 bidirectional pairs; 0 ID normalizations | Missing `IMPLEMENTS_NODE` anchors are informational under DEV-001 local-mirror policy; no product deliverable was authorized by the reconciliation run. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -177,67 +178,48 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEV001 Completed Archive Reconciliation
+## Latest State - DEL-04-01 Sealed Dispatch Brief Preparation
 
-Human project authority authorized one RECONCILIATION cycle using
-`AUDIT_DEP_CLOSURE` over the completed product deliverables listed in the
-compact archive table.
+Human project authority authorized exactly one bounded DAG item:
+`DEL-04-01 - 3D frame stiffness kernel`.
 
 Files changed in this task:
 
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-04-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-- `execution/_Reconciliation/_LATEST.md`
-- `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-01_DEV001_COMPLETED_ARCHIVE_RECONCILIATION.md`
-- `execution/_Reconciliation/DepClosure/_LATEST.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Brief.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/RUN_SUMMARY.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/QA_Report.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Decision_Log.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Dependency_Closure_Report.md`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Dependency_Closure_IssueLog.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/closure_summary.json`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/coverage.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/orphans.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/scc_summary.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/hubs.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/bidirectional_pairs.csv`
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_COMPLETED_ARCHIVE_RECONCILIATION_2026-04-30_2220/Evidence/id_normalization.csv`
 
-Audit summary:
+Brief summary:
 
-- Scoped product deliverables audited: 16.
-- Local `Dependencies.csv` files found: 16.
-- Dependency rows loaded: 130.
-- Schema-valid local registers: 16.
-- Schema-invalid local registers: 0.
-- Evidence populated: 130 / 130.
-- Orphan deliverables: 0.
-- Active SCCs larger than one node: 0.
-- Bidirectional active pairs: 0.
-- ID normalizations: 0.
+- The sealed dispatch brief was prepared from `DAG-001`,
+  `docs/_Registers/Deliverables.csv`, applicable `AB-00-*` architecture basis
+  rows, and the deliverable-local context for `DEL-04-01`.
+- Active upstream dependencies are five satisfied `PKG-00`
+  `ARCHITECTURE_BASIS` rows plus committed implementation evidence for
+  `DEL-02-01`, `DEL-02-02`, and `DEL-02-03`.
+- `DEL-04-01` remains `SEMANTIC_READY`; no lifecycle state transition was made.
+- No product implementation, candidate-edge promotion, dependency-register
+  mutation, blocker-queue refresh, or broad DAG execution was performed.
+- The current blocker queue already marks `DEL-04-01` as implementation
+  `UNBLOCKED` with missing own evidence.
 
-Known informational finding:
+Remaining open items:
 
-- The analyzer reported missing `IMPLEMENTS_NODE` anchors for all 16 scoped
-  local registers. This remains informational under the accepted DEV-001 policy:
-  local registers are synchronized mirrors/evidence and aggregate `DAG-001`
-  remains the sequencing authority.
-
-Commit evidence:
-
-- Reconciliation artifacts and the related handoff update were committed as
-  `2328331 reconcile completed archive dependencies`.
-- No product deliverable, lifecycle transition, candidate-edge promotion,
-  dependency-register mutation, or blocker-queue refresh was authorized or
-  performed by this reconciliation run.
+- The dispatch brief and this handoff update are uncommitted until routed
+  through `CHANGE`.
+- Actual `WORKING_ITEMS` / `TASK` implementation remains a separate next action
+  under the sealed brief and explicit write scope.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Human project authority may route another `RECONCILIATION`, `AUDIT_*`,
-   artifact handling, authorize exactly one next bounded DAG item, route
-   `CHANGE` for file-state handling, or pause.
+1. Route `execution/_Coordination/DEV-001_DISPATCH_DEL-04-01.md` and this
+   `NEXT_INSTANCE_STATE.md` update through `CHANGE` for staging and commit if
+   the human project authority accepts them.
+2. Human project authority may then launch one `WORKING_ITEMS` / `TASK` session
+   for `DEL-04-01`, route another `RECONCILIATION`, `AUDIT_*`, artifact
+   handling, authorize exactly one different bounded DAG item, route `CHANGE`
+   for file-state handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
 authorized by this reconciliation run.
