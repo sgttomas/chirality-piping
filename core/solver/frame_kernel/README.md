@@ -25,9 +25,15 @@ For an element, node `i` occupies indices `0..6` and node `j` occupies indices `
 
 The dense matrix and dense solve functions are interim interfaces. They are suitable for focused kernel verification and small tests only. The project sparse numerical library remains `TBD`; this crate intentionally introduces no external numerical dependency.
 
+Inputs to this crate are numeric mechanics quantities that upstream schema and unit layers must already have validated for unit compatibility. The crate validates finite, positive, nondegenerate, node-index, boundary-condition, and singular-system conditions, but it does not define the project unit catalog, conversion constants, or solver tolerance policy.
+
 ## Non-Compliance Boundary
 
 This crate computes open mechanics quantities only. It does not encode compliance rules, code-specific values, protected standard content, material allowables, SIF/flexibility data, private project data, or engineering approval/certification claims.
+
+## Verification
+
+The unit tests cover local stiffness terms, local-to-global transform behavior, global assembly, boundary-condition reduction, the temporary dense solve interface, singular-system detection, invalid node topology, repeated restraints, degenerate orientation, and non-finite input rejection.
 
 ## Future Replacement Point
 

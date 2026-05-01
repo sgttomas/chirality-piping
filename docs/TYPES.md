@@ -89,6 +89,7 @@ human acceptance is an external hash-bound project record only.
 |Rule-Pack Check|A user-defined expression/comparison applied to solver outputs.|Not equivalent to professional authentication.|
 |Professional Approval|Human acceptance for reliance by a competent/responsible professional.|Outside software authority.|
 |Centerline Model|A 3D line-element representation of the piping centerline and components.|Default global analysis model.|
+|Frame Kernel|The code-neutral 3D frame mechanics core that owns DOF ordering, element stiffness, transforms, assembly, boundary-condition reduction, and a bounded solve interface.|Consumes unit-checked numeric inputs; does not perform rule checks or professional approval.|
 |Local FEA Handoff|A transfer package for local shell/solid analysis.|Specialized workflow, not the default global solver.|
 |Plugin Manifest|A declared extension metadata record that requests entrypoints, permissions, provenance, privacy posture, checksums, sandbox requirements, and no-bypass constraints.|A manifest grants nothing by itself.|
 |Extension Point|A governed boundary where a plugin or adapter may request to import, export, validate, report, emit diagnostics, or expose user-owned rule-pack metadata.|Exact loader and transport remain `TBD`.|
@@ -117,6 +118,7 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `Model` | Centerline model container for nodes, elements, components, materials, sections, supports, load cases, combinations, results, and diagnostics. | Solver and GUI behavior are downstream consumers, not encoded as claims in the schema. |
 | `Node` | Addressable point with unit-aware coordinates and six-degree-of-freedom state fields. | Missing imposed values or constraints are findings, not silent defaults. |
 | `Element` | Analytical member connecting node references with material, section, optional component, local-coordinate, and result-station hooks. | Mechanics implementation remains separate from schema structure. |
+| `FrameKernel` | Rust mechanics module for two-node 3D frame stiffness, local/global transforms, dense assembly, boundary-condition reduction, and temporary dense solve verification. | Sparse solver selection, canonical calculation units, conversion constants, and downstream adapters remain `TBD`; code-specific checks are out of scope. |
 | `Component` | Piping-specific object such as bend, branch, reducer, valve, flange, expansion joint, rigid, or other user-defined component. | User modifiers and code/manufacturer values require provenance and may be private. |
 | `Material` | User/private or permissively sourced material record with unit-bearing properties, allowable slots, completeness findings, and provenance. | Public schema does not provide protected material allowables, code tables, or proprietary catalog values. |
 | `Section` | Pipe/section record with unit-bearing properties and provenance. | Protected dimensional tables and proprietary catalog data are not public defaults. |

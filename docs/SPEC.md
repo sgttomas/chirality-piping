@@ -320,6 +320,17 @@ Ux, Uy, Uz, Rx, Ry, Rz
 
 The straight-pipe element shall support axial, torsional, and bending stiffness in local coordinates, local-to-global transformation, thermal strain, distributed loads, and element end-force recovery.
 
+The first frame-kernel slice is `core/solver/frame_kernel`. It defines the
+six-degree-of-freedom node ordering, two-node frame element stiffness,
+local-axis transformation, dense assembly, boundary-condition reduction, and a
+temporary deterministic dense solve interface for small verification cases. The
+sparse numerical library, solver tolerances, and canonical calculation unit
+basis remain `TBD` until accepted through a later solver/architecture gate.
+Frame-kernel inputs are numeric mechanics quantities that must arrive through
+unit-aware upstream contracts; missing, non-finite, non-positive, degenerate,
+invalid-node, repeated-restraint, or singular-system conditions are explicit
+errors, not silent defaults.
+
 ### 5.3 Bend and component treatment
 
 The open core shall provide fields and mechanics interfaces for bends, branches, reducers, valves, flanges, expansion joints, and rigid elements. User-supplied SIFs, flexibility factors, stress indices, manufacturer stiffnesses, and local data are inputs, not public defaults.

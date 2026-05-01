@@ -41,6 +41,9 @@ pub enum FrameKernelError {
         node_index: usize,
         node_count: usize,
     },
+    RepeatedElementNodeIndex {
+        node_index: usize,
+    },
     InvalidMatrixDimensions {
         rows: usize,
         cols: usize,
@@ -78,6 +81,9 @@ impl fmt::Display for FrameKernelError {
                 f,
                 "node index {node_index} is outside node count {node_count}"
             ),
+            Self::RepeatedElementNodeIndex { node_index } => {
+                write!(f, "element connects node index {node_index} to itself")
+            }
             Self::InvalidMatrixDimensions { rows, cols } => {
                 write!(f, "matrix must be square, got {rows} by {cols}")
             }
@@ -214,6 +220,11 @@ impl FrameElement {
         section: FrameSection,
         y_reference: [f64; 3],
     ) -> Result<Self, FrameKernelError> {
+        if node_i.index == node_j.index {
+            return Err(FrameKernelError::RepeatedElementNodeIndex {
+                node_index: node_i.index,
+            });
+        }
         validate_finite_vector("y_reference", y_reference)?;
         let element = Self {
             node_i,
@@ -741,6 +752,61 @@ mod tests {
                 detail: "y reference parallel to local x axis"
             }
         );
+    }
+
+    #[test]
+    fn repeated_element_node_index_is_rejected() {
+        let section = FrameSection::new(1000.0, 400.0, 2.0, 1.0, 1.0, 1.0).unwrap();
+        let node_i = FrameNode::new(0, [0.0, 0.0, 0.0]).unwrap();
+        let node_j = FrameNode::new(0, [2.0, 0.0, 0.0]).unwrap();
+
+        let error = FrameElement::new(node_i, node_j, section, [0.0, 1.0, 0.0]).unwrap_err();
+
+        assert_eq!(
+            error,
+            FrameKernelError::RepeatedElementNodeIndex { node_index: 0 }
+        );
+    }
+
+    #[test]
+    fn assembly_rejects_node_index_outside_model() {
+        let section = FrameSection::new(1000.0, 400.0, 2.0, 1.0, 1.0, 1.0).unwrap();
+        let node_i = FrameNode::new(0, [0.0, 0.0, 0.0]).unwrap();
+        let node_j = FrameNode::new(2, [2.0, 0.0, 0.0]).unwrap();
+        let element = FrameElement::new(node_i, node_j, section, [0.0, 1.0, 0.0]).unwrap();
+
+        let error = assemble_global_stiffness(2, &[element]).unwrap_err();
+
+        assert_eq!(
+            error,
+            FrameKernelError::InvalidNodeIndex {
+                node_index: 2,
+                node_count: 2
+            }
+        );
+    }
+
+    #[test]
+    fn boundary_reduction_rejects_repeated_restraint() {
+        let stiffness = vec![vec![1.0, 0.0], vec![0.0, 1.0]];
+        let force = vec![1.0, 2.0];
+
+        let error = reduce_system(&stiffness, &force, &[0, 0]).unwrap_err();
+
+        assert_eq!(error, FrameKernelError::RepeatedRestrainedDof { dof: 0 });
+    }
+
+    #[test]
+    fn non_finite_input_is_rejected() {
+        let error = FrameSection::new(f64::NAN, 400.0, 2.0, 1.0, 1.0, 1.0).unwrap_err();
+
+        match error {
+            FrameKernelError::NonFiniteInput { name, value } => {
+                assert_eq!(name, "elastic_modulus");
+                assert!(value.is_nan());
+            }
+            other => panic!("expected non-finite input error, got {other:?}"),
+        }
     }
 
     fn assert_symmetric_12(matrix: &Matrix12) {
