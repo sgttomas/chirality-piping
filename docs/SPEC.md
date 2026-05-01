@@ -191,6 +191,14 @@ schema-shape-only records unless a public-permissive source has completed
 review evidence. Missing or unreviewed section/component values remain explicit
 findings; they are not supplied by silent defaults.
 
+The library import provenance checker is represented by
+`core/library_import/provenance_checker.py`. It validates already-parsed
+material, section, and component library payloads for required provenance,
+redistribution status, review disposition, private-only handling, protected
+content quarantine, and unit metadata preservation. It does not parse external
+formats and does not make legal conclusions; unresolved rights remain review
+findings for the human project authority.
+
 Bend and elbow records define schema slots and mechanics-interface metadata
 only. Public repository fixtures may show the shape of bend geometry fields but
 must not supply protected bend tables, code-specific SIF or flexibility values,

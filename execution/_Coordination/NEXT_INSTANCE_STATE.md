@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-06 bounded item closeout
+**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-07 bounded item closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-06` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-07` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
 
 ## Active Control State
 
@@ -49,10 +49,12 @@
 | Previous bounded item | `DEL-03-05 - Rigid component models for valves, flanges, reducers, and specialty items` |
 | Previous bounded item commit | `d8ee0db schema: add rigid component contract` |
 | DEL-03-05 handoff correction commit | `fd695c0 docs: record del-03-05 handoff state` |
-| Last bounded item | `DEL-03-06 - Expansion joint component model` |
+| Previous bounded item | `DEL-03-06 - Expansion joint component model` |
+| Previous bounded item commit | `f15cbc6 schema: add expansion joint component contract` |
+| Last bounded item | `DEL-03-07 - Public/private library import provenance checker` |
 | Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-03-06 closeout / CHANGE handling` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md` |
+| Current authorized item | `None beyond DEL-03-07 closeout / CHANGE handling` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
 
@@ -164,6 +166,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-03-03` Bend and elbow component model fields | Completed; `7a84472 schema: add bend elbow component contract`; handoff/push `753b096` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Bend/elbow source catalogs, fixture policy, solver use of flexibility inputs, import formats, and editor behavior remain `TBD`. |
 | `DEL-03-04` Branch connection component model fields | Completed; `ae693b6 schema: add branch component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Branch source catalogs, fixture policy, solver use of branch flexibility inputs, import formats, and editor behavior remain `TBD`. |
 | `DEL-03-05` Rigid component models for valves, flanges, reducers, and specialty items | Completed; `d8ee0db schema: add rigid component contract`; handoff `fd695c0 docs: record del-03-05 handoff state` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Rigid component source catalogs, fixture policy, semi-rigid stiffness treatment, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-06` Expansion joint component model | Completed; `f15cbc6 schema: add expansion joint component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Expansion-joint source catalogs, fixture policy, stiffness mapping, hardware taxonomy, import formats, and editor behavior remain `TBD`. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -177,48 +180,48 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
   fresh sessions into the coordination protocol and mutable handoff state, not
   a hard-coded next deliverable objective.
 
-## DEL-03-06 Bounded Item Closeout
+## DEL-03-07 Bounded Item Closeout
 
 Human project authority authorized exactly one bounded DAG item:
-`DEL-03-06 - Expansion joint component model`. ORCHESTRATOR / WORKING_ITEMS
-completed the bounded item inside the explicit write scope. Broad fan-out,
-lifecycle transition, candidate-edge promotion, blocker-queue refresh, and
-dependency-register edits were not performed.
+`DEL-03-07 - Public/private library import provenance checker`. ORCHESTRATOR /
+WORKING_ITEMS completed the bounded item inside the explicit write scope. Broad
+fan-out, lifecycle transition, candidate-edge promotion, blocker-queue refresh,
+and dependency-register edits were not performed.
 
 Dispatch evidence:
 
 - Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md`.
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md`.
 - Active upstream dependencies were consumed from approved `DAG-001` active
   rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-03-02`, `DEL-02-02`, and `DEL-01-02`.
+  `DEL-00-08`, `DEL-03-01`, `DEL-03-02`, `DEL-01-02`, `DEL-01-03`, and
+  `DEL-02-04`.
 - `CANDIDATE` rows were not promoted or used as gates.
 
 Files changed in this bounded item:
 
-- `schemas/component.schema.yaml`
-- `fixtures/component/invented_section_component_library_valid.json`
-- `tests/test_component_section_schema.py`
+- `core/library_import/provenance_checker.py`
+- `core/library_import/README.md`
+- `tests/test_library_import_provenance.py`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-06_Expansion joint component model/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-06.md`
+- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-07_Public-private library import provenance checker/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Verification run:
 
-- `python3 -m json.tool schemas/component.schema.yaml` passed.
-- `python3 -m json.tool fixtures/component/invented_section_component_library_valid.json` passed.
-- `python3 tests/test_component_section_schema.py` passed.
+- `python3 tests/test_library_import_provenance.py` passed.
 - Existing schema tests passed: `test_material_schema.py`,
-  `test_model_schema.py`, `test_units_schema.py`, `test_persistence_schema.py`,
+  `test_component_section_schema.py`, `test_model_schema.py`,
+  `test_units_schema.py`, `test_persistence_schema.py`,
   `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
   `test_analysis_boundary_schema.py`.
 - `git diff --check` passed.
-- Focused forbidden-claim/protected-content scan over affected DEL-03-06
+- Focused forbidden-claim/protected-content scan over affected DEL-03-07
   product surfaces found only existing negative boundary statements and
-  test-denylist literals, not product certification/compliance claims or
-  protected/manufacturer expansion-joint data.
+  deny-list/boundary wording, not product certification/compliance claims or
+  protected/proprietary library data.
 
 Guardrails preserved:
 
@@ -226,26 +229,24 @@ Guardrails preserved:
 - No blocker queue refresh was run.
 - No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
   mutation occurred.
-- No protected standards text, protected dimensional/rating tables,
-  proprietary engineering values, private data, manufacturer catalog values, or
-  automatic code-compliance/certification/sealing claims were introduced.
+- No protected standards text, protected tables, proprietary engineering
+  values, private data, manufacturer catalog values, or automatic
+  code-compliance/certification/sealing/legal-acceptance claims were introduced.
 
 Remaining open items:
 
-- Accepted public expansion-joint source catalogs remain `TBD`.
-- Public expansion-joint fixture value policy remains `TBD`.
-- Stiffness degree-of-freedom mapping and exact solver consumption remain
-  `TBD`.
-- Hardware flag/enumeration taxonomy remains `TBD`.
-- Concrete expansion-joint import formats remain `TBD`.
-- Downstream component editor behavior remains future GUI work.
+- Concrete external import formats remain `TBD`.
+- Legal/license interpretation and accepted public source catalogs remain human
+  or legal review matters.
+- UI/editor presentation of import findings remains future GUI work.
+- Downstream adapter framework integration remains future interop work.
 - Deliverable file-state changes are awaiting CHANGE approval.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-03-06` file-state handling through `CHANGE`; do not stage or
+1. Route `DEL-03-07` file-state handling through `CHANGE`; do not stage or
    commit without an explicit `APPROVE:` action list.
 2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
@@ -253,7 +254,7 @@ Immediate next action:
    or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-03-06 closeout / CHANGE handling.
+authorized beyond DEL-03-07 closeout / CHANGE handling.
 
 ## Guardrails
 
