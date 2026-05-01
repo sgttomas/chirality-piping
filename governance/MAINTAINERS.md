@@ -67,6 +67,8 @@ Public data contributions must also record these evidence slots before acceptanc
 | Quarantine status | Required when protected standards content, proprietary data, or private project data is suspected. |
 | Private-data risk | Review note confirming whether the contribution can expose private project, rule-pack, material, component, owner-standard, or company design-basis data. |
 
+The default review record for these gates is `governance/CONTRIBUTION_REVIEW_CHECKLIST.md`. A maintainer may use a project issue, pull-request template, or release checklist instead only when it preserves the same evidence fields and disposition states.
+
 ## 4. Release Policy Skeleton
 
 A public release must not be published until maintainers complete a release review covering:
