@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-01
 **Actor:** CHANGE coordination evidence refresh for DEL-04-04
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-04-04 implementation evidence recorded; blocker queue refreshed; awaiting CHANGE commit approval
+**Current Mode:** DEL-04-04 implementation evidence committed; blocker queue refreshed; awaiting next human gate
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-04-04 implementation evidence and blocker queue refresh` |
-| Latest state commit | Pending CHANGE commit for this coordination refresh |
+| Latest state commit | `c910723 coordination: record del-04-04 implementation evidence` |
 | Previous completed task archive status | `DEL-04-04 implementation` moved into the compact task archive table |
 | Current authorized item | None beyond this approved evidence/queue refresh |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-04-04.md` |
@@ -231,17 +231,13 @@ Verification:
 
 Remaining open items:
 
-- This evidence/queue refresh is uncommitted until routed through `CHANGE`.
 - No next product deliverable is authorized by this evidence refresh.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route the `DEL-04-04` implementation evidence and blocker-queue refresh
-   through `CHANGE` for staging and commit if the human project authority
-   accepts it.
-2. Human project authority may then authorize exactly one next bounded DAG
+1. Human project authority may authorize exactly one next bounded DAG
    item, route `RECONCILIATION`, `AUDIT_*`, artifact handling, route `CHANGE`
    for file-state handling, or pause.
 
