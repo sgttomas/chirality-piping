@@ -38,20 +38,34 @@ Exact transport, loader mechanics, signing, packaging, persistence of grants, an
 Every plugin manifest must declare:
 
 - plugin identity, version, author, description, and review status;
-- compatibility with `api/api_boundary_contract.yaml`;
-- one or more entrypoints and their operation mode;
+- compatibility with this domain contract and `api/api_boundary_contract.yaml`;
+- JSON Schema 2020-12 contract basis, host API status, and unresolved transport
+  status where applicable;
+- one or more entrypoints, their operation mode, and the domain surface they
+  touch, such as canonical model, project persistence, units, analysis
+  boundary, rule-pack metadata, results, reports, or diagnostics;
 - requested permissions, with `denied_by_default` fixed to `true`;
 - provenance, redistribution status, contributor certification, and review disposition;
 - privacy posture, including local-first behavior and telemetry off by default;
 - manifest and payload checksums using the canonical JSON/JCS-compatible basis when JSON payloads are hashed;
-- sandbox requirements and default denial of arbitrary code execution, filesystem access, network access, and process spawning;
-- no-bypass constraints for units, provenance, privacy, rule sandboxing, schema validation, diagnostics, checksums, protected-content checks, report controls, and solver boundary controls.
+- sandbox requirements, explicit capability declaration, and default denial of
+  arbitrary code execution, filesystem access, network access, and process
+  spawning;
+- no-bypass constraints for units, provenance, privacy, rule sandboxing,
+  analysis-boundary state, persistence, schema validation, diagnostics,
+  checksums, protected-content checks, report controls, solver boundary
+  controls, and human-acceptance controls.
 
 ## Denied-By-Default Behavior
 
 Absence of a permission means denial. A permission request with no recorded grant means denial. A plugin that cannot express its provenance, privacy posture, sandbox posture, or no-bypass constraints is not eligible to run through a governed extension boundary.
 
 Private project models, private rule packs, private material/component libraries, owner design bases, licensed code data, and calculation results are not transmitted or exported by default. Network access and filesystem access require explicit permission and remain subject to privacy, provenance, checksum, and protected-content controls.
+
+Privacy declarations must preserve local-first behavior, telemetry off by
+default, export permission checks, and redaction support. A plugin may request
+private data access, but the request does not grant access and must remain
+visible to the host boundary and later human review.
 
 ## No-Bypass Rules
 
@@ -63,6 +77,9 @@ Plugins and adapters must not bypass:
 - private/public data classification, telemetry-off-by-default behavior, and export permission checks;
 - protected-content screening and quarantine routing;
 - sandboxed, deterministic, unit-aware rule-pack evaluation;
+- analysis-boundary states that distinguish mechanics solved, user-rule
+  checked, failed, incomplete, and human-review-required states;
+- persistence, round-trip, migration, hash, and private-data markers;
 - command/query/job/result-envelope boundaries;
 - diagnostics, warnings, limitations, hashes, and reproducibility metadata;
 - report boundary language that prevents certification, sealing, approval, endorsement, or automatic code-compliance claims.
@@ -74,6 +91,11 @@ If an extension encounters suspected protected standards text, copied protected 
 Extension outputs are software artifacts. They may report mechanics results, user-rule outcomes, warnings, assumptions, provenance, privacy posture, and checksums. They must not state or imply that OpenPipeStress, a plugin, an adapter, or an agent has certified, sealed, approved, authenticated, endorsed, or declared a calculation code-compliant for professional reliance.
 
 Human review remains required for professional use. Any future human acceptance record must be external to automatic plugin output and bound to the relevant model, result, rule-pack, report, and manifest hashes.
+
+Plugin manifests must declare that software-generated human acceptance records
+are not allowed. Plugins may reference external human acceptance evidence only
+through hash-bound records governed by the analysis-boundary and persistence
+contracts.
 
 ## Remaining TBDs
 

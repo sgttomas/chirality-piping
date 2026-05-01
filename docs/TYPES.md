@@ -90,6 +90,10 @@ human acceptance is an external hash-bound project record only.
 |Professional Approval|Human acceptance for reliance by a competent/responsible professional.|Outside software authority.|
 |Centerline Model|A 3D line-element representation of the piping centerline and components.|Default global analysis model.|
 |Local FEA Handoff|A transfer package for local shell/solid analysis.|Specialized workflow, not the default global solver.|
+|Plugin Manifest|A declared extension metadata record that requests entrypoints, permissions, provenance, privacy posture, checksums, sandbox requirements, and no-bypass constraints.|A manifest grants nothing by itself.|
+|Extension Point|A governed boundary where a plugin or adapter may request to import, export, validate, report, emit diagnostics, or expose user-owned rule-pack metadata.|Exact loader and transport remain `TBD`.|
+|Domain Surface|The model, persistence, unit, analysis-boundary, rule-pack metadata, result, report, or diagnostic surface touched by an extension entrypoint.|Must be declared in the plugin manifest.|
+|No-Bypass Constraint|A mandatory control that plugins and adapters must preserve, including units, provenance, privacy, protected-content, diagnostics, hashes, rule sandboxing, reports, solver boundaries, and human acceptance boundaries.|Cannot be waived by plugin code.|
 
 ## 7. Data provenance labels
 

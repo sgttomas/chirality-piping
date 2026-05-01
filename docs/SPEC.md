@@ -179,6 +179,25 @@ external and hash-bound. They invalidate on bound-hash changes and do not imply
 software certification, sealing, authentication, professional approval, or
 automatic code compliance.
 
+### 4.3 Plugin and extension domain contracts
+
+The plugin manifest contract is represented by
+`schemas/plugin_manifest.schema.yaml`. It defines domain-level extension
+metadata, entrypoints, permissions, provenance, privacy posture, checksums,
+sandbox requirements, no-bypass controls, and professional-boundary constraints.
+
+Plugins and adapters are denied by default. A manifest request is not a runtime
+grant. Each entrypoint must identify the domain surface it touches, such as the
+canonical model, project persistence, units, analysis-boundary state, rule-pack
+metadata, results, reports, or diagnostics.
+
+Plugin and adapter paths must preserve the same controls as first-party code:
+schema validation, unit checks, provenance checks, private-data controls,
+protected-content screening, diagnostics/result envelopes, persistence hashes,
+rule-pack sandboxing, report boundaries, solver boundaries, and external
+hash-bound human acceptance records. They must not create software-generated
+professional approval records or automatic code-compliance statuses.
+
 ## 5. Solver core requirements
 
 ### 5.1 Degrees of freedom

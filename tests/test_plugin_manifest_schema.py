@@ -26,6 +26,9 @@ REQUIRED_NO_BYPASS = {
     "provenance_controls",
     "privacy_controls",
     "rule_sandbox_controls",
+    "analysis_boundary_controls",
+    "persistence_controls",
+    "human_acceptance_controls",
 }
 
 
@@ -57,6 +60,7 @@ def main():
     assert sandbox["properties"]["filesystem_access_default"]["enum"][0] == "denied"
     assert sandbox["properties"]["network_access_default"]["enum"][0] == "denied"
     assert sandbox["properties"]["process_spawn_default"]["enum"] == ["denied"]
+    assert sandbox["properties"]["capability_declaration_required"]["const"] is True
 
     provenance = definition(schema, "ProvenanceRecord")
     required_provenance = {
@@ -79,12 +83,32 @@ def main():
     assert privacy["properties"]["local_first"]["const"] is True
     assert privacy["properties"]["private_data_transmission_default"]["const"] is False
     assert privacy["properties"]["telemetry_enabled_by_default"]["const"] is False
+    assert privacy["properties"]["redaction_supported"]["const"] is True
 
     compatibility = definition(schema, "ApiBoundaryCompatibility")
+    assert compatibility["properties"]["domain_contract_ref"]["const"] == (
+        "docs/architecture/extension_domain_contracts.md"
+    )
     assert compatibility["properties"]["api_boundary_contract_ref"]["const"] == (
         "api/api_boundary_contract.yaml"
     )
+    assert compatibility["properties"]["schema_version_contract"]["enum"][0] == (
+        "JSON Schema 2020-12"
+    )
     assert compatibility["properties"]["result_envelope_required"]["const"] is True
+
+    entrypoint = definition(schema, "Entrypoint")
+    assert "domain_surface" in entrypoint["required"]
+    assert "canonical_model" in entrypoint["properties"]["domain_surface"]["enum"]
+    assert "project_persistence" in entrypoint["properties"]["domain_surface"]["enum"]
+
+    professional_boundary = definition(schema, "ProfessionalBoundary")
+    assert (
+        professional_boundary["properties"][
+            "human_acceptance_record_software_generated"
+        ]["const"]
+        is False
+    )
 
 
 if __name__ == "__main__":

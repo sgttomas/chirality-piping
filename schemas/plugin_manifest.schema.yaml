@@ -69,19 +69,42 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "domain_contract_ref",
         "api_boundary_contract_ref",
         "boundary_api_version",
+        "schema_version_contract",
+        "host_api_status",
         "compatible_operation_categories",
         "result_envelope_required",
         "transport"
       ],
       "properties": {
+        "domain_contract_ref": {
+          "type": "string",
+          "const": "docs/architecture/extension_domain_contracts.md"
+        },
         "api_boundary_contract_ref": {
           "type": "string",
           "const": "api/api_boundary_contract.yaml"
         },
         "boundary_api_version": {
           "type": "string"
+        },
+        "schema_version_contract": {
+          "type": "string",
+          "enum": [
+            "JSON Schema 2020-12",
+            "TBD"
+          ]
+        },
+        "host_api_status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "stable",
+            "deprecated",
+            "TBD"
+          ]
         },
         "compatible_operation_categories": {
           "type": "array",
@@ -183,6 +206,7 @@
       "required": [
         "entrypoint_id",
         "extension_point",
+        "domain_surface",
         "operation_mode",
         "handler_ref",
         "governed_boundary_required"
@@ -202,6 +226,20 @@
             "validation_hook",
             "rule_pack_provider",
             "report_output_extension",
+            "TBD"
+          ]
+        },
+        "domain_surface": {
+          "type": "string",
+          "enum": [
+            "canonical_model",
+            "project_persistence",
+            "units",
+            "analysis_boundary",
+            "rule_pack_metadata",
+            "results",
+            "reports",
+            "diagnostics",
             "TBD"
           ]
         },
@@ -232,12 +270,15 @@
         "provenance_controls",
         "privacy_controls",
         "rule_sandbox_controls",
+        "analysis_boundary_controls",
+        "persistence_controls",
         "schema_validation",
         "diagnostic_envelope",
         "checksum_controls",
         "protected_content_controls",
         "report_boundary_controls",
-        "solver_boundary_controls"
+        "solver_boundary_controls",
+        "human_acceptance_controls"
       ],
       "properties": {
         "unit_controls": {
@@ -253,6 +294,14 @@
           "const": true
         },
         "rule_sandbox_controls": {
+          "type": "boolean",
+          "const": true
+        },
+        "analysis_boundary_controls": {
+          "type": "boolean",
+          "const": true
+        },
+        "persistence_controls": {
           "type": "boolean",
           "const": true
         },
@@ -277,6 +326,10 @@
           "const": true
         },
         "solver_boundary_controls": {
+          "type": "boolean",
+          "const": true
+        },
+        "human_acceptance_controls": {
           "type": "boolean",
           "const": true
         }
@@ -393,7 +446,8 @@
         "private_data_transmission_default",
         "telemetry_enabled_by_default",
         "private_data_access",
-        "export_requires_permission"
+        "export_requires_permission",
+        "redaction_supported"
       ],
       "properties": {
         "local_first": {
@@ -419,6 +473,10 @@
         "export_requires_permission": {
           "type": "boolean",
           "const": true
+        },
+        "redaction_supported": {
+          "type": "boolean",
+          "const": true
         }
       }
     },
@@ -429,7 +487,8 @@
         "software_makes_compliance_claim",
         "software_makes_certification_claim",
         "software_makes_sealing_claim",
-        "human_review_required"
+        "human_review_required",
+        "human_acceptance_record_software_generated"
       ],
       "properties": {
         "software_makes_compliance_claim": {
@@ -447,6 +506,10 @@
         "human_review_required": {
           "type": "boolean",
           "const": true
+        },
+        "human_acceptance_record_software_generated": {
+          "type": "boolean",
+          "const": false
         }
       }
     },
@@ -513,7 +576,8 @@
         "filesystem_access_default",
         "network_access_default",
         "process_spawn_default",
-        "rule_pack_execution_mode"
+        "rule_pack_execution_mode",
+        "capability_declaration_required"
       ],
       "properties": {
         "sandbox_required": {
@@ -551,6 +615,10 @@
             "not_applicable",
             "TBD"
           ]
+        },
+        "capability_declaration_required": {
+          "type": "boolean",
+          "const": true
         }
       }
     }
