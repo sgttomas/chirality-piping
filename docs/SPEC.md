@@ -351,6 +351,15 @@ tolerance-policy `TBD` states. These diagnostics are mechanics-solver findings
 only; they do not perform rule-pack checks, professional review, certification,
 sealing, or code-compliance assessment.
 
+The sparse-solver performance harness slice is
+`core/solver/performance_harness`. It records deterministic repeat-run evidence
+for invented/public frame fixtures at the current solve boundary, including
+matrix size, nonzero-count, residual, repeatability, provenance, assumptions,
+limitations, and conditioning diagnostics. It is an observer/regression surface:
+it does not modify solver logic, choose the production sparse numerical
+library, set release timing or memory thresholds, import proprietary benchmark
+models, or make professional/code-compliance claims.
+
 ## 6. Loads and stress recovery
 
 Primitive loads include weight, pressure, temperature, imposed displacement, hydrotest, wind, seismic, and user occasional loads. Code-specific load combinations are not public defaults; they are user rule-pack or project inputs.
