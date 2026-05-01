@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 25 |
-| Committed implementation evidence | 25 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 71 |
+| Implementation evidence records | 26 |
+| Committed implementation evidence | 26 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 70 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 46 |
 | Implementation `BLOCKED` deliverables | 27 |
@@ -98,7 +98,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-04-05` | `PKG-04` | `COMMITTED` `75f6688` | 7 | Sparse solver performance harness |
 | `DEL-04-06` | `PKG-04` | `COMMITTED` `fdb0252` | 8 | Solver diagnostics and singularity detection |
 | `DEL-05-01` | `PKG-05` | `COMMITTED` `e3c9695` | 9 | Primitive load case engine |
-| `DEL-05-02` | `PKG-05` | `MISSING_EVIDENCE` | 8 | Load-case algebra engine |
+| `DEL-05-02` | `PKG-05` | `COMMITTED` `0f9189c` | 8 | Load-case algebra engine |
 | `DEL-05-03` | `PKG-05` | `MISSING_EVIDENCE` | 10 | Fundamental stress recovery module |
 | `DEL-05-04` | `PKG-05` | `COMMITTED` `dbaf21e` | 6 | Analysis status semantics |
 | `DEL-05-05` | `PKG-05` | `MISSING_EVIDENCE` | 8 | Concentrated and distributed user load application |

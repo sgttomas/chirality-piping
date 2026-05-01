@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-01
 **Actor:** WORKING_ITEMS implementation for DEL-05-02
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-05-02 implemented, lifecycle moved to CHECKING, evidence/queue pending implementation commit
+**Current Mode:** DEL-05-02 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-05-02 implementation` |
-| Latest state commit | Implementation pending commit |
+| Latest state commit | Implementation commit `0f9189c`; evidence/queue/state in this commit |
 | Previous completed task archive status | `DEL-05-02 sealed dispatch brief preparation` moved into the compact task archive table |
 | Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-02.md` |
@@ -109,10 +109,10 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 71 |
-| Filesystem lifecycle `CHECKING` (display only) | 2 |
-| Implementation evidence records | 25 |
-| Committed implementation evidence | 25 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 70 |
+| Filesystem lifecycle `CHECKING` (display only) | 3 |
+| Implementation evidence records | 26 |
+| Committed implementation evidence | 26 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 46 |
 | Implementation `BLOCKED` deliverables | 27 |
@@ -222,6 +222,9 @@ Files changed in this task:
 - `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/MEMORY.md`
 - `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/Dependencies.csv`
 - `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/_STATUS.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-05-02.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
@@ -243,8 +246,11 @@ Implementation summary:
 - Updated `DEL-05-02` lifecycle from `SEMANTIC_READY` to `CHECKING`.
 - Annotated the `DEL-05-02` local dependency mirror for satisfied
   non-architecture upstreams `DEL-05-01`, `DEL-02-02`, and `DEL-05-04`.
-- This task has not yet recorded implementation evidence or refreshed the
-  blocker queue because the implementation commit hash must exist first.
+- Committed the implementation as `0f9189c core: add load case algebra engine`.
+- Recorded `DEL-05-02` as `COMMITTED` implementation evidence in
+  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 46 unblocked / 27
+  blocked.
 - `DAG-001` has not been changed; candidate edge `DAG-001-E0616` remains
   non-gating.
 
@@ -256,13 +262,21 @@ Verification:
   8 tests.
 - `cargo test --manifest-path core/loads/primitive_loads/Cargo.toml` passed:
   9 tests.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-02_Load-case algebra engine/Dependencies.csv"`
+  passed.
+- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
+  unblocked=46, blocked=27, active_edges=615, candidate_edges_excluded=9.
+- `python3 -m pytest tools/coordination` passed: 10 tests.
+- `python3 tools/validation/validate_dependencies_schema.py
+  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
+- `python3 tools/coordination/audit_dag.py --strict --dag-dir
+  execution/_DAG/DAG-001` passed.
 - `git diff --check` passed.
 
 Remaining open items:
 
-- Implementation is pending commit.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` and `DEV-001_BLOCKER_QUEUE.*` are
-  pending update after the implementation commit exists.
+- Evidence/queue/state alignment is pending commit in this change set.
 - Canonical calculation unit basis, conversion constants, final result-envelope
   integration, concrete application-service API, persistence representation,
   general expression grammar/library, rule-pack evaluator reuse, and production
