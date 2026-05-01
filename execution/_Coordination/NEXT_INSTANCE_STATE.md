@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-03 bounded item closeout
+**Actor:** CHANGE / ORCHESTRATOR DEL-03-03 commit handoff
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-03` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-03` bounded item committed through CHANGE approval; one next bounded DAG item authorized by human project authority; no broad fan-out
 
 ## Active Control State
 
@@ -41,8 +41,8 @@
 | Previous bounded item | `DEL-03-02 - Pipe section and component library schema` |
 | Previous bounded item commit | `f0fdeac schema: add section and component library contracts` |
 | Last bounded item | `DEL-03-03 - Bend and elbow component model fields` |
-| Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-03-03 closeout / CHANGE handling` |
+| Last bounded item commit | `7a84472 schema: add bend elbow component contract` |
+| Current authorized item | Human project authority authorized exactly one next bounded DAG item of ORCHESTRATOR's choosing after DEL-03-03 handoff correction and push |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-03.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
@@ -874,21 +874,21 @@ Remaining open items:
 - Exact solver use of user-supplied flexibility inputs remains `TBD`.
 - Concrete bend/elbow import formats remain `TBD`.
 - Downstream component editor behavior remains future GUI work.
-- Deliverable file-state changes are awaiting CHANGE approval.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `7a84472 schema: add bend elbow component contract`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-03-03` file-state handling through `CHANGE`; do not stage or
-   commit without an explicit `APPROVE:` action list.
-2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
-   artifact handling if it appears in file-state evidence, authorize exactly one
-   next bounded DAG item, route `CHANGE` for push or other file-state handling,
-   or pause.
+1. Commit this `DEL-03-03` handoff correction through CHANGE approval.
+2. Push `main` to `origin/main` through CHANGE approval.
+3. ORCHESTRATOR may select exactly one next bounded DAG item and prepare a fresh
+   sealed dispatch brief from `DAG-001`, `docs/_Registers/Deliverables.csv`,
+   applicable `AB-00-*` rows, and the target deliverable's local context.
 
-Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-03-03 closeout / CHANGE handling.
+Do not start broad DAG execution. No additional DAG item is authorized beyond
+the single next bounded item approved by the human project authority.
 
 ## Guardrails
 
