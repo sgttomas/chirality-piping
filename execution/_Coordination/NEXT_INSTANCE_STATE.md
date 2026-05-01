@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR / WORKING_ITEMS DEL-03-05 bounded item closeout
+**Actor:** ORCHESTRATOR / CHANGE handoff correction for DEL-03-05
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 `DEL-03-05` bounded item completed and awaiting CHANGE file-state approval; no broad fan-out
+**Current Mode:** DEV-001 `DEL-03-05` bounded item committed; clean git state observed; no broad fan-out
 
 ## Active Control State
 
@@ -47,8 +47,8 @@
 | Previous bounded item | `DEL-03-04 - Branch connection component model fields` |
 | Previous bounded item commit | `ae693b6 schema: add branch component contract` |
 | Last bounded item | `DEL-03-05 - Rigid component models for valves, flanges, reducers, and specialty items` |
-| Last bounded item commit | `Pending CHANGE approval` |
-| Current authorized item | `None beyond DEL-03-05 closeout / CHANGE handling` |
+| Last bounded item commit | `d8ee0db schema: add rigid component contract` |
+| Current authorized item | `None after DEL-03-05 handoff correction` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-05.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current blocker evidence, and the latest human gate |
@@ -1020,21 +1020,23 @@ Remaining open items:
 - Exact solver treatment of semi-rigid stiffness inputs remains `TBD`.
 - Concrete rigid component import formats remain `TBD`.
 - Downstream component editor behavior remains future GUI work.
-- Deliverable file-state changes are awaiting CHANGE approval.
+- Deliverable file-state changes were committed through CHANGE approval as
+  `d8ee0db schema: add rigid component contract`.
+- Current git evidence from the handoff correction check: branch `main`, HEAD
+  `d8ee0db`, and `git status --short --branch` reported
+  `## main...origin/main` with no staged, unstaged, or untracked files.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route `DEL-03-05` file-state handling through `CHANGE`; do not stage or
-   commit without an explicit `APPROVE:` action list.
-2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
+1. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
    next bounded DAG item, route `CHANGE` for push or other file-state handling,
    or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond DEL-03-05 closeout / CHANGE handling.
+authorized after the DEL-03-05 handoff correction.
 
 ## Guardrails
 
