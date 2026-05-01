@@ -54,3 +54,4 @@
 - Keep dependency proposals labeled `PROPOSAL` until accepted by the human project authority.
 - Keep `NEXT_INSTANCE_PROMPT.md` objective-neutral. Put mutable item state and immediate handoff facts in `NEXT_INSTANCE_STATE.md`; put durable coordination rulings here.
 - Keep `init/NEXT_SESSION_PROMPT.md` objective-neutral. Use it only as the fresh-session bootstrap into the coordination control loop.
+- Keep `NEXT_INSTANCE_STATE.md` in rotating handoff form: archive the previous latest completed task in the compact history table, then summarize only the just-completed task as the latest state.

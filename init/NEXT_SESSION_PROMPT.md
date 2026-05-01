@@ -111,9 +111,11 @@ architecture-basis rows, and the target deliverable's local context.
 Before ending the session, close the stateful handoff loop:
 
 1. Update `execution/_Coordination/NEXT_INSTANCE_STATE.md` so it reflects the
-   new ground truth for touched deliverables, lifecycle changes, file changes,
-   commit hashes, tests/audits, human rulings, open TBDs, blockers, and
-   immediate next actions.
+   new ground truth: first move the previous latest completed task into the
+   compact archive table if it is not already archived, then replace the
+   latest-state summary with the task just completed. Include touched
+   deliverables, lifecycle changes, file changes, commit hashes, tests/audits,
+   human rulings, open TBDs, blockers, and immediate next actions.
 2. Update `execution/_Coordination/_COORDINATION.md` only if the session creates
    a durable human ruling or changes coordination mode, graph authority, or
    dispatch policy.

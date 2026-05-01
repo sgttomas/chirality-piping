@@ -121,6 +121,9 @@ Required closeout actions:
 
 1. Update `execution/_Coordination/NEXT_INSTANCE_STATE.md` with the new ground
    truth:
+   - first move the previous latest completed task into the compact archive
+     table if it is not already archived;
+   - then replace the latest-state summary with the task just completed;
    - deliverable(s) touched and current lifecycle states;
    - exact files changed and commit hashes, if committed;
    - tests, audits, scans, and their results;

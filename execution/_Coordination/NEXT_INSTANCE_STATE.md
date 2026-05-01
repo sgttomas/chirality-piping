@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-01
-**Actor:** ORCHESTRATOR DEV-001 implementation-readiness queue and bootstrap prompt refresh
+**Actor:** ORCHESTRATOR NEXT_INSTANCE_STATE rotating handoff documentation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEV-001 implementation-readiness blocker queue and next-session bootstrap prompt refreshed; no broad fan-out
+**Current Mode:** NEXT_INSTANCE_STATE handoff rotation rule documented; no broad fan-out
 
 ## Active Control State
 
@@ -23,39 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Earlier bounded item | `DEL-01-02 - Copyright and protected-data boundary policy` |
-| Earlier bounded item commit | `0d729cf docs: tighten protected data boundary` |
-| DEL-02-01 handoff correction commit | `8f57f85 docs: record del-02-01 commit handoff` |
-| DEL-02-02 handoff correction commit | `ce94de3 docs: record del-02-02 commit handoff` |
-| DEL-02-03 handoff correction commit | `f19cf2a docs: record del-02-03 commit handoff` |
-| DEL-02-05 handoff correction commit | `4e18a0f docs: record del-02-05 commit handoff` |
-| DEL-02-04 handoff correction commit | `a37a0a1 docs: record del-02-04 commit handoff` |
-| Previous governance item | `DEL-01-04 - Professional responsibility and product-claims policy` |
-| Previous governance item commit | `65f3119 docs: add professional boundary policy` |
-| DEL-01-04 handoff correction commit | `1a996ac docs: record del-01-04 commit handoff` |
-| DEL-01-04 clean handoff state commit | `474b56d docs: record del-01-04 clean handoff state` |
-| Prior bounded item | `DEL-01-03 - Contributor certification workflow` |
-| Prior bounded item commit | `df461f8 docs: add contributor certification workflow` |
-| Previous bounded item | `DEL-03-01 - Material library schema with provenance` |
-| Previous bounded item commit | `3793e87 schema: add material library provenance contract` |
-| DEL-03-01 handoff correction commit | `f749a1c docs: record del-03-01 commit handoff` |
-| Previous bounded item | `DEL-03-02 - Pipe section and component library schema` |
-| Previous bounded item commit | `f0fdeac schema: add section and component library contracts` |
-| Previous bounded item | `DEL-03-03 - Bend and elbow component model fields` |
-| Previous bounded item commit | `7a84472 schema: add bend elbow component contract` |
-| DEL-03-03 handoff correction commit | `753b096 docs: record del-03-03 commit handoff` |
-| DEL-03-03 pushed state | `main` pushed to `origin/main` through CHANGE approval on 2026-05-01 |
-| Previous bounded item | `DEL-03-04 - Branch connection component model fields` |
-| Previous bounded item commit | `ae693b6 schema: add branch component contract` |
-| Previous bounded item | `DEL-03-05 - Rigid component models for valves, flanges, reducers, and specialty items` |
-| Previous bounded item commit | `d8ee0db schema: add rigid component contract` |
-| DEL-03-05 handoff correction commit | `fd695c0 docs: record del-03-05 handoff state` |
-| Previous bounded item | `DEL-03-06 - Expansion joint component model` |
-| Previous bounded item commit | `f15cbc6 schema: add expansion joint component contract` |
-| Last bounded item | `DEL-03-07 - Public/private library import provenance checker` |
-| Last bounded item commit | `4d880b3 core: add library import provenance checker` |
-| DEL-03-07 commit state | Committed on `main`; git remote state is governed by the latest `git status --short --branch` evidence |
-| Current authorized item | `None beyond CHANGE file-state handling for the implementation-readiness queue/bootstrap refresh` |
+| Latest state task | `NEXT_INSTANCE_STATE rotating handoff documentation` |
+| Latest state commit | `Uncommitted working-tree update unless later routed through CHANGE` |
+| Previous completed task archive status | `DEL-03-07` and `DEV-001 implementation-readiness queue/bootstrap refresh` moved into the compact task archive table |
+| Current authorized item | `None` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -143,10 +114,11 @@ yet have `COMMITTED` implementation evidence. It is not a lifecycle approval,
 schedule, priority, staffing decision, implementation completeness claim, or
 professional approval.
 
-## Completed Bounded Item History (Compacted)
+## Completed Task History (Compacted)
 
-This section compactly records completed DEV-001 bounded items before the most
-recent active closeout. Historical details remain recoverable from the named
+This archive compactly records completed tasks before the latest state summary.
+After each task completes, move the previous latest task here before replacing
+the latest-state summary. Historical details remain recoverable from named
 dispatch briefs, deliverable `MEMORY.md` files, commits, and git history.
 
 Universal historical guardrails preserved across the completed bounded items:
@@ -161,7 +133,7 @@ Universal historical guardrails preserved across the completed bounded items:
   claims were introduced.
 - `CANDIDATE` edges remained non-gating.
 
-| Deliverable | Result / commit | Primary changed surfaces | Verification summary | Remaining notable TBDs |
+| Task | Result / commit | Primary changed surfaces | Verification summary | Remaining notable TBDs |
 |---|---|---|---|---|
 | `DEL-01-01` Project governance baseline | Completed pilot; `7650cf6 docs: tighten maintainer governance gates` | `governance/MAINTAINERS.md` plus control-plane handoff | `git diff --check`; focused prohibited-claim scan; evidence-slot scan | Maintainer/legal/release governance details remain governed by later human rulings. |
 | `DEL-02-01` Canonical domain model schema | Completed; `7b256f3 schema: tighten canonical domain model contract`; handoff `8f57f85` | `schemas/model.schema.yaml`, `docs/TYPES.md`, model schema tests, dispatch/state/memory | Model, units, analysis status, persistence, analysis boundary, plugin manifest tests; `git diff --check`; forbidden-schema-text scan | `C-02-01-001`, `C-02-01-002`, physical package/container and migration framework. |
@@ -178,6 +150,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-03-04` Branch connection component model fields | Completed; `ae693b6 schema: add branch component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Branch source catalogs, fixture policy, solver use of branch flexibility inputs, import formats, and editor behavior remain `TBD`. |
 | `DEL-03-05` Rigid component models for valves, flanges, reducers, and specialty items | Completed; `d8ee0db schema: add rigid component contract`; handoff `fd695c0 docs: record del-03-05 handoff state` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Rigid component source catalogs, fixture policy, semi-rigid stiffness treatment, import formats, and editor behavior remain `TBD`. |
 | `DEL-03-06` Expansion joint component model | Completed; `f15cbc6 schema: add expansion joint component contract` | Component schema/fixture/tests, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | JSON checks, component/section and adjacent schema tests; `git diff --check`; focused protected-content/claim scan | Expansion-joint source catalogs, fixture policy, stiffness mapping, hardware taxonomy, import formats, and editor behavior remain `TBD`. |
+| `DEL-03-07` Public/private library import provenance checker | Completed; `4d880b3 core: add library import provenance checker` | `core/library_import/`, `tests/test_library_import_provenance.py`, `docs/SPEC.md`, `docs/TYPES.md`, dispatch/state/memory | Library import provenance test; adjacent schema tests; `git diff --check`; focused forbidden-claim/protected-content scan | Concrete external import formats, legal/license interpretation, UI presentation, and downstream adapter integration remain future work. |
+| `DEV-001` implementation-readiness queue/bootstrap refresh | Completed; `cf1bf12 coordination: add implementation readiness queue` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, queue builder/tests, coordination prompts/state, tool registry | `pytest tools/coordination`; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue contained 40 blocked implementation items | Future queue refreshes must be driven by DAG/evidence changes; no next product deliverable is authorized by this archive row. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -200,86 +174,54 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## DEL-03-07 Bounded Item Closeout
+## Latest State - NEXT_INSTANCE_STATE Rotation Documentation
 
-Human project authority authorized exactly one bounded DAG item:
-`DEL-03-07 - Public/private library import provenance checker`. ORCHESTRATOR /
-WORKING_ITEMS completed the bounded item inside the explicit write scope. Broad
-fan-out, lifecycle transition, candidate-edge promotion, blocker-queue refresh,
-and dependency-register edits were not performed.
+Human project authority clarified the handoff convention: after each task is
+complete, `NEXT_INSTANCE_STATE.md` must move the previous latest task into the
+compact archive table, then summarize the just-completed task as the latest
+state.
 
-Dispatch evidence:
+This task updates the control-loop documentation to make that convention
+explicit and applies it to the current state file.
 
-- Fresh sealed dispatch brief:
-  `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md`.
-- Active upstream dependencies were consumed from approved `DAG-001` active
-  rows: `DEL-00-01`, `DEL-00-02`, `DEL-00-04`, `DEL-00-06`, `DEL-00-07`,
-  `DEL-00-08`, `DEL-03-01`, `DEL-03-02`, `DEL-01-02`, `DEL-01-03`, and
-  `DEL-02-04`.
-- `CANDIDATE` rows were not promoted or used as gates.
+Files changed in this task:
 
-Commit evidence:
-
-- Product commit: `4d880b3 core: add library import provenance checker`.
-- This state file records the product commit; the implementation-readiness
-  queue/bootstrap refresh is a coordination change routed through `CHANGE`.
-
-Files changed in this bounded item:
-
-- `core/library_import/provenance_checker.py`
-- `core/library_import/README.md`
-- `tests/test_library_import_provenance.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-03_Piping Components, Materials, and Library Data Model/1_Working/DEL-03-07_Public-private library import provenance checker/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-03-07.md`
+- `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+- `execution/_Coordination/_COORDINATION.md`
+- `init/NEXT_SESSION_PROMPT.md`
+
+State rotation performed:
+
+- `DEL-03-07 - Public/private library import provenance checker` is now in the
+  completed task archive table.
+- `DEV-001 implementation-readiness queue/bootstrap refresh` is now in the
+  completed task archive table.
+- The latest-state summary now describes this
+  `NEXT_INSTANCE_STATE` rotation-documentation task.
 
 Verification run:
 
-- `python3 tests/test_library_import_provenance.py` passed.
-- Existing schema tests passed: `test_material_schema.py`,
-  `test_component_section_schema.py`, `test_model_schema.py`,
-  `test_units_schema.py`, `test_persistence_schema.py`,
-  `test_plugin_manifest_schema.py`, `test_analysis_status_schema.py`, and
-  `test_analysis_boundary_schema.py`.
-- `git diff --check` passed.
-- Focused forbidden-claim/protected-content scan over affected DEL-03-07
-  product surfaces found only existing negative boundary statements and
-  deny-list/boundary wording, not product certification/compliance claims or
-  protected/proprietary library data.
-
-Guardrails preserved:
-
-- No lifecycle state transition was made.
-- No blocker queue refresh was run.
-- No `DAG-001`, candidate-edge, `Dependencies.csv`, or `_DEPENDENCIES.md`
-  mutation occurred.
-- No protected standards text, protected tables, proprietary engineering
-  values, private data, manufacturer catalog values, or automatic
-  code-compliance/certification/sealing/legal-acceptance claims were introduced.
+- `git diff --check` passed for this documentation-only update.
 
 Remaining open items:
 
-- Concrete external import formats remain `TBD`.
-- Legal/license interpretation and accepted public source catalogs remain human
-  or legal review matters.
-- UI/editor presentation of import findings remains future GUI work.
-- Downstream adapter framework integration remains future interop work.
+- No next product deliverable is authorized by this documentation update.
+- If this documentation update should be preserved in git, route it through
+  `CHANGE` for staging, commit, and push.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Complete requested `CHANGE` file-state handling for the
-   implementation-readiness queue/bootstrap refresh.
+1. If desired, route this `NEXT_INSTANCE_STATE` rotation-documentation update
+   through `CHANGE`.
 2. Human project authority may route `RECONCILIATION`, `AUDIT_*`, pre-DAG
    artifact handling if it appears in file-state evidence, authorize exactly one
-   next bounded DAG item, route `CHANGE` for push or other file-state handling,
-   or pause.
+   next bounded DAG item, route `CHANGE` for file-state handling, or pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized beyond implementation-readiness queue refresh / CHANGE handling.
+authorized by this documentation update.
 
 ## Guardrails
 
