@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-01
 **Actor:** WORKING_ITEMS implementation for DEL-05-01
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-05-01 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed; coordination commit pending
+**Current Mode:** DEL-05-01 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed, committed
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-05-01 implementation` |
-| Latest state commit | Implementation commit `e3c9695`; coordination commit pending |
+| Latest state commit | Implementation commit `e3c9695`; evidence/queue commit `0c81eea`; handoff correction in this commit |
 | Previous completed task archive status | `DEL-05-01 sealed dispatch brief preparation` moved into the compact task archive table |
 | Current authorized item | None beyond this approved implementation/evidence/queue/lifecycle/commit pass |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-01.md` |
@@ -274,8 +274,8 @@ Verification:
 
 Remaining open items:
 
-- Coordination/evidence/lifecycle/queue changes are pending commit at the time
-  this state entry was edited.
+- Implementation commit is `e3c9695`; evidence, dependency-register,
+  lifecycle, and queue refresh commit is `0c81eea`.
 - Canonical calculation unit basis, conversion constants, final result-envelope
   integration, concrete application-service API, load-case storage
   representation, wind/seismic dynamic treatment, and production tolerance
