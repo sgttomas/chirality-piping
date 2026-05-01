@@ -61,7 +61,12 @@ Deliverable IDs are coupled to package IDs: `DEL-04-02` belongs to `PKG-04`. IDs
 | `HUMAN_REVIEW_REQUIRED` | Result requires competent engineering review before reliance. | Always true for professional use. |
 | `HUMAN_APPROVED_FOR_PROJECT` | A human has recorded project-specific acceptance outside the solver core. | Human record only. |
 
-The software must not use `CODE_COMPLIANT` as an automatic status.
+Automatic software-emitted statuses are limited to `MODEL_INCOMPLETE`,
+`MECHANICS_SOLVED`, `RULE_INPUTS_INCOMPLETE`, `USER_RULE_CHECKED`,
+`USER_RULE_FAILED`, and `HUMAN_REVIEW_REQUIRED`. The software must not use
+`HUMAN_APPROVED_FOR_PROJECT`, `CODE_COMPLIANT`, `CERTIFIED`, `SEALED`,
+`APPROVED`, or equivalent professional/code-compliance language as an
+automatic status.
 
 The code-neutral analysis boundary is the data-model surface that keeps these
 statuses from collapsing into one another. `schemas/analysis_boundary.schema.yaml`

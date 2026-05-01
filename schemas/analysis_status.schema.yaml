@@ -152,6 +152,7 @@
     "HumanAcceptanceRecord": {
       "type": "object",
       "additionalProperties": false,
+      "description": "External human project review record. This object may document human acceptance for a bounded project scope, but it is not software-computed status and is invalidated when bound payload hashes change.",
       "required": [
         "record_id",
         "acceptance_outcome",
@@ -182,7 +183,18 @@
           "description": "False means no project acceptance is recorded by this record; absence of a true human record is not a software failure status."
         },
         "human_actor": {
-          "$ref": "#/$defs/Actor"
+          "allOf": [
+            {
+              "$ref": "#/$defs/Actor"
+            },
+            {
+              "properties": {
+                "actor_type": {
+                  "const": "human"
+                }
+              }
+            }
+          ]
         },
         "recorded_at": {
           "type": "string",
@@ -227,6 +239,13 @@
                 "const": "accepted_for_project"
               }
             }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "acceptance_status"
+              ]
+            }
           }
         }
       ]
@@ -242,6 +261,8 @@
         "software_makes_compliance_claim",
         "software_makes_certification_claim",
         "software_makes_sealing_claim",
+        "software_makes_approval_claim",
+        "software_makes_authentication_claim",
         "reliance_notice"
       ],
       "properties": {
@@ -252,6 +273,12 @@
           "const": false
         },
         "software_makes_sealing_claim": {
+          "const": false
+        },
+        "software_makes_approval_claim": {
+          "const": false
+        },
+        "software_makes_authentication_claim": {
           "const": false
         },
         "reliance_notice": {

@@ -489,6 +489,14 @@ Reports must include:
 
 Reports must not reproduce protected code text, protected standards tables, or proprietary formulas in public templates/examples.
 
+Analysis-status envelopes must preserve the project authority boundary:
+software may emit `MODEL_INCOMPLETE`, `MECHANICS_SOLVED`,
+`RULE_INPUTS_INCOMPLETE`, `USER_RULE_CHECKED`, `USER_RULE_FAILED`, and
+`HUMAN_REVIEW_REQUIRED`, but it must not emit `HUMAN_APPROVED_FOR_PROJECT` or
+any code-compliance, certification, sealing, approval, authentication, or
+professional-reliance equivalent as an automatic status. Any human acceptance
+record is external, human-actor-owned, and bound to reviewed payload hashes.
+
 ## 10. Verification and validation mechanics
 
 The project shall maintain:

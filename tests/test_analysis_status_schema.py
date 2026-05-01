@@ -72,11 +72,19 @@ def main():
     )
     assert "bound_hashes" in human_record["required"]
     assert "software_status" not in human_record["properties"]
+    human_actor_constraints = human_record["properties"]["human_actor"]["allOf"]
+    assert human_actor_constraints[0]["$ref"].endswith("/Actor")
+    assert human_actor_constraints[1]["properties"]["actor_type"]["const"] == "human"
+    accepted_branch = human_record["allOf"][0]
+    assert "acceptance_status" in accepted_branch["then"]["required"]
+    assert accepted_branch["else"]["not"]["required"] == ["acceptance_status"]
 
     professional_boundary = defs["ProfessionalBoundary"]["properties"]
     assert professional_boundary["software_makes_compliance_claim"]["const"] is False
     assert professional_boundary["software_makes_certification_claim"]["const"] is False
     assert professional_boundary["software_makes_sealing_claim"]["const"] is False
+    assert professional_boundary["software_makes_approval_claim"]["const"] is False
+    assert professional_boundary["software_makes_authentication_claim"]["const"] is False
 
 
 if __name__ == "__main__":

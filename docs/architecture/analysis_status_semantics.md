@@ -51,9 +51,23 @@ Human acceptance is represented separately from `software_status`. A human accep
 - hashes for the reviewed payloads;
 - a scope notice describing what was accepted.
 
-If review occurred but project acceptance was not granted, the record uses an explicit non-accepted outcome and does not carry `HUMAN_APPROVED_FOR_PROJECT`.
+If review occurred but project acceptance was not granted, the record uses an explicit non-accepted outcome and does not carry `HUMAN_APPROVED_FOR_PROJECT`. Software, agents, and external systems may write supporting status records, but they cannot be the accepting actor for a `HUMAN_APPROVED_FOR_PROJECT` record.
 
 Human acceptance does not survive content changes. If a bound model, rule pack, result, or report hash changes, the prior human record no longer applies to the changed content.
+
+## Result Envelope Requirements
+
+Every status envelope carries:
+
+- an analysis subject reference;
+- one primary automatic software status and a set of automatic software statuses;
+- a status stage and basis;
+- source and actor metadata;
+- at least one hash for the payload or evidence basis;
+- optional references to diagnostics, rule packs, reports, or human acceptance records;
+- professional-boundary fields that are fixed false for software compliance, certification, sealing, approval, and authentication claims.
+
+The automatic status set intentionally excludes `HUMAN_APPROVED_FOR_PROJECT`. A result can be mechanically solved, rule checked, and still require human review. A human acceptance record can be attached later only as a separate hash-bound record.
 
 ## Transition Pattern
 
