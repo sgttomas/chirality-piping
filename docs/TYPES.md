@@ -120,6 +120,8 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `Component` | Piping-specific object such as bend, branch, reducer, valve, flange, expansion joint, rigid, or other user-defined component. | User modifiers and code/manufacturer values require provenance and may be private. |
 | `Material` | User/private or permissively sourced material record with unit-bearing properties, allowable slots, completeness findings, and provenance. | Public schema does not provide protected material allowables, code tables, or proprietary catalog values. |
 | `Section` | Pipe/section record with unit-bearing properties and provenance. | Protected dimensional tables and proprietary catalog data are not public defaults. |
+| `SectionLibrary` | Governed section records with user-entered dimensions, derived-property slots, completeness findings, provenance, and review status. | Public fixtures remain schema-shape-only or invented unless public-permissive source review is complete. |
+| `ComponentLibrary` | Governed component records for bends, branches, reducers, valves, flanges, expansion joints, rigid parts, specialty items, and user-defined components. | SIFs, flexibility factors, manufacturer values, weights, COGs, stiffnesses, and movement limits require provenance and may be private. |
 | `Support` | Restraint/support record with target reference, directions, unit-bearing properties, and active-state result hook. | Nonlinear solution behavior and convergence semantics are solver-owned. |
 | `LoadCase` | Primitive loading record with target references, units, and provenance. | Code-specific load requirements are user/rule-pack supplied. |
 | `Combination` | Algebraic grouping of load-case factors with an explicit basis. | No public code-specific combination defaults are implied. |
@@ -141,6 +143,8 @@ Companion boundary schemas:
 
 | Schema | Purpose | Boundary note |
 |---|---|---|
+| `schemas/section.schema.yaml` | Defines section-library metadata, pipe/section dimension slots, derived-property slots, completeness findings, provenance, and review status. | Protected dimensional tables and proprietary catalog values are not public defaults. |
+| `schemas/component.schema.yaml` | Defines component-library metadata, user-entered dimension/weight/COG/stiffness/modifier slots, completeness findings, provenance, and review status. | Protected SIF/flexibility tables, code-specific values, proprietary catalog values, and private library data are user-supplied or separately reviewed. |
 | `schemas/analysis_boundary.schema.yaml` | Separates mechanics solve authority, user-rule-check authority, missing-input findings, diagnostics, and external human acceptance references. | Human acceptance is reference-only and hash-bound; it is not emitted by solver or rule-pack computation. |
 | `schemas/analysis_status.schema.yaml` | Defines result-envelope status semantics and external human acceptance records. | `HUMAN_APPROVED_FOR_PROJECT` is not an automatic software status. |
 | `schemas/project_persistence.schema.yaml` | Defines the versioned project persistence envelope, round-trip manifest, migration status, hash metadata, validation profile, service operations, private-data markers, and external human acceptance references. | Public fixtures must not contain protected standards data, private rule content, proprietary values, or automatic compliance/professional-approval claims. |

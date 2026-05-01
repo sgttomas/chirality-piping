@@ -150,7 +150,36 @@ permissively sourced records with completed review evidence. Missing or
 unreviewed material values remain explicit findings; they are not supplied by
 silent defaults.
 
-### 4.1 Code-neutral analysis boundary
+## 4.2 Section and component library schemas
+
+Pipe section and component library records are governed data. The public schema
+may define user-entered dimensions, weights, centers of gravity, component
+modifier slots, derived-property slots, provenance, redistribution status,
+review status, and completeness findings. The public repository must not bundle
+protected dimensional tables, code-specific component modifiers, proprietary
+catalog values, or private user component libraries as defaults.
+
+The section and component library contracts are represented by
+`schemas/section.schema.yaml` and `schemas/component.schema.yaml`. They define:
+
+- section-library metadata, pipe/section dimension slots, derived-property
+  slots, provenance, review status, and missing-data diagnostics;
+- component-library metadata, component field slots for dimensions, weights,
+  centers of gravity, stiffness, effective area, movement limits, and user
+  modifier inputs;
+- explicit public repository value policies for SIF, flexibility, proprietary
+  catalog, and user/private values;
+- completeness rules and diagnostics for solve-required, property-calculation,
+  rule-check-required, and import/review-required data;
+- open decisions for fixture policy, accepted source catalogs, import formats,
+  section-property calculation policy, and component value policy.
+
+Public section/component fixtures must be invented non-engineering examples or
+schema-shape-only records unless a public-permissive source has completed
+review evidence. Missing or unreviewed section/component values remain explicit
+findings; they are not supplied by silent defaults.
+
+### 4.3 Code-neutral analysis boundary
 
 The analysis boundary is represented by
 `schemas/analysis_boundary.schema.yaml`. It separates three authority domains:
@@ -172,7 +201,7 @@ Missing solve-required inputs and missing rule-check-required inputs are
 explicit findings with diagnostics and provenance. They are not defaulted by the
 solver, rule-pack evaluator, adapters, reports, or GUI.
 
-### 4.2 Project persistence and round-trip serialization
+### 4.4 Project persistence and round-trip serialization
 
 The project persistence envelope is represented by
 `schemas/project_persistence.schema.yaml`. It is a versioned, schema-governed
@@ -205,7 +234,7 @@ external and hash-bound. They invalidate on bound-hash changes and do not imply
 software certification, sealing, authentication, professional approval, or
 automatic code compliance.
 
-### 4.3 Plugin and extension domain contracts
+### 4.5 Plugin and extension domain contracts
 
 The plugin manifest contract is represented by
 `schemas/plugin_manifest.schema.yaml`. It defines domain-level extension
