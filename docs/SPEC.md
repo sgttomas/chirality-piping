@@ -433,6 +433,18 @@ slice does not provide code-specific public combination defaults, a general
 rule-pack expression evaluator, stress recovery, protected standards data, or
 professional/code-compliance claims.
 
+The stress recovery slice is `core/loads/stress_recovery`. It recovers
+code-neutral mechanics components from explicit element force resultants,
+section properties, and optional pressure basis inputs: axial normal stress,
+bending normal stress components, torsional shear stress, and thin-wall
+pressure membrane components. Missing resultants, missing section or pressure
+inputs, non-finite values, non-positive properties, incomplete mechanics
+status, and human-approval status are deterministic findings, not silent
+defaults. This slice does not provide design-code stress equations, allowables,
+stress indices, SIF/flexibility tables, protected standards content, public
+pipe tables, unit conversion constants, rule-pack checks, result export, or
+professional/code-compliance claims.
+
 Stress recovery shall calculate open mechanics quantities such as axial stress, bending stress, torsional shear stress, pressure membrane stresses, and resultants. Code-category equations are rule-pack mappings.
 
 ## 7. Rule-pack evaluator
