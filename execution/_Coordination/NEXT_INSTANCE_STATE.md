@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS implementation for DEL-08-02
+**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-08-02
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-08-02 implemented in working tree with lifecycle/local mirror alignment; awaiting commit-backed evidence and queue refresh
+**Current Mode:** DEL-08-02 committed, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-02 implementation and initial alignment in working tree` |
-| Latest state commit | `DEL-06-03` implementation/alignment commit `c075522`; evidence/queue refresh commit `67cd25c`; `DEL-08-02` not committed yet |
+| Latest state task | `DEL-08-02 implementation evidence and blocker queue refresh` |
+| Latest state commit | `DEL-08-02` implementation/alignment commit `061f1af`; evidence/queue refresh pending commit |
 | Previous completed task archive status | `DEL-06-03 implementation evidence and blocker queue refresh` moved into the compact task archive table |
-| Current authorized item | `DEL-08-02 - Audit manifest and model hash` implementation |
+| Current authorized item | `DEL-08-02` lifecycle/evidence/queue closeout |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -138,21 +138,22 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 65 |
-| Filesystem lifecycle `CHECKING` (display only) | 8 |
-| Implementation evidence records | 32 |
-| Committed implementation evidence | 32 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 63 |
+| Filesystem lifecycle `CHECKING` (display only) | 10 |
+| Implementation evidence records | 33 |
+| Committed implementation evidence | 33 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 55 |
 | Implementation `BLOCKED` deliverables | 18 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. `DEL-06-03` is now recorded as
-`COMMITTED` evidence at `c075522`; `DEL-07-04` is newly unblocked and
-`DEL-08-02` remains unblocked. The queue is not a lifecycle approval, schedule,
-priority, staffing decision, implementation completeness claim, or professional
-approval.
+yet have `COMMITTED` implementation evidence. `DEL-08-02` is now recorded as
+`COMMITTED` evidence at `061f1af`; the queue remains 55 unblocked / 18 blocked
+because downstream consumers still have other missing upstreams. `DEL-08-01`
+now only waits on `DEL-08-03`, and `DEL-10-05` now waits on `DEL-10-01` and
+`DEL-08-04`. The queue is not a lifecycle approval, schedule, priority,
+staffing decision, implementation completeness claim, or professional approval.
 
 ## Completed Task History (Compacted)
 
@@ -252,7 +253,7 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-02 Implementation and Initial Alignment in Working Tree
+## Latest State - DEL-08-02 Implementation Evidence and Blocker Queue Refresh
 
 Human project authority approved `DEL-08-02` as the next bounded item after
 `DEL-06-03` closeout:
@@ -271,6 +272,9 @@ Files changed in this task:
 - `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/MEMORY.md`
 - `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/Dependencies.csv`
 - `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/_STATUS.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Implementation summary:
@@ -309,13 +313,17 @@ Lifecycle/evidence/queue closeout:
 - Updated `DEL-08-02` lifecycle from `SEMANTIC_READY` to `CHECKING`.
 - Annotated the `DEL-08-02` local dependency mirror for satisfied
   non-architecture upstreams `DEL-02-05` and `DEL-06-04`.
-- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` update was made for `DEL-08-02`
-  yet.
-- No `DEV-001_BLOCKER_QUEUE.*` refresh was made after `DEL-08-02`
-  implementation yet; current queue remains the post-`DEL-06-03` committed
-  evidence queue at 55 unblocked / 18 blocked.
+- Committed the bounded implementation and initial lifecycle/local-mirror
+  alignment as `061f1af core: add audit manifest hashing`.
+- Recorded `DEL-08-02` as `COMMITTED` implementation evidence at `061f1af`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 55 unblocked / 18
+  blocked.
+- `DEL-08-01` no longer appears as blocked by `DEL-08-02`; it still waits on
+  `DEL-08-03`.
+- `DEL-10-05` no longer appears as blocked by `DEL-08-02`; it still waits on
+  `DEL-10-01` and `DEL-08-04`.
 - Aggregate `DAG-001` was left unchanged; candidate edges remain non-gating.
-- No commit has been made for `DEL-08-02` yet.
+- `DAG-001` has been validated and left unchanged.
 
 Remaining open items:
 
@@ -331,12 +339,12 @@ Remaining open items:
 
 Immediate next action:
 
-1. Human project authority may approve lifecycle/evidence/queue/CHANGE handling
-   for `DEL-06-03`, route review, authorize exactly one next bounded DAG item,
-   route `RECONCILIATION`, route `AUDIT_*`, handle artifacts, or pause.
+1. Human project authority may route review; authorize exactly one next bounded
+   DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle artifacts; or
+   pause.
 
 Do not start broad DAG execution. No additional DAG item is currently
-authorized by this implementation pass.
+authorized by this alignment pass.
 
 ## Guardrails
 

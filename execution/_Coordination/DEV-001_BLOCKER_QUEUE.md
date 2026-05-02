@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 32 |
-| Committed implementation evidence | 32 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 64 |
+| Implementation evidence records | 33 |
+| Committed implementation evidence | 33 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 63 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 55 |
 | Implementation `BLOCKED` deliverables | 18 |
@@ -112,7 +112,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Missing-data warning and blocking UX |
 | `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
 | `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
-| `DEL-08-02` | `PKG-08` | `MISSING_EVIDENCE` | 9 | Audit manifest and model hash |
+| `DEL-08-02` | `PKG-08` | `COMMITTED` `061f1af` | 9 | Audit manifest and model hash |
 | `DEL-08-03` | `PKG-08` | `MISSING_EVIDENCE` | 11 | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | `MISSING_EVIDENCE` | 11 | Result export format |
 | `DEL-09-01` | `PKG-09` | `MISSING_EVIDENCE` | 9 | Mechanics benchmark suite |
@@ -133,7 +133,6 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0510`; `DAG-001-E0577` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0511` |
 | `DEL-08-01` - Calculation report generator | `PKG-08` | `MISSING_EVIDENCE` | 3 | `DEL-08-05`; `DEL-11-01`; `DEL-12-02` | `DAG-001-E0529`; `DAG-001-E0578`; `DAG-001-E0612` |
-| `DEL-08-02` - Audit manifest and model hash | `PKG-08` | `MISSING_EVIDENCE` | 2 | `DEL-08-01`; `DEL-10-05` | `DAG-001-E0526`; `DAG-001-E0570` |
 | `DEL-08-03` - Warnings, assumptions, and provenance report section | `PKG-08` | `MISSING_EVIDENCE` | 1 | `DEL-08-01` | `DAG-001-E0527` |
 | `DEL-08-04` - Result export format | `PKG-08` | `MISSING_EVIDENCE` | 2 | `DEL-10-05`; `DEL-12-02` | `DAG-001-E0569`; `DAG-001-E0613` |
 | `DEL-08-05` - Report protected-content linter | `PKG-08` | `MISSING_EVIDENCE` | 3 | `DEL-09-05`; `DEL-10-04`; `DEL-11-04` | `DAG-001-E0550`; `DAG-001-E0573`; `DAG-001-E0593` |
@@ -152,14 +151,14 @@ These deliverables have no active upstream implementation dependency below the `
 |---|---|---:|---|---|
 | `DEL-07-03` | `PKG-07` | 1 | `DEL-12-01` | Material, component, and rule-pack editors |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-08-01` | `PKG-08` | 2 | `DEL-08-02`; `DEL-08-03` | Calculation report generator |
+| `DEL-08-01` | `PKG-08` | 1 | `DEL-08-03` | Calculation report generator |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
 | `DEL-09-04` | `PKG-09` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 4 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |
 | `DEL-10-02` | `PKG-10` | 3 | `DEL-10-01`; `DEL-12-01`; `DEL-12-05` | Import/export adapter framework |
 | `DEL-10-03` | `PKG-10` | 1 | `DEL-10-01` | Local FEA handoff data contract |
 | `DEL-10-04` | `PKG-10` | 4 | `DEL-09-05`; `DEL-10-05`; `DEL-08-05`; `DEL-12-05` | Build, packaging, and CI/CD pipeline |
-| `DEL-10-05` | `PKG-10` | 3 | `DEL-10-01`; `DEL-08-04`; `DEL-08-02` | Headless CLI and structured I/O analysis runner |
+| `DEL-10-05` | `PKG-10` | 2 | `DEL-10-01`; `DEL-08-04` | Headless CLI and structured I/O analysis runner |
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
 | `DEL-11-02` | `PKG-11` | 1 | `DEL-10-01` | Developer guide for solver and rule packs |
 | `DEL-11-03` | `PKG-11` | 1 | `DEL-09-01` | Theory notes: classical to modern centerline analysis |
