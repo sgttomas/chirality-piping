@@ -1,0 +1,639 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openpipestress.org/schemas/results.schema.yaml",
+  "title": "OpenPipeStress Result Export Schema",
+  "description": "Strict JSON syntax schema for schema-first JSON result envelopes. Result exports support review, regression comparison, reports, headless automation, and governed downstream tooling without choosing additional export formats or making professional/code-compliance claims.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "deliverable_id",
+    "package_id",
+    "scope_item",
+    "objectives",
+    "export_format_status",
+    "result_envelope"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "deliverable_id": {
+      "const": "DEL-08-04"
+    },
+    "package_id": {
+      "const": "PKG-08"
+    },
+    "scope_item": {
+      "const": "SOW-046"
+    },
+    "objectives": {
+      "type": "array",
+      "minItems": 2,
+      "contains": {
+        "enum": [
+          "OBJ-007",
+          "OBJ-009"
+        ]
+      },
+      "items": {
+        "type": "string",
+        "enum": [
+          "OBJ-007",
+          "OBJ-009"
+        ]
+      }
+    },
+    "export_format_status": {
+      "$ref": "#/$defs/ExportFormatStatus"
+    },
+    "result_envelope": {
+      "$ref": "#/$defs/ResultEnvelope"
+    }
+  },
+  "$defs": {
+    "AnalysisStatus": {
+      "type": "string",
+      "description": "Automatic software-emitted analysis statuses allowed in result exports. Human project acceptance is external and hash-bound.",
+      "enum": [
+        "MODEL_INCOMPLETE",
+        "MECHANICS_SOLVED",
+        "RULE_INPUTS_INCOMPLETE",
+        "USER_RULE_CHECKED",
+        "USER_RULE_FAILED",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "Checksum": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "payload_ref",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha512",
+            "TBD"
+          ]
+        },
+        "canonicalization": {
+          "type": "string",
+          "enum": [
+            "JCS",
+            "NONE",
+            "TBD"
+          ]
+        },
+        "payload_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "class",
+        "severity",
+        "source",
+        "affected_object",
+        "message",
+        "remediation",
+        "provenance"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "class": {
+          "type": "string",
+          "enum": [
+            "SOLVE_BLOCKING",
+            "RULE_CHECK_BLOCKING",
+            "PROVENANCE_WARNING",
+            "ASSUMPTION_WARNING",
+            "NONLINEAR_WARNING",
+            "IP_BOUNDARY_WARNING",
+            "UNIT_WARNING",
+            "EXPORT_BLOCKING",
+            "TBD"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "info",
+            "warning",
+            "blocking"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/Reference"
+        },
+        "affected_object": {
+          "$ref": "#/$defs/Reference"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "remediation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "DimensionId": {
+      "type": "string",
+      "enum": [
+        "dimensionless",
+        "length",
+        "angle",
+        "force",
+        "moment",
+        "stress",
+        "ratio",
+        "time",
+        "temperature",
+        "pressure",
+        "TBD"
+      ]
+    },
+    "DownstreamUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review",
+        "regression_comparison",
+        "report_consumption",
+        "headless_automation",
+        "governed_downstream_tooling",
+        "additional_export_formats"
+      ],
+      "properties": {
+        "review": {
+          "const": true
+        },
+        "regression_comparison": {
+          "const": true
+        },
+        "report_consumption": {
+          "const": true
+        },
+        "headless_automation": {
+          "const": true
+        },
+        "governed_downstream_tooling": {
+          "const": true
+        },
+        "additional_export_formats": {
+          "const": "TBD"
+        }
+      }
+    },
+    "ExportFormatStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_format",
+        "additional_formats",
+        "public_transport_protocol",
+        "local_fea_package_format",
+        "external_adapter_formats"
+      ],
+      "properties": {
+        "baseline_format": {
+          "const": "schema_first_json_result_envelope"
+        },
+        "additional_formats": {
+          "const": "TBD"
+        },
+        "public_transport_protocol": {
+          "const": "TBD"
+        },
+        "local_fea_package_format": {
+          "const": "TBD"
+        },
+        "external_adapter_formats": {
+          "const": "TBD"
+        }
+      }
+    },
+    "Id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ProfessionalBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_review_required",
+        "software_makes_compliance_claim",
+        "software_makes_certification_claim",
+        "software_makes_sealing_claim",
+        "software_makes_approval_claim",
+        "software_makes_authentication_claim"
+      ],
+      "properties": {
+        "human_review_required": {
+          "const": true
+        },
+        "software_makes_compliance_claim": {
+          "const": false
+        },
+        "software_makes_certification_claim": {
+          "const": false
+        },
+        "software_makes_sealing_claim": {
+          "const": false
+        },
+        "software_makes_approval_claim": {
+          "const": false
+        },
+        "software_makes_authentication_claim": {
+          "const": false
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_name",
+        "source_location",
+        "source_license",
+        "contributor",
+        "contributor_certification",
+        "redistribution_status",
+        "review_status"
+      ],
+      "properties": {
+        "source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contributor_certification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "invented_non_engineering_example",
+            "TBD"
+          ]
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "accepted",
+            "rejected",
+            "quarantined",
+            "TBD"
+          ]
+        }
+      }
+    },
+    "QuantityResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result_id",
+        "family",
+        "object_ref",
+        "basis_ref",
+        "magnitude",
+        "unit",
+        "dimension",
+        "provenance"
+      ],
+      "properties": {
+        "result_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "family": {
+          "$ref": "#/$defs/ResultFamily"
+        },
+        "object_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "basis_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "station_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "magnitude": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimension": {
+          "$ref": "#/$defs/DimensionId"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref_type",
+        "ref_id"
+      ],
+      "properties": {
+        "ref_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "display_name": {
+          "type": "string"
+        }
+      }
+    },
+    "Reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_hash",
+        "run_hashes",
+        "audit_manifest_ref",
+        "deterministic_ordering"
+      ],
+      "properties": {
+        "model_hash": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "run_hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Checksum"
+          }
+        },
+        "audit_manifest_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "deterministic_ordering": {
+          "const": true
+        }
+      }
+    },
+    "ResultEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "envelope_id",
+        "model_ref",
+        "run_ref",
+        "solver_version",
+        "unit_system_ref",
+        "load_basis_refs",
+        "result_sets",
+        "diagnostics",
+        "provenance",
+        "reproducibility",
+        "analysis_status",
+        "professional_boundary",
+        "downstream_use"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "envelope_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "model_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "run_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "solver_version": {
+          "$ref": "#/$defs/SolverVersion"
+        },
+        "unit_system_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "load_basis_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "result_sets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ResultSet"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "reproducibility": {
+          "$ref": "#/$defs/Reproducibility"
+        },
+        "analysis_status": {
+          "type": "array",
+          "minItems": 1,
+          "contains": {
+            "const": "HUMAN_REVIEW_REQUIRED"
+          },
+          "items": {
+            "$ref": "#/$defs/AnalysisStatus"
+          }
+        },
+        "rule_pack_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RulePackRef"
+          }
+        },
+        "professional_boundary": {
+          "$ref": "#/$defs/ProfessionalBoundary"
+        },
+        "downstream_use": {
+          "$ref": "#/$defs/DownstreamUse"
+        }
+      }
+    },
+    "ResultFamily": {
+      "type": "string",
+      "enum": [
+        "displacement",
+        "rotation",
+        "force",
+        "moment",
+        "reaction",
+        "stress",
+        "ratio",
+        "rule_check"
+      ]
+    },
+    "ResultSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "set_id",
+        "set_type",
+        "basis_ref",
+        "values"
+      ],
+      "properties": {
+        "set_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "set_type": {
+          "type": "string",
+          "enum": [
+            "mechanics",
+            "stress_recovery",
+            "user_rule_check",
+            "diagnostic_only",
+            "TBD"
+          ]
+        },
+        "basis_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/QuantityResult"
+          }
+        }
+      }
+    },
+    "RulePackRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_pack_id",
+        "version",
+        "checksum",
+        "source_notice",
+        "redistribution_status",
+        "completeness_status",
+        "private_payload_redacted"
+      ],
+      "properties": {
+        "rule_pack_id": {
+          "$ref": "#/$defs/Id"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checksum": {
+          "$ref": "#/$defs/Checksum"
+        },
+        "source_notice": {
+          "type": "string",
+          "minLength": 1
+        },
+        "redistribution_status": {
+          "type": "string",
+          "enum": [
+            "public_permissive",
+            "private_only",
+            "unknown",
+            "protected_suspected",
+            "invented_non_engineering_example",
+            "TBD"
+          ]
+        },
+        "completeness_status": {
+          "type": "string",
+          "enum": [
+            "complete_for_user_rule_check",
+            "missing_required_inputs",
+            "not_checked",
+            "TBD"
+          ]
+        },
+        "private_payload_redacted": {
+          "const": true
+        }
+      }
+    },
+    "SolverVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "solver_name",
+        "solver_version",
+        "solver_build_ref"
+      ],
+      "properties": {
+        "solver_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solver_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solver_build_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

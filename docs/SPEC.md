@@ -602,6 +602,26 @@ any code-compliance, certification, sealing, approval, authentication, or
 professional-reliance equivalent as an automatic status. Any human acceptance
 record is external, human-actor-owned, and bound to reviewed payload hashes.
 
+The result export format is represented by `schemas/results.schema.yaml` and
+the bounded `core/reporting/result_export` crate. The baseline is a
+schema-first JSON result envelope for review, regression comparison, report
+consumption, headless automation, and governed downstream tooling. Additional
+export formats, public API transport, local FEA package format, external
+adapter formats, GUI rendering, CLI runtime behavior, report rendering,
+private redaction workflow, and release comparison thresholds remain `TBD`.
+
+Result export envelopes must identify the result set, model/run basis, solver
+version, unit-system reference, load-case or combination basis, diagnostics,
+provenance, reproducibility hashes or audit-manifest reference, analysis
+statuses, rule-pack references where present, and a professional-boundary
+notice. Displacement, rotation, force, moment, reaction, stress, ratio, and
+rule-check result values must carry explicit unit and dimensional metadata or
+produce blocking diagnostics. Rule-pack references expose identity, version,
+checksum, source notice, redistribution/private-public status, completeness
+status, and redaction status; exports must not copy private formulas,
+protected standards text, protected tables, proprietary values, or private
+rule-pack payloads into public artifacts.
+
 ## 10. Verification and validation mechanics
 
 The project shall maintain:

@@ -168,6 +168,7 @@ The canonical machine-readable domain model is `schemas/model.schema.yaml`. That
 | `AuditManifest` | Reproducibility record for model/input hashes, solver version stamp, unit-system reference, rule-pack checksum refs, asset hashes, privacy/redaction metadata, and manifest findings. | It records evidence for review without storing private payloads, authenticating engineering work, or making professional/code-compliance claims. |
 | `ReportSettings` | Report configuration for manifests, provenance summaries, notices, result references, and rule-pack references. | Report rendering and professional acceptance records remain separate workflows. |
 | `Report` | Auditable report-facing record for manifests, hashes, statuses, diagnostics, rule-pack refs, provenance summary, and professional-boundary notice. | Reports are decision support and must not claim certification, sealing, or professional approval by the software. |
+| `ResultExportEnvelope` | Schema-first JSON result export contract for review, regression comparison, reports, headless automation, and governed downstream tooling. | Additional export formats, public transport, local FEA package format, GUI/report/CLI rendering, adapter behavior, and redaction workflow remain `TBD`; exports preserve units, diagnostics, provenance, hashes, status boundaries, and no professional/code-compliance claims. |
 
 Companion boundary schemas:
 
@@ -179,6 +180,7 @@ Companion boundary schemas:
 | `schemas/analysis_status.schema.yaml` | Defines result-envelope status semantics and external human acceptance records. | `HUMAN_APPROVED_FOR_PROJECT` is not an automatic software status. |
 | `schemas/project_persistence.schema.yaml` | Defines the versioned project persistence envelope, round-trip manifest, migration status, hash metadata, validation profile, service operations, private-data markers, and external human acceptance references. | Public fixtures must not contain protected standards data, private rule content, proprietary values, or automatic compliance/professional-approval claims. |
 | `schemas/rule_pack.schema.yaml` | Defines rule-pack metadata, public/private classification, required inputs, declarative formula slots, user-supplied value slots, check definitions, diagnostics, provenance, redistribution status, checksums, and professional-boundary controls. | Rule-pack content is user-owned or invented/public-reviewed; the schema does not bundle protected values, arbitrary executable code, evaluator behavior, or software-generated professional/code-compliance claims. |
+| `schemas/results.schema.yaml` | Defines schema-first JSON result export envelopes for result identity, model/run references, unit-aware values, diagnostics, provenance, reproducibility refs, analysis status, rule-pack refs, and downstream-use declarations. | Additional export formats are `TBD`; result exports do not copy protected/private rule content and do not declare professional approval or code compliance. |
 
 ## 9. Lifecycle states for development deliverables
 

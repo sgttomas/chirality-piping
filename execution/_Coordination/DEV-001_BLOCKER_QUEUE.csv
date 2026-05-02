@@ -50,7 +50,7 @@ DEL-07-07,PKG-07,"Solve execution UX: progress, cancellation, and diagnostics",S
 DEL-08-01,PKG-08,Calculation report generator,SEMANTIC_READY,MISSING_EVIDENCE,,14,13,1,BLOCKED,DEL-08-03,DAG-001-E0527
 DEL-08-02,PKG-08,Audit manifest and model hash,CHECKING,COMMITTED,061f1af,9,9,0,UNBLOCKED,,
 DEL-08-03,PKG-08,"Warnings, assumptions, and provenance report section",SEMANTIC_READY,MISSING_EVIDENCE,,11,11,0,UNBLOCKED,,
-DEL-08-04,PKG-08,Result export format,SEMANTIC_READY,MISSING_EVIDENCE,,11,11,0,UNBLOCKED,,
+DEL-08-04,PKG-08,Result export format,CHECKING,WORKING_TREE,,11,11,0,UNBLOCKED,,
 DEL-08-05,PKG-08,Report protected-content linter,SEMANTIC_READY,MISSING_EVIDENCE,,10,9,1,BLOCKED,DEL-08-01,DAG-001-E0529
 DEL-09-01,PKG-09,Mechanics benchmark suite,CHECKING,COMMITTED,b34ecd6,9,9,0,UNBLOCKED,,
 DEL-09-02,PKG-09,Stress recovery benchmark suite,CHECKING,COMMITTED,bf1dc20,8,8,0,UNBLOCKED,,
