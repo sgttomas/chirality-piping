@@ -671,6 +671,29 @@ status, and redaction status; exports must not copy private formulas,
 protected standards text, protected tables, proprietary values, or private
 rule-pack payloads into public artifacts.
 
+The calculation report generator is represented by
+`schemas/report_generator.schema.yaml` and the bounded
+`core/reporting/report_generator` crate. It assembles report-facing references
+to persisted model inputs, load cases or combinations, result export envelopes,
+audit manifests, report-section records, rule-pack references, diagnostics,
+limitations, and professional-boundary notices into deterministic template
+slots and neutral structured sections for tests. It does not read arbitrary
+project files, call solver internals, choose final report styling/layout, run
+GUI/CLI/API/adapter workflows, implement protected-content linting, implement
+private-data redaction/export controls, or make professional/code-compliance
+claims.
+
+Calculation reports must preserve stable references, checksums, source notes,
+privacy classification, review state, and provenance for input/report/result
+payloads. Numeric values included through result/report references must carry
+unit and dimensional metadata or explicit diagnostics from their source
+envelopes. Missing solve-required or rule-check-required values remain
+findings and are never hidden defaults. Report templates and public fixtures
+must be original or invented project artifacts; they must not copy protected
+standards text, protected tables, protected examples, proprietary formulas,
+proprietary engineering values, private project data, private rule-pack
+payloads, private library content, or real secrets.
+
 The headless runner contract is represented by
 `schemas/headless_runner.schema.yaml` and the bounded
 `core/runner/headless` crate. The baseline is a schema-first request/result

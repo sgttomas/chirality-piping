@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-08-03 post-commit evidence promotion
+**Actor:** WORKING_ITEMS DEL-08-01 implementation lifecycle/evidence/queue closeout
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-08-03` implementation committed; evidence promoted to `COMMITTED` and blocker queue refreshed
+**Current Mode:** `DEL-08-01` implementation and closeout ready for commit; evidence is `WORKING_TREE` until commit hash promotion
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-03 post-commit evidence promotion` |
-| Latest state commit | Implementation/closeout `50f947a`; promotion metadata `5b43b51`; this handoff row is recorded by current git history |
-| Previous completed task archive status | `DEL-08-03 lifecycle/evidence/queue closeout` committed as `50f947a` |
-| Current authorized item | `DEL-08-03` evidence promoted to `COMMITTED`; queue refreshed |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-03.md` |
+| Latest state task | `DEL-08-01 implementation lifecycle/evidence/queue closeout` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-08-01 implementation from sealed dispatch brief` archived in compact history |
+| Current authorized item | `DEL-08-01` closeout ready for commit; post-commit evidence promotion needed after commit hash exists |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -294,6 +294,9 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-03` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-03.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-03` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/report_sections.schema.yaml`, `core/reporting/report_sections/`, `tests/test_report_sections_contract.py`, docs, deliverable `MEMORY.md`, dispatch/state | Report-section schema script, report-section cargo fmt/tests, analysis-status schema, library provenance, result schema, `git diff --check`, and focused scans passed | Lifecycle/evidence/queue closeout was separately authorized after implementation. |
 | `DEL-08-03` lifecycle/evidence/queue closeout | Completed; implementation/closeout `50f947a` | Report-section implementation files, `DEL-08-03` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state/memory | Report-section tests, dependency schema validation, DAG audit, coordination tests, queue rebuild, `git diff --check`, and focused scans passed; queue initially remained 64 unblocked / 9 blocked because evidence was `WORKING_TREE` before commit | Post-commit evidence promotion was required to unblock downstream consumers. |
+| `DEL-08-03` post-commit evidence promotion | Completed; implementation/closeout `50f947a`; promotion metadata `5b43b51` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-08-03.md`, `NEXT_INSTANCE_STATE.md` | Report-section contract tests, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 65 unblocked / 8 blocked | `DEL-08-01` newly unblocked with `MISSING_EVIDENCE`; no next product deliverable was authorized by the promotion itself. |
+| `DEL-08-01` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
+| `DEL-08-01` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/report_generator.schema.yaml`, `core/reporting/report_generator/`, `fixtures/reports/invented/`, `tests/test_report_generator_contract.py`, docs, deliverable `MEMORY.md`, dispatch/state | Report-generator schema script, report-generator rustfmt/tests, report-section schema, result schema, analysis-status schema, persistence schema, rule-pack schema, `git diff --check`, and focused scans passed | Lifecycle/evidence/queue closeout was separately authorized after implementation. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -316,88 +319,76 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-03 Post-Commit Evidence Promotion
+## Latest State - DEL-08-01 Implementation Lifecycle/Evidence/Queue Closeout
 
 Human project authority authorized lifecycle/evidence/queue closeout, staging,
-and commit for the implemented `DEL-08-03` work:
+and commit for the implemented `DEL-08-01` work:
 
 - "perform lifecycle transition, dependency-register edits, evidence
   registration, blocker queue refresh, staging, and commit"
 
 Files changed in this task:
 
-- `schemas/report_sections.schema.yaml`
-- `core/reporting/report_sections/Cargo.toml`
-- `core/reporting/report_sections/Cargo.lock`
-- `core/reporting/report_sections/src/lib.rs`
-- `tests/test_report_sections_contract.py`
+- `schemas/report_generator.schema.yaml`
+- `core/reporting/report_generator/.gitignore`
+- `core/reporting/report_generator/Cargo.toml`
+- `core/reporting/report_generator/src/lib.rs`
+- `fixtures/reports/invented/calculation_report_fixture.json`
+- `tests/test_report_generator_contract.py`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-03_Warnings, assumptions, and provenance report section/MEMORY.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-03_Warnings, assumptions, and provenance report section/_STATUS.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-03_Warnings, assumptions, and provenance report section/Dependencies.csv`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/MEMORY.md`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/_STATUS.md`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/Dependencies.csv`
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-03.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Alignment summary:
+Implementation summary:
 
-- Added `schemas/report_sections.schema.yaml` as a strict-JSON JSON Schema
-  2020-12 contract for report-facing diagnostics, analysis-status
-  disclosures, provenance notes, user-supplied values, assumptions,
-  limitations, unresolved TBDs, and professional-boundary controls.
-- Added `core/reporting/report_sections/` as a bounded Rust support crate for
-  in-memory report-section validation, deterministic diagnostic ordering, and
-  missing metadata findings.
-- Added `tests/test_report_sections_contract.py` for deterministic schema
-  checks.
+- Added `schemas/report_generator.schema.yaml` as a strict-JSON JSON Schema
+  2020-12 contract for calculation-report assembly.
+- Added `core/reporting/report_generator/` as a bounded Rust support crate for
+  in-memory report validation, template-slot validation, and deterministic
+  neutral section ordering.
+- Added invented, non-engineering report fixture data under
+  `fixtures/reports/invented/`.
+- Added `tests/test_report_generator_contract.py` for deterministic schema and
+  fixture checks.
 - Updated focused `docs/SPEC.md` and `docs/TYPES.md` sections only for the
-  report-section boundary.
+  report-generator boundary.
 - Added deliverable `MEMORY.md`.
 - Updated the dispatch brief with implementation and verification summaries.
-- Set `DEL-08-03` lifecycle display state to `CHECKING`.
-- Annotated local dependency mirror rows `DAG-001-E0518` through
-  `DAG-001-E0521` as `SATISFIED` from committed upstream evidence.
-- Added `DEL-08-03` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
+- Set `DEL-08-01` lifecycle display state to `CHECKING`.
+- Annotated local dependency mirror rows `DAG-001-E0522` through
+  `DAG-001-E0528` as `SATISFIED` from committed upstream evidence.
+- Added `DEL-08-01` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
   `WORKING_TREE` evidence before commit.
-- `DEL-08-03` implementation and closeout alignment were committed as
-  `50f947a schema: add report sections contract`.
-- Promoted `DEL-08-03` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
-  `WORKING_TREE` to `COMMITTED` evidence for commit `50f947a`.
-- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 65 unblocked / 8
-  blocked. `DEL-08-01 - Calculation report generator` is now unblocked by
-  implementation-readiness criteria and has `MISSING_EVIDENCE` for its own
-  implementation.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 65 unblocked / 8 blocked
+  because `DEL-08-01` evidence was not yet commit-backed.
 
 Verification:
 
+- `python3 tests/test_report_generator_contract.py` passed.
+- `cargo fmt --manifest-path core/reporting/report_generator/Cargo.toml -- --check`
+  passed.
+- `cargo test --manifest-path core/reporting/report_generator/Cargo.toml` passed
+  with 5 unit tests.
 - `python3 tests/test_report_sections_contract.py` passed.
-- `cargo fmt --manifest-path core/reporting/report_sections/Cargo.toml -- --check`
-  passed.
-- `cargo test --manifest-path core/reporting/report_sections/Cargo.toml` passed
-  with 6 unit tests.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_library_import_provenance.py` passed.
 - `python3 tests/test_results_schema.py` passed.
+- `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tests/test_persistence_schema.py` passed.
+- `python3 tests/test_rule_pack_schema.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed before commit: 64 unblocked / 9 blocked.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed after evidence promotion: 65 unblocked / 8 blocked.
-- `python3 tools/validation/validate_dependencies_schema.py
-  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-03_Warnings, assumptions, and provenance report section/Dependencies.csv"`
-  passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
-- `python3 -m pytest tools/coordination` passed with 10 tests.
+  2026-05-02` passed before commit: 65 unblocked / 8 blocked.
 - `git diff --check` passed.
 - Focused protected-content/private-secret/prohibited-claim scan was reviewed;
-  matches were guardrail/prohibition terms in tests, docs, memory, and the
-  dispatch brief, not protected data, private secrets, concrete report-renderer
-  commitments, or positive compliance/professional/security claims.
+  matches were guardrail/prohibition terms in docs, tests, schema, memory, and
+  the dispatch brief, not protected data, private secrets, concrete runtime
+  redaction/linter commitments, or positive compliance/professional/security
+  claims.
 
 Guardrail results:
 
@@ -405,20 +396,23 @@ Guardrail results:
 - Lifecycle, local dependency mirror, evidence register, and blocker queue
   changes were limited to the authorized closeout surfaces.
 - No aggregate `DAG-001` change, candidate-edge promotion, protected standards
-  data, private data, real secret, report renderer/template implementation,
-  GUI/report/CLI/API/adapter runtime behavior, redaction/export controls, or
-  professional/security/code-compliance claim was performed.
+  data, private data, real secret, GUI/report-preview/CLI/API/adapter runtime
+  behavior, redaction/export control implementation, protected-content linter
+  implementation, or professional/code-compliance claim occurred during
+  closeout.
 
 Remaining open items:
 
-- No remaining closeout item for `DEL-08-03` post-commit evidence promotion.
+- Post-commit evidence promotion is required after the implementation/closeout
+  commit hash exists.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize one bounded DAG item, route
-   reconciliation/audit, handle artifacts, or pause.
+1. After committing this closeout, promote `DEL-08-01` evidence from
+   `WORKING_TREE` to `COMMITTED`, refresh `DEV-001_BLOCKER_QUEUE.*`, verify,
+   and commit the promotion metadata.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
