@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 39 |
+| Implementation evidence records | 40 |
 | Committed implementation evidence | 39 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 34 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 33 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 60 |
 | Implementation `BLOCKED` deliverables | 13 |
@@ -119,7 +119,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `MISSING_EVIDENCE` | 6 | Nonlinear support regression suite |
-| `DEL-10-01` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Public API and plugin boundary |
+| `DEL-10-01` | `PKG-10` | `WORKING_TREE` | 11 | Public API and plugin boundary |
 | `DEL-11-03` | `PKG-11` | `MISSING_EVIDENCE` | 9 | Theory notes: classical to modern centerline analysis |
 | `DEL-11-05` | `PKG-11` | `MISSING_EVIDENCE` | 8 | Contributor tutorial and onboarding |
 | `DEL-12-01` | `PKG-12` | `COMMITTED` `84e0a73` | 10 | Local-first storage and private data paths |
@@ -143,7 +143,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-08-05` - Report protected-content linter | `PKG-08` | `MISSING_EVIDENCE` | 3 | `DEL-09-05`; `DEL-10-04`; `DEL-11-04` | `DAG-001-E0550`; `DAG-001-E0573`; `DAG-001-E0593` |
 | `DEL-09-03` - Nonlinear support regression suite | `PKG-09` | `MISSING_EVIDENCE` | 2 | `DEL-09-04`; `DEL-09-05` | `DAG-001-E0545`; `DAG-001-E0549` |
 | `DEL-09-05` - Release quality gate checklist | `PKG-09` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-001-E0571` |
-| `DEL-10-01` - Public API and plugin boundary | `PKG-10` | `MISSING_EVIDENCE` | 4 | `DEL-10-02`; `DEL-10-03`; `DEL-10-05`; `DEL-11-02` | `DAG-001-E0556`; `DAG-001-E0561`; `DAG-001-E0565`; `DAG-001-E0584` |
+| `DEL-10-01` - Public API and plugin boundary | `PKG-10` | `WORKING_TREE` | 4 | `DEL-10-02`; `DEL-10-03`; `DEL-10-05`; `DEL-11-02` | `DAG-001-E0556`; `DAG-001-E0561`; `DAG-001-E0565`; `DAG-001-E0584` |
 | `DEL-10-05` - Headless CLI and structured I/O analysis runner | `PKG-10` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-001-E0572` |
 
 ## Per-Deliverable Blocked Items

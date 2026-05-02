@@ -16,9 +16,11 @@ This document defines the public plugin and API boundary rules for OpenPipeStres
 
 - Public API contracts are schema-first. Transport remains `TBD`; this deliverable does not lock the project to HTTP, OpenAPI, local IPC, CLI stdin/stdout, or an embedded plugin ABI.
 - External callers use command, query, job, and result-envelope boundaries. Mutating operations are commands, read-only operations are queries, long-running solve/export/report work is a job, and nontrivial outputs return result envelopes.
+- Validation-test execution is a governed job boundary when exposed through public API or plugin surfaces. Validation fixtures and outputs must carry provenance, diagnostics, reproducibility metadata, and result envelopes.
 - Plugins and adapters translate data at the boundary. They do not own domain validation, unit validation, provenance policy, protected-content screening, rule-pack sandboxing, or report boundary controls.
 - Model import/export, solver invocation, result access, rule-pack hooks, diagnostics, provenance, privacy, permissions, and checksums are explicit contract categories.
-- API outputs must preserve the distinction between `MECHANICS_SOLVED`, `USER_RULE_CHECKED`, `USER_RULE_FAILED`, `RULE_INPUTS_INCOMPLETE`, `HUMAN_REVIEW_REQUIRED`, and any external human acceptance record. Human acceptance records are hash-bound references, not software-emitted `analysis_status` values. Automatic API status must not use `CODE_COMPLIANT`, `HUMAN_APPROVED_FOR_PROJECT`, or equivalent approval/certification language.
+- API outputs must preserve the distinction between `MECHANICS_SOLVED`, `USER_RULE_CHECKED`, `USER_RULE_FAILED`, `RULE_INPUTS_INCOMPLETE`, `HUMAN_REVIEW_REQUIRED`, and any external human acceptance record. Human acceptance records are hash-bound references, not software-emitted `analysis_status` values. Automatic API status must not use compliance, approval, or certification language.
+- Public transport protocol, endpoint syntax, OpenAPI transport binding, API stability level, code-generation tooling, external format list, plugin runtime, plugin loading/signing/isolation, and permission grant persistence remain `TBD` until a later human-approved architecture decision records them.
 
 ## Permission Model Skeleton
 
@@ -49,6 +51,7 @@ Plugins and adapters must not:
 - bypass provenance, redistribution-status, privacy, or protected-content checks;
 - call solver internals in a way that skips solve-required input checks, diagnostics, result envelopes, model snapshot hashes, or reproducibility metadata;
 - execute arbitrary code through rule packs or bypass the sandboxed rule-pack evaluator;
+- bypass persistence, migration, checksum, manifest, report, diagnostics, validation, or human-acceptance boundary controls;
 - write private libraries, private rule packs, project data, or export payloads without explicit permission;
 - transmit private project, material, component, or rule-pack data by default;
 - embed protected standards text, protected tables, copied code formulas, material allowables, SIF/flexibility tables, protected dimensional tables, proprietary vendor data, or private user rule packs in public artifacts;
@@ -71,6 +74,7 @@ Rule-pack references must include name or ID, version, checksum, source note, pu
 ## Remaining TBDs
 
 - Public transport protocol and external API surface.
+- Endpoint syntax, OpenAPI transport binding, API stability level, and code-generation tooling.
 - Plugin packaging, loading, signing, isolation, and update mechanism.
 - External import/export format list.
 - Permission persistence, user consent UX, and revocation semantics.

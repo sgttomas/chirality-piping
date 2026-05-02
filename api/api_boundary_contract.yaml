@@ -11,7 +11,14 @@
     "objective": "OBJ-009",
     "status": "draft",
     "public_transport_protocol": "TBD",
+    "endpoint_syntax": "TBD",
+    "openapi_transport_binding": "TBD",
     "external_format_list": "TBD",
+    "plugin_runtime": "TBD",
+    "plugin_loading_signing_isolation": "TBD",
+    "permission_grant_persistence": "TBD",
+    "api_stability_level": "TBD",
+    "code_generation_tooling": "TBD",
     "schema_basis": "JSON Schema 2020-12",
     "hash_basis": "Canonical JSON/JCS-compatible hash basis where JSON payloads are hashed",
     "protected_content_notice": "Public API artifacts must not embed protected standards text, protected tables, copied code formulas, material allowables, SIF/flexibility tables, protected dimensional tables, proprietary vendor data, or private user rule packs."
@@ -47,6 +54,7 @@
         "permission",
         "privacy",
         "checksum",
+        "validation_test",
         "no_bypass"
       ]
     },
@@ -83,6 +91,7 @@
             "provenance",
             "privacy",
             "checksums",
+            "validation_test",
             "no_bypass"
           ]
         },
@@ -202,6 +211,11 @@
         "id": "ops.report.job",
         "boundary_area": "results",
         "summary": "Long-running report production job that references rule-pack identity and checksum without embedding protected content in public templates."
+      },
+      {
+        "id": "ops.validation.job",
+        "boundary_area": "validation_test",
+        "summary": "Long-running validation-test execution job with explicit fixture provenance, diagnostics, reproducibility metadata, and result envelope."
       }
     ]
   },
@@ -423,7 +437,8 @@
               "solver_post_process",
               "rule_pack_provider",
               "result_export",
-              "diagnostic_provider"
+              "diagnostic_provider",
+              "validation_hook"
             ]
           }
         },
@@ -819,6 +834,10 @@
           "must_preserve_provenance",
           "must_preserve_privacy_classification",
           "must_return_result_envelope",
+          "must_preserve_diagnostics",
+          "must_preserve_persistence_hash_controls",
+          "must_preserve_report_controls",
+          "must_preserve_human_acceptance_boundary",
           "must_not_execute_arbitrary_rule_code",
           "must_not_skip_rule_pack_sandbox",
           "must_not_claim_code_compliance",
