@@ -36,7 +36,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
 | Implementation evidence records | 47 |
-| Committed implementation evidence | 46 |
+| Committed implementation evidence | 47 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 26 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 68 |
@@ -107,7 +107,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-03` | `PKG-06` | `COMMITTED` `c075522` | 10 | Required-input completeness checker |
 | `DEL-06-04` | `PKG-06` | `COMMITTED` `ad270f6` | 9 | Private rule-pack lifecycle and checksum handling |
 | `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
-| `DEL-07-01` | `PKG-07` | `WORKING_TREE` `TBD` | 15 | 3D viewport and centerline editor |
+| `DEL-07-01` | `PKG-07` | `COMMITTED` `4785806` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
 | `DEL-07-03` | `PKG-07` | `MISSING_EVIDENCE` | 13 | Material, component, and rule-pack editors |
 | `DEL-07-04` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Missing-data warning and blocking UX |
@@ -139,7 +139,6 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-07-01` - 3D viewport and centerline editor | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0506`; `DAG-001-E0575` |
 | `DEL-07-02` - Model tree and property inspector | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0507` |
 | `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0508`; `DAG-001-E0576` |
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0509` |
@@ -152,11 +151,11 @@ These deliverables have no active upstream implementation dependency below the `
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
+| `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
 | `DEL-09-04` | `PKG-09` | 1 | `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 1 | `DEL-09-03` | Release quality gate checklist |
 | `DEL-10-04` | `PKG-10` | 1 | `DEL-09-05` | Build, packaging, and CI/CD pipeline |
-| `DEL-11-01` | `PKG-11` | 3 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05` | User guide skeleton |
+| `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
 
 ## Candidate Edges Excluded
 

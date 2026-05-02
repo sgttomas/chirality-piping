@@ -16,8 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-07-01 3D Viewport and Centerline Editor
 
-**Dispatch status:** implemented in working tree after human approval on
-2026-05-02; commit-backed evidence promotion remains pending.
+**Dispatch status:** implementation committed as `4785806`; commit-backed
+evidence promotion updated in working tree and awaiting commit.
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -74,7 +74,8 @@ Active upstream dependencies from `DAG-001`:
 Current implementation-readiness queue state:
 
 - `DEL-07-01` is `UNBLOCKED`.
-- `DEL-07-01` has `MISSING_EVIDENCE`; it is not yet recorded as implemented.
+- `DEL-07-01` is recorded as `COMMITTED` evidence for `4785806` after
+  post-commit evidence promotion.
 - Candidate edges are excluded.
 
 Downstream impact if later implemented and committed:
@@ -204,8 +205,9 @@ Implemented from this sealed brief in the working tree on 2026-05-02:
   implementation evidence, blocker queue, and next-instance handoff state
 
 The implementation remains contract-first because no frontend application
-scaffold exists in the repository. Commit-backed evidence promotion is not yet
-available because the working-tree patch has not been committed.
+scaffold exists in the repository. The implementation/closeout patch was
+committed as `4785806 schema: add viewport editor contract`; evidence-promotion
+metadata is updated in the working tree and awaits a separate commit.
 
 ## Verification Summary
 
@@ -217,5 +219,5 @@ available because the working-tree patch has not been committed.
 - `python3 tests/test_model_schema.py` passed.
 - `python3 tests/test_component_section_schema.py` passed.
 - Local dependency schema validation passed for `DEL-07-01`.
-- DEV-001 blocker queue rebuild passed with 68 unblocked / 5 blocked because
-  `DEL-07-01` is recorded as `WORKING_TREE`, not `COMMITTED`, evidence.
+- DEV-001 blocker queue rebuild passed with 68 unblocked / 5 blocked after
+  `DEL-07-01` was recorded as `COMMITTED` evidence for `4785806`.

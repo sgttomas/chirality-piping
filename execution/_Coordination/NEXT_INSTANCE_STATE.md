@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-02
 **Actor:** WORKING_ITEMS DEL-07-01 implementation from sealed dispatch brief
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-07-01` implemented in working tree from sealed dispatch brief; commit-backed evidence promotion remains pending
+**Current Mode:** `DEL-07-01` implemented and committed; commit-backed evidence promotion is updated in working tree and awaits commit
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-07-01 implementation from sealed dispatch brief` |
-| Latest state commit | Working tree only; no commit hash yet |
+| Latest state commit | Implementation/closeout `4785806`; evidence promotion working tree pending commit |
 | Previous completed task archive status | `DEL-08-05 implementation from sealed dispatch brief` archived in compact history |
 | Current authorized item | `DEL-07-01` implementation and working-tree closeout from sealed dispatch brief |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md` |
@@ -156,8 +156,8 @@ evidence and should not be treated as current sequencing authority.
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-08-05` implementation evidence was promoted to
-`COMMITTED` for commit `69adffa`.
+2026-05-02 after `DEL-07-01` implementation evidence was promoted to
+`COMMITTED` for commit `4785806`.
 It reads approved active `DAG-001` edges and
 `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
@@ -170,10 +170,10 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 28 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 26 |
 | Filesystem lifecycle `CHECKING` (display only) | 44 |
-| Implementation evidence records | 46 |
-| Committed implementation evidence | 46 |
+| Implementation evidence records | 47 |
+| Committed implementation evidence | 47 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 68 |
 | Implementation `BLOCKED` deliverables | 5 |
@@ -184,12 +184,13 @@ yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
 `COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `COMMITTED`
 evidence for `be29df7`; `DEL-08-03` is recorded as `COMMITTED` evidence for
 `50f947a`; `DEL-08-01` is recorded as `COMMITTED` evidence for `9e21716`;
-`DEL-08-05` is recorded as `COMMITTED` evidence for `69adffa`.
-The queue changed to 68 unblocked / 5 blocked after `DEL-08-05` promotion.
-`DEL-11-04` is newly implementation-unblocked. `DEL-11-01` remains blocked by
-GUI deliverables `DEL-07-01`, `DEL-07-03`, and `DEL-07-05`. The queue is not a
-lifecycle approval, schedule, priority, staffing decision, implementation
-completeness claim, or professional approval.
+`DEL-08-05` is recorded as `COMMITTED` evidence for `69adffa`; `DEL-07-01` is
+recorded as `COMMITTED` evidence for `4785806`.
+The queue remained 68 unblocked / 5 blocked after `DEL-07-01` promotion
+because `DEL-07-06` and `DEL-11-01` still wait on other missing GUI upstreams.
+`DEL-11-01` no longer waits on `DEL-07-01`; it remains blocked by `DEL-07-03`
+and `DEL-07-05`. The queue is not a lifecycle approval, schedule, priority,
+staffing decision, implementation completeness claim, or professional approval.
 
 ## Completed Task History (Compacted)
 
@@ -373,9 +374,13 @@ Implementation summary:
 - Annotated local dependency mirror rows `DAG-001-E0478` through
   `DAG-001-E0485` as `SATISFIED` from committed upstream evidence.
 - Added `DEL-07-01` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
-  `WORKING_TREE` evidence pending commit.
+  `WORKING_TREE` evidence pending commit, then committed the implementation as
+  `4785806 schema: add viewport editor contract`.
+- Promoted `DEL-07-01` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `4785806`.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 68 unblocked / 5 blocked
-  because `DEL-07-01` evidence is not yet commit-backed.
+  because `DEL-07-06` and `DEL-11-01` still wait on other missing GUI
+  upstreams.
 
 Verification:
 
@@ -390,7 +395,8 @@ Verification:
   "execution/PKG-07_Graphical User Interface and Engineering Workflow/1_Working/DEL-07-01_3D viewport and centerline editor/Dependencies.csv"`
   passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed: 68 unblocked / 5 blocked.
+  2026-05-02` passed before and after evidence promotion: 68 unblocked / 5
+  blocked.
 
 Guardrail results:
 
@@ -407,19 +413,15 @@ Guardrail results:
 
 Remaining open items:
 
-- Commit the working-tree patch, then promote `DEL-07-01` evidence from
-  `WORKING_TREE` to `COMMITTED` using the resulting commit hash and rebuild the
-  blocker queue.
+- Commit the `DEL-07-01` evidence-promotion metadata and handoff update.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
 1. Route through `CHANGE` for approved staging/commit of the `DEL-07-01`
-   working-tree patch.
-2. After commit, promote `DEL-07-01` implementation evidence to `COMMITTED`
-   and refresh `DEV-001_BLOCKER_QUEUE.*`.
-3. Then await the next human gate: authorize one bounded DAG item, route
+   evidence-promotion metadata and handoff update.
+2. Then await the next human gate: authorize one bounded DAG item, route
    reconciliation/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
