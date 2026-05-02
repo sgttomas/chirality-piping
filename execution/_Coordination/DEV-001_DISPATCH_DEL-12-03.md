@@ -16,7 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-12-03 Telemetry Off-By-Default Design
 
-**Dispatch status:** sealed dispatch brief prepared on 2026-05-02.
+**Dispatch status:** implemented in working tree on 2026-05-02 after separate
+human approval gate.
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -188,7 +189,36 @@ Return:
   - Remaining TBDs and blocked decisions.
 ```
 
-## Current Stop Point
+## Implementation Record
 
-Stop after sealed dispatch brief preparation. Implementation requires a
-separate human approval gate from this brief.
+Human project authority later authorized implementation from this sealed brief
+only. Implementation stayed within the approved write scope:
+
+- `docs/security/telemetry_policy.md`
+- `tests/security/test_telemetry_policy.py`
+- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-03_Telemetry off-by-default design/MEMORY.md`
+- this dispatch brief
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Implementation summary:
+
+- Added the public telemetry policy.
+- Added deterministic policy tests for default-off behavior, malformed/unknown
+  configuration fail-closed behavior, opt-in plus allowlist gating, forbidden
+  payload field classes, and absence of runtime telemetry surfaces.
+- Kept product config schema, consent UI/CLI, endpoint, vendor, transport,
+  retention policy, concrete event schema, and support-bundle workflow as
+  `TBD`.
+- No lifecycle transition, dependency-register edit, candidate-edge change,
+  blocker-queue refresh, implementation-evidence registration, protected
+  standards data, proprietary engineering value, real private data, real
+  secret, telemetry vendor integration, network behavior, runtime behavior
+  change, or professional/security/code-compliance claim occurred.
+
+Verification:
+
+- `python3 -m pytest tests/security/test_telemetry_policy.py` passed.
+- `git diff --check` passed before handoff update.
+
+Current stop point: lifecycle/evidence/local dependency-register alignment,
+blocker-queue refresh, staging, and commit require a separate human gate.

@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-12-05 closeout and DEL-12-03 sealed dispatch brief preparation
+**Actor:** WORKING_ITEMS DEL-12-03 implementation from sealed dispatch brief
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-12-05` lifecycle/evidence/queue closeout complete in working tree; `DEL-12-03` sealed dispatch brief prepared
+**Current Mode:** `DEL-12-03` implemented from sealed brief in working tree; lifecycle/evidence/queue closeout and implementation commit await separate gate
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-12-03 sealed dispatch brief preparation after DEL-12-05 closeout` |
-| Latest state commit | `DEL-12-05` implementation `b97121d`; closeout/brief prep not committed |
-| Previous completed task archive status | `DEL-12-05 implementation and lifecycle/evidence/queue alignment` archived with implementation `b97121d` |
-| Current authorized item | `DEL-12-03` sealed dispatch brief prepared; implementation not authorized |
+| Latest state task | `DEL-12-03 implementation from sealed dispatch brief` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-12-03 sealed dispatch brief preparation after DEL-12-05 closeout` archived with `9278c7f` |
+| Current authorized item | `DEL-12-03` implemented in working tree; lifecycle/evidence/queue closeout and implementation commit not authorized |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -251,6 +251,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-09-02` implementation and lifecycle/evidence/queue alignment | Completed; implementation `bf1dc20`; closeout/evidence `f7028d3`; later handoff `204944f` | `validation/benchmarks/stress/`, `validation/hand_calcs/stress/`, validation/spec/type docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Stress benchmark rustfmt and 8 tests passed; dependency schema validation, DAG audit, blocker queue rebuild, `git diff --check`, and protected-content/prohibited-claim scan passed; queue remained 56 unblocked / 17 blocked | `DEL-09-04` still waits on `DEL-09-03`; `DEL-09-05` still waits on `DEL-09-03` and `DEL-08-05`; `DEL-11-04` still waits on `DEL-08-05`. |
 | `DEL-12-05` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-12-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief sealed active upstreams, architecture basis, explicit write scope, acceptance criteria, and non-gating candidate caveats | Implementation was later authorized from the sealed brief only; lifecycle/evidence/queue closeout remained separate. |
 | `DEL-12-05` implementation and lifecycle/evidence/queue alignment | Completed; implementation `b97121d`; closeout/evidence in working tree | `docs/security/threat_model.md`, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Threat model scans and `git diff --check` passed before implementation commit; blocker queue rebuild passed at 58 unblocked / 15 blocked | `DEL-12-03` newly unblocked; closeout/evidence files are not yet committed. |
+| `DEL-12-03` sealed dispatch brief preparation after DEL-12-05 closeout | Completed; `9278c7f coordination: close del-12-05 and prepare del-12-03` | `DEL-12-05` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-12-03.md`, `NEXT_INSTANCE_STATE.md` | Blocker queue rebuild, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed in the preceding closeout session; queue changed to 58 unblocked / 15 blocked | `DEL-12-03` implementation was separately authorized from the sealed brief only. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -273,74 +274,76 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-12-03 Sealed Dispatch Brief Preparation
+## Latest State - DEL-12-03 Implementation From Sealed Dispatch Brief
 
-Human project authority authorized `DEL-12-05` lifecycle/evidence/local
-dependency-register alignment and blocker-queue refresh, followed by
-`DEL-12-03` sealed dispatch brief preparation if the queue confirmed readiness.
+Human project authority authorized two bounded steps:
 
-`DEL-12-05` closeout passed and `DEL-12-03` is now unblocked. The sealed brief
-was prepared at `execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md`.
+- route the existing `DEL-12-05` closeout and `DEL-12-03` brief-prep files
+  through `CHANGE` and commit them;
+- implement `DEL-12-03` from the sealed brief, deliberately narrow:
+  default-off/no-op telemetry policy, fail-closed config semantics, forbidden
+  payload fields, no vendor, no endpoint, and no runtime networking.
+
+The closeout/brief-prep commit is `9278c7f coordination: close del-12-05 and
+prepare del-12-03`.
+
+Implementation was completed in the working tree from
+`execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md`. Lifecycle transition,
+implementation-evidence registration, local dependency-register alignment,
+blocker-queue refresh, staging, and implementation commit were not performed.
 
 Files changed in this task:
 
-- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-05_Security threat model/_STATUS.md`
-- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-05_Security threat model/Dependencies.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-12-05.md`
+- `docs/security/telemetry_policy.md`
+- `tests/security/test_telemetry_policy.py`
+- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-03_Telemetry off-by-default design/MEMORY.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Closeout and brief-preparation summary:
+Implementation summary:
 
-- `DEL-12-05` implementation was committed as `b97121d docs: add security
-  threat model`.
-- `DEL-12-05` lifecycle moved to `CHECKING`.
-- `DEL-12-05` local dependency rows `DAG-001-E0598` through `DAG-001-E0600`
-  were annotated as `SATISFIED`.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-12-05` as `COMMITTED`.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed; implementation readiness changed
-  to 58 unblocked / 15 blocked.
-- `DEL-12-03` is now `UNBLOCKED` and has `MISSING_EVIDENCE`.
-- Prepared `execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md` from
-  `DAG-001`, registers, applicable architecture-basis rows, local context,
-  blocker queue, `DEL-12-05` evidence, and threat-model posture.
-- No `DAG-001` change, candidate-edge promotion, protected standards content,
-  real private data, real secret, or professional/security/code-compliance
-  claim was introduced.
+- Added `docs/security/telemetry_policy.md` as the public telemetry policy.
+- Defined default-off behavior for absent, unset, empty, unknown, unsupported,
+  and malformed telemetry configuration.
+- Required fail-closed behavior: telemetry remains disabled unless explicit
+  user opt-in and a human-approved event allowlist both exist.
+- Prohibited telemetry initialization of network transport, background upload
+  jobs, upload queues, persistence, endpoints, vendors, and external service
+  clients without opt-in and allowlist evidence.
+- Prohibited telemetry payloads from carrying private project models,
+  code-specific rule data, private rule packs, private material/component
+  libraries, generated reports, model hashes, local file paths, secrets,
+  credentials, protected standards content, or professional/code-compliance
+  claims.
+- Kept product config schema, consent UI/CLI, endpoint, vendor, transport,
+  retention policy, concrete event schema, and support-bundle workflow as
+  `TBD`.
+- No runtime telemetry code, telemetry vendor, endpoint, product config schema,
+  networking behavior, plugin/runtime behavior change, protected standards
+  content, real private data, real secret, or professional/security/code-
+  compliance claim was introduced.
 
 Verification:
 
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed: 58 unblocked / 15 blocked.
-- `python3 tools/validation/validate_dependencies_schema.py
-  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-05_Security threat model/Dependencies.csv"`
-  passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
-- `pytest tools/coordination` passed: 10 tests.
-- `git diff --check` passed.
+- `python3 -m pytest tests/security/test_telemetry_policy.py` passed: 7 tests.
+- `git diff --check` passed before handoff update.
 - Focused protected-content/prohibited-claim/real-secret scan found only
-  guardrail, exclusion, and pre-existing governance wording.
+  guardrail and exclusion wording in the telemetry policy, tests, dispatch
+  brief, memory, and state.
 
 Remaining open items:
 
-- `DEL-12-03` implementation requires a separate human gate from the sealed
-  dispatch brief.
-- `DEL-12-05` closeout/evidence and `DEL-12-03` brief-preparation files are
-  not yet committed.
+- `DEL-12-03` lifecycle/evidence/local dependency-register alignment and
+  blocker-queue refresh require a separate human gate.
+- `DEL-12-03` implementation files are not yet committed.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize `DEL-12-03` implementation from
-   `execution/_Coordination/DEV-001_DISPATCH_DEL-12-03.md`, authorize commit
-   handling for the current closeout/brief-prep files, authorize a different
+1. Await the next human gate: authorize `DEL-12-03` lifecycle/evidence/local
+   dependency-register alignment and blocker-queue refresh, authorize CHANGE
+   commit handling for the current implementation files, authorize a different
    bounded DAG item, route reconciliation/change/audit, handle artifacts, or
    pause.
 
