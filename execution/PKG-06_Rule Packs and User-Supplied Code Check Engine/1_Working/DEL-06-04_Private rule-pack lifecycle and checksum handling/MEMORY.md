@@ -36,9 +36,10 @@
   `DAG-001-E0473` as satisfied by committed upstream evidence, recorded
   `WORKING_TREE_IMPLEMENTED` evidence, refreshed the blocker queue, and
   validated `DAG-001` unchanged.
-- The refreshed queue still treats downstream consumers of `DEL-06-04` as
-  blocked because DEV-001 implementation readiness requires `COMMITTED`
-  evidence, and this implementation is not yet committed.
+- 2026-05-02: Implementation and initial alignment were committed as
+  `ad270f6 core: add rule pack lifecycle handling`; evidence was converted to
+  `COMMITTED`, the blocker queue was refreshed to 54 unblocked / 19 blocked,
+  and `DEL-08-02` became newly unblocked.
 
 ## Remaining TBDs
 

@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-06-04
 doc_kind: coordination.dispatch_brief
-status: implemented_lifecycle_evidence_queue_refreshed_working_tree
+status: committed_evidence_queue_refreshed
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -32,8 +32,9 @@ edits, blocker-queue refresh, or commit unless separately approved.
 Implementation has been completed in the working tree within the bounded write
 scope. Lifecycle transition, implementation-evidence registration,
 local-dependency annotation, blocker-queue refresh, and DAG validation have now
-been performed. Commit-backed `COMMITTED` evidence has not been recorded because
-the implementation remains uncommitted pending `CHANGE`/file-state handling.
+been performed. Implementation and initial alignment were committed as
+`ad270f6 core: add rule pack lifecycle handling`; final evidence and queue
+artifacts now record `DEL-06-04` as `COMMITTED`.
 
 ## Deliverable Identity
 
@@ -47,7 +48,7 @@ the implementation remains uncommitted pending `CHANGE`/file-state handling.
 | Objectives | `OBJ-002`, `OBJ-005` |
 | Context envelope | `M` |
 | Deliverable path | `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-04_Private rule-pack lifecycle and checksum handling` |
-| Current lifecycle | `SEMANTIC_READY` |
+| Current lifecycle | `CHECKING` |
 
 ## Approved DAG Preconditions
 
@@ -68,7 +69,7 @@ Active upstream dependencies from `DAG-001`:
 Current implementation-readiness queue state:
 
 - `DEL-06-04` is `UNBLOCKED`.
-- `DEL-06-04` has `MISSING_EVIDENCE` for its own implementation.
+- `DEL-06-04` has `COMMITTED` evidence `ad270f6`.
 - Candidate edges are excluded.
 - `DEL-06-04` currently gates downstream consumers `DEL-07-03`,
   `DEL-08-01`, `DEL-08-02`, `DEL-12-02`, and `DEL-12-04`.
@@ -169,11 +170,9 @@ Lifecycle/evidence/queue closeout:
 - `DEL-06-04` local dependency mirror rows `DAG-001-E0472` and
   `DAG-001-E0473` record satisfied upstreams `DEL-06-01` and `DEL-02-05`.
 - `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-06-04` as
-  `WORKING_TREE_IMPLEMENTED`, not `COMMITTED`.
+  `COMMITTED` evidence `ad270f6`.
 - `DEV-001_BLOCKER_QUEUE.*` was refreshed from approved active `DAG-001` edges
-  and implementation evidence; queue remained 53 unblocked / 20 blocked.
-- `DEL-06-04` remains a missing committed upstream blocker for `DEL-07-03`,
-  `DEL-08-01`, `DEL-08-02`, `DEL-12-02`, and `DEL-12-04` until commit-backed
-  evidence exists.
+  and implementation evidence; queue changed to 54 unblocked / 19 blocked.
+- `DEL-06-04` no longer appears as a missing upstream blocker; `DEL-08-02` is
+  newly unblocked.
 - Aggregate `DAG-001` was validated and left unchanged.
-- Changes are not committed.
