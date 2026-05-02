@@ -156,8 +156,8 @@ evidence and should not be treated as current sequencing authority.
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-10-05` implementation evidence was promoted to
-`COMMITTED` for commit `9de5e9b`.
+2026-05-02 after `DEL-08-03` implementation evidence was promoted to
+`COMMITTED` for commit `50f947a`.
 It reads approved active `DAG-001` edges and
 `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
@@ -170,24 +170,24 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 30 |
-| Filesystem lifecycle `CHECKING` (display only) | 42 |
-| Implementation evidence records | 43 |
-| Committed implementation evidence | 43 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 29 |
+| Filesystem lifecycle `CHECKING` (display only) | 43 |
+| Implementation evidence records | 44 |
+| Committed implementation evidence | 44 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 64 |
-| Implementation `BLOCKED` deliverables | 9 |
+| Implementation `UNBLOCKED` deliverables | 65 |
+| Implementation `BLOCKED` deliverables | 8 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
 yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
 `COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `COMMITTED`
-evidence for `be29df7`.
-The queue remained 64 unblocked / 9 blocked. `DEL-10-04` no longer waits on
-`DEL-10-05`; it still waits on `DEL-09-05` and `DEL-08-05`. No active blocked
-consumer currently lists `DEL-10-02` as a missing upstream provider. The queue is not a lifecycle
-approval, schedule, priority, staffing decision, implementation completeness
-claim, or professional approval.
+evidence for `be29df7`; `DEL-08-03` is recorded as `COMMITTED` evidence for
+`50f947a`.
+The queue changed to 65 unblocked / 8 blocked. `DEL-08-01` no longer waits on
+`DEL-08-03` and is now implementation-unblocked with its own evidence still
+`MISSING_EVIDENCE`. The queue is not a lifecycle approval, schedule, priority,
+staffing decision, implementation completeness claim, or professional approval.
 
 ## Completed Task History (Compacted)
 
