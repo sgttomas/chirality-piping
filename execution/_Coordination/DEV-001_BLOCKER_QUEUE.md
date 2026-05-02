@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 42 |
+| Implementation evidence records | 43 |
 | Committed implementation evidence | 42 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 31 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 30 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 64 |
 | Implementation `BLOCKED` deliverables | 9 |
@@ -120,7 +120,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `MISSING_EVIDENCE` | 6 | Nonlinear support regression suite |
 | `DEL-10-01` | `PKG-10` | `COMMITTED` `53cc3d6` | 11 | Public API and plugin boundary |
-| `DEL-10-02` | `PKG-10` | `MISSING_EVIDENCE` | 12 | Import/export adapter framework |
+| `DEL-10-02` | `PKG-10` | `WORKING_TREE` | 12 | Import/export adapter framework |
 | `DEL-10-03` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Local FEA handoff data contract |
 | `DEL-10-05` | `PKG-10` | `COMMITTED` `9de5e9b` | 13 | Headless CLI and structured I/O analysis runner |
 | `DEL-11-02` | `PKG-11` | `MISSING_EVIDENCE` | 11 | Developer guide for solver and rule packs |

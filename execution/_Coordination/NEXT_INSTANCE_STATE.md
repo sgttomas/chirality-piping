@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-10-05 post-commit evidence promotion
+**Actor:** ORCHESTRATOR DEL-10-02 sealed dispatch brief preparation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-10-05` implementation committed; evidence promoted to `COMMITTED` and blocker queue refreshed
+**Current Mode:** `DEL-10-02` implementation in working tree; lifecycle/evidence/dependency mirror aligned and blocker queue refreshed
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-10-05 post-commit evidence promotion` |
-| Latest state commit | Promotion metadata `5eabcb8`; this handoff row is recorded by current git history |
-| Previous completed task archive status | `DEL-10-05 implementation and lifecycle/evidence/queue alignment` archived with implementation/alignment commit `9de5e9b` |
-| Current authorized item | `DEL-10-05` evidence promoted to `COMMITTED`; queue refreshed; post-commit promotion committed |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md` |
+| Latest state task | `DEL-10-02 lifecycle/evidence/queue alignment` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-10-05 post-commit evidence promotion` archived; promotion commits `5eabcb8`, `4b4a1c5`, and `a009d19` |
+| Current authorized item | `DEL-10-02` lifecycle/evidence/dependency mirror aligned; queue refreshed; commit-backed evidence still pending until commit/promotion |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -170,9 +170,9 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 31 |
-| Filesystem lifecycle `CHECKING` (display only) | 41 |
-| Implementation evidence records | 42 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 30 |
+| Filesystem lifecycle `CHECKING` (display only) | 42 |
+| Implementation evidence records | 43 |
 | Committed implementation evidence | 42 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 64 |
@@ -180,11 +180,12 @@ blockers by itself.
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. `DEL-10-05` is now recorded as
-`COMMITTED` evidence for `9de5e9b`, so it satisfies downstream implementation
-blockers.
+yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
+`COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `WORKING_TREE`
+evidence and does not yet count as committed evidence.
 The queue remained 64 unblocked / 9 blocked. `DEL-10-04` no longer waits on
-`DEL-10-05`; it still waits on `DEL-09-05` and `DEL-08-05`. The queue is not a lifecycle
+`DEL-10-05`; it still waits on `DEL-09-05` and `DEL-08-05`. No active blocked
+consumer currently lists `DEL-10-02` as a missing upstream provider. The queue is not a lifecycle
 approval, schedule, priority, staffing decision, implementation completeness
 claim, or professional approval.
 
@@ -288,6 +289,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-04` post-commit evidence promotion | Completed; implementation/alignment `3e33ea4`; evidence promotion `52384f0` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | Result-export crate tests, schema scripts, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 64 unblocked / 9 blocked | `DEL-10-05` newly unblocked; no next product deliverable was authorized by the promotion itself. |
 | `DEL-10-05` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout was separately authorized after implementation. |
 | `DEL-10-05` implementation and lifecycle/evidence/queue alignment | Completed; implementation/alignment `9de5e9b` | `schemas/headless_runner.schema.yaml`, `core/runner/headless/`, `tests/test_headless_runner_contract.py`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, evidence, blocker queue, dispatch/state | Headless-runner rustfmt and 5 tests passed; headless runner, result export, API boundary, dependency schema, DAG audit, coordination tests, queue rebuild, `git diff --check`, and focused scans passed; queue initially remained 64 unblocked / 9 blocked because evidence was `WORKING_TREE` before commit | Post-commit evidence promotion was required to remove `DEL-10-05` from downstream blockers. |
+| `DEL-10-05` post-commit evidence promotion | Completed; promotion commits `5eabcb8`, `4b4a1c5`, `a009d19` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-10-05.md`, deliverable `MEMORY.md`, `NEXT_INSTANCE_STATE.md` | Headless runner/API/result contract tests, dependency schema validation, DAG audit, coordination tests, blocker queue rebuild, `git diff --check`, and focused scans passed; queue remained 64 unblocked / 9 blocked with 42 committed evidence records | `DEL-10-04` no longer waits on `DEL-10-05`; it still waits on `DEL-09-05` and `DEL-08-05`. No next product deliverable was authorized by the promotion itself. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -310,76 +312,101 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-10-05 Post-Commit Evidence Promotion
+## Latest State - DEL-10-02 Lifecycle/Evidence/Queue Alignment
 
-Human project authority authorized the CHANGE gate and post-commit evidence
-promotion after `DEL-10-05` was committed:
+Human project authority authorized lifecycle transition, dependency-register
+edits, evidence registration, blocker queue refresh, staging, and commit after
+the implemented `DEL-10-02` work:
 
-- "proceed with that gate and post-commit promotion"
+- "perform lifecycle transition, dependency-register edits, evidence
+  registration, blocker queue refresh, staging, and commit"
 
 Files changed in this task:
 
-- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/MEMORY.md`
+- `schemas/adapter_framework.schema.yaml`
+- `core/adapters/framework/__init__.py`
+- `core/adapters/framework/adapter_framework.py`
+- `fixtures/adapters/invented/invented_adapter_framework.json`
+- `tests/test_adapter_framework_contract.py`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-02_Import-export adapter framework/_STATUS.md`
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-02_Import-export adapter framework/Dependencies.csv`
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-02_Import-export adapter framework/MEMORY.md`
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-10-02.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Promotion summary:
+Alignment summary:
 
-- `DEL-10-05` implementation and closeout alignment were committed as
-  `9de5e9b core: add headless runner contract`.
-- Promoted `DEL-10-05` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
-  `WORKING_TREE` to `COMMITTED` evidence for commit `9de5e9b`.
+- Added `schemas/adapter_framework.schema.yaml` as a strict-JSON JSON Schema
+  2020-12 contract for format-neutral adapter declarations, validation plans,
+  diagnostics, provenance, privacy, checksums, audit references, and
+  result-envelope compatibility.
+- Added `core/adapters/framework/` as a bounded Python support module for
+  in-memory adapter declaration validation and deterministic operation-result
+  construction.
+- Added an invented adapter fixture under `fixtures/adapters/invented/` with
+  invented, non-code, non-proprietary metadata only.
+- Added deterministic stdlib tests under
+  `tests/test_adapter_framework_contract.py`.
+- Updated focused `docs/SPEC.md` and `docs/TYPES.md` sections only for the
+  adapter framework boundary.
+- Set `DEL-10-02` lifecycle display state to `CHECKING`.
+- Annotated `DEL-10-02` local `Dependencies.csv` rows `DAG-001-E0556` through
+  `DAG-001-E0560` as `SATISFIED` from committed upstream evidence.
+- Recorded `DEL-10-02` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
+  `WORKING_TREE` evidence. Because this is not yet `COMMITTED`, downstream
+  implementation blockers are not satisfied by it until post-commit promotion;
+  currently no active blocked consumer lists `DEL-10-02` as missing.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 64 unblocked / 9 blocked,
-  with committed evidence records increasing from 41 to 42.
-- `DEL-10-04` no longer waits on `DEL-10-05`; it still waits on `DEL-09-05`
-  and `DEL-08-05`.
-- Verified aggregate `DAG-001` and `DEL-10-05` local dependency register
-  schema validity. No aggregate `DAG-001` row, local dependency row, or
-  candidate edge was changed during promotion.
-- Candidate edge `DAG-001-E0624` remains non-gating and was not promoted.
-- No protected standards data, private data, real secret, final CLI command
-  syntax, package manifest/script change, CI provider choice, release matrix
-  choice, transport choice, external format choice, GUI/report/adapter/local
-  FEA runtime implementation, process/network/filesystem capability, or
-  professional/code-compliance claim occurred.
+  with 43 evidence records and 42 committed evidence records.
+- Updated this dispatch brief and deliverable `MEMORY.md` with implementation
+  and closeout summaries.
+- Candidate edge `DAG-001-E0619` remains non-gating and was not promoted. No
+  aggregate `DAG-001` row, candidate edge, concrete external format choice,
+  public transport choice, plugin runtime implementation, package/CI/release
+  choice, protected/private content, or professional/security/code-compliance
+  claim occurred.
 
 Verification:
 
-- `cargo fmt --manifest-path core/runner/headless/Cargo.toml --check` passed.
-- `cargo test --manifest-path core/runner/headless/Cargo.toml` passed: 5 tests.
-- `python3 tests/test_headless_runner_contract.py` passed.
-- `python3 tests/test_results_schema.py` passed.
+- `python3 tests/test_adapter_framework_contract.py` passed.
 - `python3 tests/test_api_boundary_contract.py` passed.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed: 64 unblocked / 9 blocked; committed evidence 42.
+- `python3 tests/test_library_import_provenance.py` passed.
+- `python3 tests/test_headless_runner_contract.py` passed.
 - `python3 tools/validation/validate_dependencies_schema.py
   execution/_DAG/DAG-001/DependencyEdges.csv` passed.
 - `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/Dependencies.csv"`
+  "execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-02_Import-export adapter framework/Dependencies.csv"`
   passed.
 - `python3 tools/coordination/audit_dag.py --strict --dag-dir
   execution/_DAG/DAG-001` passed.
-- `python3 -m pytest tools/coordination` passed: 10 tests.
 - `git diff --check` passed.
 - Focused protected-content/private-secret/prohibited-claim scan was reviewed;
-  matches were guardrail/prohibition terms and schema field names, not
-  protected data, private secrets, or positive compliance/professional claims.
+  matches were guardrail/prohibition terms, schema/test forbidden-term lists,
+  and unresolved `TBD` field names, not protected data, private secrets,
+  concrete external-format commitments, or positive compliance/professional/
+  security claims.
 
 Remaining open items:
 
-- No remaining closeout item for `DEL-10-05` post-commit evidence promotion.
-- Candidate-edge promotion, release packaging, CI provider selection, and broad
-  DAG execution still require separate human approval gates.
+- `DEL-10-02` commit and post-commit evidence promotion are in progress under
+  this CHANGE gate. Until promotion, `DEL-10-02` remains `WORKING_TREE`
+  evidence.
+- Candidate-edge promotion, concrete external format selection, public
+  transport, plugin runtime/loading/signing, package/CI/release choices, and
+  broad DAG execution still require separate human approval gates.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: route reconciliation/audit, handle artifacts,
-   authorize a different bounded DAG item, or pause.
+1. Complete CHANGE commit and post-commit evidence promotion for `DEL-10-02`,
+   then await the next human gate: route reconciliation/audit, handle
+   artifacts, authorize a different bounded DAG item, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.

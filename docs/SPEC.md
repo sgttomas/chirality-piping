@@ -306,6 +306,25 @@ rule-pack sandboxing, report boundaries, solver boundaries, and external
 hash-bound human acceptance records. They must not create software-generated
 professional approval records or automatic code-compliance statuses.
 
+The import/export adapter framework is represented by
+`schemas/adapter_framework.schema.yaml` and
+`core/adapters/framework/adapter_framework.py`. It defines a format-neutral
+adapter declaration, validation plan, diagnostics, provenance, privacy,
+checksum/audit references, result-envelope compatibility, and no-bypass
+controls. It validates already-declared adapter metadata and invented fixtures
+only. It does not parse real external files, select import/export formats,
+choose public transport or endpoint syntax, implement plugin loading, choose
+filesystem roots, mutate project storage, access networks or processes, or
+make professional/code-compliance/security claims.
+
+Adapter declarations must distinguish syntactic parse readiness, schema
+validation, unit and dimensional validation, provenance completeness,
+redistribution review, privacy classification, protected-content screening,
+mechanics readiness, rule-check readiness, export review, and human review.
+Export operations remain local-first and review-gated by default; unresolved
+redaction, concrete format, runtime, packaging, CI, release, local FEA, and
+physical project container choices remain `TBD`.
+
 ## 5. Solver core requirements
 
 ### 5.1 Degrees of freedom
