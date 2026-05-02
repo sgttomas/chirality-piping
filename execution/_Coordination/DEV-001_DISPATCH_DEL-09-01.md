@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-09-01
 doc_kind: coordination.dispatch_brief
-status: implemented_in_working_tree_pending_closeout
+status: implemented_lifecycle_evidence_queue_refreshed
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -16,8 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-09-01 Mechanics Benchmark Suite
 
-**Dispatch status:** implemented in working tree after human approval on
-2026-05-02; lifecycle/evidence/queue closeout pending separate gate
+**Dispatch status:** implementation and lifecycle/evidence/queue closeout
+completed on 2026-05-02
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -38,7 +38,7 @@ The human project authority later authorized implementation from this sealed
 brief. Implementation has been completed in the working tree within the bounded
 write scope. Lifecycle transition, implementation-evidence registration,
 dependency-register alignment, blocker-queue refresh, staging, and commit have
-not been performed by this implementation pass.
+now been completed after verification.
 
 The eventual implementation scope should be deliberately constrained to
 mechanics verification benchmarks for open/original/public-permissive mechanics
@@ -61,7 +61,7 @@ CLI runner work, local FEA handoff, or professional/code-compliance claims.
 | Objectives | `OBJ-008` |
 | Context envelope | `M` |
 | Deliverable path | `execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite` |
-| Current lifecycle | `SEMANTIC_READY` |
+| Current lifecycle | `CHECKING` |
 
 ## Approved DAG Preconditions
 
@@ -79,7 +79,7 @@ Active upstream dependencies from `DAG-001`:
 Current implementation-readiness queue state:
 
 - `DEL-09-01` is `UNBLOCKED`.
-- `DEL-09-01` has `MISSING_EVIDENCE`.
+- `DEL-09-01` has `COMMITTED` evidence `b34ecd6`.
 - Candidate edges are excluded.
 - `DEL-09-01` currently gates downstream consumers `DEL-09-04`,
   `DEL-09-05`, `DEL-11-03`, and `DEL-11-04`.
@@ -217,11 +217,27 @@ Verification performed:
   passed.
 - `cargo test --manifest-path validation/benchmarks/mechanics/Cargo.toml`
   passed: 7 tests.
+- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
+  2026-05-02` passed: 56 unblocked / 17 blocked.
+- `python3 -m pytest tools/coordination` passed: 10 tests.
+- `python3 tools/validation/validate_dependencies_schema.py
+  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/Dependencies.csv"`
+  passed.
+- `python3 tools/coordination/audit_dag.py --strict --dag-dir
+  execution/_DAG/DAG-001` passed.
+- `git diff --check` passed.
 
-Closeout pending separate authorization:
+Lifecycle/evidence/queue closeout:
 
-- `DEL-09-01` lifecycle remains `SEMANTIC_READY`.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` has not been changed.
-- `DEV-001_BLOCKER_QUEUE.*` has not been refreshed.
-- `DEL-09-01` deliverable-local `Dependencies.csv` has not been annotated.
-- Aggregate `DAG-001` and candidate edges are unchanged.
+- Implementation commit: `b34ecd6 validation: add mechanics benchmark suite`.
+- `DEL-09-01` lifecycle moved to `CHECKING`.
+- `DEL-09-01` local dependency mirror rows `DAG-001-E0532` through
+  `DAG-001-E0536` record satisfied committed upstream evidence.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-09-01` as `COMMITTED`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed from approved active `DAG-001` edges
+  and committed evidence; queue changed to 56 unblocked / 17 blocked.
+- `DEL-11-03` is newly unblocked; `DEL-09-04`, `DEL-09-05`, and `DEL-11-04`
+  still wait on other missing upstream implementation evidence.
+- Aggregate `DAG-001` was validated and left unchanged.
