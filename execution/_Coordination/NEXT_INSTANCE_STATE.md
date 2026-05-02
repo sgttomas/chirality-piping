@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-08-02 implementation evidence and blocker queue refresh` |
-| Latest state commit | `DEL-08-02` implementation/alignment commit `061f1af`; evidence/queue refresh pending commit |
+| Latest state commit | `DEL-08-02` implementation/alignment commit `061f1af`; evidence/queue refresh commit `4cf5bf9` |
 | Previous completed task archive status | `DEL-06-03 implementation evidence and blocker queue refresh` moved into the compact task archive table |
 | Current authorized item | `DEL-08-02` lifecycle/evidence/queue closeout |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md` |
