@@ -73,17 +73,16 @@ Alignment summary:
 - Lifecycle display state is now `CHECKING`.
 - Local dependency rows `DAG-001-E0565` through `DAG-001-E0570` now record
   `SATISFIED` from committed upstream implementation evidence.
-- DEV-001 implementation evidence records `DEL-10-05` as `WORKING_TREE`
-  evidence, not `COMMITTED` evidence.
-- The blocker queue was rebuilt at 64 unblocked / 9 blocked. `DEL-10-05`
-  appears with `WORKING_TREE` evidence, and `DEL-10-04` still waits on
-  `DEL-09-05`, `DEL-10-05`, and `DEL-08-05` because downstream blockers
-  require `COMMITTED` upstream evidence.
+- `DEL-10-05` implementation and closeout alignment were committed as
+  `9de5e9b core: add headless runner contract`.
+- DEV-001 implementation evidence records `DEL-10-05` as `COMMITTED`
+  evidence for commit `9de5e9b`.
+- The blocker queue was rebuilt at 64 unblocked / 9 blocked. `DEL-10-04`
+  no longer waits on `DEL-10-05`; it still waits on `DEL-09-05` and
+  `DEL-08-05`.
 - Aggregate `DAG-001` was validated and was not changed. Candidate edge
   `DAG-001-E0624` remains non-gating.
 
 Remaining closeout:
 
-- Commit through CHANGE if approved.
-- After commit, promote `DEL-10-05` evidence to `COMMITTED` and rebuild the
-  blocker queue under the DEV-001 implementation-readiness rules.
+- Commit this post-commit evidence promotion through CHANGE.

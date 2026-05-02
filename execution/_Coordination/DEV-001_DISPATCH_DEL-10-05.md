@@ -73,13 +73,13 @@ Active upstream dependencies from `DAG-001`:
 | `DAG-001-E0569` | `DEL-08-04` Result export format | `REPORTING_PREDECESSOR` | `COMMITTED` evidence `3e33ea4` |
 | `DAG-001-E0570` | `DEL-08-02` Audit manifest and model hash | `REPORTING_PREDECESSOR` | `COMMITTED` evidence `061f1af` |
 
-Current implementation-readiness queue state:
+Implementation-readiness queue state at dispatch preparation:
 
 - `DEL-10-05` is `UNBLOCKED`.
 - `DEL-10-05` has `MISSING_EVIDENCE`; it is not yet recorded as implemented.
 - Candidate edges are excluded.
 
-Downstream impact if later implemented and committed:
+Downstream impact at dispatch preparation if later implemented and committed:
 
 - `DEL-10-05` currently blocks `DEL-10-04 - Build, packaging, and CI/CD
   pipeline` in the active implementation-readiness queue.
@@ -289,12 +289,17 @@ Alignment stayed within the closeout scope:
 - `DEL-10-05` lifecycle display state set to `CHECKING`.
 - `DEL-10-05` local dependency rows `DAG-001-E0565` through `DAG-001-E0570`
   marked `SATISFIED` from committed upstream implementation evidence.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-10-05` as
-  `WORKING_TREE` evidence.
-- `DEV-001_BLOCKER_QUEUE.*` was rebuilt at 64 unblocked / 9 blocked. Because
-  `DEL-10-05` is not yet `COMMITTED`, `DEL-10-04` still waits on it.
+- `DEL-10-05` implementation and closeout alignment were committed as
+  `9de5e9b core: add headless runner contract`.
+- Human project authority authorized post-commit evidence promotion and
+  CHANGE gate handling.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` now records `DEL-10-05` as
+  `COMMITTED` evidence for commit `9de5e9b`.
+- `DEV-001_BLOCKER_QUEUE.*` was rebuilt at 64 unblocked / 9 blocked.
+  `DEL-10-04` no longer waits on `DEL-10-05`; it still waits on `DEL-09-05`
+  and `DEL-08-05`.
 - Aggregate `DAG-001` was not edited; candidate edge `DAG-001-E0624` remains
   non-gating.
 
-Staging, commit, post-commit evidence promotion, candidate-edge promotion, and
-broad DAG execution require a separate human approval gate.
+Candidate-edge promotion and broad DAG execution require a separate human
+approval gate.
