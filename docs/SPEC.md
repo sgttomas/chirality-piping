@@ -587,6 +587,23 @@ Missing data warnings must distinguish:
 | `NONLINEAR_WARNING` | Convergence or active-state uncertainty exists. |
 | `IP_BOUNDARY_WARNING` | Public contribution/report may contain protected or private data. |
 
+The initial 3D viewport/editor contract is represented by
+`schemas/viewport_editor.schema.yaml` and
+`core/gui/viewport_editor`. It defines transient camera, hover, selection,
+drag, snap, view-primitive, diagnostic, and command-intent records for nodes,
+pipe runs, bend arcs, branch symbols, and simple component symbols. Durable
+model edits are represented as application-service command intents; the
+viewport contract does not directly mutate persisted project payloads.
+
+The current viewport/editor implementation is a bounded contract and support
+module because the repository has no frontend application scaffold yet. It does
+not create a Tauri/React/Vite shell, render Three.js scenes, choose dependency
+versions, select a state-management library, access host resources, parse
+project files, implement adjacent GUI slices, provide protected engineering
+data, or make professional/code-compliance claims. Runtime Three.js
+integration, GUI package manifests, Playwright rendering checks, and final app
+workflow behavior remain `TBD`.
+
 ## 9. Reporting and audit
 
 Reports must include:

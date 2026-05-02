@@ -40,7 +40,7 @@ DEL-06-02,PKG-06,Sandboxed unit-aware expression evaluator,CHECKING,COMMITTED,74
 DEL-06-03,PKG-06,Required-input completeness checker,CHECKING,COMMITTED,c075522,10,10,0,UNBLOCKED,,
 DEL-06-04,PKG-06,Private rule-pack lifecycle and checksum handling,CHECKING,COMMITTED,ad270f6,9,9,0,UNBLOCKED,,
 DEL-06-05,PKG-06,Invented non-code example rule pack,CHECKING,COMMITTED,73506b7,11,11,0,UNBLOCKED,,
-DEL-07-01,PKG-07,3D viewport and centerline editor,SEMANTIC_READY,MISSING_EVIDENCE,,15,15,0,UNBLOCKED,,
+DEL-07-01,PKG-07,3D viewport and centerline editor,CHECKING,WORKING_TREE,TBD,15,15,0,UNBLOCKED,,
 DEL-07-02,PKG-07,Model tree and property inspector,SEMANTIC_READY,MISSING_EVIDENCE,,10,10,0,UNBLOCKED,,
 DEL-07-03,PKG-07,"Material, component, and rule-pack editors",SEMANTIC_READY,MISSING_EVIDENCE,,13,13,0,UNBLOCKED,,
 DEL-07-04,PKG-07,Missing-data warning and blocking UX,SEMANTIC_READY,MISSING_EVIDENCE,,11,11,0,UNBLOCKED,,
