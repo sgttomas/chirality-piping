@@ -24,9 +24,9 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-10-05 post-commit evidence promotion` |
-| Latest state commit | Promotion metadata being committed through this CHANGE gate |
+| Latest state commit | `5eabcb8 coordination: record del-10-05 committed evidence` |
 | Previous completed task archive status | `DEL-10-05 implementation and lifecycle/evidence/queue alignment` archived with implementation/alignment commit `9de5e9b` |
-| Current authorized item | `DEL-10-05` evidence promoted to `COMMITTED`; queue refreshed; post-commit promotion complete after metadata commit |
+| Current authorized item | `DEL-10-05` evidence promoted to `COMMITTED`; queue refreshed; post-commit promotion committed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
