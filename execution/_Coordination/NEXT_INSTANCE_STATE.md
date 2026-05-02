@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS implementation for DEL-06-03
+**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-06-03
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-06-03 implemented in working tree with lifecycle/local mirror alignment; awaiting commit-backed evidence and queue refresh
+**Current Mode:** DEL-06-03 committed, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-06-03 implementation and initial alignment in working tree` |
-| Latest state commit | None yet; working tree implementation only |
+| Latest state task | `DEL-06-03 implementation evidence and blocker queue refresh` |
+| Latest state commit | Implementation/alignment commit `c075522`; evidence/queue refresh pending commit |
 | Previous completed task archive status | `DEL-06-04 commit-backed evidence/queue refresh` moved into the compact task archive table |
-| Current authorized item | `DEL-06-03 - Required-input completeness checker` implementation |
+| Current authorized item | `DEL-06-03` lifecycle/evidence/queue closeout and then `DEL-08-02` |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-03.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -140,18 +140,19 @@ blockers by itself.
 |---|---:|
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 65 |
 | Filesystem lifecycle `CHECKING` (display only) | 8 |
-| Implementation evidence records | 31 |
-| Committed implementation evidence | 31 |
+| Implementation evidence records | 32 |
+| Committed implementation evidence | 32 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 54 |
-| Implementation `BLOCKED` deliverables | 19 |
+| Implementation `UNBLOCKED` deliverables | 55 |
+| Implementation `BLOCKED` deliverables | 18 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. `DEL-06-04` is now recorded as
-`COMMITTED` evidence at `ad270f6`; `DEL-08-02` is newly unblocked. The queue is
-not a lifecycle approval, schedule, priority, staffing decision, implementation
-completeness claim, or professional approval.
+yet have `COMMITTED` implementation evidence. `DEL-06-03` is now recorded as
+`COMMITTED` evidence at `c075522`; `DEL-07-04` is newly unblocked and
+`DEL-08-02` remains unblocked. The queue is not a lifecycle approval, schedule,
+priority, staffing decision, implementation completeness claim, or professional
+approval.
 
 ## Completed Task History (Compacted)
 
@@ -250,9 +251,10 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-06-03 Implementation and Initial Alignment in Working Tree
+## Latest State - DEL-06-03 Implementation Evidence and Blocker Queue Refresh
 
-Human project authority approved the next bounded item:
+Human project authority approved closing out `DEL-06-03` before continuing to
+`DEL-08-02`:
 
 - `DEL-06-03 - Required-input completeness checker`
 
@@ -266,6 +268,11 @@ Files changed in this task:
 - `docs/TYPES.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-06-03.md`
 - `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/MEMORY.md`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/Dependencies.csv`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/_STATUS.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Implementation summary:
@@ -299,15 +306,18 @@ Verification:
 
 Lifecycle/evidence/queue closeout:
 
+- Committed the bounded implementation and initial lifecycle/local-mirror
+  alignment as `c075522 core: add rule completeness checker`.
 - Updated `DEL-06-03` lifecycle from `SEMANTIC_READY` to `CHECKING`.
 - Annotated the `DEL-06-03` local dependency mirror for satisfied
   non-architecture upstreams `DEL-06-01`, `DEL-02-03`, and `DEL-05-04`.
-- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` update was made.
-- No `DEV-001_BLOCKER_QUEUE.*` refresh was made; current queue remains the
-  post-`DEL-06-04` committed-evidence queue at 54 unblocked / 19 blocked.
-- `DAG-001` and deliverable-local `Dependencies.csv` were left unchanged;
-  candidate edges remain non-gating.
-- No commit has been made for this task.
+- Recorded `DEL-06-03` as `COMMITTED` implementation evidence at `c075522`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue changed to 55 unblocked / 18
+  blocked.
+- `DEL-07-04` is newly unblocked; `DEL-08-02` remains unblocked and is the next
+  requested DAG-ready item.
+- Aggregate `DAG-001` was left unchanged; candidate edges remain non-gating.
+- `DAG-001` has been validated and left unchanged.
 
 Remaining open items:
 
