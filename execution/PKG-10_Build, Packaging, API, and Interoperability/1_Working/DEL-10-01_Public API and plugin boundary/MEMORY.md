@@ -66,9 +66,11 @@ Stop point:
 - Lifecycle transition, implementation-evidence registration, local dependency
   mirror annotation, and blocker-queue refresh were completed in working tree
   after separate human authorization.
-- Staging and commit require a separate human gate. After commit, the
-  implementation evidence should be promoted from `WORKING_TREE` to
-  `COMMITTED` and the blocker queue should be refreshed.
+- Implementation and alignment were committed as `53cc3d6 api: harden public
+  boundary contract`.
+- Post-commit evidence was promoted from `WORKING_TREE` to `COMMITTED` and
+  the blocker queue was refreshed. Final coordination evidence-promotion commit
+  remains pending.
 
 ### 2026-05-02 - Lifecycle, evidence, and queue alignment
 
@@ -80,10 +82,11 @@ Alignment summary:
 - `_STATUS.md` moved from `SEMANTIC_READY` to `CHECKING`.
 - Local dependency rows `DAG-001-E0552` through `DAG-001-E0555` were annotated
   as `SATISFIED` from committed upstream evidence.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-10-01` as `WORKING_TREE`,
-  not `COMMITTED`, because the implementation is not yet committed.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed and remains 60 unblocked / 13
-  blocked. Downstream consumers still require committed `DEL-10-01` evidence.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-10-01` as `COMMITTED`
+  evidence at `53cc3d6`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed and changed to 63 unblocked / 10
+  blocked. `DEL-10-02`, `DEL-10-03`, and `DEL-11-02` are newly unblocked;
+  `DEL-10-05` still waits on `DEL-08-04`.
 - `DAG-001` validated and was not changed.
 
 Verification:

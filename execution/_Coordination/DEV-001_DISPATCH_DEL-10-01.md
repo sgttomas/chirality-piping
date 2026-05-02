@@ -272,12 +272,13 @@ Closeout summary:
 - `DEL-10-01` lifecycle moved to `CHECKING`.
 - `DEL-10-01` local dependency rows `DAG-001-E0552` through `DAG-001-E0555`
   were annotated as `SATISFIED` from committed upstream evidence.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-10-01` as
-  `WORKING_TREE`; because the implementation is not committed, this does not
-  satisfy downstream implementation blockers.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed and remains 60 unblocked / 13
-  blocked. `DEL-10-02`, `DEL-10-03`, `DEL-10-05`, and `DEL-11-02` still show
-  `DEL-10-01` as a missing committed upstream provider.
+- Implementation and alignment were committed as `53cc3d6 api: harden public
+  boundary contract`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-10-01` as `COMMITTED`
+  evidence at `53cc3d6`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed and changed to 63 unblocked / 10
+  blocked. `DEL-10-02`, `DEL-10-03`, and `DEL-11-02` are newly unblocked.
+  `DEL-10-05` still waits on `DEL-08-04`.
 - `DAG-001` schema and strict audit passed; no aggregate graph, candidate edge,
   or ordering change was required.
 
@@ -295,6 +296,4 @@ Closeout verification:
 - `pytest tools/coordination` passed.
 - `git diff --check` passed.
 
-Current stop point: staging and commit require a separate human gate. After
-commit, `DEL-10-01` evidence should be promoted from `WORKING_TREE` to
-`COMMITTED` with the commit hash and the blocker queue should be refreshed.
+Current stop point: final coordination evidence promotion commit is pending.
