@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-09-02 implementation and lifecycle/evidence/queue alignment` |
-| Latest state commit | Implementation `bf1dc20`; closeout not committed |
+| Latest state commit | Implementation `bf1dc20`; closeout/evidence `f7028d3` |
 | Previous completed task archive status | `DEL-09-02 sealed dispatch brief preparation` archived with brief `d88c6ae` and handoff correction `b84a26c` |
 | Current authorized item | Ordered tranche item 3: `DEL-09-02` stress recovery benchmark suite closeout complete in working tree |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md` |
@@ -352,7 +352,7 @@ Verification:
 
 Remaining open items:
 
-- Closeout state is not committed.
+- Closeout/evidence state committed as `f7028d3`.
 - `DEL-09-04` still waits on `DEL-09-03`.
 - `DEL-09-05` still waits on `DEL-09-03` and `DEL-08-05`.
 - `DEL-11-04` still waits on `DEL-08-05`.
@@ -361,8 +361,8 @@ Remaining open items:
 
 Immediate next action:
 
-1. If accepted, route this closeout state through `CHANGE` for staging and
-   commit.
+1. Await the next human gate: authorize exactly one bounded DAG item,
+   reconciliation/change/audit, artifact handling, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
