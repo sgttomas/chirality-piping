@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR dispatch brief preparation
+**Actor:** WORKING_ITEMS DEL-09-01 implementation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** sealed dispatch brief prepared for `DEL-09-01`; awaiting human implementation gate
+**Current Mode:** `DEL-09-01` implemented in working tree; closeout gate pending
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-09-01 sealed dispatch brief preparation` |
+| Latest state task | `DEL-09-01 implementation` |
 | Latest state commit | Not committed; working tree state only |
-| Previous completed task archive status | `DEL-05-05 implementation closeout` archived in compact completed history |
-| Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite has sealed brief prepared; implementation still requires human approval |
+| Previous completed task archive status | `DEL-09-01 sealed dispatch brief preparation` superseded by same-turn implementation |
+| Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite implemented in working tree; lifecycle/evidence/queue/commit closeout still requires human approval |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -255,48 +255,69 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-09-01 Sealed Dispatch Brief Preparation
+## Latest State - DEL-09-01 Implementation
 
-Human project authority approved preparation of a fresh sealed dispatch brief:
+Human project authority approved implementation from the sealed dispatch brief:
 
 - `DEL-09-01 - Mechanics benchmark suite`
 
-The sealed brief has been prepared at
-`execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`. This preparation does
-not authorize implementation, lifecycle transition, implementation-evidence
-registration, dependency-register edits, blocker-queue refresh, `DAG-001`
-changes, candidate-edge promotion, staging, commit, or broad DAG execution.
+Implementation has been completed in the working tree within the sealed write
+scope. Lifecycle transition, implementation-evidence registration,
+dependency-register edits, blocker-queue refresh, `DAG-001` changes,
+candidate-edge promotion, staging, and commit have not been performed by this
+implementation pass.
 
 Files changed in this task:
 
+- `validation/benchmarks/mechanics/Cargo.lock`
+- `validation/benchmarks/mechanics/Cargo.toml`
+- `validation/benchmarks/mechanics/README.md`
+- `validation/benchmarks/mechanics/src/lib.rs`
+- `validation/hand_calcs/mechanics/README.md`
+- `validation/hand_calcs/mechanics/cantilever_tip_force.md`
+- `validation/hand_calcs/mechanics/fixed_fixed_thermal_axial.md`
+- `validation/hand_calcs/mechanics/imposed_displacement_spring.md`
+- `validation/hand_calcs/mechanics/inclined_member_transform.md`
+- `validation/hand_calcs/mechanics/portal_frame_sway.md`
+- `docs/VALIDATION_STRATEGY.md`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/MEMORY.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Brief summary:
+Implementation summary:
 
-- `DEL-09-01` is recorded as `UNBLOCKED` in the current
-  implementation-readiness queue and still has `MISSING_EVIDENCE`.
-- The brief uses approved active `DAG-001` edges only and excludes candidate
-  edges.
-- Applicable architecture basis is limited to `AB-00-01`, `AB-00-02`,
-  `AB-00-06`, and `AB-00-08`.
-- Active upstream implementation evidence is recorded for `DEL-04-01`,
-  `DEL-04-02`, `DEL-04-03`, `DEL-05-01`, and `DEL-01-02`.
-- Future implementation scope is bounded to mechanics verification benchmarks,
-  hand-calculation/provenance notes, and supporting validation documentation.
-- Fixture schema, runner command, numerical tolerances, release thresholds, CI
-  gate policy, approved artificial fixture values, and final result-envelope or
-  export integration remain `TBD`.
+- Added the `open_pipe_stress_mechanics_benchmarks` Rust crate under
+  `validation/benchmarks/mechanics`.
+- Implemented original public fixtures for cantilever response, portal-frame
+  assembly/sway, fixed-fixed thermal axial restraint, imposed displacement on a
+  spring support, and inclined-member stiffness transformation.
+- Added fixture provenance, accepted public-original redistribution posture,
+  dimensioned expected values, unresolved tolerance-policy fields, and focused
+  automated comparisons against existing frame-kernel, straight-pipe,
+  primitive-load, and linear-support APIs.
+- Added hand-calculation notes under `validation/hand_calcs/mechanics`.
+- Updated validation/spec/type documentation and deliverable `MEMORY.md`.
+- No solver implementation crate, stress-recovery benchmark surface, protected
+  standards example, commercial benchmark file, proprietary engineering value,
+  code-specific acceptance criterion, final release tolerance, CI gate, or
+  professional/code-compliance claim was introduced.
 
 Verification:
 
-- `git diff --check` passed for the dispatch-brief preparation diff.
+- `cargo fmt --manifest-path validation/benchmarks/mechanics/Cargo.toml --check`
+  passed.
+- `cargo test --manifest-path validation/benchmarks/mechanics/Cargo.toml`
+  passed: 7 tests.
 
 Remaining open items:
 
-- Brief preparation is not yet committed.
-- `DEL-09-01` implementation still requires an explicit human approval gate
-  from the sealed dispatch brief.
+- `DEL-09-01` lifecycle remains `SEMANTIC_READY`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` has not been changed.
+- `DEV-001_BLOCKER_QUEUE.*` has not been refreshed.
+- `DEL-09-01` deliverable-local `Dependencies.csv` has not been annotated.
+- Implementation is not yet committed.
 - `DEL-09-02` remains the next ordered tranche item after `DEL-09-01`
   implementation/closeout, unless superseded by later human ruling.
 
@@ -304,9 +325,8 @@ Remaining open items:
 
 Immediate next action:
 
-1. Either commit the `DEL-09-01` sealed dispatch brief preparation through
-   `CHANGE`, or approve implementation from
-   `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`.
+1. Either approve `DEL-09-01` lifecycle/evidence/dependency/queue closeout and
+   commit, or request review/revision of the working-tree implementation.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.

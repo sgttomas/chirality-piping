@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-09-01
 doc_kind: coordination.dispatch_brief
-status: sealed_dispatch_brief_prepared
+status: implemented_in_working_tree_pending_closeout
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -16,7 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-09-01 Mechanics Benchmark Suite
 
-**Dispatch status:** sealed brief prepared by human approval on 2026-05-02
+**Dispatch status:** implemented in working tree after human approval on
+2026-05-02; lifecycle/evidence/queue closeout pending separate gate
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -32,6 +33,12 @@ This authorization prepares the implementation brief only. It does not
 authorize implementation, lifecycle transition, implementation-evidence
 registration, dependency-register edits, blocker-queue refresh, `DAG-001`
 changes, candidate-edge promotion, staging, commit, or broad DAG execution.
+
+The human project authority later authorized implementation from this sealed
+brief. Implementation has been completed in the working tree within the bounded
+write scope. Lifecycle transition, implementation-evidence registration,
+dependency-register alignment, blocker-queue refresh, staging, and commit have
+not been performed by this implementation pass.
 
 The eventual implementation scope should be deliberately constrained to
 mechanics verification benchmarks for open/original/public-permissive mechanics
@@ -185,3 +192,36 @@ Return:
   - Fixture provenance summary.
   - Remaining TBDs and blocked decisions.
 ```
+
+## Implementation Summary
+
+Implemented within the sealed write scope:
+
+- Added `validation/benchmarks/mechanics/` as the
+  `open_pipe_stress_mechanics_benchmarks` Rust crate.
+- Added original mechanics fixtures for cantilever response, portal-frame
+  assembly/sway, fixed-fixed thermal axial restraint, imposed displacement on a
+  spring support, and inclined-member stiffness transformation.
+- Added fixture provenance records, accepted public-original redistribution
+  posture, dimensioned expected values, unresolved tolerance policy fields, and
+  focused automated comparisons against existing frame-kernel, straight-pipe,
+  primitive-load, and linear-support APIs.
+- Added `validation/hand_calcs/mechanics/` hand-calculation notes for each
+  fixture family.
+- Updated `docs/VALIDATION_STRATEGY.md`, `docs/SPEC.md`, `docs/TYPES.md`, and
+  deliverable `MEMORY.md`.
+
+Verification performed:
+
+- `cargo fmt --manifest-path validation/benchmarks/mechanics/Cargo.toml --check`
+  passed.
+- `cargo test --manifest-path validation/benchmarks/mechanics/Cargo.toml`
+  passed: 7 tests.
+
+Closeout pending separate authorization:
+
+- `DEL-09-01` lifecycle remains `SEMANTIC_READY`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` has not been changed.
+- `DEV-001_BLOCKER_QUEUE.*` has not been refreshed.
+- `DEL-09-01` deliverable-local `Dependencies.csv` has not been annotated.
+- Aggregate `DAG-001` and candidate edges are unchanged.

@@ -604,6 +604,13 @@ The project shall maintain:
 - report reproducibility tests;
 - public validation manual using original/public/permissive examples only.
 
+`validation/benchmarks/mechanics/` is the initial mechanics benchmark crate for
+`DEL-09-01`. It records public-original fixture provenance, dimensioned
+expected values, unresolved tolerance policy, and focused automated comparisons
+for cantilever, frame, thermal-growth, imposed-displacement, and
+stiffness-transform families. Hand-calculation notes for those fixtures live in
+`validation/hand_calcs/mechanics/`.
+
 ## 11. Agentic development mechanics
 
 Downstream implementation should use the decomposition package as the source of work identity:
