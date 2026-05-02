@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-08-01 post-commit evidence promotion` |
-| Latest state commit | Implementation/closeout `9e21716`; promotion metadata pending current commit |
+| Latest state commit | Implementation/closeout `9e21716`; promotion metadata `074de21` |
 | Previous completed task archive status | `DEL-08-01 implementation lifecycle/evidence/queue closeout` archived in compact history |
 | Current authorized item | `DEL-08-01` evidence promoted to `COMMITTED`; queue refreshed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md` |
