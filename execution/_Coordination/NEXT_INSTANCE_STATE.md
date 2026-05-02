@@ -24,9 +24,9 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-09-01 implementation` |
-| Latest state commit | Implementation `b34ecd6`; closeout commit pending |
+| Latest state commit | Implementation `b34ecd6`; closeout `33bd2f5` |
 | Previous completed task archive status | `DEL-09-01 sealed dispatch brief preparation` superseded by same-turn implementation |
-| Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite closeout complete in working tree; commit pending |
+| Current authorized item | Ordered tranche item 3: `DEL-09-02` stress recovery benchmark suite requires fresh sealed brief before implementation |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -337,7 +337,8 @@ Verification:
 
 Remaining open items:
 
-- Closeout commit is pending.
+- Closeout commit: `33bd2f5 coordination: record del-09-01 implementation
+  evidence`.
 - `DEL-09-04`, `DEL-09-05`, and `DEL-11-04` still wait on other missing
   upstream implementation evidence.
 - `DEL-09-02` remains the next ordered tranche item after `DEL-09-01`
