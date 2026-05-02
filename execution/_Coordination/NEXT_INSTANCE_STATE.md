@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS DEL-09-01 implementation
+**Actor:** ORCHESTRATOR DEL-09-02 dispatch preparation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-09-01` implemented; lifecycle/evidence/queue closeout complete in working tree
+**Current Mode:** `DEL-09-02` sealed dispatch brief prepared; implementation not yet authorized
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-09-01 implementation` |
-| Latest state commit | Implementation `b34ecd6`; closeout `33bd2f5` |
-| Previous completed task archive status | `DEL-09-01 sealed dispatch brief preparation` superseded by same-turn implementation |
-| Current authorized item | Ordered tranche item 3: `DEL-09-02` stress recovery benchmark suite requires fresh sealed brief before implementation |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md` |
+| Latest state task | `DEL-09-02 sealed dispatch brief preparation` |
+| Latest state commit | Pending CHANGE commit for this control-plane brief preparation |
+| Previous completed task archive status | `DEL-09-01 implementation` archived with implementation `b34ecd6`, closeout/evidence `33bd2f5`, and handoff `023ddad` |
+| Current authorized item | Ordered tranche item 3: `DEL-09-02` stress recovery benchmark suite has a fresh sealed brief; implementation requires a separate human gate |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -126,7 +126,7 @@ evidence and should not be treated as current sequencing authority.
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-05-05` implementation evidence was added. It reads approved active
+2026-05-02 after `DEL-09-01` implementation evidence was added. It reads approved active
 `DAG-001` edges and `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
 `TargetDeliverableID`, the upstream provider.
@@ -233,6 +233,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-02` implementation and lifecycle/evidence/queue alignment | Completed; implementation/alignment `061f1af`; evidence/queue `4cf5bf9`; handoff `caf6220` | `core/reporting/audit_manifest/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Audit-manifest, rule-pack lifecycle, persistence schema, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue remained 55 unblocked / 18 blocked | `DEL-08-01` now only waits on `DEL-08-03`; `DEL-10-05` now waits on `DEL-10-01` and `DEL-08-04`; project container, persistence adapter, report/API/CLI integration, and private storage/redaction remain downstream work. |
 | `Committed-evidence lifecycle alignment audit` | Completed; `1d8d9a5 coordination: align committed lifecycle states` | 23 deliverable `_STATUS.md` files, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | Rebuilt blocker queue at 55 unblocked / 18 blocked; dependency schema, DAG audit, local dependency-register validation, lifecycle count check, committed-evidence check, and `git diff --check` passed | Lifecycle display/state only; no item was promoted to `ISSUED`, no DAG/candidate/dependency ordering changed, and no product deliverable was authorized by the pass. |
 | `DEL-05-05` implementation closeout | Completed; implementation `3cfcfd2`; evidence/queue `1007993`; handoff `af4f885`; state correction `c46b41a` | `core/loads/user_loads/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | User-load, primitive-load, load-case algebra, and frame-kernel cargo tests passed; coordination tests, dependency schema validation, DAG audit, `git diff --check`, and focused protected-content/prohibited-claim scan passed; queue remained 55 unblocked / 18 blocked | `DEL-09-01` and `DEL-09-02` remained approved as ordered tranche items; `DEL-09-01` required a fresh sealed dispatch brief before implementation. |
+| `DEL-09-01` implementation | Completed; implementation `b34ecd6`; closeout/evidence `33bd2f5`; handoff `023ddad` | `validation/benchmarks/mechanics/`, `validation/hand_calcs/mechanics/`, validation/spec/type docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Mechanics benchmark rustfmt and 7 tests passed; coordination tests, dependency schema validation, DAG audit, `git diff --check`, and focused protected-content/prohibited-claim scan passed; queue changed to 56 unblocked / 17 blocked | `DEL-09-02` remained the next ordered tranche item; `DEL-09-04`, `DEL-09-05`, and `DEL-11-04` still wait on other missing upstream implementation evidence. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -255,102 +256,66 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-09-01 Implementation
+## Latest State - DEL-09-02 Sealed Dispatch Brief Preparation
 
-Human project authority approved implementation from the sealed dispatch brief:
+Human project authority authorized one bounded ORCHESTRATOR action after
+handoff-trail repair:
 
-- `DEL-09-01 - Mechanics benchmark suite`
+- prepare `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md`
+  for `DEL-09-02 - Stress recovery benchmark suite`.
 
-Implementation and lifecycle/evidence/queue closeout have been completed in
-the working tree within the sealed write scope. Aggregate `DAG-001` and
-candidate edges were not changed.
+The sealed dispatch brief has been prepared from `DAG-001`,
+`docs/_Registers/Deliverables.csv`, applicable `AB-00-*` architecture-basis
+rows, the current blocker queue/evidence, and the deliverable-local context.
+This action did not authorize implementation, lifecycle transition,
+implementation-evidence registration, dependency-register edits, blocker-queue
+refresh, candidate-edge promotion, staging, commit, or broad DAG execution.
 
 Files changed in this task:
 
-- `validation/benchmarks/mechanics/Cargo.lock`
-- `validation/benchmarks/mechanics/Cargo.toml`
-- `validation/benchmarks/mechanics/README.md`
-- `validation/benchmarks/mechanics/src/lib.rs`
-- `validation/hand_calcs/mechanics/README.md`
-- `validation/hand_calcs/mechanics/cantilever_tip_force.md`
-- `validation/hand_calcs/mechanics/fixed_fixed_thermal_axial.md`
-- `validation/hand_calcs/mechanics/imposed_displacement_spring.md`
-- `validation/hand_calcs/mechanics/inclined_member_transform.md`
-- `validation/hand_calcs/mechanics/portal_frame_sway.md`
-- `docs/VALIDATION_STRATEGY.md`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/MEMORY.md`
-- `execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/_STATUS.md`
-- `execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/Dependencies.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Implementation summary:
+Preparation summary:
 
-- Added the `open_pipe_stress_mechanics_benchmarks` Rust crate under
-  `validation/benchmarks/mechanics`.
-- Implemented original public fixtures for cantilever response, portal-frame
-  assembly/sway, fixed-fixed thermal axial restraint, imposed displacement on a
-  spring support, and inclined-member stiffness transformation.
-- Added fixture provenance, accepted public-original redistribution posture,
-  dimensioned expected values, unresolved tolerance-policy fields, and focused
-  automated comparisons against existing frame-kernel, straight-pipe,
-  primitive-load, and linear-support APIs.
-- Added hand-calculation notes under `validation/hand_calcs/mechanics`.
-- Updated validation/spec/type documentation and deliverable `MEMORY.md`.
-- Implementation committed as `b34ecd6 validation: add mechanics benchmark
-  suite`.
-- `DEL-09-01` lifecycle moved to `CHECKING`.
-- `DEL-09-01` local dependency mirror rows `DAG-001-E0532` through
-  `DAG-001-E0536` were annotated as satisfied by committed upstream evidence.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-09-01` as `COMMITTED`.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed; implementation readiness changed
-  to 56 unblocked / 17 blocked and `DEL-11-03` is newly unblocked.
-- No solver implementation crate, stress-recovery benchmark surface, protected
-  standards example, commercial benchmark file, proprietary engineering value,
-  code-specific acceptance criterion, final release tolerance, CI gate, or
-  professional/code-compliance claim was introduced.
+- Corrected the `DEL-09-01` handoff trail to record implementation `b34ecd6`,
+  closeout/evidence `33bd2f5`, and handoff `023ddad`.
+- Archived `DEL-09-01` as the previous latest completed task.
+- Prepared a fresh `DEL-09-02` sealed dispatch brief with explicit bounded
+  write scope and acceptance criteria.
+- Confirmed `DEL-09-02` is `UNBLOCKED` in the current implementation-readiness
+  queue, with upstream `COMMITTED` evidence from `DEL-05-03`, `DEL-03-08`,
+  `DEL-04-02`, and `DEL-01-02`.
+- No `DAG-001`, candidate edge, lifecycle, evidence register, blocker queue, or
+  deliverable-local dependency register was changed.
 
 Verification:
 
-- `cargo fmt --manifest-path validation/benchmarks/mechanics/Cargo.toml --check`
+- `git diff --check -- execution/_Coordination/NEXT_INSTANCE_STATE.md`
   passed.
-- `cargo test --manifest-path validation/benchmarks/mechanics/Cargo.toml`
-  passed: 7 tests.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed: 56 unblocked / 17 blocked.
-- `python3 -m pytest tools/coordination` passed: 10 tests.
+- Trailing-whitespace scan on
+  `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md` passed.
 - `python3 tools/validation/validate_dependencies_schema.py
   execution/_DAG/DAG-001/DependencyEdges.csv` passed.
 - `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-01_Mechanics benchmark suite/Dependencies.csv"`
+  "execution/PKG-09_Verification, Validation, and Quality Oracles/1_Working/DEL-09-02_Stress recovery benchmark suite/Dependencies.csv"`
   passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
-- Focused protected-content/prohibited-claim scan found only guardrail,
-  exclusion, and pre-existing governance wording.
-- `git diff --check` passed.
 
 Remaining open items:
 
-- Closeout commit: `33bd2f5 coordination: record del-09-01 implementation
-  evidence`.
-- `DEL-09-04`, `DEL-09-05`, and `DEL-11-04` still wait on other missing
-  upstream implementation evidence.
-- `DEL-09-02` remains the next ordered tranche item after `DEL-09-01`
-  implementation/closeout, unless superseded by later human ruling.
+- The `DEL-09-02` brief preparation is pending CHANGE staging/commit.
+- `DEL-09-02` implementation requires a separate human approval gate.
+- `DEL-09-04`, `DEL-09-05`, and `DEL-11-04` still wait on missing upstream
+  implementation evidence from `DEL-09-02` and other unimplemented items.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Commit `DEL-09-01` closeout state, then prepare a fresh sealed dispatch
-   brief for `DEL-09-02 - Stress recovery benchmark suite` as ordered tranche
-   item 3.
+1. If accepted, route this control-plane state through `CHANGE` for staging and
+   commit.
+2. If the human approves the next gate, implement `DEL-09-02` from the fresh
+   sealed dispatch brief only within its explicit write scope.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
