@@ -265,8 +265,16 @@ Closeout actions performed before commit:
   implementation evidence. The queue remained 64 unblocked / 9 blocked
   because `WORKING_TREE` evidence does not satisfy the `COMMITTED` threshold.
 
-Post-commit promotion to `COMMITTED` evidence is required before downstream
-consumer `DEL-08-01` can treat `DEL-08-03` as an implementation-ready upstream.
+Post-commit promotion:
+
+- `DEL-08-03` implementation and closeout alignment were committed as
+  `50f947a schema: add report sections contract`.
+- Promoted `DEL-08-03` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `50f947a`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 65 unblocked / 8
+  blocked. `DEL-08-01 - Calculation report generator` is now unblocked by
+  implementation-readiness criteria and has `MISSING_EVIDENCE` for its own
+  implementation.
 
 ## Dispatch Task Shape
 
