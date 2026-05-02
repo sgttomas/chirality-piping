@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-05-05
 doc_kind: coordination.dispatch_brief
-status: implemented_pending_change_closeout
+status: implemented_lifecycle_evidence_queue_refreshed
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -16,8 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-05-05 Concentrated and Distributed User Load Application
 
-**Dispatch status:** implementation approved by human project authority on
-2026-05-02 and completed in the working tree
+**Dispatch status:** implementation and CHANGE/closeout completed on
+2026-05-02
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -35,11 +35,10 @@ registration, dependency-register edits, blocker-queue refresh, `DAG-001`
 changes, candidate-edge promotion, staging, commit, or broad DAG execution.
 
 The human project authority later authorized implementation from this sealed
-brief as the first item in an ordered tranche. Implementation has been completed
-in the working tree within the bounded write scope. Lifecycle transition,
-implementation evidence registration, dependency-register alignment,
-blocker-queue refresh, staging, and commit still require follow-on CHANGE/
-closeout approval.
+brief as the first item in an ordered tranche. Implementation was completed
+within the bounded write scope. Lifecycle transition, implementation evidence
+registration, dependency-register alignment, blocker-queue refresh, staging,
+and commit have now been completed after verification.
 
 The eventual implementation scope should be deliberately constrained to
 code-neutral mechanics load application for concentrated forces, concentrated
@@ -78,7 +77,7 @@ Active upstream dependencies from `DAG-001`:
 Current implementation-readiness queue state:
 
 - `DEL-05-05` is `UNBLOCKED`.
-- `DEL-05-05` has `MISSING_EVIDENCE` for its own implementation.
+- `DEL-05-05` has `COMMITTED` implementation evidence `3cfcfd2`.
 - Candidate edges are excluded.
 
 ## Applicable Architecture Basis
@@ -191,13 +190,17 @@ Verification performed:
 - Focused protected-content/prohibited-claim scan found only boundary/exclusion
   language and pre-existing governance terms.
 
-Closeout still pending:
+Lifecycle/evidence/queue closeout:
 
-- No lifecycle state transition has been made.
-- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` record has been added.
-- No deliverable-local dependency mirror has been annotated.
-- No `DEV-001_BLOCKER_QUEUE.*` refresh has been performed.
-- No staging or commit has been performed.
+- Implementation commit: `3cfcfd2 core: add user load application`.
+- `DEL-05-05` lifecycle moved to `CHECKING`.
+- `DEL-05-05` local dependency mirror rows `DAG-001-E0459` through
+  `DAG-001-E0461` record satisfied upstreams `DEL-05-01`, `DEL-04-01`, and
+  `DEL-02-02`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-05-05` as `COMMITTED`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed from approved active `DAG-001` edges
+  and committed evidence; queue remained 55 unblocked / 18 blocked.
+- Aggregate `DAG-001` was validated and left unchanged.
 
 ## Dispatch Task Shape
 

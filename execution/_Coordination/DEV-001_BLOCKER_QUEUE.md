@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 33 |
-| Committed implementation evidence | 33 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 40 |
+| Implementation evidence records | 34 |
+| Committed implementation evidence | 34 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 39 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 55 |
 | Implementation `BLOCKED` deliverables | 18 |
@@ -101,7 +101,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-05-02` | `PKG-05` | `COMMITTED` `0f9189c` | 8 | Load-case algebra engine |
 | `DEL-05-03` | `PKG-05` | `COMMITTED` `26dc805` | 10 | Fundamental stress recovery module |
 | `DEL-05-04` | `PKG-05` | `COMMITTED` `dbaf21e` | 6 | Analysis status semantics |
-| `DEL-05-05` | `PKG-05` | `MISSING_EVIDENCE` | 8 | Concentrated and distributed user load application |
+| `DEL-05-05` | `PKG-05` | `COMMITTED` `3cfcfd2` | 8 | Concentrated and distributed user load application |
 | `DEL-06-01` | `PKG-06` | `COMMITTED` `20241f9` | 12 | Rule-pack schema |
 | `DEL-06-02` | `PKG-06` | `COMMITTED` `7490f67` | 9 | Sandboxed unit-aware expression evaluator |
 | `DEL-06-03` | `PKG-06` | `COMMITTED` `c075522` | 10 | Required-input completeness checker |
