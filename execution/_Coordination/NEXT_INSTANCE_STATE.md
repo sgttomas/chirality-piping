@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-06-03
+**Actor:** WORKING_ITEMS implementation for DEL-08-02
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-06-03 committed, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
+**Current Mode:** DEL-08-02 implemented in working tree with lifecycle/local mirror alignment; awaiting commit-backed evidence and queue refresh
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-06-03 implementation evidence and blocker queue refresh` |
-| Latest state commit | Implementation/alignment commit `c075522`; evidence/queue refresh pending commit |
-| Previous completed task archive status | `DEL-06-04 commit-backed evidence/queue refresh` moved into the compact task archive table |
-| Current authorized item | `DEL-06-03` lifecycle/evidence/queue closeout and then `DEL-08-02` |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-03.md` |
+| Latest state task | `DEL-08-02 implementation and initial alignment in working tree` |
+| Latest state commit | `DEL-06-03` implementation/alignment commit `c075522`; evidence/queue refresh commit `67cd25c`; `DEL-08-02` not committed yet |
+| Previous completed task archive status | `DEL-06-03 implementation evidence and blocker queue refresh` moved into the compact task archive table |
+| Current authorized item | `DEL-08-02 - Audit manifest and model hash` implementation |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -229,6 +229,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-06-05` lifecycle/evidence/queue alignment | Completed; implementation `73506b7`; evidence/queue/state `cb3ffa6` | `DEL-06-05` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue remained 53 unblocked / 20 blocked | No next product deliverable was authorized by the alignment pass; `DEL-11-04` remains blocked by `DEL-09-01`, `DEL-09-02`, and `DEL-08-05`. |
 | `DEL-06-04` implementation and initial alignment | Completed; `ad270f6 core: add rule pack lifecycle handling` | `core/rules/rule_pack_lifecycle/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, evidence/queue, dispatch/state | Rule-pack lifecycle rustfmt and 8 focused tests passed; rule-pack schema check and expression-evaluator tests passed; dependency schema validation, coordination tests, DAG audit, `git diff --check`, and protected-content/prohibited-claim scan passed | JSON canonicalization library/dependency, non-JSON payload partitioning, storage, encryption, access control, secrets, GUI/report/API integration, and result-envelope integration remain `TBD`. |
 | `DEL-06-04` commit-backed evidence/queue refresh | Completed; implementation/alignment `ad270f6`; evidence/queue refresh `7ae87ba` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-06-04.md`, `DEL-06-04` `MEMORY.md`, `NEXT_INSTANCE_STATE.md` | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue changed to 54 unblocked / 19 blocked | `DEL-08-02` newly unblocked; `DEL-07-03`, `DEL-08-01`, `DEL-12-02`, and `DEL-12-04` still blocked by other missing upstreams. |
+| `DEL-06-03` implementation and lifecycle/local alignment | Completed; implementation/alignment `c075522`; evidence/queue `67cd25c` | `core/rules/completeness_checker/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Completeness-checker, expression-evaluator, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue changed to 55 unblocked / 18 blocked | `DEL-07-04` newly unblocked; schema adapter, unit conversion, GUI/report/API/result-envelope integration, and private storage/redaction remain downstream work. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -251,54 +252,53 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-06-03 Implementation Evidence and Blocker Queue Refresh
+## Latest State - DEL-08-02 Implementation and Initial Alignment in Working Tree
 
-Human project authority approved closing out `DEL-06-03` before continuing to
-`DEL-08-02`:
+Human project authority approved `DEL-08-02` as the next bounded item after
+`DEL-06-03` closeout:
 
-- `DEL-06-03 - Required-input completeness checker`
+- `DEL-08-02 - Audit manifest and model hash`
 
 Files changed in this task:
 
-- `core/rules/completeness_checker/.gitignore`
-- `core/rules/completeness_checker/Cargo.toml`
-- `core/rules/completeness_checker/README.md`
-- `core/rules/completeness_checker/src/lib.rs`
+- `core/reporting/audit_manifest/.gitignore`
+- `core/reporting/audit_manifest/Cargo.toml`
+- `core/reporting/audit_manifest/README.md`
+- `core/reporting/audit_manifest/src/lib.rs`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-06-03.md`
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/MEMORY.md`
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/Dependencies.csv`
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-03_Required-input completeness checker/_STATUS.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/MEMORY.md`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/Dependencies.csv`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/_STATUS.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Implementation summary:
 
-- Added a bounded Rust completeness-checker crate for declarative rule-pack
-  required-input declarations and caller-supplied input evidence.
-- The checker emits deterministic findings for missing values, missing units,
-  dimension mismatch, provenance gaps, redistribution gaps, suspected protected
-  content, review gaps, duplicate declarations, duplicate supplied inputs, and
-  unexpected inputs.
-- Blocking findings map to `RULE_INPUTS_INCOMPLETE` readiness while preserving
-  mechanics solve status.
-- The implementation does not parse rule-pack JSON, evaluate formulas, store
-  private data, provide code-specific values, import protected standards data,
-  or make professional/code-compliance claims.
+- Added a bounded Rust audit-manifest crate for canonical JSON model/input
+  hashes, separate non-JSON asset hashes, solver version stamps, unit-system
+  references, rule-pack checksum references, privacy/redaction metadata, and
+  deterministic manifest findings.
+- The implementation accepts structured `CanonicalJson` values and serializes
+  object keys deterministically for hash input.
+- The implementation does not parse arbitrary project files, choose a physical
+  project container, store private payloads, authenticate engineering work,
+  import protected standards data, or make professional/code-compliance claims.
 
 Verification:
 
-- `cargo fmt --manifest-path core/rules/completeness_checker/Cargo.toml --check`
+- `cargo fmt --manifest-path core/reporting/audit_manifest/Cargo.toml --check`
   passed.
-- `cargo test --manifest-path core/rules/completeness_checker/Cargo.toml`
-  passed: 11 tests.
-- `cargo test --manifest-path core/rules/expression_evaluator/Cargo.toml`
-  passed: 14 tests.
+- `cargo test --manifest-path core/reporting/audit_manifest/Cargo.toml`
+  passed: 9 tests.
+- `cargo test --manifest-path core/rules/rule_pack_lifecycle/Cargo.toml`
+  passed: 8 tests.
+- `python3 tests/test_persistence_schema.py` passed.
 - `python3 tests/test_rule_pack_schema.py` passed.
 - `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/Dependencies.csv"`
+  passed.
 - `git diff --check` passed.
 - Focused protected-content/prohibited-claim scan found only guardrail and
   exclusion wording; no protected data, proprietary engineering values, private
@@ -306,24 +306,24 @@ Verification:
 
 Lifecycle/evidence/queue closeout:
 
-- Committed the bounded implementation and initial lifecycle/local-mirror
-  alignment as `c075522 core: add rule completeness checker`.
-- Updated `DEL-06-03` lifecycle from `SEMANTIC_READY` to `CHECKING`.
-- Annotated the `DEL-06-03` local dependency mirror for satisfied
-  non-architecture upstreams `DEL-06-01`, `DEL-02-03`, and `DEL-05-04`.
-- Recorded `DEL-06-03` as `COMMITTED` implementation evidence at `c075522`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue changed to 55 unblocked / 18
-  blocked.
-- `DEL-07-04` is newly unblocked; `DEL-08-02` remains unblocked and is the next
-  requested DAG-ready item.
+- Updated `DEL-08-02` lifecycle from `SEMANTIC_READY` to `CHECKING`.
+- Annotated the `DEL-08-02` local dependency mirror for satisfied
+  non-architecture upstreams `DEL-02-05` and `DEL-06-04`.
+- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` update was made for `DEL-08-02`
+  yet.
+- No `DEV-001_BLOCKER_QUEUE.*` refresh was made after `DEL-08-02`
+  implementation yet; current queue remains the post-`DEL-06-03` committed
+  evidence queue at 55 unblocked / 18 blocked.
 - Aggregate `DAG-001` was left unchanged; candidate edges remain non-gating.
-- `DAG-001` has been validated and left unchanged.
+- No commit has been made for `DEL-08-02` yet.
 
 Remaining open items:
 
-- Schema-to-Rust adapter and rule-pack JSON parsing remain downstream.
-- Unit conversion and canonical unit catalog remain downstream.
-- GUI/report/API/final result-envelope integration remains downstream.
+- Physical project package/container remains downstream.
+- Full project schema adapter and persistence-service integration remain
+  downstream.
+- Report renderer, API transport, CLI runner, GUI workflow, and final
+  result-envelope integration remain downstream.
 - Private storage, redaction, access control, and secret handling remain PKG-12
   downstream work.
 

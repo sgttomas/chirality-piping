@@ -565,6 +565,15 @@ Reports must include:
 
 Reports must not reproduce protected code text, protected standards tables, or proprietary formulas in public templates/examples.
 
+`core/reporting/audit_manifest` implements the bounded audit-manifest and model
+hash surface. It hashes structured canonical JSON values using sorted object
+keys, records non-JSON asset hashes as separate manifest entries, captures
+solver version stamps, unit-system references, rule-pack checksum references,
+privacy/redaction metadata, and deterministic findings for missing manifest
+evidence. It does not parse project files, choose a physical project container,
+store private rule-pack payloads, import protected standards content,
+authenticate engineering work, or make professional/code-compliance claims.
+
 Analysis-status envelopes must preserve the project authority boundary:
 software may emit `MODEL_INCOMPLETE`, `MECHANICS_SOLVED`,
 `RULE_INPUTS_INCOMPLETE`, `USER_RULE_CHECKED`, `USER_RULE_FAILED`, and
