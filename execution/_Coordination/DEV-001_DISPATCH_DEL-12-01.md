@@ -16,7 +16,8 @@ write_scope: explicit_bounded_targets
 
 # DEV-001 Dispatch - DEL-12-01 Local-First Storage And Private Data Paths
 
-**Dispatch status:** sealed dispatch brief prepared on 2026-05-02.
+**Dispatch status:** implemented in working tree on 2026-05-02 after separate
+human approval gate.
 **Coordination mode:** `FULL_GRAPH`
 **Graph authority:** `execution/_DAG/DAG-001/DependencyEdges.csv`
 **Implementation threshold:** upstream `COMMITTED` evidence
@@ -217,7 +218,40 @@ Return:
   - Remaining TBDs and blocked decisions.
 ```
 
-## Current Stop Point
+## Implementation Record
 
-Stop after sealed dispatch brief preparation. Implementation requires a
-separate human approval gate from this brief.
+Human project authority later authorized implementation from this sealed brief
+only. Implementation stayed within the approved write scope:
+
+- `docs/security/local_first_storage_policy.md`
+- `tests/security/test_local_first_storage_policy.py`
+- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-01_Local-first storage and private data paths/MEMORY.md`
+- this dispatch brief
+- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+
+Implementation summary:
+
+- Added the public local-first storage and private path policy.
+- Added deterministic policy tests for traceability, local-first default
+  behavior, repository-leakage prohibition, symbolic path classes, required
+  `TBD` decisions, no-bypass language, and absence of runtime storage surfaces.
+- Kept physical project package/container, OS-specific roots, application data
+  directories, migration framework, encryption, secret storage, key
+  management, redaction workflow, import/export formats, cloud exception
+  workflow, and runtime storage implementation as `TBD`.
+- No lifecycle transition, dependency-register edit, candidate-edge change,
+  blocker-queue refresh, implementation-evidence registration, protected
+  standards data, proprietary engineering value, real private data, real
+  secret, real path, cloud storage implementation, runtime storage behavior,
+  encryption claim, schema edit, product config edit, or professional/security/
+  code-compliance claim occurred.
+
+Verification:
+
+- `python3 -m pytest tests/security/test_local_first_storage_policy.py`
+  passed.
+- `python3 -m pytest tests/security/test_telemetry_policy.py` passed.
+- `git diff --check` passed before handoff update.
+
+Current stop point: lifecycle/evidence/local dependency-register alignment,
+blocker-queue refresh, staging, and commit require a separate human gate.

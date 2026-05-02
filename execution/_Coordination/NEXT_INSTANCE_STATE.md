@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-12-01 sealed dispatch brief preparation
+**Actor:** WORKING_ITEMS DEL-12-01 implementation from sealed dispatch brief
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-12-01` sealed dispatch brief prepared
+**Current Mode:** `DEL-12-01` implemented from sealed brief in working tree; lifecycle/evidence/queue closeout and implementation commit await separate gate
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-12-01 sealed dispatch brief preparation` |
-| Latest state commit | Brief preparation not committed |
-| Previous completed task archive status | `DEL-12-03 lifecycle/evidence/queue closeout` archived with implementation `7834b97`, evidence `01d7e75`, and handoff `88292d7` |
-| Current authorized item | `DEL-12-01` sealed dispatch brief prepared; implementation not authorized |
+| Latest state task | `DEL-12-01 implementation from sealed dispatch brief` |
+| Latest state commit | Brief preparation `2c3dcae`; implementation not committed |
+| Previous completed task archive status | `DEL-12-01 sealed dispatch brief preparation` archived with `2c3dcae` |
+| Current authorized item | `DEL-12-01` implemented in working tree; lifecycle/evidence/queue closeout and implementation commit not authorized |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -260,6 +260,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-12-03` sealed dispatch brief preparation after DEL-12-05 closeout | Completed; `9278c7f coordination: close del-12-05 and prepare del-12-03` | `DEL-12-05` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-12-03.md`, `NEXT_INSTANCE_STATE.md` | Blocker queue rebuild, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed in the preceding closeout session; queue changed to 58 unblocked / 15 blocked | `DEL-12-03` implementation was separately authorized from the sealed brief only. |
 | `DEL-12-03` implementation from sealed dispatch brief | Completed; `7834b97 docs: add telemetry off by default policy` | `docs/security/telemetry_policy.md`, `tests/security/test_telemetry_policy.py`, deliverable `MEMORY.md`, dispatch/state | Telemetry policy tests passed; `git diff --check`; focused protected-content/prohibited-claim/real-secret scan passed with only guardrail/exclusion wording | Lifecycle/evidence/queue closeout was separately authorized after implementation commit. |
 | `DEL-12-03` lifecycle/evidence/queue closeout | Completed; evidence `01d7e75`; handoff `88292d7` | `DEL-12-03` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | Telemetry policy tests, coordination tests, dependency schema validation, DAG audit, queue rebuild, and `git diff --check` passed; queue remained 58 unblocked / 15 blocked | No next product deliverable was authorized by the closeout itself. |
+| `DEL-12-01` sealed dispatch brief preparation | Completed; `2c3dcae coordination: prepare del-12-01 dispatch brief` | `execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, committed upstream evidence, threat model, and telemetry posture | Implementation was later authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -282,62 +283,80 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-12-01 Sealed Dispatch Brief Preparation
+## Latest State - DEL-12-01 Implementation From Sealed Dispatch Brief
 
-Human project authority authorized preparing a sealed dispatch brief for:
+Human project authority authorized committing the sealed brief and then
+implementing from it:
 
 - `DEL-12-01 - Local-first storage and private data paths`
 
-The sealed brief was prepared at
-`execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md`.
+The sealed brief preparation commit is `2c3dcae coordination: prepare
+del-12-01 dispatch brief`.
 
-`DEL-12-01` is `UNBLOCKED` with `MISSING_EVIDENCE`. Its non-architecture
-active upstreams have committed implementation evidence: `DEL-02-05`
-(`742016e`), `DEL-12-05` (`b97121d`), and `DEL-01-02` (`0d729cf`).
+Implementation was completed in the working tree from
+`execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md`. Lifecycle transition,
+implementation-evidence registration, local dependency-register alignment,
+blocker-queue refresh, staging, and implementation commit were not performed.
 
 Files changed in this task:
 
+- `docs/security/local_first_storage_policy.md`
+- `tests/security/test_local_first_storage_policy.py`
+- `execution/PKG-12_Security, Privacy, and Private Data Handling/1_Working/DEL-12-01_Local-first storage and private data paths/MEMORY.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Brief-preparation summary:
+Implementation summary:
 
-- Prepared the brief from `DAG-001`, `docs/_Registers/Deliverables.csv`,
-  applicable architecture-basis rows, `DEL-12-01` local context, blocker queue,
-  committed upstream evidence, `DEL-12-05` threat model, and `DEL-12-03`
-  telemetry posture.
-- Explicit implementation write scope is limited to
-  `docs/security/local_first_storage_policy.md`,
-  `tests/security/test_local_first_storage_policy.py`, deliverable
-  `MEMORY.md`, the dispatch brief, and this handoff state.
-- The brief requires symbolic path classes and policy tests only; it does not
-  authorize runtime storage code, schema edits, filesystem writes, physical
-  project package/container selection, OS-specific roots, cloud sync, secret
-  storage, encryption, plugin/runtime changes, or dependency-register edits.
-- No implementation, lifecycle transition, evidence registration, dependency-
-  register edit, blocker-queue refresh, `DAG-001` edit, candidate-edge
-  promotion, protected standards content, real private data, real secret, real
-  path, cloud behavior, or professional/security/code-compliance claim was
-  introduced.
+- Added `docs/security/local_first_storage_policy.md` as the public local-first
+  storage and private path policy.
+- Defined local-first, user-controlled defaults for private project models,
+  private rule packs, private material/component libraries, owner standards,
+  company design bases, credentials, secrets, diagnostics, reports, generated
+  outputs, and other user-owned engineering data.
+- Defined symbolic path classes for public repository content, public examples,
+  user project packages, private libraries, private rule packs, reports,
+  diagnostics/support bundles, imports, exports, local caches, and secret
+  references.
+- Prohibited public repository paths as default durable storage for private
+  project, rule-pack, material, component, report, diagnostic, owner-standard,
+  credential, secret, or proprietary data.
+- Preserved the persistence baseline: versioned, schema-governed, unit-aware,
+  provenance-preserving, migration-aware, round-trip testable persistence with
+  canonical JSON/JCS-compatible hashes where JSON payloads are hashed.
+- Kept physical project package/container, OS-specific roots, application data
+  directories, migration framework, encryption, secret storage, key
+  management, redaction workflow, import/export formats, cloud exception
+  workflow, and runtime storage implementation as `TBD`.
+- No runtime storage code, schema edit, product config edit, filesystem write,
+  physical project package/container selection, OS-specific root selection,
+  cloud sync/storage, secret storage, encryption implementation,
+  plugin/runtime behavior change, adapter behavior change, protected standards
+  content, real private data, real secret, real path, or professional/security/
+  code-compliance claim was introduced.
 
 Verification:
 
-- `git diff --check` passed.
+- `python3 -m pytest tests/security/test_local_first_storage_policy.py`
+  passed: 9 tests.
+- `python3 -m pytest tests/security/test_telemetry_policy.py` passed: 7 tests.
+- `git diff --check` passed before handoff update.
 
 Remaining open items:
 
-- `DEL-12-01` implementation requires a separate human gate from the sealed
-  dispatch brief.
-- `DEL-12-01` brief-preparation files are not yet committed.
+- `DEL-12-01` lifecycle/evidence/local dependency-register alignment and
+  blocker-queue refresh require a separate human gate.
+- `DEL-12-01` implementation files are not yet committed.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize `DEL-12-01` implementation from
-   `execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md`, authorize commit
-   handling for the current brief-prep files, authorize a different bounded
-   DAG item, route reconciliation/change/audit, handle artifacts, or pause.
+1. Await the next human gate: authorize `DEL-12-01` lifecycle/evidence/local
+   dependency-register alignment and blocker-queue refresh, authorize CHANGE
+   commit handling for the current implementation files, authorize a different
+   bounded DAG item, route reconciliation/change/audit, handle artifacts, or
+   pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
