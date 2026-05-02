@@ -433,6 +433,17 @@ slice does not provide code-specific public combination defaults, a general
 rule-pack expression evaluator, stress recovery, protected standards data, or
 professional/code-compliance claims.
 
+The concentrated and distributed user-load slice is `core/loads/user_loads`.
+It prepares explicit concentrated forces, concentrated moments, and uniform
+distributed user loads as solver-boundary contribution records with unit/
+dimension intent, target references, provenance references, deterministic
+findings, and result-recovery hooks. Missing targets, missing quantities,
+out-of-range targets, incompatible dimensions, invalid directions, invalid
+distribution spans, and non-positive element lengths are findings, not silent
+defaults. This slice does not provide code-specific load combinations, public
+default factors, wind/seismic procedures, protected standards data, rule-pack
+checks, GUI/report/API/CLI behavior, or professional/code-compliance claims.
+
 The stress recovery slice is `core/loads/stress_recovery`. It recovers
 code-neutral mechanics components from explicit element force resultants,
 section properties, and optional pressure basis inputs: axial normal stress,
