@@ -382,6 +382,12 @@ Closeout actions performed before implementation/closeout commit:
   `WORKING_TREE` evidence before commit.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 65 unblocked / 8 blocked
   because `DEL-08-01` evidence was not yet commit-backed.
+- `DEL-08-01` implementation and closeout alignment were committed as
+  `9e21716 schema: add calculation report generator contract`.
+- Promoted `DEL-08-01` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `9e21716`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 67 unblocked / 6
+  blocked. `DEL-08-05` and `DEL-12-02` are newly implementation-unblocked.
 
 No aggregate `DAG-001` change, candidate-edge promotion, protected standards
 data, private data, real secret, GUI/CLI/API/adapter runtime behavior,

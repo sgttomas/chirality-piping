@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS DEL-08-01 implementation lifecycle/evidence/queue closeout
+**Actor:** ORCHESTRATOR DEL-08-01 post-commit evidence promotion
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-08-01` implementation and closeout ready for commit; evidence is `WORKING_TREE` until commit hash promotion
+**Current Mode:** `DEL-08-01` implementation committed; evidence promoted to `COMMITTED` and blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-01 implementation lifecycle/evidence/queue closeout` |
-| Latest state commit | Not committed |
-| Previous completed task archive status | `DEL-08-01 implementation from sealed dispatch brief` archived in compact history |
-| Current authorized item | `DEL-08-01` closeout ready for commit; post-commit evidence promotion needed after commit hash exists |
+| Latest state task | `DEL-08-01 post-commit evidence promotion` |
+| Latest state commit | Implementation/closeout `9e21716`; promotion metadata pending current commit |
+| Previous completed task archive status | `DEL-08-01 implementation lifecycle/evidence/queue closeout` archived in compact history |
+| Current authorized item | `DEL-08-01` evidence promoted to `COMMITTED`; queue refreshed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -170,24 +170,26 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 29 |
-| Filesystem lifecycle `CHECKING` (display only) | 43 |
-| Implementation evidence records | 44 |
-| Committed implementation evidence | 44 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 28 |
+| Filesystem lifecycle `CHECKING` (display only) | 44 |
+| Implementation evidence records | 45 |
+| Committed implementation evidence | 45 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 65 |
-| Implementation `BLOCKED` deliverables | 8 |
+| Implementation `UNBLOCKED` deliverables | 67 |
+| Implementation `BLOCKED` deliverables | 6 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
 yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
 `COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `COMMITTED`
 evidence for `be29df7`; `DEL-08-03` is recorded as `COMMITTED` evidence for
-`50f947a`.
-The queue changed to 65 unblocked / 8 blocked. `DEL-08-01` no longer waits on
-`DEL-08-03` and is now implementation-unblocked with its own evidence still
-`MISSING_EVIDENCE`. The queue is not a lifecycle approval, schedule, priority,
-staffing decision, implementation completeness claim, or professional approval.
+`50f947a`; `DEL-08-01` is recorded as `COMMITTED` evidence for `9e21716`.
+The queue changed to 67 unblocked / 6 blocked. `DEL-08-05` and `DEL-12-02`
+are newly implementation-unblocked. `DEL-11-01` no longer waits on
+`DEL-08-01`, but remains blocked by GUI deliverables `DEL-07-01`,
+`DEL-07-03`, and `DEL-07-05`. The queue is not a lifecycle approval,
+schedule, priority, staffing decision, implementation completeness claim, or
+professional approval.
 
 ## Completed Task History (Compacted)
 
@@ -297,6 +299,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-03` post-commit evidence promotion | Completed; implementation/closeout `50f947a`; promotion metadata `5b43b51` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-08-03.md`, `NEXT_INSTANCE_STATE.md` | Report-section contract tests, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 65 unblocked / 8 blocked | `DEL-08-01` newly unblocked with `MISSING_EVIDENCE`; no next product deliverable was authorized by the promotion itself. |
 | `DEL-08-01` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-01` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/report_generator.schema.yaml`, `core/reporting/report_generator/`, `fixtures/reports/invented/`, `tests/test_report_generator_contract.py`, docs, deliverable `MEMORY.md`, dispatch/state | Report-generator schema script, report-generator rustfmt/tests, report-section schema, result schema, analysis-status schema, persistence schema, rule-pack schema, `git diff --check`, and focused scans passed | Lifecycle/evidence/queue closeout was separately authorized after implementation. |
+| `DEL-08-01` implementation lifecycle/evidence/queue closeout | Completed; implementation/closeout `9e21716` | Report-generator implementation files, `DEL-08-01` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state/memory | Report-generator tests, dependency schema validation, DAG audit, coordination tests, queue rebuild, `git diff --check`, and focused scans passed; queue initially remained 65 unblocked / 8 blocked because evidence was `WORKING_TREE` before commit | Post-commit evidence promotion was required to unblock downstream consumers. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -319,7 +322,7 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-01 Implementation Lifecycle/Evidence/Queue Closeout
+## Latest State - DEL-08-01 Post-Commit Evidence Promotion
 
 Human project authority authorized lifecycle/evidence/queue closeout, staging,
 and commit for the implemented `DEL-08-01` work:
@@ -368,6 +371,12 @@ Implementation summary:
   `WORKING_TREE` evidence before commit.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 65 unblocked / 8 blocked
   because `DEL-08-01` evidence was not yet commit-backed.
+- `DEL-08-01` implementation and closeout alignment were committed as
+  `9e21716 schema: add calculation report generator contract`.
+- Promoted `DEL-08-01` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `9e21716`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 67 unblocked / 6
+  blocked. `DEL-08-05` and `DEL-12-02` are newly implementation-unblocked.
 
 Verification:
 
@@ -383,6 +392,8 @@ Verification:
 - `python3 tests/test_rule_pack_schema.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
   2026-05-02` passed before commit: 65 unblocked / 8 blocked.
+- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
+  2026-05-02` passed after evidence promotion: 67 unblocked / 6 blocked.
 - `git diff --check` passed.
 - Focused protected-content/private-secret/prohibited-claim scan was reviewed;
   matches were guardrail/prohibition terms in docs, tests, schema, memory, and
@@ -403,16 +414,14 @@ Guardrail results:
 
 Remaining open items:
 
-- Post-commit evidence promotion is required after the implementation/closeout
-  commit hash exists.
+- No remaining closeout item for `DEL-08-01` post-commit evidence promotion.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. After committing this closeout, promote `DEL-08-01` evidence from
-   `WORKING_TREE` to `COMMITTED`, refresh `DEV-001_BLOCKER_QUEUE.*`, verify,
-   and commit the promotion metadata.
+1. Await the next human gate: authorize one bounded DAG item, route
+   reconciliation/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
