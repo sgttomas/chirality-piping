@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-02
 **Actor:** WORKING_ITEMS DEL-07-01 implementation from sealed dispatch brief
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-07-01` implemented and committed; commit-backed evidence promotion is updated in working tree and awaits commit
+**Current Mode:** `DEL-07-01` implemented, committed, and promoted to commit-backed evidence
 
 ## Active Control State
 
@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-07-01 implementation from sealed dispatch brief` |
-| Latest state commit | Implementation/closeout `4785806`; evidence promotion working tree pending commit |
+| Latest state commit | Implementation/closeout `4785806`; evidence promotion `3d74e63` |
 | Previous completed task archive status | `DEL-08-05 implementation from sealed dispatch brief` archived in compact history |
 | Current authorized item | `DEL-07-01` implementation and working-tree closeout from sealed dispatch brief |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md` |
@@ -413,15 +413,13 @@ Guardrail results:
 
 Remaining open items:
 
-- Commit the `DEL-07-01` evidence-promotion metadata and handoff update.
+- No remaining closeout item for `DEL-07-01` post-commit evidence promotion.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Route through `CHANGE` for approved staging/commit of the `DEL-07-01`
-   evidence-promotion metadata and handoff update.
-2. Then await the next human gate: authorize one bounded DAG item, route
+1. Await the next human gate: authorize one bounded DAG item, route
    reconciliation/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and

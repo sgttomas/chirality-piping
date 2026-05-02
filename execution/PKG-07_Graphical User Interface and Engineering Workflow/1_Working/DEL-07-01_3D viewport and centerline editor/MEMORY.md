@@ -24,8 +24,8 @@ Human project authority approved a small coordination cleanup followed by
 - Added `DEL-07-01` as `WORKING_TREE` implementation evidence pending commit.
 - Committed the implementation/closeout patch as
   `4785806 schema: add viewport editor contract`.
-- Promoted `DEL-07-01` evidence to `COMMITTED` for commit `4785806` in the
-  working tree; this metadata still needs its own commit.
+- Promoted `DEL-07-01` evidence to `COMMITTED` for commit `4785806` in
+  `3d74e63 coordination: promote del-07-01 evidence`.
 
 ## Boundaries Preserved
 
