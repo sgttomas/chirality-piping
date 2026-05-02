@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-06-04 commit-backed evidence/queue refresh` |
-| Latest state commit | Implementation/alignment commit `ad270f6`; final evidence/queue refresh not committed |
+| Latest state commit | Implementation/alignment commit `ad270f6`; final evidence/queue refresh commit `7ae87ba` |
 | Previous completed task archive status | `DEL-06-04 implementation` moved into the compact task archive table |
 | Current authorized item | Final evidence/queue refresh from `WORKING_TREE_IMPLEMENTED` to `COMMITTED` after commit |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-04.md` |
@@ -330,13 +330,11 @@ Remaining open items:
 
 Immediate next action:
 
-1. Recommended next gate is `CHANGE`/file-state handling for the final
-   evidence/queue refresh artifacts.
-2. After final state artifacts are handled, human project authority may route
-   review; authorize exactly one next bounded DAG item; route
-   `RECONCILIATION`; route `AUDIT_*`; handle artifacts; or pause.
+1. Human project authority may route review; authorize exactly one next bounded
+   DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle artifacts; or
+   pause.
 
-Do not start broad DAG execution. No additional DAG item or commit is currently
+Do not start broad DAG execution. No additional DAG item is currently
 authorized by this alignment pass.
 
 ## Guardrails
