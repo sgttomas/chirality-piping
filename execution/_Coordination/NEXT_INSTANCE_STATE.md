@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-05-05 implementation closeout` |
-| Latest state commit | `1007993 coordination: record del-05-05 implementation evidence` |
+| Latest state commit | `af4f885 coordination: record del-05-05 handoff commit` |
 | Previous completed task archive status | `DEL-05-05 sealed dispatch brief preparation` superseded by same-turn implementation and closeout |
 | Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite requires fresh sealed brief before implementation |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-05.md` |
@@ -334,8 +334,10 @@ Verification:
 
 Remaining open items:
 
-- Closeout commit: `1007993 coordination: record del-05-05 implementation
-  evidence`.
+- Implementation evidence/queue closeout commit: `1007993 coordination: record
+  del-05-05 implementation evidence`.
+- Handoff-state correction commit: `af4f885 coordination: record del-05-05
+  handoff commit`.
 - `DEL-09-01` and `DEL-09-02` are approved as next ordered tranche items.
 - `DEL-09-01` should receive a fresh sealed dispatch brief before
   implementation begins.
@@ -344,8 +346,8 @@ Remaining open items:
 
 Immediate next action:
 
-1. Commit `DEL-05-05` closeout state, then prepare a fresh sealed dispatch
-   brief for `DEL-09-01 - Mechanics benchmark suite` as ordered tranche item 2.
+1. Prepare a fresh sealed dispatch brief for `DEL-09-01 - Mechanics benchmark
+   suite` as ordered tranche item 2.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
