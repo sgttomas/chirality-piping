@@ -24,9 +24,9 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-12-01 lifecycle/evidence/queue closeout` |
-| Latest state commit | `DEL-12-01` implementation `84e0a73`; closeout/evidence not committed |
+| Latest state commit | Implementation `84e0a73`; closeout/evidence `1ed8619` |
 | Previous completed task archive status | `DEL-12-01 implementation from sealed dispatch brief` archived with implementation `84e0a73` |
-| Current authorized item | `DEL-12-01` closeout/evidence/queue alignment complete in working tree; CHANGE commit handling remains |
+| Current authorized item | `DEL-12-01` closeout/evidence/queue alignment committed; no next product deliverable authorized |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-12-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -301,7 +301,8 @@ Implementation was first committed through `CHANGE`:
 
 - `84e0a73 docs: add local first storage policy`
 
-Closeout/evidence work was then completed in the working tree. `DAG-001` was
+Closeout/evidence work was then completed and committed as `1ed8619
+coordination: record del-12-01 implementation evidence`. `DAG-001` was
 validated as the active graph authority and was not changed.
 
 Files changed in this task:
@@ -351,15 +352,13 @@ Verification:
 
 Remaining open items:
 
-- `DEL-12-01` closeout/evidence files are not yet committed.
 - No next product deliverable is authorized by this closeout.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize CHANGE commit handling for the current
-   closeout/evidence files, authorize a different bounded DAG item, route
+1. Await the next human gate: authorize a different bounded DAG item, route
    reconciliation/change/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
