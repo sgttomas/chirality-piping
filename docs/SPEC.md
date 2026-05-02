@@ -504,6 +504,16 @@ private rule-pack payloads, choose private storage paths, implement encryption
 or access control, handle secrets, run GUI/report/API workflows, evaluate rule
 expressions, or make professional/code-compliance claims.
 
+`core/rules/completeness_checker` implements required-input completeness
+checking for user-owned rule packs. It compares declarative required-input
+records against caller-supplied input evidence for values, units, dimensions,
+provenance, redistribution status, and review status. Blocking findings map to
+`RULE_INPUTS_INCOMPLETE` and `RULE_CHECK_BLOCKING` semantics while preserving
+the distinction between mechanics solve status and user-rule-check readiness.
+It does not evaluate formulas, parse rule-pack files, store private data,
+provide code-specific values, import protected standards content, or make
+professional/code-compliance claims.
+
 The evaluator reports deterministic findings for unsafe host-access requests,
 unsupported expression forms, missing or duplicate bindings, invalid
 references, missing required values, non-finite inputs, division by zero,
