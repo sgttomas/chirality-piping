@@ -76,10 +76,12 @@ Implemented within the sealed write scope from
 - Lifecycle display state is now `CHECKING`.
 - Local dependency rows `DAG-001-E0556` through `DAG-001-E0560` now record
   `SATISFIED` from committed upstream implementation evidence.
-- DEV-001 implementation evidence records `DEL-10-02` as `WORKING_TREE`
-  evidence, not `COMMITTED` evidence.
+- `DEL-10-02` implementation and closeout alignment were committed as
+  `be29df7 core: add adapter framework contract`.
+- DEV-001 implementation evidence records `DEL-10-02` as `COMMITTED`
+  evidence for commit `be29df7`.
 - The blocker queue was rebuilt at 64 unblocked / 9 blocked. `DEL-10-02`
-  appears with `WORKING_TREE` evidence; no active blocked consumer currently
+  appears with `COMMITTED` evidence; no active blocked consumer currently
   lists `DEL-10-02` as a missing upstream provider.
 - Aggregate `DAG-001` was validated and was not changed. Candidate edge
   `DAG-001-E0619` remains non-gating.
@@ -91,5 +93,4 @@ Implemented within the sealed write scope from
   signing/isolation, permission persistence, package scripts, CI provider,
   release matrix, physical project container, local FEA package format,
   redaction workflow, and GUI/report runtime behavior remain `TBD`.
-- Commit through CHANGE, then promote `DEL-10-02` evidence to `COMMITTED` and
-  rebuild the blocker queue under DEV-001 implementation-readiness rules.
+- Commit this post-commit evidence promotion through CHANGE.

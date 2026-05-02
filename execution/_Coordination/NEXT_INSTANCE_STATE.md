@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-10-02 sealed dispatch brief preparation
+**Actor:** ORCHESTRATOR DEL-10-02 post-commit evidence promotion
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-10-02` implementation in working tree; lifecycle/evidence/dependency mirror aligned and blocker queue refreshed
+**Current Mode:** `DEL-10-02` implementation committed; evidence promoted to `COMMITTED` and blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-10-02 lifecycle/evidence/queue alignment` |
-| Latest state commit | Not committed |
+| Latest state task | `DEL-10-02 post-commit evidence promotion` |
+| Latest state commit | Promotion metadata being committed through this CHANGE gate |
 | Previous completed task archive status | `DEL-10-05 post-commit evidence promotion` archived; promotion commits `5eabcb8`, `4b4a1c5`, and `a009d19` |
-| Current authorized item | `DEL-10-02` lifecycle/evidence/dependency mirror aligned; queue refreshed; commit-backed evidence still pending until commit/promotion |
+| Current authorized item | `DEL-10-02` evidence promoted to `COMMITTED`; queue refreshed; post-commit promotion complete after metadata commit |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -173,7 +173,7 @@ blockers by itself.
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 30 |
 | Filesystem lifecycle `CHECKING` (display only) | 42 |
 | Implementation evidence records | 43 |
-| Committed implementation evidence | 42 |
+| Committed implementation evidence | 43 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 64 |
 | Implementation `BLOCKED` deliverables | 9 |
@@ -181,8 +181,8 @@ blockers by itself.
 
 The queue now contains blockers for consumers whose upstream providers do not
 yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
-`COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `WORKING_TREE`
-evidence and does not yet count as committed evidence.
+`COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `COMMITTED`
+evidence for `be29df7`.
 The queue remained 64 unblocked / 9 blocked. `DEL-10-04` no longer waits on
 `DEL-10-05`; it still waits on `DEL-09-05` and `DEL-08-05`. No active blocked
 consumer currently lists `DEL-10-02` as a missing upstream provider. The queue is not a lifecycle
@@ -312,11 +312,11 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-10-02 Lifecycle/Evidence/Queue Alignment
+## Latest State - DEL-10-02 Post-Commit Evidence Promotion
 
 Human project authority authorized lifecycle transition, dependency-register
-edits, evidence registration, blocker queue refresh, staging, and commit after
-the implemented `DEL-10-02` work:
+edits, evidence registration, blocker queue refresh, staging, commit, and
+post-commit evidence promotion after the implemented `DEL-10-02` work:
 
 - "perform lifecycle transition, dependency-register edits, evidence
   registration, blocker queue refresh, staging, and commit"
@@ -354,15 +354,15 @@ Alignment summary:
   `tests/test_adapter_framework_contract.py`.
 - Updated focused `docs/SPEC.md` and `docs/TYPES.md` sections only for the
   adapter framework boundary.
+- `DEL-10-02` implementation and closeout alignment were committed as
+  `be29df7 core: add adapter framework contract`.
 - Set `DEL-10-02` lifecycle display state to `CHECKING`.
 - Annotated `DEL-10-02` local `Dependencies.csv` rows `DAG-001-E0556` through
   `DAG-001-E0560` as `SATISFIED` from committed upstream evidence.
-- Recorded `DEL-10-02` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
-  `WORKING_TREE` evidence. Because this is not yet `COMMITTED`, downstream
-  implementation blockers are not satisfied by it until post-commit promotion;
-  currently no active blocked consumer lists `DEL-10-02` as missing.
+- Promoted `DEL-10-02` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `be29df7`.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 64 unblocked / 9 blocked,
-  with 43 evidence records and 42 committed evidence records.
+  with 43 evidence records and 43 committed evidence records.
 - Updated this dispatch brief and deliverable `MEMORY.md` with implementation
   and closeout summaries.
 - Candidate edge `DAG-001-E0619` remains non-gating and was not promoted. No
@@ -393,9 +393,7 @@ Verification:
 
 Remaining open items:
 
-- `DEL-10-02` commit and post-commit evidence promotion are in progress under
-  this CHANGE gate. Until promotion, `DEL-10-02` remains `WORKING_TREE`
-  evidence.
+- No remaining closeout item for `DEL-10-02` post-commit evidence promotion.
 - Candidate-edge promotion, concrete external format selection, public
   transport, plugin runtime/loading/signing, package/CI/release choices, and
   broad DAG execution still require separate human approval gates.
@@ -404,9 +402,8 @@ Remaining open items:
 
 Immediate next action:
 
-1. Complete CHANGE commit and post-commit evidence promotion for `DEL-10-02`,
-   then await the next human gate: route reconciliation/audit, handle
-   artifacts, authorize a different bounded DAG item, or pause.
+1. Await the next human gate: route reconciliation/audit, handle artifacts,
+   authorize a different bounded DAG item, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
