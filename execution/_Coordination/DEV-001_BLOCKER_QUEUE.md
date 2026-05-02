@@ -37,7 +37,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Candidate edges excluded | 9 |
 | Implementation evidence records | 33 |
 | Committed implementation evidence | 33 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 63 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 40 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 55 |
 | Implementation `BLOCKED` deliverables | 18 |

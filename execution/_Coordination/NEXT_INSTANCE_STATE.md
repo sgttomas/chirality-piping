@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-08-02
+**Actor:** WORKING_ITEMS lifecycle alignment audit
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-08-02 committed, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
+**Current Mode:** committed-evidence lifecycle states aligned to CHECKING; blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-02 implementation evidence and blocker queue refresh` |
-| Latest state commit | `DEL-08-02` implementation/alignment commit `061f1af`; evidence/queue refresh commit `4cf5bf9` |
-| Previous completed task archive status | `DEL-06-03 implementation evidence and blocker queue refresh` moved into the compact task archive table |
-| Current authorized item | `DEL-08-02` lifecycle/evidence/queue closeout |
+| Latest state task | `Committed-evidence lifecycle alignment audit` |
+| Latest state commit | Pending commit |
+| Previous completed task archive status | `DEL-08-02 implementation evidence and blocker queue refresh` moved into the compact task archive table |
+| Current authorized item | Lifecycle/evidence/blocker/dependency consistency alignment |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -138,8 +138,8 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 63 |
-| Filesystem lifecycle `CHECKING` (display only) | 10 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 40 |
+| Filesystem lifecycle `CHECKING` (display only) | 33 |
 | Implementation evidence records | 33 |
 | Committed implementation evidence | 33 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
@@ -231,6 +231,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-06-04` implementation and initial alignment | Completed; `ad270f6 core: add rule pack lifecycle handling` | `core/rules/rule_pack_lifecycle/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, evidence/queue, dispatch/state | Rule-pack lifecycle rustfmt and 8 focused tests passed; rule-pack schema check and expression-evaluator tests passed; dependency schema validation, coordination tests, DAG audit, `git diff --check`, and protected-content/prohibited-claim scan passed | JSON canonicalization library/dependency, non-JSON payload partitioning, storage, encryption, access control, secrets, GUI/report/API integration, and result-envelope integration remain `TBD`. |
 | `DEL-06-04` commit-backed evidence/queue refresh | Completed; implementation/alignment `ad270f6`; evidence/queue refresh `7ae87ba` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-06-04.md`, `DEL-06-04` `MEMORY.md`, `NEXT_INSTANCE_STATE.md` | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue changed to 54 unblocked / 19 blocked | `DEL-08-02` newly unblocked; `DEL-07-03`, `DEL-08-01`, `DEL-12-02`, and `DEL-12-04` still blocked by other missing upstreams. |
 | `DEL-06-03` implementation and lifecycle/local alignment | Completed; implementation/alignment `c075522`; evidence/queue `67cd25c` | `core/rules/completeness_checker/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Completeness-checker, expression-evaluator, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue changed to 55 unblocked / 18 blocked | `DEL-07-04` newly unblocked; schema adapter, unit conversion, GUI/report/API/result-envelope integration, and private storage/redaction remain downstream work. |
+| `DEL-08-02` implementation and lifecycle/evidence/queue alignment | Completed; implementation/alignment `061f1af`; evidence/queue `4cf5bf9`; handoff `caf6220` | `core/reporting/audit_manifest/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Audit-manifest, rule-pack lifecycle, persistence schema, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue remained 55 unblocked / 18 blocked | `DEL-08-01` now only waits on `DEL-08-03`; `DEL-10-05` now waits on `DEL-10-01` and `DEL-08-04`; project container, persistence adapter, report/API/CLI integration, and private storage/redaction remain downstream work. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -253,87 +254,48 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-02 Implementation Evidence and Blocker Queue Refresh
+## Latest State - Committed-Evidence Lifecycle Alignment Audit
 
-Human project authority approved `DEL-08-02` as the next bounded item after
-`DEL-06-03` closeout:
-
-- `DEL-08-02 - Audit manifest and model hash`
+Human project authority identified that older committed deliverables were not
+regularly moved from `SEMANTIC_READY` to `CHECKING`. This pass aligned
+deliverable lifecycle state with `COMMITTED` implementation evidence.
 
 Files changed in this task:
 
-- `core/reporting/audit_manifest/.gitignore`
-- `core/reporting/audit_manifest/Cargo.toml`
-- `core/reporting/audit_manifest/README.md`
-- `core/reporting/audit_manifest/src/lib.rs`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-02.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/MEMORY.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/Dependencies.csv`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/_STATUS.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+- 23 deliverable `_STATUS.md` files for committed-evidence items that still
+  showed `SEMANTIC_READY`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Implementation summary:
+Alignment summary:
 
-- Added a bounded Rust audit-manifest crate for canonical JSON model/input
-  hashes, separate non-JSON asset hashes, solver version stamps, unit-system
-  references, rule-pack checksum references, privacy/redaction metadata, and
-  deterministic manifest findings.
-- The implementation accepts structured `CanonicalJson` values and serializes
-  object keys deterministically for hash input.
-- The implementation does not parse arbitrary project files, choose a physical
-  project container, store private payloads, authenticate engineering work,
-  import protected standards data, or make professional/code-compliance claims.
+- Updated 23 stale committed-evidence deliverable lifecycle files from
+  `SEMANTIC_READY` to `CHECKING`.
+- Added dated history notes referencing each deliverable's committed
+  implementation evidence commit.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`.
+- Lifecycle display counts now read 40 `SEMANTIC_READY` and 33 `CHECKING`.
+- Implementation readiness remains 55 unblocked / 18 blocked; no dependency
+  ordering changed.
+- Verified there are 0 committed-evidence deliverables with stale lifecycle
+  state.
 
 Verification:
 
-- `cargo fmt --manifest-path core/reporting/audit_manifest/Cargo.toml --check`
-  passed.
-- `cargo test --manifest-path core/reporting/audit_manifest/Cargo.toml`
-  passed: 9 tests.
-- `cargo test --manifest-path core/rules/rule_pack_lifecycle/Cargo.toml`
-  passed: 8 tests.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_rule_pack_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-02_Audit manifest and model hash/Dependencies.csv"`
-  passed.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`: unblocked=55, blocked=18.
+- Validated aggregate `DAG-001` dependency schema.
+- Ran strict DAG audit: active graph remains acyclic with no endpoint issues.
+- Validated all deliverable-local `Dependencies.csv` files.
+- Confirmed lifecycle counts: 40 `SEMANTIC_READY`, 33 `CHECKING`.
+- Confirmed implementation evidence: 33 records, 33 committed.
 - `git diff --check` passed.
-- Focused protected-content/prohibited-claim scan found only guardrail and
-  exclusion wording; no protected data, proprietary engineering values, private
-  payloads, or professional/code-compliance claims were introduced.
-
-Lifecycle/evidence/queue closeout:
-
-- Updated `DEL-08-02` lifecycle from `SEMANTIC_READY` to `CHECKING`.
-- Annotated the `DEL-08-02` local dependency mirror for satisfied
-  non-architecture upstreams `DEL-02-05` and `DEL-06-04`.
-- Committed the bounded implementation and initial lifecycle/local-mirror
-  alignment as `061f1af core: add audit manifest hashing`.
-- Recorded `DEL-08-02` as `COMMITTED` implementation evidence at `061f1af`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 55 unblocked / 18
-  blocked.
-- `DEL-08-01` no longer appears as blocked by `DEL-08-02`; it still waits on
-  `DEL-08-03`.
-- `DEL-10-05` no longer appears as blocked by `DEL-08-02`; it still waits on
-  `DEL-10-01` and `DEL-08-04`.
-- Aggregate `DAG-001` was left unchanged; candidate edges remain non-gating.
-- `DAG-001` has been validated and left unchanged.
 
 Remaining open items:
 
-- Physical project package/container remains downstream.
-- Full project schema adapter and persistence-service integration remain
-  downstream.
-- Report renderer, API transport, CLI runner, GUI workflow, and final
-  result-envelope integration remain downstream.
-- Private storage, redaction, access control, and secret handling remain PKG-12
-  downstream work.
+- This pass updates lifecycle display/state only. It does not promote any item
+  to `ISSUED`, alter `DAG-001`, promote candidate edges, or change dependency
+  ordering.
 
 ## Immediate Next Actions
 
