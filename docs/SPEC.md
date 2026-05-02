@@ -451,21 +451,37 @@ Stress recovery shall calculate open mechanics quantities such as axial stress, 
 
 Rule packs are private or user-owned design-basis artifacts. The public project ships schemas and invented examples only.
 
-Minimum rule-pack sections:
+The rule-pack artifact contract is represented by
+`schemas/rule_pack.schema.yaml`. It defines structure for:
 
-```yaml
-rule_pack:
-  id: string
-  name: string
-  version: string
-  source_notice: string
-  redistribution_status: private|public_permissive|unknown
-  checksum: sha256:...
-required_inputs: []
-variables: []
-checks: []
-report_notice: string
-```
+- rule-pack identity, schema version, rule-pack version, lifecycle/status, and
+  source notices;
+- public/private classification, redistribution status, protected-content
+  review requirement, and public repository policy;
+- required input declarations with unit/dimensional intent, provenance
+  requirements, completeness status, and missing-value diagnostics;
+- declarative formula slots that are data records only, with arbitrary code
+  execution disallowed and protected text, tables, or copied formulas excluded;
+- user-supplied value slots for allowables, limits, coefficients, thresholds,
+  and source references, with provenance, redistribution, review, and
+  completeness status;
+- user-rule check definitions that may produce `RULE_INPUTS_INCOMPLETE`,
+  `USER_RULE_CHECKED`, `USER_RULE_FAILED`, and `HUMAN_REVIEW_REQUIRED`
+  statuses, but not human approval or code-compliance statuses;
+- checksum metadata using the accepted canonical JSON/JCS-compatible basis for
+  JSON rule-pack payloads;
+- diagnostics for missing inputs, unit mismatch, provenance gaps,
+  redistribution gaps, suspected protected content, evaluator errors, and
+  incomplete data;
+- professional-boundary flags preventing software-generated certification,
+  sealing, compliance, or human-acceptance records.
+
+The schema is a contract for downstream evaluator, completeness-check,
+private-lifecycle, GUI-editor, report, and documentation work. It does not
+select the expression grammar, implement evaluation, create public example rule
+packs, define private storage, choose the checksum library, or integrate final
+result envelopes. Those details remain `TBD` until assigned to later
+deliverables.
 
 The evaluator must be sandboxed, unit-aware, deterministic, and incapable of arbitrary code execution.
 

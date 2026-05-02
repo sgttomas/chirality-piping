@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-05-03
+**Actor:** WORKING_ITEMS implementation for DEL-06-01
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-05-03 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
+**Current Mode:** DEL-06-01 implemented; awaiting lifecycle/evidence/queue alignment gate
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-05-03 lifecycle/evidence/queue/DAG/dependency-register alignment` |
-| Latest state commit | Implementation commit `26dc805`; evidence/queue/state commit `4a1fbb4` |
-| Previous completed task archive status | `DEL-05-03 implementation` moved into the compact task archive table |
-| Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-03.md` |
+| Latest state task | `DEL-06-01 implementation` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-06-01 sealed dispatch brief preparation` moved into the compact task archive table |
+| Current authorized item | Implement `DEL-06-01` from sealed dispatch brief; lifecycle/evidence/queue alignment not yet authorized |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -194,6 +194,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-05-02` implementation | Completed; implementation `0f9189c`; evidence/queue/state `6d930b1` | `core/loads/load_case_algebra/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Load-case algebra and primitive-load cargo tests passed; coordination tests passed; dependency schema validation; `audit_dag.py --strict`; `git diff --check`; queue remained 46 unblocked / 27 blocked | Canonical calculation unit basis, conversion constants, final result-envelope integration, concrete application-service API, persistence representation, general expression grammar/library, rule-pack evaluator reuse, and production tolerance policy remain `TBD`. |
 | `DEL-05-03` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-05-03.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; dispatch brief prepared from `DAG-001`, `Deliverables.csv`, applicable `AB-00-*` rows, local context, blocker queue, and committed upstream evidence | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 | `DEL-05-03` implementation | Completed; `26dc805 core: add stress recovery module` | `core/loads/stress_recovery/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Stress-recovery, straight-pipe, primitive-load, load-case algebra, and section-property tests passed; dependency schema validation; `git diff --check` | Canonical calculation unit basis, conversion constants, final result-envelope integration, concrete application-service API, persistence representation, code/rule stress equations, SIF/flexibility usage, production tolerance policy, and stress benchmark publication scope remain `TBD`. |
+| `DEL-05-03` lifecycle/evidence/queue alignment | Completed; implementation `26dc805`; evidence/queue/state `4a1fbb4` | `DEL-05-03` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue changed to 49 unblocked / 24 blocked | No next product deliverable was authorized by the alignment pass; newly unblocked `DEL-07-05`, `DEL-08-04`, and `DEL-09-02`. |
+| `DEL-06-01` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-06-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; dispatch brief prepared from `DAG-001`, `Deliverables.csv`, applicable `AB-00-*` rows, local context, blocker queue, and committed upstream evidence | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -216,71 +218,77 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-05-03 Lifecycle/Evidence/Queue Alignment
+## Latest State - DEL-06-01 Implementation
 
-Human project authority authorized lifecycle, evidence, blocker queue, DAG, and
-dependency-register alignment after implementation of:
+Human project authority authorized implementation from the sealed dispatch
+brief for:
 
-- `DEL-05-03 - Fundamental stress recovery module`
+- `DEL-06-01 - Rule-pack schema`
 
 Files changed in this task:
 
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-03_Fundamental stress recovery module/Dependencies.csv`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-03_Fundamental stress recovery module/_STATUS.md`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-05-03.md`
+- `schemas/rule_pack.schema.yaml`
+- `tests/test_rule_pack_schema.py`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-01_Rule-pack schema/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-06-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Alignment summary:
+Implementation summary:
 
-- Committed the bounded implementation as
-  `26dc805 core: add stress recovery module`.
-- Updated `DEL-05-03` lifecycle from `SEMANTIC_READY` to `CHECKING`.
-- Annotated the `DEL-05-03` local dependency mirror for satisfied
-  non-architecture upstreams `DEL-04-02`, `DEL-03-08`, `DEL-05-01`,
-  `DEL-02-02`, and `DEL-05-04`.
-- Recorded `DEL-05-03` as `COMMITTED` implementation evidence in
-  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue changed to 49 unblocked / 24
-  blocked.
-- `DEL-07-05`, `DEL-08-04`, and `DEL-09-02` are newly unblocked by committed
-  `DEL-05-03` evidence.
-- `DAG-001` has been validated and left unchanged; candidate edges remain
-  non-gating.
+- Added `schemas/rule_pack.schema.yaml` as a strict JSON-syntax JSON Schema
+  2020-12 contract for user-owned rule-pack artifacts.
+- Defined rule-pack metadata, public/private classification, required inputs,
+  declarative formula slots, user-supplied value slots, check definitions,
+  diagnostics, checksums, provenance, professional-boundary flags, and open
+  decisions.
+- Added focused schema checks in `tests/test_rule_pack_schema.py`.
+- Updated `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, and the
+  dispatch brief.
+- Preserved candidate-edge policy; no candidate edge was promoted.
+- Did not perform lifecycle transition, implementation evidence registration,
+  dependency-register alignment, blocker-queue refresh, `DAG-001` changes, or
+  commit.
 
 Verification:
 
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-03_Fundamental stress recovery module/Dependencies.csv"`
-  passed.
-- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
-  unblocked=49, blocked=24, active_edges=615, candidate_edges_excluded=9.
-- `python3 -m pytest tools/coordination` passed: 10 tests.
-- `python3 tools/validation/validate_dependencies_schema.py
-  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
+- `python3 tests/test_rule_pack_schema.py` passed.
+- `python3 tests/test_units_schema.py` passed.
+- `python3 tests/test_analysis_boundary_schema.py` passed.
+- `python3 tests/test_analysis_status_schema.py` passed.
+- `python3 tests/test_model_schema.py` passed.
+- `python3 tests/test_plugin_manifest_schema.py` passed.
+- `python3 tests/test_persistence_schema.py` passed.
+- `python3 tests/test_material_schema.py` passed.
+- `python3 tests/test_component_section_schema.py` passed.
 - `git diff --check` passed.
+- Focused protected-content/prohibited-claim scan found only existing
+  governance guardrail text and dispatch protocol wording; no protected
+  standards data, proprietary engineering values, or software-generated
+  professional/code-compliance claim was introduced.
 
 Remaining open items:
 
-- Canonical calculation unit basis, conversion constants, final result-envelope
-  integration, concrete application-service API, persistence representation,
-  code/rule stress equations, SIF/flexibility usage, production tolerance
-  policy, and stress benchmark publication scope remain `TBD`.
+- Rule expression grammar/library, evaluator execution semantics, concrete
+  formula AST, public example content, private storage location, checksum
+  library, non-JSON asset handling, public API transport, GUI editor
+  presentation, and final rule-check result-envelope integration remain `TBD`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Human project authority may authorize exactly one next bounded DAG item,
-   route `RECONCILIATION`, route `AUDIT_*`, handle artifacts, route `CHANGE`
-   for file-state handling, or pause.
+1. Human project authority may authorize lifecycle, evidence, local dependency
+   mirror, blocker queue, DAG validation, and file-state alignment for
+   implemented `DEL-06-01`; route review; route `CHANGE` for file-state
+   handling; authorize exactly one next bounded DAG item; route
+   `RECONCILIATION`; route `AUDIT_*`; or pause.
 
-Do not start broad DAG execution. No additional DAG item is currently
-authorized by this alignment pass.
+Do not start broad DAG execution. No lifecycle transition, implementation
+evidence registration, dependency-register edit, blocker-queue refresh,
+`DAG-001` change, commit, or additional DAG item is currently authorized by
+this implementation pass.
 
 ## Guardrails
 
