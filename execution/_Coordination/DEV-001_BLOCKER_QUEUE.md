@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-05-02
+updated: 2026-05-01
 source_graph: execution/_DAG/DAG-001/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 27 |
-| Committed implementation evidence | 27 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 69 |
+| Implementation evidence records | 28 |
+| Committed implementation evidence | 28 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 68 |
 | PKG-00 architecture-basis edges satisfied | 388 |
-| Implementation `UNBLOCKED` deliverables | 49 |
-| Implementation `BLOCKED` deliverables | 24 |
+| Implementation `UNBLOCKED` deliverables | 52 |
+| Implementation `BLOCKED` deliverables | 21 |
 
 ## Package Summary
 
@@ -52,7 +52,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-03` | 8 | 0 |
 | `PKG-04` | 6 | 0 |
 | `PKG-05` | 5 | 0 |
-| `PKG-06` | 1 | 4 |
+| `PKG-06` | 4 | 1 |
 | `PKG-07` | 4 | 3 |
 | `PKG-08` | 2 | 3 |
 | `PKG-09` | 3 | 2 |
@@ -102,7 +102,10 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-05-03` | `PKG-05` | `COMMITTED` `26dc805` | 10 | Fundamental stress recovery module |
 | `DEL-05-04` | `PKG-05` | `COMMITTED` `dbaf21e` | 6 | Analysis status semantics |
 | `DEL-05-05` | `PKG-05` | `MISSING_EVIDENCE` | 8 | Concentrated and distributed user load application |
-| `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
+| `DEL-06-01` | `PKG-06` | `COMMITTED` `20241f9` | 12 | Rule-pack schema |
+| `DEL-06-02` | `PKG-06` | `MISSING_EVIDENCE` | 9 | Sandboxed unit-aware expression evaluator |
+| `DEL-06-03` | `PKG-06` | `MISSING_EVIDENCE` | 10 | Required-input completeness checker |
+| `DEL-06-04` | `PKG-06` | `MISSING_EVIDENCE` | 9 | Private rule-pack lifecycle and checksum handling |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
 | `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
@@ -120,7 +123,6 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-06-01` - Rule-pack schema | `PKG-06` | `MISSING_EVIDENCE` | 6 | `DEL-06-02`; `DEL-06-03`; `DEL-06-04`; `DEL-06-05`; `DEL-07-03`; `DEL-11-02` | `DAG-001-E0467`; `DAG-001-E0469`; `DAG-001-E0472`; `DAG-001-E0474`; `DAG-001-E0492`; `DAG-001-E0583` |
 | `DEL-06-02` - Sandboxed unit-aware expression evaluator | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-06-05` | `DAG-001-E0475` |
 | `DEL-06-03` - Required-input completeness checker | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-07-04` | `DAG-001-E0497` |
 | `DEL-06-04` - Private rule-pack lifecycle and checksum handling | `PKG-06` | `MISSING_EVIDENCE` | 5 | `DEL-07-03`; `DEL-08-01`; `DEL-08-02`; `DEL-12-02`; `DEL-12-04` | `DAG-001-E0493`; `DAG-001-E0513`; `DAG-001-E0525`; `DAG-001-E0609`; `DAG-001-E0614` |
@@ -149,11 +151,8 @@ These deliverables have no active upstream implementation dependency below the `
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-06-02` | `PKG-06` | 1 | `DEL-06-01` | Sandboxed unit-aware expression evaluator |
-| `DEL-06-03` | `PKG-06` | 1 | `DEL-06-01` | Required-input completeness checker |
-| `DEL-06-04` | `PKG-06` | 1 | `DEL-06-01` | Private rule-pack lifecycle and checksum handling |
-| `DEL-06-05` | `PKG-06` | 2 | `DEL-06-01`; `DEL-06-02` | Invented non-code example rule pack |
-| `DEL-07-03` | `PKG-07` | 3 | `DEL-06-01`; `DEL-06-04`; `DEL-12-01` | Material, component, and rule-pack editors |
+| `DEL-06-05` | `PKG-06` | 1 | `DEL-06-02` | Invented non-code example rule pack |
+| `DEL-07-03` | `PKG-07` | 2 | `DEL-06-04`; `DEL-12-01` | Material, component, and rule-pack editors |
 | `DEL-07-04` | `PKG-07` | 1 | `DEL-06-03` | Missing-data warning and blocking UX |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
 | `DEL-08-01` | `PKG-08` | 3 | `DEL-06-04`; `DEL-08-02`; `DEL-08-03` | Calculation report generator |
@@ -166,7 +165,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-10-04` | `PKG-10` | 4 | `DEL-09-05`; `DEL-10-05`; `DEL-08-05`; `DEL-12-05` | Build, packaging, and CI/CD pipeline |
 | `DEL-10-05` | `PKG-10` | 3 | `DEL-10-01`; `DEL-08-04`; `DEL-08-02` | Headless CLI and structured I/O analysis runner |
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
-| `DEL-11-02` | `PKG-11` | 2 | `DEL-06-01`; `DEL-10-01` | Developer guide for solver and rule packs |
+| `DEL-11-02` | `PKG-11` | 1 | `DEL-10-01` | Developer guide for solver and rule packs |
 | `DEL-11-03` | `PKG-11` | 1 | `DEL-09-01` | Theory notes: classical to modern centerline analysis |
 | `DEL-11-04` | `PKG-11` | 4 | `DEL-06-05`; `DEL-09-01`; `DEL-09-02`; `DEL-08-05` | Invented educational example models |
 | `DEL-12-01` | `PKG-12` | 1 | `DEL-12-05` | Local-first storage and private data paths |

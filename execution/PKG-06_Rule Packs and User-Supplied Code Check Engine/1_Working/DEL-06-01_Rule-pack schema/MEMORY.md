@@ -10,6 +10,10 @@
   stdlib schema-check style.
 - Updated `docs/SPEC.md` and `docs/TYPES.md` to record the bounded rule-pack
   schema surface.
+- Implementation committed as `20241f9 schema: add rule pack contract`.
+- Lifecycle moved to `CHECKING`; local dependency mirror, implementation
+  evidence, blocker queue, and dispatch/state handoff were aligned after
+  verification.
 
 ## Boundary Decisions
 
