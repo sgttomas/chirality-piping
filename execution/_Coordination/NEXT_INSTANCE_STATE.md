@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-10-05 post-commit evidence promotion` |
-| Latest state commit | `5eabcb8 coordination: record del-10-05 committed evidence` |
+| Latest state commit | Promotion metadata `5eabcb8`; this handoff row is recorded by current git history |
 | Previous completed task archive status | `DEL-10-05 implementation and lifecycle/evidence/queue alignment` archived with implementation/alignment commit `9de5e9b` |
 | Current authorized item | `DEL-10-05` evidence promoted to `COMMITTED`; queue refreshed; post-commit promotion committed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md` |
