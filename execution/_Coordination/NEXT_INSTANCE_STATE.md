@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-08-03 post-commit evidence promotion` |
-| Latest state commit | Implementation/closeout `50f947a`; promotion metadata not yet committed |
+| Latest state commit | Implementation/closeout `50f947a`; promotion metadata `5b43b51`; this handoff row is recorded by current git history |
 | Previous completed task archive status | `DEL-08-03 lifecycle/evidence/queue closeout` committed as `50f947a` |
 | Current authorized item | `DEL-08-03` evidence promoted to `COMMITTED`; queue refreshed |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-03.md` |
@@ -411,16 +411,14 @@ Guardrail results:
 
 Remaining open items:
 
-- Promotion metadata commit is pending for this post-commit evidence state.
-- No remaining closeout item for `DEL-08-03` after promotion metadata is
-  committed.
+- No remaining closeout item for `DEL-08-03` post-commit evidence promotion.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Stage and commit the `DEL-08-03` post-commit evidence promotion metadata,
-   then await the next human gate.
+1. Await the next human gate: authorize one bounded DAG item, route
+   reconciliation/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
