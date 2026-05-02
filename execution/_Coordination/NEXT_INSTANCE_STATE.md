@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-08-05 implementation from sealed dispatch brief` |
-| Latest state commit | Not committed |
+| Latest state commit | Implementation/closeout `69adffa`; promotion metadata not yet committed |
 | Previous completed task archive status | `DEL-08-05 candidate edge reconciliation and dispatch brief preparation` archived in compact history |
 | Current authorized item | `DEL-08-05` implementation only from sealed dispatch brief |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-05.md` |
@@ -370,6 +370,12 @@ Implementation summary:
   `WORKING_TREE` evidence before commit.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 67 unblocked / 6 blocked
   because `DEL-08-05` evidence was not yet commit-backed.
+- `DEL-08-05` implementation and closeout alignment were committed as
+  `69adffa schema: add report protected-content linter`.
+- Promoted `DEL-08-05` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `69adffa`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 68 unblocked / 5
+  blocked. `DEL-11-04` is newly implementation-unblocked.
 
 Verification:
 
@@ -384,6 +390,8 @@ Verification:
 - `python3 tests/test_analysis_status_schema.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
   2026-05-02` passed before commit: 67 unblocked / 6 blocked.
+- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
+  2026-05-02` passed after evidence promotion: 68 unblocked / 5 blocked.
 - `python3 tools/validation/validate_dependencies_schema.py
   "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-05_Report protected-content linter/Dependencies.csv"`
   passed.
@@ -405,8 +413,7 @@ Guardrail results:
   educational example models.
 - Lifecycle, local dependency mirror, evidence register, and blocker queue
   changes were limited to the authorized closeout surfaces.
-- No aggregate `DAG-001` change, candidate-edge promotion, staging, or commit
-  occurred yet.
+- No aggregate `DAG-001` change or candidate-edge promotion occurred.
 - No protected standards/code data, proprietary engineering value, private
   project data, private rule-pack payload, private library content, real secret,
   legal sufficiency claim, security sufficiency claim, professional/code-
@@ -415,16 +422,15 @@ Guardrail results:
 
 Remaining open items:
 
-- Commit-backed evidence promotion is required after the implementation/
-  closeout commit exists.
+- Promotion metadata commit remains to be created for the evidence/queue/state
+  refresh after implementation commit `69adffa`.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Stage and commit the `DEL-08-05` implementation/closeout state, then promote
-   `DEL-08-05` implementation evidence from `WORKING_TREE` to `COMMITTED` with
-   the actual commit hash and rebuild the blocker queue.
+1. Stage and commit the `DEL-08-05` post-commit evidence promotion metadata,
+   then await the next human gate.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.

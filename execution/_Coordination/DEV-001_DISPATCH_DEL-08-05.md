@@ -398,3 +398,9 @@ Closeout actions performed before implementation/closeout commit:
   `WORKING_TREE` evidence before commit.
 - Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 67 unblocked / 6 blocked
   because `DEL-08-05` evidence was not yet commit-backed.
+- `DEL-08-05` implementation and closeout alignment were committed as
+  `69adffa schema: add report protected-content linter`.
+- Promoted `DEL-08-05` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
+  `WORKING_TREE` to `COMMITTED` evidence for commit `69adffa`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 68 unblocked / 5
+  blocked. `DEL-11-04` is newly implementation-unblocked.

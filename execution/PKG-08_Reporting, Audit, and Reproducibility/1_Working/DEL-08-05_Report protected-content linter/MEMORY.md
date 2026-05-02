@@ -62,3 +62,9 @@ Implementation verification should include:
 - Registered working-tree implementation evidence for `DEL-08-05`.
 - Rebuilt the blocker queue at 67 unblocked / 6 blocked before commit-backed
   evidence promotion.
+- Implementation and closeout alignment committed as
+  `69adffa schema: add report protected-content linter`.
+- Promoted implementation evidence to `COMMITTED` for commit `69adffa` and
+  rebuilt the blocker queue at 68 unblocked / 5 blocked.
+- `DEL-11-04` is newly implementation-unblocked; `DEL-09-05` still waits on
+  `DEL-09-03`, and `DEL-10-04` still waits on `DEL-09-05`.
