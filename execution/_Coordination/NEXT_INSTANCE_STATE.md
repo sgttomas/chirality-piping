@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-08-04 post-commit evidence promotion
+**Actor:** ORCHESTRATOR DEL-10-05 lifecycle/evidence/queue alignment
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-08-04` implementation committed; evidence promoted to COMMITTED and blocker queue refreshed
+**Current Mode:** `DEL-10-05` implementation in working tree; lifecycle/evidence/dependency mirror aligned and blocker queue refreshed
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-04 post-commit evidence promotion` |
-| Latest state commit | Implementation/alignment `3e33ea4`; evidence promotion `52384f0` |
-| Previous completed task archive status | `DEL-08-04 lifecycle/evidence/queue alignment` archived with implementation/alignment `3e33ea4` |
-| Current authorized item | `DEL-08-04` evidence promoted to `COMMITTED` and queue refreshed; aspect complete |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-04.md` |
+| Latest state task | `DEL-10-05 lifecycle/evidence/queue alignment` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-10-05 implementation from sealed dispatch brief` archived; not committed |
+| Current authorized item | `DEL-10-05` lifecycle/evidence/dependency mirror aligned; queue refreshed; commit-backed evidence still pending |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -156,8 +156,8 @@ evidence and should not be treated as current sequencing authority.
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-10-01` implementation evidence was promoted to
-`COMMITTED`.
+2026-05-02 after `DEL-10-05` implementation evidence was recorded as
+`WORKING_TREE`.
 It reads approved active `DAG-001` edges and
 `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
@@ -170,22 +170,23 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 33 |
-| Filesystem lifecycle `CHECKING` (display only) | 40 |
-| Implementation evidence records | 40 |
-| Committed implementation evidence | 40 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 31 |
+| Filesystem lifecycle `CHECKING` (display only) | 41 |
+| Implementation evidence records | 42 |
+| Committed implementation evidence | 41 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 63 |
-| Implementation `BLOCKED` deliverables | 10 |
+| Implementation `UNBLOCKED` deliverables | 64 |
+| Implementation `BLOCKED` deliverables | 9 |
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. `DEL-10-01` is now recorded as
-`COMMITTED` evidence at `53cc3d6`; the queue changed to 63 unblocked / 10
-blocked. `DEL-10-02`, `DEL-10-03`, and `DEL-11-02` are newly unblocked.
-`DEL-10-05` still waits on `DEL-08-04`. The queue is not a lifecycle approval,
-schedule, priority, staffing decision, implementation completeness claim, or
-professional approval.
+yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
+`WORKING_TREE` evidence with no commit hash, so it appears as implemented in
+the working tree but does not yet satisfy downstream `COMMITTED` blockers.
+The queue remained 64 unblocked / 9 blocked. `DEL-10-04` still waits on
+`DEL-09-05`, `DEL-10-05`, and `DEL-08-05`. The queue is not a lifecycle
+approval, schedule, priority, staffing decision, implementation completeness
+claim, or professional approval.
 
 ## Completed Task History (Compacted)
 
@@ -284,6 +285,9 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-04` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-04.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was later authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-04` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/results.schema.yaml`, `core/reporting/result_export/`, `tests/test_results_schema.py`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Result-export crate tests, result/status/model/unit schema scripts, `git diff --check`, and focused protected-content/private-secret/prohibited-claim scan passed | Lifecycle/evidence/queue alignment was separately authorized after implementation. |
 | `DEL-08-04` lifecycle/evidence/queue alignment | Completed; implementation/alignment `3e33ea4` | Result export implementation files, `DEL-08-04` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state/memory | Result-export crate tests, schema scripts, dependency schema validation, DAG audit, coordination tests, queue rebuild, `git diff --check`, and focused scans passed; queue initially remained 63 unblocked / 10 blocked because evidence was `WORKING_TREE` before commit | Post-commit evidence promotion was required to unblock downstream consumers. |
+| `DEL-08-04` post-commit evidence promotion | Completed; implementation/alignment `3e33ea4`; evidence promotion `52384f0` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | Result-export crate tests, schema scripts, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 64 unblocked / 9 blocked | `DEL-10-05` newly unblocked; no next product deliverable was authorized by the promotion itself. |
+| `DEL-10-05` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
+| `DEL-10-05` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/headless_runner.schema.yaml`, `core/runner/headless/`, `tests/test_headless_runner_contract.py`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Headless-runner rustfmt and 5 tests passed; headless runner, result export, and API boundary schema checks passed; `git diff --check`; focused scans passed | Lifecycle/evidence/queue alignment was separately authorized after implementation; commit-backed evidence remains pending. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -306,57 +310,59 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-04 Post-Commit Evidence Promotion
+## Latest State - DEL-10-05 Lifecycle/Evidence/Queue Alignment
 
-Human project authority authorized CHANGE / closeout activities for the
-implemented `DEL-08-04` work.
+Human project authority authorized closeout alignment after the implemented
+`DEL-10-05` work:
 
-Implementation and lifecycle/evidence/queue alignment were committed as:
-
-- `3e33ea4 schema: add result export contract`
-
-Post-commit evidence promotion was committed as:
-
-- `52384f0 coordination: record del-08-04 committed evidence`
+- "now ensure all lifecycle, evidence, blocker queue, DAG, and dependency
+  registers now reflect the current state."
 
 Files changed in this task:
 
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/_STATUS.md`
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/Dependencies.csv`
+- `execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/MEMORY.md`
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-10-05.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Promotion summary:
+Alignment summary:
 
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` now records `DEL-08-04` as
-  `COMMITTED` evidence at `3e33ea4`.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed; implementation readiness changed
-  to 64 unblocked / 9 blocked.
-- `DEL-10-05` is newly unblocked.
-- `DEL-12-02` still waits on `DEL-08-01`.
-- `DAG-001` schema and strict audit passed; no aggregate graph, candidate edge,
-  or ordering change was required.
-- No `DAG-001` change, candidate-edge promotion, protected standards data,
-  private data, real secret, external export format choice, API transport
-  choice, GUI/report/CLI/adapter implementation, or professional/
-  code-compliance claim occurred.
+- Set `DEL-10-05` lifecycle display state to `CHECKING` after implementation
+  from the sealed dispatch brief.
+- Annotated `DEL-10-05` local `Dependencies.csv` rows `DAG-001-E0565` through
+  `DAG-001-E0570` as `SATISFIED` from committed upstream evidence.
+- Recorded `DEL-10-05` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
+  `WORKING_TREE` evidence. Because this is not `COMMITTED`, downstream
+  implementation blockers are not satisfied yet.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 64 unblocked / 9 blocked.
+  `DEL-10-05` appears with `WORKING_TREE` evidence, and `DEL-10-04` still
+  waits on `DEL-09-05`, `DEL-10-05`, and `DEL-08-05`.
+- Verified aggregate `DAG-001` and `DEL-10-05` local dependency register
+  schema validity. No aggregate `DAG-001` row or candidate edge was changed.
+- Candidate edge `DAG-001-E0624` remains non-gating and was not promoted.
+- No protected standards data, private data, real secret, final CLI command
+  syntax, package manifest/script change, CI provider choice, release matrix
+  choice, transport choice, external format choice, GUI/report/adapter/local
+  FEA runtime implementation, process/network/filesystem capability, or
+  professional/code-compliance claim occurred.
 
 Verification:
 
-- `cargo fmt --manifest-path core/reporting/result_export/Cargo.toml --check`
-  passed.
-- `cargo test --manifest-path core/reporting/result_export/Cargo.toml` passed:
-  7 tests.
+- `cargo fmt --manifest-path core/runner/headless/Cargo.toml --check` passed.
+- `cargo test --manifest-path core/runner/headless/Cargo.toml` passed: 5 tests.
+- `python3 tests/test_headless_runner_contract.py` passed.
 - `python3 tests/test_results_schema.py` passed.
-- `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_units_schema.py` passed.
+- `python3 tests/test_api_boundary_contract.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
   2026-05-02` passed: 64 unblocked / 9 blocked.
 - `python3 tools/validation/validate_dependencies_schema.py
   execution/_DAG/DAG-001/DependencyEdges.csv` passed.
 - `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-04_Result export format/Dependencies.csv"`
+  "execution/PKG-10_Build, Packaging, API, and Interoperability/1_Working/DEL-10-05_Headless CLI and structured I-O analysis runner/Dependencies.csv"`
   passed.
 - `python3 tools/coordination/audit_dag.py --strict --dag-dir
   execution/_DAG/DAG-001` passed.
@@ -368,14 +374,18 @@ Verification:
 
 Remaining open items:
 
-- No remaining closeout item for this aspect.
+- `DEL-10-05` commit and post-commit evidence promotion require CHANGE /
+  human approval. Until then, `DEL-10-05` remains `WORKING_TREE` evidence and
+  does not satisfy downstream implementation blockers.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize a bounded DAG item, route
-   reconciliation/change/audit, handle artifacts, or pause.
+1. Await the next human gate: route CHANGE for `DEL-10-05` working-tree
+   artifacts, authorize post-commit evidence promotion after commit, route
+   reconciliation/audit, handle artifacts, authorize a different bounded DAG
+   item, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.

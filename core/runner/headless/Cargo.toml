@@ -1,0 +1,11 @@
+[package]
+name = "open_pipe_stress_headless_runner"
+version = "0.1.0"
+edition = "2021"
+description = "Headless runner contract support for OpenPipeStress"
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]

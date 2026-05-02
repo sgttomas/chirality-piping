@@ -622,6 +622,32 @@ status, and redaction status; exports must not copy private formulas,
 protected standards text, protected tables, proprietary values, or private
 rule-pack payloads into public artifacts.
 
+The headless runner contract is represented by
+`schemas/headless_runner.schema.yaml` and the bounded
+`core/runner/headless` crate. The baseline is a schema-first request/result
+envelope for non-GUI solve execution, benchmark automation, regression
+execution, audit-manifest capture, and result-export handoff. It is an
+application-service client contract, not a solver shortcut. Runner requests
+must identify operation, project, model, unit-system, load-case or combination
+basis, input manifest, requested outputs, privacy, provenance, and the
+professional-boundary posture. Runner results must identify job progress and
+cancellation state, analysis statuses, result-export envelope reference,
+audit-manifest reference, checksums, diagnostics, privacy, provenance, and the
+professional-boundary posture.
+
+`DEL-10-05` deliberately leaves final CLI command syntax, package scripts,
+process invocation, network access, filesystem mutation policy, public
+transport, CI provider, release matrix, external adapter formats, physical
+project container, GUI/report runtime behavior, local FEA package structure,
+and release automation details as `TBD`. Missing solve-required or
+rule-check-required values must produce structured diagnostics rather than
+silent defaults. Runner outputs must remain compatible with
+`schemas/results.schema.yaml` rather than introducing an ad hoc regression or
+automation output shape. Public fixtures or examples for runner tests must use
+invented or otherwise permitted data only and must not embed protected
+standards text, protected tables, proprietary values, private project data,
+private rule-pack payloads, real secrets, or real user paths.
+
 ## 10. Verification and validation mechanics
 
 The project shall maintain:
