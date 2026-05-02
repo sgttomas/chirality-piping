@@ -3,7 +3,7 @@
 **Last Updated:** 2026-05-02
 **Actor:** ORCHESTRATOR DEL-10-01 post-commit evidence promotion
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-10-01` implementation committed; evidence promoted to COMMITTED and blocker queue refreshed in working tree
+**Current Mode:** `DEL-10-01` implementation committed; evidence promoted to COMMITTED and blocker queue refreshed and committed
 
 ## Active Control State
 
@@ -24,9 +24,9 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-10-01 post-commit evidence promotion` |
-| Latest state commit | Implementation/alignment `53cc3d6`; evidence promotion not committed |
+| Latest state commit | Implementation/alignment `53cc3d6`; evidence promotion `a1f449b` |
 | Previous completed task archive status | `DEL-10-01 lifecycle/evidence/queue alignment` archived with implementation/alignment `53cc3d6` |
-| Current authorized item | `DEL-10-01` evidence promoted to `COMMITTED` and queue refreshed; final coordination commit pending |
+| Current authorized item | `DEL-10-01` evidence promoted to `COMMITTED` and queue refreshed; aspect complete |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-10-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -311,8 +311,9 @@ Implementation and lifecycle/evidence/queue alignment were committed as:
 
 - `53cc3d6 api: harden public boundary contract`
 
-Post-commit evidence promotion was completed in the working tree and is not yet
-committed.
+Post-commit evidence promotion was committed as:
+
+- `a1f449b coordination: record del-10-01 committed evidence`
 
 Files changed in this task:
 
@@ -356,14 +357,14 @@ Verification:
 
 Remaining open items:
 
-- Final coordination evidence promotion commit is pending.
+- No remaining closeout item for this aspect.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Commit the final `DEL-10-01` post-commit evidence promotion and queue
-   refresh, then this aspect is closed.
+1. Await the next human gate: authorize a different bounded DAG item, route
+   reconciliation/change/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
