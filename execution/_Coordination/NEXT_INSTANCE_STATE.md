@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-09-02 sealed dispatch brief preparation` |
-| Latest state commit | Pending CHANGE commit for this control-plane brief preparation |
+| Latest state commit | Brief preparation `d88c6ae` |
 | Previous completed task archive status | `DEL-09-01 implementation` archived with implementation `b34ecd6`, closeout/evidence `33bd2f5`, and handoff `023ddad` |
 | Current authorized item | Ordered tranche item 3: `DEL-09-02` stress recovery benchmark suite has a fresh sealed brief; implementation requires a separate human gate |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-02.md` |
@@ -303,7 +303,7 @@ Verification:
 
 Remaining open items:
 
-- The `DEL-09-02` brief preparation is pending CHANGE staging/commit.
+- The `DEL-09-02` brief preparation was committed as `d88c6ae`.
 - `DEL-09-02` implementation requires a separate human approval gate.
 - `DEL-09-04`, `DEL-09-05`, and `DEL-11-04` still wait on missing upstream
   implementation evidence from `DEL-09-02` and other unimplemented items.
@@ -312,9 +312,7 @@ Remaining open items:
 
 Immediate next action:
 
-1. If accepted, route this control-plane state through `CHANGE` for staging and
-   commit.
-2. If the human approves the next gate, implement `DEL-09-02` from the fresh
+1. If the human approves the next gate, implement `DEL-09-02` from the fresh
    sealed dispatch brief only within its explicit write scope.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
