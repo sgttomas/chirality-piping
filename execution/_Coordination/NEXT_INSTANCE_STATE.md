@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-06-05 lifecycle/evidence/queue/DAG/dependency-register alignment` |
-| Latest state commit | Implementation commit `73506b7`; alignment not committed |
+| Latest state commit | Implementation commit `73506b7`; evidence/queue/state commit `cb3ffa6` |
 | Previous completed task archive status | `DEL-06-05 implementation` moved into the compact task archive table |
 | Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-05.md` |
