@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-06-05
+**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-06-04
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-06-05 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
+**Current Mode:** DEL-06-04 implemented in working tree, lifecycle moved to CHECKING, working-tree evidence recorded, blocker queue refreshed
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-06-05 lifecycle/evidence/queue/DAG/dependency-register alignment` |
-| Latest state commit | Implementation commit `73506b7`; evidence/queue/state commit `cb3ffa6` |
-| Previous completed task archive status | `DEL-06-05 implementation` moved into the compact task archive table |
+| Latest state task | `DEL-06-04 lifecycle/evidence/queue/DAG/dependency-register alignment` |
+| Latest state commit | Not committed; working tree implementation pending CHANGE/file-state handling |
+| Previous completed task archive status | `DEL-06-04 implementation` moved into the compact task archive table |
 | Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-05.md` |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-04.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -116,6 +116,13 @@ evidence and should not be treated as current sequencing authority.
   `DAG-001-E0477` now record `SATISFIED` local satisfaction evidence.
 - This local annotation does not replace aggregate `DAG-001` as sequencing
   authority and does not promote candidate edges.
+- `DEL-06-04` local dependency mirror was annotated after working-tree
+  implementation; non-architecture upstream rows `DAG-001-E0472` and
+  `DAG-001-E0473` now record `SATISFIED` local satisfaction evidence from
+  committed upstreams `DEL-06-01` and `DEL-02-05`.
+- This local annotation does not replace aggregate `DAG-001` as sequencing
+  authority, does not promote candidate edges, and does not satisfy downstream
+  implementation blockers until `DEL-06-04` has `COMMITTED` evidence.
 
 ## Current Blocker Queue
 
@@ -132,9 +139,9 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 66 |
-| Filesystem lifecycle `CHECKING` (display only) | 7 |
-| Implementation evidence records | 30 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 65 |
+| Filesystem lifecycle `CHECKING` (display only) | 8 |
+| Implementation evidence records | 31 |
 | Committed implementation evidence | 30 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 53 |
@@ -142,9 +149,11 @@ blockers by itself.
 | Candidate edges used | 0 |
 
 The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. It is not a lifecycle approval,
-schedule, priority, staffing decision, implementation completeness claim, or
-professional approval.
+yet have `COMMITTED` implementation evidence. `DEL-06-04` is recorded as
+`WORKING_TREE_IMPLEMENTED`, so downstream consumers remain blocked by it until
+commit-backed evidence exists. The queue is not a lifecycle approval, schedule,
+priority, staffing decision, implementation completeness claim, or professional
+approval.
 
 ## Completed Task History (Compacted)
 
@@ -218,6 +227,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-06-02` lifecycle/evidence/queue alignment | Completed; implementation `7490f67`; evidence/queue/state `36bfb25`; handoff `b63f82f` | `DEL-06-02` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue changed to 53 unblocked / 20 blocked | No next product deliverable was authorized by the alignment pass; newly unblocked `DEL-06-05`. |
 | `DEL-06-05` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-06-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; dispatch brief prepared from `DAG-001`, `Deliverables.csv`, applicable `AB-00-*` rows, local context, blocker queue, and committed upstream evidence | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
 | `DEL-06-05` implementation | Completed; `73506b7 docs: add invented rule pack example` | `examples/rule_packs/invented_demo.yaml`, `docs/_Examples/rule_pack_notice.md`, deliverable `MEMORY.md`, dispatch/state | JSON parse, schema-surface assertions, `git diff --check`, and focused protected-content/prohibited-claim scan passed | Concrete checksum generation, result-envelope integration, public API transport, GUI presentation, private storage, completeness-checker behavior, and broader tutorial placement remain `TBD`. |
+| `DEL-06-05` lifecycle/evidence/queue alignment | Completed; implementation `73506b7`; evidence/queue/state `cb3ffa6` | `DEL-06-05` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue remained 53 unblocked / 20 blocked | No next product deliverable was authorized by the alignment pass; `DEL-11-04` remains blocked by `DEL-09-01`, `DEL-09-02`, and `DEL-08-05`. |
+| `DEL-06-04` implementation | Completed in working tree; not committed | `core/rules/rule_pack_lifecycle/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Rule-pack lifecycle rustfmt and 8 focused tests passed; rule-pack schema check and expression-evaluator tests passed; `git diff --check`; focused protected-content/prohibited-claim scan passed | JSON canonicalization library/dependency, non-JSON payload partitioning, storage, encryption, access control, secrets, GUI/report/API integration, and result-envelope integration remain `TBD`. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -240,72 +251,116 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-06-05 Lifecycle/Evidence/Queue Alignment
+## Latest State - DEL-06-04 Lifecycle/Evidence/Queue Alignment
 
 Human project authority authorized lifecycle, evidence, blocker queue, DAG, and
-dependency-register alignment after implementation of:
+dependency-register alignment after working-tree implementation of:
 
-- `DEL-06-05 - Invented non-code example rule pack`
+- `DEL-06-04 - Private rule-pack lifecycle and checksum handling`
 
 Files changed in this task:
 
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/Dependencies.csv`
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/_STATUS.md`
+- `core/rules/rule_pack_lifecycle/.gitignore`
+- `core/rules/rule_pack_lifecycle/Cargo.toml`
+- `core/rules/rule_pack_lifecycle/README.md`
+- `core/rules/rule_pack_lifecycle/src/lib.rs`
+- `docs/SPEC.md`
+- `docs/TYPES.md`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-04_Private rule-pack lifecycle and checksum handling/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-06-04.md`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-04_Private rule-pack lifecycle and checksum handling/Dependencies.csv`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-04_Private rule-pack lifecycle and checksum handling/_STATUS.md`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/MEMORY.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-06-05.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Alignment summary:
+Implementation summary:
 
-- Committed the bounded implementation as
-  `73506b7 docs: add invented rule pack example`.
-- Updated `DEL-06-05` lifecycle from `SEMANTIC_READY` to `CHECKING`.
-- Annotated the `DEL-06-05` local dependency mirror for satisfied
-  non-architecture upstreams `DEL-06-01`, `DEL-06-02`, `DEL-01-02`, and
-  `DEL-01-04`.
-- Recorded `DEL-06-05` as `COMMITTED` implementation evidence in
-  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
-- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 53 unblocked / 20
-  blocked.
-- `DEL-06-05` no longer appears as a missing upstream blocker; `DEL-11-04`
-  remains blocked by `DEL-09-01`, `DEL-09-02`, and `DEL-08-05`.
-- `DAG-001` has been validated and left unchanged; candidate edges remain
-  non-gating.
+- Added `core/rules/rule_pack_lifecycle` as a bounded Rust crate.
+- Implemented lifecycle metadata for rule-pack identity, version, privacy
+  class, redistribution status, review status, source notice, protected-content
+  review state, checksum record, and professional-boundary flags.
+- Implemented deterministic SHA-256 checksum generation over caller-supplied
+  canonical payload bytes with JCS-compatible metadata for JSON payloads.
+- Implemented lifecycle diagnostics for missing identity/version/source notice,
+  missing or unknown redistribution status, pending review state, missing or
+  stale checksum, suspected protected content, attempted public export of
+  private content, and professional-boundary violations.
+- Implemented audit-manifest references that expose rule-pack identity, version,
+  checksum, source notice, privacy/redistribution status, and redaction state
+  without exposing private rule-pack payloads.
+- Updated `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, and this
+  dispatch/state handoff to reflect the implemented surface.
 
 Verification:
 
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/Dependencies.csv"`
+- `cargo fmt --manifest-path core/rules/rule_pack_lifecycle/Cargo.toml --check`
   passed.
-- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
-  unblocked=53, blocked=20, active_edges=615, candidate_edges_excluded=9.
+- `cargo test --manifest-path core/rules/rule_pack_lifecycle/Cargo.toml`
+  passed: 8 tests.
+- `python3 tests/test_rule_pack_schema.py` passed.
+- `cargo test --manifest-path core/rules/expression_evaluator/Cargo.toml`
+  passed: 14 tests.
+- `git diff --check` passed.
+- Focused protected-content/prohibited-claim scan found only guardrail,
+  exclusion, and diagnostic wording; no protected data, proprietary engineering
+  values, private payloads, or professional/code-compliance claims were
+  introduced.
+
+Lifecycle/evidence/queue closeout:
+
+- Updated `DEL-06-04` lifecycle from `SEMANTIC_READY` to `CHECKING`.
+- Annotated the `DEL-06-04` local dependency mirror for satisfied
+  non-architecture upstreams `DEL-06-01` and `DEL-02-05`.
+- Recorded `DEL-06-04` as `WORKING_TREE_IMPLEMENTED` implementation evidence
+  in `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 53 unblocked / 20
+  blocked.
+- `DEL-06-04` remains a missing committed upstream blocker for `DEL-07-03`,
+  `DEL-08-01`, `DEL-08-02`, `DEL-12-02`, and `DEL-12-04` until commit-backed
+  evidence exists.
+- `DAG-001` has been validated and left unchanged; candidate edges remain
+  non-gating.
+- No commit was performed; changes remain in the working tree pending
+  `CHANGE`/file-state handling.
+
+Additional closeout verification:
+
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-04_Private rule-pack lifecycle and checksum handling/Dependencies.csv"`
+  passed.
+- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
+  2026-05-02` passed: unblocked=53, blocked=20, active_edges=615,
+  candidate_edges_excluded=9.
 - `python3 -m pytest tools/coordination` passed: 10 tests.
 - `python3 tools/validation/validate_dependencies_schema.py
   execution/_DAG/DAG-001/DependencyEdges.csv` passed.
 - `python3 tools/coordination/audit_dag.py --strict --dag-dir
   execution/_DAG/DAG-001` passed.
-- `git diff --check` passed.
 
 Remaining open items:
 
-- Final public example validation command, checksum generation,
-  result-envelope integration, public API transport, GUI presentation, private
-  rule-pack storage, completeness-checker behavior, and broader tutorial
-  placement remain `TBD`.
+- JSON canonicalization library/dependency choice remains `TBD`; this crate
+  hashes caller-supplied canonical bytes.
+- Non-JSON/binary payload partitioning remains `TBD`.
+- Private storage path, encryption defaults, access control, secret handling,
+  GUI presentation, report integration, API transport, final result-envelope
+  integration, and PKG-12 redaction/export policy remain downstream work.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Human project authority may route `CHANGE` for file-state handling and
-   commit alignment artifacts; route review; authorize exactly one next bounded
-   DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle artifacts; or
-   pause.
+1. Recommended next gate is `CHANGE`/file-state handling and commit for the
+   current `DEL-06-04` implementation and alignment artifacts.
+2. After commit-backed evidence exists, human project authority may authorize a
+   final evidence/queue refresh to convert `DEL-06-04` from
+   `WORKING_TREE_IMPLEMENTED` to `COMMITTED`; route review; authorize exactly
+   one next bounded DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle
+   artifacts; or pause.
 
-Do not start broad DAG execution. No additional DAG item is currently
+Do not start broad DAG execution. No additional DAG item or commit is currently
 authorized by this alignment pass.
 
 ## Guardrails

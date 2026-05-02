@@ -488,8 +488,21 @@ surface. It evaluates explicit expression trees only; it does not parse
 arbitrary text or use host-language `eval`. The supported surface is deliberately
 small: numeric literals, declared variable references, unary negation, basic
 arithmetic, and same-dimension comparisons. Multiplication and division are
-limited to dimensionless scaling or same-dimension ratios until derived
-dimension policy, quantity representation, and tolerance decisions are accepted.
+bounded to dimensionless scaling and same-dimension ratios until a later unit
+algebra decision extends them.
+
+`core/rules/rule_pack_lifecycle` implements private rule-pack lifecycle and
+checksum evidence. It records rule-pack identity, version, privacy class,
+redistribution status, review state, source notice, protected-content review
+state, SHA-256 checksum records, JCS-compatible canonicalization metadata for
+caller-supplied canonical JSON payload bytes, and audit-manifest references.
+It emits deterministic findings for missing source notices, missing or unknown
+redistribution state, pending review state, missing or stale checksums,
+suspected protected content, attempted public export of private content, and
+professional-boundary violations. It does not parse/canonicalize JSON, store
+private rule-pack payloads, choose private storage paths, implement encryption
+or access control, handle secrets, run GUI/report/API workflows, evaluate rule
+expressions, or make professional/code-compliance claims.
 
 The evaluator reports deterministic findings for unsafe host-access requests,
 unsupported expression forms, missing or duplicate bindings, invalid

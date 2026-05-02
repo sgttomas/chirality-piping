@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 30 |
+| Implementation evidence records | 31 |
 | Committed implementation evidence | 30 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 66 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 65 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 53 |
 | Implementation `BLOCKED` deliverables | 20 |
@@ -105,7 +105,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-01` | `PKG-06` | `COMMITTED` `20241f9` | 12 | Rule-pack schema |
 | `DEL-06-02` | `PKG-06` | `COMMITTED` `7490f67` | 9 | Sandboxed unit-aware expression evaluator |
 | `DEL-06-03` | `PKG-06` | `MISSING_EVIDENCE` | 10 | Required-input completeness checker |
-| `DEL-06-04` | `PKG-06` | `MISSING_EVIDENCE` | 9 | Private rule-pack lifecycle and checksum handling |
+| `DEL-06-04` | `PKG-06` | `WORKING_TREE_IMPLEMENTED` | 9 | Private rule-pack lifecycle and checksum handling |
 | `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
@@ -125,7 +125,7 @@ These deliverables have no active upstream implementation dependency below the `
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
 | `DEL-06-03` - Required-input completeness checker | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-07-04` | `DAG-001-E0497` |
-| `DEL-06-04` - Private rule-pack lifecycle and checksum handling | `PKG-06` | `MISSING_EVIDENCE` | 5 | `DEL-07-03`; `DEL-08-01`; `DEL-08-02`; `DEL-12-02`; `DEL-12-04` | `DAG-001-E0493`; `DAG-001-E0513`; `DAG-001-E0525`; `DAG-001-E0609`; `DAG-001-E0614` |
+| `DEL-06-04` - Private rule-pack lifecycle and checksum handling | `PKG-06` | `WORKING_TREE_IMPLEMENTED` | 5 | `DEL-07-03`; `DEL-08-01`; `DEL-08-02`; `DEL-12-02`; `DEL-12-04` | `DAG-001-E0493`; `DAG-001-E0513`; `DAG-001-E0525`; `DAG-001-E0609`; `DAG-001-E0614` |
 | `DEL-07-01` - 3D viewport and centerline editor | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0506`; `DAG-001-E0575` |
 | `DEL-07-02` - Model tree and property inspector | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0507` |
 | `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0508`; `DAG-001-E0576` |
