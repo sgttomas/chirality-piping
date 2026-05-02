@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-05-05 implementation closeout` |
-| Latest state commit | Pending commit |
+| Latest state commit | `1007993 coordination: record del-05-05 implementation evidence` |
 | Previous completed task archive status | `DEL-05-05 sealed dispatch brief preparation` superseded by same-turn implementation and closeout |
 | Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite requires fresh sealed brief before implementation |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-05.md` |
@@ -334,7 +334,8 @@ Verification:
 
 Remaining open items:
 
-- Closeout commit is pending.
+- Closeout commit: `1007993 coordination: record del-05-05 implementation
+  evidence`.
 - `DEL-09-01` and `DEL-09-02` are approved as next ordered tranche items.
 - `DEL-09-01` should receive a fresh sealed dispatch brief before
   implementation begins.
