@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-06-05
 doc_kind: coordination.dispatch_brief
-status: implemented_awaiting_lifecycle_evidence_gate
+status: implemented_lifecycle_evidence_queue_refreshed
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -30,7 +30,8 @@ broad DAG execution.
 The human project authority later authorized implementation from this sealed
 brief. Implementation has been completed within the bounded write scope.
 Lifecycle transition, implementation evidence registration, dependency-register
-alignment, blocker-queue refresh, and commit remain separate gated actions.
+alignment, blocker-queue refresh, and commit have now been completed after
+verification. `DAG-001` was validated and left unchanged.
 
 The eventual implementation scope should be deliberately constrained to a
 public invented demonstration rule-pack artifact and notice text. The example
@@ -184,11 +185,17 @@ Verification performed:
 
 Lifecycle/evidence/queue closeout:
 
-- No lifecycle transition was performed.
-- No deliverable-local `Dependencies.csv` edit was performed.
-- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` update was performed.
-- No `DEV-001_BLOCKER_QUEUE.*` refresh was performed.
-- Aggregate `DAG-001` was left unchanged.
+- Implementation commit: `73506b7 docs: add invented rule pack example`.
+- `DEL-06-05` lifecycle moved to `CHECKING`.
+- `DEL-06-05` local dependency mirror rows `DAG-001-E0474` through
+  `DAG-001-E0477` record satisfied upstreams `DEL-06-01`, `DEL-06-02`,
+  `DEL-01-02`, and `DEL-01-04`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-06-05` as `COMMITTED`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed from approved active `DAG-001` edges
+  and committed evidence; queue remained 53 unblocked / 20 blocked.
+- `DEL-06-05` no longer appears as a missing upstream blocker; `DEL-11-04`
+  remains blocked by `DEL-09-01`, `DEL-09-02`, and `DEL-08-05`.
+- Aggregate `DAG-001` was validated and left unchanged.
 
 ## Dispatch Task Shape
 

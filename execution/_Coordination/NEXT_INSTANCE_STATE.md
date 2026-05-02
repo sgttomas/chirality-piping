@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS implementation for DEL-06-05
+**Actor:** WORKING_ITEMS lifecycle/evidence/queue alignment for DEL-06-05
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** DEL-06-05 implemented within sealed scope; lifecycle/evidence/queue closeout awaiting explicit human gate
+**Current Mode:** DEL-06-05 implemented, lifecycle moved to CHECKING, evidence recorded, blocker queue refreshed
 
 ## Active Control State
 
@@ -23,10 +23,10 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-06-05 implementation` |
-| Latest state commit | Not committed |
-| Previous completed task archive status | `DEL-06-05 sealed dispatch brief preparation` moved into the compact task archive table |
-| Current authorized item | `DEL-06-05` implementation from sealed dispatch brief |
+| Latest state task | `DEL-06-05 lifecycle/evidence/queue/DAG/dependency-register alignment` |
+| Latest state commit | Implementation commit `73506b7`; alignment not committed |
+| Previous completed task archive status | `DEL-06-05 implementation` moved into the compact task archive table |
+| Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-06-05.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -111,11 +111,16 @@ evidence and should not be treated as current sequencing authority.
   `DAG-001-E0468` now record `SATISFIED` local satisfaction evidence.
 - This local annotation does not replace aggregate `DAG-001` as sequencing
   authority and does not promote candidate edges.
+- `DEL-06-05` local dependency mirror was annotated after implementation commit
+  `73506b7`; non-architecture upstream rows `DAG-001-E0474` through
+  `DAG-001-E0477` now record `SATISFIED` local satisfaction evidence.
+- This local annotation does not replace aggregate `DAG-001` as sequencing
+  authority and does not promote candidate edges.
 
 ## Current Blocker Queue
 
 `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-06-02` implementation evidence was added. It reads approved active
+2026-05-02 after `DEL-06-05` implementation evidence was added. It reads approved active
 `DAG-001` edges and `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 `FromDeliverableID` is treated as the downstream consumer blocked by
 `TargetDeliverableID`, the upstream provider.
@@ -127,10 +132,10 @@ blockers by itself.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 67 |
-| Filesystem lifecycle `CHECKING` (display only) | 6 |
-| Implementation evidence records | 29 |
-| Committed implementation evidence | 29 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 66 |
+| Filesystem lifecycle `CHECKING` (display only) | 7 |
+| Implementation evidence records | 30 |
+| Committed implementation evidence | 30 |
 | PKG-00 architecture-basis edges satisfied by baseline | 388 |
 | Implementation `UNBLOCKED` deliverables | 53 |
 | Implementation `BLOCKED` deliverables | 20 |
@@ -212,6 +217,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-06-02` implementation | Completed; `7490f67 core: add rule expression evaluator` | `core/rules/expression_evaluator/`, `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, dispatch/state | Expression-evaluator rustfmt and 14 focused tests passed; `git diff --check`; focused protected-content/prohibited-claim scan | Final expression grammar/library, parser dependency policy, quantity representation, conversion constants, diagnostic taxonomy, tolerance policy, variable namespace, threat-model review depth, API/GUI/report/private-storage/checksum integration remain `TBD`. |
 | `DEL-06-02` lifecycle/evidence/queue alignment | Completed; implementation `7490f67`; evidence/queue/state `36bfb25`; handoff `b63f82f` | `DEL-06-02` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state | Dependency schema validation, blocker queue builder, coordination tests, DAG schema validation, `audit_dag.py --strict`, and `git diff --check` passed; queue changed to 53 unblocked / 20 blocked | No next product deliverable was authorized by the alignment pass; newly unblocked `DEL-06-05`. |
 | `DEL-06-05` sealed dispatch brief preparation | Completed; not committed | `DEV-001_DISPATCH_DEL-06-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`; dispatch brief prepared from `DAG-001`, `Deliverables.csv`, applicable `AB-00-*` rows, local context, blocker queue, and committed upstream evidence | No implementation, lifecycle transition, evidence update, dependency-register edit, queue refresh, or commit was performed by brief preparation. |
+| `DEL-06-05` implementation | Completed; `73506b7 docs: add invented rule pack example` | `examples/rule_packs/invented_demo.yaml`, `docs/_Examples/rule_pack_notice.md`, deliverable `MEMORY.md`, dispatch/state | JSON parse, schema-surface assertions, `git diff --check`, and focused protected-content/prohibited-claim scan passed | Concrete checksum generation, result-envelope integration, public API transport, GUI presentation, private storage, completeness-checker behavior, and broader tutorial placement remain `TBD`. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -234,44 +240,53 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-06-05 Implementation
+## Latest State - DEL-06-05 Lifecycle/Evidence/Queue Alignment
 
-Human project authority authorized implementation for exactly one bounded DAG
-item from the sealed dispatch brief:
+Human project authority authorized lifecycle, evidence, blocker queue, DAG, and
+dependency-register alignment after implementation of:
 
 - `DEL-06-05 - Invented non-code example rule pack`
 
 Files changed in this task:
 
-- `examples/rule_packs/invented_demo.yaml`
-- `docs/_Examples/rule_pack_notice.md`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/Dependencies.csv`
+- `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/_STATUS.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 - `execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/MEMORY.md`
 - `execution/_Coordination/DEV-001_DISPATCH_DEL-06-05.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Implementation summary:
+Alignment summary:
 
-- Added `examples/rule_packs/invented_demo.yaml` as a strict JSON-syntax YAML
-  artifact for an invented public rule-pack demonstration.
-- Added `docs/_Examples/rule_pack_notice.md` with professional-boundary,
-  protected-content, provenance, and reliance warnings.
-- Used only original invented labels and values, with no protected standards
-  text, copied formulas, material allowables, SIF/flexibility data, owner/vendor
-  data, private rule packs, or realistic code criteria.
-- Added deliverable `MEMORY.md` with implementation notes, verification, and
-  open items.
-- No lifecycle transition, implementation-evidence update, dependency-register
-  edit, blocker-queue refresh, `DAG-001` change, or candidate-edge promotion
-  was performed.
+- Committed the bounded implementation as
+  `73506b7 docs: add invented rule pack example`.
+- Updated `DEL-06-05` lifecycle from `SEMANTIC_READY` to `CHECKING`.
+- Annotated the `DEL-06-05` local dependency mirror for satisfied
+  non-architecture upstreams `DEL-06-01`, `DEL-06-02`, `DEL-01-02`, and
+  `DEL-01-04`.
+- Recorded `DEL-06-05` as `COMMITTED` implementation evidence in
+  `DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- Refreshed `DEV-001_BLOCKER_QUEUE.*`; queue remained 53 unblocked / 20
+  blocked.
+- `DEL-06-05` no longer appears as a missing upstream blocker; `DEL-11-04`
+  remains blocked by `DEL-09-01`, `DEL-09-02`, and `DEL-08-05`.
+- `DAG-001` has been validated and left unchanged; candidate edges remain
+  non-gating.
 
 Verification:
 
-- `python3 -m json.tool examples/rule_packs/invented_demo.yaml` passed.
-- A focused stdlib schema-surface assertion passed for required top-level
-  fields, invented classification, professional-boundary booleans, and
-  non-executable formula declarations.
-- Focused protected-content/prohibited-claim scan found only explicit
-  guardrail/exclusion wording and no protected data.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-06_Rule Packs and User-Supplied Code Check Engine/1_Working/DEL-06-05_Invented non-code example rule pack/Dependencies.csv"`
+  passed.
+- `python3 tools/coordination/build_dev001_blocker_queue.py` passed:
+  unblocked=53, blocked=20, active_edges=615, candidate_edges_excluded=9.
+- `python3 -m pytest tools/coordination` passed: 10 tests.
+- `python3 tools/validation/validate_dependencies_schema.py
+  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
+- `python3 tools/coordination/audit_dag.py --strict --dag-dir
+  execution/_DAG/DAG-001` passed.
 - `git diff --check` passed.
 
 Remaining open items:
@@ -286,14 +301,12 @@ Remaining open items:
 Immediate next action:
 
 1. Human project authority may route `CHANGE` for file-state handling and
-   commit implementation artifacts; authorize lifecycle/evidence/local
-   dependency/queue closeout for exactly `DEL-06-05`; route review; authorize a
-   different bounded DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle
-   artifacts; or pause.
+   commit alignment artifacts; route review; authorize exactly one next bounded
+   DAG item; route `RECONCILIATION`; route `AUDIT_*`; handle artifacts; or
+   pause.
 
-Do not start broad DAG execution. Lifecycle transition, implementation evidence
-registration, dependency-register alignment, and blocker-queue refresh are not
-currently authorized by this implementation pass.
+Do not start broad DAG execution. No additional DAG item is currently
+authorized by this alignment pass.
 
 ## Guardrails
 

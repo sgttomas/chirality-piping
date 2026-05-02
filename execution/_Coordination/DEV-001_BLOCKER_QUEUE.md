@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 29 |
-| Committed implementation evidence | 29 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 67 |
+| Implementation evidence records | 30 |
+| Committed implementation evidence | 30 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 66 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 53 |
 | Implementation `BLOCKED` deliverables | 20 |
@@ -106,7 +106,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-02` | `PKG-06` | `COMMITTED` `7490f67` | 9 | Sandboxed unit-aware expression evaluator |
 | `DEL-06-03` | `PKG-06` | `MISSING_EVIDENCE` | 10 | Required-input completeness checker |
 | `DEL-06-04` | `PKG-06` | `MISSING_EVIDENCE` | 9 | Private rule-pack lifecycle and checksum handling |
-| `DEL-06-05` | `PKG-06` | `MISSING_EVIDENCE` | 11 | Invented non-code example rule pack |
+| `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
 | `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
@@ -126,7 +126,6 @@ These deliverables have no active upstream implementation dependency below the `
 |---|---|---|---:|---|---|
 | `DEL-06-03` - Required-input completeness checker | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-07-04` | `DAG-001-E0497` |
 | `DEL-06-04` - Private rule-pack lifecycle and checksum handling | `PKG-06` | `MISSING_EVIDENCE` | 5 | `DEL-07-03`; `DEL-08-01`; `DEL-08-02`; `DEL-12-02`; `DEL-12-04` | `DAG-001-E0493`; `DAG-001-E0513`; `DAG-001-E0525`; `DAG-001-E0609`; `DAG-001-E0614` |
-| `DEL-06-05` - Invented non-code example rule pack | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-11-04` | `DAG-001-E0590` |
 | `DEL-07-01` - 3D viewport and centerline editor | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0506`; `DAG-001-E0575` |
 | `DEL-07-02` - Model tree and property inspector | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0507` |
 | `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0508`; `DAG-001-E0576` |
@@ -166,7 +165,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
 | `DEL-11-02` | `PKG-11` | 1 | `DEL-10-01` | Developer guide for solver and rule packs |
 | `DEL-11-03` | `PKG-11` | 1 | `DEL-09-01` | Theory notes: classical to modern centerline analysis |
-| `DEL-11-04` | `PKG-11` | 4 | `DEL-06-05`; `DEL-09-01`; `DEL-09-02`; `DEL-08-05` | Invented educational example models |
+| `DEL-11-04` | `PKG-11` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-08-05` | Invented educational example models |
 | `DEL-12-01` | `PKG-12` | 1 | `DEL-12-05` | Local-first storage and private data paths |
 | `DEL-12-02` | `PKG-12` | 5 | `DEL-12-05`; `DEL-12-01`; `DEL-08-01`; `DEL-08-04`; `DEL-06-04` | Private data redaction and export controls |
 | `DEL-12-03` | `PKG-12` | 1 | `DEL-12-05` | Telemetry off-by-default design |
