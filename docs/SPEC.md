@@ -621,6 +621,36 @@ any code-compliance, certification, sealing, approval, authentication, or
 professional-reliance equivalent as an automatic status. Any human acceptance
 record is external, human-actor-owned, and bound to reviewed payload hashes.
 
+The warnings, assumptions, and provenance report-section surface is represented
+by `schemas/report_sections.schema.yaml` and the bounded
+`core/reporting/report_sections` crate. It defines schema-first records for
+report-facing diagnostics, analysis-status disclosures, provenance notes,
+user-supplied values, assumptions, limitations, unresolved TBDs, and
+human-review-needed findings. It does not implement the full report renderer,
+final report template layout, GUI presentation, CLI runtime, API transport,
+adapter behavior, private redaction/export controls, or release-template
+integration; those remain `TBD` unless authorized by later deliverables.
+
+Report-section records must preserve structured diagnostic fields from solver,
+rule, provenance, unit, nonlinear, IP-boundary, and report checks. Numeric
+user-supplied values required for mechanics solving or user-rule checking must
+carry finite magnitude, unit, and dimension metadata. Provenance notes must
+carry source, license, contributor certification, redistribution status, review
+status, and privacy classification. Assumptions and limitations must identify
+owner/source, affected scope, review status where applicable, and downstream
+effect on mechanics solve, user-rule check, report completeness, and human
+review. Missing required data remains an explicit finding and is never treated
+as an accepted default.
+
+Report sections may reference private rule packs, material libraries, component
+libraries, owner requirements, and project values by identifier, checksum,
+source note, privacy class, and review state, but public artifacts must not
+copy private formulas, protected standards text, protected tables, proprietary
+engineering values, private project data, private rule-pack payloads, or real
+secrets. Report sections preserve the professional boundary: software output is
+decision support and must not declare code compliance, certification, sealing,
+approval, authentication, endorsement, or professional reliance.
+
 The result export format is represented by `schemas/results.schema.yaml` and
 the bounded `core/reporting/result_export` crate. The baseline is a
 schema-first JSON result envelope for review, regression comparison, report

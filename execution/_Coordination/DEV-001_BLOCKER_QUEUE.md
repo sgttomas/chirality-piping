@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 43 |
+| Implementation evidence records | 44 |
 | Committed implementation evidence | 43 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 30 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 29 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 64 |
 | Implementation `BLOCKED` deliverables | 9 |
@@ -114,7 +114,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
 | `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
 | `DEL-08-02` | `PKG-08` | `COMMITTED` `061f1af` | 9 | Audit manifest and model hash |
-| `DEL-08-03` | `PKG-08` | `MISSING_EVIDENCE` | 11 | Warnings, assumptions, and provenance report section |
+| `DEL-08-03` | `PKG-08` | `WORKING_TREE` | 11 | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | `COMMITTED` `3e33ea4` | 11 | Result export format |
 | `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
@@ -142,7 +142,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-001-E0510`; `DAG-001-E0577` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-001-E0511` |
 | `DEL-08-01` - Calculation report generator | `PKG-08` | `MISSING_EVIDENCE` | 3 | `DEL-08-05`; `DEL-11-01`; `DEL-12-02` | `DAG-001-E0529`; `DAG-001-E0578`; `DAG-001-E0612` |
-| `DEL-08-03` - Warnings, assumptions, and provenance report section | `PKG-08` | `MISSING_EVIDENCE` | 1 | `DEL-08-01` | `DAG-001-E0527` |
+| `DEL-08-03` - Warnings, assumptions, and provenance report section | `PKG-08` | `WORKING_TREE` | 1 | `DEL-08-01` | `DAG-001-E0527` |
 | `DEL-08-05` - Report protected-content linter | `PKG-08` | `MISSING_EVIDENCE` | 3 | `DEL-09-05`; `DEL-10-04`; `DEL-11-04` | `DAG-001-E0550`; `DAG-001-E0573`; `DAG-001-E0593` |
 | `DEL-09-03` - Nonlinear support regression suite | `PKG-09` | `MISSING_EVIDENCE` | 2 | `DEL-09-04`; `DEL-09-05` | `DAG-001-E0545`; `DAG-001-E0549` |
 | `DEL-09-05` - Release quality gate checklist | `PKG-09` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-001-E0571` |
