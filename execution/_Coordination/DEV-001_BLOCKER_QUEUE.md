@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 38 |
-| Committed implementation evidence | 38 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 35 |
+| Implementation evidence records | 39 |
+| Committed implementation evidence | 39 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 34 |
 | PKG-00 architecture-basis edges satisfied | 388 |
-| Implementation `UNBLOCKED` deliverables | 58 |
-| Implementation `BLOCKED` deliverables | 15 |
+| Implementation `UNBLOCKED` deliverables | 60 |
+| Implementation `BLOCKED` deliverables | 13 |
 
 ## Package Summary
 
@@ -53,12 +53,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-04` | 6 | 0 |
 | `PKG-05` | 5 | 0 |
 | `PKG-06` | 5 | 0 |
-| `PKG-07` | 5 | 2 |
+| `PKG-07` | 6 | 1 |
 | `PKG-08` | 3 | 2 |
 | `PKG-09` | 3 | 2 |
 | `PKG-10` | 1 | 4 |
 | `PKG-11` | 2 | 3 |
-| `PKG-12` | 3 | 2 |
+| `PKG-12` | 4 | 1 |
 
 ## Unblocked DAG-Ready Items
 
@@ -109,6 +109,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
+| `DEL-07-03` | `PKG-07` | `MISSING_EVIDENCE` | 13 | Material, component, and rule-pack editors |
 | `DEL-07-04` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Missing-data warning and blocking UX |
 | `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
 | `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
@@ -121,8 +122,9 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-10-01` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Public API and plugin boundary |
 | `DEL-11-03` | `PKG-11` | `MISSING_EVIDENCE` | 9 | Theory notes: classical to modern centerline analysis |
 | `DEL-11-05` | `PKG-11` | `MISSING_EVIDENCE` | 8 | Contributor tutorial and onboarding |
-| `DEL-12-01` | `PKG-12` | `MISSING_EVIDENCE` | 10 | Local-first storage and private data paths |
+| `DEL-12-01` | `PKG-12` | `COMMITTED` `84e0a73` | 10 | Local-first storage and private data paths |
 | `DEL-12-03` | `PKG-12` | `COMMITTED` `7834b97` | 9 | Telemetry off-by-default design |
+| `DEL-12-04` | `PKG-12` | `MISSING_EVIDENCE` | 11 | Secret and private-library handling |
 | `DEL-12-05` | `PKG-12` | `COMMITTED` `b97121d` | 10 | Security threat model |
 
 ## Blocked Items Grouped By Missing Upstream
@@ -143,27 +145,24 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-09-05` - Release quality gate checklist | `PKG-09` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-001-E0571` |
 | `DEL-10-01` - Public API and plugin boundary | `PKG-10` | `MISSING_EVIDENCE` | 4 | `DEL-10-02`; `DEL-10-03`; `DEL-10-05`; `DEL-11-02` | `DAG-001-E0556`; `DAG-001-E0561`; `DAG-001-E0565`; `DAG-001-E0584` |
 | `DEL-10-05` - Headless CLI and structured I/O analysis runner | `PKG-10` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-001-E0572` |
-| `DEL-12-01` - Local-first storage and private data paths | `PKG-12` | `MISSING_EVIDENCE` | 4 | `DEL-07-03`; `DEL-10-02`; `DEL-12-02`; `DEL-12-04` | `DAG-001-E0494`; `DAG-001-E0559`; `DAG-001-E0607`; `DAG-001-E0611` |
 
 ## Per-Deliverable Blocked Items
 
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
-| `DEL-07-03` | `PKG-07` | 1 | `DEL-12-01` | Material, component, and rule-pack editors |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
 | `DEL-08-01` | `PKG-08` | 1 | `DEL-08-03` | Calculation report generator |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
 | `DEL-09-04` | `PKG-09` | 1 | `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 2 | `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |
-| `DEL-10-02` | `PKG-10` | 2 | `DEL-10-01`; `DEL-12-01` | Import/export adapter framework |
+| `DEL-10-02` | `PKG-10` | 1 | `DEL-10-01` | Import/export adapter framework |
 | `DEL-10-03` | `PKG-10` | 1 | `DEL-10-01` | Local FEA handoff data contract |
 | `DEL-10-04` | `PKG-10` | 3 | `DEL-09-05`; `DEL-10-05`; `DEL-08-05` | Build, packaging, and CI/CD pipeline |
 | `DEL-10-05` | `PKG-10` | 2 | `DEL-10-01`; `DEL-08-04` | Headless CLI and structured I/O analysis runner |
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
 | `DEL-11-02` | `PKG-11` | 1 | `DEL-10-01` | Developer guide for solver and rule packs |
 | `DEL-11-04` | `PKG-11` | 1 | `DEL-08-05` | Invented educational example models |
-| `DEL-12-02` | `PKG-12` | 3 | `DEL-12-01`; `DEL-08-01`; `DEL-08-04` | Private data redaction and export controls |
-| `DEL-12-04` | `PKG-12` | 1 | `DEL-12-01` | Secret and private-library handling |
+| `DEL-12-02` | `PKG-12` | 2 | `DEL-08-01`; `DEL-08-04` | Private data redaction and export controls |
 
 ## Candidate Edges Excluded
 
