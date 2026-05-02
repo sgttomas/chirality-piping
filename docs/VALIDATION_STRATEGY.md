@@ -38,6 +38,14 @@ transform. The fixtures use original invented values and keep final release
 tolerances, CI gates, and professional reliance policy as `TBD` until human
 approval.
 
+The initial stress recovery benchmark suite for `DEL-09-02` lives under
+`validation/benchmarks/stress/` with hand-calculation notes under
+`validation/hand_calcs/stress/`. Its required fixture families are axial
+normal stress, bending normal stress, torsional shear stress, pressure membrane
+stress, and mechanics-only stress range. The fixtures use original invented
+values and keep final release tolerances, CI gates, fatigue/allowable
+criteria, and professional reliance policy as `TBD` until human approval.
+
 ## 3. Validation manual structure
 
 The validation manual shall include:
@@ -74,3 +82,9 @@ Each public mechanics benchmark fixture must record source/provenance,
 redistribution status, contributor or generator note, assumptions, units,
 expected result fields, and review disposition before it is treated as accepted
 public validation evidence.
+
+Each public stress recovery benchmark fixture must follow the same provenance
+rule and must remain limited to open mechanics component comparisons. Stress
+range fixtures are mechanics differences between result states; they are not
+fatigue checks, allowable comparisons, code compliance checks, or professional
+approval records.

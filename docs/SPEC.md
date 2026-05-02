@@ -458,6 +458,15 @@ professional/code-compliance claims.
 
 Stress recovery shall calculate open mechanics quantities such as axial stress, bending stress, torsional shear stress, pressure membrane stresses, and resultants. Code-category equations are rule-pack mappings.
 
+The stress recovery benchmark suite is `validation/benchmarks/stress`. It
+contains original invented verification fixtures and hand-calculation notes for
+axial normal stress, bending normal stress, torsional shear stress, pressure
+membrane stress, and mechanics-only stress range behavior. The suite compares
+outputs from the governed stress-recovery API without changing production
+stress-recovery behavior and without introducing code-specific stress
+equations, allowables, protected standards content, or professional/compliance
+claims.
+
 ## 7. Rule-pack evaluator
 
 Rule packs are private or user-owned design-basis artifacts. The public project ships schemas and invented examples only.
