@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-08-04 post-commit evidence promotion` |
-| Latest state commit | Implementation/alignment `3e33ea4`; evidence promotion pending commit |
+| Latest state commit | Implementation/alignment `3e33ea4`; evidence promotion `52384f0` |
 | Previous completed task archive status | `DEL-08-04 lifecycle/evidence/queue alignment` archived with implementation/alignment `3e33ea4` |
 | Current authorized item | `DEL-08-04` evidence promoted to `COMMITTED` and queue refreshed; aspect complete |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-04.md` |
@@ -315,8 +315,9 @@ Implementation and lifecycle/evidence/queue alignment were committed as:
 
 - `3e33ea4 schema: add result export contract`
 
-Post-commit evidence promotion is staged in the working tree and ready to
-commit.
+Post-commit evidence promotion was committed as:
+
+- `52384f0 coordination: record del-08-04 committed evidence`
 
 Files changed in this task:
 
@@ -367,16 +368,14 @@ Verification:
 
 Remaining open items:
 
-- Commit the post-commit evidence promotion.
-- No remaining closeout item for this aspect after that commit.
+- No remaining closeout item for this aspect.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Commit the post-commit evidence promotion, then await the next human gate:
-   authorize a bounded DAG item, route reconciliation/change/audit, handle
-   artifacts, or pause.
+1. Await the next human gate: authorize a bounded DAG item, route
+   reconciliation/change/audit, handle artifacts, or pause.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
