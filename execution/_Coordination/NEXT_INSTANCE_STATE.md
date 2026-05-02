@@ -24,7 +24,7 @@
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `DEL-05-03 lifecycle/evidence/queue/DAG/dependency-register alignment` |
-| Latest state commit | Implementation commit `26dc805`; evidence/queue/state pending commit in this change set |
+| Latest state commit | Implementation commit `26dc805`; evidence/queue/state commit `4a1fbb4` |
 | Previous completed task archive status | `DEL-05-03 implementation` moved into the compact task archive table |
 | Current authorized item | Lifecycle/evidence/queue/DAG/dependency-register alignment after implementation verification |
 | Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-03.md` |
@@ -266,7 +266,6 @@ Verification:
 
 Remaining open items:
 
-- Evidence/queue/state alignment is pending commit in this change set.
 - Canonical calculation unit basis, conversion constants, final result-envelope
   integration, concrete application-service API, persistence representation,
   code/rule stress equations, SIF/flexibility usage, production tolerance
