@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** ORCHESTRATOR DEL-08-01 post-commit evidence promotion
+**Actor:** WORKING_ITEMS DEL-08-05 implementation from sealed dispatch brief
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-08-01` implementation committed; evidence promoted to `COMMITTED` and blocker queue refreshed
+**Current Mode:** `DEL-08-05` implemented in working tree from sealed dispatch brief; lifecycle/evidence/queue closeout not yet authorized
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-08-01 post-commit evidence promotion` |
-| Latest state commit | Implementation/closeout `9e21716`; promotion metadata `074de21` |
-| Previous completed task archive status | `DEL-08-01 implementation lifecycle/evidence/queue closeout` archived in compact history |
-| Current authorized item | `DEL-08-01` evidence promoted to `COMMITTED`; queue refreshed |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md` |
+| Latest state task | `DEL-08-05 implementation from sealed dispatch brief` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-08-05 candidate edge reconciliation and dispatch brief preparation` archived in compact history |
+| Current authorized item | `DEL-08-05` implementation only from sealed dispatch brief |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-05.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -300,6 +300,8 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-01` sealed dispatch brief preparation | Completed; not committed | `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check` passed; brief prepared from `DAG-001`, registers, applicable architecture-basis rows, local context, blocker queue, and committed upstream evidence | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-01` implementation from sealed dispatch brief | Completed in working tree; not committed | `schemas/report_generator.schema.yaml`, `core/reporting/report_generator/`, `fixtures/reports/invented/`, `tests/test_report_generator_contract.py`, docs, deliverable `MEMORY.md`, dispatch/state | Report-generator schema script, report-generator rustfmt/tests, report-section schema, result schema, analysis-status schema, persistence schema, rule-pack schema, `git diff --check`, and focused scans passed | Lifecycle/evidence/queue closeout was separately authorized after implementation. |
 | `DEL-08-01` implementation lifecycle/evidence/queue closeout | Completed; implementation/closeout `9e21716` | Report-generator implementation files, `DEL-08-01` local dependency mirror and `_STATUS.md`, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, dispatch/state/memory | Report-generator tests, dependency schema validation, DAG audit, coordination tests, queue rebuild, `git diff --check`, and focused scans passed; queue initially remained 65 unblocked / 8 blocked because evidence was `WORKING_TREE` before commit | Post-commit evidence promotion was required to unblock downstream consumers. |
+| `DEL-08-01` post-commit evidence promotion | Completed; implementation/closeout `9e21716`; promotion metadata `074de21` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-08-01.md`, `NEXT_INSTANCE_STATE.md` | Report-generator contract tests, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 67 unblocked / 6 blocked | `DEL-08-05` and `DEL-12-02` newly implementation-unblocked; no next product deliverable was authorized by the promotion itself. |
+| `DEL-08-05` candidate reconciliation and sealed dispatch brief preparation | Completed; not committed | `Reconciliation_Run_Summary_2026-05-02_DEL0805_CANDIDATE_E0621.md`, `DEV-001_DISPATCH_DEL-08-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`, aggregate dependency schema validation, and DAG audit passed; `DAG-001-E0621` retained as non-gating candidate | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -322,106 +324,107 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-08-01 Post-Commit Evidence Promotion
+## Latest State - DEL-08-05 Implementation From Sealed Dispatch Brief
 
-Human project authority authorized lifecycle/evidence/queue closeout, staging,
-and commit for the implemented `DEL-08-01` work:
+Human project authority authorized implementation from the sealed
+`DEL-08-05 - Report protected-content linter` dispatch brief:
 
-- "perform lifecycle transition, dependency-register edits, evidence
-  registration, blocker queue refresh, staging, and commit"
+- "proceed with implementation"
 
 Files changed in this task:
 
-- `schemas/report_generator.schema.yaml`
-- `core/reporting/report_generator/.gitignore`
-- `core/reporting/report_generator/Cargo.toml`
-- `core/reporting/report_generator/src/lib.rs`
-- `fixtures/reports/invented/calculation_report_fixture.json`
-- `tests/test_report_generator_contract.py`
+- `schemas/report_protected_content_linter.schema.yaml`
+- `core/reporting/protected_content_linter/.gitignore`
+- `core/reporting/protected_content_linter/Cargo.toml`
+- `core/reporting/protected_content_linter/src/lib.rs`
+- `fixtures/report_lint/invented/lint_run_fixture.json`
+- `fixtures/report_lint/invented/safe_metadata_template.txt`
+- `fixtures/report_lint/invented/synthetic_risk_template.txt`
+- `tests/test_report_protected_content_linter.py`
 - `docs/SPEC.md`
 - `docs/TYPES.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/MEMORY.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/_STATUS.md`
-- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-01_Calculation report generator/Dependencies.csv`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-01.md`
+- `execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-05_Report protected-content linter/MEMORY.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-08-05.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
 Implementation summary:
 
-- Added `schemas/report_generator.schema.yaml` as a strict-JSON JSON Schema
-  2020-12 contract for calculation-report assembly.
-- Added `core/reporting/report_generator/` as a bounded Rust support crate for
-  in-memory report validation, template-slot validation, and deterministic
-  neutral section ordering.
-- Added invented, non-engineering report fixture data under
-  `fixtures/reports/invented/`.
-- Added `tests/test_report_generator_contract.py` for deterministic schema and
-  fixture checks.
+- Added `schemas/report_protected_content_linter.schema.yaml` as a strict-JSON
+  JSON Schema 2020-12 contract for deterministic protected-content linter
+  configuration, public-surface targets, findings, source locations, review
+  routes, dispositions, summaries, and provenance.
+- Added `core/reporting/protected_content_linter/` as a bounded,
+  dependency-free Rust support crate for caller-supplied public-surface text
+  scanning and deterministic finding generation.
+- Added invented/synthetic linter fixtures under `fixtures/report_lint/invented/`.
+- Added `tests/test_report_protected_content_linter.py` for deterministic
+  schema/fixture checks.
 - Updated focused `docs/SPEC.md` and `docs/TYPES.md` sections only for the
-  report-generator boundary.
+  linter boundary.
 - Added deliverable `MEMORY.md`.
 - Updated the dispatch brief with implementation and verification summaries.
-- Set `DEL-08-01` lifecycle display state to `CHECKING`.
-- Annotated local dependency mirror rows `DAG-001-E0522` through
-  `DAG-001-E0528` as `SATISFIED` from committed upstream evidence.
-- Added `DEL-08-01` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
+- Set `DEL-08-05` lifecycle display state to `CHECKING`.
+- Annotated local dependency mirror rows `DAG-001-E0529` through
+  `DAG-001-E0531` as `SATISFIED` from committed upstream evidence.
+- Added `DEL-08-05` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
   `WORKING_TREE` evidence before commit.
-- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 65 unblocked / 8 blocked
-  because `DEL-08-01` evidence was not yet commit-backed.
-- `DEL-08-01` implementation and closeout alignment were committed as
-  `9e21716 schema: add calculation report generator contract`.
-- Promoted `DEL-08-01` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
-  `WORKING_TREE` to `COMMITTED` evidence for commit `9e21716`.
-- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue changed to 67 unblocked / 6
-  blocked. `DEL-08-05` and `DEL-12-02` are newly implementation-unblocked.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 67 unblocked / 6 blocked
+  because `DEL-08-05` evidence was not yet commit-backed.
 
 Verification:
 
-- `python3 tests/test_report_generator_contract.py` passed.
-- `cargo fmt --manifest-path core/reporting/report_generator/Cargo.toml -- --check`
+- `python3 tests/test_report_protected_content_linter.py` passed.
+- `cargo fmt --manifest-path core/reporting/protected_content_linter/Cargo.toml -- --check`
   passed.
-- `cargo test --manifest-path core/reporting/report_generator/Cargo.toml` passed
-  with 5 unit tests.
+- `cargo test --manifest-path core/reporting/protected_content_linter/Cargo.toml`
+  passed with 4 unit tests.
+- `python3 tests/test_report_generator_contract.py` passed.
 - `python3 tests/test_report_sections_contract.py` passed.
 - `python3 tests/test_results_schema.py` passed.
 - `python3 tests/test_analysis_status_schema.py` passed.
-- `python3 tests/test_persistence_schema.py` passed.
-- `python3 tests/test_rule_pack_schema.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed before commit: 65 unblocked / 8 blocked.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed after evidence promotion: 67 unblocked / 6 blocked.
+  2026-05-02` passed before commit: 67 unblocked / 6 blocked.
+- `python3 tools/validation/validate_dependencies_schema.py
+  "execution/PKG-08_Reporting, Audit, and Reproducibility/1_Working/DEL-08-05_Report protected-content linter/Dependencies.csv"`
+  passed.
+- `python3 tools/validation/validate_dependencies_schema.py
+  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
+- `python3 tools/coordination/audit_dag.py --strict --edges
+  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
 - `git diff --check` passed.
 - Focused protected-content/private-secret/prohibited-claim scan was reviewed;
-  matches were guardrail/prohibition terms in docs, tests, schema, memory, and
-  the dispatch brief, not protected data, private secrets, concrete runtime
-  redaction/linter commitments, or positive compliance/professional/security
-  claims.
+  matches were guardrail/prohibition terms in docs, schema, memory, dispatch,
+  state, and synthetic linter pattern lists/tests, not protected data, private
+  secrets, or positive legal/professional/security/code-compliance claims.
 
 Guardrail results:
 
 - Product implementation stayed inside the sealed write scope.
+- `DAG-001-E0621` remains `CANDIDATE` and non-gating; the implementation uses
+  invented/synthetic linter fixtures and does not depend on actual `DEL-11-04`
+  educational example models.
 - Lifecycle, local dependency mirror, evidence register, and blocker queue
   changes were limited to the authorized closeout surfaces.
-- No aggregate `DAG-001` change, candidate-edge promotion, protected standards
-  data, private data, real secret, GUI/report-preview/CLI/API/adapter runtime
-  behavior, redaction/export control implementation, protected-content linter
-  implementation, or professional/code-compliance claim occurred during
-  closeout.
+- No aggregate `DAG-001` change, candidate-edge promotion, staging, or commit
+  occurred yet.
+- No protected standards/code data, proprietary engineering value, private
+  project data, private rule-pack payload, private library content, real secret,
+  legal sufficiency claim, security sufficiency claim, professional/code-
+  compliance claim, CI/release workflow implementation, redaction/export
+  control implementation, or educational example model implementation occurred.
 
 Remaining open items:
 
-- No remaining closeout item for `DEL-08-01` post-commit evidence promotion.
+- Commit-backed evidence promotion is required after the implementation/
+  closeout commit exists.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize one bounded DAG item, route
-   reconciliation/audit, handle artifacts, or pause.
+1. Stage and commit the `DEL-08-05` implementation/closeout state, then promote
+   `DEL-08-05` implementation evidence from `WORKING_TREE` to `COMMITTED` with
+   the actual commit hash and rebuild the blocker queue.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.

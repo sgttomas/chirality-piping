@@ -694,6 +694,28 @@ standards text, protected tables, protected examples, proprietary formulas,
 proprietary engineering values, private project data, private rule-pack
 payloads, private library content, or real secrets.
 
+The report protected-content linter is represented by
+`schemas/report_protected_content_linter.schema.yaml` and the bounded
+`core/reporting/protected_content_linter` crate. It records deterministic
+heuristic findings over explicitly configured public report-template,
+public-report-example, and public-fixture surfaces. The implementation uses
+invented synthetic markers for fixtures and never requires protected examples
+or `DEL-11-04` educational example models. It does not scan private user
+templates by default, move files into quarantine, implement redaction/export
+controls, choose CI or release policy, access host resources, or provide legal
+clearance, security sufficiency, professional approval, certification, sealing,
+endorsement, authentication, or code-compliance proof.
+
+Protected-content linter findings must preserve target identity, path, line,
+column, finding code, class, severity, matched policy, excerpt, remediation,
+review route, disposition, and provenance. Clean linter output is review
+evidence only and is not legal or professional clearance. Public-safe report
+metadata such as rule-pack identity, version, checksum, source notice,
+redistribution status, review state, provenance summary, diagnostics, and
+professional-boundary notices may be present when they do not embed private
+formulas, protected content, proprietary values, private project data, private
+rule-pack payloads, private library content, or real secrets.
+
 The headless runner contract is represented by
 `schemas/headless_runner.schema.yaml` and the bounded
 `core/runner/headless` crate. The baseline is a schema-first request/result

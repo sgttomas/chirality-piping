@@ -51,7 +51,7 @@ DEL-08-01,PKG-08,Calculation report generator,CHECKING,COMMITTED,9e21716,14,14,0
 DEL-08-02,PKG-08,Audit manifest and model hash,CHECKING,COMMITTED,061f1af,9,9,0,UNBLOCKED,,
 DEL-08-03,PKG-08,"Warnings, assumptions, and provenance report section",CHECKING,COMMITTED,50f947a,11,11,0,UNBLOCKED,,
 DEL-08-04,PKG-08,Result export format,CHECKING,COMMITTED,3e33ea4,11,11,0,UNBLOCKED,,
-DEL-08-05,PKG-08,Report protected-content linter,SEMANTIC_READY,MISSING_EVIDENCE,,10,10,0,UNBLOCKED,,
+DEL-08-05,PKG-08,Report protected-content linter,CHECKING,WORKING_TREE,WORKING_TREE,10,10,0,UNBLOCKED,,
 DEL-09-01,PKG-09,Mechanics benchmark suite,CHECKING,COMMITTED,b34ecd6,9,9,0,UNBLOCKED,,
 DEL-09-02,PKG-09,Stress recovery benchmark suite,CHECKING,COMMITTED,bf1dc20,8,8,0,UNBLOCKED,,
 DEL-09-03,PKG-09,Nonlinear support regression suite,SEMANTIC_READY,MISSING_EVIDENCE,,6,6,0,UNBLOCKED,,
