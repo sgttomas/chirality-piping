@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-DISPATCH-DEL-06-02
 doc_kind: coordination.dispatch_brief
-status: implemented_awaiting_lifecycle_evidence_gate
+status: implemented_lifecycle_evidence_queue_refreshed
 created: 2026-05-02
 prepared_by: ORCHESTRATOR
 active_plan: plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md
@@ -30,7 +30,8 @@ broad DAG execution.
 The human project authority later authorized implementation from this sealed
 brief. Implementation has been completed within the bounded write scope.
 Lifecycle transition, implementation evidence registration, dependency-register
-alignment, blocker-queue refresh, and commit remain separate gated actions.
+alignment, blocker-queue refresh, and commit have now been completed after
+verification. `DAG-001` was validated and left unchanged.
 
 The eventual implementation scope should be deliberately constrained to a
 sandboxed, deterministic, unit-aware evaluator for declarative rule-pack
@@ -200,11 +201,15 @@ Verification performed:
 
 Lifecycle/evidence/queue closeout:
 
-- No lifecycle transition was performed.
-- No deliverable-local `Dependencies.csv` edit was performed.
-- No `DEV-001_IMPLEMENTATION_EVIDENCE.csv` update was performed.
-- No `DEV-001_BLOCKER_QUEUE.*` refresh was performed.
-- Aggregate `DAG-001` was left unchanged.
+- Implementation commit: `7490f67 core: add rule expression evaluator`.
+- `DEL-06-02` lifecycle moved to `CHECKING`.
+- `DEL-06-02` local dependency mirror rows `DAG-001-E0467` and
+  `DAG-001-E0468` record satisfied upstreams `DEL-06-01` and `DEL-02-02`.
+- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-06-02` as `COMMITTED`.
+- `DEV-001_BLOCKER_QUEUE.*` was refreshed from approved active `DAG-001` edges
+  and committed evidence; queue changed to 53 unblocked / 20 blocked.
+- `DEL-06-05` is newly unblocked by committed `DEL-06-02` evidence.
+- Aggregate `DAG-001` was validated and left unchanged.
 
 ## Dispatch Task Shape
 
