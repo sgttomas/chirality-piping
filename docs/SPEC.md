@@ -483,7 +483,22 @@ packs, define private storage, choose the checksum library, or integrate final
 result envelopes. Those details remain `TBD` until assigned to later
 deliverables.
 
-The evaluator must be sandboxed, unit-aware, deterministic, and incapable of arbitrary code execution.
+`core/rules/expression_evaluator` implements the first bounded evaluator
+surface. It evaluates explicit expression trees only; it does not parse
+arbitrary text or use host-language `eval`. The supported surface is deliberately
+small: numeric literals, declared variable references, unary negation, basic
+arithmetic, and same-dimension comparisons. Multiplication and division are
+limited to dimensionless scaling or same-dimension ratios until derived
+dimension policy, quantity representation, and tolerance decisions are accepted.
+
+The evaluator reports deterministic findings for unsafe host-access requests,
+unsupported expression forms, missing or duplicate bindings, invalid
+references, missing required values, non-finite inputs, division by zero,
+dimension mismatches, type mismatches, and human-approval status boundary
+violations. It preserves the separation among mechanics solved, rule inputs
+incomplete, user-rule checked, user-rule failed, and human review required. It
+does not emit certification, sealing, authentication, human approval, or
+code-compliance statuses.
 
 ## 8. GUI requirements
 
