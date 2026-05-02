@@ -1,9 +1,9 @@
 # NEXT INSTANCE STATE
 
 **Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS lifecycle alignment audit
+**Actor:** ORCHESTRATOR dispatch brief preparation
 **Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** committed-evidence lifecycle states aligned to CHECKING; blocker queue refreshed
+**Current Mode:** sealed dispatch brief prepared for `DEL-09-01`; awaiting human implementation gate
 
 ## Active Control State
 
@@ -23,11 +23,11 @@
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-05-05 implementation closeout` |
-| Latest state commit | `af4f885 coordination: record del-05-05 handoff commit` |
-| Previous completed task archive status | `DEL-05-05 sealed dispatch brief preparation` superseded by same-turn implementation and closeout |
-| Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite requires fresh sealed brief before implementation |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-05-05.md` |
+| Latest state task | `DEL-09-01 sealed dispatch brief preparation` |
+| Latest state commit | Not committed; working tree state only |
+| Previous completed task archive status | `DEL-05-05 implementation closeout` archived in compact completed history |
+| Current authorized item | Ordered tranche item 2: `DEL-09-01` mechanics benchmark suite has sealed brief prepared; implementation still requires human approval |
+| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md` |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -232,6 +232,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-06-03` implementation and lifecycle/local alignment | Completed; implementation/alignment `c075522`; evidence/queue `67cd25c` | `core/rules/completeness_checker/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Completeness-checker, expression-evaluator, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue changed to 55 unblocked / 18 blocked | `DEL-07-04` newly unblocked; schema adapter, unit conversion, GUI/report/API/result-envelope integration, and private storage/redaction remain downstream work. |
 | `DEL-08-02` implementation and lifecycle/evidence/queue alignment | Completed; implementation/alignment `061f1af`; evidence/queue `4cf5bf9`; handoff `caf6220` | `core/reporting/audit_manifest/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | Audit-manifest, rule-pack lifecycle, persistence schema, rule-pack schema, analysis-status schema, dependency schema, coordination, and DAG audit checks passed; queue remained 55 unblocked / 18 blocked | `DEL-08-01` now only waits on `DEL-08-03`; `DEL-10-05` now waits on `DEL-10-01` and `DEL-08-04`; project container, persistence adapter, report/API/CLI integration, and private storage/redaction remain downstream work. |
 | `Committed-evidence lifecycle alignment audit` | Completed; `1d8d9a5 coordination: align committed lifecycle states` | 23 deliverable `_STATUS.md` files, `DEV-001_BLOCKER_QUEUE.*`, `NEXT_INSTANCE_STATE.md` | Rebuilt blocker queue at 55 unblocked / 18 blocked; dependency schema, DAG audit, local dependency-register validation, lifecycle count check, committed-evidence check, and `git diff --check` passed | Lifecycle display/state only; no item was promoted to `ISSUED`, no DAG/candidate/dependency ordering changed, and no product deliverable was authorized by the pass. |
+| `DEL-05-05` implementation closeout | Completed; implementation `3cfcfd2`; evidence/queue `1007993`; handoff `af4f885`; state correction `c46b41a` | `core/loads/user_loads/`, docs, deliverable `MEMORY.md`, local dependency mirror, `_STATUS.md`, dispatch/state/evidence/queue | User-load, primitive-load, load-case algebra, and frame-kernel cargo tests passed; coordination tests, dependency schema validation, DAG audit, `git diff --check`, and focused protected-content/prohibited-claim scan passed; queue remained 55 unblocked / 18 blocked | `DEL-09-01` and `DEL-09-02` remained approved as ordered tranche items; `DEL-09-01` required a fresh sealed dispatch brief before implementation. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -254,100 +255,58 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-05-05 Implementation
+## Latest State - DEL-09-01 Sealed Dispatch Brief Preparation
 
-Human project authority approved an ordered tranche:
+Human project authority approved preparation of a fresh sealed dispatch brief:
 
-1. `DEL-05-05` implementation
-2. `DEL-09-01` mechanics benchmark suite
-3. `DEL-09-02` stress recovery benchmark suite
+- `DEL-09-01 - Mechanics benchmark suite`
 
-`DEL-05-05` implementation and CHANGE/closeout have been completed from the
-sealed dispatch brief. The next ordered tranche item is `DEL-09-01`, which
-requires a fresh sealed brief before implementation.
+The sealed brief has been prepared at
+`execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`. This preparation does
+not authorize implementation, lifecycle transition, implementation-evidence
+registration, dependency-register edits, blocker-queue refresh, `DAG-001`
+changes, candidate-edge promotion, staging, commit, or broad DAG execution.
 
 Files changed in this task:
 
-- `core/loads/user_loads/.gitignore`
-- `core/loads/user_loads/Cargo.lock`
-- `core/loads/user_loads/Cargo.toml`
-- `core/loads/user_loads/README.md`
-- `core/loads/user_loads/src/lib.rs`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-05_Concentrated and distributed user load application/MEMORY.md`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-05_Concentrated and distributed user load application/_STATUS.md`
-- `execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-05_Concentrated and distributed user load application/Dependencies.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-05-05.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Implementation summary:
+Brief summary:
 
-- Added the `open_pipe_stress_user_loads` Rust crate under
-  `core/loads/user_loads`.
-- Implemented explicit concentrated force, concentrated moment, and uniform
-  distributed user-load records.
-- Added deterministic solver-boundary contribution records for nodal loads and
-  element distributed loads.
-- Added traceable result-recovery hooks with load identity, target references,
-  dimensions, and optional provenance references.
-- Added deterministic findings for missing targets, missing quantities,
-  out-of-range targets, invalid dimensions, invalid directions, invalid
-  distribution spans, and non-positive element lengths.
-- Updated `docs/SPEC.md`, `docs/TYPES.md`, deliverable `MEMORY.md`, and the
-  dispatch brief.
-- Implementation committed as `3cfcfd2 core: add user load application`.
-- `DEL-05-05` lifecycle moved to `CHECKING`.
-- `DEL-05-05` local dependency mirror rows `DAG-001-E0459` through
-  `DAG-001-E0461` were annotated as satisfied by committed upstream evidence.
-- `DEV-001_IMPLEMENTATION_EVIDENCE.csv` records `DEL-05-05` as `COMMITTED`.
-- `DEV-001_BLOCKER_QUEUE.*` was refreshed; implementation readiness remained
-  55 unblocked / 18 blocked.
+- `DEL-09-01` is recorded as `UNBLOCKED` in the current
+  implementation-readiness queue and still has `MISSING_EVIDENCE`.
+- The brief uses approved active `DAG-001` edges only and excludes candidate
+  edges.
+- Applicable architecture basis is limited to `AB-00-01`, `AB-00-02`,
+  `AB-00-06`, and `AB-00-08`.
+- Active upstream implementation evidence is recorded for `DEL-04-01`,
+  `DEL-04-02`, `DEL-04-03`, `DEL-05-01`, and `DEL-01-02`.
+- Future implementation scope is bounded to mechanics verification benchmarks,
+  hand-calculation/provenance notes, and supporting validation documentation.
+- Fixture schema, runner command, numerical tolerances, release thresholds, CI
+  gate policy, approved artificial fixture values, and final result-envelope or
+  export integration remain `TBD`.
 
 Verification:
 
-- `cargo fmt --manifest-path core/loads/user_loads/Cargo.toml --check` passed.
-- `cargo test --manifest-path core/loads/user_loads/Cargo.toml` passed: 9
-  tests.
-- `cargo test --manifest-path core/loads/primitive_loads/Cargo.toml` passed: 9
-  tests.
-- `cargo test --manifest-path core/loads/load_case_algebra/Cargo.toml` passed:
-  8 tests.
-- `cargo test --manifest-path core/solver/frame_kernel/Cargo.toml` passed: 11
-  tests.
-- Focused protected-content/prohibited-claim scan found only boundary/exclusion
-  language and pre-existing governance terms.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed: 55 unblocked / 18 blocked.
-- `python3 -m pytest tools/coordination` passed: 10 tests.
-- `python3 tools/validation/validate_dependencies_schema.py
-  execution/_DAG/DAG-001/DependencyEdges.csv` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-05_Loads, Load Cases, and Stress Recovery/1_Working/DEL-05-05_Concentrated and distributed user load application/Dependencies.csv"`
-  passed.
-- `python3 tools/coordination/audit_dag.py --strict --dag-dir
-  execution/_DAG/DAG-001` passed.
-- `git diff --check` passed.
+- `git diff --check` passed for the dispatch-brief preparation diff.
 
 Remaining open items:
 
-- Implementation evidence/queue closeout commit: `1007993 coordination: record
-  del-05-05 implementation evidence`.
-- Handoff-state correction commit: `af4f885 coordination: record del-05-05
-  handoff commit`.
-- `DEL-09-01` and `DEL-09-02` are approved as next ordered tranche items.
-- `DEL-09-01` should receive a fresh sealed dispatch brief before
-  implementation begins.
+- Brief preparation is not yet committed.
+- `DEL-09-01` implementation still requires an explicit human approval gate
+  from the sealed dispatch brief.
+- `DEL-09-02` remains the next ordered tranche item after `DEL-09-01`
+  implementation/closeout, unless superseded by later human ruling.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Prepare a fresh sealed dispatch brief for `DEL-09-01 - Mechanics benchmark
-   suite` as ordered tranche item 2.
+1. Either commit the `DEL-09-01` sealed dispatch brief preparation through
+   `CHANGE`, or approve implementation from
+   `execution/_Coordination/DEV-001_DISPATCH_DEL-09-01.md`.
 
 Do not start broad DAG execution. The approved tranche remains ordered and
 bounded; no parallel fan-out is authorized.
