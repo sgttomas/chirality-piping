@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 37 |
-| Committed implementation evidence | 37 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 36 |
+| Implementation evidence records | 38 |
+| Committed implementation evidence | 38 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 35 |
 | PKG-00 architecture-basis edges satisfied | 388 |
 | Implementation `UNBLOCKED` deliverables | 58 |
 | Implementation `BLOCKED` deliverables | 15 |
@@ -122,7 +122,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-11-03` | `PKG-11` | `MISSING_EVIDENCE` | 9 | Theory notes: classical to modern centerline analysis |
 | `DEL-11-05` | `PKG-11` | `MISSING_EVIDENCE` | 8 | Contributor tutorial and onboarding |
 | `DEL-12-01` | `PKG-12` | `MISSING_EVIDENCE` | 10 | Local-first storage and private data paths |
-| `DEL-12-03` | `PKG-12` | `MISSING_EVIDENCE` | 9 | Telemetry off-by-default design |
+| `DEL-12-03` | `PKG-12` | `COMMITTED` `7834b97` | 9 | Telemetry off-by-default design |
 | `DEL-12-05` | `PKG-12` | `COMMITTED` `b97121d` | 10 | Security threat model |
 
 ## Blocked Items Grouped By Missing Upstream
