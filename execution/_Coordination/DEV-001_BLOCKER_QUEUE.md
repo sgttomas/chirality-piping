@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-05-01
+updated: 2026-05-02
 source_graph: execution/_DAG/DAG-001/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 73 |
 | Active edges included | 615 |
 | Candidate edges excluded | 9 |
-| Implementation evidence records | 26 |
-| Committed implementation evidence | 26 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 70 |
+| Implementation evidence records | 27 |
+| Committed implementation evidence | 27 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 69 |
 | PKG-00 architecture-basis edges satisfied | 388 |
-| Implementation `UNBLOCKED` deliverables | 46 |
-| Implementation `BLOCKED` deliverables | 27 |
+| Implementation `UNBLOCKED` deliverables | 49 |
+| Implementation `BLOCKED` deliverables | 24 |
 
 ## Package Summary
 
@@ -53,9 +53,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-04` | 6 | 0 |
 | `PKG-05` | 5 | 0 |
 | `PKG-06` | 1 | 4 |
-| `PKG-07` | 3 | 4 |
-| `PKG-08` | 1 | 4 |
-| `PKG-09` | 2 | 3 |
+| `PKG-07` | 4 | 3 |
+| `PKG-08` | 2 | 3 |
+| `PKG-09` | 3 | 2 |
 | `PKG-10` | 1 | 4 |
 | `PKG-11` | 1 | 4 |
 | `PKG-12` | 1 | 4 |
@@ -99,15 +99,18 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-04-06` | `PKG-04` | `COMMITTED` `fdb0252` | 8 | Solver diagnostics and singularity detection |
 | `DEL-05-01` | `PKG-05` | `COMMITTED` `e3c9695` | 9 | Primitive load case engine |
 | `DEL-05-02` | `PKG-05` | `COMMITTED` `0f9189c` | 8 | Load-case algebra engine |
-| `DEL-05-03` | `PKG-05` | `MISSING_EVIDENCE` | 10 | Fundamental stress recovery module |
+| `DEL-05-03` | `PKG-05` | `COMMITTED` `26dc805` | 10 | Fundamental stress recovery module |
 | `DEL-05-04` | `PKG-05` | `COMMITTED` `dbaf21e` | 6 | Analysis status semantics |
 | `DEL-05-05` | `PKG-05` | `MISSING_EVIDENCE` | 8 | Concentrated and distributed user load application |
 | `DEL-06-01` | `PKG-06` | `MISSING_EVIDENCE` | 12 | Rule-pack schema |
 | `DEL-07-01` | `PKG-07` | `MISSING_EVIDENCE` | 15 | 3D viewport and centerline editor |
 | `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
+| `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
 | `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
 | `DEL-08-03` | `PKG-08` | `MISSING_EVIDENCE` | 11 | Warnings, assumptions, and provenance report section |
+| `DEL-08-04` | `PKG-08` | `MISSING_EVIDENCE` | 11 | Result export format |
 | `DEL-09-01` | `PKG-09` | `MISSING_EVIDENCE` | 9 | Mechanics benchmark suite |
+| `DEL-09-02` | `PKG-09` | `MISSING_EVIDENCE` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `MISSING_EVIDENCE` | 6 | Nonlinear support regression suite |
 | `DEL-10-01` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Public API and plugin boundary |
 | `DEL-11-05` | `PKG-11` | `MISSING_EVIDENCE` | 8 | Contributor tutorial and onboarding |
@@ -117,7 +120,6 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-05-03` - Fundamental stress recovery module | `PKG-05` | `MISSING_EVIDENCE` | 5 | `DEL-07-05`; `DEL-08-01`; `DEL-08-04`; `DEL-09-02`; `DEL-10-03` | `DAG-001-E0499`; `DAG-001-E0516`; `DAG-001-E0523`; `DAG-001-E0537`; `DAG-001-E0563` |
 | `DEL-06-01` - Rule-pack schema | `PKG-06` | `MISSING_EVIDENCE` | 6 | `DEL-06-02`; `DEL-06-03`; `DEL-06-04`; `DEL-06-05`; `DEL-07-03`; `DEL-11-02` | `DAG-001-E0467`; `DAG-001-E0469`; `DAG-001-E0472`; `DAG-001-E0474`; `DAG-001-E0492`; `DAG-001-E0583` |
 | `DEL-06-02` - Sandboxed unit-aware expression evaluator | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-06-05` | `DAG-001-E0475` |
 | `DEL-06-03` - Required-input completeness checker | `PKG-06` | `MISSING_EVIDENCE` | 1 | `DEL-07-04` | `DAG-001-E0497` |
@@ -153,17 +155,14 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-05` | `PKG-06` | 2 | `DEL-06-01`; `DEL-06-02` | Invented non-code example rule pack |
 | `DEL-07-03` | `PKG-07` | 3 | `DEL-06-01`; `DEL-06-04`; `DEL-12-01` | Material, component, and rule-pack editors |
 | `DEL-07-04` | `PKG-07` | 1 | `DEL-06-03` | Missing-data warning and blocking UX |
-| `DEL-07-05` | `PKG-07` | 1 | `DEL-05-03` | Results viewer |
 | `DEL-07-06` | `PKG-07` | 6 | `DEL-07-01`; `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-08-01` | `PKG-08` | 4 | `DEL-05-03`; `DEL-06-04`; `DEL-08-02`; `DEL-08-03` | Calculation report generator |
+| `DEL-08-01` | `PKG-08` | 3 | `DEL-06-04`; `DEL-08-02`; `DEL-08-03` | Calculation report generator |
 | `DEL-08-02` | `PKG-08` | 1 | `DEL-06-04` | Audit manifest and model hash |
-| `DEL-08-04` | `PKG-08` | 1 | `DEL-05-03` | Result export format |
 | `DEL-08-05` | `PKG-08` | 1 | `DEL-08-01` | Report protected-content linter |
-| `DEL-09-02` | `PKG-09` | 1 | `DEL-05-03` | Stress recovery benchmark suite |
 | `DEL-09-04` | `PKG-09` | 3 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03` | Validation manual skeleton |
 | `DEL-09-05` | `PKG-09` | 4 | `DEL-09-01`; `DEL-09-02`; `DEL-09-03`; `DEL-08-05` | Release quality gate checklist |
 | `DEL-10-02` | `PKG-10` | 3 | `DEL-10-01`; `DEL-12-01`; `DEL-12-05` | Import/export adapter framework |
-| `DEL-10-03` | `PKG-10` | 2 | `DEL-10-01`; `DEL-05-03` | Local FEA handoff data contract |
+| `DEL-10-03` | `PKG-10` | 1 | `DEL-10-01` | Local FEA handoff data contract |
 | `DEL-10-04` | `PKG-10` | 4 | `DEL-09-05`; `DEL-10-05`; `DEL-08-05`; `DEL-12-05` | Build, packaging, and CI/CD pipeline |
 | `DEL-10-05` | `PKG-10` | 3 | `DEL-10-01`; `DEL-08-04`; `DEL-08-02` | Headless CLI and structured I/O analysis runner |
 | `DEL-11-01` | `PKG-11` | 4 | `DEL-07-01`; `DEL-07-03`; `DEL-07-05`; `DEL-08-01` | User guide skeleton |
