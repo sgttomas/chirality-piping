@@ -17,17 +17,19 @@ The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 - normalized SCA-002 supersession CSVs to the canonical tool schema;
 - clarified human-gate status after cleanup.
 
-The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` may now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` has now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+
+The planning output is recorded at `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`. This report does not refresh `DAG-001`, approve `DAG-002`, regenerate blocker queues, update lifecycle states, update implementation evidence, create package-local contexts, edit dependency registers, authorize Type 2 dispatch, or promote the Chirality app/harness corpus.
 
 The 2026-05-03 review of `docs/_ScopeChange/chirality-app-docs/` classified that folder as a quarantined reference corpus. It may be read for governance perspective, but it is not active OpenPipeStress implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority. Do not generate Type 2 dispatch, DAG edges, package-local contexts, production artifacts, implementation briefs, GUI/runtime work, SDK/provider integration, harness API work, lifecycle transitions, or dependency-register changes from that corpus under SCA-002.
 
 Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, blocker regeneration, or Type 2 dispatch from revision `0.5` until the downstream refresh plan reaches the relevant later approval gate. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
 
 **Last Updated:** 2026-05-03
-**Actor:** SCA-002 acceptance recording and downstream refresh planning
+**Actor:** ORCHESTRATOR Phase 1 inventory and Phase 2 reconciliation-request planning
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
-**Current Mode:** ORCHESTRATOR planning authorized; downstream coordination state below remains stale until explicitly refreshed
-**Current Planning Surface:** `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
+**Current Mode:** ORCHESTRATOR planning report complete; awaiting next human gate
+**Current Planning Surface:** `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`
 
 ## Active Control State
 
@@ -48,11 +50,11 @@ Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DEL-07-01 implementation from sealed dispatch brief` |
-| Latest state commit | Implementation/closeout `4785806`; evidence promotion `3d74e63` |
-| Previous completed task archive status | `DEL-08-05 implementation from sealed dispatch brief` archived in compact history |
-| Current authorized item | `DEL-07-01` implementation and working-tree closeout from sealed dispatch brief |
-| Current dispatch brief | `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md` |
+| Latest state task | `SCA-002 Phase 1 inventory and Phase 2 reconciliation request` |
+| Latest state commit | Not committed |
+| Previous completed task archive status | `DEL-07-01 implementation from sealed dispatch brief` archived in compact history |
+| Current authorized item | None after ORCHESTRATOR planning output; awaiting human gate |
+| Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
 
@@ -329,6 +331,7 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-01` post-commit evidence promotion | Completed; implementation/closeout `9e21716`; promotion metadata `074de21` | `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `DEV-001_BLOCKER_QUEUE.*`, `DEV-001_DISPATCH_DEL-08-01.md`, `NEXT_INSTANCE_STATE.md` | Report-generator contract tests, blocker queue builder, dependency schema validation, DAG audit, coordination tests, and `git diff --check` passed; queue changed to 67 unblocked / 6 blocked | `DEL-08-05` and `DEL-12-02` newly implementation-unblocked; no next product deliverable was authorized by the promotion itself. |
 | `DEL-08-05` candidate reconciliation and sealed dispatch brief preparation | Completed; not committed | `Reconciliation_Run_Summary_2026-05-02_DEL0805_CANDIDATE_E0621.md`, `DEV-001_DISPATCH_DEL-08-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`, aggregate dependency schema validation, and DAG audit passed; `DAG-001-E0621` retained as non-gating candidate | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-05` implementation from sealed dispatch brief | Completed; implementation/closeout `69adffa`; promotion metadata `1c0469b`; handoff `77a0819` | `schemas/report_protected_content_linter.schema.yaml`, `core/reporting/protected_content_linter/`, `fixtures/report_lint/invented/`, report linter tests, docs, deliverable memory, local dependency mirror, status, dispatch/state/evidence/queue | Report linter schema and Rust tests, adjacent report/schema tests, dependency schema validation, DAG audit, blocker queue rebuild, `git diff --check`, and focused scans passed; queue changed to 68 unblocked / 5 blocked | No remaining closeout item for `DEL-08-05`; `DEL-11-04` newly implementation-unblocked. |
+| `DEL-07-01` implementation from sealed dispatch brief | Completed; implementation/closeout `4785806`; evidence promotion `3d74e63` | `schemas/viewport_editor.schema.yaml`, `core/gui/viewport_editor/`, invented GUI fixture, viewport contract test, docs, deliverable memory, local dependency mirror, status, dispatch/state/evidence/queue | Viewport schema test, viewport Rust fmt/tests, adjacent schema tests, local dependency schema validation, blocker queue rebuild, and focused guardrail checks passed; queue remained 68 unblocked / 5 blocked | No remaining closeout item for `DEL-07-01`; all SCA-002 revision `0.5` downstream surfaces remain stale until refreshed through the accepted downstream plan. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -351,104 +354,82 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEL-07-01 Implementation From Sealed Dispatch Brief
+## Latest State - SCA-002 Phase 1 Inventory And Phase 2 Reconciliation Request
 
-Human project authority authorized a small coordination cleanup followed by
-`DEL-07-01 - 3D viewport and centerline editor` implementation from a fresh
-sealed dispatch brief.
+Human project authority accepted corrected SCA-002 revision `0.5` for
+downstream refresh planning on 2026-05-03. `ORCHESTRATOR` completed the
+authorized Phase 1 inventory and Phase 2 reconciliation-request planning output
+from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
 
 Files changed in this task:
 
-- `schemas/viewport_editor.schema.yaml`
-- `core/gui/viewport_editor/.gitignore`
-- `core/gui/viewport_editor/Cargo.lock`
-- `core/gui/viewport_editor/Cargo.toml`
-- `core/gui/viewport_editor/src/lib.rs`
-- `fixtures/gui/invented/viewport_editor_session.json`
-- `tests/test_viewport_editor_contract.py`
-- `docs/SPEC.md`
-- `docs/TYPES.md`
-- `execution/PKG-07_Graphical User Interface and Engineering Workflow/1_Working/DEL-07-01_3D viewport and centerline editor/MEMORY.md`
-- `execution/PKG-07_Graphical User Interface and Engineering Workflow/1_Working/DEL-07-01_3D viewport and centerline editor/_STATUS.md`
-- `execution/PKG-07_Graphical User Interface and Engineering Workflow/1_Working/DEL-07-01_3D viewport and centerline editor/Dependencies.csv`
-- `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`
-- `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Implementation summary:
+Planning summary:
 
-- Corrected stale `DEL-08-05` top-level coordination wording and queue counts.
-- Added `schemas/viewport_editor.schema.yaml` as a strict-JSON JSON Schema
-  2020-12 contract for viewport/editor status, transient camera/interaction
-  state, view primitives, selection, diagnostics, provenance, professional
-  boundary controls, and application-service command intents.
-- Added `core/gui/viewport_editor/` as a bounded, dependency-free Rust support
-  crate for in-memory viewport state and deterministic command-intent
-  generation.
-- Added invented non-engineering GUI fixture
-  `fixtures/gui/invented/viewport_editor_session.json`.
-- Added `tests/test_viewport_editor_contract.py` for deterministic schema and
-  fixture checks.
-- Updated focused `docs/SPEC.md` and `docs/TYPES.md` sections only for the
-  viewport/editor boundary.
-- Added deliverable `MEMORY.md`.
-- Updated the dispatch brief with implementation and verification summaries.
-- Set `DEL-07-01` lifecycle display state to `CHECKING`.
-- Annotated local dependency mirror rows `DAG-001-E0478` through
-  `DAG-001-E0485` as `SATISFIED` from committed upstream evidence.
-- Added `DEL-07-01` to `DEV-001_IMPLEMENTATION_EVIDENCE.csv` as
-  `WORKING_TREE` evidence pending commit, then committed the implementation as
-  `4785806 schema: add viewport editor contract`.
-- Promoted `DEL-07-01` in `DEV-001_IMPLEMENTATION_EVIDENCE.csv` from
-  `WORKING_TREE` to `COMMITTED` evidence for commit `4785806`.
-- Rebuilt `DEV-001_BLOCKER_QUEUE.*`; queue remained 68 unblocked / 5 blocked
-  because `DEL-07-06` and `DEL-11-01` still wait on other missing GUI
-  upstreams.
+- Recorded accepted revision `0.5` register facts: 76 scope rows, 92
+  deliverables, 92 context-budget rows, 17 packages, and context envelope
+  counts `S=9`, `M=66`, `L=17`, `XL=0`.
+- Identified 19 SCA-002 added deliverables absent from historical `DAG-001`:
+  `DEL-07-08`, `DEL-08-06`, `DEL-13-01` through `DEL-16-04`.
+- Identified missing package folders for `PKG-13` through `PKG-16`.
+- Identified missing folders and contexts for all 19 SCA-002 added
+  deliverables.
+- Identified two pre-existing deliverables with changed scope/objective
+  mappings: `DEL-01-04` and `DEL-02-01`.
+- Identified 73 existing contexts that reference the old docs-side
+  decomposition path, including 65 contexts that also reference revision `0.4`.
+- Recorded that 47 historical dispatch briefs, historical `DAG-001`, blocker
+  queue files, local dependency mirrors, lifecycle states, and implementation
+  evidence are stale for revision `0.5` dispatch.
+- Recorded that 47 committed implementation-evidence rows still map to
+  revision `0.5` deliverable IDs, while the 19 new deliverables have no
+  implementation evidence.
+- Preserved the `docs/_ScopeChange/chirality-app-docs/` quarantine
+  classification: read-only governance perspective only, not scope,
+  implementation, dependency, dispatch, runtime, or UI authority.
+- Wrote a bounded Phase 2 `RECONCILIATION` request with required outputs,
+  candidate questions, constraints, and a recommended human approval gate.
 
 Verification:
 
-- `python3 tests/test_viewport_editor_contract.py` passed.
-- `cargo fmt --manifest-path core/gui/viewport_editor/Cargo.toml -- --check`
-  passed after formatting.
-- `cargo test --manifest-path core/gui/viewport_editor/Cargo.toml` passed with
-  6 unit tests.
-- `python3 tests/test_model_schema.py` passed.
-- `python3 tests/test_component_section_schema.py` passed.
-- `python3 tools/validation/validate_dependencies_schema.py
-  "execution/PKG-07_Graphical User Interface and Engineering Workflow/1_Working/DEL-07-01_3D viewport and centerline editor/Dependencies.csv"`
-  passed.
-- `python3 tools/coordination/build_dev001_blocker_queue.py --generated-date
-  2026-05-02` passed before and after evidence promotion: 68 unblocked / 5
-  blocked.
+- Required bootstrap and live coordination reading was completed before edits.
+- `git status --short` was clean before planning edits.
+- The inventory was computed from `docs/_Registers/*.csv`,
+  `execution/_DAG/DAG-001/*`, `execution/_Coordination/*`,
+  deliverable-local folders, and the quarantined corpus file tree.
 
 Guardrail results:
 
-- Product implementation stayed inside the sealed write scope.
-- The implementation did not create a Tauri/React/Vite app shell, package
-  manifests, Three.js runtime renderer, or Playwright rendering tests.
-- Durable model edits are represented as application-service command intents,
-  not direct persisted-project mutations.
-- No aggregate `DAG-001` change or candidate-edge promotion occurred.
-- No protected standards/code data, proprietary engineering value, private
-  project data, private rule-pack payload, private library content, real secret,
-  legal sufficiency claim, security sufficiency claim, professional/code-
-  compliance claim, or adjacent GUI slice implementation occurred.
+- No `PREPARATION` run was started.
+- No DAG refresh, `DAG-002` proposal, blocker regeneration, lifecycle change,
+  implementation-evidence update, dependency-register edit, or Type 2 dispatch
+  occurred.
+- No old dispatch brief was reused.
+- No candidate edge was promoted.
+- No Chirality app/harness material was promoted into OpenPipeStress scope.
 
 Remaining open items:
 
-- No remaining closeout item for `DEL-07-01` post-commit evidence promotion.
+- Human gate is required before launching `RECONCILIATION`, `DAG-002`
+  proposal planning, `PREPARATION`, artifact handling through `CHANGE`, or any
+  later Type 2 dispatch.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate: authorize one bounded DAG item, route
-   reconciliation/audit, handle artifacts, or pause.
+1. Await the next human gate. Recommended gate is to launch `RECONCILIATION`
+   for SCA-002 revision `0.5` compatibility planning using the scope and
+   constraints in
+   `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`.
+2. Alternative gates: authorize `DAG-002` proposal planning after
+   reconciliation, authorize a later `PREPARATION` scaffold tranche after
+   graph/context strategy is accepted, handle artifact state through `CHANGE`,
+   or pause.
 
-Do not start broad DAG execution. The approved tranche remains ordered and
-bounded; no parallel fan-out is authorized.
+Do not start broad DAG execution. No parallel fan-out is authorized.
 
 ## Guardrails
 
