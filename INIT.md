@@ -27,7 +27,7 @@ All agentic development work must preserve four boundaries:
 5. `docs/IP_AND_DATA_BOUNDARY.md` — public/private data boundary.
 6. `docs/VALIDATION_STRATEGY.md` — verification and release-quality expectations.
 7. `docs/AGENTIC_DEVELOPMENT_WORKFLOW.md` — how agents execute deliverables.
-8. `docs/_Decomposition/SOFTWARE_DECOMP.md` — current package/deliverable working surface.
+8. `execution/_Decomposition/SOFTWARE_DECOMP.md` — current package/deliverable working surface.
 9. `docs/_Registers/*.csv` — machine-readable scope, deliverable, and context-budget registers.
 
 ## Agent rule
@@ -36,4 +36,4 @@ Unknown engineering values become `TBD`. Suspected protected data is quarantined
 
 ## Next step
 
-After reading these files, use the accepted `docs/_Decomposition/SOFTWARE_DECOMP.md` v0.3 basis. Revision v0.3 adds `PKG-00 — Software Architecture Runway` as the first architecture gate before `PKG-01` through `PKG-12` package-level document drafting or implementation planning proceeds. Type 2 execution begins only with one sealed `DEL-XX-YY` context, explicit write scope, applicable invariants, and acceptance criteria.
+After reading these files, use the accepted `execution/_Decomposition/SOFTWARE_DECOMP.md` revision 0.5 basis. Revision 0.5 includes the SCA-001 `PKG-00 — Software Architecture Runway` architecture gate and the accepted SCA-002 physical-model, design-knowledge, operation, state/run/comparison, handoff, external-prover-boundary, and GUI comparison scope. Downstream coordination surfaces remain stale until refreshed through `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`. Type 2 execution begins only from refreshed sealed `DEL-XX-YY` context, explicit write scope, applicable invariants, and acceptance criteria.

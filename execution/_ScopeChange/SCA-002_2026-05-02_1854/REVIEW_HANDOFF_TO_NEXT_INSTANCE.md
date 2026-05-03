@@ -3,7 +3,7 @@ amendment_id: SCA-002
 doc_kind: scope_change.review_handoff
 package_role: snapshot / handoff artifact
 created: 2026-05-03
-status: corrective_action_applied_pending_human_acceptance
+status: corrective_action_applied_and_accepted_for_downstream_refresh_planning
 ---
 
 # SCA-002 Review Handoff To Next Instance
@@ -17,6 +17,10 @@ This handoff records a hindsight review of the SCA-002 implementation. The conce
 This handoff has been actioned. The cleanup corrected package-local direct scope mappings, reciprocal scope-ledger mappings, package-table assignments for `PKG-01`, `PKG-02`, and `PKG-07`, the decomposition latest pointer, and canonical supersession CSV schema. Local validation now passes for counts, deliverable/package coupling, package-local scope coverage, reciprocal scope-ledger coverage, package table parity, and markdown/register deliverable parity.
 
 Downstream use remains blocked until the human accepts the corrected revision 0.5 basis or explicitly authorizes an owning workflow to refresh downstream artifacts.
+
+## Acceptance Recorded
+
+The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. Downstream refresh planning is now routed through `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; direct Type 2 dispatch remains blocked until refreshed coordination surfaces are accepted.
 
 The next instance should start from the normal bootstrap files, then read:
 
@@ -67,17 +71,11 @@ The package table in `execution/_Decomposition/SOFTWARE_DECOMP.md` omits new sco
 
 Recommended correction: update the package table `Assigned Scope Items` cells to match `docs/_Registers/ScopeLedger.csv` after resolving the scope-locality issue.
 
-### 3. Decomposition Latest Pointer Stale
+### 3. Decomposition Latest Pointer Corrected
 
-`execution/_Decomposition/_LATEST.md` still says:
+`execution/_Decomposition/_LATEST.md` previously pointed at a retired docs-side revision. It now points to `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5`.
 
-```text
-Latest: docs/_Decomposition/SOFTWARE_DECOMP.md revision 0.3
-```
-
-Recommended correction: update it to point to `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` after the SCA-002 cleanup is applied.
-
-### 4. Supersession CSV Schema Mismatch
+### 4. Supersession CSV Schema Corrected
 
 `tools/coordination/accumulate_supersession_map.py` expects canonical supersession columns:
 
@@ -88,21 +86,18 @@ OverrideType, ReplacementFactTextOrValue, AppliesToRoots, AppliesToFacilities,
 AppliesToSections, Notes
 ```
 
-SCA-002 currently wrote `Supersession_Delta.csv` and `Supersession_Map.csv` with narrative columns:
+SCA-002 initially wrote `Supersession_Delta.csv` and `Supersession_Map.csv` with narrative columns:
 
 ```text
 AmendmentID, BindingType, AuthorityDocument, AuthorityReference,
 OriginalValue, ReplacementValue, ScopeAffected, Notes
 ```
 
-Recommended correction: either convert SCA-002 supersession files to the canonical tool schema and regenerate/check the map, or explicitly mark them as narrative noncanonical records and add a proper canonical file for tool consumption.
+Correction applied: SCA-002 supersession files now use the canonical schema and the map has been regenerated/check-validated with the accumulator.
 
-### 5. Gate/Approval Wording Too Strong
+### 5. Gate/Approval Wording Corrected
 
-`Brief.md` says the previous agent plan supplies the human-initiated request and authorized workflow posture. That is acceptable as delegated context, but before downstream use the next instance should add a clearer human-gate status:
-
-- either `pending_human_acceptance_after_review_cleanup`; or
-- an explicit human acceptance record if the human approves the corrected revision.
+`Brief.md` now records corrective cleanup and SCA-002 human acceptance. The explicit acceptance record is `ACCEPTANCE_RECORD.md`.
 
 ## Cleanup Plan Applied
 

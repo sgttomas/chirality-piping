@@ -11,7 +11,11 @@
 **Default blocker satisfaction threshold:** `COMMITTED` implementation evidence
 **Implementation evidence register:** `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 **Active graph authority:** aggregate `execution/_DAG/DAG-001/DependencyEdges.csv`
+**Accepted decomposition basis:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for SCA-002 downstream refresh planning
+**Downstream refresh plan:** `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
+**Current DAG status relative to revision 0.5:** `DAG-001` is historical revision `0.4` coordination evidence and stale for new dispatch until refreshed/accepted
 **Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
+**Quarantined reference corpus:** `docs/_ScopeChange/chirality-app-docs/` is read-only perspective material; not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
 **Last bounded item:** `DEL-03-07 - Public/private library import provenance checker`
 **Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
@@ -38,6 +42,8 @@
 - 2026-04-30 - Treat `NEXT_INSTANCE_PROMPT.md` as stable control-loop protocol. Agents derive the current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted `DAG-001` artifacts, the blocker queue when explicitly current, and the latest human approval gate instead of hard-coded next-deliverable language.
 - 2026-04-30 - Treat `init/NEXT_SESSION_PROMPT.md` as a stable bootstrap entrypoint. It should direct fresh sessions into the coordination protocol and mutable handoff state, not encode the next deliverable objective.
 - 2026-05-01 - Replace DEV-001 blocker queue semantics with an implementation-readiness view: `FromDeliverableID` is the downstream consumer blocked by `TargetDeliverableID`; only `COMMITTED` implementation evidence satisfies non-architecture upstreams; `SEMANTIC_READY` remains context readiness only; `PKG-00` `ARCHITECTURE_BASIS` edges are satisfied by the accepted architecture baseline; `CANDIDATE` edges remain excluded.
+- 2026-05-03 - Accept corrected SCA-002 revision `0.5` for downstream refresh planning. `ORCHESTRATOR` may run planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `DAG-001`, blocker queues, dispatch briefs, lifecycle states, dependency mirrors, and implementation evidence remain stale relative to revision `0.5` until refreshed through later gates.
+- 2026-05-03 - Classify `docs/_ScopeChange/chirality-app-docs/` as a quarantined reference corpus for SCA-002. It may inform governance perspective, but no Chirality app/harness implementation, UI/runtime work, SDK/provider integration, DAG edge, Type 2 dispatch, package-local context, lifecycle transition, or dependency-register change is authorized from that corpus without a later explicit scope change or architecture decision.
 
 ## Operating Rules
 
@@ -55,3 +61,5 @@
 - Keep `NEXT_INSTANCE_PROMPT.md` objective-neutral. Put mutable item state and immediate handoff facts in `NEXT_INSTANCE_STATE.md`; put durable coordination rulings here.
 - Keep `init/NEXT_SESSION_PROMPT.md` objective-neutral. Use it only as the fresh-session bootstrap into the coordination control loop.
 - Keep `NEXT_INSTANCE_STATE.md` in rotating handoff form: archive the previous latest completed task in the compact history table, then summarize only the just-completed task as the latest state.
+- After SCA-002 acceptance, do not use `DAG-001`, old blocker queues, or old dispatch briefs for new Type 2 dispatch until a revision `0.5` refresh is planned, accepted, and materialized through the appropriate workflow gates.
+- Treat the Chirality app docs corpus as quarantined reference material. Route any proposed promotion into OpenPipeStress through `SCOPE_CHANGE` or a human-approved architecture decision before development execution.

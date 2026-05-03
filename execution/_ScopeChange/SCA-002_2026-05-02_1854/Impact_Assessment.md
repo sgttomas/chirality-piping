@@ -3,7 +3,7 @@ amendment_id: SCA-002
 doc_kind: scope_change.impact_assessment
 package_role: snapshot / handoff artifact
 created: 2026-05-02
-status: corrective_cleanup_applied_pending_human_acceptance
+status: accepted_for_downstream_refresh_planning
 ---
 
 # Impact Assessment
@@ -25,6 +25,10 @@ status: corrective_cleanup_applied_pending_human_acceptance
 ## Corrective Cleanup Impact
 
 The hindsight cleanup corrected internal decomposition/register consistency only. Direct scope coverage is now package-local, scope-ledger deliverable mappings are reciprocal with `Deliverables.csv`, package-table assignments match the ledger, `execution/_Decomposition/_LATEST.md` points to revision 0.5, and SCA-002 supersession CSVs use the canonical tool schema. Counts remain unchanged: 76 scope items, 92 deliverables, 92 context-budget rows, and context envelopes `S=9, M=66, L=17, XL=0`.
+
+## Acceptance Impact
+
+The 2026-05-03 human acceptance changes SCA-002 from pending acceptance to accepted for downstream refresh planning. It does not change the stale state of downstream artifacts; it authorizes ORCHESTRATOR planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
 
 ## Product Scope Impact
 

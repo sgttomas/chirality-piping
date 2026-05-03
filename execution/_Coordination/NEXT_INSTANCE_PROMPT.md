@@ -5,8 +5,9 @@ Continue as `ORCHESTRATOR` for the OpenPipeStress SOFTWARE workflow.
 This prompt is stable control-loop protocol. It is not the source of the next
 deliverable objective. Derive the current objective from
 `execution/_Coordination/NEXT_INSTANCE_STATE.md`,
-`execution/_Coordination/_COORDINATION.md`, accepted `DAG-001` artifacts, the
-blocker queue when explicitly current, and the latest human approval gate.
+`execution/_Coordination/_COORDINATION.md`, historical `DAG-001` artifacts, the
+blocker queue only as stale/pre-refresh evidence unless explicitly refreshed,
+and the latest human approval gate.
 
 Do not launch a new `WORKING_ITEMS` session, dispatch `TASK`, start another
 deliverable, edit deliverable-local dependency registers, or change lifecycle
@@ -16,10 +17,14 @@ state unless the human explicitly approves that next action.
 
 - Mutable handoff truth:
   `execution/_Coordination/NEXT_INSTANCE_STATE.md`.
-- Active decomposition: `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`.
-- Accepted coordination graph: `execution/_DAG/DAG-001/`.
-- Approval record: `execution/_DAG/DAG-001/APPROVAL_RECORD.md`.
+- Active decomposition: `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5`, accepted for SCA-002 downstream refresh planning.
+- SCA-002 acceptance record: `execution/_ScopeChange/SCA-002_2026-05-02_1854/ACCEPTANCE_RECORD.md`.
+- Current downstream refresh plan: `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+- Quarantined reference corpus: `docs/_ScopeChange/chirality-app-docs/` may be read for governance perspective only; it is not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002.
+- Historical coordination graph: `execution/_DAG/DAG-001/`.
+- Historical approval record: `execution/_DAG/DAG-001/APPROVAL_RECORD.md`.
 - `DAG-001` active edge set is approved for development coordination.
+- `DAG-001`, old blocker queues, old dispatch briefs, lifecycle states, dependency mirrors, and implementation evidence are stale relative to revision `0.5` until refreshed through the SCA-002 downstream refresh plan.
 - Blocker computation is enabled from approved `ACTIVE` `DAG-001` edges only;
   `CANDIDATE` edges remain non-gating.
 - DEV-001 blocker computation uses implementation-readiness semantics:
@@ -28,7 +33,7 @@ state unless the human explicitly approves that next action.
   `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
 - `SEMANTIC_READY` remains context readiness and does not satisfy
   implementation blockers by itself.
-- Current blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- Historical pre-SCA-002 blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
   and `.csv`.
 - `PKG-00` remains `SEMANTIC_READY`, not `ISSUED`.
 - `PKG-00` is prerequisite architecture context processed through `SCA-001`;
@@ -38,9 +43,10 @@ state unless the human explicitly approves that next action.
 - Non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
   mirrors/evidence materialized from `DAG-001`, not independent sequencing
   authority.
-- The next gate is always the latest explicit human choice: authorize exactly
-  one bounded DAG item, route reconciliation/change/audit, handle artifact
-  state, or pause. Broad DAG execution is not authorized by default.
+- The next gate is always the latest explicit human choice: run SCA-002 refresh
+  planning, authorize exactly one bounded DAG item after refresh, route
+  reconciliation/change/audit, handle artifact state, or pause. Broad DAG
+  execution is not authorized by default.
 
 ## First Action - Required Reading
 
@@ -56,29 +62,34 @@ Before planning a next action, read:
 8. `docs/CONTRACT.md`
 9. `docs/IP_AND_DATA_BOUNDARY.md`
 10. `docs/AGENTIC_DEVELOPMENT_WORKFLOW.md`
-11. `docs/_Decomposition/SOFTWARE_DECOMP.md`
+11. `execution/_Decomposition/SOFTWARE_DECOMP.md`
 12. `docs/_Registers/Deliverables.csv`
 13. `execution/_Coordination/_COORDINATION.md`
 14. `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-15. `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
-16. `execution/_DAG/DAG-001/DAG_Audit.md`
-17. `execution/_DAG/DAG-001/Cycle_Report.md`
-18. `execution/_DAG/DAG-001/TopologicalWaves.md`
-19. `execution/_DAG/DAG-001/DependencyEdges.csv`
-20. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-21. `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-22. Any active, latest, or historically relevant dispatch brief named by
+15. `execution/_ScopeChange/SCA-002_2026-05-02_1854/ACCEPTANCE_RECORD.md`
+16. `execution/_ScopeChange/SCA-002_2026-05-02_1854/Handoff_State.md`
+17. `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
+18. `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
+19. `execution/_DAG/DAG-001/DAG_Audit.md`
+20. `execution/_DAG/DAG-001/Cycle_Report.md`
+21. `execution/_DAG/DAG-001/TopologicalWaves.md`
+22. `execution/_DAG/DAG-001/DependencyEdges.csv`
+23. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+24. `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+25. Any active, latest, or historically relevant dispatch brief named by
     `NEXT_INSTANCE_STATE.md`.
-23. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
-24. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
-25. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
+26. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
+27. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
+28. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
 After reading, state that reading is complete, summarize the active control
 state, and ask for or consume the next human approval gate.
 
 ## Operating Rules
 
-- Use aggregate `DAG-001` as the active graph authority.
+- Use aggregate `DAG-001` as historical revision `0.4` coordination evidence.
+  Do not use it as revision `0.5` dispatch authority until refreshed and
+  accepted through the SCA-002 downstream refresh plan.
 - Use a DEV-001 implementation projection only as a derived view when useful:
   exclude `PKG-00` nodes and `ARCHITECTURE_BASIS` edges, while retaining
   `SCA-001` / `AB-00-*` brief injection evidence.
@@ -98,16 +109,18 @@ To determine the next safe step:
 2. Confirm whether the prior bounded item is complete, committed, awaiting
    review, awaiting CHANGE approval, blocked, or superseded by a newer human
    instruction.
-3. Consult `DAG-001`, topological waves, and the blocker queue only as
-   coordination evidence. Do not treat wave position or queue order as schedule,
-   staffing, priority, or authorization.
+3. Consult `DAG-001`, topological waves, and the blocker queue only as stale
+   coordination evidence until a revision `0.5` refresh is accepted. Do not
+   treat wave position or queue order as schedule, staffing, priority, or
+   authorization.
 4. Apply the latest explicit human ruling. If no next item is authorized, ask
-   for a gate among: one bounded DAG item, `RECONCILIATION`, `CHANGE`,
-   `AUDIT_*`, artifact handling, or pause.
-5. If exactly one bounded DAG item is authorized, prepare a fresh sealed
-   handoff brief from `DAG-001`, `docs/_Registers/Deliverables.csv`,
-   applicable `AB-00-*` architecture-basis rows, and the target deliverable's
-   local context.
+   for a gate among: SCA-002 refresh planning, one bounded DAG item,
+   `RECONCILIATION`, `CHANGE`, `AUDIT_*`, artifact handling, or pause.
+5. If exactly one bounded DAG item is authorized after refresh, prepare a fresh
+   sealed handoff brief from the accepted revision `0.5` coordination graph,
+   `docs/_Registers/Deliverables.csv`, applicable `AB-00-*`
+   architecture-basis rows, and the target deliverable's refreshed local
+   context.
 
 Do not reuse any prior dispatch brief as an implementation brief for a later
 deliverable.
@@ -155,3 +168,7 @@ commits after explicit approval.
   project data, real secrets, private libraries, or certification/compliance
   claims.
 - No silent edits to deliverable-local `Dependencies.csv`.
+- No Chirality app/harness implementation, UI/runtime work, SDK/provider
+  integration, DAG edge, Type 2 dispatch, package-local context, lifecycle
+  transition, or dependency-register change from the quarantined reference
+  corpus without a later explicit scope change or architecture decision.

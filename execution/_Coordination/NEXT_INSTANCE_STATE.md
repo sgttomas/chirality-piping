@@ -1,10 +1,12 @@
 # NEXT INSTANCE STATE
 
-## SCA-002 Corrective Cleanup Applied
+## SCA-002 Accepted For Downstream Refresh Planning
 
 Before resuming DEV-001 orchestration or using decomposition revision `0.5` for downstream work, read:
 
 `execution/_ScopeChange/SCA-002_2026-05-02_1854/REVIEW_HANDOFF_TO_NEXT_INSTANCE.md`
+`execution/_ScopeChange/SCA-002_2026-05-02_1854/ACCEPTANCE_RECORD.md`
+`plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
 
 The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 
@@ -15,26 +17,32 @@ The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 - normalized SCA-002 supersession CSVs to the canonical tool schema;
 - clarified human-gate status after cleanup.
 
-Do not run `ORCHESTRATOR`, `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, or Type 2 dispatch from revision `0.5` until the human accepts the corrected revision 0.5 basis or explicitly authorizes a downstream refresh. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
+The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` may now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+
+The 2026-05-03 review of `docs/_ScopeChange/chirality-app-docs/` classified that folder as a quarantined reference corpus. It may be read for governance perspective, but it is not active OpenPipeStress implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority. Do not generate Type 2 dispatch, DAG edges, package-local contexts, production artifacts, implementation briefs, GUI/runtime work, SDK/provider integration, harness API work, lifecycle transitions, or dependency-register changes from that corpus under SCA-002.
+
+Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, blocker regeneration, or Type 2 dispatch from revision `0.5` until the downstream refresh plan reaches the relevant later approval gate. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
 
 **Last Updated:** 2026-05-03
-**Actor:** SCA-002 corrective cleanup from review handoff
-**Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` pending human acceptance for downstream refresh
-**Current Mode:** SCA-002 corrective cleanup applied; downstream coordination state below remains stale until explicitly refreshed
+**Actor:** SCA-002 acceptance recording and downstream refresh planning
+**Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
+**Current Mode:** ORCHESTRATOR planning authorized; downstream coordination state below remains stale until explicitly refreshed
+**Current Planning Surface:** `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
 
 ## Active Control State
 
 | Surface | Current state |
 |---|---|
 | Coordination mode | `FULL_GRAPH` |
-| Accepted graph | `execution/_DAG/DAG-001/` |
-| Graph approval | `execution/_DAG/DAG-001/APPROVAL_RECORD.md` |
-| Active graph authority | Aggregate `DAG-001` `DependencyEdges.csv` |
-| Blocker computation | Enabled from approved `ACTIVE` DAG edges only; implementation-readiness semantics |
+| Accepted graph | `execution/_DAG/DAG-001/` historical revision `0.4` graph |
+| Graph approval | `execution/_DAG/DAG-001/APPROVAL_RECORD.md` historical revision `0.4` approval |
+| Active graph authority | Stale for revision `0.5`; refresh planning authorized through `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md` |
+| Quarantined reference corpus | `docs/_ScopeChange/chirality-app-docs/`; read-only perspective only, not implementation or dispatch authority |
+| Blocker computation | Stale for revision `0.5`; do not regenerate or use for dispatch until refreshed graph approval |
 | Candidate edges | Retained as non-gating pending `RECONCILIATION` |
 | Semantic context threshold | `SEMANTIC_READY` |
 | Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` historical pre-SCA-002 evidence |
 | Selected pilot | `DEL-01-01 - Project governance baseline` |
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
 | Pilot status | Launched and completed as a bounded governance-file patch |

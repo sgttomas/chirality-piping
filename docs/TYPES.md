@@ -15,7 +15,7 @@ refs:
 OpenPipeStress agentic development uses a flat hierarchy:
 
 ```text
-docs/_Decomposition/SOFTWARE_DECOMP.md
+execution/_Decomposition/SOFTWARE_DECOMP.md
 └── PKG-XX Package
     └── DEL-XX-YY Deliverable
 ```

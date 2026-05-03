@@ -3,7 +3,7 @@ amendment_id: SCA-002
 doc_kind: scope_change.propagation_plan
 package_role: snapshot / handoff artifact
 created: 2026-05-02
-status: corrective_cleanup_applied_pending_human_acceptance
+status: accepted_for_downstream_refresh_planning
 ---
 
 # Propagation Plan
@@ -25,6 +25,10 @@ status: corrective_cleanup_applied_pending_human_acceptance
 ## Corrective Cleanup Propagation
 
 The corrective cleanup is limited to SCA-owned decomposition truth, companion registers, and SCA handoff records. It does not authorize downstream refresh by itself; downstream owners still require human acceptance or explicit authorization before consuming revision 0.5.
+
+## Acceptance Propagation
+
+Human acceptance was recorded on 2026-05-03. `ORCHESTRATOR` may now perform downstream refresh planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`. The plan still gates actual graph refresh, preparation scaffolding, blocker regeneration, lifecycle changes, and Type 2 dispatch behind later approval points.
 
 ## Deferred Downstream Refresh
 

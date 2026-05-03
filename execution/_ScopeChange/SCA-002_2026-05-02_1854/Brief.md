@@ -3,7 +3,7 @@ amendment_id: SCA-002
 doc_kind: scope_change.brief
 package_role: snapshot / handoff artifact
 created: 2026-05-02
-status: corrective_cleanup_applied_pending_human_acceptance
+status: accepted_for_downstream_refresh_planning
 ---
 
 # SCA-002 Brief
@@ -28,6 +28,10 @@ Human intent, via the SCA-002 Bootstrap and Integration Plan, is to process PRD 
 
 After hindsight review, SCA-002 received a corrective cleanup for package-local scope mapping, reciprocal scope-ledger mapping, package-table coverage, decomposition latest pointer, and canonical supersession CSV schema. This cleanup does not add scope, retire IDs, refresh downstream artifacts, or change the PRD v0.2 design basis.
 
+## Acceptance
+
+The human project authority accepted corrected SCA-002 for acceptance recording and downstream refresh planning on 2026-05-03. Acceptance is recorded in `ACCEPTANCE_RECORD.md`, and the downstream planning surface is `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+
 ## Gate Disposition
 
-The previous agent plan supplied the human-initiated request and authorized workflow posture for SCA-002 implementation. The current human request authorized corrective action from `REVIEW_HANDOFF_TO_NEXT_INSTANCE.md`. Downstream use of revision 0.5 remains pending human acceptance after this cleanup or explicit authorization for an owning workflow to refresh downstream artifacts.
+The previous agent plan supplied the human-initiated request and authorized workflow posture for SCA-002 implementation. The corrective cleanup from `REVIEW_HANDOFF_TO_NEXT_INSTANCE.md` was applied, then accepted by the human project authority for downstream refresh planning. Downstream execution remains gated by `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
