@@ -94,5 +94,7 @@ Recommended graph-authoring consequence:
 - 2026-05-03: Human project authority approved the `DAG-002` revision `0.5`
   active edge set after the supplement. The approval record is
   `execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
-- Keep `DEL-01-04` and `DEL-02-01` lifecycle and implementation-evidence
-  projection rows unchanged until a separate authorized closeout changes them.
+- 2026-05-03: A later handoff-readiness closeout updated the lifecycle and
+  implementation-evidence projection rows to reflect the completed targeted
+  review and required `DEL-02-01` supplement. This projection closeout does not
+  change lifecycle state, dispatch Type 2 work, or claim release completeness.

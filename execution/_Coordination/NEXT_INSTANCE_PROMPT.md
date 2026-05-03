@@ -6,9 +6,9 @@ This prompt is stable control-loop protocol. It is not the source of the next
 deliverable objective. Derive the current objective from
 `execution/_Coordination/NEXT_INSTANCE_STATE.md`,
 `execution/_Coordination/_COORDINATION.md`, the latest DAG pointer, historical
-`DAG-001` artifacts, approved `DAG-002` artifacts when present, the
-current blocker/evidence/dependency status surfaces, and the latest human
-approval gate.
+`DAG-001` artifacts, approved `DAG-002` artifacts, the current
+blocker/evidence/dependency status surfaces, and the latest human approval
+gate.
 
 Do not launch a new `WORKING_ITEMS` session, dispatch `TASK`, start another
 deliverable, edit deliverable-local dependency registers, or change lifecycle
@@ -30,9 +30,8 @@ state unless the human explicitly approves that next action.
   `execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
 - `DAG-001` active edge set is historical revision `0.4` development
   coordination evidence only; it must not drive new revision `0.5` dispatch.
-- Blocker computation is authorized for revision `0.5` only as a later guarded
-  recomputation step; it has not yet been run. `CANDIDATE` edges remain
-  non-gating.
+- Blocker computation for revision `0.5` has been run from approved `ACTIVE`
+  `DAG-002` edges. `CANDIDATE` edges remain non-gating and excluded.
 - DEV-001 blocker computation uses implementation-readiness semantics:
   `FromDeliverableID` is blocked by `TargetDeliverableID`, and non-architecture
   upstreams require `COMMITTED` evidence in
@@ -40,7 +39,8 @@ state unless the human explicitly approves that next action.
 - `SEMANTIC_READY` remains context readiness and does not satisfy
   implementation blockers by itself.
 - Current blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-  and `.csv` as a stale hold-state queue, not blocked/unblocked readiness.
+  and `.csv` as the current active-edge implementation-readiness computation:
+  70 unblocked, 22 blocked.
 - Current lifecycle snapshot:
   `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`.
 - Current implementation evidence projection:
@@ -52,9 +52,10 @@ state unless the human explicitly approves that next action.
   its applicable `AB-00-*` rows are injected into sealed briefs instead of
   being treated as implementation graph work.
 - `PKG-00` does not require deliverable-local `Dependencies.csv` files.
-- Non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
-  mirrors/evidence materialized from `DAG-001`, not independent sequencing
-  authority.
+- Existing non-`PKG-00` deliverable-local `Dependencies.csv` files are
+  synchronized mirrors/evidence refreshed from approved `DAG-002`, not
+  independent sequencing authority. Revision `0.5` deliverables without
+  execution control surfaces remain held for `PREPARATION`.
 - The next gate is always the latest explicit human choice: run SCA-002 refresh
   planning, authorize exactly one bounded DAG item after refresh, route
   reconciliation/change/audit, handle artifact state, or pause. Broad DAG
@@ -110,12 +111,11 @@ state, and ask for or consume the next human approval gate.
 ## Operating Rules
 
 - Use aggregate `DAG-001` as historical revision `0.4` coordination evidence.
-  Do not use it as revision `0.5` dispatch authority until refreshed and
-  accepted through the SCA-002 downstream refresh plan.
+  Do not use it as revision `0.5` dispatch authority.
 - Use aggregate `DAG-002` as the approved revision `0.5` active-edge
-  coordination basis. Candidate rows remain non-gating, and later blocker
+  coordination basis. Candidate rows remain non-gating. Additional blocker
   readiness recomputation or dependency mirror refresh must be run only through
-  their own guarded workflow steps.
+  its own guarded workflow step.
 - Use a DEV-001 implementation projection only as a derived view when useful:
   exclude `PKG-00` nodes and `ARCHITECTURE_BASIS` edges, while retaining
   `SCA-001` / `AB-00-*` brief injection evidence.
@@ -136,9 +136,9 @@ To determine the next safe step:
    review, awaiting CHANGE approval, blocked, or superseded by a newer human
    instruction.
 3. Consult approved `DAG-002`, topological waves, and the blocker queue with
-   their current authority boundaries. Do not treat wave position or stale
-   hold-state queue rows as schedule, staffing, priority, readiness, or
-   authorization.
+   their current authority boundaries. Do not treat wave position or queue rows
+   as schedule, staffing, priority, lifecycle approval, dispatch authorization,
+   or professional approval.
 4. Apply the latest explicit human ruling. If no next item is authorized, ask
    for a gate among: SCA-002 refresh planning, one bounded DAG item,
    `RECONCILIATION`, `CHANGE`, `AUDIT_*`, artifact handling, or pause.
