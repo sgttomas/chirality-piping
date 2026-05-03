@@ -10,8 +10,8 @@ DEL-00-08,PKG-00,M,OK,Proceed with bounded Type 2 brief,"SCA-001 accepted Cargo,
 DEL-01-01,PKG-01,M,OK,Proceed with bounded Type 2 brief,Single governance surface; policy language only.
 DEL-01-02,PKG-01,M,OK,Proceed with bounded Type 2 brief,Requires careful wording and legal-review flags.
 DEL-01-03,PKG-01,S,OK,Proceed with bounded Type 2 brief,Bounded policy artifact.
-DEL-01-04,PKG-01,S,OK,Proceed with bounded Type 2 brief,Policy wording; no code.
-DEL-02-01,PKG-02,M,OK,Proceed with bounded Type 2 brief,Schema deliverable must use JSON Schema 2020-12 baseline from SCA-001.
+DEL-01-04,PKG-01,S,OK,Proceed with bounded Type 2 brief,Policy wording and product-claims boundaries; no code.
+DEL-02-01,PKG-02,M,OK,Proceed with bounded Type 2 brief,Schema deliverable must use JSON Schema 2020-12 baseline from SCA-001 and preserve the physical-model source-of-truth contract.
 DEL-02-02,PKG-02,M,OK,Proceed with bounded Type 2 brief,Foundation for solver and rule engine.
 DEL-02-03,PKG-02,S,OK,Proceed with bounded Type 2 brief,Important semantic boundary; limited implementation surface.
 DEL-02-04,PKG-02,M,OK,Proceed with bounded Type 2 brief,Plugin/extension contracts must enforce SCA-001 no-bypass units/provenance/diagnostics/data-boundary constraints.
@@ -72,3 +72,22 @@ DEL-12-02,PKG-12,M,OK,Proceed with bounded Type 2 brief,Security-sensitive but b
 DEL-12-03,PKG-12,S,OK,Proceed with bounded Type 2 brief,May be no-op in MVP.
 DEL-12-04,PKG-12,M,OK,Proceed with bounded Type 2 brief,Avoids cloud assumptions.
 DEL-12-05,PKG-12,M,OK,Proceed with bounded Type 2 brief,Document now; update as architecture matures.
+DEL-07-08,PKG-07,L,WATCH,Confirm scope and split if it expands,Adds design-authoring and comparison workspace to the GUI workflow.
+DEL-08-06,PKG-08,M,OK,Proceed with bounded Type 2 brief,Reports draw from state/run/comparison/handoff records and preserve professional-boundary wording.
+DEL-13-01,PKG-13,M,OK,Proceed with bounded Type 2 brief,No protected owner standards or project data in public examples.
+DEL-13-02,PKG-13,M,OK,Proceed with bounded Type 2 brief,Constraint records must identify user/project/import/agent/source provenance where known.
+DEL-13-03,PKG-13,M,OK,Proceed with bounded Type 2 brief,Does not infer hidden owner standards or protected code requirements.
+DEL-13-04,PKG-13,L,WATCH,Confirm scope and split if it expands,First-class bridge from design authoring to solver execution.
+DEL-14-01,PKG-14,M,OK,Proceed with bounded Type 2 brief,Flexible metadata only; no formal prover approval statuses.
+DEL-14-02,PKG-14,M,OK,Proceed with bounded Type 2 brief,Results attach to immutable run records.
+DEL-14-03,PKG-14,L,WATCH,Confirm scope and split if it expands,Reports added/removed/changed/unchanged model entities.
+DEL-14-04,PKG-14,L,WATCH,Confirm scope and split if it expands,Comparison is diagnostic/audit functionality only.
+DEL-14-05,PKG-14,M,OK,Proceed with bounded Type 2 brief,Future external result states may be represented without changing core compare logic.
+DEL-15-01,PKG-15,M,OK,Proceed with bounded Type 2 brief,Package is for downstream modeling and professional validation workflows.
+DEL-15-02,PKG-15,M,OK,Proceed with bounded Type 2 brief,Avoids silent loss of critical assumptions or unsupported target behavior.
+DEL-15-03,PKG-15,L,WATCH,Confirm scope and split if it expands,Target-specific commercial stress output parsers remain deferred.
+DEL-15-04,PKG-15,M,OK,Proceed with bounded Type 2 brief,Preserves non-authoritative professional reliance boundary.
+DEL-16-01,PKG-16,M,OK,Proceed with bounded Type 2 brief,Operations are the only model mutation route for GUI and agent proposals.
+DEL-16-02,PKG-16,M,OK,Proceed with bounded Type 2 brief,Blocks invalid operations before application.
+DEL-16-03,PKG-16,M,OK,Proceed with bounded Type 2 brief,Default workflow requires user acceptance unless later explicitly changed.
+DEL-16-04,PKG-16,S,OK,Proceed with bounded Type 2 brief,Agent output cannot become accepted engineering work by itself.

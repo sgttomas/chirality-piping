@@ -1,9 +1,26 @@
 # NEXT INSTANCE STATE
 
-**Last Updated:** 2026-05-02
-**Actor:** WORKING_ITEMS DEL-07-01 implementation from sealed dispatch brief
-**Current Decomposition:** `docs/_Decomposition/SOFTWARE_DECOMP.md` revision `0.4`
-**Current Mode:** `DEL-07-01` implemented, committed, and promoted to commit-backed evidence
+## SCA-002 Corrective Cleanup Applied
+
+Before resuming DEV-001 orchestration or using decomposition revision `0.5` for downstream work, read:
+
+`execution/_ScopeChange/SCA-002_2026-05-02_1854/REVIEW_HANDOFF_TO_NEXT_INSTANCE.md`
+
+The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
+
+- removed cross-package direct `CoversScopeItems` / deliverable `Scope Items` claims;
+- fixed reciprocal scope-ledger mappings;
+- updated package table assigned-scope cells for `PKG-01`, `PKG-02`, and `PKG-07`;
+- updated stale `execution/_Decomposition/_LATEST.md`;
+- normalized SCA-002 supersession CSVs to the canonical tool schema;
+- clarified human-gate status after cleanup.
+
+Do not run `ORCHESTRATOR`, `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, or Type 2 dispatch from revision `0.5` until the human accepts the corrected revision 0.5 basis or explicitly authorizes a downstream refresh. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
+
+**Last Updated:** 2026-05-03
+**Actor:** SCA-002 corrective cleanup from review handoff
+**Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` pending human acceptance for downstream refresh
+**Current Mode:** SCA-002 corrective cleanup applied; downstream coordination state below remains stale until explicitly refreshed
 
 ## Active Control State
 
