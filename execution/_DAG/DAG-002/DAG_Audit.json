@@ -7,12 +7,14 @@
   "package_count": 17,
   "historical_dag001_node_count": 73,
   "revision05_added_node_count": 19,
-  "active_edge_count": 615,
-  "candidate_edge_count": 9,
-  "edge_row_count": 624,
+  "active_edge_count": 859,
+  "candidate_edge_count": 8,
+  "retired_edge_count": 1,
+  "edge_row_count": 868,
   "status_counts": {
-    "ACTIVE": 615,
-    "CANDIDATE": 9
+    "ACTIVE": 859,
+    "CANDIDATE": 8,
+    "RETIRED": 1
   },
   "endpoint_issue_count": 0,
   "endpoint_issues": [],
@@ -24,15 +26,11 @@
   "bidirectional_active_pairs": [],
   "active_scc_count": 0,
   "active_sccs": [],
-  "active_plus_candidate_scc_count": 4,
+  "active_plus_candidate_scc_count": 3,
   "active_plus_candidate_sccs": [
     [
       "DEL-04-04",
       "DEL-04-06"
-    ],
-    [
-      "DEL-08-05",
-      "DEL-11-04"
     ],
     [
       "DEL-09-05",
@@ -44,7 +42,7 @@
       "DEL-12-05"
     ]
   ],
-  "topological_wave_count": 12,
+  "topological_wave_count": 15,
   "topological_cycle_remainder": [],
   "lifecycle_counts": {
     "CHECKING": 47,
@@ -78,29 +76,15 @@
     "DEL-16-03",
     "DEL-16-04"
   ],
-  "revision05_added_nodes_without_active_incident_edges": [
-    "DEL-07-08",
-    "DEL-08-06",
-    "DEL-13-01",
-    "DEL-13-02",
-    "DEL-13-03",
-    "DEL-13-04",
-    "DEL-14-01",
-    "DEL-14-02",
-    "DEL-14-03",
-    "DEL-14-04",
-    "DEL-14-05",
-    "DEL-15-01",
-    "DEL-15-02",
-    "DEL-15-03",
-    "DEL-15-04",
-    "DEL-16-01",
-    "DEL-16-02",
-    "DEL-16-03",
-    "DEL-16-04"
-  ],
+  "revision05_added_nodes_without_active_incident_edges": [],
   "targeted_review_deliverables": [
     "DEL-01-04",
     "DEL-02-01"
-  ]
+  ],
+  "targeted_review_dispositions": {
+    "DEL-01-04": "ACCEPTED_FOR_REV05_GRAPH_AUTHORING",
+    "DEL-02-01": "ACCEPTED_AS_FOUNDATIONAL_PREDECESSOR_WITH_SUPPLEMENT_REQUIRED_BEFORE_COMPLETENESS_RELIANCE"
+  },
+  "edge_disposition_review": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md",
+  "edge_disposition_worklist": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionWorklist.csv"
 }

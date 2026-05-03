@@ -4,7 +4,7 @@
 **Dependency tracking mode:** FULL_GRAPH
 **External schedule / coordination artifact:** N/A
 **Semantic context maturity threshold:** SEMANTIC_READY
-**DAG status:** `DAG-002` unapproved revision `0.5` proposal snapshot created
+**DAG status:** `DAG-002` unapproved revision `0.5` proposal snapshot refreshed from targeted review and edge-disposition review
 **Accepted DAG:** None for revision `0.5`; `execution/_DAG/DAG-001/` remains historical revision `0.4` evidence
 **DAG approval record:** None for revision `0.5`; historical `DAG-001` approval remains at `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
 **Blocker computation:** HELD for revision `0.5` until explicit human graph approval; `CANDIDATE` edges excluded; DEV-001 uses implementation-readiness semantics only after graph approval
@@ -15,13 +15,13 @@
 **Accepted decomposition basis:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for SCA-002 downstream refresh planning
 **Downstream refresh plan:** `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
 **Current DAG status relative to revision 0.5:** `DAG-002` is a current unapproved proposal; `DAG-001` is historical revision `0.4` evidence and must not drive new revision `0.5` dispatch
-**Current SCA-002 proposal surface:** `execution/_DAG/DAG-002/` plus `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`
+**Current SCA-002 proposal surface:** `execution/_DAG/DAG-002/`, `execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md`, and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`
 **Current lifecycle snapshot:** `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`
-**Current blocker queue:** `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` hold-state queue; not readiness computation
+**Current blocker queue:** `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` hold-state queue; not readiness computation; not refreshed after the latest proposal-only DAG edge update
 **Local dependency registers:** historical synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority; current status projection at `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
 **Quarantined reference corpus:** `docs/_ScopeChange/chirality-app-docs/` is read-only perspective material; not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
-**Last bounded item:** `SCA-002 revision 0.5 control-plane current-state alignment`
+**Last bounded item:** `SCA-002 DAG-002 targeted review, edge disposition, and unapproved proposal refresh`
 **Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
 **Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, `DAG-001`, and the latest human gate
 
@@ -50,6 +50,7 @@
 - 2026-05-03 - Classify `docs/_ScopeChange/chirality-app-docs/` as a quarantined reference corpus for SCA-002. It may inform governance perspective, but no Chirality app/harness implementation, UI/runtime work, SDK/provider integration, DAG edge, Type 2 dispatch, package-local context, lifecycle transition, or dependency-register change is authorized from that corpus without a later explicit scope change or architecture decision.
 - 2026-05-03 - Authorize the SCA-002 `DAG-002` proposal-plan handoff closeout. The next fresh agent may create an unapproved revision `0.5` `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/` using `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, while preserving `DAG-001` as historical revision `0.4` evidence. This does not approve a graph, approve any active edge set, regenerate blockers, update lifecycle state, update implementation evidence, refresh dependency mirrors, dispatch Type 2 work, run `PREPARATION`, or promote Chirality corpus material.
 - 2026-05-03 - Request current-state alignment for lifecycle, evidence, blocker queue, DAG, and dependency registers. The implemented alignment creates `execution/_DAG/DAG-002/` as an unapproved revision `0.5` proposal, replaces `DEV-001_BLOCKER_QUEUE.*` with a hold-state queue, and adds revision `0.5` lifecycle/evidence/dependency status projections. This does not approve a graph, approve any active edge set, compute implementation readiness, refresh deliverable-local dependency mirrors, dispatch Type 2 work, run `PREPARATION`, or promote Chirality corpus material.
+- 2026-05-03 - Authorize targeted `REVIEW` for `DEL-01-04` and `DEL-02-01`, bounded `DAG-002` graph-authoring review for `DAG2-RD-001` through `DAG2-RD-016` and inherited candidate rows, and proposal-only update/validation after those decisions. This does not approve `DAG-002`, create `APPROVAL_RECORD.md`, compute blocker readiness, refresh deliverable-local dependency mirrors, change lifecycle state, dispatch Type 2 work, run `PREPARATION`, or promote Chirality corpus material.
 
 ## Operating Rules
 
@@ -70,4 +71,5 @@
 - After SCA-002 acceptance, do not use `DAG-001`, old dispatch briefs, or the `DAG-002` proposal for new Type 2 dispatch until a revision `0.5` graph is approved and downstream context surfaces are refreshed through the appropriate workflow gates.
 - Treat `execution/_DAG/DAG-002/` artifacts as unapproved proposal evidence until a later human graph approval record exists. Proposal artifacts must not drive blocker computation, lifecycle state, Type 2 dispatch, schedule, staffing, priority, or implementation-readiness claims.
 - Treat `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` as a current hold-state queue, not as a blocked/unblocked implementation-readiness queue, until explicit graph approval enables recomputation.
+- Treat hold-state queue edge counts as last-refresh context only if the unapproved `DAG-002` proposal has changed after the queue was generated.
 - Treat the Chirality app docs corpus as quarantined reference material. Route any proposed promotion into OpenPipeStress through `SCOPE_CHANGE` or a human-approved architecture decision before development execution.

@@ -5,11 +5,14 @@
     "decomposition_revision": "0.5",
     "node_count": 92,
     "package_count": 17,
-    "active_edge_count": 615,
-    "candidate_edge_count": 9,
+    "active_edge_count": 859,
+    "candidate_edge_count": 8,
+    "retired_edge_count": 1,
     "approval_status": "UNAPPROVED_PROPOSAL_NOT_DISPATCH_AUTHORITY",
     "approval_record": "",
     "proposal_record": "execution/_DAG/DAG-002/PROPOSAL_RECORD.md",
+    "edge_disposition_review": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md",
+    "targeted_review": "execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md",
     "blocker_computation": "HELD_NO_APPROVED_REVISION_0_5_GRAPH",
     "topological_waves_produced": true,
     "active_cycle_status": "ACYCLIC",
@@ -6288,6 +6291,2202 @@
       "status": "ACTIVE",
       "confidence": "HIGH",
       "evidence_file": "docs/_Registers/Deliverables.csv"
+    },
+    {
+      "id": "DAG-002-E0625",
+      "from": "DEL-07-08",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0626",
+      "from": "DEL-07-08",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0627",
+      "from": "DEL-07-08",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0628",
+      "from": "DEL-07-08",
+      "to": "DEL-00-05",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0629",
+      "from": "DEL-07-08",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0630",
+      "from": "DEL-07-08",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0631",
+      "from": "DEL-07-08",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0632",
+      "from": "DEL-08-06",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0633",
+      "from": "DEL-08-06",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0634",
+      "from": "DEL-08-06",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0635",
+      "from": "DEL-08-06",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0636",
+      "from": "DEL-08-06",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0637",
+      "from": "DEL-08-06",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0638",
+      "from": "DEL-08-06",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0639",
+      "from": "DEL-13-01",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0640",
+      "from": "DEL-13-01",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0641",
+      "from": "DEL-13-01",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0642",
+      "from": "DEL-13-01",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0643",
+      "from": "DEL-13-01",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0644",
+      "from": "DEL-13-01",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0645",
+      "from": "DEL-13-01",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0646",
+      "from": "DEL-13-02",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0647",
+      "from": "DEL-13-02",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0648",
+      "from": "DEL-13-02",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0649",
+      "from": "DEL-13-02",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0650",
+      "from": "DEL-13-02",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0651",
+      "from": "DEL-13-02",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0652",
+      "from": "DEL-13-02",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0653",
+      "from": "DEL-13-03",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0654",
+      "from": "DEL-13-03",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0655",
+      "from": "DEL-13-03",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0656",
+      "from": "DEL-13-03",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0657",
+      "from": "DEL-13-03",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0658",
+      "from": "DEL-13-03",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0659",
+      "from": "DEL-13-03",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0660",
+      "from": "DEL-13-04",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0661",
+      "from": "DEL-13-04",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0662",
+      "from": "DEL-13-04",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0663",
+      "from": "DEL-13-04",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0664",
+      "from": "DEL-13-04",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0665",
+      "from": "DEL-13-04",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0666",
+      "from": "DEL-13-04",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0667",
+      "from": "DEL-14-01",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0668",
+      "from": "DEL-14-01",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0669",
+      "from": "DEL-14-01",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0670",
+      "from": "DEL-14-01",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0671",
+      "from": "DEL-14-01",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0672",
+      "from": "DEL-14-01",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0673",
+      "from": "DEL-14-01",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0674",
+      "from": "DEL-14-02",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0675",
+      "from": "DEL-14-02",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0676",
+      "from": "DEL-14-02",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0677",
+      "from": "DEL-14-02",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0678",
+      "from": "DEL-14-02",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0679",
+      "from": "DEL-14-02",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0680",
+      "from": "DEL-14-02",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0681",
+      "from": "DEL-14-03",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0682",
+      "from": "DEL-14-03",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0683",
+      "from": "DEL-14-03",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0684",
+      "from": "DEL-14-03",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0685",
+      "from": "DEL-14-03",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0686",
+      "from": "DEL-14-03",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0687",
+      "from": "DEL-14-03",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0688",
+      "from": "DEL-14-04",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0689",
+      "from": "DEL-14-04",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0690",
+      "from": "DEL-14-04",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0691",
+      "from": "DEL-14-04",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0692",
+      "from": "DEL-14-04",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0693",
+      "from": "DEL-14-04",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0694",
+      "from": "DEL-14-04",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0695",
+      "from": "DEL-14-05",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0696",
+      "from": "DEL-14-05",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0697",
+      "from": "DEL-14-05",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0698",
+      "from": "DEL-14-05",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0699",
+      "from": "DEL-14-05",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0700",
+      "from": "DEL-14-05",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0701",
+      "from": "DEL-14-05",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0702",
+      "from": "DEL-15-01",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0703",
+      "from": "DEL-15-01",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0704",
+      "from": "DEL-15-01",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0705",
+      "from": "DEL-15-01",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0706",
+      "from": "DEL-15-01",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0707",
+      "from": "DEL-15-01",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0708",
+      "from": "DEL-15-01",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0709",
+      "from": "DEL-15-02",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0710",
+      "from": "DEL-15-02",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0711",
+      "from": "DEL-15-02",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0712",
+      "from": "DEL-15-02",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0713",
+      "from": "DEL-15-02",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0714",
+      "from": "DEL-15-02",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0715",
+      "from": "DEL-15-02",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0716",
+      "from": "DEL-15-03",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0717",
+      "from": "DEL-15-03",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0718",
+      "from": "DEL-15-03",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0719",
+      "from": "DEL-15-03",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0720",
+      "from": "DEL-15-03",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0721",
+      "from": "DEL-15-03",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0722",
+      "from": "DEL-15-03",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0723",
+      "from": "DEL-15-04",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0724",
+      "from": "DEL-15-04",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0725",
+      "from": "DEL-15-04",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0726",
+      "from": "DEL-15-04",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0727",
+      "from": "DEL-15-04",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0728",
+      "from": "DEL-15-04",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0729",
+      "from": "DEL-15-04",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0730",
+      "from": "DEL-16-01",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0731",
+      "from": "DEL-16-01",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0732",
+      "from": "DEL-16-01",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0733",
+      "from": "DEL-16-01",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0734",
+      "from": "DEL-16-01",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0735",
+      "from": "DEL-16-01",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0736",
+      "from": "DEL-16-01",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0737",
+      "from": "DEL-16-02",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0738",
+      "from": "DEL-16-02",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0739",
+      "from": "DEL-16-02",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0740",
+      "from": "DEL-16-02",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0741",
+      "from": "DEL-16-02",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0742",
+      "from": "DEL-16-02",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0743",
+      "from": "DEL-16-02",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0744",
+      "from": "DEL-16-03",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0745",
+      "from": "DEL-16-03",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0746",
+      "from": "DEL-16-03",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0747",
+      "from": "DEL-16-03",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0748",
+      "from": "DEL-16-03",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0749",
+      "from": "DEL-16-03",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0750",
+      "from": "DEL-16-03",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0751",
+      "from": "DEL-16-04",
+      "to": "DEL-00-01",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0752",
+      "from": "DEL-16-04",
+      "to": "DEL-00-02",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0753",
+      "from": "DEL-16-04",
+      "to": "DEL-00-03",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0754",
+      "from": "DEL-16-04",
+      "to": "DEL-00-04",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0755",
+      "from": "DEL-16-04",
+      "to": "DEL-00-06",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0756",
+      "from": "DEL-16-04",
+      "to": "DEL-00-07",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0757",
+      "from": "DEL-16-04",
+      "to": "DEL-00-08",
+      "type": "ARCHITECTURE_BASIS",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_Decomposition/SOFTWARE_DECOMP.md"
+    },
+    {
+      "id": "DAG-002-E0758",
+      "from": "DEL-13-01",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0759",
+      "from": "DEL-13-01",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0760",
+      "from": "DEL-13-01",
+      "to": "DEL-01-02",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0761",
+      "from": "DEL-13-01",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0762",
+      "from": "DEL-13-02",
+      "to": "DEL-13-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0763",
+      "from": "DEL-13-02",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0764",
+      "from": "DEL-13-02",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0765",
+      "from": "DEL-13-02",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0766",
+      "from": "DEL-13-02",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0767",
+      "from": "DEL-13-03",
+      "to": "DEL-13-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0768",
+      "from": "DEL-13-03",
+      "to": "DEL-13-02",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0769",
+      "from": "DEL-13-03",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0770",
+      "from": "DEL-13-03",
+      "to": "DEL-04-06",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0771",
+      "from": "DEL-13-03",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0772",
+      "from": "DEL-13-04",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0773",
+      "from": "DEL-13-04",
+      "to": "DEL-13-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0774",
+      "from": "DEL-13-04",
+      "to": "DEL-13-02",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0775",
+      "from": "DEL-13-04",
+      "to": "DEL-13-03",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0776",
+      "from": "DEL-13-04",
+      "to": "DEL-04-01",
+      "type": "SOLVER_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0777",
+      "from": "DEL-13-04",
+      "to": "DEL-04-03",
+      "type": "SOLVER_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0778",
+      "from": "DEL-13-04",
+      "to": "DEL-05-01",
+      "type": "LOAD_STRESS_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0779",
+      "from": "DEL-14-01",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0780",
+      "from": "DEL-14-01",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0781",
+      "from": "DEL-14-01",
+      "to": "DEL-08-02",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0782",
+      "from": "DEL-14-01",
+      "to": "DEL-05-04",
+      "type": "LOAD_STRESS_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0783",
+      "from": "DEL-14-02",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0784",
+      "from": "DEL-14-02",
+      "to": "DEL-05-04",
+      "type": "LOAD_STRESS_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0785",
+      "from": "DEL-14-02",
+      "to": "DEL-08-02",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0786",
+      "from": "DEL-14-02",
+      "to": "DEL-08-04",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0787",
+      "from": "DEL-14-02",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0788",
+      "from": "DEL-14-05",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0789",
+      "from": "DEL-14-05",
+      "to": "DEL-14-02",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0790",
+      "from": "DEL-14-05",
+      "to": "DEL-08-04",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0791",
+      "from": "DEL-14-05",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0792",
+      "from": "DEL-14-03",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0793",
+      "from": "DEL-14-03",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0794",
+      "from": "DEL-14-03",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0795",
+      "from": "DEL-14-04",
+      "to": "DEL-14-02",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0796",
+      "from": "DEL-14-04",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0797",
+      "from": "DEL-14-04",
+      "to": "DEL-08-04",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0798",
+      "from": "DEL-14-04",
+      "to": "DEL-02-02",
+      "type": "UNIT_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0799",
+      "from": "DEL-15-01",
+      "to": "DEL-10-03",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0800",
+      "from": "DEL-15-01",
+      "to": "DEL-08-04",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0801",
+      "from": "DEL-15-01",
+      "to": "DEL-08-02",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0802",
+      "from": "DEL-15-01",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0803",
+      "from": "DEL-15-01",
+      "to": "DEL-14-02",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0804",
+      "from": "DEL-15-01",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0805",
+      "from": "DEL-15-02",
+      "to": "DEL-15-01",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0806",
+      "from": "DEL-15-02",
+      "to": "DEL-10-02",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0807",
+      "from": "DEL-15-02",
+      "to": "DEL-10-03",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0808",
+      "from": "DEL-15-02",
+      "to": "DEL-12-02",
+      "type": "SECURITY_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0809",
+      "from": "DEL-15-02",
+      "to": "DEL-13-04",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0810",
+      "from": "DEL-15-02",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0811",
+      "from": "DEL-15-03",
+      "to": "DEL-15-01",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0812",
+      "from": "DEL-15-03",
+      "to": "DEL-15-02",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0813",
+      "from": "DEL-15-03",
+      "to": "DEL-10-02",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0814",
+      "from": "DEL-15-03",
+      "to": "DEL-10-03",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0815",
+      "from": "DEL-15-03",
+      "to": "DEL-12-02",
+      "type": "SECURITY_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0816",
+      "from": "DEL-15-03",
+      "to": "DEL-13-04",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0817",
+      "from": "DEL-15-03",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0818",
+      "from": "DEL-15-04",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0819",
+      "from": "DEL-15-04",
+      "to": "DEL-15-01",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0820",
+      "from": "DEL-15-04",
+      "to": "DEL-15-02",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0821",
+      "from": "DEL-15-04",
+      "to": "DEL-15-03",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0822",
+      "from": "DEL-15-04",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0823",
+      "from": "DEL-16-01",
+      "to": "DEL-02-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0824",
+      "from": "DEL-16-01",
+      "to": "DEL-13-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0825",
+      "from": "DEL-16-01",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0826",
+      "from": "DEL-16-01",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0827",
+      "from": "DEL-16-02",
+      "to": "DEL-16-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0828",
+      "from": "DEL-16-02",
+      "to": "DEL-13-03",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0829",
+      "from": "DEL-16-02",
+      "to": "DEL-14-03",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0830",
+      "from": "DEL-16-02",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0831",
+      "from": "DEL-16-02",
+      "to": "DEL-04-06",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0832",
+      "from": "DEL-16-03",
+      "to": "DEL-16-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0833",
+      "from": "DEL-16-03",
+      "to": "DEL-16-02",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0834",
+      "from": "DEL-16-03",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0835",
+      "from": "DEL-16-03",
+      "to": "DEL-08-02",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0836",
+      "from": "DEL-16-03",
+      "to": "DEL-02-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0837",
+      "from": "DEL-16-04",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0838",
+      "from": "DEL-16-04",
+      "to": "DEL-16-03",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0839",
+      "from": "DEL-16-04",
+      "to": "DEL-12-05",
+      "type": "SECURITY_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0840",
+      "from": "DEL-07-08",
+      "to": "DEL-07-01",
+      "type": "GUI_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0841",
+      "from": "DEL-07-08",
+      "to": "DEL-07-02",
+      "type": "GUI_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0842",
+      "from": "DEL-07-08",
+      "to": "DEL-07-04",
+      "type": "GUI_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0843",
+      "from": "DEL-07-08",
+      "to": "DEL-07-05",
+      "type": "GUI_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0844",
+      "from": "DEL-07-08",
+      "to": "DEL-13-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0845",
+      "from": "DEL-07-08",
+      "to": "DEL-13-03",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0846",
+      "from": "DEL-07-08",
+      "to": "DEL-13-04",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0847",
+      "from": "DEL-07-08",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0848",
+      "from": "DEL-07-08",
+      "to": "DEL-14-03",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0849",
+      "from": "DEL-07-08",
+      "to": "DEL-14-04",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0850",
+      "from": "DEL-07-08",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0851",
+      "from": "DEL-07-08",
+      "to": "DEL-16-01",
+      "type": "DOMAIN_MODEL",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0852",
+      "from": "DEL-07-08",
+      "to": "DEL-16-02",
+      "type": "DIAGNOSTICS_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0853",
+      "from": "DEL-07-08",
+      "to": "DEL-16-03",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0854",
+      "from": "DEL-08-06",
+      "to": "DEL-01-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0855",
+      "from": "DEL-08-06",
+      "to": "DEL-08-01",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0856",
+      "from": "DEL-08-06",
+      "to": "DEL-08-02",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0857",
+      "from": "DEL-08-06",
+      "to": "DEL-08-03",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0858",
+      "from": "DEL-08-06",
+      "to": "DEL-08-04",
+      "type": "REPORTING_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0859",
+      "from": "DEL-08-06",
+      "to": "DEL-08-05",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0860",
+      "from": "DEL-08-06",
+      "to": "DEL-12-02",
+      "type": "SECURITY_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0861",
+      "from": "DEL-08-06",
+      "to": "DEL-14-01",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0862",
+      "from": "DEL-08-06",
+      "to": "DEL-14-02",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0863",
+      "from": "DEL-08-06",
+      "to": "DEL-14-03",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0864",
+      "from": "DEL-08-06",
+      "to": "DEL-14-04",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0865",
+      "from": "DEL-08-06",
+      "to": "DEL-14-05",
+      "type": "PERSISTENCE_CONTRACT",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0866",
+      "from": "DEL-08-06",
+      "to": "DEL-15-01",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0867",
+      "from": "DEL-08-06",
+      "to": "DEL-15-03",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
+    },
+    {
+      "id": "DAG-002-E0868",
+      "from": "DEL-08-06",
+      "to": "DEL-15-04",
+      "type": "INTEROP_PREDECESSOR",
+      "status": "ACTIVE",
+      "confidence": "HIGH",
+      "evidence_file": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md"
     }
   ],
   "candidate_edges": [
@@ -6337,15 +8536,6 @@
       "evidence_file": "plans/DAG-001_EXECUTION_DEPENDENCY_GRAPH_PLAN.md"
     },
     {
-      "id": "DAG-002-E0621",
-      "from": "DEL-08-05",
-      "to": "DEL-11-04",
-      "type": "GOVERNANCE_PREDECESSOR",
-      "status": "CANDIDATE",
-      "confidence": "LOW",
-      "evidence_file": "plans/DAG-001_EXECUTION_DEPENDENCY_GRAPH_PLAN.md"
-    },
-    {
       "id": "DAG-002-E0622",
       "from": "DEL-04-06",
       "to": "DEL-04-04",
@@ -6369,6 +8559,17 @@
       "to": "DEL-10-05",
       "type": "GUI_PREDECESSOR",
       "status": "CANDIDATE",
+      "confidence": "LOW",
+      "evidence_file": "plans/DAG-001_EXECUTION_DEPENDENCY_GRAPH_PLAN.md"
+    }
+  ],
+  "retired_edges": [
+    {
+      "id": "DAG-002-E0621",
+      "from": "DEL-08-05",
+      "to": "DEL-11-04",
+      "type": "GOVERNANCE_PREDECESSOR",
+      "status": "RETIRED",
       "confidence": "LOW",
       "evidence_file": "plans/DAG-001_EXECUTION_DEPENDENCY_GRAPH_PLAN.md"
     }

@@ -10,7 +10,7 @@ created: 2026-05-03
 ## Active Edge Layer
 
 | Check | Result |
-|---|---|
+|---|---:|
 | Active SCC count | 0 |
 | Active cycle status | ACYCLIC |
 | Duplicate active directed edges | 0 |
@@ -21,10 +21,17 @@ created: 2026-05-03
 ## Active Plus Candidate Layer
 
 | Check | Result |
-|---|---|
-| SCC count with candidates included | 4 |
-| Candidate edge count | 9 |
-| Candidate interpretation | warning only; non-gating |
+|---|---:|
+| SCC count with candidates included | 3 |
+| Candidate edge count | 8 |
+| Retired candidate rows | 1 |
+
+Candidate interpretation: warning only; non-gating.
 
 Candidate-layer SCCs, if any, are proposal warnings only and do not block the active-edge acyclicity result unless later promoted by explicit human graph approval.
 
+## Candidate-Layer SCCs
+
+- `DEL-04-04, DEL-04-06`
+- `DEL-09-05, DEL-10-04`
+- `DEL-10-02, DEL-12-01, DEL-12-05`
