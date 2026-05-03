@@ -19,13 +19,13 @@ The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 
 The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` ran Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `RECONCILIATION` completed the revision `0.5` compatibility-planning cycle; `ORCHESTRATOR` prepared the revision `0.5` `DAG-002` proposal plan; and `CHANGE` closed out the handoff for proposal-snapshot implementation.
 
-The latest human request then asked that lifecycle, evidence, blocker queue, DAG, and dependency registers reflect the current state. That alignment is now recorded as proposal/control-plane state only:
+An earlier human request then asked that lifecycle, evidence, blocker queue, DAG, and dependency registers reflect the current state. That alignment was recorded as proposal/control-plane state only:
 
 - `execution/_DAG/DAG-002/` was initially created as a revision `0.5` proposal snapshot.
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` now reflect a current hold-state queue, not a blocked/unblocked readiness queue.
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` records the current lifecycle/control-surface projection across all 92 revision `0.5` deliverables.
 - `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` records current implementation-evidence mapping, including targeted-review flags for `DEL-01-04` and `DEL-02-01`.
-- `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` records dependency-register status without refreshing deliverable-local `Dependencies.csv` mirrors from the then-proposed graph.
+- `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` initially recorded dependency-register status without refreshing deliverable-local `Dependencies.csv` mirrors from the then-proposed graph.
 
 The planning output is recorded at `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`. The reconciliation output is recorded at `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md` with dependency-closure evidence under `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`. The `DAG-002` proposal plan and handoff remain recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md` and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`.
 
@@ -40,21 +40,39 @@ as the OpenPipeStress SOFTWARE development coordination basis. Candidate rows
 remain non-gating. The approval record exists at
 `execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
 
-Do not use `DAG-002`, the stale hold-state blocker queue, lifecycle/evidence
-projections, or dependency-register projections to dispatch Type 2 work, claim
-implementation readiness, refresh package-local dependency mirrors, run
-`PREPARATION`, or promote the Chirality app/harness corpus except through the
-later guarded workflow steps explicitly authorized for that purpose.
+The next human instruction approved refreshing deliverable-local dependency
+mirrors from approved `DAG-002` and, if appropriate, recomputing blocker
+readiness from approved `ACTIVE` `DAG-002` edges. ORCHESTRATOR completed that
+guarded refresh:
+
+- 65 existing non-`PKG-00` local `Dependencies.csv` mirrors and
+  `_DEPENDENCIES.md` pointers were refreshed from approved `DAG-002`;
+- 8 `PKG-00` architecture-basis deliverables remain register-exempt;
+- 19 revision `0.5` deliverables have no execution control surface yet and are
+  held for `PREPARATION`;
+- `DEV-001_BLOCKER_QUEUE.md` / `.csv` were recomputed from 859 active edges:
+  70 unblocked, 22 blocked, 8 candidate rows excluded.
+
+Do not use the approved `DAG-002` graph, refreshed blocker queue, lifecycle or
+evidence projections, refreshed dependency mirrors, or mirror-status projection
+to dispatch Type 2 work, change lifecycle state, run `PREPARATION`, claim
+implementation completeness, promote candidate rows, or promote the Chirality
+app/harness corpus except through the later guarded workflow steps explicitly
+authorized for that purpose.
 
 The 2026-05-03 review of `docs/_ScopeChange/chirality-app-docs/` classified that folder as a quarantined reference corpus. It may be read for governance perspective, but it is not active OpenPipeStress implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority. Do not generate Type 2 dispatch, DAG edges, package-local contexts, production artifacts, implementation briefs, GUI/runtime work, SDK/provider integration, harness API work, lifecycle transitions, or dependency-register changes from that corpus under SCA-002.
 
-Do not run `PREPARATION`, deliverable-local dependency refresh, lifecycle transitions, blocker readiness computation, or Type 2 dispatch from revision `0.5` except through the relevant later guarded workflow gate. The completed-task archive remains historical pre-SCA-002 DEV-001 state unless a row explicitly says otherwise.
+Do not run `PREPARATION`, lifecycle transitions, additional dependency refresh,
+additional blocker readiness computation, or Type 2 dispatch from revision
+`0.5` except through the relevant later guarded workflow gate. The completed
+task archive remains historical pre-SCA-002 DEV-001 state unless a row
+explicitly says otherwise.
 
 **Last Updated:** 2026-05-03
-**Actor:** ORCHESTRATOR DAG-002 visualization
+**Actor:** ORCHESTRATOR dependency mirror and blocker readiness refresh
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
-**Current Mode:** `DAG-002` revision `0.5` active edge set approved; Mermaid visualization generated; guarded follow-up steps not yet run
-**Current Planning Surface:** `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionWorklist.csv`, `execution/_Coordination/SCA-002_DAG-002_PRE_APPROVAL_GRAPH_REVIEW_HANDOFF.md`, `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
+**Current Mode:** `DAG-002` revision `0.5` active edge set approved; existing dependency mirrors refreshed; blocker readiness recomputed from active edges; `PREPARATION` and Type 2 dispatch not run
+**Current Planning Surface:** `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`, `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`, `execution/_DAG/DAG-002/evidence/dev001_rev05_local_materialization_summary.json`, `execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionWorklist.csv`, `execution/_Coordination/SCA-002_DAG-002_PRE_APPROVAL_GRAPH_REVIEW_HANDOFF.md`, `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
 
 ## Active Control State
 
@@ -66,24 +84,24 @@ Do not run `PREPARATION`, deliverable-local dependency refresh, lifecycle transi
 | Graph approval | `execution/_DAG/DAG-002/APPROVAL_RECORD.md`; historical `DAG-001` approval remains at `execution/_DAG/DAG-001/APPROVAL_RECORD.md` |
 | Active graph authority | Approved revision `0.5` active edge set only; candidate rows remain non-gating |
 | Quarantined reference corpus | `docs/_ScopeChange/chirality-app-docs/`; read-only perspective only, not implementation or dispatch authority |
-| Blocker computation | Authorized for later guarded recomputation from approved `ACTIVE` `DAG-002` edges; not yet run |
+| Blocker computation | Completed 2026-05-03 from approved `ACTIVE` `DAG-002` edges; candidate rows excluded |
 | Candidate edges | 8 retained as non-gating; 1 inherited candidate row retired |
 | Semantic context threshold | `SEMANTIC_READY` |
 | Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
 | Lifecycle snapshot | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` |
 | Implementation evidence source | `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` historical committed evidence rows |
 | Implementation evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current hold-state queue |
-| Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current active-edge readiness queue: 70 unblocked, 22 blocked |
+| Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`: 65 refreshed mirrors, 8 `PKG-00` exempt, 19 missing control surfaces held |
 | Selected pilot | `DEL-01-01 - Project governance baseline` |
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `DAG-002 Mermaid visualization` |
-| Latest state commit | CHANGE closeout commit for `DAG-002` approval, `DEL-02-01` supplement, and Mermaid visualization; exact hash recorded in git history and final handoff response |
-| Previous completed task archive status | `DAG-002 revision 0.5 active edge set approval` archived in compact history |
-| Current authorized item | No Type 2 dispatch item. Later blocker readiness recomputation and dependency mirror refresh are authorized only as their own guarded workflow steps; CHANGE closeout for the working tree remains pending if requested. |
+| Latest state task | `DAG-002 dependency mirror and blocker readiness refresh` |
+| Latest state commit | Not committed; CHANGE closeout/commit remains pending if requested |
+| Previous completed task archive status | `DAG-002 Mermaid visualization` archived in compact history |
+| Current authorized item | No Type 2 dispatch item. Dependency mirror refresh and blocker readiness recomputation are complete within the approved gate; `PREPARATION`, lifecycle transition, Type 2 dispatch, candidate promotion, and additional refreshes remain gated. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -103,7 +121,7 @@ Do not run `PREPARATION`, deliverable-local dependency refresh, lifecycle transi
 | Active plus candidate SCC warnings | 3 |
 | Topological waves from approved active edges | 15 |
 | Schema validation | `tools/validation/validate_dependencies_schema.py` passes on `execution/_DAG/DAG-002/DependencyEdges.csv`; `tools/coordination/audit_dag.py --strict` passes on `DAG-002` |
-| Approval status | Approved active edge set; `execution/_DAG/DAG-002/APPROVAL_RECORD.md` exists; guarded follow-up steps not yet run |
+| Approval status | Approved active edge set; `execution/_DAG/DAG-002/APPROVAL_RECORD.md` exists; dependency mirror refresh and blocker readiness recomputation completed as a later guarded step |
 
 Derived DEV-001 implementation projection, when needed:
 
@@ -135,8 +153,9 @@ require deliverable-local `Dependencies.csv` files.
 ## Local Dependency Register Status
 
 Non-`PKG-00` deliverable-local `Dependencies.csv` files remain synchronized
-mirrors/evidence materialized from `DAG-001`, not independent sequencing
-authority. They were not refreshed from `DAG-002` during graph approval.
+mirrors/evidence materialized from the approved aggregate DAG, not independent
+sequencing authority. Existing deliverable control surfaces were refreshed from
+approved `DAG-002` on 2026-05-03.
 
 Current dependency-register status is recorded in
 `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`:
@@ -144,35 +163,33 @@ Current dependency-register status is recorded in
 | Register status | Count |
 |---|---:|
 | `NOT_REQUIRED_ARCHITECTURE_BASIS` | 8 |
-| `HISTORICAL_DAG001_MIRROR_PRESENT_STALE_FOR_REV05` | 65 |
+| `SYNCHRONIZED_FROM_APPROVED_DAG002_MIRROR_PRESENT` | 65 |
 | `MISSING_CONTROL_SURFACE` | 19 |
 
-Refresh is now authorized only as a later guarded workflow step from the
-approved `DAG-002` active edge set.
+The 19 missing control surfaces are revision `0.5` additions or control
+surfaces not yet scaffolded under `execution/`; they remain held until a
+separate `PREPARATION` gate.
 
 ## Current Blocker Queue
 
-`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on 2026-05-03
-as a revision `0.5` hold-state queue. It was not refreshed after the later
-proposal-only `DAG-002` edge update or after graph approval. It remains stale
-and does not compute blocked/unblocked implementation readiness.
+`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was recomputed on 2026-05-03
+from approved `ACTIVE` `DAG-002` edges using the current DEV-001 implementation
+evidence register. Candidate rows were excluded and remain non-gating.
 
 | Queue fact | Count |
 |---|---:|
 | Queue rows | 92 |
-| Rows with `HELD_GRAPH_UNAPPROVED` | 92 |
-| Active proposal edges counted at last queue refresh | 615 |
-| Candidate proposal edges excluded from readiness at last queue refresh | 9 |
-| Satisfaction counts computed | 0 |
-| Blocking counts computed | 0 |
+| Active `DAG-002` edges counted | 859 |
+| Candidate rows excluded from readiness | 8 |
+| `UNBLOCKED` | 70 |
+| `BLOCKED` | 22 |
+| Implementation evidence records loaded | 47 |
+| Committed implementation evidence records | 47 |
+| Satisfied `PKG-00` architecture-basis edges | 521 |
 
 The queue is not a lifecycle approval, schedule, priority, staffing decision,
-implementation completeness claim, implementation-readiness claim, or
-professional approval.
-
-Current approved `DAG-002` counts are 859 active, 8 candidate, and 1 retired
-proposal row. The hold-state queue counts remain stale by design until a later
-explicit queue-refresh gate.
+implementation completeness claim, dispatch authorization, or professional
+approval.
 
 ## Completed Task History (Compacted)
 
@@ -292,8 +309,9 @@ Universal historical guardrails preserved across the completed bounded items:
 | `SCA-002 DAG-002 proposal plan` | Completed and handoff-authorized; committed by CHANGE closeout | `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, `NEXT_INSTANCE_STATE.md` | Proposal plan used reconciliation outputs to define 92-node revision `0.5` coverage, carry-forward/candidate/new-scope edge lanes, validation gates, and guardrails; `git diff --check`, preserved `DAG-001` dependency schema validation, and no-`DAG-002` directory check passed | Human later authorized proposal-plan handoff closeout for next-agent proposal-snapshot implementation; graph approval and downstream refresh actions remained out of scope. |
 | `SCA-002 DAG-002 proposal-plan handoff closeout` | Completed; `5896ece docs: record sca-002 dag-002 proposal handoff` | `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`, proposal plan/state/coordination records, change record | `git diff --check`; DAG-001 dependency schema validation passed; verified no `DAG-002` directory existed before closeout | Authorized the next proposal-snapshot implementation only; no graph approval, blocker regeneration, lifecycle/evidence update, dependency mirror refresh, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
 | `SCA-002 revision 0.5 control-plane current-state alignment` | Completed; `e4b05b4 docs: align sca002 rev05 control plane` | `execution/_DAG/DAG-002/`, hold-state blocker queue, lifecycle/evidence/dependency status projections, coordination prompt/state/change record | DAG-002 proposal schema validation, strict DAG audit, CSV/JSON parse checks, and `git diff --check` passed; proposal has 92 nodes, 615 active carry-forward rows, 9 candidate rows, 0 active SCCs | `DAG-002` remained unapproved; no blocker readiness, lifecycle change, dependency mirror refresh, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
-| `DEL-02-01 revision 0.5 supplement` | Completed in working tree; not committed | `schemas/model.schema.yaml`, `tests/test_model_schema.py`, `docs/TYPES.md`, `docs/SPEC.md`, `DEL-02-01` context/status/memory, `DAG-002` approval-review packet, coordination state | Model schema JSON check, model/persistence/results schema tests, DAG-002 dependency schema validation, strict DAG audit, DAG JSON checks, `git diff --check`, and no-approval-record check passed | Supplement removed the pre-approval blocker for graph approval; no lifecycle change, blocker readiness computation, dependency mirror refresh, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
-| `DAG-002 revision 0.5 active edge set approval` | Completed in working tree; not committed | `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, DAG-002 metadata/audit/wave/cycle/edge-register approval wording, coordination prompt/state | DAG-002 dependency schema validation, strict DAG audit, DAG JSON checks, and `git diff --check` passed; approved graph has 92 nodes, 859 active edges, 8 candidates, 1 retired row, and 0 active SCCs | Guarded follow-up steps remain pending: blocker readiness recomputation and dependency mirror refresh. No lifecycle change, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
+| `DEL-02-01 revision 0.5 supplement` | Completed; closeout commit `b79f645 docs: approve dag002 rev05 graph` | `schemas/model.schema.yaml`, `tests/test_model_schema.py`, `docs/TYPES.md`, `docs/SPEC.md`, `DEL-02-01` context/status/memory, `DAG-002` approval-review packet, coordination state | Model schema JSON check, model/persistence/results schema tests, DAG-002 dependency schema validation, strict DAG audit, DAG JSON checks, `git diff --check`, and no-approval-record check passed | Supplement removed the pre-approval blocker for graph approval; no lifecycle change, blocker readiness computation, dependency mirror refresh, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred during the supplement. |
+| `DAG-002 revision 0.5 active edge set approval` | Completed; `b79f645 docs: approve dag002 rev05 graph` | `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, DAG-002 metadata/audit/wave/cycle/edge-register approval wording, coordination prompt/state | DAG-002 dependency schema validation, strict DAG audit, DAG JSON checks, and `git diff --check` passed; approved graph has 92 nodes, 859 active edges, 8 candidates, 1 retired row, and 0 active SCCs | Later guarded follow-up steps refreshed mirrors and blocker readiness; no lifecycle change, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred during graph approval. |
+| `DAG-002 Mermaid visualization` | Completed; closeout commit `b79f645 docs: approve dag002 rev05 graph` also contains the approved graph/supplement closeout | `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `NEXT_INSTANCE_STATE.md` | DAG-002 dependency schema validation, strict DAG audit, and `git diff --check` passed; visualization collapsed 859 active deliverable edges into package-level and wave-level Mermaid diagrams | No graph edge, lifecycle, evidence, blocker queue, dependency mirror, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -316,64 +334,79 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DAG-002 Mermaid Visualization
+## Latest State - DAG-002 Dependency Mirror And Blocker Refresh
 
-Human requested a Mermaid diagram of approved `DAG-002`. ORCHESTRATOR generated
-a visualization artifact from `DeliverableNodes.csv`, `DependencyEdges.csv`,
-and `TopologicalWaves.md`.
+Human approved refreshing deliverable-local dependency mirrors from approved
+`DAG-002`, then recomputing blocker readiness from approved `ACTIVE` `DAG-002`
+edges if appropriate. ORCHESTRATOR completed the guarded refresh without
+launching `PREPARATION`, lifecycle transitions, Type 2 dispatch, candidate
+promotion, or Chirality corpus promotion.
 
 Files changed in this latest task include:
 
-- `execution/_DAG/DAG-002/DAG-002_Mermaid.md`
+- 65 existing non-`PKG-00` deliverable-local `Dependencies.csv` mirrors;
+- 65 matching `_DEPENDENCIES.md` pointer files;
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
+- `execution/_DAG/DAG-002/evidence/dev001_rev05_local_materialization_summary.json`
+- `tools/coordination/materialize_local_dependencies.py`
+- `tools/coordination/build_dev001_blocker_queue.py`
+- `tools/coordination/test_dag_control_plane.py`
+- `execution/_Coordination/_COORDINATION.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 
-Visualization summary:
+Refresh summary:
 
-- `DAG-002_Mermaid.md` contains a package-level Mermaid flowchart collapsing
-  the 859 approved active deliverable edges into cross-package edge counts.
-- The same file contains a wave-level Mermaid flowchart for the 15 active
-  topological waves.
-- Candidate rows are excluded from the active diagrams and remain non-gating.
-- The visualization records 764 cross-package active edges and 95 internal
-  same-package active edges.
+- Local mirror materialization wrote 65 deliverable registers and pointers.
+- `PKG-00` remains register-exempt with 8 architecture-basis deliverables.
+- 19 revision `0.5` deliverables were not created or materialized because their
+  execution control surfaces are missing; they remain held for `PREPARATION`.
+- The materialized local-row total is 623 rows: 615 active and 8 candidate.
+- The blocker queue was recomputed from 859 approved active edges and excludes
+  8 candidate rows.
+- The recomputed queue has 70 `UNBLOCKED` rows and 22 `BLOCKED` rows.
 
 Verification:
 
-- Required-reading protocol was checked before visualization work.
 - `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-002/DependencyEdges.csv`
-  passed with 868 rows.
+  passed.
 - `python3 tools/coordination/audit_dag.py --nodes execution/_DAG/DAG-002/DeliverableNodes.csv --edges execution/_DAG/DAG-002/DependencyEdges.csv --strict`
+  passed.
+- `python3 -m pytest tools/coordination` passed 10 tests.
+- 65 deliverable-local `Dependencies.csv` files passed dependency-schema
+  validation.
+- `python3 -m json.tool execution/_DAG/DAG-002/evidence/dev001_rev05_local_materialization_summary.json`
   passed.
 - `git diff --check` passed.
 
 Guardrail results:
 
-- No DAG edge, lifecycle, implementation-evidence, blocker queue, or
-  deliverable-local dependency mirror was changed by the visualization.
-- No blocked/unblocked readiness computation occurred.
-- No Type 2 dispatch, `PREPARATION` scaffold, or Chirality corpus promotion
-  occurred.
+- No DAG edge was changed.
+- No lifecycle state was changed.
+- No implementation-evidence row was changed.
+- No Type 2 dispatch or `WORKING_ITEMS` launch occurred.
+- No `PREPARATION` scaffold was run.
+- No Chirality app/harness corpus material was promoted.
 
 Remaining open items:
 
-- A later guarded workflow may recompute blocker readiness from approved
-  `ACTIVE` `DAG-002` edges.
-- A later guarded workflow may refresh deliverable-local dependency mirrors
-  from the approved graph.
-- CHANGE closeout/commit was requested by the human after the visualization
-  update.
+- CHANGE closeout/commit for this refresh is pending if requested.
+- `PREPARATION` must explicitly create or refresh the 19 missing revision `0.5`
+  control surfaces before their local dependency mirrors can be materialized.
+- Any Type 2 dispatch still requires a sealed deliverable brief, explicit write
+  scope, current context, and a separate human gate.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Push the CHANGE closeout commit for the current working-tree state.
-2. As a separate guarded workflow, recompute blocker readiness from approved
-   `ACTIVE` `DAG-002` edges if assigned.
-3. As a separate guarded workflow, refresh deliverable-local dependency mirrors
-   from approved `DAG-002` if assigned.
-4. Do not prepare revision `0.5` Type 2 dispatch until the relevant guarded
-   readiness/context-refresh steps are complete and explicitly authorized.
+1. If approved, perform CHANGE closeout for the dependency mirror and blocker
+   readiness refresh.
+2. If assigned through a separate gate, run `PREPARATION` or an equivalent
+   control-surface refresh for the 19 missing revision `0.5` deliverables.
+3. Do not prepare revision `0.5` Type 2 dispatch until current context surfaces,
+   sealed scope, explicit write targets, and human authorization are present.
 
 Do not start broad DAG execution. No parallel fan-out is authorized.
 

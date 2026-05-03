@@ -1,19 +1,14 @@
 # Dependencies: DEL-05-01 Primitive load case engine
 
 ## Generated Dependency Register
-- **Status:** SYNCHRONIZED_FROM_DAG_001
-- **Source of Truth:** `execution/_DAG/DAG-001/DependencyEdges.csv`
+- **Status:** SYNCHRONIZED_FROM_DAG_002
+- **Source of Truth:** `execution/_DAG/DAG-002/DependencyEdges.csv`
 - **Local Register:** `Dependencies.csv`
 - **Rows:** 9 total; 9 ACTIVE; 0 CANDIDATE.
-- **Generated:** 2026-04-30
-- **Local Annotation:** 2026-05-01 implementation evidence pass marked the
-  non-architecture upstream rows satisfied in the local mirror after
-  `DEL-05-01` implementation commit `e3c9695`.
+- **Generated:** 2026-05-03
 
 ## Authority Boundary
-- Aggregate `DAG-001` remains the sequencing and blocker-computation authority.
+- Aggregate `DAG-002` remains the sequencing and blocker-computation authority within its approval boundary.
 - This local register is a synchronized mirror/evidence surface, not an independent graph authority.
-- The local satisfaction annotations do not replace aggregate `DAG-001` as the
-  sequencing authority and do not promote candidate edges.
 - `CANDIDATE` rows remain non-gating until later RECONCILIATION plus CHANGE approval.
 - `PKG-00` architecture-basis rows are preserved here as injected context evidence; `PKG-00` does not receive local dependency registers.

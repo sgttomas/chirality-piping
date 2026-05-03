@@ -7,7 +7,7 @@
 **DAG status:** `DAG-002` revision `0.5` active edge set approved for development coordination
 **Accepted DAG:** `execution/_DAG/DAG-002/` revision `0.5`; `execution/_DAG/DAG-001/` remains historical revision `0.4` evidence
 **DAG approval record:** `execution/_DAG/DAG-002/APPROVAL_RECORD.md`; historical `DAG-001` approval remains at `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
-**Blocker computation:** Authorized for later guarded recomputation from approved `ACTIVE` `DAG-002` edges; not yet run; `CANDIDATE` edges remain excluded
+**Blocker computation:** Completed 2026-05-03 from approved `ACTIVE` `DAG-002` edges; `CANDIDATE` edges remain excluded
 **Default blocker satisfaction threshold:** `COMMITTED` implementation evidence
 **Implementation evidence register:** `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
 **Implementation evidence status projection:** `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
@@ -17,13 +17,13 @@
 **Current DAG status relative to revision 0.5:** `DAG-002` is the approved active-edge coordination basis; `DAG-001` is historical revision `0.4` evidence and must not drive new revision `0.5` dispatch
 **Current SCA-002 graph surface:** `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md`, `execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md`, and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`
 **Current lifecycle snapshot:** `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`
-**Current blocker queue:** `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` hold-state queue; not refreshed after `DAG-002` approval and not a current readiness computation
-**Local dependency registers:** historical synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority; current status projection at `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
+**Current blocker queue:** `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current active-edge readiness computation from approved `DAG-002`: 70 unblocked, 22 blocked, 8 candidate rows excluded
+**Local dependency registers:** synchronized mirrors/evidence for existing non-`PKG-00` deliverable control surfaces were refreshed from approved `DAG-002`; 65 mirrors present, 8 `PKG-00` registers not required, 19 revision `0.5` nodes held for `PREPARATION`; current status projection at `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
 **Quarantined reference corpus:** `docs/_ScopeChange/chirality-app-docs/` is read-only perspective material; not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
-**Last bounded item:** `DEL-02-01 supplemental revision 0.5 schema/context work`
+**Last bounded item:** `DAG-002` dependency mirror and blocker readiness refresh
 **Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
-**Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, `DAG-001`, and the latest human gate
+**Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, approved `DAG-002`, current blocker/evidence/dependency status surfaces, and the latest human gate
 
 ## Human Rulings
 
@@ -54,6 +54,7 @@
 - 2026-05-03 - Rule that `DEL-02-01` supplemental revision `0.5` schema/context work is required before `DAG-002` graph approval. The refreshed `DAG-002` may be packaged for approval review, but no `APPROVAL_RECORD.md` may be created until that supplement is complete, the graph is revalidated, and the human explicitly approves the graph.
 - 2026-05-03 - Authorize execution of the `DEL-02-01` supplemental revision `0.5` schema/context work. The supplement updates the canonical model source-of-truth schema/context surface and revalidates `DAG-002`; it does not approve `DAG-002`, create `APPROVAL_RECORD.md`, compute blocker readiness, refresh deliverable-local dependency mirrors, change lifecycle state, run `PREPARATION`, or promote Chirality corpus material.
 - 2026-05-03 - Approve `DAG-002` revision `0.5` active edge set as the OpenPipeStress SOFTWARE development coordination basis. Candidate rows remain non-gating. This approval authorizes later blocker readiness recomputation and dependency mirror refresh through their own guarded workflow steps, but does not by itself dispatch Type 2 work, change lifecycle states, run `PREPARATION`, or promote Chirality corpus material.
+- 2026-05-03 - Approve refreshing deliverable-local dependency mirrors from approved `DAG-002` and, if appropriate, recomputing blocker readiness from approved `ACTIVE` `DAG-002` edges. The refresh updated 65 existing non-`PKG-00` local mirrors and `_DEPENDENCIES.md` pointers; `PKG-00` remains register-exempt; 19 revision `0.5` deliverables without control surfaces remain held for `PREPARATION`. The blocker queue was recomputed as 70 unblocked and 22 blocked from 859 active edges, excluding 8 candidate rows. This does not dispatch Type 2 work, change lifecycle states, run `PREPARATION`, promote candidate rows, or promote Chirality corpus material.
 
 ## Operating Rules
 
@@ -61,7 +62,7 @@
 - Semantic readiness answers: is the task context prepared for bounded dispatch/review?
 - Implementation readiness answers: can this item safely consume committed upstream artifacts?
 - DEV-001 dispatch uses implementation readiness after the 2026-05-01 blocker-queue replacement.
-- Compute implementation blocked/unblocked states only from approved `ACTIVE` DAG edges, the DEV-001 implementation evidence register, the `COMMITTED` evidence threshold, and satisfied `PKG-00` architecture-basis edges unless a later human ruling changes the rule. For revision `0.5`, this recomputation is authorized only through its own guarded follow-up step and has not yet been run.
+- Compute implementation blocked/unblocked states only from approved `ACTIVE` DAG edges, the DEV-001 implementation evidence register, the `COMMITTED` evidence threshold, and satisfied `PKG-00` architecture-basis edges unless a later human ruling changes the rule. For revision `0.5`, this recomputation was completed on 2026-05-03 from approved `DAG-002`.
 - Do not use `CANDIDATE` edges for blocker queues, wave placement, readiness claims, schedule, staffing, or priority.
 - `PKG-00` has reached the selected architecture readiness threshold; downstream product-development work still requires one sealed deliverable scope and explicit write targets.
 - Do not require local dependency registers for `PKG-00`; use the scope-change/context-injection record as the evidence surface for `PKG-00` architecture basis.
@@ -71,11 +72,9 @@
 - Keep `NEXT_INSTANCE_PROMPT.md` objective-neutral. Put mutable item state and immediate handoff facts in `NEXT_INSTANCE_STATE.md`; put durable coordination rulings here.
 - Keep `init/NEXT_SESSION_PROMPT.md` objective-neutral. Use it only as the fresh-session bootstrap into the coordination control loop.
 - Keep `NEXT_INSTANCE_STATE.md` in rotating handoff form: archive the previous latest completed task in the compact history table, then summarize only the just-completed task as the latest state.
-- After SCA-002 acceptance, do not use `DAG-001`, old dispatch briefs, or stale pre-approval proposal status for new Type 2 dispatch. Use the approved `DAG-002` active edge set only after downstream context surfaces are refreshed through the appropriate workflow gates.
-- Treat `execution/_DAG/DAG-002/` artifacts as approved revision `0.5` active-edge coordination evidence. They still must not drive lifecycle state, Type 2 dispatch, schedule, staffing, priority, or implementation-readiness claims without the later guarded workflow steps.
-- Treat `DEL-02-01` supplemental revision `0.5` schema/context work as complete in the working tree and prerequisite to the `DAG-002` approval record.
-- Treat `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` as a stale hold-state queue until a later guarded recomputation refreshes it from the approved `DAG-002` active edge set.
-- Treat hold-state queue edge counts as last-refresh context only. The queue
-  predates the approved `DAG-002` edge set and must be refreshed before it can
-  be used as readiness evidence.
+- After SCA-002 acceptance, do not use `DAG-001`, old dispatch briefs, or stale pre-approval proposal status for new Type 2 dispatch. Use the approved `DAG-002` active edge set, refreshed blocker queue, and refreshed dependency mirrors only within their approval boundaries and only after any needed downstream context surfaces are refreshed through the appropriate workflow gates.
+- Treat `execution/_DAG/DAG-002/` artifacts as approved revision `0.5` active-edge coordination evidence. Refreshed dependency mirrors and blocker readiness are current where materialized, but they still must not drive lifecycle state, Type 2 dispatch, schedule, staffing, priority, or implementation-completeness claims without the relevant later guarded workflow steps.
+- Treat `DEL-02-01` supplemental revision `0.5` schema/context work as complete and reflected in the approved `DAG-002` graph.
+- Treat `execution/_Coordination/DEV-001_BLOCKER_QUEUE.*` as the current guarded recomputation from approved `DAG-002` active edges as of 2026-05-03.
+- Treat `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` as the current mirror-status projection: refreshed where deliverable control surfaces exist, register-exempt for `PKG-00`, and held for `PREPARATION` where revision `0.5` folders are missing.
 - Treat the Chirality app docs corpus as quarantined reference material. Route any proposed promotion into OpenPipeStress through `SCOPE_CHANGE` or a human-approved architecture decision before development execution.

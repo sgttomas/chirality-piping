@@ -272,6 +272,7 @@ def render_markdown(summary: dict[str, object], generated_date: str) -> str:
 
     unblocked_rows = [row for row in queue_rows if row["BlockerState"] == UNBLOCKED]
     blocked_rows = [row for row in queue_rows if row["BlockerState"] == BLOCKED]
+    source_graph = str(summary["edges_path"])
 
     lines = [
         "---",
@@ -280,7 +281,7 @@ def render_markdown(summary: dict[str, object], generated_date: str) -> str:
         "status: computed_active_edges_only",
         "created: 2026-04-30",
         f"updated: {generated_date}",
-        "source_graph: execution/_DAG/DAG-001/DependencyEdges.csv",
+        f"source_graph: {source_graph}",
         "implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv",
         "implementation_threshold: COMMITTED",
         "architecture_basis: satisfied_by_existing_baseline",
@@ -293,7 +294,7 @@ def render_markdown(summary: dict[str, object], generated_date: str) -> str:
         "",
         "## Computation Rule",
         "",
-        "- Source graph: `execution/_DAG/DAG-001/DependencyEdges.csv`.",
+        f"- Source graph: `{source_graph}`.",
         "- Included edges: `Status=ACTIVE` only.",
         "- Excluded edges: all `Status=CANDIDATE` rows.",
         "- Direction convention: `FromDeliverableID` is the downstream consumer and is blocked by `TargetDeliverableID`, the upstream provider.",

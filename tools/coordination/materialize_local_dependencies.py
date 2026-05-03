@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Materialize deliverable-local Dependencies.csv mirrors from aggregate DAG-001.
+Materialize deliverable-local Dependencies.csv mirrors from an aggregate DAG.
 
 Only non-PKG-00 deliverables are written. PKG-00 remains architecture context
 evidence and does not receive local dependency registers from this tool.
@@ -37,21 +37,38 @@ def write_dependency_csv(path: Path, header: list[str], rows: list[dict[str, str
             writer.writerow({field: row.get(field, "") for field in header})
 
 
-def pointer_text(node: dict[str, str], row_count: int, active_count: int, candidate_count: int, generated: str) -> str:
+def dag_label_from_path(edges_path: Path) -> str:
+    parent_name = edges_path.parent.name.strip()
+    return parent_name if parent_name else "AGGREGATE_DAG"
+
+
+def pointer_status(source_label: str) -> str:
+    return f"SYNCHRONIZED_FROM_{source_label.replace('-', '_').upper()}"
+
+
+def pointer_text(
+    node: dict[str, str],
+    row_count: int,
+    active_count: int,
+    candidate_count: int,
+    generated: str,
+    source_label: str,
+    source_edges_path: Path,
+) -> str:
     deliverable_id = node.get("DeliverableID", "")
     deliverable_name = node.get("DeliverableName", "")
     return "\n".join([
         f"# Dependencies: {deliverable_id} {deliverable_name}",
         "",
         "## Generated Dependency Register",
-        "- **Status:** SYNCHRONIZED_FROM_DAG_001",
-        "- **Source of Truth:** `execution/_DAG/DAG-001/DependencyEdges.csv`",
+        f"- **Status:** {pointer_status(source_label)}",
+        f"- **Source of Truth:** `{source_edges_path}`",
         "- **Local Register:** `Dependencies.csv`",
         f"- **Rows:** {row_count} total; {active_count} ACTIVE; {candidate_count} CANDIDATE.",
         f"- **Generated:** {generated}",
         "",
         "## Authority Boundary",
-        "- Aggregate `DAG-001` remains the sequencing and blocker-computation authority.",
+        f"- Aggregate `{source_label}` remains the sequencing and blocker-computation authority within its approval boundary.",
         "- This local register is a synchronized mirror/evidence surface, not an independent graph authority.",
         "- `CANDIDATE` rows remain non-gating until later RECONCILIATION plus CHANGE approval.",
         "- `PKG-00` architecture-basis rows are preserved here as injected context evidence; `PKG-00` does not receive local dependency registers.",
@@ -72,10 +89,12 @@ def materialize_local_dependencies(
     refresh_pointers: bool = False,
     dry_run: bool = False,
     generated_date: str | None = None,
+    source_label: str | None = None,
 ) -> dict[str, object]:
     header, edge_rows, edge_width_issues = read_csv_rows(edges_path)
     _node_header, node_rows, node_width_issues = read_csv_rows(nodes_path)
     generated = generated_date or date.today().isoformat()
+    resolved_source_label = source_label or dag_label_from_path(edges_path)
 
     rows_by_from: dict[str, list[dict[str, str]]] = defaultdict(list)
     skipped_status_counts: dict[str, int] = defaultdict(int)
@@ -123,7 +142,15 @@ def materialize_local_dependencies(
         if refresh_pointers:
             write_pointer(
                 pointer_path,
-                pointer_text(node, len(rows), active_count, candidate_count, generated),
+                pointer_text(
+                    node,
+                    len(rows),
+                    active_count,
+                    candidate_count,
+                    generated,
+                    resolved_source_label,
+                    edges_path,
+                ),
                 dry_run=dry_run,
             )
 
@@ -137,15 +164,23 @@ def materialize_local_dependencies(
             "CandidateRows": candidate_count,
         })
 
+    total_rows = sum(int(item["Rows"]) for item in written)
+    total_active_rows = sum(int(item["ActiveRows"]) for item in written)
+    total_candidate_rows = sum(int(item["CandidateRows"]) for item in written)
+
     return {
         "edges_path": str(edges_path),
         "nodes_path": str(nodes_path),
+        "source_label": resolved_source_label,
         "execution_root": str(execution_root),
         "dry_run": dry_run,
         "refresh_pointers": refresh_pointers,
         "edge_row_width_issue_count": len(edge_width_issues),
         "node_row_width_issue_count": len(node_width_issues),
         "written_count": len(written),
+        "total_rows": total_rows,
+        "total_active_rows": total_active_rows,
+        "total_candidate_rows": total_candidate_rows,
         "written": written,
         "skipped_pkg00_count": len(skipped_pkg00),
         "skipped_pkg00": skipped_pkg00,
@@ -156,21 +191,18 @@ def materialize_local_dependencies(
 
 
 def render_console(summary: dict[str, object]) -> str:
-    total_rows = sum(int(item["Rows"]) for item in summary["written"])
-    active_rows = sum(int(item["ActiveRows"]) for item in summary["written"])
-    candidate_rows = sum(int(item["CandidateRows"]) for item in summary["written"])
     return "\n".join([
         f"Written local registers: {summary['written_count']}",
         f"Skipped PKG-00 deliverables: {summary['skipped_pkg00_count']}",
         f"Missing execution paths: {summary['missing_execution_path_count']}",
-        f"Rows materialized: total={total_rows} active={active_rows} candidate={candidate_rows}",
+        f"Rows materialized: total={summary['total_rows']} active={summary['total_active_rows']} candidate={summary['total_candidate_rows']}",
         f"Pointer refresh: {summary['refresh_pointers']}",
         f"Dry run: {summary['dry_run']}",
     ])
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Materialize local Dependencies.csv mirrors from DAG-001.")
+    parser = argparse.ArgumentParser(description="Materialize local Dependencies.csv mirrors from an aggregate DAG.")
     parser.add_argument(
         "--dag-dir",
         type=Path,
@@ -183,6 +215,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--refresh-pointers", action="store_true", help="Rewrite _DEPENDENCIES.md generated pointers.")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--json-out", type=Path, help="Write materialization summary JSON.")
+    parser.add_argument("--source-label", help="Label to write into generated pointer files, e.g. DAG-002.")
+    parser.add_argument(
+        "--allow-missing-execution-paths",
+        action="store_true",
+        help="Return success when some DAG nodes do not yet have PREPARATION-created folders.",
+    )
     return parser.parse_args(argv)
 
 
@@ -196,12 +234,13 @@ def main(argv: list[str] | None = None) -> int:
         execution_root=args.execution_root,
         refresh_pointers=args.refresh_pointers,
         dry_run=args.dry_run,
+        source_label=args.source_label,
     )
     print(render_console(summary))
     if args.json_out:
         args.json_out.parent.mkdir(parents=True, exist_ok=True)
         args.json_out.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    if int(summary["missing_execution_path_count"]) > 0:
+    if int(summary["missing_execution_path_count"]) > 0 and not args.allow_missing_execution_paths:
         return 1
     return 0
 

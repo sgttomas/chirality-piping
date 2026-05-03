@@ -1,64 +1,207 @@
 ---
 doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
-status: current_hold_graph_unapproved_revision_0_5
+status: computed_active_edges_only
 created: 2026-04-30
 updated: 2026-05-03
 source_graph: execution/_DAG/DAG-002/DependencyEdges.csv
-source_graph_status: unapproved_revision_0_5_proposal
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
-implementation_evidence_projection: execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv
 implementation_threshold: COMMITTED
-candidate_edges: excluded_from_readiness
-blocker_computation: held_until_explicit_graph_approval
+architecture_basis: satisfied_by_existing_baseline
+candidate_edges: excluded
 ---
 
-# DEV-001 Revision 0.5 Blocker Queue Hold State
+# DEV-001 Implementation-Readiness Blocker Queue
 
-This file now reflects the accepted revision `0.5` current state. It is intentionally a hold-state queue, not an implementation-readiness queue, because `DAG-002` is an unapproved proposal and no revision `0.5` graph approval record exists.
+This blocker queue is an advisory implementation-readiness view only. It is not a schedule, staffing plan, priority list, lifecycle approval, professional approval, or readiness-for-reliance claim.
 
-## Current Rule
+## Computation Rule
 
-- Source graph: `execution/_DAG/DAG-002/DependencyEdges.csv` as an unapproved proposal only.
-- Included edge count for context: active proposal rows are counted per deliverable, but satisfaction and blocking are not computed.
-- Blocker state: every deliverable is `HELD_GRAPH_UNAPPROVED` until explicit human graph approval.
-- Candidate rows remain non-gating and excluded from readiness.
-- This queue must not be used for Type 2 dispatch, schedule, priority, staffing, lifecycle promotion, or professional approval.
+- Source graph: `execution/_DAG/DAG-002/DependencyEdges.csv`.
+- Included edges: `Status=ACTIVE` only.
+- Excluded edges: all `Status=CANDIDATE` rows.
+- Direction convention: `FromDeliverableID` is the downstream consumer and is blocked by `TargetDeliverableID`, the upstream provider.
+- Satisfaction threshold: upstream provider has `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
+- `SEMANTIC_READY` remains decomposition/context readiness evidence; it does not satisfy implementation blockers by itself.
+- `PKG-00` `ARCHITECTURE_BASIS` provider edges are satisfied by the accepted architecture baseline, not by implementation evidence.
+- `UNBLOCKED` means all active upstream implementation dependencies satisfy the threshold or are satisfied architecture-basis edges.
+- `BLOCKED` means one or more active upstream providers lack committed implementation evidence.
 
 ## Evidence Summary
 
 | Evidence | Count |
-|---|---|
+|---|---:|
 | Packages represented | 17 |
 | Deliverable nodes represented | 92 |
-| Active proposal edges counted | 615 |
-| Candidate proposal edges excluded from readiness | 9 |
-| Committed implementation evidence rows | 45 |
-| Committed rows requiring revision 0.5 targeted review | 2 |
-| PKG-00 architecture baseline rows | 8 |
-| Missing implementation evidence rows | 37 |
-| Held blocker rows | 92 |
+| Active edges included | 859 |
+| Candidate edges excluded | 8 |
+| Implementation evidence records | 47 |
+| Committed implementation evidence | 47 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 26 |
+| PKG-00 architecture-basis edges satisfied | 521 |
+| Implementation `UNBLOCKED` deliverables | 70 |
+| Implementation `BLOCKED` deliverables | 22 |
 
 ## Package Summary
 
-| PackageID | Rows | Blocker state |
-|---|---|---|
-| `PKG-00` | 8 | HELD_GRAPH_UNAPPROVED |
-| `PKG-01` | 4 | HELD_GRAPH_UNAPPROVED |
-| `PKG-02` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-03` | 8 | HELD_GRAPH_UNAPPROVED |
-| `PKG-04` | 6 | HELD_GRAPH_UNAPPROVED |
-| `PKG-05` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-06` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-07` | 8 | HELD_GRAPH_UNAPPROVED |
-| `PKG-08` | 6 | HELD_GRAPH_UNAPPROVED |
-| `PKG-09` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-10` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-11` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-12` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-13` | 4 | HELD_GRAPH_UNAPPROVED |
-| `PKG-14` | 5 | HELD_GRAPH_UNAPPROVED |
-| `PKG-15` | 4 | HELD_GRAPH_UNAPPROVED |
-| `PKG-16` | 4 | HELD_GRAPH_UNAPPROVED |
+| PackageID | UNBLOCKED | BLOCKED |
+|---|---:|---:|
+| `PKG-00` | 8 | 0 |
+| `PKG-01` | 4 | 0 |
+| `PKG-02` | 5 | 0 |
+| `PKG-03` | 8 | 0 |
+| `PKG-04` | 6 | 0 |
+| `PKG-05` | 5 | 0 |
+| `PKG-06` | 5 | 0 |
+| `PKG-07` | 6 | 2 |
+| `PKG-08` | 5 | 1 |
+| `PKG-09` | 3 | 2 |
+| `PKG-10` | 4 | 1 |
+| `PKG-11` | 4 | 1 |
+| `PKG-12` | 5 | 0 |
+| `PKG-13` | 1 | 3 |
+| `PKG-14` | 1 | 4 |
+| `PKG-15` | 0 | 4 |
+| `PKG-16` | 0 | 4 |
 
-Full per-deliverable hold rows are recorded in `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`.
+## Unblocked DAG-Ready Items
+
+These deliverables have no active upstream implementation dependency below the `COMMITTED` threshold. Items without their own committed evidence are DAG-ready candidates, not completed work.
+
+| DeliverableID | PackageID | Implementation evidence | Active upstream | Name |
+|---|---|---|---:|---|
+| `DEL-00-01` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Architecture decision record baseline |
+| `DEL-00-02` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Repository and module boundary architecture |
+| `DEL-00-03` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Application service command-query-job model |
+| `DEL-00-04` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Persistence and schema versioning architecture |
+| `DEL-00-05` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | GUI state and interaction architecture |
+| `DEL-00-06` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Diagnostics, warning, and result-envelope contract |
+| `DEL-00-07` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | API boundary and adapter contract map |
+| `DEL-00-08` | `PKG-00` | `ARCHITECTURE_BASELINE` | 0 | Layered software test and acceptance strategy |
+| `DEL-01-01` | `PKG-01` | `COMMITTED` `7650cf6` | 4 | Project governance baseline |
+| `DEL-01-02` | `PKG-01` | `COMMITTED` `0d729cf` | 5 | Copyright and protected-data boundary policy |
+| `DEL-01-03` | `PKG-01` | `COMMITTED` `df461f8` | 6 | Contributor certification workflow |
+| `DEL-01-04` | `PKG-01` | `COMMITTED` `65f3119` | 5 | Professional responsibility and product-claims policy |
+| `DEL-02-01` | `PKG-02` | `COMMITTED` `7b256f3` | 7 | Canonical domain model schema |
+| `DEL-02-02` | `PKG-02` | `COMMITTED` `a458cba` | 8 | Unit system and dimensional-analysis core contract |
+| `DEL-02-03` | `PKG-02` | `COMMITTED` `abc1306` | 8 | Code-neutral analysis boundary model |
+| `DEL-02-04` | `PKG-02` | `COMMITTED` `ef44f4c` | 10 | Plugin and extension domain contracts |
+| `DEL-02-05` | `PKG-02` | `COMMITTED` `742016e` | 10 | Project persistence and round-trip serialization |
+| `DEL-03-01` | `PKG-03` | `COMMITTED` `3793e87` | 10 | Material library schema with provenance |
+| `DEL-03-02` | `PKG-03` | `COMMITTED` `f0fdeac` | 10 | Pipe section and component library schema |
+| `DEL-03-03` | `PKG-03` | `COMMITTED` `7a84472` | 9 | Bend and elbow component model fields |
+| `DEL-03-04` | `PKG-03` | `COMMITTED` `ae693b6` | 9 | Branch connection component model fields |
+| `DEL-03-05` | `PKG-03` | `COMMITTED` `d8ee0db` | 9 | Rigid component models for valves, flanges, reducers, and specialty items |
+| `DEL-03-06` | `PKG-03` | `COMMITTED` `f15cbc6` | 9 | Expansion joint component model |
+| `DEL-03-07` | `PKG-03` | `COMMITTED` `4d880b3` | 11 | Public/private library import provenance checker |
+| `DEL-03-08` | `PKG-03` | `COMMITTED` `9712e98` | 9 | Pipe section property and mass-property calculator |
+| `DEL-04-01` | `PKG-04` | `COMMITTED` `1506cc0` | 8 | 3D frame stiffness kernel |
+| `DEL-04-02` | `PKG-04` | `COMMITTED` `b0516e5` | 8 | Straight pipe element |
+| `DEL-04-03` | `PKG-04` | `COMMITTED` `d227a27` | 8 | Linear support and restraint models |
+| `DEL-04-04` | `PKG-04` | `COMMITTED` `d3c3533` | 8 | Nonlinear support active-set solver |
+| `DEL-04-05` | `PKG-04` | `COMMITTED` `75f6688` | 7 | Sparse solver performance harness |
+| `DEL-04-06` | `PKG-04` | `COMMITTED` `fdb0252` | 8 | Solver diagnostics and singularity detection |
+| `DEL-05-01` | `PKG-05` | `COMMITTED` `e3c9695` | 9 | Primitive load case engine |
+| `DEL-05-02` | `PKG-05` | `COMMITTED` `0f9189c` | 8 | Load-case algebra engine |
+| `DEL-05-03` | `PKG-05` | `COMMITTED` `26dc805` | 10 | Fundamental stress recovery module |
+| `DEL-05-04` | `PKG-05` | `COMMITTED` `dbaf21e` | 6 | Analysis status semantics |
+| `DEL-05-05` | `PKG-05` | `COMMITTED` `3cfcfd2` | 8 | Concentrated and distributed user load application |
+| `DEL-06-01` | `PKG-06` | `COMMITTED` `20241f9` | 12 | Rule-pack schema |
+| `DEL-06-02` | `PKG-06` | `COMMITTED` `7490f67` | 9 | Sandboxed unit-aware expression evaluator |
+| `DEL-06-03` | `PKG-06` | `COMMITTED` `c075522` | 10 | Required-input completeness checker |
+| `DEL-06-04` | `PKG-06` | `COMMITTED` `ad270f6` | 9 | Private rule-pack lifecycle and checksum handling |
+| `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
+| `DEL-07-01` | `PKG-07` | `COMMITTED` `4785806` | 15 | 3D viewport and centerline editor |
+| `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
+| `DEL-07-03` | `PKG-07` | `MISSING_EVIDENCE` | 13 | Material, component, and rule-pack editors |
+| `DEL-07-04` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Missing-data warning and blocking UX |
+| `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
+| `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-08-01` | `PKG-08` | `COMMITTED` `9e21716` | 14 | Calculation report generator |
+| `DEL-08-02` | `PKG-08` | `COMMITTED` `061f1af` | 9 | Audit manifest and model hash |
+| `DEL-08-03` | `PKG-08` | `COMMITTED` `50f947a` | 11 | Warnings, assumptions, and provenance report section |
+| `DEL-08-04` | `PKG-08` | `COMMITTED` `3e33ea4` | 11 | Result export format |
+| `DEL-08-05` | `PKG-08` | `COMMITTED` `69adffa` | 10 | Report protected-content linter |
+| `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
+| `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
+| `DEL-09-03` | `PKG-09` | `MISSING_EVIDENCE` | 6 | Nonlinear support regression suite |
+| `DEL-10-01` | `PKG-10` | `COMMITTED` `53cc3d6` | 11 | Public API and plugin boundary |
+| `DEL-10-02` | `PKG-10` | `COMMITTED` `be29df7` | 12 | Import/export adapter framework |
+| `DEL-10-03` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Local FEA handoff data contract |
+| `DEL-10-05` | `PKG-10` | `COMMITTED` `9de5e9b` | 13 | Headless CLI and structured I/O analysis runner |
+| `DEL-11-02` | `PKG-11` | `MISSING_EVIDENCE` | 11 | Developer guide for solver and rule packs |
+| `DEL-11-03` | `PKG-11` | `MISSING_EVIDENCE` | 9 | Theory notes: classical to modern centerline analysis |
+| `DEL-11-04` | `PKG-11` | `MISSING_EVIDENCE` | 10 | Invented educational example models |
+| `DEL-11-05` | `PKG-11` | `MISSING_EVIDENCE` | 8 | Contributor tutorial and onboarding |
+| `DEL-12-01` | `PKG-12` | `COMMITTED` `84e0a73` | 10 | Local-first storage and private data paths |
+| `DEL-12-02` | `PKG-12` | `MISSING_EVIDENCE` | 13 | Private data redaction and export controls |
+| `DEL-12-03` | `PKG-12` | `COMMITTED` `7834b97` | 9 | Telemetry off-by-default design |
+| `DEL-12-04` | `PKG-12` | `MISSING_EVIDENCE` | 11 | Secret and private-library handling |
+| `DEL-12-05` | `PKG-12` | `COMMITTED` `b97121d` | 10 | Security threat model |
+| `DEL-13-01` | `PKG-13` | `MISSING_EVIDENCE` | 11 | Design knowledge schema and provenance model |
+| `DEL-14-01` | `PKG-14` | `MISSING_EVIDENCE` | 11 | Immutable model state records |
+
+## Blocked Items Grouped By Missing Upstream
+
+| Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
+|---|---|---|---:|---|---|
+| `DEL-07-02` - Model tree and property inspector | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0507`; `DAG-002-E0841` |
+| `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-002-E0508`; `DAG-002-E0576` |
+| `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
+| `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
+| `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
+| `DEL-09-03` - Nonlinear support regression suite | `PKG-09` | `MISSING_EVIDENCE` | 2 | `DEL-09-04`; `DEL-09-05` | `DAG-002-E0545`; `DAG-002-E0549` |
+| `DEL-09-05` - Release quality gate checklist | `PKG-09` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-002-E0571` |
+| `DEL-10-03` - Local FEA handoff data contract | `PKG-10` | `MISSING_EVIDENCE` | 3 | `DEL-15-01`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0799`; `DAG-002-E0807`; `DAG-002-E0814` |
+| `DEL-12-02` - Private data redaction and export controls | `PKG-12` | `MISSING_EVIDENCE` | 3 | `DEL-08-06`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0808`; `DAG-002-E0815`; `DAG-002-E0860` |
+| `DEL-13-01` - Design knowledge schema and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 5 | `DEL-07-08`; `DEL-13-02`; `DEL-13-03`; `DEL-13-04`; `DEL-16-01` | `DAG-002-E0762`; `DAG-002-E0767`; `DAG-002-E0773`; `DAG-002-E0824`; `DAG-002-E0844` |
+| `DEL-13-02` - Constraint entity and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 2 | `DEL-13-03`; `DEL-13-04` | `DAG-002-E0768`; `DAG-002-E0774` |
+| `DEL-13-03` - Constraint validation engine | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-13-04`; `DEL-16-02` | `DAG-002-E0775`; `DAG-002-E0828`; `DAG-002-E0845` |
+| `DEL-13-04` - Physical-to-analytical transformation contract | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0809`; `DAG-002-E0816`; `DAG-002-E0846` |
+| `DEL-14-01` - Immutable model state records | `PKG-14` | `MISSING_EVIDENCE` | 8 | `DEL-07-08`; `DEL-08-06`; `DEL-14-02`; `DEL-14-03`; `DEL-14-05`; `DEL-15-01`; `DEL-15-04`; `DEL-16-03` | `DAG-002-E0783`; `DAG-002-E0788`; `DAG-002-E0792`; `DAG-002-E0802`; `DAG-002-E0822`; `DAG-002-E0834`; `DAG-002-E0847`; `DAG-002-E0861` |
+| `DEL-14-02` - Analysis run records | `PKG-14` | `MISSING_EVIDENCE` | 4 | `DEL-08-06`; `DEL-14-04`; `DEL-14-05`; `DEL-15-01` | `DAG-002-E0789`; `DAG-002-E0795`; `DAG-002-E0803`; `DAG-002-E0862` |
+| `DEL-14-03` - Model-state comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-08-06`; `DEL-16-02` | `DAG-002-E0829`; `DAG-002-E0848`; `DAG-002-E0863` |
+| `DEL-14-04` - Analysis-run comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-08-06` | `DAG-002-E0849`; `DAG-002-E0864` |
+| `DEL-14-05` - Comparison mapping, tolerance, and export contracts | `PKG-14` | `MISSING_EVIDENCE` | 7 | `DEL-07-08`; `DEL-08-06`; `DEL-14-03`; `DEL-14-04`; `DEL-15-02`; `DEL-15-03`; `DEL-16-02` | `DAG-002-E0793`; `DAG-002-E0796`; `DAG-002-E0810`; `DAG-002-E0817`; `DAG-002-E0830`; `DAG-002-E0850`; `DAG-002-E0865` |
+| `DEL-15-01` - Canonical handoff package schema and manifest | `PKG-15` | `MISSING_EVIDENCE` | 4 | `DEL-08-06`; `DEL-15-02`; `DEL-15-03`; `DEL-15-04` | `DAG-002-E0805`; `DAG-002-E0811`; `DAG-002-E0819`; `DAG-002-E0866` |
+| `DEL-15-02` - Target mapping and unsupported-behavior contract | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-15-03`; `DEL-15-04` | `DAG-002-E0812`; `DAG-002-E0820` |
+| `DEL-15-03` - Downstream modeling export workflow | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-08-06`; `DEL-15-04` | `DAG-002-E0821`; `DAG-002-E0867` |
+| `DEL-15-04` - External prover boundary metadata | `PKG-15` | `MISSING_EVIDENCE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
+| `DEL-16-01` - Structured model operation schema | `PKG-16` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-16-02`; `DEL-16-03` | `DAG-002-E0827`; `DAG-002-E0832`; `DAG-002-E0851` |
+| `DEL-16-02` - Operation validation and diff preview | `PKG-16` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-16-03` | `DAG-002-E0833`; `DAG-002-E0852` |
+| `DEL-16-03` - User acceptance and operation audit trail | `PKG-16` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-16-04` | `DAG-002-E0838`; `DAG-002-E0853` |
+
+## Per-Deliverable Blocked Items
+
+| DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
+|---|---|---:|---|---|
+| `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
+| `DEL-07-08` | `PKG-07` | 13 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05`; `DEL-13-01`; `DEL-13-03`; `DEL-13-04`; `DEL-14-01`; `DEL-14-03`; `DEL-14-04`; `DEL-14-05`; `DEL-16-01`; `DEL-16-02`; `DEL-16-03` | Design-authoring state and comparison workspace |
+| `DEL-08-06` | `PKG-08` | 9 | `DEL-12-02`; `DEL-14-01`; `DEL-14-02`; `DEL-14-03`; `DEL-14-04`; `DEL-14-05`; `DEL-15-01`; `DEL-15-03`; `DEL-15-04` | State, comparison, and handoff report sections |
+| `DEL-09-04` | `PKG-09` | 1 | `DEL-09-03` | Validation manual skeleton |
+| `DEL-09-05` | `PKG-09` | 1 | `DEL-09-03` | Release quality gate checklist |
+| `DEL-10-04` | `PKG-10` | 1 | `DEL-09-05` | Build, packaging, and CI/CD pipeline |
+| `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
+| `DEL-13-02` | `PKG-13` | 1 | `DEL-13-01` | Constraint entity and provenance model |
+| `DEL-13-03` | `PKG-13` | 2 | `DEL-13-01`; `DEL-13-02` | Constraint validation engine |
+| `DEL-13-04` | `PKG-13` | 3 | `DEL-13-01`; `DEL-13-02`; `DEL-13-03` | Physical-to-analytical transformation contract |
+| `DEL-14-02` | `PKG-14` | 1 | `DEL-14-01` | Analysis run records |
+| `DEL-14-03` | `PKG-14` | 2 | `DEL-14-01`; `DEL-14-05` | Model-state comparison engine |
+| `DEL-14-04` | `PKG-14` | 2 | `DEL-14-02`; `DEL-14-05` | Analysis-run comparison engine |
+| `DEL-14-05` | `PKG-14` | 2 | `DEL-14-01`; `DEL-14-02` | Comparison mapping, tolerance, and export contracts |
+| `DEL-15-01` | `PKG-15` | 3 | `DEL-10-03`; `DEL-14-01`; `DEL-14-02` | Canonical handoff package schema and manifest |
+| `DEL-15-02` | `PKG-15` | 5 | `DEL-15-01`; `DEL-10-03`; `DEL-12-02`; `DEL-13-04`; `DEL-14-05` | Target mapping and unsupported-behavior contract |
+| `DEL-15-03` | `PKG-15` | 6 | `DEL-15-01`; `DEL-15-02`; `DEL-10-03`; `DEL-12-02`; `DEL-13-04`; `DEL-14-05` | Downstream modeling export workflow |
+| `DEL-15-04` | `PKG-15` | 4 | `DEL-15-01`; `DEL-15-02`; `DEL-15-03`; `DEL-14-01` | External prover boundary metadata |
+| `DEL-16-01` | `PKG-16` | 1 | `DEL-13-01` | Structured model operation schema |
+| `DEL-16-02` | `PKG-16` | 4 | `DEL-16-01`; `DEL-13-03`; `DEL-14-03`; `DEL-14-05` | Operation validation and diff preview |
+| `DEL-16-03` | `PKG-16` | 3 | `DEL-16-01`; `DEL-16-02`; `DEL-14-01` | User acceptance and operation audit trail |
+| `DEL-16-04` | `PKG-16` | 1 | `DEL-16-03` | Agent rationale and professional-boundary controls |
+
+## Candidate Edges Excluded
+
+Candidate edges remain non-gating pending later `RECONCILIATION` and `CHANGE`; they were not used in the blocker state calculation.
+
+## Machine-Readable Queue
+
+Full per-deliverable queue rows are recorded in `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`.

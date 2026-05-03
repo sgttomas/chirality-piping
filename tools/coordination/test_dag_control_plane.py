@@ -164,6 +164,7 @@ def test_materializer_writes_non_pkg00_mirrors_and_preserves_rows(tmp_path: Path
         execution_root=execution_root,
         refresh_pointers=True,
         generated_date="2026-04-30",
+        source_label="DAG-001",
     )
 
     assert summary["written_count"] == 2
