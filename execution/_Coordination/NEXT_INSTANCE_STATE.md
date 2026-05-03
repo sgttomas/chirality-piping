@@ -100,6 +100,7 @@ explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `Handoff readiness alignment after DAG-002 dependency refresh` |
 | Latest state commit | `7480f73 coordination: align next handoff state`; prior dependency refresh closeout is `6416815 coordination: refresh dag002 dependency mirrors` pushed to `origin/main` |
+| Latest cleanup commit | `a1d6788 coordination: align latest dag handoff state` |
 | Previous completed task archive status | `DAG-002 dependency mirror and blocker readiness refresh` archived in compact history |
 | Current authorized item | No Type 2 dispatch item. Handoff documents and projections have been aligned; `PREPARATION`, lifecycle transition, Type 2 dispatch, candidate promotion, and additional refreshes remain gated. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
@@ -398,6 +399,8 @@ Remaining open items:
 
 - CHANGE closeout/commit for this handoff-readiness alignment completed as
   `7480f73 coordination: align next handoff state`.
+- Follow-up stale pointer/handoff cleanup completed as
+  `a1d6788 coordination: align latest dag handoff state`.
 - `PREPARATION` must explicitly create or refresh the 19 missing revision `0.5`
   control surfaces before their local dependency mirrors can be materialized.
 - Any Type 2 dispatch still requires a sealed deliverable brief, explicit write
