@@ -17,71 +17,92 @@ The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 - normalized SCA-002 supersession CSVs to the canonical tool schema;
 - clarified human-gate status after cleanup.
 
-The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` has now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `RECONCILIATION` has completed the approved revision `0.5` compatibility-planning cycle; `ORCHESTRATOR` has prepared the approved revision `0.5` `DAG-002` proposal plan; and `CHANGE` has closed out the handoff for next-agent proposal-snapshot implementation.
+The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` ran Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `RECONCILIATION` completed the revision `0.5` compatibility-planning cycle; `ORCHESTRATOR` prepared the revision `0.5` `DAG-002` proposal plan; and `CHANGE` closed out the handoff for proposal-snapshot implementation.
 
-The planning output is recorded at `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`. This report does not refresh `DAG-001`, approve `DAG-002`, regenerate blocker queues, update lifecycle states, update implementation evidence, create package-local contexts, edit dependency registers, authorize Type 2 dispatch, or promote the Chirality app/harness corpus.
+The latest human request then asked that lifecycle, evidence, blocker queue, DAG, and dependency registers reflect the current state. That alignment is now recorded as proposal/control-plane state only:
 
-The reconciliation output is recorded at `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md` with dependency-closure evidence under `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`. This run was read-only on product deliverables and did not mutate graph, blocker, lifecycle, implementation-evidence, dependency-register, dispatch, or Chirality corpus state.
+- `execution/_DAG/DAG-002/` now exists as an unapproved revision `0.5` proposal snapshot.
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` now reflect a current hold-state queue, not a blocked/unblocked readiness queue.
+- `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` records the current lifecycle/control-surface projection across all 92 revision `0.5` deliverables.
+- `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` records current implementation-evidence mapping, including targeted-review flags for `DEL-01-04` and `DEL-02-01`.
+- `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` records dependency-register status without refreshing deliverable-local `Dependencies.csv` mirrors from the unapproved graph.
 
-The `DAG-002` proposal plan is recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`; the handoff authorization is recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`. The next fresh agent may create an unapproved revision `0.5` proposal snapshot under `execution/_DAG/DAG-002/` from those inputs. This handoff does not approve a graph, mutate `DAG-001`, regenerate blockers, update lifecycle state, update implementation evidence, refresh dependency mirrors, dispatch Type 2 work, run `PREPARATION`, or promote the Chirality app/harness corpus.
+The planning output is recorded at `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`. The reconciliation output is recorded at `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md` with dependency-closure evidence under `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`. The `DAG-002` proposal plan and handoff remain recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md` and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`.
+
+No revision `0.5` graph approval record exists. Do not use `DAG-002`, the hold-state blocker queue, lifecycle/evidence projections, or dependency-register projections to dispatch Type 2 work, claim implementation readiness, refresh package-local dependency mirrors, run `PREPARATION`, or promote the Chirality app/harness corpus.
 
 The 2026-05-03 review of `docs/_ScopeChange/chirality-app-docs/` classified that folder as a quarantined reference corpus. It may be read for governance perspective, but it is not active OpenPipeStress implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority. Do not generate Type 2 dispatch, DAG edges, package-local contexts, production artifacts, implementation briefs, GUI/runtime work, SDK/provider integration, harness API work, lifecycle transitions, or dependency-register changes from that corpus under SCA-002.
 
-Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, blocker regeneration, or Type 2 dispatch from revision `0.5` until the downstream refresh plan reaches the relevant later approval gate. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
+Do not run graph approval, `PREPARATION`, deliverable-local dependency refresh, lifecycle transitions, blocker readiness computation, or Type 2 dispatch from revision `0.5` until the downstream refresh plan reaches the relevant later approval gate. The completed-task archive remains historical pre-SCA-002 DEV-001 state unless a row explicitly says otherwise.
 
 **Last Updated:** 2026-05-03
-**Actor:** CHANGE SCA-002 DAG-002 proposal-plan handoff closeout
+**Actor:** ORCHESTRATOR/CHANGE SCA-002 revision 0.5 control-plane current-state alignment
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
-**Current Mode:** Proposal-plan handoff authorized; next fresh agent may create an unapproved `DAG-002` proposal snapshot within recorded constraints
-**Current Planning Surface:** `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md` and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
+**Current Mode:** Current-state registers aligned around unapproved `DAG-002` proposal; no revision `0.5` graph approval or dispatch authority
+**Current Planning Surface:** `execution/_DAG/DAG-002/`, `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
 
 ## Active Control State
 
 | Surface | Current state |
 |---|---|
 | Coordination mode | `FULL_GRAPH` |
-| Accepted graph | `execution/_DAG/DAG-001/` historical revision `0.4` graph |
-| Graph approval | `execution/_DAG/DAG-001/APPROVAL_RECORD.md` historical revision `0.4` approval |
-| Active graph authority | Stale for revision `0.5`; refresh planning authorized through `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md` |
+| Accepted graph | None for revision `0.5`; `execution/_DAG/DAG-001/` is historical revision `0.4` evidence |
+| Latest graph artifact | `execution/_DAG/DAG-002/` unapproved revision `0.5` proposal |
+| Graph approval | None for revision `0.5`; historical `DAG-001` approval remains at `execution/_DAG/DAG-001/APPROVAL_RECORD.md` |
+| Active graph authority | No approved revision `0.5` graph; proposal is not dispatch authority |
 | Quarantined reference corpus | `docs/_ScopeChange/chirality-app-docs/`; read-only perspective only, not implementation or dispatch authority |
-| Blocker computation | Stale for revision `0.5`; do not regenerate or use for dispatch until refreshed graph approval |
+| Blocker computation | Held for revision `0.5`; `DEV-001_BLOCKER_QUEUE.*` is a hold-state queue until graph approval |
 | Candidate edges | Retained as non-gating pending refreshed graph proposal and human approval |
 | Semantic context threshold | `SEMANTIC_READY` |
 | Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` historical pre-SCA-002 evidence |
+| Lifecycle snapshot | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` |
+| Implementation evidence source | `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` historical committed evidence rows |
+| Implementation evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current hold-state queue |
+| Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` |
 | Selected pilot | `DEL-01-01 - Project governance baseline` |
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `SCA-002 DAG-002 proposal-plan handoff closeout` |
+| Latest state task | `SCA-002 revision 0.5 control-plane current-state alignment` |
 | Latest state commit | Current HEAD after CHANGE closeout; verify with `git log -1 --oneline` |
-| Previous completed task archive status | `SCA-002 DAG-002 proposal plan` archived in compact history |
-| Current authorized item | Next fresh agent may create an unapproved revision `0.5` `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/` using the proposal plan and handoff record; no graph approval or downstream refresh action is authorized |
+| Previous completed task archive status | `SCA-002 DAG-002 proposal-plan handoff closeout` archived in compact history |
+| Current authorized item | No Type 2 dispatch item. Next fresh agent may seek explicit graph approval or continue graph-proposal review from `DAG-002`; blocker readiness, dependency mirror refresh, lifecycle transitions, `PREPARATION`, and dispatch remain held. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
-| Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
+| Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
 
 ## DAG Evidence
 
 | Fact | State |
 |---|---:|
-| Deliverable nodes in `DAG-001` | 73 |
-| Active edges | 615 |
-| Candidate edges | 9 |
+| Deliverable nodes in `DAG-002` proposal | 92 |
+| Packages in `DAG-002` proposal | 17 |
+| Revision `0.5` nodes added beyond `DAG-001` | 19 |
+| Active proposal edges | 615 |
+| Candidate proposal edges | 9 |
+| Endpoint issues | 0 |
 | Active-edge cycle status | ACYCLIC |
-| Topological waves | 12 |
-| Schema validation | `tools/validation/validate_dependencies_schema.py` passes on `DependencyEdges.csv` |
+| Active plus candidate SCC warnings | 4 |
+| Topological waves from active proposal edges | 12 |
+| Schema validation | `tools/validation/validate_dependencies_schema.py` passes on `execution/_DAG/DAG-002/DependencyEdges.csv` |
+| Approval status | Unapproved proposal; no `APPROVAL_RECORD.md` |
 
 Derived DEV-001 implementation projection, when needed:
 
 | Projection rule | Result |
 |---|---:|
-| Exclude `PKG-00` nodes and `ARCHITECTURE_BASIS` edges | 65 nodes / 227 active edges |
-| Projection cycle status | ACYCLIC |
-| Projection waves | 11 |
+| Current lifecycle rows | 92 |
+| Lifecycle `CHECKING` | 47 |
+| Lifecycle `SEMANTIC_READY` | 26 |
+| Lifecycle `MISSING_CONTROL_SURFACE` | 19 |
+| Implementation evidence `COMMITTED` | 45 |
+| Implementation evidence `COMMITTED_REQUIRES_REV05_TARGETED_REVIEW` | 2 |
+| Implementation evidence `ARCHITECTURE_BASELINE` | 8 |
+| Implementation evidence `MISSING_EVIDENCE` | 37 |
 
-This projection is a coordination view only. It does not replace `DAG-001` and
+This projection is a coordination view only. It does not approve `DAG-002`, and
 does not remove `SCA-001` / `AB-00-*` architecture-basis injection from sealed
 briefs.
 
@@ -97,131 +118,40 @@ require deliverable-local `Dependencies.csv` files.
 
 ## Local Dependency Register Status
 
-Non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
+Non-`PKG-00` deliverable-local `Dependencies.csv` files remain synchronized
 mirrors/evidence materialized from `DAG-001`, not independent sequencing
-authority. `PKG-00` remains architecture context only and does not receive local
-dependency registers.
+authority. They were not refreshed from the unapproved `DAG-002` proposal.
 
-Post-materialization evidence:
+Current dependency-register status is recorded in
+`execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`:
 
-- `execution/_DAG/DAG-001/evidence/dev001_local_materialization_summary.json`
-  records 65 non-`PKG-00` local registers written from `DAG-001`.
-- `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
-  records 65 schema-valid local registers, 624 local rows, 0 active SCCs, and 0
-  bidirectional active pairs.
-- `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
-  records the authority boundary: aggregate `DAG-001` remains sequencing
-  authority, local registers remain synchronized mirrors, and `CANDIDATE` edges
-  remain non-gating.
+| Register status | Count |
+|---|---:|
+| `NOT_REQUIRED_ARCHITECTURE_BASIS` | 8 |
+| `HISTORICAL_DAG001_MIRROR_PRESENT_STALE_FOR_REV05` | 65 |
+| `MISSING_CONTROL_SURFACE` | 19 |
 
-The older pre-DAG reconciliation artifacts are still present as untracked local
-evidence and should not be treated as current sequencing authority.
-
-2026-05-01 local annotation:
-
-- `DEL-05-01` local dependency mirror was annotated after implementation commit
-  `e3c9695`; non-architecture upstream rows `DAG-001-E0446` through
-  `DAG-001-E0449` now record `SATISFIED` local satisfaction evidence.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-
-2026-05-02 local annotation:
-
-- `DEL-05-03` local dependency mirror was annotated after implementation commit
-  `26dc805`; non-architecture upstream rows `DAG-001-E0454` through
-  `DAG-001-E0458` now record `SATISFIED` local satisfaction evidence.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-06-01` local dependency mirror was annotated after implementation commit
-  `20241f9`; non-architecture upstream rows `DAG-001-E0462` through
-  `DAG-001-E0466` now record `SATISFIED` local satisfaction evidence.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-06-02` local dependency mirror was annotated after implementation commit
-  `7490f67`; non-architecture upstream rows `DAG-001-E0467` and
-  `DAG-001-E0468` now record `SATISFIED` local satisfaction evidence.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-06-05` local dependency mirror was annotated after implementation commit
-  `73506b7`; non-architecture upstream rows `DAG-001-E0474` through
-  `DAG-001-E0477` now record `SATISFIED` local satisfaction evidence.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-06-04` local dependency mirror was annotated after working-tree
-  implementation; non-architecture upstream rows `DAG-001-E0472` and
-  `DAG-001-E0473` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-06-01` and `DEL-02-05`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-09-02` local dependency mirror was annotated after implementation commit
-  `bf1dc20`; non-architecture upstream rows `DAG-001-E0537` through
-  `DAG-001-E0540` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-05-03`, `DEL-03-08`, `DEL-04-02`, and `DEL-01-02`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-12-05` local dependency mirror was annotated after implementation commit
-  `b97121d`; non-architecture upstream rows `DAG-001-E0598` through
-  `DAG-001-E0600` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-01-02`, `DEL-02-04`, and `DEL-01-04`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-12-03` local dependency mirror was annotated after implementation commit
-  `7834b97`; non-architecture upstream rows `DAG-001-E0604` and
-  `DAG-001-E0605` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-12-05` and `DEL-01-02`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-12-01` local dependency mirror was annotated after implementation commit
-  `84e0a73`; non-architecture upstream rows `DAG-001-E0601` through
-  `DAG-001-E0603` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-02-05`, `DEL-12-05`, and `DEL-01-02`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
-- `DEL-10-01` local dependency mirror was annotated after implementation commit
-  `53cc3d6`; non-architecture upstream rows `DAG-001-E0552` through
-  `DAG-001-E0555` now record `SATISFIED` local satisfaction evidence from
-  committed upstreams `DEL-02-04`, `DEL-02-01`, `DEL-02-02`, and `DEL-02-03`.
-- This local annotation does not replace aggregate `DAG-001` as sequencing
-  authority and does not promote candidate edges.
+Refresh remains held until explicit `DAG-002` graph approval and any required
+`PREPARATION` scaffold tranche.
 
 ## Current Blocker Queue
 
-`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on
-2026-05-02 after `DEL-07-01` implementation evidence was promoted to
-`COMMITTED` for commit `4785806`.
-It reads approved active `DAG-001` edges and
-`execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`.
-`FromDeliverableID` is treated as the downstream consumer blocked by
-`TargetDeliverableID`, the upstream provider.
-
-Semantic readiness answers whether task context is prepared. Implementation
-readiness answers whether a consumer can safely rely on committed upstream
-artifacts. `SEMANTIC_READY` no longer satisfies DEV-001 implementation
-blockers by itself.
+`execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` was refreshed on 2026-05-03
+as a revision `0.5` hold-state queue. It reads `DAG-002` as an unapproved
+proposal only and does not compute blocked/unblocked implementation readiness.
 
 | Queue fact | Count |
 |---|---:|
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 26 |
-| Filesystem lifecycle `CHECKING` (display only) | 44 |
-| Implementation evidence records | 47 |
-| Committed implementation evidence | 47 |
-| PKG-00 architecture-basis edges satisfied by baseline | 388 |
-| Implementation `UNBLOCKED` deliverables | 68 |
-| Implementation `BLOCKED` deliverables | 5 |
-| Candidate edges used | 0 |
+| Queue rows | 92 |
+| Rows with `HELD_GRAPH_UNAPPROVED` | 92 |
+| Active proposal edges counted for context | 615 |
+| Candidate proposal edges excluded from readiness | 9 |
+| Satisfaction counts computed | 0 |
+| Blocking counts computed | 0 |
 
-The queue now contains blockers for consumers whose upstream providers do not
-yet have `COMMITTED` implementation evidence. `DEL-10-05` is recorded as
-`COMMITTED` evidence for `9de5e9b`; `DEL-10-02` is recorded as `COMMITTED`
-evidence for `be29df7`; `DEL-08-03` is recorded as `COMMITTED` evidence for
-`50f947a`; `DEL-08-01` is recorded as `COMMITTED` evidence for `9e21716`;
-`DEL-08-05` is recorded as `COMMITTED` evidence for `69adffa`; `DEL-07-01` is
-recorded as `COMMITTED` evidence for `4785806`.
-The queue remained 68 unblocked / 5 blocked after `DEL-07-01` promotion
-because `DEL-07-06` and `DEL-11-01` still wait on other missing GUI upstreams.
-`DEL-11-01` no longer waits on `DEL-07-01`; it remains blocked by `DEL-07-03`
-and `DEL-07-05`. The queue is not a lifecycle approval, schedule, priority,
-staffing decision, implementation completeness claim, or professional approval.
+The queue is not a lifecycle approval, schedule, priority, staffing decision,
+implementation completeness claim, implementation-readiness claim, or
+professional approval.
 
 ## Completed Task History (Compacted)
 
@@ -339,15 +269,16 @@ Universal historical guardrails preserved across the completed bounded items:
 | `SCA-002 Phase 1 inventory and Phase 2 reconciliation request` | Completed; not committed | `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`, `NEXT_INSTANCE_STATE.md` | Required bootstrap/live coordination reading completed; inventory computed from revision `0.5` registers, historical `DAG-001`, coordination artifacts, deliverable-local folders, and quarantined corpus file tree | Recommended next gate was `RECONCILIATION`; no DAG refresh, blocker regeneration, lifecycle change, implementation-evidence update, dependency-register edit, Type 2 dispatch, or Chirality promotion occurred. |
 | `SCA-002 revision 0.5 compatibility reconciliation` | Completed; not committed | `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md`, `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`, `_LATEST` pointers, `NEXT_INSTANCE_STATE.md` | Closure audit found 65 valid local registers, 624 rows, 0 active SCCs, and 0 bidirectional active pairs; revision `0.5` worklists were generated; dependency schema validation, CSV/JSON parse checks, and `git diff --check` passed | Recommended next gate was `DAG-002` proposal planning; no graph, blocker, lifecycle, evidence, mirror, dispatch, `PREPARATION`, or Chirality mutation occurred. |
 | `SCA-002 DAG-002 proposal plan` | Completed and handoff-authorized; committed by CHANGE closeout | `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, `NEXT_INSTANCE_STATE.md` | Proposal plan used reconciliation outputs to define 92-node revision `0.5` coverage, carry-forward/candidate/new-scope edge lanes, validation gates, and guardrails; `git diff --check`, preserved `DAG-001` dependency schema validation, and no-`DAG-002` directory check passed | Human later authorized proposal-plan handoff closeout for next-agent proposal-snapshot implementation; graph approval and downstream refresh actions remained out of scope. |
+| `SCA-002 DAG-002 proposal-plan handoff closeout` | Completed; `5896ece docs: record sca-002 dag-002 proposal handoff` | `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`, proposal plan/state/coordination records, change record | `git diff --check`; DAG-001 dependency schema validation passed; verified no `DAG-002` directory existed before closeout | Authorized the next proposal-snapshot implementation only; no graph approval, blocker regeneration, lifecycle/evidence update, dependency mirror refresh, Type 2 dispatch, `PREPARATION`, or Chirality promotion occurred. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
 Human project authority accepted objective-neutral bootstrap/control-loop posture:
 
 - `NEXT_INSTANCE_PROMPT.md` is stable control-loop protocol. Agents derive the
-  current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, accepted
-  `DAG-001` artifacts, current implementation-readiness queue/evidence, and the
-  latest human approval gate.
+  current objective from `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md`, the
+  latest DAG pointer, the current blocker/evidence/dependency status surfaces,
+  and the latest human approval gate.
 - `init/NEXT_SESSION_PROMPT.md` is a stable bootstrap entrypoint. It routes
   fresh sessions into the coordination protocol and mutable handoff state, not
   a hard-coded next deliverable objective.
@@ -361,93 +292,90 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - SCA-002 DAG-002 Proposal-Plan Handoff Closeout
+## Latest State - SCA-002 Revision 0.5 Control-Plane Alignment
 
-Human project authority authorized the `DAG-002` proposal-plan handoff closeout
-on 2026-05-03 and instructed that the workspace be left ready for the next
-agent instance to implement from fresh context.
+Human project authority requested that lifecycle, evidence, blocker queue, DAG,
+and dependency registers reflect the current state. The current-session
+alignment created an unapproved `DAG-002` proposal snapshot and status
+projections while keeping graph approval and dispatch held.
 
 Files changed in this task:
 
-- `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
-- `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`
+- `execution/_DAG/DAG-002/`
+- `execution/_DAG/_LATEST.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+- `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`
+- `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`
+- `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
+- `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
 - `execution/_Coordination/_COORDINATION.md`
+- `execution/_Coordination/NEXT_INSTANCE_PROMPT.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-- `execution/_Change/2026-05-03_SCA002_DAG002_PROPOSAL_HANDOFF_CLOSEOUT.md`
+- `execution/_Change/2026-05-03_SCA002_REV05_CONTROL_PLANE_ALIGNMENT.md`
 
-Handoff summary:
+Alignment summary:
 
-- Recorded a handoff authorization record for the proposal plan.
-- Marked the proposal plan as handoff-authorized for the next fresh agent.
-- Updated durable coordination state to preserve the next-agent authorization
-  and its limits.
-- Left the next implementation target as an unapproved revision `0.5`
-  `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/`.
-- Preserved `DAG-001` as historical revision `0.4` evidence.
-
-Authorized next-agent implementation target:
-
-- Create an unapproved revision `0.5` `DAG-002` proposal snapshot under
-  `execution/_DAG/DAG-002/` using
-  `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`,
-  `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`,
-  SCA-002 reconciliation evidence, accepted revision `0.5` registers, and
-  historical `DAG-001` evidence.
-- Include all 92 accepted revision `0.5` deliverables.
-- Preserve candidate edges as non-gating proposal evidence.
-- Run the validation gates named in the proposal plan before requesting any
-  later graph approval.
+- Created `execution/_DAG/DAG-002/` with 92 revision `0.5` nodes and 624
+  carried-forward proposal dependency rows.
+- Preserved 615 active rows and 9 candidate rows as proposal evidence only.
+- Recorded active-edge acyclicity, 0 endpoint issues, and 12 active proposal
+  topological waves.
+- Replaced the blocker queue with a 92-row `HELD_GRAPH_UNAPPROVED` hold-state
+  queue instead of computing readiness from an unapproved graph.
+- Added lifecycle, implementation-evidence, and dependency-register status
+  projections for all 92 revision `0.5` deliverables.
+- Left deliverable-local `Dependencies.csv` mirrors unchanged as historical
+  `DAG-001` evidence.
 
 Verification:
 
-- `git diff --check` passed before closeout.
-- `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-001/DependencyEdges.csv`
+- `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-002/DependencyEdges.csv`
   passed with 624 rows.
-- `find execution/_DAG -maxdepth 1 -type d -name DAG-002` returned no path
-  before closeout.
+- `python3 tools/coordination/audit_dag.py --dag-dir execution/_DAG/DAG-002 --json-out /tmp/dag002_audit.json --strict`
+  passed.
+- CSV/JSON parse checks and `git diff --check` passed.
 
 Guardrail results:
 
-- No `execution/_DAG/DAG-002/` directory was created.
-- No graph approval artifact was written.
+- No `APPROVAL_RECORD.md` was written for `DAG-002`.
 - No `DAG-001` mutation occurred.
-- No blocker regeneration, lifecycle change, implementation-evidence update,
-  dependency mirror refresh, Type 2 dispatch, `PREPARATION` scaffold, or
-  Chirality corpus promotion occurred.
+- No blocked/unblocked implementation-readiness queue was computed.
+- No deliverable-local dependency mirror refresh, Type 2 dispatch,
+  `PREPARATION` scaffold, product implementation, or Chirality corpus promotion
+  occurred.
 
 Remaining open items:
 
-- Later human gate is still required before approving any `DAG-002` active edge
-  set, before blocker regeneration, before targeted `REVIEW` of `DEL-01-04` /
-  `DEL-02-01` if not handled during proposal authoring, before `PREPARATION`
-  scaffolds missing contexts, before local dependency mirror refresh, or before
-  any Type 2 dispatch.
+- Explicit human graph approval is required before `DAG-002` can become active
+  graph authority.
+- Targeted `REVIEW` remains required for `DEL-01-04` and `DEL-02-01` before
+  relying on their historical implementation evidence as complete revision
+  `0.5` evidence.
+- Dependency questions for `PKG-13` through `PKG-16`, `DEL-07-08`, and
+  `DEL-08-06` remain unresolved graph-authoring work.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Next fresh agent should implement the authorized proposal-snapshot step:
-   create an unapproved revision `0.5` `DAG-002` proposal snapshot under
-   `execution/_DAG/DAG-002/` from the proposal plan and handoff record.
-2. During that implementation, do not approve the graph, regenerate blockers,
-   change lifecycle state, update implementation evidence, refresh dependency
-   mirrors, dispatch Type 2 work, run `PREPARATION`, or promote Chirality
-   corpus material.
-3. Alternative later gates after proposal-snapshot creation: route targeted
-   `REVIEW` for `DEL-01-04` and `DEL-02-01`, request human graph approval,
-   authorize a `PREPARATION` scaffold tranche after graph/context strategy is
-   accepted, or pause.
+1. Complete validation/commit closeout for this current-state alignment if not
+   already committed.
+2. If the human wants to proceed, request explicit graph approval or direct a
+   graph-authoring review pass for unresolved revision `0.5` dependency
+   questions.
+3. Only after explicit graph approval may a future agent recompute blocker
+   readiness, refresh deliverable-local dependency mirrors, authorize
+   `PREPARATION`, or prepare a fresh revision `0.5` Type 2 dispatch brief.
 
 Do not start broad DAG execution. No parallel fan-out is authorized.
 
 ## Guardrails
 
-- No new `WORKING_ITEMS` launch for product implementation; only the
-  ORCHESTRATOR proposal-snapshot action named above is authorized.
+- No new `WORKING_ITEMS` launch for product implementation.
 - No `TASK` dispatch until within a sealed, approved deliverable session.
 - No product implementation outside an approved deliverable scope.
-- No lifecycle transitions unless explicitly authorized.
+- No lifecycle transitions unless explicitly authorized; current lifecycle
+  surface is a projection snapshot only.
 - No protected standards/code data, private project data, real secrets, private
   libraries, or certification/compliance claims.
 - No silent edits to deliverable-local `Dependencies.csv`.
