@@ -14,10 +14,11 @@
 **Accepted decomposition basis:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for SCA-002 downstream refresh planning
 **Downstream refresh plan:** `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
 **Current DAG status relative to revision 0.5:** `DAG-001` is historical revision `0.4` coordination evidence and stale for new dispatch until refreshed/accepted
+**Current SCA-002 proposal surface:** `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md` handoff-authorized for the next fresh agent to create an unapproved `DAG-002` proposal snapshot
 **Local dependency registers:** synchronized mirrors/evidence materialized from `DAG-001`; not sequencing authority
 **Quarantined reference corpus:** `docs/_ScopeChange/chirality-app-docs/` is read-only perspective material; not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002
 **Pilot state:** `DEL-01-01` pilot completed; pattern accepted for bounded one-item execution, not broad fan-out
-**Last bounded item:** `DEL-03-07 - Public/private library import provenance checker`
+**Last bounded item:** `SCA-002 DAG-002 proposal-plan handoff closeout`
 **Root next-session prompt posture:** Stable bootstrap; delegate current objective discovery to coordination state and latest human gate
 **Next-instance prompt posture:** Stable protocol; derive current objective from mutable coordination state, `DAG-001`, and the latest human gate
 
@@ -44,6 +45,7 @@
 - 2026-05-01 - Replace DEV-001 blocker queue semantics with an implementation-readiness view: `FromDeliverableID` is the downstream consumer blocked by `TargetDeliverableID`; only `COMMITTED` implementation evidence satisfies non-architecture upstreams; `SEMANTIC_READY` remains context readiness only; `PKG-00` `ARCHITECTURE_BASIS` edges are satisfied by the accepted architecture baseline; `CANDIDATE` edges remain excluded.
 - 2026-05-03 - Accept corrected SCA-002 revision `0.5` for downstream refresh planning. `ORCHESTRATOR` may run planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `DAG-001`, blocker queues, dispatch briefs, lifecycle states, dependency mirrors, and implementation evidence remain stale relative to revision `0.5` until refreshed through later gates.
 - 2026-05-03 - Classify `docs/_ScopeChange/chirality-app-docs/` as a quarantined reference corpus for SCA-002. It may inform governance perspective, but no Chirality app/harness implementation, UI/runtime work, SDK/provider integration, DAG edge, Type 2 dispatch, package-local context, lifecycle transition, or dependency-register change is authorized from that corpus without a later explicit scope change or architecture decision.
+- 2026-05-03 - Authorize the SCA-002 `DAG-002` proposal-plan handoff closeout. The next fresh agent may create an unapproved revision `0.5` `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/` using `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, while preserving `DAG-001` as historical revision `0.4` evidence. This does not approve a graph, approve any active edge set, regenerate blockers, update lifecycle state, update implementation evidence, refresh dependency mirrors, dispatch Type 2 work, run `PREPARATION`, or promote Chirality corpus material.
 
 ## Operating Rules
 
@@ -62,4 +64,5 @@
 - Keep `init/NEXT_SESSION_PROMPT.md` objective-neutral. Use it only as the fresh-session bootstrap into the coordination control loop.
 - Keep `NEXT_INSTANCE_STATE.md` in rotating handoff form: archive the previous latest completed task in the compact history table, then summarize only the just-completed task as the latest state.
 - After SCA-002 acceptance, do not use `DAG-001`, old blocker queues, or old dispatch briefs for new Type 2 dispatch until a revision `0.5` refresh is planned, accepted, and materialized through the appropriate workflow gates.
+- Treat any `DAG-002` artifacts created under the proposal-plan handoff as unapproved proposal evidence until a later human graph approval record exists. Proposal artifacts must not drive blocker computation, lifecycle state, Type 2 dispatch, schedule, staffing, priority, or implementation-readiness claims.
 - Treat the Chirality app docs corpus as quarantined reference material. Route any proposed promotion into OpenPipeStress through `SCOPE_CHANGE` or a human-approved architecture decision before development execution.

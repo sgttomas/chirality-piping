@@ -17,19 +17,23 @@ The SCA-002 hindsight review has been actioned. Corrective cleanup applied:
 - normalized SCA-002 supersession CSVs to the canonical tool schema;
 - clarified human-gate status after cleanup.
 
-The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` has now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+The human project authority accepted corrected SCA-002 for downstream refresh planning on 2026-05-03. `ORCHESTRATOR` has now run Phase 1 inventory and Phase 2 reconciliation-request planning from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`; `RECONCILIATION` has completed the approved revision `0.5` compatibility-planning cycle; `ORCHESTRATOR` has prepared the approved revision `0.5` `DAG-002` proposal plan; and `CHANGE` has closed out the handoff for next-agent proposal-snapshot implementation.
 
 The planning output is recorded at `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`. This report does not refresh `DAG-001`, approve `DAG-002`, regenerate blocker queues, update lifecycle states, update implementation evidence, create package-local contexts, edit dependency registers, authorize Type 2 dispatch, or promote the Chirality app/harness corpus.
+
+The reconciliation output is recorded at `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md` with dependency-closure evidence under `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`. This run was read-only on product deliverables and did not mutate graph, blocker, lifecycle, implementation-evidence, dependency-register, dispatch, or Chirality corpus state.
+
+The `DAG-002` proposal plan is recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`; the handoff authorization is recorded at `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`. The next fresh agent may create an unapproved revision `0.5` proposal snapshot under `execution/_DAG/DAG-002/` from those inputs. This handoff does not approve a graph, mutate `DAG-001`, regenerate blockers, update lifecycle state, update implementation evidence, refresh dependency mirrors, dispatch Type 2 work, run `PREPARATION`, or promote the Chirality app/harness corpus.
 
 The 2026-05-03 review of `docs/_ScopeChange/chirality-app-docs/` classified that folder as a quarantined reference corpus. It may be read for governance perspective, but it is not active OpenPipeStress implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority. Do not generate Type 2 dispatch, DAG edges, package-local contexts, production artifacts, implementation briefs, GUI/runtime work, SDK/provider integration, harness API work, lifecycle transitions, or dependency-register changes from that corpus under SCA-002.
 
 Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions, blocker regeneration, or Type 2 dispatch from revision `0.5` until the downstream refresh plan reaches the relevant later approval gate. The remainder of this coordination file is pre-SCA-002 DEV-001 state and remains stale by design.
 
 **Last Updated:** 2026-05-03
-**Actor:** ORCHESTRATOR Phase 1 inventory and Phase 2 reconciliation-request planning
+**Actor:** CHANGE SCA-002 DAG-002 proposal-plan handoff closeout
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
-**Current Mode:** ORCHESTRATOR planning report complete; awaiting next human gate
-**Current Planning Surface:** `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`
+**Current Mode:** Proposal-plan handoff authorized; next fresh agent may create an unapproved `DAG-002` proposal snapshot within recorded constraints
+**Current Planning Surface:** `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md` and `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
 
 ## Active Control State
 
@@ -41,7 +45,7 @@ Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions
 | Active graph authority | Stale for revision `0.5`; refresh planning authorized through `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md` |
 | Quarantined reference corpus | `docs/_ScopeChange/chirality-app-docs/`; read-only perspective only, not implementation or dispatch authority |
 | Blocker computation | Stale for revision `0.5`; do not regenerate or use for dispatch until refreshed graph approval |
-| Candidate edges | Retained as non-gating pending `RECONCILIATION` |
+| Candidate edges | Retained as non-gating pending refreshed graph proposal and human approval |
 | Semantic context threshold | `SEMANTIC_READY` |
 | Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
 | Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` historical pre-SCA-002 evidence |
@@ -50,10 +54,10 @@ Do not run `PREPARATION`, DAG refresh, dependency refresh, lifecycle transitions
 | Pilot status | Launched and completed as a bounded governance-file patch |
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
-| Latest state task | `SCA-002 Phase 1 inventory and Phase 2 reconciliation request` |
-| Latest state commit | Not committed |
-| Previous completed task archive status | `DEL-07-01 implementation from sealed dispatch brief` archived in compact history |
-| Current authorized item | None after ORCHESTRATOR planning output; awaiting human gate |
+| Latest state task | `SCA-002 DAG-002 proposal-plan handoff closeout` |
+| Latest state commit | Current HEAD after CHANGE closeout; verify with `git log -1 --oneline` |
+| Previous completed task archive status | `SCA-002 DAG-002 proposal plan` archived in compact history |
+| Current authorized item | Next fresh agent may create an unapproved revision `0.5` `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/` using the proposal plan and handoff record; no graph approval or downstream refresh action is authorized |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, `DAG-001`, current implementation-readiness queue/evidence, and the latest human gate |
@@ -332,6 +336,9 @@ Universal historical guardrails preserved across the completed bounded items:
 | `DEL-08-05` candidate reconciliation and sealed dispatch brief preparation | Completed; not committed | `Reconciliation_Run_Summary_2026-05-02_DEL0805_CANDIDATE_E0621.md`, `DEV-001_DISPATCH_DEL-08-05.md`, `NEXT_INSTANCE_STATE.md` | `git diff --check`, aggregate dependency schema validation, and DAG audit passed; `DAG-001-E0621` retained as non-gating candidate | Implementation was separately authorized from the sealed brief only; lifecycle/evidence/queue closeout remains separate. |
 | `DEL-08-05` implementation from sealed dispatch brief | Completed; implementation/closeout `69adffa`; promotion metadata `1c0469b`; handoff `77a0819` | `schemas/report_protected_content_linter.schema.yaml`, `core/reporting/protected_content_linter/`, `fixtures/report_lint/invented/`, report linter tests, docs, deliverable memory, local dependency mirror, status, dispatch/state/evidence/queue | Report linter schema and Rust tests, adjacent report/schema tests, dependency schema validation, DAG audit, blocker queue rebuild, `git diff --check`, and focused scans passed; queue changed to 68 unblocked / 5 blocked | No remaining closeout item for `DEL-08-05`; `DEL-11-04` newly implementation-unblocked. |
 | `DEL-07-01` implementation from sealed dispatch brief | Completed; implementation/closeout `4785806`; evidence promotion `3d74e63` | `schemas/viewport_editor.schema.yaml`, `core/gui/viewport_editor/`, invented GUI fixture, viewport contract test, docs, deliverable memory, local dependency mirror, status, dispatch/state/evidence/queue | Viewport schema test, viewport Rust fmt/tests, adjacent schema tests, local dependency schema validation, blocker queue rebuild, and focused guardrail checks passed; queue remained 68 unblocked / 5 blocked | No remaining closeout item for `DEL-07-01`; all SCA-002 revision `0.5` downstream surfaces remain stale until refreshed through the accepted downstream plan. |
+| `SCA-002 Phase 1 inventory and Phase 2 reconciliation request` | Completed; not committed | `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`, `NEXT_INSTANCE_STATE.md` | Required bootstrap/live coordination reading completed; inventory computed from revision `0.5` registers, historical `DAG-001`, coordination artifacts, deliverable-local folders, and quarantined corpus file tree | Recommended next gate was `RECONCILIATION`; no DAG refresh, blocker regeneration, lifecycle change, implementation-evidence update, dependency-register edit, Type 2 dispatch, or Chirality promotion occurred. |
+| `SCA-002 revision 0.5 compatibility reconciliation` | Completed; not committed | `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-03_SCA002_REV05_COMPATIBILITY_PLANNING.md`, `execution/_Reconciliation/DepClosure/CLOSURE_SCA002_REV05_COMPATIBILITY_2026-05-03_1441/`, `_LATEST` pointers, `NEXT_INSTANCE_STATE.md` | Closure audit found 65 valid local registers, 624 rows, 0 active SCCs, and 0 bidirectional active pairs; revision `0.5` worklists were generated; dependency schema validation, CSV/JSON parse checks, and `git diff --check` passed | Recommended next gate was `DAG-002` proposal planning; no graph, blocker, lifecycle, evidence, mirror, dispatch, `PREPARATION`, or Chirality mutation occurred. |
+| `SCA-002 DAG-002 proposal plan` | Completed and handoff-authorized; committed by CHANGE closeout | `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`, `NEXT_INSTANCE_STATE.md` | Proposal plan used reconciliation outputs to define 92-node revision `0.5` coverage, carry-forward/candidate/new-scope edge lanes, validation gates, and guardrails; `git diff --check`, preserved `DAG-001` dependency schema validation, and no-`DAG-002` directory check passed | Human later authorized proposal-plan handoff closeout for next-agent proposal-snapshot implementation; graph approval and downstream refresh actions remained out of scope. |
 
 ## Bootstrap and Next-Instance Prompt Posture
 
@@ -354,86 +361,90 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - SCA-002 Phase 1 Inventory And Phase 2 Reconciliation Request
+## Latest State - SCA-002 DAG-002 Proposal-Plan Handoff Closeout
 
-Human project authority accepted corrected SCA-002 revision `0.5` for
-downstream refresh planning on 2026-05-03. `ORCHESTRATOR` completed the
-authorized Phase 1 inventory and Phase 2 reconciliation-request planning output
-from `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`.
+Human project authority authorized the `DAG-002` proposal-plan handoff closeout
+on 2026-05-03 and instructed that the workspace be left ready for the next
+agent instance to implement from fresh context.
 
 Files changed in this task:
 
-- `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`
+- `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`
+- `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`
+- `execution/_Coordination/_COORDINATION.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+- `execution/_Change/2026-05-03_SCA002_DAG002_PROPOSAL_HANDOFF_CLOSEOUT.md`
 
-Planning summary:
+Handoff summary:
 
-- Recorded accepted revision `0.5` register facts: 76 scope rows, 92
-  deliverables, 92 context-budget rows, 17 packages, and context envelope
-  counts `S=9`, `M=66`, `L=17`, `XL=0`.
-- Identified 19 SCA-002 added deliverables absent from historical `DAG-001`:
-  `DEL-07-08`, `DEL-08-06`, `DEL-13-01` through `DEL-16-04`.
-- Identified missing package folders for `PKG-13` through `PKG-16`.
-- Identified missing folders and contexts for all 19 SCA-002 added
-  deliverables.
-- Identified two pre-existing deliverables with changed scope/objective
-  mappings: `DEL-01-04` and `DEL-02-01`.
-- Identified 73 existing contexts that reference the old docs-side
-  decomposition path, including 65 contexts that also reference revision `0.4`.
-- Recorded that 47 historical dispatch briefs, historical `DAG-001`, blocker
-  queue files, local dependency mirrors, lifecycle states, and implementation
-  evidence are stale for revision `0.5` dispatch.
-- Recorded that 47 committed implementation-evidence rows still map to
-  revision `0.5` deliverable IDs, while the 19 new deliverables have no
-  implementation evidence.
-- Preserved the `docs/_ScopeChange/chirality-app-docs/` quarantine
-  classification: read-only governance perspective only, not scope,
-  implementation, dependency, dispatch, runtime, or UI authority.
-- Wrote a bounded Phase 2 `RECONCILIATION` request with required outputs,
-  candidate questions, constraints, and a recommended human approval gate.
+- Recorded a handoff authorization record for the proposal plan.
+- Marked the proposal plan as handoff-authorized for the next fresh agent.
+- Updated durable coordination state to preserve the next-agent authorization
+  and its limits.
+- Left the next implementation target as an unapproved revision `0.5`
+  `DAG-002` proposal snapshot under `execution/_DAG/DAG-002/`.
+- Preserved `DAG-001` as historical revision `0.4` evidence.
+
+Authorized next-agent implementation target:
+
+- Create an unapproved revision `0.5` `DAG-002` proposal snapshot under
+  `execution/_DAG/DAG-002/` using
+  `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN.md`,
+  `execution/_Coordination/SCA-002_DAG-002_PROPOSAL_PLAN_HANDOFF_RECORD.md`,
+  SCA-002 reconciliation evidence, accepted revision `0.5` registers, and
+  historical `DAG-001` evidence.
+- Include all 92 accepted revision `0.5` deliverables.
+- Preserve candidate edges as non-gating proposal evidence.
+- Run the validation gates named in the proposal plan before requesting any
+  later graph approval.
 
 Verification:
 
-- Required bootstrap and live coordination reading was completed before edits.
-- `git status --short` was clean before planning edits.
-- The inventory was computed from `docs/_Registers/*.csv`,
-  `execution/_DAG/DAG-001/*`, `execution/_Coordination/*`,
-  deliverable-local folders, and the quarantined corpus file tree.
+- `git diff --check` passed before closeout.
+- `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-001/DependencyEdges.csv`
+  passed with 624 rows.
+- `find execution/_DAG -maxdepth 1 -type d -name DAG-002` returned no path
+  before closeout.
 
 Guardrail results:
 
-- No `PREPARATION` run was started.
-- No DAG refresh, `DAG-002` proposal, blocker regeneration, lifecycle change,
-  implementation-evidence update, dependency-register edit, or Type 2 dispatch
-  occurred.
-- No old dispatch brief was reused.
-- No candidate edge was promoted.
-- No Chirality app/harness material was promoted into OpenPipeStress scope.
+- No `execution/_DAG/DAG-002/` directory was created.
+- No graph approval artifact was written.
+- No `DAG-001` mutation occurred.
+- No blocker regeneration, lifecycle change, implementation-evidence update,
+  dependency mirror refresh, Type 2 dispatch, `PREPARATION` scaffold, or
+  Chirality corpus promotion occurred.
 
 Remaining open items:
 
-- Human gate is required before launching `RECONCILIATION`, `DAG-002`
-  proposal planning, `PREPARATION`, artifact handling through `CHANGE`, or any
-  later Type 2 dispatch.
+- Later human gate is still required before approving any `DAG-002` active edge
+  set, before blocker regeneration, before targeted `REVIEW` of `DEL-01-04` /
+  `DEL-02-01` if not handled during proposal authoring, before `PREPARATION`
+  scaffolds missing contexts, before local dependency mirror refresh, or before
+  any Type 2 dispatch.
 
 ## Immediate Next Actions
 
 Immediate next action:
 
-1. Await the next human gate. Recommended gate is to launch `RECONCILIATION`
-   for SCA-002 revision `0.5` compatibility planning using the scope and
-   constraints in
-   `execution/_Coordination/SCA-002_PHASE1_INVENTORY_AND_PHASE2_RECONCILIATION_REQUEST.md`.
-2. Alternative gates: authorize `DAG-002` proposal planning after
-   reconciliation, authorize a later `PREPARATION` scaffold tranche after
-   graph/context strategy is accepted, handle artifact state through `CHANGE`,
-   or pause.
+1. Next fresh agent should implement the authorized proposal-snapshot step:
+   create an unapproved revision `0.5` `DAG-002` proposal snapshot under
+   `execution/_DAG/DAG-002/` from the proposal plan and handoff record.
+2. During that implementation, do not approve the graph, regenerate blockers,
+   change lifecycle state, update implementation evidence, refresh dependency
+   mirrors, dispatch Type 2 work, run `PREPARATION`, or promote Chirality
+   corpus material.
+3. Alternative later gates after proposal-snapshot creation: route targeted
+   `REVIEW` for `DEL-01-04` and `DEL-02-01`, request human graph approval,
+   authorize a `PREPARATION` scaffold tranche after graph/context strategy is
+   accepted, or pause.
 
 Do not start broad DAG execution. No parallel fan-out is authorized.
 
 ## Guardrails
 
-- No new `WORKING_ITEMS` launch until the human approves the next gate.
+- No new `WORKING_ITEMS` launch for product implementation; only the
+  ORCHESTRATOR proposal-snapshot action named above is authorized.
 - No `TASK` dispatch until within a sealed, approved deliverable session.
 - No product implementation outside an approved deliverable scope.
 - No lifecycle transitions unless explicitly authorized.
