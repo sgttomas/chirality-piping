@@ -99,7 +99,7 @@ explicitly says otherwise.
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future items still require explicit one-item gates |
 | Latest state task | `Handoff readiness alignment after DAG-002 dependency refresh` |
-| Latest state commit | Not committed; prior dependency refresh closeout is `6416815 coordination: refresh dag002 dependency mirrors` pushed to `origin/main` |
+| Latest state commit | `7480f73 coordination: align next handoff state`; prior dependency refresh closeout is `6416815 coordination: refresh dag002 dependency mirrors` pushed to `origin/main` |
 | Previous completed task archive status | `DAG-002 dependency mirror and blocker readiness refresh` archived in compact history |
 | Current authorized item | No Type 2 dispatch item. Handoff documents and projections have been aligned; `PREPARATION`, lifecycle transition, Type 2 dispatch, candidate promotion, and additional refreshes remain gated. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
@@ -396,8 +396,8 @@ Guardrail results:
 
 Remaining open items:
 
-- CHANGE closeout/commit for this handoff-readiness alignment is pending if
-  requested.
+- CHANGE closeout/commit for this handoff-readiness alignment completed as
+  `7480f73 coordination: align next handoff state`.
 - `PREPARATION` must explicitly create or refresh the 19 missing revision `0.5`
   control surfaces before their local dependency mirrors can be materialized.
 - Any Type 2 dispatch still requires a sealed deliverable brief, explicit write
@@ -407,10 +407,9 @@ Remaining open items:
 
 Immediate next action:
 
-1. If approved, perform CHANGE closeout for this handoff-readiness alignment.
-2. If assigned through a separate gate, run `PREPARATION` or an equivalent
+1. If assigned through a separate gate, run `PREPARATION` or an equivalent
    control-surface refresh for the 19 missing revision `0.5` deliverables.
-3. Do not prepare revision `0.5` Type 2 dispatch until current context surfaces,
+2. Do not prepare revision `0.5` Type 2 dispatch until current context surfaces,
    sealed scope, explicit write targets, and human authorization are present.
 
 Do not start broad DAG execution. No parallel fan-out is authorized.

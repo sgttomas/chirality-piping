@@ -8,4 +8,4 @@
 - Approval record: `execution/_DAG/DAG-002/APPROVAL_RECORD.md`
 - Historical approved graph: `execution/_DAG/DAG-001/` revision `0.4` evidence
 - Historical approval record: `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
-- Blocker computation: authorized for later guarded recomputation from approved `ACTIVE` DAG-002 edges; not yet run
+- Blocker computation: completed from approved `ACTIVE` DAG-002 edges on 2026-05-03; current queue is `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv`
