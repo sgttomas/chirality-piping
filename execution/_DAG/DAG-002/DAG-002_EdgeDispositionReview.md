@@ -1,10 +1,10 @@
 ---
 doc_id: DAG-002-EDGE-DISPOSITION-REVIEW
 doc_kind: coordination.dag_edge_disposition_review
-status: complete_for_unapproved_proposal_update
+status: complete_for_approved_graph_record
 created: 2026-05-03
 decomposition_revision: "0.5"
-graph_approval: not_requested
+graph_approval: approved_after_separate_human_gate
 reviewed_by: ORCHESTRATOR
 ---
 
@@ -12,12 +12,14 @@ reviewed_by: ORCHESTRATOR
 
 ## Authority And Boundary
 
-This bounded review converts the SCA-002 pre-approval question list into an
-edge-disposition worklist for the unapproved `DAG-002` proposal. It does not
-approve `DAG-002`, create `APPROVAL_RECORD.md`, compute blocked/unblocked
-readiness, refresh deliverable-local dependency mirrors, change lifecycle
-state, dispatch Type 2 work, run `PREPARATION`, or promote the quarantined
-Chirality corpus.
+This bounded review converted the SCA-002 pre-approval question list into an
+edge-disposition worklist for the `DAG-002` proposal. A later, separate human
+gate approved the active edge set in
+`execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
+
+This review itself did not compute blocked/unblocked readiness, refresh
+deliverable-local dependency mirrors, change lifecycle state, dispatch Type 2
+work, run `PREPARATION`, or promote the quarantined Chirality corpus.
 
 ## Review Inputs
 
@@ -84,4 +86,5 @@ Chirality corpus.
 - Keep the other inherited candidate rows non-gating.
 - Rebuild `dag.json`, audit summaries, cycle report, and active topological
   waves from the proposal only.
-- Do not create an approval record or compute readiness.
+- Approval was later granted in `execution/_DAG/DAG-002/APPROVAL_RECORD.md`;
+  readiness computation remains a separate guarded follow-up step.

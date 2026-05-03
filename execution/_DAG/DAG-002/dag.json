@@ -8,15 +8,17 @@
     "active_edge_count": 859,
     "candidate_edge_count": 8,
     "retired_edge_count": 1,
-    "approval_status": "UNAPPROVED_PROPOSAL_NOT_DISPATCH_AUTHORITY",
-    "approval_record": "",
+    "approval_status": "APPROVED_REVISION_0_5_ACTIVE_EDGE_SET",
+    "approval_record": "execution/_DAG/DAG-002/APPROVAL_RECORD.md",
     "proposal_record": "execution/_DAG/DAG-002/PROPOSAL_RECORD.md",
     "edge_disposition_review": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md",
     "targeted_review": "execution/_Coordination/SCA-002_REV05_TARGETED_REVIEW_DEL-01-04_DEL-02-01.md",
-    "blocker_computation": "HELD_NO_APPROVED_REVISION_0_5_GRAPH",
+    "blocker_computation": "AUTHORIZED_LATER_GUARDED_RECOMPUTATION_NOT_RUN",
     "topological_waves_produced": true,
     "active_cycle_status": "ACYCLIC",
-    "edge_direction": "from depends on target"
+    "edge_direction": "from depends on target",
+    "approval_readiness": "APPROVED",
+    "approval_review_packet": "execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md"
   },
   "nodes": [
     {

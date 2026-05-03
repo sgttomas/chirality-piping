@@ -31,6 +31,47 @@
         "HUMAN_APPROVED_FOR_PROJECT"
       ]
     },
+    "Assumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "statement",
+        "status",
+        "affected_refs",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "unresolved",
+            "resolved",
+            "rejected",
+            "TBD"
+          ]
+        },
+        "affected_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "resolution_note": {
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
     "Axis": {
       "type": "string",
       "enum": [
@@ -429,6 +470,7 @@
       "required": [
         "id",
         "name",
+        "model_role",
         "coordinate_system",
         "nodes",
         "elements",
@@ -439,7 +481,19 @@
         "load_cases",
         "combinations",
         "results",
-        "diagnostics"
+        "diagnostics",
+        "unresolved_assumptions",
+        "traceability_links",
+        "design_knowledge_refs",
+        "constraint_refs",
+        "equipment_interface_refs",
+        "operation_refs",
+        "model_state_refs",
+        "analysis_run_refs",
+        "comparison_refs",
+        "handoff_package_refs",
+        "external_reference_refs",
+        "provenance"
       ],
       "properties": {
         "id": {
@@ -451,6 +505,12 @@
         },
         "description": {
           "type": "string"
+        },
+        "model_role": {
+          "$ref": "#/$defs/ModelRole"
+        },
+        "source_model_ref": {
+          "$ref": "#/$defs/Reference"
         },
         "coordinate_system": {
           "$ref": "#/$defs/CoordinateSystem"
@@ -514,8 +574,86 @@
           "items": {
             "$ref": "#/$defs/Diagnostic"
           }
+        },
+        "unresolved_assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Assumption"
+          }
+        },
+        "traceability_links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/TraceabilityLink"
+          }
+        },
+        "design_knowledge_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "constraint_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "equipment_interface_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "operation_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "model_state_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "analysis_run_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "comparison_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "handoff_package_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "external_reference_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
         }
       }
+    },
+    "ModelRole": {
+      "type": "string",
+      "enum": [
+        "physical_source_of_truth",
+        "analytical_solver_model",
+        "derived_view",
+        "TBD"
+      ]
     },
     "Node": {
       "type": "object",
@@ -810,6 +948,17 @@
             "Report",
             "ReportSettings",
             "Diagnostic",
+            "DesignKnowledge",
+            "Constraint",
+            "EquipmentInterface",
+            "ModelOperation",
+            "ModelState",
+            "AnalysisRun",
+            "Comparison",
+            "HandoffPackage",
+            "ExternalProverReference",
+            "Assumption",
+            "TraceabilityLink",
             "external",
             "TBD"
           ]
@@ -1135,6 +1284,57 @@
         },
         "active_state_result_ref": {
           "$ref": "#/$defs/Reference"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      }
+    },
+    "TraceabilityLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "trace_type",
+        "source_ref",
+        "target_ref",
+        "diagnostics",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Id"
+        },
+        "trace_type": {
+          "type": "string",
+          "enum": [
+            "physical_to_analytical",
+            "operation_application",
+            "state_snapshot",
+            "analysis_run",
+            "comparison",
+            "handoff",
+            "external_reference",
+            "TBD"
+          ]
+        },
+        "source_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "target_ref": {
+          "$ref": "#/$defs/Reference"
+        },
+        "assumption_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Diagnostic"
+          }
         },
         "provenance": {
           "$ref": "#/$defs/Provenance"

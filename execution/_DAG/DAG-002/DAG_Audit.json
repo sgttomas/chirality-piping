@@ -1,6 +1,6 @@
 {
   "dag_id": "DAG-002",
-  "status": "UNAPPROVED_REVISION_0_5_PROPOSAL",
+  "status": "APPROVED_REVISION_0_5_ACTIVE_EDGE_SET",
   "created": "2026-05-03",
   "decomposition_revision": "0.5",
   "node_count": 92,
@@ -83,8 +83,17 @@
   ],
   "targeted_review_dispositions": {
     "DEL-01-04": "ACCEPTED_FOR_REV05_GRAPH_AUTHORING",
-    "DEL-02-01": "ACCEPTED_AS_FOUNDATIONAL_PREDECESSOR_WITH_SUPPLEMENT_REQUIRED_BEFORE_COMPLETENESS_RELIANCE"
+    "DEL-02-01": "SUPPLEMENT_COMPLETED_WORKING_TREE_VALIDATED_BEFORE_GRAPH_APPROVAL"
   },
   "edge_disposition_review": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionReview.md",
-  "edge_disposition_worklist": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionWorklist.csv"
+  "edge_disposition_worklist": "execution/_DAG/DAG-002/DAG-002_EdgeDispositionWorklist.csv",
+  "approval_readiness": "APPROVED",
+  "approval_record": "execution/_DAG/DAG-002/APPROVAL_RECORD.md",
+  "approval_review_packet": "execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md",
+  "post_approval_guardrails": [
+    "Candidate rows remain non-gating",
+    "Blocker readiness recomputation requires its own guarded workflow step and has not been run",
+    "Deliverable-local dependency mirror refresh requires its own guarded workflow step and has not been run",
+    "Approval does not dispatch Type 2 work, change lifecycle states, run PREPARATION, or promote Chirality corpus material"
+  ]
 }

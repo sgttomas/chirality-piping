@@ -6,7 +6,7 @@ This prompt is stable control-loop protocol. It is not the source of the next
 deliverable objective. Derive the current objective from
 `execution/_Coordination/NEXT_INSTANCE_STATE.md`,
 `execution/_Coordination/_COORDINATION.md`, the latest DAG pointer, historical
-`DAG-001` artifacts, unapproved `DAG-002` proposal artifacts when present, the
+`DAG-001` artifacts, approved `DAG-002` artifacts when present, the
 current blocker/evidence/dependency status surfaces, and the latest human
 approval gate.
 
@@ -24,12 +24,14 @@ state unless the human explicitly approves that next action.
 - Quarantined reference corpus: `docs/_ScopeChange/chirality-app-docs/` may be read for governance perspective only; it is not implementation scope, runtime architecture, UI requirement, dependency authority, or dispatch authority under SCA-002.
 - Historical coordination graph: `execution/_DAG/DAG-001/`.
 - Historical approval record: `execution/_DAG/DAG-001/APPROVAL_RECORD.md`.
-- Latest graph artifact: `execution/_DAG/DAG-002/` as an unapproved revision
-  `0.5` proposal snapshot.
-- No revision `0.5` graph approval record exists.
+- Latest graph artifact: `execution/_DAG/DAG-002/` as the approved revision
+  `0.5` active-edge coordination basis.
+- Revision `0.5` graph approval record:
+  `execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
 - `DAG-001` active edge set is historical revision `0.4` development
   coordination evidence only; it must not drive new revision `0.5` dispatch.
-- Blocker computation is held for revision `0.5`; `CANDIDATE` edges remain
+- Blocker computation is authorized for revision `0.5` only as a later guarded
+  recomputation step; it has not yet been run. `CANDIDATE` edges remain
   non-gating.
 - DEV-001 blocker computation uses implementation-readiness semantics:
   `FromDeliverableID` is blocked by `TargetDeliverableID`, and non-architecture
@@ -38,7 +40,7 @@ state unless the human explicitly approves that next action.
 - `SEMANTIC_READY` remains context readiness and does not satisfy
   implementation blockers by itself.
 - Current blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-  and `.csv` as a hold-state queue, not blocked/unblocked readiness.
+  and `.csv` as a stale hold-state queue, not blocked/unblocked readiness.
 - Current lifecycle snapshot:
   `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`.
 - Current implementation evidence projection:
@@ -81,25 +83,26 @@ Before planning a next action, read:
 17. `plans/SCA-002_DOWNSTREAM_REFRESH_PLAN.md`
 18. `execution/_DAG/_LATEST.md`
 19. `execution/_DAG/DAG-002/PROPOSAL_RECORD.md`
-20. `execution/_DAG/DAG-002/DAG_Audit.md`
-21. `execution/_DAG/DAG-002/Cycle_Report.md`
-22. `execution/_DAG/DAG-002/TopologicalWaves.md`
-23. `execution/_DAG/DAG-002/DependencyEdges.csv`
-24. `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
-25. `execution/_DAG/DAG-001/DAG_Audit.md`
-26. `execution/_DAG/DAG-001/Cycle_Report.md`
-27. `execution/_DAG/DAG-001/TopologicalWaves.md`
-28. `execution/_DAG/DAG-001/DependencyEdges.csv`
-29. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
-30. `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
-31. `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
-32. `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`
-33. `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
-34. Any active, latest, or historically relevant dispatch brief named by
+20. `execution/_DAG/DAG-002/APPROVAL_RECORD.md`
+21. `execution/_DAG/DAG-002/DAG_Audit.md`
+22. `execution/_DAG/DAG-002/Cycle_Report.md`
+23. `execution/_DAG/DAG-002/TopologicalWaves.md`
+24. `execution/_DAG/DAG-002/DependencyEdges.csv`
+25. `execution/_DAG/DAG-001/APPROVAL_RECORD.md`
+26. `execution/_DAG/DAG-001/DAG_Audit.md`
+27. `execution/_DAG/DAG-001/Cycle_Report.md`
+28. `execution/_DAG/DAG-001/TopologicalWaves.md`
+29. `execution/_DAG/DAG-001/DependencyEdges.csv`
+30. `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
+31. `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`
+32. `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
+33. `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`
+34. `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`
+35. Any active, latest, or historically relevant dispatch brief named by
     `NEXT_INSTANCE_STATE.md`.
-35. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
-36. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
-37. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
+36. `execution/_Reconciliation/Reconciliation_Run_Summary_2026-04-30_DEV001_CONTROL_PLANE_HARDENING.md`
+37. `execution/_Reconciliation/DepClosure/CLOSURE_DEV001_POST_MATERIALIZATION_2026-04-30/RUN_SUMMARY.md`
+38. `plans/DEV-001_PRODUCT_DEVELOPMENT_DISPATCH_PLAN.md`
 
 After reading, state that reading is complete, summarize the active control
 state, and ask for or consume the next human approval gate.
@@ -109,8 +112,10 @@ state, and ask for or consume the next human approval gate.
 - Use aggregate `DAG-001` as historical revision `0.4` coordination evidence.
   Do not use it as revision `0.5` dispatch authority until refreshed and
   accepted through the SCA-002 downstream refresh plan.
-- Use aggregate `DAG-002` only as an unapproved revision `0.5` proposal until
-  an explicit human graph approval record exists.
+- Use aggregate `DAG-002` as the approved revision `0.5` active-edge
+  coordination basis. Candidate rows remain non-gating, and later blocker
+  readiness recomputation or dependency mirror refresh must be run only through
+  their own guarded workflow steps.
 - Use a DEV-001 implementation projection only as a derived view when useful:
   exclude `PKG-00` nodes and `ARCHITECTURE_BASIS` edges, while retaining
   `SCA-001` / `AB-00-*` brief injection evidence.
@@ -130,10 +135,10 @@ To determine the next safe step:
 2. Confirm whether the prior bounded item is complete, committed, awaiting
    review, awaiting CHANGE approval, blocked, or superseded by a newer human
    instruction.
-3. Consult `DAG-002`, topological waves, and the blocker queue only as
-   unapproved proposal/hold-state evidence until a revision `0.5` graph is
-   approved. Do not treat wave position or queue rows as schedule, staffing,
-   priority, readiness, or authorization.
+3. Consult approved `DAG-002`, topological waves, and the blocker queue with
+   their current authority boundaries. Do not treat wave position or stale
+   hold-state queue rows as schedule, staffing, priority, readiness, or
+   authorization.
 4. Apply the latest explicit human ruling. If no next item is authorized, ask
    for a gate among: SCA-002 refresh planning, one bounded DAG item,
    `RECONCILIATION`, `CHANGE`, `AUDIT_*`, artifact handling, or pause.

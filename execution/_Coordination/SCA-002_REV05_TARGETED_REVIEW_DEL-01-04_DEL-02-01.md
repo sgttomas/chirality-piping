@@ -6,7 +6,7 @@ created: 2026-05-03
 scope_change: SCA-002
 decomposition_revision: "0.5"
 reviewed_by: ORCHESTRATOR
-graph_approval: not_requested
+graph_approval: approved_after_separate_human_gate
 ---
 
 # SCA-002 Revision 0.5 Targeted Evidence Review
@@ -84,11 +84,15 @@ Recommended graph-authoring consequence:
   whether to authorize a supplemental `DEL-02-01` schema/context refresh or
   explicitly defer that supplement with recorded risk.
 
-## Human Gates Still Needed Before Any Approval Request
+## Human Ruling Before Approval
 
-- Confirm whether this targeted review disposition is accepted as graph-authoring
-  evidence for the unapproved `DAG-002` proposal.
-- Decide, before approval or before the first dependent implementation dispatch,
-  whether `DEL-02-01` requires an explicit supplemental revision `0.5` update.
+- 2026-05-03: Human project authority ruled that `DEL-02-01` requires an
+  explicit supplemental revision `0.5` schema/context update before `DAG-002`
+  graph approval.
+- 2026-05-03: The supplemental schema/context work was executed in the working
+  tree and validated; final graph approval remains a separate human gate.
+- 2026-05-03: Human project authority approved the `DAG-002` revision `0.5`
+  active edge set after the supplement. The approval record is
+  `execution/_DAG/DAG-002/APPROVAL_RECORD.md`.
 - Keep `DEL-01-04` and `DEL-02-01` lifecycle and implementation-evidence
   projection rows unchanged until a separate authorized closeout changes them.

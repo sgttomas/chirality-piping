@@ -1,13 +1,15 @@
 ---
 doc_id: DAG-002-TOPOLOGICAL-WAVES
 doc_kind: coordination.topological_waves
-status: generated_unapproved_proposal
+status: generated_approved_active_edge_set
 created: 2026-05-03
 ---
 
 # DAG-002 Topological Waves
 
-These waves are generated from active proposal edges only. Because `DAG-002` is unapproved, these waves are evidence for graph review only and are not a dispatch order.
+These waves are generated from approved `ACTIVE` `DAG-002` edges only. They
+are dependency-order evidence, not a schedule, staffing plan, priority list,
+readiness claim, or dispatch order.
 
 | Wave | Node count | Deliverables |
 |---|---:|---|

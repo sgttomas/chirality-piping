@@ -1,7 +1,7 @@
 ---
 doc_id: DAG-002-CYCLE-REPORT
 doc_kind: coordination.cycle_report
-status: generated_unapproved_proposal
+status: generated_approved_active_edge_set
 created: 2026-05-03
 ---
 
@@ -28,7 +28,9 @@ created: 2026-05-03
 
 Candidate interpretation: warning only; non-gating.
 
-Candidate-layer SCCs, if any, are proposal warnings only and do not block the active-edge acyclicity result unless later promoted by explicit human graph approval.
+Candidate-layer SCCs are warning-only because candidate rows remain non-gating
+after graph approval. They do not block the approved active-edge acyclicity
+result unless later promoted by a separate human gate and cycle check.
 
 ## Candidate-Layer SCCs
 

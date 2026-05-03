@@ -71,7 +71,7 @@ Minimum domain objects:
 | Object | Purpose | Required properties |
 |---|---|---|
 | `Project` | Project container and design basis metadata | ID, units, storage policy, rule-pack refs, report settings |
-| `Model` | Piping system model | nodes, elements, components, supports, loads, libraries |
+| `Model` | Physical source-of-truth or derived analytical piping model | role, nodes, elements, components, supports, loads, libraries, diagnostics, unresolved assumptions, traceability and downstream contract refs |
 | `Node` | 3D coordinate and six-DOF state | coordinates, DOF flags, imposed displacement refs |
 | `Element` | Analytical member between nodes | type, section/material refs, local coordinate system, results stations |
 | `Component` | Piping-specific object | component type, geometry, user modifiers, source/provenance |
@@ -82,6 +82,15 @@ Minimum domain objects:
 | `Combination` | Algebraic result combination | expression, result basis, category |
 | `RulePack` | User-defined code/design-basis check | required inputs, formulas, allowables, status, checksum |
 | `Report` | Auditable calculation output | input manifest, warnings, results, rule-pack refs, notices |
+
+Revision 0.5 treats the schema-backed physical model as the source of truth for
+editable piping design data. `schemas/model.schema.yaml` therefore exposes
+source-of-truth role metadata, unresolved assumptions, diagnostics/warnings,
+traceability links, and typed references to design knowledge, constraints,
+equipment interfaces, model operations, immutable states, analysis runs,
+comparisons, handoff packages, and external prover metadata. The detailed
+records for those surfaces remain owned by PKG-13 through PKG-16 and their
+specialized schemas or services.
 
 ## 4. Unit system and dimensional analysis
 

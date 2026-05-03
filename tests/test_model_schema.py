@@ -9,8 +9,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "schemas" / "model.schema.yaml"
 
 REQUIRED_DEFS = {
+    "Assumption",
     "Project",
     "Model",
+    "ModelRole",
     "Node",
     "Element",
     "Component",
@@ -28,6 +30,7 @@ REQUIRED_DEFS = {
     "Diagnostic",
     "Checksum",
     "Reference",
+    "TraceabilityLink",
 }
 
 REQUIRED_ANALYSIS_STATUSES = {
@@ -113,6 +116,7 @@ def main():
     } <= required_at(schema, "Project")
 
     assert {
+        "model_role",
         "nodes",
         "elements",
         "components",
@@ -123,7 +127,65 @@ def main():
         "combinations",
         "results",
         "diagnostics",
+        "unresolved_assumptions",
+        "traceability_links",
+        "design_knowledge_refs",
+        "constraint_refs",
+        "equipment_interface_refs",
+        "operation_refs",
+        "model_state_refs",
+        "analysis_run_refs",
+        "comparison_refs",
+        "handoff_package_refs",
+        "external_reference_refs",
+        "provenance",
     } <= required_at(schema, "Model")
+    assert {
+        "physical_source_of_truth",
+        "analytical_solver_model",
+        "derived_view",
+        "TBD",
+    } <= enum_at(schema, "ModelRole")
+
+    assert {"id", "statement", "status", "affected_refs", "provenance"} <= required_at(
+        schema, "Assumption"
+    )
+    assert {"unresolved", "resolved", "rejected", "TBD"} <= set(
+        defs["Assumption"]["properties"]["status"]["enum"]
+    )
+
+    assert {
+        "id",
+        "trace_type",
+        "source_ref",
+        "target_ref",
+        "diagnostics",
+        "provenance",
+    } <= required_at(schema, "TraceabilityLink")
+    assert {
+        "physical_to_analytical",
+        "operation_application",
+        "state_snapshot",
+        "analysis_run",
+        "comparison",
+        "handoff",
+        "external_reference",
+        "TBD",
+    } <= set(defs["TraceabilityLink"]["properties"]["trace_type"]["enum"])
+
+    assert {
+        "DesignKnowledge",
+        "Constraint",
+        "EquipmentInterface",
+        "ModelOperation",
+        "ModelState",
+        "AnalysisRun",
+        "Comparison",
+        "HandoffPackage",
+        "ExternalProverReference",
+        "Assumption",
+        "TraceabilityLink",
+    } <= set(defs["Reference"]["properties"]["object_type"]["enum"])
 
     assert {"value", "unit", "dimension", "provenance"} <= required_at(
         schema, "Quantity"
