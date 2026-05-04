@@ -1,7 +1,7 @@
 # Status: DEL-11-04 Invented educational example models
 
-**Current State:** SEMANTIC_READY
-**Last Updated:** 2026-04-30
+**Current State:** CHECKING
+**Last Updated:** 2026-05-04
 
 ## History
 - 2026-04-30 - State set to OPEN (PREPARATION)
@@ -9,3 +9,4 @@
 - 2026-04-30 - State set to SEMANTIC_READY (TASK+semantic-matrix-build)
 - 2026-04-30 - State verified as SEMANTIC_READY (TASK+four-documents P3_ONLY)
 - 2026-04-30 - State verified as SEMANTIC_READY after dependency-extract setup gates (TASK+dependency-extract)
+- 2026-05-04 - State moved to CHECKING after DEV-001 revision 0.5 Tranche A working-tree implementation and post-worker closeout preparation; commit and evidence promotion remain pending CHANGE authorization.

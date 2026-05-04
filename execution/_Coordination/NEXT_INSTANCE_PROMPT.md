@@ -10,9 +10,13 @@ deliverable objective. Derive the current objective from
 blocker/evidence/dependency status surfaces, and the latest human approval
 gate.
 
-Do not launch a new `WORKING_ITEMS` session, dispatch `TASK`, start another
-deliverable, edit deliverable-local dependency registers, or change lifecycle
-state unless the human explicitly approves that next action.
+Do not launch `WORKING_ITEMS`, dispatch `TASK`, start deliverable
+implementation, edit deliverable-local dependency registers, or change
+lifecycle state unless the human explicitly approves that next action. When the
+human approves a bounded parallel Type 2 tranche proposal, ORCHESTRATOR may
+prepare one sealed brief per deliverable. Worker agents may be spawned only if
+the human separately and explicitly approves worker launch for those sealed
+briefs.
 
 ## Current Ground Truth
 
@@ -54,12 +58,13 @@ state unless the human explicitly approves that next action.
 - `PKG-00` does not require deliverable-local `Dependencies.csv` files.
 - Existing non-`PKG-00` deliverable-local `Dependencies.csv` files are
   synchronized mirrors/evidence refreshed from approved `DAG-002`, not
-  independent sequencing authority. Revision `0.5` deliverables without
-  execution control surfaces remain held for `PREPARATION`.
+  independent sequencing authority. Nineteen revision `0.5` control surfaces
+  now exist with local `Dependencies.csv` mirrors pending a separate guarded
+  refresh.
 - The next gate is always the latest explicit human choice: run SCA-002 refresh
-  planning, authorize exactly one bounded DAG item after refresh, route
-  reconciliation/change/audit, handle artifact state, or pause. Broad DAG
-  execution is not authorized by default.
+  planning, authorize a bounded parallel Type 2 tranche, authorize a single
+  bounded item, route reconciliation/change/audit, handle artifact state, or
+  pause. Open-ended broad DAG execution is not authorized by default.
 
 ## First Action - Required Reading
 
@@ -140,13 +145,18 @@ To determine the next safe step:
    as schedule, staffing, priority, lifecycle approval, dispatch authorization,
    or professional approval.
 4. Apply the latest explicit human ruling. If no next item is authorized, ask
-   for a gate among: SCA-002 refresh planning, one bounded DAG item,
-   `RECONCILIATION`, `CHANGE`, `AUDIT_*`, artifact handling, or pause.
-5. If exactly one bounded DAG item is authorized after refresh, prepare a fresh
-   sealed handoff brief from the accepted revision `0.5` coordination graph,
-   `docs/_Registers/Deliverables.csv`, applicable `AB-00-*`
-   architecture-basis rows, and the target deliverable's refreshed local
-   context.
+   for a gate among: SCA-002 refresh planning, a bounded parallel Type 2
+   tranche, one bounded item, `RECONCILIATION`, `CHANGE`, `AUDIT_*`, artifact
+   handling, or pause.
+5. If a bounded parallel tranche is authorized, prepare a tranche plan and one
+   sealed handoff brief per deliverable from the accepted revision `0.5`
+   coordination graph, `docs/_Registers/Deliverables.csv`, applicable
+   `AB-00-*` architecture-basis rows, and each target deliverable's refreshed
+   local context. Confirm implementation readiness, dependency mirror/context
+   readiness, acceptance criteria, validation expectations, and disjoint or
+   explicitly coordinated write scopes before spawning worker agents.
+6. If exactly one bounded DAG item is authorized, prepare the same sealed brief
+   structure for that one deliverable.
 
 Do not reuse any prior dispatch brief as an implementation brief for a later
 deliverable.
@@ -187,8 +197,10 @@ commits after explicit approval.
 
 ## Hard Stops
 
-- No product implementation without a sealed deliverable scope and human gate.
-- No broad fan-out.
+- No product implementation without sealed deliverable scope and human gate.
+- No open-ended broad fan-out. Parallel fan-out is allowed only as a bounded
+  human-approved Type 2 tranche with one sealed brief per deliverable and
+  disjoint or explicitly coordinated write scopes.
 - No lifecycle transitions.
 - No protected standards/code data, proprietary engineering values, private
   project data, real secrets, private libraries, or certification/compliance
