@@ -11,4 +11,4 @@
 - 2026-04-30 - Semantic lensing register generated (TASK+lens-register)
 - 2026-04-30 - Pass 3 semantic enrichment applied with TBD/open-issue preservation (TASK+four-documents, RUN_PASSES=P3_ONLY)
 - 2026-04-30 - Dependency register generated and schema-validated; legacy ID-format validator mismatch recorded as warning (TASK+dependency-extract)
-- 2026-05-04 - State moved to CHECKING after DEV-001 revision 0.5 Tranche A working-tree implementation and post-worker closeout preparation; commit and evidence promotion remain pending CHANGE authorization.
+- 2026-05-04 - State moved to CHECKING after DEV-001 revision 0.5 Tranche A implementation and post-worker closeout; implementation committed as `abdecbd` and evidence promoted to COMMITTED on 2026-05-04.

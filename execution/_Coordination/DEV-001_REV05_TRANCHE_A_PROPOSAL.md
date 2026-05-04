@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-A-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: closeout_prepared_commit_not_authorized
+status: implementation_committed_evidence_promoted
 created: 2026-05-03
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -12,7 +12,7 @@ accepted_for_brief_preparation: 2026-05-03
 sealed_briefs_status: prepared
 dispatch_authorization: approved_2026-05-03
 worker_launch: completed
-post_worker_closeout: prepared_2026-05-04_commit_not_authorized
+post_worker_closeout: committed_2026-05-04
 ---
 
 # DEV-001 Revision 0.5 Tranche A Proposal
@@ -25,13 +25,13 @@ project authority accepted the proposal for sealed brief preparation on
 2026-05-03, then separately approved worker dispatch for the six sealed
 briefs. Worker implementation outputs have returned in the working tree. The
 human project authority later approved post-worker REVIEW/AUDIT and
-CHANGE-managed closeout preparation. The closeout patch is prepared but not
-committed.
+CHANGE-managed closeout preparation. The implementation and closeout patch was committed as `abdecbd`,
+and the six evidence rows were promoted to `COMMITTED` using that hash.
 
 The accepted brief-preparation and worker-dispatch actions have been
 completed. Post-worker closeout preparation has also been completed through
-REVIEW/AUDIT and CHANGE surfaces. Commit and post-commit evidence promotion
-remain gated until explicitly authorized.
+REVIEW/AUDIT and CHANGE surfaces. Commit and post-commit evidence promotion were later authorized and
+completed through CHANGE.
 
 ## Acceptance And Prepared Briefs
 
@@ -208,7 +208,10 @@ Before worker launch:
 4. Completed: human approved the sealed briefs and worker launch.
 5. Completed: human approved post-worker REVIEW/AUDIT and CHANGE-managed
    closeout preparation.
-6. Pending: human approves commit and post-commit evidence promotion.
+6. Completed: human approved CHANGE commit and post-commit evidence promotion.
+7. Completed: implementation and closeout patch committed as `abdecbd`; six
+   implementation-evidence rows promoted from `WORKING_TREE` to `COMMITTED`
+   using that hash.
 
 No prerequisite dependency mirror refresh is required for the six selected
 deliverables because their local mirrors are already synchronized from approved
@@ -230,9 +233,9 @@ Each worker brief should require focused validation plus tranche-level checks:
 Post-worker closeout preparation was authorized and prepared on 2026-05-04.
 The six deliverables have working-tree lifecycle/evidence closeout rows and
 the blocker queue has been regenerated against the pre-commit evidence state:
-the tranche deliverables now carry `WORKING_TREE` evidence, which does not
-satisfy downstream implementation blockers until the CHANGE commit is made and
-evidence is promoted to `COMMITTED`.
+the tranche deliverables initially carried `WORKING_TREE` evidence. The later
+CHANGE commit and evidence-promotion gate promoted them to `COMMITTED` using
+implementation commit `abdecbd`.
 
 ## Post-Worker Closeout Preparation
 
@@ -265,11 +268,13 @@ Dependency status for the six selected deliverables remains unchanged: their
 local `Dependencies.csv` mirrors were already synchronized from approved
 `DAG-002`, and no worker or closeout step edited those local mirrors.
 
-The closeout patch is ready for human review. No commit has been made.
+The closeout patch was committed as `abdecbd`. Evidence promotion then changed
+the six Tranche A rows from `WORKING_TREE` to `COMMITTED` and regenerated the
+blocker queue to 72 unblocked / 20 blocked.
 
-## Next Approval Gate
+## Commit And Evidence Promotion
 
-Recommended next human gate:
+Human approval received:
 
 ```text
 APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche A working-tree
@@ -277,3 +282,17 @@ implementation and closeout patch, then promote the six Tranche A
 implementation-evidence rows from WORKING_TREE to COMMITTED using the resulting
 commit hash and rebuild the blocker queue.
 ```
+
+CHANGE result:
+
+- implementation and closeout patch committed as `abdecbd`;
+- six Tranche A implementation-evidence rows promoted to `COMMITTED` using
+  `abdecbd`;
+- blocker queue regenerated from approved active `DAG-002` edges;
+- queue result changed from 70 unblocked / 22 blocked to 72 unblocked / 20
+  blocked;
+- newly unblocked items: `DEL-09-04` and `DEL-09-05`.
+
+No additional Type 2 dispatch, dependency-mirror refresh, candidate promotion,
+or lifecycle transition beyond the six approved `CHECKING` states is authorized
+by this record.

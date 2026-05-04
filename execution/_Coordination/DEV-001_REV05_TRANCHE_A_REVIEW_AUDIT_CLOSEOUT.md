@@ -1,13 +1,15 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-A-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: closeout_prepared_commit_not_authorized
+status: implementation_committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
 graph_authority: execution/_DAG/DAG-002/
 tranche_proposal: execution/_Coordination/DEV-001_REV05_TRANCHE_A_PROPOSAL.md
-commit_authorization: withheld
+commit_authorization: approved_2026-05-04
+implementation_closeout_commit: abdecbd
+evidence_promotion: completed_2026-05-04
 ---
 
 # DEV-001 Revision 0.5 Tranche A Review/Audit Closeout
@@ -58,14 +60,14 @@ No blocking audit findings were found.
 
 ## CHANGE Closeout Patch
 
-Prepared without committing:
+Prepared without committing, then committed after explicit CHANGE authorization:
 
 - six deliverable `_STATUS.md` files moved from `SEMANTIC_READY` to
-  `CHECKING`;
+  `CHECKING` and later annotated with implementation commit `abdecbd`;
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` updated to
   `CHECKING` / `WORKING_TREE` for the six tranche deliverables;
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` appended with
-  six `WORKING_TREE` evidence rows;
+  six `WORKING_TREE` evidence rows before commit; after commit these rows were promoted to `COMMITTED` using `abdecbd`;
 - `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
   updated to `WORKING_TREE` for the six tranche deliverables;
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` and `.csv` regenerated
@@ -98,7 +100,7 @@ Closeout verification completed:
   passed.
 - `python3 -m pytest -q tools/coordination` passed: 10 tests.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --dag-dir execution/_DAG/DAG-002 --generated-date 2026-05-04`
-  passed and reported 70 unblocked / 22 blocked.
+  passed before commit and reported 70 unblocked / 22 blocked; after evidence promotion it reported 72 unblocked / 20 blocked.
 - `git diff --check` passed.
 - `git diff --check --no-index -- /dev/null` over untracked source files
   produced no whitespace diagnostics.
@@ -111,9 +113,13 @@ untouched.
 
 ## Commit Gate
 
-No commit has been made.
+Implementation and closeout were committed as `abdecbd`. The six Tranche A evidence rows were promoted to `COMMITTED` with that implementation commit hash, and the blocker queue was rebuilt to 72 unblocked / 20 blocked. Newly unblocked items are `DEL-09-04` and `DEL-09-05`.
 
-Recommended next approval:
+This promotion patch is committed separately by CHANGE; see git history for the evidence-promotion commit hash.
+
+No next Type 2 dispatch is authorized by this closeout record.
+
+Historical approval text:
 
 ```text
 APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche A working-tree
