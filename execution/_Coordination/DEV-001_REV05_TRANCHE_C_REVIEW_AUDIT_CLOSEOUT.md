@@ -1,15 +1,17 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-C-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_closeout_prepared
+status: implementation_committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
 graph_authority: execution/_DAG/DAG-002/
 tranche_proposal: execution/_Coordination/DEV-001_REV05_TRANCHE_C_PROPOSAL.md
 sealed_brief: execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-10-04.md
-commit_authorization: not_authorized
-evidence_promotion: not_authorized
+commit_authorization: approved_2026-05-04
+implementation_closeout_commit: daaff87
+evidence_promotion: completed_2026-05-04
+evidence_promotion_commit: this_commit
 ---
 
 # DEV-001 Revision 0.5 Tranche C Review/Audit Closeout
@@ -28,6 +30,13 @@ ORCHESTRATOR interpreted this as authorization to review the working-tree
 `DEL-10-04` implementation, prepare lifecycle/evidence/blocker/handoff
 closeout surfaces using `WORKING_TREE` evidence, and stop before commit or
 `COMMITTED` evidence promotion.
+
+The human later authorized commit, handover completion, second commit, and
+push:
+
+```text
+commit and then complete the handover procedure and then commit again and push
+```
 
 ## REVIEW Result
 
@@ -53,44 +62,46 @@ No blocking audit findings were found.
 | Protected/private data | PASS - focused scans returned boundary/prohibition language only, not copied protected data, protected tables, proprietary examples, private project data, private rule packs, private libraries, or real secrets. |
 | Authority claims | PASS - documents use negative boundary wording and human-governance constraints; they do not claim software certification, sealing, endorsement, professional approval, authentication, or automatic code compliance. |
 | Dependency authority | PASS - no aggregate DAG or local `Dependencies.csv` mirror was edited. The local mirror remains synchronized from approved `DAG-002`. |
-| Evidence threshold | PASS - closeout evidence is recorded as `WORKING_TREE`, not `COMMITTED`; downstream implementation blockers remain unsatisfied until post-commit promotion if a later gate authorizes it. |
+| Evidence threshold | PASS - closeout evidence was recorded as `WORKING_TREE` before commit, then promoted to `COMMITTED` only after the authorized implementation commit `daaff87`. |
 | Candidate edges | PASS - `DAG-002-E0620` remains non-gating and was not used as readiness authority. |
 | Quarantined corpus | PASS - no Chirality app/harness material was promoted. |
 | CI boundary | PASS - no `.github/`, live CI workflow, hosted service integration, signing, notarization, attestation, or publishing surface was added. |
 
 ## CHANGE Closeout Patch
 
-Prepared in the working tree only:
+Prepared and committed as `daaff87`, then promoted in the follow-up handover
+commit:
 
 - `DEL-10-04` `_STATUS.md` moved from `SEMANTIC_READY` to `CHECKING`;
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` updated to
   `CHECKING` / `WORKING_TREE` for `DEL-10-04`;
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` appended with
-  one `WORKING_TREE` evidence row for `DEL-10-04`;
+  one `WORKING_TREE` evidence row for `DEL-10-04`, then promoted to
+  `COMMITTED` using implementation commit `daaff87`;
 - `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
-  updated to `WORKING_TREE` for `DEL-10-04`;
+  updated to `WORKING_TREE` for `DEL-10-04`, then promoted to `COMMITTED`;
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` and `.csv` regenerated
   from approved active `DAG-002` edges using the unchanged `COMMITTED`
   threshold;
-- coordination handoff surfaces updated to record that commit and
-  `COMMITTED` evidence promotion remain gated.
+- coordination handoff surfaces updated to record the committed promotion and
+  the absence of any additional Type 2 dispatch authority.
 
 Dependency status for `DEL-10-04` remains unchanged:
 `SYNCHRONIZED_FROM_APPROVED_DAG002_MIRROR_PRESENT`.
 
-Working-tree blocker queue state:
+Post-promotion blocker queue state:
 
 | Fact | State |
 |---|---:|
 | Implementation evidence records | 56 |
-| Committed implementation evidence records | 55 |
-| Working-tree evidence records | 1 |
+| Committed implementation evidence records | 56 |
+| Working-tree evidence records | 0 |
 | Queue state | 73 unblocked / 19 blocked |
 | `DEL-10-04` lifecycle | `CHECKING` |
-| `DEL-10-04` evidence | `WORKING_TREE` |
+| `DEL-10-04` evidence | `COMMITTED` `daaff87` |
+| Newly unblocked by promotion | none |
 
-`WORKING_TREE` evidence is display/evidence-prep state only. It does not
-satisfy the `COMMITTED` implementation threshold for downstream consumers.
+No additional downstream deliverable became unblocked by this promotion.
 
 ## Verification
 
@@ -105,7 +116,7 @@ Closeout verification completed:
 - `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-002/DependencyEdges.csv`
   passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --dag-dir execution/_DAG/DAG-002 --generated-date 2026-05-04`
-  passed and reported 73 unblocked / 19 blocked.
+  passed before and after promotion and reported 73 unblocked / 19 blocked.
 - `git diff --check` passed.
 - Trailing-whitespace scan over changed Tranche C closeout files returned no
   matches.
@@ -117,17 +128,14 @@ Closeout verification completed:
 
 ## Commit And Promotion
 
-No commit was made.
+Implementation and closeout were committed as `daaff87`.
 
-No `DEL-10-04` evidence was promoted to `COMMITTED`.
+The `DEL-10-04` evidence row was promoted from `WORKING_TREE` to `COMMITTED`
+using implementation commit `daaff87`, and the blocker queue was rebuilt to 73
+unblocked / 19 blocked with 56 committed evidence records.
 
-Recommended next guarded gate, if the human accepts this closeout patch:
+Historical approval text:
 
 ```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche C working-tree
-implementation and closeout patch, then promote the DEL-10-04
-implementation-evidence row from WORKING_TREE to COMMITTED using the resulting
-commit hash and rebuild the blocker queue.
+commit and then complete the handover procedure and then commit again and push
 ```
-
-This recommended next gate is not self-authorizing.

@@ -26,13 +26,14 @@ sealed Tranche C brief write scope:
 
 This implementation did not create live CI workflow files, package-manager
 manifests, signing or publishing configuration, release binaries, installers,
-notarization artifacts, dependency-register edits, aggregate DAG changes,
-candidate-edge promotions, commits, or pushes.
+notarization artifacts, dependency-register edits, aggregate DAG changes, or
+candidate-edge promotions.
 
-Post-implementation closeout later moved `DEL-10-04` to `CHECKING` with
-`WORKING_TREE` evidence. This is not `COMMITTED` evidence and does not satisfy
-downstream implementation blockers until a later commit/promotion gate
-authorizes that transition.
+Post-implementation closeout moved `DEL-10-04` to `CHECKING` with
+`WORKING_TREE` evidence. A later CHANGE gate committed the implementation and
+closeout as `daaff87`, then promoted the `DEL-10-04` evidence row to
+`COMMITTED` using that implementation commit. The queue remained 73 unblocked /
+19 blocked after promotion.
 
 ## Evidence Basis
 
@@ -100,6 +101,7 @@ Checks run on 2026-05-04:
 | focused private-data and real-secret scan | Reviewed; matches were boundary wording and historical handoff text only, not credentials, tokens, passwords, keys, or private data. |
 | focused authority-overclaim scan | Reviewed; matches were negative boundary statements, human-gate wording, or historical handoff text only, not software certification, sealing, endorsement, approval, authentication, or compliance claims. |
 | post-implementation closeout queue rebuild | Pass; 73 unblocked / 19 blocked with 56 evidence records and 55 committed evidence records. |
+| post-commit evidence promotion queue rebuild | Pass; 73 unblocked / 19 blocked with 56 evidence records and 56 committed evidence records. |
 
 ## Remaining TBDs
 
