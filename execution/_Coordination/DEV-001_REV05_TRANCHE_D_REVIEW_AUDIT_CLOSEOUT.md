@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-D-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_closeout_prepared_commit_withheld
+status: committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -11,8 +11,10 @@ implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_D_IMPLEMEN
 sealed_briefs:
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-01.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-01.md
-commit_authorization: not_authorized
-evidence_promotion: not_authorized
+commit_authorization: authorized_and_completed
+implementation_commit: dcdc1ac
+evidence_promotion: completed
+post_promotion_queue: 76_unblocked_16_blocked
 ---
 
 # DEV-001 Revision 0.5 Tranche D Review/Audit Closeout
@@ -31,6 +33,20 @@ ORCHESTRATOR interpreted this as authorization to review the working-tree
 Tranche D implementation, audit scope/boundaries, prepare lifecycle/evidence
 and handoff closeout surfaces using `WORKING_TREE` evidence, and stop before
 commit or `COMMITTED` evidence promotion.
+
+Later CHANGE approval authorized the implementation/closeout commit, promotion
+of `DEL-13-01` and `DEL-14-01` evidence to `COMMITTED` using the resulting
+commit hash, blocker queue rebuild, promotion handoff commit, and push:
+
+```text
+APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche D working-tree implementation
+and closeout patch, then promote DEL-13-01 and DEL-14-01 implementation
+evidence from WORKING_TREE to COMMITTED using the resulting commit hash and
+rebuild the blocker queue. Commit the promotion handoff. And then push
+```
+
+Implementation and closeout were committed as `dcdc1ac schema: add design
+knowledge and model state contracts`.
 
 ## REVIEW Result
 
@@ -66,28 +82,28 @@ No blocking audit findings were found.
 | Protected/private data | PASS - focused scans returned guardrail/prohibition language or existing vocabulary only, not copied protected standards data, protected tables, proprietary project data, private project payloads, private rule packs, private libraries, or real secrets. |
 | Authority claims | PASS - schemas use negative professional-boundary controls and do not introduce positive software certification, sealing, authentication, automatic code-compliance, formal prover approval, or professional acceptance states. |
 | Dependency authority | PASS - no aggregate DAG or local `Dependencies.csv` mirror was edited. Both local mirrors remain synchronized from approved `DAG-002`. |
-| Evidence threshold | PASS - closeout evidence is recorded as `WORKING_TREE`; `COMMITTED` promotion is explicitly withheld. |
+| Evidence threshold | PASS - closeout evidence was first recorded as `WORKING_TREE`; later CHANGE approval promoted it to `COMMITTED` using implementation commit `dcdc1ac`. |
 | Candidate edges | PASS - candidate rows remain non-gating and were not promoted or used as implementation-readiness authority. |
 | Quarantined corpus | PASS - no Chirality app/harness material was promoted. |
 | Runtime boundary | PASS - no GUI runtime, external prover integration, physical project container implementation, private storage implementation, live CI/signing/publishing, or external service integration was added. |
 
 ## CHANGE Closeout Patch
 
-Prepared but not committed:
+Committed and promoted:
 
 - `DEL-13-01` `_STATUS.md` moved from `SEMANTIC_READY` to `CHECKING`;
 - `DEL-14-01` `_STATUS.md` moved from `SEMANTIC_READY` to `CHECKING`;
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` appended with
-  two `WORKING_TREE` evidence rows for `DEL-13-01` and `DEL-14-01`;
+  two evidence rows for `DEL-13-01` and `DEL-14-01`, then promoted them from
+  `WORKING_TREE` to `COMMITTED` using implementation commit `dcdc1ac`;
 - `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
-  updated to `WORKING_TREE` for both deliverables;
+  updated to `COMMITTED` for both deliverables;
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` updated to
-  `CHECKING` / `WORKING_TREE` for both deliverables;
+  `CHECKING` / `COMMITTED` for both deliverables;
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` and `.csv` regenerated
-  from approved active `DAG-002` edges using the unchanged `COMMITTED`
-  threshold;
+  from approved active `DAG-002` edges using the `COMMITTED` threshold;
 - coordination handoff surfaces updated to record the working-tree closeout and
-  the absence of commit or `COMMITTED` evidence promotion authority.
+  the later `COMMITTED` evidence promotion.
 
 Dependency status for both deliverables remains unchanged:
 `SYNCHRONIZED_FROM_APPROVED_DAG002_MIRROR_PRESENT`.
@@ -97,14 +113,14 @@ Current closeout queue state:
 | Fact | State |
 |---|---:|
 | Implementation evidence records | 58 |
-| Committed implementation evidence records | 56 |
-| Working-tree evidence records | 2 |
-| Queue state | 73 unblocked / 19 blocked |
+| Committed implementation evidence records | 58 |
+| Working-tree evidence records | 0 |
+| Queue state | 76 unblocked / 16 blocked |
 | `DEL-13-01` lifecycle | `CHECKING` |
-| `DEL-13-01` evidence | `WORKING_TREE` |
+| `DEL-13-01` evidence | `COMMITTED` `dcdc1ac` |
 | `DEL-14-01` lifecycle | `CHECKING` |
-| `DEL-14-01` evidence | `WORKING_TREE` |
-| Newly unblocked by closeout preparation | none, because blocker satisfaction still requires `COMMITTED` evidence |
+| `DEL-14-01` evidence | `COMMITTED` `dcdc1ac` |
+| Newly unblocked by promotion | `DEL-13-02`, `DEL-14-02`, `DEL-16-01` |
 
 ## Verification
 
@@ -116,7 +132,7 @@ Closeout verification completed:
 - `python3 tests/test_persistence_schema.py` passed.
 - `python3 tests/test_analysis_status_schema.py` passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --dag-dir execution/_DAG/DAG-002 --generated-date 2026-05-04`
-  passed and reported 73 unblocked / 19 blocked.
+  passed after promotion and reported 76 unblocked / 16 blocked.
 - `python3 -m pytest -q tools/coordination` passed: 11 tests.
 - `python3 tools/validation/validate_dependencies_schema.py execution/_DAG/DAG-002/DependencyEdges.csv`
   passed.
@@ -126,14 +142,13 @@ Closeout verification completed:
 - Focused boundary scan over changed implementation and coordination surfaces
   returned guardrail/prohibition language or existing vocabulary only.
 
-## Pending Gate
+## Promotion Handoff
 
-Commit and `COMMITTED` evidence promotion remain withheld. Recommended next
-approval after review of this closeout patch:
-
-```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche D working-tree implementation
-and closeout patch, then promote DEL-13-01 and DEL-14-01 implementation
-evidence from WORKING_TREE to COMMITTED using the resulting commit hash and
-rebuild the blocker queue. Commit the promotion handoff. Do not push.
-```
+`DEL-13-01` and `DEL-14-01` now satisfy downstream blockers at the
+implementation-readiness threshold because their evidence rows are `COMMITTED`
+against `dcdc1ac`. The blocker queue is rebuilt from the approved active
+`DAG-002` edge set and now shows 76 unblocked / 16 blocked. This promotion does
+not authorize another Type 2 dispatch, dependency mirror refresh, aggregate
+DAG mutation, candidate-edge promotion, lifecycle transition beyond the two
+approved `CHECKING` states, Chirality corpus promotion, live CI/signing, or
+professional acceptance claims.
