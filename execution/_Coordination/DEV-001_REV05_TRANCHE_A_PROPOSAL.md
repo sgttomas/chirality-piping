@@ -288,6 +288,7 @@ CHANGE result:
 - implementation and closeout patch committed as `abdecbd`;
 - six Tranche A implementation-evidence rows promoted to `COMMITTED` using
   `abdecbd`;
+- evidence promotion committed as `b19ac15`;
 - blocker queue regenerated from approved active `DAG-002` edges;
 - queue result changed from 70 unblocked / 22 blocked to 72 unblocked / 20
   blocked;

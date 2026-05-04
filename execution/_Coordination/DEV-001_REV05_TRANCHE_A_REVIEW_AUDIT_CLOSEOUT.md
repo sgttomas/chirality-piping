@@ -10,6 +10,7 @@ tranche_proposal: execution/_Coordination/DEV-001_REV05_TRANCHE_A_PROPOSAL.md
 commit_authorization: approved_2026-05-04
 implementation_closeout_commit: abdecbd
 evidence_promotion: completed_2026-05-04
+evidence_promotion_commit: b19ac15
 ---
 
 # DEV-001 Revision 0.5 Tranche A Review/Audit Closeout
@@ -115,7 +116,7 @@ untouched.
 
 Implementation and closeout were committed as `abdecbd`. The six Tranche A evidence rows were promoted to `COMMITTED` with that implementation commit hash, and the blocker queue was rebuilt to 72 unblocked / 20 blocked. Newly unblocked items are `DEL-09-04` and `DEL-09-05`.
 
-This promotion patch is committed separately by CHANGE; see git history for the evidence-promotion commit hash.
+This promotion patch was committed separately by CHANGE as `b19ac15`.
 
 No next Type 2 dispatch is authorized by this closeout record.
 

@@ -103,7 +103,7 @@ unless a row explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state task | `DEV-001 revision 0.5 Tranche A implementation commit and evidence promotion` |
-| Latest state commit | Implementation/closeout `abdecbd feat: complete dev001 rev05 tranche a`; evidence-promotion commit is the current CHANGE commit in git history |
+| Latest state commit | Implementation/closeout `abdecbd feat: complete dev001 rev05 tranche a`; evidence promotion `b19ac15 coordination: promote dev001 rev05 tranche a evidence`; this handoff record is the current CHANGE cleanup commit |
 | Latest cleanup commit | Prior handoff cleanup is `581d19a coordination: record latest handoff cleanup commit` |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche A post-worker closeout preparation` archived in compact history |
 | Current authorized item | Human approved CHANGE commit and post-commit evidence promotion for Tranche A. Implementation and closeout were committed as `abdecbd`; six evidence rows were promoted to `COMMITTED`; blocker queue was rebuilt to 72 unblocked / 20 blocked. No next Type 2 dispatch, dependency mirror materialization for the 19, candidate promotion, or additional refresh is authorized unless included in a later explicit approval. |
@@ -360,6 +360,8 @@ CHANGE results:
 
 - Implementation and closeout patch committed as `abdecbd feat: complete dev001
   rev05 tranche a`.
+- Evidence promotion committed as
+  `b19ac15 coordination: promote dev001 rev05 tranche a evidence`.
 - Six Tranche A evidence rows were promoted to `COMMITTED` with commit
   `abdecbd`.
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` now records the
