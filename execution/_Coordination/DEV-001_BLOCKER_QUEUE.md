@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 55 |
+| Implementation evidence records | 56 |
 | Committed implementation evidence | 55 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 18 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 17 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 73 |
 | Implementation `BLOCKED` deliverables | 19 |
@@ -130,7 +130,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-10-01` | `PKG-10` | `COMMITTED` `53cc3d6` | 11 | Public API and plugin boundary |
 | `DEL-10-02` | `PKG-10` | `COMMITTED` `be29df7` | 12 | Import/export adapter framework |
 | `DEL-10-03` | `PKG-10` | `COMMITTED` `abdecbd` | 11 | Local FEA handoff data contract |
-| `DEL-10-04` | `PKG-10` | `MISSING_EVIDENCE` | 11 | Build, packaging, and CI/CD pipeline |
+| `DEL-10-04` | `PKG-10` | `WORKING_TREE` `WORKING_TREE` | 11 | Build, packaging, and CI/CD pipeline |
 | `DEL-10-05` | `PKG-10` | `COMMITTED` `9de5e9b` | 13 | Headless CLI and structured I/O analysis runner |
 | `DEL-11-02` | `PKG-11` | `COMMITTED` `abdecbd` | 11 | Developer guide for solver and rule packs |
 | `DEL-11-03` | `PKG-11` | `COMMITTED` `abdecbd` | 9 | Theory notes: classical to modern centerline analysis |
