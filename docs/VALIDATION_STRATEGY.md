@@ -48,7 +48,12 @@ criteria, and professional reliance policy as `TBD` until human approval.
 
 ## 3. Validation manual structure
 
-The validation manual shall include:
+The validation manual skeleton lives at `docs/validation_manual/index.md`. It
+is a draft evidence-organization surface for maintainers and reviewers; it is
+not an engineering seal, code-compliance ruling, or project-specific reliance
+record.
+
+The validation manual shall include these sections:
 
 1. product scope and limitations;
 2. solver theory summary;
@@ -60,6 +65,12 @@ The validation manual shall include:
 8. GUI workflow validation;
 9. report reproducibility validation;
 10. known limitations and open issues.
+
+Each section must state whether it is verification evidence, workflow
+validation evidence, user-rule-check evidence, or professional-reliance context.
+Missing evidence, unapproved thresholds, and unresolved source/provenance
+questions remain explicit `TBD` items until a governed decision or evidence
+record exists.
 
 ## 4. Release gate
 

@@ -1,9 +1,10 @@
 # Status: DEL-09-04 Validation manual skeleton
 
-**Current State:** SEMANTIC_READY
-**Last Updated:** 2026-04-30
+**Current State:** CHECKING
+**Last Updated:** 2026-05-04
 
 ## History
 - 2026-04-30 - State set to OPEN (PREPARATION)
 - 2026-04-30 - State set to INITIALIZED (TASK+four-documents P1_P2)
 - 2026-04-30 - State set/verified as SEMANTIC_READY (TASK+semantic-matrix-build)
+- 2026-05-04 - State moved to CHECKING after DEV-001 revision 0.5 Tranche B implementation and REVIEW/AUDIT closeout preparation; implementation remains in working tree pending commit and evidence promotion.

@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 53 |
+| Implementation evidence records | 55 |
 | Committed implementation evidence | 53 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 20 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 18 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 72 |
 | Implementation `BLOCKED` deliverables | 20 |
@@ -125,8 +125,8 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `COMMITTED` `abdecbd` | 6 | Nonlinear support regression suite |
-| `DEL-09-04` | `PKG-09` | `MISSING_EVIDENCE` | 8 | Validation manual skeleton |
-| `DEL-09-05` | `PKG-09` | `MISSING_EVIDENCE` | 9 | Release quality gate checklist |
+| `DEL-09-04` | `PKG-09` | `WORKING_TREE` | 8 | Validation manual skeleton |
+| `DEL-09-05` | `PKG-09` | `WORKING_TREE` | 9 | Release quality gate checklist |
 | `DEL-10-01` | `PKG-10` | `COMMITTED` `53cc3d6` | 11 | Public API and plugin boundary |
 | `DEL-10-02` | `PKG-10` | `COMMITTED` `be29df7` | 12 | Import/export adapter framework |
 | `DEL-10-03` | `PKG-10` | `COMMITTED` `abdecbd` | 11 | Local FEA handoff data contract |
@@ -152,7 +152,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-09-05` - Release quality gate checklist | `PKG-09` | `MISSING_EVIDENCE` | 1 | `DEL-10-04` | `DAG-002-E0571` |
+| `DEL-09-05` - Release quality gate checklist | `PKG-09` | `WORKING_TREE` | 1 | `DEL-10-04` | `DAG-002-E0571` |
 | `DEL-13-01` - Design knowledge schema and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 5 | `DEL-07-08`; `DEL-13-02`; `DEL-13-03`; `DEL-13-04`; `DEL-16-01` | `DAG-002-E0762`; `DAG-002-E0767`; `DAG-002-E0773`; `DAG-002-E0824`; `DAG-002-E0844` |
 | `DEL-13-02` - Constraint entity and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 2 | `DEL-13-03`; `DEL-13-04` | `DAG-002-E0768`; `DAG-002-E0774` |
 | `DEL-13-03` - Constraint validation engine | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-13-04`; `DEL-16-02` | `DAG-002-E0775`; `DAG-002-E0828`; `DAG-002-E0845` |
