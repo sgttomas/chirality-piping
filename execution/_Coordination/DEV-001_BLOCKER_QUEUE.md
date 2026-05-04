@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 56 |
+| Implementation evidence records | 58 |
 | Committed implementation evidence | 56 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 36 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 34 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 73 |
 | Implementation `BLOCKED` deliverables | 19 |
@@ -141,8 +141,8 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-12-03` | `PKG-12` | `COMMITTED` `7834b97` | 9 | Telemetry off-by-default design |
 | `DEL-12-04` | `PKG-12` | `MISSING_EVIDENCE` | 11 | Secret and private-library handling |
 | `DEL-12-05` | `PKG-12` | `COMMITTED` `b97121d` | 10 | Security threat model |
-| `DEL-13-01` | `PKG-13` | `MISSING_EVIDENCE` | 11 | Design knowledge schema and provenance model |
-| `DEL-14-01` | `PKG-14` | `MISSING_EVIDENCE` | 11 | Immutable model state records |
+| `DEL-13-01` | `PKG-13` | `WORKING_TREE` `WORKING_TREE` | 11 | Design knowledge schema and provenance model |
+| `DEL-14-01` | `PKG-14` | `WORKING_TREE` `WORKING_TREE` | 11 | Immutable model state records |
 
 ## Blocked Items Grouped By Missing Upstream
 
@@ -153,11 +153,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-13-01` - Design knowledge schema and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 5 | `DEL-07-08`; `DEL-13-02`; `DEL-13-03`; `DEL-13-04`; `DEL-16-01` | `DAG-002-E0762`; `DAG-002-E0767`; `DAG-002-E0773`; `DAG-002-E0824`; `DAG-002-E0844` |
+| `DEL-13-01` - Design knowledge schema and provenance model | `PKG-13` | `WORKING_TREE` | 5 | `DEL-07-08`; `DEL-13-02`; `DEL-13-03`; `DEL-13-04`; `DEL-16-01` | `DAG-002-E0762`; `DAG-002-E0767`; `DAG-002-E0773`; `DAG-002-E0824`; `DAG-002-E0844` |
 | `DEL-13-02` - Constraint entity and provenance model | `PKG-13` | `MISSING_EVIDENCE` | 2 | `DEL-13-03`; `DEL-13-04` | `DAG-002-E0768`; `DAG-002-E0774` |
 | `DEL-13-03` - Constraint validation engine | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-13-04`; `DEL-16-02` | `DAG-002-E0775`; `DAG-002-E0828`; `DAG-002-E0845` |
 | `DEL-13-04` - Physical-to-analytical transformation contract | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0809`; `DAG-002-E0816`; `DAG-002-E0846` |
-| `DEL-14-01` - Immutable model state records | `PKG-14` | `MISSING_EVIDENCE` | 8 | `DEL-07-08`; `DEL-08-06`; `DEL-14-02`; `DEL-14-03`; `DEL-14-05`; `DEL-15-01`; `DEL-15-04`; `DEL-16-03` | `DAG-002-E0783`; `DAG-002-E0788`; `DAG-002-E0792`; `DAG-002-E0802`; `DAG-002-E0822`; `DAG-002-E0834`; `DAG-002-E0847`; `DAG-002-E0861` |
+| `DEL-14-01` - Immutable model state records | `PKG-14` | `WORKING_TREE` | 8 | `DEL-07-08`; `DEL-08-06`; `DEL-14-02`; `DEL-14-03`; `DEL-14-05`; `DEL-15-01`; `DEL-15-04`; `DEL-16-03` | `DAG-002-E0783`; `DAG-002-E0788`; `DAG-002-E0792`; `DAG-002-E0802`; `DAG-002-E0822`; `DAG-002-E0834`; `DAG-002-E0847`; `DAG-002-E0861` |
 | `DEL-14-02` - Analysis run records | `PKG-14` | `MISSING_EVIDENCE` | 4 | `DEL-08-06`; `DEL-14-04`; `DEL-14-05`; `DEL-15-01` | `DAG-002-E0789`; `DAG-002-E0795`; `DAG-002-E0803`; `DAG-002-E0862` |
 | `DEL-14-03` - Model-state comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-08-06`; `DEL-16-02` | `DAG-002-E0829`; `DAG-002-E0848`; `DAG-002-E0863` |
 | `DEL-14-04` - Analysis-run comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-08-06` | `DAG-002-E0849`; `DAG-002-E0864` |

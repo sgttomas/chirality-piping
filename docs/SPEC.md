@@ -92,6 +92,44 @@ comparisons, handoff packages, and external prover metadata. The detailed
 records for those surfaces remain owned by PKG-13 through PKG-16 and their
 specialized schemas or services.
 
+### 3.1 Design knowledge contract
+
+The design knowledge contract is represented by
+`schemas/design_knowledge.schema.json`. It defines user-supplied design
+knowledge records for endpoints, line data, routing corridors, zones,
+equipment interfaces, access/slope/drain/vent requirements, owner/project
+metadata, source notes, and unresolved assumptions.
+
+Design knowledge records are structured project data supplied by users or
+their cleared sources. Public examples must be invented or otherwise cleared
+for redistribution. Records carry provenance, privacy classification,
+redistribution status, review status, and explicit unit metadata for
+unit-bearing values. Missing or uncertain data remains a diagnostic or
+assumption record, not a silent engineering default.
+
+The schema provides slots for owner/project metadata without bundling owner
+standards, protected code criteria, proprietary project data, protected
+standards text, protected tables, vendor catalog values, or code-specific
+acceptance criteria.
+
+### 3.2 Immutable model state contract
+
+The immutable model state contract is represented by
+`schemas/model_state.schema.json`. It defines named model state records with
+tags, notes, parent-state references, external references, unresolved
+assumptions, warnings, analysis-status references, deterministic hashes, and a
+read-only snapshot policy.
+
+Model states are reproducibility and design-iteration records. Changes to a
+state payload create a new model state. Hash-bound external review or human
+acceptance references, if added by later workflows, invalidate when bound
+hashes change. The model state schema uses the accepted JCS-compatible JSON
+payload hash basis but leaves physical project container details `TBD`.
+
+Model states do not provide formal prover approval states, certification
+states, sealing states, authentication states, automatic code-compliance
+statuses, or professional acceptance records.
+
 ## 4. Unit system and dimensional analysis
 
 The domain core owns the unit contract. Every physical value that crosses a
