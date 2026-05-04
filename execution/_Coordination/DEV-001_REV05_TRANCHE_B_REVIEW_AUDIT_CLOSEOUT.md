@@ -1,15 +1,16 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-B-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: prepared_pending_commit_authorization
+status: implementation_committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
 graph_authority: execution/_DAG/DAG-002/
 tranche_proposal: execution/_Coordination/DEV-001_REV05_TRANCHE_B_PROPOSAL.md
-commit_authorization: not_authorized
-implementation_closeout_commit: pending
-evidence_promotion: not_authorized
+commit_authorization: approved_2026-05-04
+implementation_closeout_commit: 03344e6
+evidence_promotion: completed_2026-05-04
+evidence_promotion_commit: this_commit
 ---
 
 # DEV-001 Revision 0.5 Tranche B Review/Audit Closeout
@@ -24,8 +25,15 @@ run those handoff tasks now.
 
 ORCHESTRATOR interpreted this as authorization for post-implementation
 REVIEW/AUDIT and CHANGE-managed closeout preparation for `DEL-09-04` and
-`DEL-09-05`. Commit and post-commit `COMMITTED` evidence promotion remain
-withheld until separately approved.
+`DEL-09-05`.
+
+The human later authorized commit, evidence promotion, consequence updates, a
+second commit, and push:
+
+```text
+commit, promote, make all updates that come as a consequence of this, commit
+again and push.
+```
 
 ## REVIEW Result
 
@@ -59,14 +67,16 @@ No blocking audit findings were found.
 
 ## CHANGE Closeout Patch
 
-Prepared without committing:
+Prepared and committed as `03344e6`, then promoted in the follow-up evidence
+promotion commit:
 
 - two deliverable `_STATUS.md` files moved from `SEMANTIC_READY` to
   `CHECKING`;
 - `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` updated to
   `CHECKING` / `WORKING_TREE` for `DEL-09-04` and `DEL-09-05`;
 - `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` appended with
-  two `WORKING_TREE` evidence rows;
+  two `WORKING_TREE` evidence rows before commit, then promoted to `COMMITTED`
+  using implementation commit `03344e6`;
 - `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`
   updated to `WORKING_TREE` for the two deliverables;
 - `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` and `.csv` regenerated
@@ -78,16 +88,16 @@ Prepared without committing:
 Dependency status for both deliverables remains unchanged:
 `SYNCHRONIZED_FROM_APPROVED_DAG002_MIRROR_PRESENT`.
 
-Pre-commit blocker queue state after closeout preparation:
+Post-promotion blocker queue state:
 
 | Fact | State |
 |---|---:|
 | Implementation evidence records | 55 |
-| Committed implementation evidence records | 53 |
-| Queue state | 72 unblocked / 20 blocked |
-| `DEL-09-04` evidence | `WORKING_TREE` |
-| `DEL-09-05` evidence | `WORKING_TREE` |
-| `DEL-10-04` blocker | Still blocked by `DEL-09-05` through `DAG-002-E0571` until `DEL-09-05` evidence is promoted to `COMMITTED` |
+| Committed implementation evidence records | 55 |
+| Queue state | 73 unblocked / 19 blocked |
+| `DEL-09-04` evidence | `COMMITTED` `03344e6` |
+| `DEL-09-05` evidence | `COMMITTED` `03344e6` |
+| Newly unblocked | `DEL-10-04` |
 
 ## Verification
 
@@ -102,7 +112,8 @@ Closeout verification completed:
 - `PYTHONDONTWRITEBYTECODE=1 python3 tools/coordination/audit_dag.py --nodes execution/_DAG/DAG-002/DeliverableNodes.csv --edges execution/_DAG/DAG-002/DependencyEdges.csv --strict`
   passed.
 - `python3 tools/coordination/build_dev001_blocker_queue.py --dag-dir execution/_DAG/DAG-002 --generated-date 2026-05-04`
-  passed and reported 72 unblocked / 20 blocked.
+  passed before promotion and reported 72 unblocked / 20 blocked; after
+  promotion it reported 73 unblocked / 19 blocked.
 - `git diff --check` passed.
 - Trailing-whitespace scan over changed Tranche B closeout files returned no
   matches.
@@ -110,12 +121,15 @@ Closeout verification completed:
   language only.
 - Focused private-data/secret scan returned boundary/prohibition language only.
 
-## Commit Gate
+## Commit And Promotion
 
-No commit is authorized by this closeout preparation. The working-tree
-implementation and closeout patch is ready for human review.
+Implementation and closeout were committed as `03344e6`.
 
-Suggested approval text:
+The two Tranche B evidence rows were promoted from `WORKING_TREE` to
+`COMMITTED` using implementation commit `03344e6`, and the blocker queue was
+rebuilt to 73 unblocked / 19 blocked. `DEL-10-04` is newly unblocked.
+
+Historical approval text:
 
 ```text
 APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche B working-tree
@@ -124,6 +138,4 @@ implementation-evidence rows from WORKING_TREE to COMMITTED using the resulting
 commit hash and rebuild the blocker queue.
 ```
 
-Without that approval, the two evidence rows remain `WORKING_TREE`, downstream
-blockers remain governed by the `COMMITTED` threshold, and no commit should be
-made.
+No next Type 2 dispatch is authorized by this closeout record.

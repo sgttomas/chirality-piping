@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-B-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: review_audit_closeout_prepared_pending_commit_authorization
+status: implementation_committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -13,7 +13,9 @@ accepted_for_brief_preparation: 2026-05-04
 sealed_briefs_status: prepared
 dispatch_authorization: local_orchestrator_implementation_authorized_2026-05-04
 worker_launch: not_used_orchestrator_local_execution
-implementation_status: working_tree_complete_closeout_prepared
+implementation_status: committed_evidence_promoted
+implementation_closeout_commit: 03344e6
+evidence_promotion: completed_2026-05-04
 ---
 
 # DEV-001 Revision 0.5 Tranche B Proposal
@@ -60,7 +62,7 @@ Prepared sealed briefs:
 | Invariants | `docs/CONTRACT.md` |
 | Active graph | `execution/_DAG/DAG-002/DependencyEdges.csv` approved `ACTIVE` edges only |
 | Approval | `execution/_DAG/DAG-002/APPROVAL_RECORD.md` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 72 unblocked, 20 blocked |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 73 unblocked, 19 blocked after evidence promotion |
 | Lifecycle projection | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv` |
 | Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` |
 | Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv` |
@@ -224,24 +226,19 @@ authorized and completed. The closeout record is
 
 The closeout patch moved `DEL-09-04` and `DEL-09-05` to `CHECKING`, appended
 `WORKING_TREE` implementation-evidence rows, regenerated the blocker queue
-under the unchanged `COMMITTED` threshold, and updated handoff state. It did
-not commit or promote evidence to `COMMITTED`.
+under the unchanged `COMMITTED` threshold, and updated handoff state. The
+implementation/closeout patch was committed as `03344e6`.
+
+## Evidence Promotion
+
+The human later authorized commit, evidence promotion, consequence updates, a
+second commit, and push. The two Tranche B evidence rows were promoted to
+`COMMITTED` using implementation commit `03344e6`, and the blocker queue was
+rebuilt to 73 unblocked / 19 blocked. `DEL-10-04` became newly unblocked.
 
 ## Requested Next Gate
 
-The next guarded approval is CHANGE commit and post-commit evidence promotion.
-Commit and implementation-evidence promotion remain separate approvals after
-the closeout patch is reviewed.
-
-Suggested approval text:
-
-```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche B working-tree
-implementation and closeout patch, then promote the DEL-09-04 and DEL-09-05
-implementation-evidence rows from WORKING_TREE to COMMITTED using the resulting
-commit hash and rebuild the blocker queue.
-```
-
-Without that approval, the two evidence rows remain `WORKING_TREE`, downstream
-blockers remain governed by the `COMMITTED` threshold, and no commit should be
-made.
+No next Type 2 dispatch is authorized by this proposal. The next human gate is
+to select or approve the next bounded workflow step from the current approved
+`DAG-002` readiness state. `DEL-10-04` is newly unblocked and is a natural
+proposal-only Tranche C candidate, but it is not dispatched by this record.
