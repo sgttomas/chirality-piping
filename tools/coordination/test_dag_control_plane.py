@@ -185,3 +185,39 @@ def test_materializer_writes_non_pkg00_mirrors_and_preserves_rows(tmp_path: Path
     pointer = (del0101_path / "_DEPENDENCIES.md").read_text(encoding="utf-8")
     assert "SYNCHRONIZED_FROM_DAG_001" in pointer
     assert "CANDIDATE` rows remain non-gating" in pointer
+
+
+def test_materializer_can_scope_to_selected_deliverables(tmp_path: Path) -> None:
+    execution_root = tmp_path / "execution"
+    del0101_path = execution_root / "PKG-01" / "1_Working" / "DEL-01-01_Project governance baseline"
+    del0102_path = execution_root / "PKG-01" / "1_Working" / "DEL-01-02_Copyright policy"
+    del0101_path.mkdir(parents=True)
+    del0102_path.mkdir(parents=True)
+
+    nodes_path = tmp_path / "DeliverableNodes.csv"
+    edges_path = tmp_path / "DependencyEdges.csv"
+    write_csv(nodes_path, [
+        node("DEL-01-01", "PKG-01", "Project governance baseline", del0101_path),
+        node("DEL-01-02", "PKG-01", "Copyright policy", del0102_path),
+    ], NODE_COLUMNS)
+    write_csv(edges_path, [
+        edge("DAG-001-E0001", "PKG-01", "DEL-01-01", "PKG-01", "DEL-01-02"),
+        edge("DAG-001-E0002", "PKG-01", "DEL-01-02", "PKG-01", "DEL-01-01"),
+    ], REQUIRED_COLUMNS)
+
+    summary = materialize_local_dependencies(
+        edges_path=edges_path,
+        nodes_path=nodes_path,
+        execution_root=execution_root,
+        refresh_pointers=True,
+        generated_date="2026-04-30",
+        source_label="DAG-001",
+        deliverable_ids={"DEL-01-02"},
+    )
+
+    assert summary["written_count"] == 1
+    assert summary["filtered_deliverable_ids"] == ["DEL-01-02"]
+    assert not (del0101_path / "Dependencies.csv").exists()
+
+    _header, rows = read_rows(del0102_path / "Dependencies.csv")
+    assert [row["DependencyID"] for row in rows] == ["DAG-001-E0002"]

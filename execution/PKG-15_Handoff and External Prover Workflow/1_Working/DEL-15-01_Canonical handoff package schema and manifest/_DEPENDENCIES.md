@@ -1,15 +1,14 @@
 # Dependencies: DEL-15-01 Canonical handoff package schema and manifest
 
-## Generated Dependency Register Pointer
-- **Status:** CONTROL_SURFACE_PRESENT_DEPENDENCY_MIRROR_PENDING
+## Generated Dependency Register
+- **Status:** SYNCHRONIZED_FROM_APPROVED_DAG002
 - **Source of Truth:** `execution/_DAG/DAG-002/DependencyEdges.csv`
-- **Local Register:** `Dependencies.csv` not materialized by this PREPARATION gate.
-- **Aggregate Rows as Consumer:** 13 total; 13 ACTIVE; 0 CANDIDATE.
+- **Local Register:** `Dependencies.csv`
+- **Rows:** 13 total; 13 ACTIVE; 0 CANDIDATE.
 - **Generated:** 2026-05-03
 
 ## Authority Boundary
-- Aggregate `DAG-002` remains the sequencing and blocker-computation authority within its approval boundary.
-- This `_DEPENDENCIES.md` file is a metadata pointer, not an independent graph authority.
-- Local `Dependencies.csv` mirror materialization is pending a separate guarded dependency-mirror refresh.
+- Aggregate `APPROVED_DAG002` remains the sequencing and blocker-computation authority within its approval boundary.
+- This local register is a synchronized mirror/evidence surface, not an independent graph authority.
 - `CANDIDATE` rows remain non-gating until later RECONCILIATION plus CHANGE approval.
-- This pass did not refresh `DEV-001_BLOCKER_QUEUE.*` or change implementation readiness.
+- `PKG-00` architecture-basis rows are preserved here as injected context evidence; `PKG-00` does not receive local dependency registers.

@@ -57,11 +57,12 @@ briefs.
   its applicable `AB-00-*` rows are injected into sealed briefs instead of
   being treated as implementation graph work.
 - `PKG-00` does not require deliverable-local `Dependencies.csv` files.
-- Existing non-`PKG-00` deliverable-local `Dependencies.csv` files are
-  synchronized mirrors/evidence refreshed from approved `DAG-002`, not
-  independent sequencing authority. Nineteen revision `0.5` control surfaces
-  now exist with local `Dependencies.csv` mirrors pending a separate guarded
-  refresh.
+- All non-`PKG-00` deliverable-local `Dependencies.csv` files are synchronized
+  mirrors/evidence refreshed from approved `DAG-002`, not independent
+  sequencing authority. Nineteen revision `0.5` control surfaces now exist
+  with dependency mirrors present, four production documents initialized,
+  non-placeholder semantic matrices, semantic lens registers, and
+  `SEMANTIC_READY` context state.
 - The next gate is always the latest explicit human choice: run SCA-002 refresh
   planning, authorize a bounded parallel Type 2 tranche, authorize a single
   bounded item, route reconciliation/change/audit, handle artifact state, or

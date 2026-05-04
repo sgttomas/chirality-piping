@@ -90,6 +90,7 @@ def materialize_local_dependencies(
     dry_run: bool = False,
     generated_date: str | None = None,
     source_label: str | None = None,
+    deliverable_ids: set[str] | None = None,
 ) -> dict[str, object]:
     header, edge_rows, edge_width_issues = read_csv_rows(edges_path)
     _node_header, node_rows, node_width_issues = read_csv_rows(nodes_path)
@@ -116,6 +117,8 @@ def materialize_local_dependencies(
         package_id = node.get("PackageID", "").strip()
         execution_path_raw = node.get("ExecutionPath", "").strip()
         if not deliverable_id:
+            continue
+        if deliverable_ids is not None and deliverable_id not in deliverable_ids:
             continue
         if package_id == PKG_00:
             skipped_pkg00.append(deliverable_id)
@@ -172,6 +175,7 @@ def materialize_local_dependencies(
         "edges_path": str(edges_path),
         "nodes_path": str(nodes_path),
         "source_label": resolved_source_label,
+        "filtered_deliverable_ids": sorted(deliverable_ids or []),
         "execution_root": str(execution_root),
         "dry_run": dry_run,
         "refresh_pointers": refresh_pointers,
@@ -191,7 +195,11 @@ def materialize_local_dependencies(
 
 
 def render_console(summary: dict[str, object]) -> str:
-    return "\n".join([
+    lines = []
+    filtered = summary.get("filtered_deliverable_ids") or []
+    if filtered:
+        lines.append(f"Deliverable filter: {','.join(filtered)}")
+    lines.extend([
         f"Written local registers: {summary['written_count']}",
         f"Skipped PKG-00 deliverables: {summary['skipped_pkg00_count']}",
         f"Missing execution paths: {summary['missing_execution_path_count']}",
@@ -199,6 +207,7 @@ def render_console(summary: dict[str, object]) -> str:
         f"Pointer refresh: {summary['refresh_pointers']}",
         f"Dry run: {summary['dry_run']}",
     ])
+    return "\n".join(lines)
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -217,6 +226,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--json-out", type=Path, help="Write materialization summary JSON.")
     parser.add_argument("--source-label", help="Label to write into generated pointer files, e.g. DAG-002.")
     parser.add_argument(
+        "--deliverable-id",
+        action="append",
+        default=[],
+        help="Restrict materialization to a deliverable ID. May be repeated or comma-separated.",
+    )
+    parser.add_argument(
         "--allow-missing-execution-paths",
         action="store_true",
         help="Return success when some DAG nodes do not yet have PREPARATION-created folders.",
@@ -228,6 +243,12 @@ def main(argv: list[str] | None = None) -> int:
     args = parse_args(sys.argv[1:] if argv is None else argv)
     edges_path = args.edges or args.dag_dir / "DependencyEdges.csv"
     nodes_path = args.nodes or args.dag_dir / "DeliverableNodes.csv"
+    deliverable_ids = {
+        item.strip()
+        for value in args.deliverable_id
+        for item in value.split(",")
+        if item.strip()
+    } or None
     summary = materialize_local_dependencies(
         edges_path=edges_path,
         nodes_path=nodes_path,
@@ -235,6 +256,7 @@ def main(argv: list[str] | None = None) -> int:
         refresh_pointers=args.refresh_pointers,
         dry_run=args.dry_run,
         source_label=args.source_label,
+        deliverable_ids=deliverable_ids,
     )
     print(render_console(summary))
     if args.json_out:
