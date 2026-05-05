@@ -44,7 +44,7 @@ briefs.
   implementation blockers by itself.
 - Current blocker queue: `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`
   and `.csv` as the current active-edge implementation-readiness computation:
-  73 unblocked, 19 blocked after DEV-001 revision `0.5` Tranche C evidence
+  82 unblocked, 10 blocked after DEV-001 revision `0.5` Tranche F evidence
   promotion.
 - Current lifecycle snapshot:
   `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`.
