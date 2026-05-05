@@ -118,10 +118,10 @@ row explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state task | `DEV-001 revision 0.5 post-Tranche F next-step assessment` |
-| Latest state commit | Not committed; proposal-only assessment file-state is in the working tree. |
-| Latest cleanup commit | None for this assessment; Tranche F implementation/closeout commit remains `05878bf`. |
+| Latest state commit | Assessment and handoff committed as `3823b1f` (`coordination: assess post tranche f next step`). |
+| Latest cleanup commit | This handoff hash update is pending commit; Tranche F implementation/closeout commit remains `05878bf`. |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche F implementation commit and evidence promotion` archived in compact history |
-| Current authorized item | Human approved proposal-only DEV-001 revision `0.5` post-Tranche F next-step assessment from the current approved `DAG-002` readiness state and Tranche F committed evidence. ORCHESTRATOR prepared `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md`, screened ten implementation-unblocked missing-evidence candidates, and recommended proposal-only Tranche G planning for `DEL-13-04`, `DEL-14-03`, and `DEL-14-04`. No sealed brief preparation, worker launch, Type 2 dispatch, product implementation, lifecycle transition, implementation-evidence update, blocker refresh, dependency mirror refresh, aggregate DAG mutation, candidate promotion, commit, push, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion is authorized. |
+| Current authorized item | Human approved proposal-only DEV-001 revision `0.5` post-Tranche F next-step assessment from the current approved `DAG-002` readiness state and Tranche F committed evidence. ORCHESTRATOR prepared and committed `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md` as `3823b1f`, screened ten implementation-unblocked missing-evidence candidates, and recommended proposal-only Tranche G planning for `DEL-13-04`, `DEL-14-03`, and `DEL-14-04`. No sealed brief preparation, worker launch, Type 2 dispatch, product implementation, lifecycle transition, implementation-evidence update, blocker refresh, dependency mirror refresh, aggregate DAG mutation, candidate promotion, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion is authorized. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -425,7 +425,7 @@ workflows, or Chirality corpus promotion.
 Completed output:
 
 - `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md`
-  was created.
+  was created and committed as `3823b1f`.
 - `_COORDINATION.md` was updated with the assessment ruling and recommended
   next gate.
 - This state file was updated for handoff.
@@ -471,7 +471,9 @@ Control-state non-actions:
 - No product implementation occurred.
 - No lifecycle, evidence, blocker queue, dependency mirror, aggregate DAG,
   candidate edge, or local `Dependencies.csv` state was changed.
-- No commit or push was made.
+- Assessment and handoff state were committed as `3823b1f`; no product,
+  lifecycle, evidence, blocker, dependency, DAG, or candidate state was changed
+  by that commit.
 - No GUI/runtime work, external prover integration, physical project container
   implementation, private storage implementation, live CI/signing/publishing,
   autonomous mutation workflow, professional acceptance logic, or Chirality
