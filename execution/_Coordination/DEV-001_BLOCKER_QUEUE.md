@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 61 |
+| Implementation evidence records | 64 |
 | Committed implementation evidence | 61 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 31 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 28 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 79 |
 | Implementation `BLOCKED` deliverables | 13 |
@@ -143,11 +143,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-12-05` | `PKG-12` | `COMMITTED` `b97121d` | 10 | Security threat model |
 | `DEL-13-01` | `PKG-13` | `COMMITTED` `dcdc1ac` | 11 | Design knowledge schema and provenance model |
 | `DEL-13-02` | `PKG-13` | `COMMITTED` `002263b` | 12 | Constraint entity and provenance model |
-| `DEL-13-03` | `PKG-13` | `MISSING_EVIDENCE` | 12 | Constraint validation engine |
+| `DEL-13-03` | `PKG-13` | `WORKING_TREE` | 12 | Constraint validation engine |
 | `DEL-14-01` | `PKG-14` | `COMMITTED` `dcdc1ac` | 11 | Immutable model state records |
 | `DEL-14-02` | `PKG-14` | `COMMITTED` `002263b` | 12 | Analysis run records |
-| `DEL-14-05` | `PKG-14` | `MISSING_EVIDENCE` | 11 | Comparison mapping, tolerance, and export contracts |
-| `DEL-15-01` | `PKG-15` | `MISSING_EVIDENCE` | 13 | Canonical handoff package schema and manifest |
+| `DEL-14-05` | `PKG-14` | `WORKING_TREE` | 11 | Comparison mapping, tolerance, and export contracts |
+| `DEL-15-01` | `PKG-15` | `WORKING_TREE` | 13 | Canonical handoff package schema and manifest |
 | `DEL-16-01` | `PKG-16` | `COMMITTED` `002263b` | 11 | Structured model operation schema |
 
 ## Blocked Items Grouped By Missing Upstream
@@ -159,12 +159,12 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-13-03` - Constraint validation engine | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-13-04`; `DEL-16-02` | `DAG-002-E0775`; `DAG-002-E0828`; `DAG-002-E0845` |
+| `DEL-13-03` - Constraint validation engine | `PKG-13` | `WORKING_TREE` | 3 | `DEL-07-08`; `DEL-13-04`; `DEL-16-02` | `DAG-002-E0775`; `DAG-002-E0828`; `DAG-002-E0845` |
 | `DEL-13-04` - Physical-to-analytical transformation contract | `PKG-13` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0809`; `DAG-002-E0816`; `DAG-002-E0846` |
 | `DEL-14-03` - Model-state comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 3 | `DEL-07-08`; `DEL-08-06`; `DEL-16-02` | `DAG-002-E0829`; `DAG-002-E0848`; `DAG-002-E0863` |
 | `DEL-14-04` - Analysis-run comparison engine | `PKG-14` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-08-06` | `DAG-002-E0849`; `DAG-002-E0864` |
-| `DEL-14-05` - Comparison mapping, tolerance, and export contracts | `PKG-14` | `MISSING_EVIDENCE` | 7 | `DEL-07-08`; `DEL-08-06`; `DEL-14-03`; `DEL-14-04`; `DEL-15-02`; `DEL-15-03`; `DEL-16-02` | `DAG-002-E0793`; `DAG-002-E0796`; `DAG-002-E0810`; `DAG-002-E0817`; `DAG-002-E0830`; `DAG-002-E0850`; `DAG-002-E0865` |
-| `DEL-15-01` - Canonical handoff package schema and manifest | `PKG-15` | `MISSING_EVIDENCE` | 4 | `DEL-08-06`; `DEL-15-02`; `DEL-15-03`; `DEL-15-04` | `DAG-002-E0805`; `DAG-002-E0811`; `DAG-002-E0819`; `DAG-002-E0866` |
+| `DEL-14-05` - Comparison mapping, tolerance, and export contracts | `PKG-14` | `WORKING_TREE` | 7 | `DEL-07-08`; `DEL-08-06`; `DEL-14-03`; `DEL-14-04`; `DEL-15-02`; `DEL-15-03`; `DEL-16-02` | `DAG-002-E0793`; `DAG-002-E0796`; `DAG-002-E0810`; `DAG-002-E0817`; `DAG-002-E0830`; `DAG-002-E0850`; `DAG-002-E0865` |
+| `DEL-15-01` - Canonical handoff package schema and manifest | `PKG-15` | `WORKING_TREE` | 4 | `DEL-08-06`; `DEL-15-02`; `DEL-15-03`; `DEL-15-04` | `DAG-002-E0805`; `DAG-002-E0811`; `DAG-002-E0819`; `DAG-002-E0866` |
 | `DEL-15-02` - Target mapping and unsupported-behavior contract | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-15-03`; `DEL-15-04` | `DAG-002-E0812`; `DAG-002-E0820` |
 | `DEL-15-03` - Downstream modeling export workflow | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-08-06`; `DEL-15-04` | `DAG-002-E0821`; `DAG-002-E0867` |
 | `DEL-15-04` - External prover boundary metadata | `PKG-15` | `MISSING_EVIDENCE` | 1 | `DEL-08-06` | `DAG-002-E0868` |

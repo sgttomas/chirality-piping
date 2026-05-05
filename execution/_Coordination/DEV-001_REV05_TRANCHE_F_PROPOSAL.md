@@ -73,9 +73,9 @@ reference corpus.
 | Active graph | `execution/_DAG/DAG-002/DependencyEdges.csv` approved `ACTIVE` edges only |
 | Approval | `execution/_DAG/DAG-002/APPROVAL_RECORD.md` |
 | Source assessment | `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_E_NEXT_STEP_ASSESSMENT.md` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 79 unblocked, 13 blocked |
-| Lifecycle projection | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 61 `CHECKING`, 31 `SEMANTIC_READY`, 0 `OPEN` |
-| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 61 `COMMITTED`, 0 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 23 `MISSING_EVIDENCE` |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 79 unblocked, 13 blocked after closeout preparation |
+| Lifecycle projection | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 64 `CHECKING`, 28 `SEMANTIC_READY`, 0 `OPEN` after closeout preparation |
+| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 61 `COMMITTED`, 3 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 20 `MISSING_EVIDENCE` after closeout preparation |
 | Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`: 84 synchronized non-`PKG-00` mirrors, 8 `PKG-00` exemptions |
 | Local contexts | `execution/PKG-13_Physical Design Knowledge and Constraint Engine/1_Working/DEL-13-03_Constraint validation engine/`; `execution/PKG-14_Model States, Analysis Runs, and Comparison/1_Working/DEL-14-05_Comparison mapping, tolerance, and export contracts/`; `execution/PKG-15_Handoff and External Prover Workflow/1_Working/DEL-15-01_Canonical handoff package schema and manifest/` |
 
@@ -204,7 +204,7 @@ these direct downstream effects:
 Planning simulation only: if `DEL-13-03`, `DEL-14-05`, and `DEL-15-01` were
 later implemented and promoted to `COMMITTED`, the queue would become 82
 unblocked / 10 blocked, with `DEL-13-04`, `DEL-14-03`, and `DEL-14-04`
-newly implementation-unblocked. This proposal does not run that promotion or
+newly implementation-ready. This proposal does not run that promotion or
 refresh the blocker queue.
 
 ## Write Ownership In Prepared Briefs
@@ -290,23 +290,53 @@ Prepared sealed briefs require focused validation plus tranche-level checks:
 
 ## Stop Conditions
 
-After sealed brief preparation, stop before implementation dispatch, lifecycle
-transition, implementation-evidence update, blocker refresh, dependency mirror
-refresh, aggregate DAG mutation, candidate promotion, commit, push, live
-CI/signing/publishing, GUI runtime work, external prover integration,
-commercial-tool parser work, protected standards content, private project data,
-real secrets, autonomous accepted-model mutation, or professional/code
-compliance claims unless separately authorized.
+After this working-tree closeout preparation, stop before commit,
+`COMMITTED` evidence promotion, dependency refresh, candidate promotion,
+aggregate DAG mutation, push, live CI/signing/publishing, GUI runtime work,
+external prover integration, commercial-tool parser work, protected standards
+content, private project data, real secrets, autonomous accepted-model
+mutation, or professional/code compliance claims unless separately authorized.
+
+## Implementation Outputs
+
+| DeliverableID | Working-tree outputs |
+|---|---|
+| `DEL-13-03` | `core/constraints/validation/`; `tests/test_constraint_validation.py`; deliverable `MEMORY.md`; deliverable run note |
+| `DEL-14-05` | `schemas/comparison_mapping.schema.json`; `schemas/comparison_tolerance.schema.json`; `tests/test_comparison_contracts.py`; deliverable `MEMORY.md` |
+| `DEL-15-01` | `schemas/handoff_package.schema.json`; `tests/test_handoff_package_schema.py`; deliverable `MEMORY.md` |
+
+## Review/Audit Closeout
+
+Closeout record:
+
+- `execution/_Coordination/DEV-001_REV05_TRANCHE_F_REVIEW_AUDIT_CLOSEOUT.md`
+
+Prepared closeout state:
+
+| Fact | State |
+|---|---:|
+| `DEL-13-03` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
+| `DEL-14-05` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
+| `DEL-15-01` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
+| Implementation evidence records | 64 |
+| Committed implementation evidence records | 61 |
+| Working-tree evidence records | 3 |
+| Blocker queue | 79 unblocked / 13 blocked |
+| Newly unblocked by closeout | None; `WORKING_TREE` evidence does not satisfy the `COMMITTED` threshold. |
+
+The queue was regenerated from approved active `DAG-002` edges under the
+unchanged `COMMITTED` threshold after recording `WORKING_TREE` evidence.
 
 ## Recommendation
 
-The proposal has been accepted and the sealed briefs have been prepared. The
-next gated action, if accepted, is implementation dispatch from the sealed
-briefs:
+The proposal has been accepted, the briefs are prepared, worker implementation
+is complete, and post-worker REVIEW/AUDIT closeout preparation is complete.
+The next gated action, if accepted, is CHANGE commit and evidence promotion:
 
 ```text
-APPROVE: dispatch DEV-001 revision 0.5 Tranche F implementation using the
-sealed briefs for DEL-13-03, DEL-14-05, and DEL-15-01. Workers may edit only
-their sealed write scopes and must not edit lifecycle, evidence, blocker,
-dependency, DAG, or coordination state.
+APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche F working-tree
+implementation and closeout patch, then promote DEL-13-03, DEL-14-05, and
+DEL-15-01 implementation evidence from WORKING_TREE to COMMITTED using the
+resulting commit hash and rebuild the blocker queue. Commit the promotion
+handoff. Do not push.
 ```
