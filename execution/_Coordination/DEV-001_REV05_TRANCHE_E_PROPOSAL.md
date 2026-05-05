@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-E-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: working_tree_closeout_prepared_commit_withheld
+status: committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -14,8 +14,10 @@ accepted_for_brief_preparation: 2026-05-04
 sealed_briefs_status: prepared
 dispatch_authorization: local_orchestrator_implementation_authorized_2026-05-04
 worker_launch: not_used_orchestrator_local_execution
-implementation_status: working_tree_complete_review_audit_prepared
-closeout_status: working_tree_closeout_prepared_commit_withheld
+implementation_status: committed_002263b
+closeout_status: committed_evidence_promoted
+implementation_commit: 002263b
+evidence_promotion: completed_2026-05-04
 ---
 
 # DEV-001 Revision 0.5 Tranche E Proposal
@@ -76,8 +78,22 @@ DEL-16-01. Do not commit or promote COMMITTED evidence.
 ```
 
 ORCHESTRATOR prepared REVIEW/AUDIT and CHANGE-managed closeout surfaces using
-`WORKING_TREE` evidence only. Commit and `COMMITTED` evidence promotion remain
-withheld.
+`WORKING_TREE` evidence only. At that stage, commit and `COMMITTED` evidence
+promotion remained withheld.
+
+CHANGE commit and evidence-promotion authorization later received:
+
+```text
+APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche E working-tree
+implementation and closeout patch, then promote DEL-13-02, DEL-14-02, and
+DEL-16-01 implementation evidence from WORKING_TREE to COMMITTED using the
+resulting commit hash and rebuild the blocker queue. Commit the promotion
+handoff.
+```
+
+Implementation and closeout were committed as `002263b schema: add tranche e
+model contracts`, then the three Tranche E evidence rows were promoted to
+`COMMITTED`.
 
 ## Source Inputs
 
@@ -89,9 +105,9 @@ withheld.
 | Active graph | `execution/_DAG/DAG-002/DependencyEdges.csv` approved `ACTIVE` edges only |
 | Approval | `execution/_DAG/DAG-002/APPROVAL_RECORD.md` |
 | Source assessment | `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_D_NEXT_STEP_ASSESSMENT.md` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 76 unblocked, 16 blocked |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 79 unblocked, 13 blocked after evidence promotion |
 | Lifecycle projection | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 61 `CHECKING`, 31 `SEMANTIC_READY`, 0 `OPEN` after closeout preparation |
-| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 58 `COMMITTED`, 3 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 23 `MISSING_EVIDENCE` after closeout preparation |
+| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 61 `COMMITTED`, 0 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 23 `MISSING_EVIDENCE` after evidence promotion |
 | Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`: 84 synchronized non-`PKG-00` mirrors, 8 `PKG-00` exemptions |
 | Local contexts | `execution/PKG-13_Physical Design Knowledge and Constraint Engine/1_Working/DEL-13-02_Constraint entity and provenance model/`; `execution/PKG-14_Model States, Analysis Runs, and Comparison/1_Working/DEL-14-02_Analysis run records/`; `execution/PKG-16_Model Operation and Agent Proposal Framework/1_Working/DEL-16-01_Structured model operation schema/` |
 
@@ -315,28 +331,29 @@ Prepared closeout state:
 
 | Fact | State |
 |---|---:|
-| `DEL-13-02` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
-| `DEL-14-02` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
-| `DEL-16-01` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
+| `DEL-13-02` lifecycle/evidence | `CHECKING` / `COMMITTED` `002263b` |
+| `DEL-14-02` lifecycle/evidence | `CHECKING` / `COMMITTED` `002263b` |
+| `DEL-16-01` lifecycle/evidence | `CHECKING` / `COMMITTED` `002263b` |
 | Implementation evidence records | 61 |
-| Committed implementation evidence records | 58 |
-| Working-tree evidence records | 3 |
-| Blocker queue | 76 unblocked / 16 blocked |
+| Committed implementation evidence records | 61 |
+| Working-tree evidence records | 0 |
+| Blocker queue | 79 unblocked / 13 blocked |
+| Newly unblocked by promotion | `DEL-13-03`, `DEL-14-05`, `DEL-15-01` |
 
 The queue was regenerated from approved active `DAG-002` edges under the
-unchanged `COMMITTED` threshold. No downstream blocker was satisfied by this
-`WORKING_TREE` closeout state.
+unchanged `COMMITTED` threshold after the promotion.
 
 ## Recommendation
 
 The proposal has been accepted, the briefs are prepared, the working-tree
-schema-first implementation is complete, and post-implementation REVIEW/AUDIT
-closeout preparation is complete. The next gated action, if accepted, is:
+schema-first implementation is complete, post-implementation REVIEW/AUDIT
+closeout preparation is complete, and Tranche E evidence has been promoted to
+`COMMITTED`. The next gated action, if accepted, is a proposal-only assessment
+from the new readiness state:
 
 ```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche E working-tree
-implementation and closeout patch, then promote DEL-13-02, DEL-14-02, and
-DEL-16-01 implementation evidence from WORKING_TREE to COMMITTED using the
-resulting commit hash and rebuild the blocker queue. Commit the promotion
-handoff.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche E
+next-step assessment from the current approved DAG-002 readiness state and
+Tranche E committed evidence. Do not prepare sealed briefs or dispatch
+implementation.
 ```

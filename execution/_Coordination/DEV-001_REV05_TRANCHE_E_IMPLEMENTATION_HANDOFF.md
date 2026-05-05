@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-E-IMPLEMENTATION-HANDOFF
 doc_kind: coordination.implementation_handoff
-status: working_tree_closeout_prepared_commit_withheld
+status: committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -11,10 +11,10 @@ sealed_briefs:
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-02.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-02.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-01.md
-commit_status: not_committed
-evidence_promotion: not_authorized
+commit_status: committed_002263b
+evidence_promotion: completed_2026-05-04
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_E_REVIEW_AUDIT_CLOSEOUT.md
-closeout_status: working_tree_prepared
+closeout_status: committed_evidence_promoted
 ---
 
 # DEV-001 Revision 0.5 Tranche E Implementation Handoff
@@ -81,34 +81,33 @@ authorized separately and prepared at:
 - `execution/_Coordination/DEV-001_REV05_TRANCHE_E_REVIEW_AUDIT_CLOSEOUT.md`
 
 Closeout moved `DEL-13-02`, `DEL-14-02`, and `DEL-16-01` to `CHECKING`,
-recorded three `WORKING_TREE` implementation-evidence rows, updated the
-lifecycle/evidence projections, and regenerated the blocker queue from
-approved active `DAG-002` edges under the unchanged `COMMITTED` threshold.
-Queue state remains 76 unblocked / 16 blocked with 61 evidence records and 58
-committed evidence records. Commit and `COMMITTED` evidence promotion remain
-unauthorized.
+recorded three `WORKING_TREE` implementation-evidence rows, and updated the
+lifecycle/evidence projections. CHANGE then committed the implementation and
+closeout as `002263b`, promoted the three evidence rows to `COMMITTED`, and
+regenerated the blocker queue from approved active `DAG-002` edges under the
+unchanged `COMMITTED` threshold. Queue state is 79 unblocked / 13 blocked with
+61 evidence records and 61 committed evidence records.
 
 ## Non-Actions
 
-- No lifecycle transition.
-- No implementation-evidence update.
-- No blocker queue refresh.
 - No dependency mirror refresh or local `Dependencies.csv` edit.
 - No aggregate `DAG-002` mutation.
 - No candidate-edge promotion.
-- No commit or push.
+- No push.
 - No GUI/runtime work, external prover integration, commercial-tool
   integration, physical project container implementation, private storage
   implementation, autonomous model mutation, or professional acceptance logic.
 
-## Pending Gate
+## Promotion Result
 
-Recommended next guarded command:
+Implementation and closeout commit:
 
-```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche E working-tree
-implementation and closeout patch, then promote DEL-13-02, DEL-14-02, and
-DEL-16-01 implementation evidence from WORKING_TREE to COMMITTED using the
-resulting commit hash and rebuild the blocker queue. Commit the promotion
-handoff.
-```
+- `002263b schema: add tranche e model contracts`
+
+Newly unblocked by the evidence promotion:
+
+- `DEL-13-03`
+- `DEL-14-05`
+- `DEL-15-01`
+
+No next Type 2 dispatch is authorized by this handoff.
