@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-F-IMPLEMENTATION-HANDOFF
 doc_kind: coordination.implementation_handoff
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-04
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -21,10 +21,10 @@ worker_agents:
   - deliverable_id: DEL-15-01
     agent_id: 019df5e2-74ae-7862-94c4-171627216c7a
     nickname: Avicenna
-commit_status: not_committed
-evidence_promotion: not_authorized
+commit_status: committed_05878bf
+evidence_promotion: completed_2026-05-04
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_F_REVIEW_AUDIT_CLOSEOUT.md
-closeout_status: working_tree_closeout_prepared
+closeout_status: committed_evidence_promoted
 ---
 
 # DEV-001 Revision 0.5 Tranche F Implementation Handoff
@@ -119,10 +119,14 @@ authorized separately and prepared at:
 Closeout moved `DEL-13-03`, `DEL-14-05`, and `DEL-15-01` to `CHECKING`,
 recorded three `WORKING_TREE` implementation-evidence rows, regenerated the
 blocker queue under the unchanged `COMMITTED` threshold, and stopped before
-commit or `COMMITTED` evidence promotion.
+commit or `COMMITTED` evidence promotion. A later CHANGE gate committed the
+implementation and closeout patch as `05878bf`, promoted the three evidence
+rows to `COMMITTED`, and rebuilt the blocker queue to 82 unblocked / 10
+blocked, newly unblocking `DEL-13-04`, `DEL-14-03`, and `DEL-14-04`.
 
 ## Recommended Next Gate
 
-If the working-tree implementation and closeout patch are accepted, the next
-guarded action is CHANGE commit and `COMMITTED` evidence promotion for
-`DEL-13-03`, `DEL-14-05`, and `DEL-15-01`.
+The implementation, closeout patch, and evidence promotion are complete. The
+next guarded action should be proposal-only post-Tranche F next-step
+assessment from the current approved `DAG-002` readiness state and committed
+Tranche F evidence.

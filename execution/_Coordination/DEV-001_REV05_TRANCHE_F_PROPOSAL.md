@@ -75,7 +75,7 @@ reference corpus.
 | Source assessment | `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_E_NEXT_STEP_ASSESSMENT.md` |
 | Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv`: 79 unblocked, 13 blocked after closeout preparation |
 | Lifecycle projection | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 64 `CHECKING`, 28 `SEMANTIC_READY`, 0 `OPEN` after closeout preparation |
-| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 61 `COMMITTED`, 3 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 20 `MISSING_EVIDENCE` after closeout preparation |
+| Evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`: 64 `COMMITTED`, 0 `WORKING_TREE`, 8 `ARCHITECTURE_BASELINE`, 20 `MISSING_EVIDENCE` after CHANGE-authorized promotion |
 | Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`: 84 synchronized non-`PKG-00` mirrors, 8 `PKG-00` exemptions |
 | Local contexts | `execution/PKG-13_Physical Design Knowledge and Constraint Engine/1_Working/DEL-13-03_Constraint validation engine/`; `execution/PKG-14_Model States, Analysis Runs, and Comparison/1_Working/DEL-14-05_Comparison mapping, tolerance, and export contracts/`; `execution/PKG-15_Handoff and External Prover Workflow/1_Working/DEL-15-01_Canonical handoff package schema and manifest/` |
 
@@ -207,6 +207,10 @@ unblocked / 10 blocked, with `DEL-13-04`, `DEL-14-03`, and `DEL-14-04`
 newly implementation-ready. This proposal does not run that promotion or
 refresh the blocker queue.
 
+Post-closeout update: the later CHANGE-authorized Tranche F implementation
+commit and evidence promotion completed that simulated state using commit
+`05878bf`; the queue is now 82 unblocked / 10 blocked.
+
 ## Write Ownership In Prepared Briefs
 
 The sealed briefs prepared from this proposal keep write scope disjoint.
@@ -311,32 +315,32 @@ Closeout record:
 
 - `execution/_Coordination/DEV-001_REV05_TRANCHE_F_REVIEW_AUDIT_CLOSEOUT.md`
 
-Prepared closeout state:
+Committed promotion state:
 
 | Fact | State |
 |---|---:|
-| `DEL-13-03` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
-| `DEL-14-05` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
-| `DEL-15-01` lifecycle/evidence | `CHECKING` / `WORKING_TREE` |
+| `DEL-13-03` lifecycle/evidence | `CHECKING` / `COMMITTED` at `05878bf` |
+| `DEL-14-05` lifecycle/evidence | `CHECKING` / `COMMITTED` at `05878bf` |
+| `DEL-15-01` lifecycle/evidence | `CHECKING` / `COMMITTED` at `05878bf` |
 | Implementation evidence records | 64 |
-| Committed implementation evidence records | 61 |
-| Working-tree evidence records | 3 |
-| Blocker queue | 79 unblocked / 13 blocked |
-| Newly unblocked by closeout | None; `WORKING_TREE` evidence does not satisfy the `COMMITTED` threshold. |
+| Committed implementation evidence records | 64 |
+| Working-tree evidence records | 0 |
+| Blocker queue | 82 unblocked / 10 blocked |
+| Newly unblocked by promotion | `DEL-13-04`, `DEL-14-03`, and `DEL-14-04` |
 
 The queue was regenerated from approved active `DAG-002` edges under the
-unchanged `COMMITTED` threshold after recording `WORKING_TREE` evidence.
+unchanged `COMMITTED` threshold after promoting Tranche F evidence to
+`COMMITTED`.
 
 ## Recommendation
 
 The proposal has been accepted, the briefs are prepared, worker implementation
-is complete, and post-worker REVIEW/AUDIT closeout preparation is complete.
-The next gated action, if accepted, is CHANGE commit and evidence promotion:
+is complete, post-worker REVIEW/AUDIT closeout preparation is complete, and
+the CHANGE-authorized implementation commit/evidence promotion has completed.
+The next gated action should be proposal-only post-Tranche F assessment:
 
 ```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche F working-tree
-implementation and closeout patch, then promote DEL-13-03, DEL-14-05, and
-DEL-15-01 implementation evidence from WORKING_TREE to COMMITTED using the
-resulting commit hash and rebuild the blocker queue. Commit the promotion
-handoff. Do not push.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche F next-step
+assessment from the current approved DAG-002 readiness state and Tranche F
+committed evidence. Do not prepare sealed briefs or dispatch implementation.
 ```
