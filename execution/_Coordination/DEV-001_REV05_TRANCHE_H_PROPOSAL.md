@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-H-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: proposal_prepared_sealed_briefs_not_authorized
+status: sealed_briefs_prepared_dispatch_not_authorized
 created: 2026-05-06
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -10,7 +10,7 @@ approval_record: execution/_DAG/DAG-002/APPROVAL_RECORD.md
 blocker_queue: execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv
 source_assessment: execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md
 human_authorization: proceed_as_recommended_2026-05-06
-sealed_briefs_status: not_prepared
+sealed_briefs_status: prepared
 dispatch_authorization: not_authorized
 ---
 
@@ -37,6 +37,26 @@ queue, mutate aggregate DAG artifacts, promote candidate rows, commit file
 state, push, run live CI/signing/publishing, claim professional acceptance,
 start autonomous mutation workflow, or promote the quarantined Chirality
 reference corpus.
+
+The human project authority later accepted this proposal for sealed brief
+preparation:
+
+```text
+commit changes and then carry on with the preparation of the sealed briefs.
+```
+
+ORCHESTRATOR committed the proposal state as `0e7f957` and prepared sealed
+briefs for `DEL-15-02` and `DEL-16-02`:
+
+- `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-02.md`
+- `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-02.md`
+
+This later authorization does not dispatch workers, run implementation, change
+lifecycle state, update implementation evidence, refresh dependency mirrors,
+rebuild the blocker queue, mutate aggregate DAG artifacts, promote candidate
+rows, commit sealed-brief file state, push, run live CI/signing/publishing,
+claim professional acceptance, start autonomous mutation workflow, or promote
+the quarantined Chirality reference corpus.
 
 ## Source Inputs
 
@@ -187,12 +207,14 @@ proposal follows the post-Tranche G assessment recommendation because
 `DEL-15-02` and `DEL-16-02` were newly unblocked by Tranche G and each unlocks
 one immediate downstream deliverable if later committed.
 
-## Proposal Acceptance Gate
+## Dispatch Gate
 
 Recommended next gate:
 
 ```text
-APPROVE: accept DEV-001 revision 0.5 Tranche H proposal and prepare sealed
-briefs for DEL-15-02 and DEL-16-02. Do not dispatch implementation.
+APPROVE: dispatch bounded DEV-001 revision 0.5 Tranche H workers from sealed
+briefs for DEL-15-02 and DEL-16-02.
 ```
 
+If a clean checkpoint is desired before dispatch, first approve committing the
+sealed-brief preparation state.
