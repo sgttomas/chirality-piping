@@ -54,8 +54,8 @@ guarded refresh:
   semantic-matrix, and lens-register setup workflow has completed;
 - `DEV-001_BLOCKER_QUEUE.md` / `.csv` were recomputed from 859 active edges
   during the initial mirror refresh as 70 unblocked, 22 blocked, 8 candidate
-  rows excluded. Later Tranche G evidence promotion leaves the current queue
-  at 84 unblocked, 8 blocked, 8 candidate rows excluded.
+  rows excluded. Later Tranche H evidence promotion leaves the current queue
+  at 86 unblocked, 6 blocked, 8 candidate rows excluded.
 
 Do not use the approved `DAG-002` graph, refreshed blocker queue, lifecycle or
 evidence projections, refreshed dependency mirrors, or mirror-status projection
@@ -77,17 +77,18 @@ completed task archive remains historical pre-SCA-002 DEV-001 state unless a
 row explicitly says otherwise.
 
 **Last Updated:** 2026-05-06
-**Actor:** ORCHESTRATOR DEV-001 revision 0.5 post-Tranche G assessment
+**Actor:** ORCHESTRATOR DEV-001 revision 0.5 Tranche H promotion
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
-**Current Mode:** `DAG-002` revision `0.5` active edge set approved; all 84 non-`PKG-00` dependency mirrors refreshed; 8 `PKG-00` registers exempt; lifecycle projection is now 67 `CHECKING`, 25 `SEMANTIC_READY`, 0 `OPEN`; Tranche A through G implementation evidence is committed through `DEL-14-04`; Tranche G implementation output is committed at `24b5717`; Tranche G closeout patch is committed as `b78930e`; Tranche G promotion handoff is committed and pushed as `1f33815`; latest committed handoff finalization is `91abcb6`; Tranche H proposal state is committed as `0e7f957`; implementation evidence now has 67 records with 67 `COMMITTED` and 0 `WORKING_TREE`; blocker queue is 84 unblocked / 8 blocked under the unchanged `COMMITTED` threshold; Tranche H sealed briefs are prepared in the working tree for `DEL-15-02` and `DEL-16-02`; dependency mirror refresh, candidate promotion, aggregate DAG mutation, live CI/signing/publishing, Type 2 dispatch, and Chirality corpus promotion remain unauthorized
-**Current Planning Surface:** `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`, `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`, `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`, `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_REFRESH_CLOSEOUT.md`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_PRECHECK.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_WORKFLOW_SUMMARY.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_REVIEW_AUDIT_CHANGE_CLOSEOUT.md`, `execution/_DAG/DAG-002/evidence/dev001_rev05_sca002_control_surface_materialization_summary.json`, `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-02.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-02.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-04.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-03.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-04.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROMOTION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_REVIEW_AUDIT_CLOSEOUT.md`, and `execution/_Coordination/DEV-001_REV05_TRANCHE_F_PROMOTION_HANDOFF.md`
+**Current Mode:** `DAG-002` revision `0.5` active edge set approved; all 84 non-`PKG-00` dependency mirrors refreshed; 8 `PKG-00` registers exempt; lifecycle projection is now 69 `CHECKING`, 23 `SEMANTIC_READY`, 0 `OPEN`; Tranche A through H implementation evidence is committed through `DEL-16-02`; Tranche H sealed-brief state is committed as `cefa18d`; Tranche H implementation output is committed as `c08b0a2`; implementation evidence now has 69 records with 69 `COMMITTED` and 0 `WORKING_TREE`; blocker queue is 86 unblocked / 6 blocked under the unchanged `COMMITTED` threshold; approved aggregate `DAG-002` edges were not mutated and candidate rows remain excluded; dependency mirror refresh, candidate promotion, aggregate DAG mutation, live CI/signing/publishing, Type 2 dispatch, and Chirality corpus promotion remain unauthorized
+**Current Planning Surface:** `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`, `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`, `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`, `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_REFRESH_CLOSEOUT.md`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_PRECHECK.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_WORKFLOW_SUMMARY.csv`, `execution/_Coordination/SCA-002_REV05_SEMANTIC_DEPENDENCY_REVIEW_AUDIT_CHANGE_CLOSEOUT.md`, `execution/_DAG/DAG-002/evidence/dev001_rev05_sca002_control_surface_materialization_summary.json`, `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROMOTION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-02.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-02.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-04.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-03.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-04.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROMOTION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_F_REVIEW_AUDIT_CLOSEOUT.md`, and `execution/_Coordination/DEV-001_REV05_TRANCHE_F_PROMOTION_HANDOFF.md`
 **Latest Assessment Surface:** `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md`
 **Latest Proposal Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROPOSAL.md`
 **Latest Tranche H Scope Surfaces:** `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-02.md` and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-02.md`
 **Latest Tranche G Scope Surfaces:** `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-04.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-03.md`, and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-04.md`
-**Latest Implementation Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_G_IMPLEMENTATION_HANDOFF.md`
+**Latest Implementation Surface:** implementation commit `c08b0a2` (`core: implement tranche h contracts`)
+**Latest Promotion Handoff Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROMOTION_HANDOFF.md`
 **Latest Tranche G Closeout Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_G_REVIEW_AUDIT_CLOSEOUT.md`
-**Latest Promotion Handoff Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROMOTION_HANDOFF.md`
+**Previous Promotion Handoff Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_G_PROMOTION_HANDOFF.md`
 **Latest Tranche F Scope Surfaces:** `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-03.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-05.md`, and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-01.md`
 **Latest Tranche E Scope Surfaces:** `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-02.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-02.md`, and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-01.md`
 **Previous Implementation Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_F_IMPLEMENTATION_HANDOFF.md`
@@ -107,14 +108,14 @@ row explicitly says otherwise.
 | Graph approval | `execution/_DAG/DAG-002/APPROVAL_RECORD.md`; historical `DAG-001` approval remains at `execution/_DAG/DAG-001/APPROVAL_RECORD.md` |
 | Active graph authority | Approved revision `0.5` active edge set only; candidate rows remain non-gating |
 | Quarantined reference corpus | `docs/_ScopeChange/chirality-app-docs/`; read-only perspective only, not implementation or dispatch authority |
-| Blocker computation | Recomputed 2026-05-06 from approved `ACTIVE` `DAG-002` edges after Tranche G `COMMITTED` evidence promotion; candidate rows excluded and blocker satisfaction threshold remains `COMMITTED` |
+| Blocker computation | Recomputed 2026-05-06 from approved `ACTIVE` `DAG-002` edges after Tranche H `COMMITTED` evidence promotion; candidate rows excluded and blocker satisfaction threshold remains `COMMITTED` |
 | Candidate edges | 8 retained as non-gating; 1 inherited candidate row retired |
 | Semantic context threshold | `SEMANTIC_READY` |
 | Implementation blocker threshold | `COMMITTED` evidence in `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv` |
-| Lifecycle snapshot | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 67 `CHECKING`, 25 `SEMANTIC_READY`, 0 `OPEN` |
-| Implementation evidence source | `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`: 67 records, 67 `COMMITTED` rows through Tranche G using implementation commit `24b5717` for `DEL-13-04`, `DEL-14-03`, and `DEL-14-04` |
+| Lifecycle snapshot | `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`: 69 `CHECKING`, 23 `SEMANTIC_READY`, 0 `OPEN` |
+| Implementation evidence source | `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`: 69 records, 69 `COMMITTED` rows through Tranche H using implementation commit `c08b0a2` for `DEL-15-02` and `DEL-16-02` |
 | Implementation evidence projection | `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv` |
-| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current active-edge readiness queue: 84 unblocked, 8 blocked, 67 evidence records, 67 committed evidence records, 0 working-tree evidence records |
+| Blocker queue | `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md` / `.csv` current active-edge readiness queue: 86 unblocked, 6 blocked, 69 evidence records, 69 committed evidence records, 0 working-tree evidence records |
 | Dependency register status | `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`: 84 refreshed non-`PKG-00` mirrors, 8 `PKG-00` exempt, 0 non-`PKG-00` mirrors pending |
 | Selected pilot | `DEL-01-01 - Project governance baseline` |
 | DEV-001 hardening acceptance | Granted in-session by human project authority on 2026-04-30 |
@@ -122,11 +123,11 @@ row explicitly says otherwise.
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
-| Latest state task | `DEV-001 revision 0.5 Tranche H sealed brief preparation` |
-| Latest state commit | Tranche H proposal committed as `0e7f957` (`coordination: prepare tranche h proposal`); sealed brief preparation is in the working tree and not committed. |
-| Latest cleanup commit | Latest committed handoff finalization is `91abcb6 coordination: finalize tranche g handoff`; promotion handoff committed and pushed as `1f33815`; closeout patch committed as `b78930e`; implementation output exists at `24b5717` (`core: implement tranche g engines`). |
-| Previous completed task archive status | `DEV-001 revision 0.5 Tranche G implementation commit and evidence promotion` archived in compact history by this handoff update. |
-| Current authorized item | Human approved committing the Tranche H proposal state and preparing sealed briefs for `DEL-15-02` and `DEL-16-02` without dispatching implementation. ORCHESTRATOR committed proposal state as `0e7f957`, prepared `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-02.md` and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-02.md`, and updated proposal/handoff state. No Type 2 dispatch, product implementation, lifecycle/evidence/blocker/dependency/DAG change, candidate promotion, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion occurred. |
+| Latest state task | `DEV-001 revision 0.5 Tranche H implementation and evidence promotion` |
+| Latest state commit | Implementation committed as `c08b0a2`; promotion state is pending commit in the working tree. |
+| Latest cleanup commit | Latest committed sealed-brief checkpoint is `cefa18d`; Tranche H implementation output exists at `c08b0a2` (`core: implement tranche h contracts`). |
+| Previous completed task archive status | `DEV-001 revision 0.5 post-Tranche G assessment and Tranche H proposal/sealed brief preparation` archived in compact history by this handoff update. |
+| Current authorized item | Human authorized lifecycle/evidence/blocker/DAG state update and commit after Tranche H implementation. ORCHESTRATOR promoted `DEL-15-02` and `DEL-16-02` evidence to `COMMITTED` using implementation commit `c08b0a2`, moved both lifecycle states to `CHECKING`, rebuilt the blocker queue from approved active `DAG-002` edges to 86 unblocked / 6 blocked, and recorded `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROMOTION_HANDOFF.md`. Approved aggregate DAG edges were not mutated; candidate rows remained non-gating; no dependency mirror refresh, push, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion occurred. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -153,14 +154,14 @@ Derived DEV-001 implementation projection, when needed:
 | Projection rule | Result |
 |---|---:|
 | Current lifecycle rows | 92 |
-| Lifecycle `CHECKING` | 67 |
-| Lifecycle `SEMANTIC_READY` | 25 |
+| Lifecycle `CHECKING` | 69 |
+| Lifecycle `SEMANTIC_READY` | 23 |
 | Lifecycle `OPEN` | 0 |
-| Implementation evidence `COMMITTED` | 67 |
+| Implementation evidence `COMMITTED` | 69 |
 | Implementation evidence `WORKING_TREE` | 0 |
 | Implementation evidence requiring targeted review | 0 |
 | Implementation evidence `ARCHITECTURE_BASELINE` | 8 |
-| Implementation evidence `MISSING_EVIDENCE` | 17 |
+| Implementation evidence `MISSING_EVIDENCE` | 15 |
 
 This projection is a coordination view only. It does not compute readiness,
 change lifecycle state, or remove `SCA-001` / `AB-00-*` architecture-basis
@@ -217,16 +218,19 @@ carry `COMMITTED` evidence using implementation commit `05878bf`, satisfying
 downstream blockers at the current threshold. Tranche G `DEL-13-04`,
 `DEL-14-03`, and `DEL-14-04` carry `COMMITTED` evidence using implementation
 commit `24b5717`, satisfying downstream blockers at the current threshold.
+Tranche H `DEL-15-02` and `DEL-16-02` carry `COMMITTED` evidence using
+implementation commit `c08b0a2`, satisfying downstream blockers at the current
+threshold.
 
 | Queue fact | Count |
 |---|---:|
 | Queue rows | 92 |
 | Active `DAG-002` edges counted | 859 |
 | Candidate rows excluded from readiness | 8 |
-| `UNBLOCKED` | 84 |
-| `BLOCKED` | 8 |
-| Implementation evidence records loaded | 67 |
-| Committed implementation evidence records | 67 |
+| `UNBLOCKED` | 86 |
+| `BLOCKED` | 6 |
+| Implementation evidence records loaded | 69 |
+| Committed implementation evidence records | 69 |
 | Working-tree implementation evidence records | 0 |
 | Satisfied `PKG-00` architecture-basis edges | 521 |
 
@@ -256,6 +260,7 @@ Universal historical guardrails preserved across the completed bounded items:
 
 | Task | Result / commit | Primary changed surfaces | Verification summary | Remaining notable TBDs |
 |---|---|---|---|---|
+| `DEV-001 revision 0.5 Tranche H implementation and evidence promotion` | Implementation committed as `c08b0a2`; promotion pending commit | `DEL-15-02`, `DEL-16-02`, implementation evidence/projection, lifecycle snapshot, blocker queue, Tranche H promotion handoff surface | Focused Tranche H tests and adjacent schema/contract checks passed; blocker queue rebuilt from approved `DAG-002` active edges to 86 unblocked / 6 blocked; aggregate DAG edge set unchanged | `DEL-15-03` and `DEL-16-03` are newly implementation-unblocked; no dependency mirror refresh, aggregate DAG mutation, candidate promotion, push, live CI/signing/publishing, or Chirality promotion occurred. |
 | `DEV-001 revision 0.5 post-Tranche G next-step assessment and Tranche H proposal` | Completed; committed as `0e7f957` | `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROPOSAL.md`, `NEXT_INSTANCE_STATE.md`, `_COORDINATION.md` | Current queue/evidence/lifecycle/dependency projections read; nine unblocked missing-evidence candidates screened; proposal selected `DEL-15-02` and `DEL-16-02`; `git diff --check` passed before commit | Sealed briefs were later prepared in the working tree; no Type 2 dispatch, lifecycle/evidence/blocker/dependency/DAG change, or Chirality promotion occurred. |
 | `DEV-001 revision 0.5 Tranche G implementation commit and evidence promotion` | Completed; implementation `24b5717`; closeout `b78930e`; promotion `1f33815`; handoff finalization `91abcb6` | `DEL-13-04`, `DEL-14-03`, `DEL-14-04`, implementation evidence/projection, lifecycle snapshot, blocker queue, Tranche G closeout and promotion handoff surfaces | Tranche G focused tests and adjacent schema/contract checks passed; blocker queue rebuilt to 84 unblocked / 8 blocked; focused guardrail scans passed | `DEL-15-02` and `DEL-16-02` became newly unblocked; no dependency mirror refresh, aggregate DAG mutation, candidate promotion, sealed brief prep, Type 2 dispatch, or Chirality promotion was authorized. |
 | `DEL-01-01` Project governance baseline | Completed pilot; `7650cf6 docs: tighten maintainer governance gates` | `governance/MAINTAINERS.md` plus control-plane handoff | `git diff --check`; focused prohibited-claim scan; evidence-slot scan | Maintainer/legal/release governance details remain governed by later human rulings. |
@@ -420,72 +425,48 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEV-001 Revision 0.5 Tranche H Proposal Preparation
+## Latest State - DEV-001 Revision 0.5 Tranche H Promotion
 
-Human instructed ORCHESTRATOR to proceed as recommended after the post-Tranche
-G assessment. ORCHESTRATOR interpreted this as authorization to prepare only
-the recommended Tranche H proposal for `DEL-15-02` and `DEL-16-02`.
-
-```text
-proceed as recommended.
-```
-
-The consumed recommendation is recorded in
-`execution/_Coordination/DEV-001_REV05_POST_TRANCHE_G_NEXT_STEP_ASSESSMENT.md`.
-This proposal stage does not authorize sealed brief preparation or
-implementation dispatch.
+Human authorized lifecycle/evidence/blocker/DAG state update and commit after
+Tranche H implementation. ORCHESTRATOR treated the DAG-state portion as a
+guarded readiness recomputation from approved `DAG-002` active edges, not as
+authorization to mutate the approved aggregate DAG edge set.
 
 Completed output:
 
-- Prepared `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROPOSAL.md`.
-- Proposed a bounded Tranche H containing `DEL-15-02` and `DEL-16-02`.
-- Selected a contract-first, provider-neutral handoff mapping and model
-  operation validation lane.
-- Confirmed both proposed deliverables are `SEMANTIC_READY`,
-  `MISSING_EVIDENCE`, synchronized from approved `DAG-002` local dependency
-  mirrors, and implementation-unblocked under the current queue.
-- Recorded that a later committed implementation/evidence-promotion gate for
-  both proposed deliverables would be expected to move the queue from 84
-  unblocked / 8 blocked to 86 unblocked / 6 blocked, with `DEL-15-03` and
-  `DEL-16-03` newly implementation-unblocked.
+- Committed Tranche H implementation as `c08b0a2` (`core: implement tranche h
+  contracts`).
+- Promoted `DEL-15-02` and `DEL-16-02` implementation evidence to
+  `COMMITTED` using `c08b0a2`.
+- Moved `DEL-15-02` and `DEL-16-02` lifecycle state to `CHECKING`.
+- Rebuilt `DEV-001_BLOCKER_QUEUE.md` / `.csv` from approved active `DAG-002`
+  edges under the unchanged `COMMITTED` threshold.
+- Recorded `execution/_Coordination/DEV-001_REV05_TRANCHE_H_PROMOTION_HANDOFF.md`.
 
-Verification performed:
+Current control state after promotion:
 
-- Read current `DEV-001_BLOCKER_QUEUE.csv`, approved
-  `DAG-002/DependencyEdges.csv`, `docs/_Registers/Deliverables.csv`, and the
-  local `_CONTEXT.md` / `Specification.md` files for `DEL-15-02` and
-  `DEL-16-02`.
-- Confirmed `DEL-15-02` has 13 satisfied active upstreams and direct
-  downstream consumers `DEL-15-03` and `DEL-15-04`.
-- Confirmed `DEL-16-02` has 12 satisfied active upstreams and direct
-  downstream consumers `DEL-16-03` and `DEL-07-08`.
-
-Current control state after proposal:
-
-- Lifecycle projection remains 67 `CHECKING`, 25 `SEMANTIC_READY`, 0 `OPEN`.
-- Implementation evidence remains 67 `COMMITTED`, 0 `WORKING_TREE`, 8
-  `ARCHITECTURE_BASELINE`, 17 `MISSING_EVIDENCE`.
-- Blocker queue remains 84 unblocked / 8 blocked.
-- No sealed briefs have been prepared for Tranche H.
+- Lifecycle projection is 69 `CHECKING`, 23 `SEMANTIC_READY`, 0 `OPEN`.
+- Implementation evidence is 69 `COMMITTED`, 0 `WORKING_TREE`, 8
+  `ARCHITECTURE_BASELINE`, 15 `MISSING_EVIDENCE`.
+- Blocker queue is 86 unblocked / 6 blocked.
+- `DEL-15-03` and `DEL-16-03` are newly implementation-unblocked.
 
 Control-state non-actions:
 
-- No lifecycle state, implementation evidence, blocker queue, dependency
-  mirror, aggregate DAG, candidate edge, or local `Dependencies.csv` was
-  changed by the proposal.
-- No Type 2 dispatch, product implementation, GUI/runtime work, external
-  prover integration, physical project container implementation, private
-  storage implementation, live CI/signing/publishing, autonomous mutation
-  workflow, professional acceptance logic, or Chirality corpus promotion was
-  introduced.
+- Approved aggregate `DAG-002` edge files were not changed.
+- Candidate rows remain non-gating and were excluded from blocker readiness.
+- No dependency mirror refresh, push, live CI/signing/publishing,
+  professional acceptance logic, autonomous mutation workflow, or Chirality
+  corpus promotion occurred.
 
 ## Immediate Next Actions
 
-The next guarded action should be Tranche H sealed-brief preparation:
+The next guarded action should be a proposal-only post-Tranche H assessment:
 
 ```text
-APPROVE: accept DEV-001 revision 0.5 Tranche H proposal and prepare sealed
-briefs for DEL-15-02 and DEL-16-02. Do not dispatch implementation.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche H next-step
+assessment from the current approved DAG-002 readiness state and Tranche H
+committed evidence.
 ```
 
 Do not start open-ended broad DAG execution. Parallel fan-out is authorized

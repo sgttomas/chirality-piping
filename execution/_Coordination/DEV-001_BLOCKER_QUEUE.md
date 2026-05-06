@@ -35,12 +35,12 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 67 |
-| Committed implementation evidence | 67 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 25 |
+| Implementation evidence records | 69 |
+| Committed implementation evidence | 69 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 23 |
 | PKG-00 architecture-basis edges satisfied | 521 |
-| Implementation `UNBLOCKED` deliverables | 84 |
-| Implementation `BLOCKED` deliverables | 8 |
+| Implementation `UNBLOCKED` deliverables | 86 |
+| Implementation `BLOCKED` deliverables | 6 |
 
 ## Package Summary
 
@@ -61,8 +61,8 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-12` | 5 | 0 |
 | `PKG-13` | 4 | 0 |
 | `PKG-14` | 5 | 0 |
-| `PKG-15` | 2 | 2 |
-| `PKG-16` | 2 | 2 |
+| `PKG-15` | 3 | 1 |
+| `PKG-16` | 3 | 1 |
 
 ## Unblocked DAG-Ready Items
 
@@ -151,9 +151,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-14-04` | `PKG-14` | `COMMITTED` `24b5717` | 11 | Analysis-run comparison engine |
 | `DEL-14-05` | `PKG-14` | `COMMITTED` `05878bf` | 11 | Comparison mapping, tolerance, and export contracts |
 | `DEL-15-01` | `PKG-15` | `COMMITTED` `05878bf` | 13 | Canonical handoff package schema and manifest |
-| `DEL-15-02` | `PKG-15` | `MISSING_EVIDENCE` | 13 | Target mapping and unsupported-behavior contract |
+| `DEL-15-02` | `PKG-15` | `COMMITTED` `c08b0a2` | 13 | Target mapping and unsupported-behavior contract |
+| `DEL-15-03` | `PKG-15` | `MISSING_EVIDENCE` | 14 | Downstream modeling export workflow |
 | `DEL-16-01` | `PKG-16` | `COMMITTED` `002263b` | 11 | Structured model operation schema |
-| `DEL-16-02` | `PKG-16` | `MISSING_EVIDENCE` | 12 | Operation validation and diff preview |
+| `DEL-16-02` | `PKG-16` | `COMMITTED` `c08b0a2` | 12 | Operation validation and diff preview |
+| `DEL-16-03` | `PKG-16` | `MISSING_EVIDENCE` | 12 | User acceptance and operation audit trail |
 
 ## Blocked Items Grouped By Missing Upstream
 
@@ -164,10 +166,8 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-15-02` - Target mapping and unsupported-behavior contract | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-15-03`; `DEL-15-04` | `DAG-002-E0812`; `DAG-002-E0820` |
 | `DEL-15-03` - Downstream modeling export workflow | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-08-06`; `DEL-15-04` | `DAG-002-E0821`; `DAG-002-E0867` |
 | `DEL-15-04` - External prover boundary metadata | `PKG-15` | `MISSING_EVIDENCE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
-| `DEL-16-02` - Operation validation and diff preview | `PKG-16` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-16-03` | `DAG-002-E0833`; `DAG-002-E0852` |
 | `DEL-16-03` - User acceptance and operation audit trail | `PKG-16` | `MISSING_EVIDENCE` | 2 | `DEL-07-08`; `DEL-16-04` | `DAG-002-E0838`; `DAG-002-E0853` |
 
 ## Per-Deliverable Blocked Items
@@ -175,12 +175,10 @@ These deliverables have no active upstream implementation dependency below the `
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
 | `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-07-08` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05`; `DEL-16-02`; `DEL-16-03` | Design-authoring state and comparison workspace |
+| `DEL-07-08` | `PKG-07` | 4 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05`; `DEL-16-03` | Design-authoring state and comparison workspace |
 | `DEL-08-06` | `PKG-08` | 2 | `DEL-15-03`; `DEL-15-04` | State, comparison, and handoff report sections |
 | `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
-| `DEL-15-03` | `PKG-15` | 1 | `DEL-15-02` | Downstream modeling export workflow |
-| `DEL-15-04` | `PKG-15` | 2 | `DEL-15-02`; `DEL-15-03` | External prover boundary metadata |
-| `DEL-16-03` | `PKG-16` | 1 | `DEL-16-02` | User acceptance and operation audit trail |
+| `DEL-15-04` | `PKG-15` | 1 | `DEL-15-03` | External prover boundary metadata |
 | `DEL-16-04` | `PKG-16` | 1 | `DEL-16-03` | Agent rationale and professional-boundary controls |
 
 ## Candidate Edges Excluded
