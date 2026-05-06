@@ -126,10 +126,10 @@ row explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state task | `DEV-001 revision 0.5 Tranche I sealed-brief preparation` |
-| Latest state commit | Proposal and sealed-brief state are pending commit in the working tree. |
+| Latest state commit | Proposal and sealed-brief state committed as `c7b0977` (`coordination: prepare tranche i sealed briefs`). |
 | Latest cleanup commit | Latest committed post-Tranche H assessment checkpoint is `7969470`; Tranche H promotion is committed as `38d43a2`; Tranche H implementation output exists at `c08b0a2` (`core: implement tranche h contracts`). |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche I proposal preparation` archived in compact history by this handoff update. |
-| Current authorized item | Human approved sealed-brief preparation for DEV-001 revision `0.5` Tranche I deliverables `DEL-15-03` and `DEL-16-03` from the accepted proposal. ORCHESTRATOR prepared `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-03.md` and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-03.md`. No Type 2 dispatch, lifecycle/evidence/blocker/dependency/DAG change, candidate promotion, commit, push, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion occurred. |
+| Current authorized item | Human approved committing the Tranche I sealed-brief state and handing off to the next instance. ORCHESTRATOR committed `execution/_Coordination/DEV-001_REV05_TRANCHE_I_PROPOSAL.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-03.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-03.md`, `NEXT_INSTANCE_STATE.md`, and `_COORDINATION.md` as `c7b0977`. No Type 2 dispatch, lifecycle/evidence/blocker/dependency/DAG change, candidate promotion, push, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion occurred. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -448,7 +448,7 @@ Completed output:
 - Updated `execution/_Coordination/NEXT_INSTANCE_STATE.md` and
   `execution/_Coordination/_COORDINATION.md` with the sealed-brief state and
   next guarded dispatch gate.
-- No commit was made.
+- Committed as `c7b0977` (`coordination: prepare tranche i sealed briefs`).
 
 Files changed:
 
@@ -457,6 +457,10 @@ Files changed:
 - `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-03.md`
 - `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 - `execution/_Coordination/_COORDINATION.md`
+
+Commit:
+
+- `c7b0977` - `coordination: prepare tranche i sealed briefs`
 
 Verification:
 
