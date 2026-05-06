@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-G-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: proposal_prepared_sealed_briefs_not_authorized
+status: sealed_briefs_prepared_dispatch_not_authorized
 created: 2026-05-05
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -10,7 +10,8 @@ approval_record: execution/_DAG/DAG-002/APPROVAL_RECORD.md
 blocker_queue: execution/_Coordination/DEV-001_BLOCKER_QUEUE.csv
 source_assessment: execution/_Coordination/DEV-001_REV05_POST_TRANCHE_F_NEXT_STEP_ASSESSMENT.md
 human_authorization: proposal_preparation_only_2026-05-05
-sealed_briefs_status: not_prepared
+accepted_for_brief_preparation: 2026-05-05
+sealed_briefs_status: prepared
 dispatch_authorization: not_authorized
 ---
 
@@ -33,6 +34,28 @@ mirrors, rebuild the blocker queue, mutate aggregate DAG artifacts, promote
 candidate rows, commit file state, push, run live CI/signing/publishing, claim
 professional acceptance, start autonomous mutation workflow, or promote the
 quarantined Chirality reference corpus.
+
+The human project authority later accepted this proposal for sealed brief
+preparation:
+
+```text
+commit then proceed with preparation of the sealed-brief
+```
+
+ORCHESTRATOR interpreted that as authorization to commit the proposal-only
+state and then prepare sealed briefs for `DEL-13-04`, `DEL-14-03`, and
+`DEL-14-04`. Prepared sealed briefs:
+
+- `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-13-04.md`
+- `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-03.md`
+- `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-14-04.md`
+
+This later authorization does not dispatch workers, run implementation, change
+lifecycle state, update implementation evidence, refresh dependency mirrors,
+rebuild the blocker queue, mutate aggregate DAG artifacts, promote candidate
+rows, commit sealed-brief file state, push, run live CI/signing/publishing,
+claim professional acceptance, start autonomous mutation workflow, or promote
+the quarantined Chirality reference corpus.
 
 ## Source Inputs
 
@@ -201,11 +224,11 @@ and each removes blockers from downstream SCA-002 surfaces.
 ## Recommended Next Gate
 
 ```text
-APPROVE: accept DEV-001 revision 0.5 Tranche G proposal and prepare sealed
-briefs for DEL-13-04, DEL-14-03, and DEL-14-04 using the contract-first,
-provider-neutral transformation/comparison engine lane. Do not dispatch
-implementation.
+APPROVE: dispatch DEV-001 revision 0.5 Tranche G implementation using the
+sealed briefs for DEL-13-04, DEL-14-03, and DEL-14-04. Workers may edit only
+their sealed write scopes and must not edit lifecycle, evidence, blocker,
+dependency, DAG, or coordination state.
 ```
 
-No sealed brief preparation or implementation dispatch is authorized by this
-proposal.
+No implementation dispatch is authorized by this proposal or sealed-brief
+preparation.
