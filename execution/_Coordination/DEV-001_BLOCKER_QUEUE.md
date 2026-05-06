@@ -36,11 +36,11 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
 | Implementation evidence records | 67 |
-| Committed implementation evidence | 64 |
+| Committed implementation evidence | 67 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 25 |
 | PKG-00 architecture-basis edges satisfied | 521 |
-| Implementation `UNBLOCKED` deliverables | 82 |
-| Implementation `BLOCKED` deliverables | 10 |
+| Implementation `UNBLOCKED` deliverables | 84 |
+| Implementation `BLOCKED` deliverables | 8 |
 
 ## Package Summary
 
@@ -61,8 +61,8 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-12` | 5 | 0 |
 | `PKG-13` | 4 | 0 |
 | `PKG-14` | 5 | 0 |
-| `PKG-15` | 1 | 3 |
-| `PKG-16` | 1 | 3 |
+| `PKG-15` | 2 | 2 |
+| `PKG-16` | 2 | 2 |
 
 ## Unblocked DAG-Ready Items
 
@@ -144,14 +144,16 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-13-01` | `PKG-13` | `COMMITTED` `dcdc1ac` | 11 | Design knowledge schema and provenance model |
 | `DEL-13-02` | `PKG-13` | `COMMITTED` `002263b` | 12 | Constraint entity and provenance model |
 | `DEL-13-03` | `PKG-13` | `COMMITTED` `05878bf` | 12 | Constraint validation engine |
-| `DEL-13-04` | `PKG-13` | `WORKING_TREE` `24b5717` | 14 | Physical-to-analytical transformation contract |
+| `DEL-13-04` | `PKG-13` | `COMMITTED` `24b5717` | 14 | Physical-to-analytical transformation contract |
 | `DEL-14-01` | `PKG-14` | `COMMITTED` `dcdc1ac` | 11 | Immutable model state records |
 | `DEL-14-02` | `PKG-14` | `COMMITTED` `002263b` | 12 | Analysis run records |
-| `DEL-14-03` | `PKG-14` | `WORKING_TREE` `24b5717` | 10 | Model-state comparison engine |
-| `DEL-14-04` | `PKG-14` | `WORKING_TREE` `24b5717` | 11 | Analysis-run comparison engine |
+| `DEL-14-03` | `PKG-14` | `COMMITTED` `24b5717` | 10 | Model-state comparison engine |
+| `DEL-14-04` | `PKG-14` | `COMMITTED` `24b5717` | 11 | Analysis-run comparison engine |
 | `DEL-14-05` | `PKG-14` | `COMMITTED` `05878bf` | 11 | Comparison mapping, tolerance, and export contracts |
 | `DEL-15-01` | `PKG-15` | `COMMITTED` `05878bf` | 13 | Canonical handoff package schema and manifest |
+| `DEL-15-02` | `PKG-15` | `MISSING_EVIDENCE` | 13 | Target mapping and unsupported-behavior contract |
 | `DEL-16-01` | `PKG-16` | `COMMITTED` `002263b` | 11 | Structured model operation schema |
+| `DEL-16-02` | `PKG-16` | `MISSING_EVIDENCE` | 12 | Operation validation and diff preview |
 
 ## Blocked Items Grouped By Missing Upstream
 
@@ -162,9 +164,6 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-13-04` - Physical-to-analytical transformation contract | `PKG-13` | `WORKING_TREE` | 3 | `DEL-07-08`; `DEL-15-02`; `DEL-15-03` | `DAG-002-E0809`; `DAG-002-E0816`; `DAG-002-E0846` |
-| `DEL-14-03` - Model-state comparison engine | `PKG-14` | `WORKING_TREE` | 3 | `DEL-07-08`; `DEL-08-06`; `DEL-16-02` | `DAG-002-E0829`; `DAG-002-E0848`; `DAG-002-E0863` |
-| `DEL-14-04` - Analysis-run comparison engine | `PKG-14` | `WORKING_TREE` | 2 | `DEL-07-08`; `DEL-08-06` | `DAG-002-E0849`; `DAG-002-E0864` |
 | `DEL-15-02` - Target mapping and unsupported-behavior contract | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-15-03`; `DEL-15-04` | `DAG-002-E0812`; `DAG-002-E0820` |
 | `DEL-15-03` - Downstream modeling export workflow | `PKG-15` | `MISSING_EVIDENCE` | 2 | `DEL-08-06`; `DEL-15-04` | `DAG-002-E0821`; `DAG-002-E0867` |
 | `DEL-15-04` - External prover boundary metadata | `PKG-15` | `MISSING_EVIDENCE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
@@ -176,13 +175,11 @@ These deliverables have no active upstream implementation dependency below the `
 | DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
 |---|---|---:|---|---|
 | `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-07-08` | `PKG-07` | 8 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05`; `DEL-13-04`; `DEL-14-03`; `DEL-14-04`; `DEL-16-02`; `DEL-16-03` | Design-authoring state and comparison workspace |
-| `DEL-08-06` | `PKG-08` | 4 | `DEL-14-03`; `DEL-14-04`; `DEL-15-03`; `DEL-15-04` | State, comparison, and handoff report sections |
+| `DEL-07-08` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05`; `DEL-16-02`; `DEL-16-03` | Design-authoring state and comparison workspace |
+| `DEL-08-06` | `PKG-08` | 2 | `DEL-15-03`; `DEL-15-04` | State, comparison, and handoff report sections |
 | `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
-| `DEL-15-02` | `PKG-15` | 1 | `DEL-13-04` | Target mapping and unsupported-behavior contract |
-| `DEL-15-03` | `PKG-15` | 2 | `DEL-15-02`; `DEL-13-04` | Downstream modeling export workflow |
+| `DEL-15-03` | `PKG-15` | 1 | `DEL-15-02` | Downstream modeling export workflow |
 | `DEL-15-04` | `PKG-15` | 2 | `DEL-15-02`; `DEL-15-03` | External prover boundary metadata |
-| `DEL-16-02` | `PKG-16` | 1 | `DEL-14-03` | Operation validation and diff preview |
 | `DEL-16-03` | `PKG-16` | 1 | `DEL-16-02` | User acceptance and operation audit trail |
 | `DEL-16-04` | `PKG-16` | 1 | `DEL-16-03` | Agent rationale and professional-boundary controls |
 
