@@ -11,7 +11,8 @@ implementation_commit_subject: "core: implement tranche g engines"
 closeout_commit: b78930e
 evidence_promotion: completed
 post_promotion_queue: 84_unblocked_8_blocked
-push_status: not_pushed
+push_status: pushed
+pushed_through_commit: 1f33815
 ---
 
 # DEV-001 Revision 0.5 Tranche G Promotion Handoff
@@ -59,8 +60,9 @@ blocked by `DEL-15-03` and `DEL-15-04`; `DEL-07-08` remains blocked by
 ## Boundaries
 
 No dependency mirror, aggregate DAG, candidate edge, Chirality corpus, live CI,
-signing, publishing, professional acceptance claim, or push was changed by this
-promotion.
+signing, publishing, or professional acceptance claim was changed by this
+promotion. A later human instruction authorized `git push`; `main` was pushed
+to `origin/main` through `1f33815`.
 
 ## Recommended Next Gate
 
