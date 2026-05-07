@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-05-06
+updated: 2026-05-07
 source_graph: execution/_DAG/DAG-002/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 71 |
+| Implementation evidence records | 73 |
 | Committed implementation evidence | 71 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 21 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 19 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 88 |
 | Implementation `BLOCKED` deliverables | 4 |
@@ -153,11 +153,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-15-01` | `PKG-15` | `COMMITTED` `05878bf` | 13 | Canonical handoff package schema and manifest |
 | `DEL-15-02` | `PKG-15` | `COMMITTED` `c08b0a2` | 13 | Target mapping and unsupported-behavior contract |
 | `DEL-15-03` | `PKG-15` | `COMMITTED` `4601724` | 14 | Downstream modeling export workflow |
-| `DEL-15-04` | `PKG-15` | `MISSING_EVIDENCE` | 12 | External prover boundary metadata |
+| `DEL-15-04` | `PKG-15` | `WORKING_TREE` `WORKING_TREE` | 12 | External prover boundary metadata |
 | `DEL-16-01` | `PKG-16` | `COMMITTED` `002263b` | 11 | Structured model operation schema |
 | `DEL-16-02` | `PKG-16` | `COMMITTED` `c08b0a2` | 12 | Operation validation and diff preview |
 | `DEL-16-03` | `PKG-16` | `COMMITTED` `4601724` | 12 | User acceptance and operation audit trail |
-| `DEL-16-04` | `PKG-16` | `MISSING_EVIDENCE` | 10 | Agent rationale and professional-boundary controls |
+| `DEL-16-04` | `PKG-16` | `WORKING_TREE` `WORKING_TREE` | 10 | Agent rationale and professional-boundary controls |
 
 ## Blocked Items Grouped By Missing Upstream
 
@@ -168,7 +168,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-15-04` - External prover boundary metadata | `PKG-15` | `MISSING_EVIDENCE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
+| `DEL-15-04` - External prover boundary metadata | `PKG-15` | `WORKING_TREE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
 
 ## Per-Deliverable Blocked Items
 
