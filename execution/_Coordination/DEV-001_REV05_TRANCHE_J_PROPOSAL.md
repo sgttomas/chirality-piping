@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-J-PROPOSAL
 doc_kind: coordination.tranche_proposal
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -15,6 +15,7 @@ sealed_briefs_status: prepared
 dispatch_authorization: authorized_2026-05-07
 implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_J_IMPLEMENTATION_HANDOFF.md
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_J_REVIEW_AUDIT_CLOSEOUT.md
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche J Proposal
@@ -76,6 +77,13 @@ Tranche J deliverables. This did not authorize commit, `COMMITTED` evidence
 promotion, push, dependency mirror refresh, aggregate DAG mutation, candidate
 promotion, live CI/signing/publishing, professional acceptance, autonomous
 mutation workflow, or Chirality corpus promotion.
+
+The human project authority later approved CHANGE commit and evidence
+promotion. ORCHESTRATOR committed the Tranche J implementation/closeout patch
+as `68d863b`, promoted `DEL-15-04` and `DEL-16-04` evidence to `COMMITTED`,
+rebuilt the blocker queue to 89 unblocked / 3 blocked, and recorded promotion
+handoff at
+`execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md`.
 
 ## Source Inputs
 
@@ -232,9 +240,7 @@ professional-boundary continuity before broader GUI tranche planning.
 Recommended next gate:
 
 ```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche J working-tree
-implementation and closeout patch, then promote DEL-15-04 and DEL-16-04
-implementation evidence from WORKING_TREE to COMMITTED using the resulting
-commit hash and rebuild the blocker queue. Commit the promotion handoff. Do
-not push.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche J next-step
+assessment from the current approved DAG-002 readiness state and Tranche J
+committed evidence.
 ```

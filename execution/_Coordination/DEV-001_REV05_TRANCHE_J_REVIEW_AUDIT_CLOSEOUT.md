@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-J-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -11,13 +11,16 @@ implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_J_IMPLEMEN
 sealed_briefs:
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-15-04.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-16-04.md
-commit_authorization: not_authorized
-evidence_promotion: not_authorized
+commit_authorization: authorized_and_completed
+implementation_commit: 68d863b
+evidence_promotion: completed
 pre_closeout_queue: 88_unblocked_4_blocked
 post_closeout_queue: 88_unblocked_4_blocked
+post_promotion_queue: 89_unblocked_3_blocked
 evidence_records: 73
-committed_evidence_records: 71
-working_tree_evidence_records: 2
+committed_evidence_records: 73
+working_tree_evidence_records: 0
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche J Review/Audit Closeout
@@ -139,9 +142,11 @@ Closeout verification completed:
 
 ## Commit And Promotion
 
-No commit or `COMMITTED` evidence promotion was authorized or performed.
-Tranche J remains a working-tree closeout patch with `WORKING_TREE` evidence
-for `DEL-15-04` and `DEL-16-04`.
+The Tranche J implementation and closeout patch was committed as `68d863b`
+(`core: implement tranche j boundary controls`). `DEL-15-04` and `DEL-16-04`
+evidence was promoted from `WORKING_TREE` to `COMMITTED` using that commit
+hash. The blocker queue was rebuilt after promotion, resulting in 89 unblocked
+/ 3 blocked and newly unblocking `DEL-08-06`.
 
 No next Type 2 dispatch, dependency mirror refresh, aggregate DAG mutation,
 candidate-edge promotion, push, live CI/signing/publishing, professional
@@ -151,9 +156,7 @@ is authorized by this closeout.
 ## Recommended Next Gate
 
 ```text
-APPROVE: CHANGE commit DEV-001 revision 0.5 Tranche J working-tree
-implementation and closeout patch, then promote DEL-15-04 and DEL-16-04
-implementation evidence from WORKING_TREE to COMMITTED using the resulting
-commit hash and rebuild the blocker queue. Commit the promotion handoff. Do
-not push.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche J next-step
+assessment from the current approved DAG-002 readiness state and Tranche J
+committed evidence.
 ```

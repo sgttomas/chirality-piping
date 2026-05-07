@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-J-IMPLEMENTATION-HANDOFF
 doc_kind: coordination.implementation_handoff
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -17,10 +17,11 @@ worker_agents:
   - deliverable_id: DEL-16-04
     agent_id: 019dfffe-1dfe-78b2-90ab-afa20e59e202
     nickname: Archimedes
-commit_status: not_committed
-evidence_promotion: not_authorized
+commit_status: committed_68d863b
+evidence_promotion: completed
 closeout_status: review_audit_change_closeout_prepared
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_J_REVIEW_AUDIT_CLOSEOUT.md
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche J Implementation Handoff
@@ -40,7 +41,10 @@ and their explicit write scopes.
 Post-worker REVIEW/AUDIT and CHANGE-managed closeout preparation were later
 authorized and recorded at
 `execution/_Coordination/DEV-001_REV05_TRANCHE_J_REVIEW_AUDIT_CLOSEOUT.md`.
-Commit, push, and `COMMITTED` evidence promotion remain separate gates.
+CHANGE commit and `COMMITTED` evidence promotion were later authorized and
+recorded at
+`execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md`.
+Push remains a separate gate and was not authorized.
 
 ## Worker Outputs
 

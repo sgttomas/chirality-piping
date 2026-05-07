@@ -36,11 +36,11 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
 | Implementation evidence records | 73 |
-| Committed implementation evidence | 71 |
+| Committed implementation evidence | 73 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 19 |
 | PKG-00 architecture-basis edges satisfied | 521 |
-| Implementation `UNBLOCKED` deliverables | 88 |
-| Implementation `BLOCKED` deliverables | 4 |
+| Implementation `UNBLOCKED` deliverables | 89 |
+| Implementation `BLOCKED` deliverables | 3 |
 
 ## Package Summary
 
@@ -54,7 +54,7 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-05` | 5 | 0 |
 | `PKG-06` | 5 | 0 |
 | `PKG-07` | 6 | 2 |
-| `PKG-08` | 5 | 1 |
+| `PKG-08` | 6 | 0 |
 | `PKG-09` | 5 | 0 |
 | `PKG-10` | 5 | 0 |
 | `PKG-11` | 4 | 1 |
@@ -122,6 +122,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-08-03` | `PKG-08` | `COMMITTED` `50f947a` | 11 | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | `COMMITTED` `3e33ea4` | 11 | Result export format |
 | `DEL-08-05` | `PKG-08` | `COMMITTED` `69adffa` | 10 | Report protected-content linter |
+| `DEL-08-06` | `PKG-08` | `MISSING_EVIDENCE` | 22 | State, comparison, and handoff report sections |
 | `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `COMMITTED` `abdecbd` | 6 | Nonlinear support regression suite |
@@ -153,11 +154,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-15-01` | `PKG-15` | `COMMITTED` `05878bf` | 13 | Canonical handoff package schema and manifest |
 | `DEL-15-02` | `PKG-15` | `COMMITTED` `c08b0a2` | 13 | Target mapping and unsupported-behavior contract |
 | `DEL-15-03` | `PKG-15` | `COMMITTED` `4601724` | 14 | Downstream modeling export workflow |
-| `DEL-15-04` | `PKG-15` | `WORKING_TREE` `WORKING_TREE` | 12 | External prover boundary metadata |
+| `DEL-15-04` | `PKG-15` | `COMMITTED` `68d863b` | 12 | External prover boundary metadata |
 | `DEL-16-01` | `PKG-16` | `COMMITTED` `002263b` | 11 | Structured model operation schema |
 | `DEL-16-02` | `PKG-16` | `COMMITTED` `c08b0a2` | 12 | Operation validation and diff preview |
 | `DEL-16-03` | `PKG-16` | `COMMITTED` `4601724` | 12 | User acceptance and operation audit trail |
-| `DEL-16-04` | `PKG-16` | `WORKING_TREE` `WORKING_TREE` | 10 | Agent rationale and professional-boundary controls |
+| `DEL-16-04` | `PKG-16` | `COMMITTED` `68d863b` | 10 | Agent rationale and professional-boundary controls |
 
 ## Blocked Items Grouped By Missing Upstream
 
@@ -168,7 +169,6 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
 | `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
 | `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
-| `DEL-15-04` - External prover boundary metadata | `PKG-15` | `WORKING_TREE` | 1 | `DEL-08-06` | `DAG-002-E0868` |
 
 ## Per-Deliverable Blocked Items
 
@@ -176,7 +176,6 @@ These deliverables have no active upstream implementation dependency below the `
 |---|---|---:|---|---|
 | `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
 | `DEL-07-08` | `PKG-07` | 3 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05` | Design-authoring state and comparison workspace |
-| `DEL-08-06` | `PKG-08` | 1 | `DEL-15-04` | State, comparison, and handoff report sections |
 | `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
 
 ## Candidate Edges Excluded
