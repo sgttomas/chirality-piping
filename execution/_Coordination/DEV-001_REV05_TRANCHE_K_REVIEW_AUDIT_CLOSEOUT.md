@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-K-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_evidence_recorded
+status: committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -11,13 +11,16 @@ sealed_brief: execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-08-06.md
 implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_K_IMPLEMENTATION_HANDOFF.md
 deliverable_id: DEL-08-06
 package_id: PKG-08
-commit_authorization: not_authorized
-evidence_promotion: working_tree_only
+commit_authorization: authorized_and_completed
+implementation_commit: cf6ffb9
+evidence_promotion: completed
 pre_closeout_queue: 89_unblocked_3_blocked
 post_closeout_queue: 89_unblocked_3_blocked
+post_promotion_queue: 89_unblocked_3_blocked
 evidence_records: 74
-committed_evidence_records: 73
-working_tree_evidence_records: 1
+committed_evidence_records: 74
+working_tree_evidence_records: 0
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_K_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche K Review/Audit Closeout
@@ -95,21 +98,21 @@ Prepared as working-tree closeout surfaces only:
 Dependency status for `DEL-08-06` remains unchanged:
 `SYNCHRONIZED_FROM_APPROVED_DAG002_MIRROR_PRESENT`.
 
-Current closeout queue state:
+Current promoted queue state:
 
 | Fact | State |
 |---|---:|
 | Implementation evidence records | 74 |
-| Committed implementation evidence records | 73 |
-| Working-tree implementation evidence records | 1 |
+| Committed implementation evidence records | 74 |
+| Working-tree implementation evidence records | 0 |
 | Queue state | 89 unblocked / 3 blocked |
 | `DEL-08-06` lifecycle | `CHECKING` |
-| `DEL-08-06` evidence | `WORKING_TREE` |
+| `DEL-08-06` evidence | `COMMITTED` |
 | Newly unblocked by closeout | None under the `COMMITTED` threshold |
 
-`DEL-08-06` remains an unblocked working-tree implementation item. Its
-working-tree evidence does not count as `COMMITTED` evidence until a later
-authorized commit and evidence-promotion gate.
+`DEL-08-06` is now committed evidence and remains unblocked. It has no direct
+active downstream consumers in approved `DAG-002`, so promotion does not change
+the blocked queue count.
 
 ## Verification
 
@@ -141,7 +144,10 @@ Closeout verification completed:
 
 ## Commit And Promotion
 
-No commit or `COMMITTED` evidence promotion is authorized by this closeout.
+The Tranche K implementation and closeout patch was committed as `cf6ffb9`
+(`core: implement tranche k report sections`). `DEL-08-06` evidence was
+promoted from `WORKING_TREE` to `COMMITTED` using that commit hash. The blocker
+queue was rebuilt after promotion, remaining at 89 unblocked / 3 blocked.
 
 No next Type 2 dispatch, dependency mirror refresh, aggregate DAG mutation,
 candidate-edge promotion, push, live CI/signing/publishing, professional
@@ -151,8 +157,7 @@ is authorized by this closeout.
 ## Recommended Next Gate
 
 ```text
-APPROVE: commit DEV-001 revision 0.5 Tranche K working-tree implementation and
-closeout patch, then promote DEL-08-06 implementation evidence from
-WORKING_TREE to COMMITTED using the resulting commit hash and rebuild the
-blocker queue. Do not push without a separate gate.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche K next-step
+assessment from the current approved DAG-002 readiness state and Tranche K
+committed evidence.
 ```

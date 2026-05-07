@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-SEALED-BRIEF-DEL-08-06
 doc_kind: coordination.sealed_type2_brief
-status: dispatched_working_tree_output_recorded
+status: dispatched_committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 tranche: DEV-001_REV05_TRANCHE_K
@@ -12,6 +12,7 @@ implementation_lane: state_comparison_handoff_report_sections
 source_assessment: execution/_Coordination/DEV-001_REV05_POST_TRANCHE_J_NEXT_STEP_ASSESSMENT.md
 implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_K_IMPLEMENTATION_HANDOFF.md
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_K_REVIEW_AUDIT_CLOSEOUT.md
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_K_PROMOTION_HANDOFF.md
 ---
 
 # Sealed Brief - DEL-08-06 State, Comparison, And Handoff Report Sections

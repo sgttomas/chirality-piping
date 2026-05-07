@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-K-IMPLEMENTATION-HANDOFF
 doc_kind: coordination.implementation_handoff
-status: review_audit_change_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-07
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -13,10 +13,11 @@ package_id: PKG-08
 worker_agent:
   agent_id: 019e00a4-3220-7b83-8557-aeb56d38c7e6
   nickname: Boyle
-commit_status: not_committed
-evidence_promotion: not_authorized
+commit_status: committed_cf6ffb9
+evidence_promotion: completed
 closeout_status: prepared
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_K_REVIEW_AUDIT_CLOSEOUT.md
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_K_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche K Implementation Handoff
