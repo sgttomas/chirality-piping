@@ -130,8 +130,8 @@ row explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state task | `Coordination artifact hygiene after DEV-001 revision 0.5 Tranche J evidence promotion` |
-| Latest state commit | Tranche J implementation and closeout committed as `68d863b` (`core: implement tranche j boundary controls`); Tranche J promotion handoff is being committed by the current `coordination: promote tranche j evidence` commit. |
-| Latest cleanup commit | Latest committed Tranche J implementation/closeout checkpoint is `68d863b`; Tranche J promotion handoff is recorded at `execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md`. This coordination artifact hygiene update is not yet committed. |
+| Latest state commit | Coordination artifact hygiene committed as `9341402` (`coordination: align tranche j handoff state`). |
+| Latest cleanup commit | Latest committed Tranche J implementation/closeout checkpoint is `68d863b`; Tranche J promotion handoff is recorded at `execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md`; coordination artifact hygiene is committed as `9341402`. |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche J review/audit closeout preparation` archived in compact history by this handoff update. |
 | Current authorized item | Human approved CHANGE commit of Tranche J working-tree implementation and closeout patch, then promotion of `DEL-15-04` and `DEL-16-04` evidence from `WORKING_TREE` to `COMMITTED` using the resulting commit hash. ORCHESTRATOR committed implementation/closeout as `68d863b`, promoted both evidence rows to `COMMITTED`, rebuilt the blocker queue to 89 unblocked / 3 blocked, and recorded `execution/_Coordination/DEV-001_REV05_TRANCHE_J_PROMOTION_HANDOFF.md`. No dependency mirror refresh, aggregate DAG mutation, candidate promotion, push, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, or Chirality corpus promotion occurred. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
@@ -722,7 +722,7 @@ Files changed:
 
 Commit:
 
-- Not committed in this hygiene step.
+- `9341402` - `coordination: align tranche j handoff state`
 
 Verification:
 
