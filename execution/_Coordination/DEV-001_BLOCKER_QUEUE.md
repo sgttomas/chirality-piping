@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 73 |
+| Implementation evidence records | 74 |
 | Committed implementation evidence | 73 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 19 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 18 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 89 |
 | Implementation `BLOCKED` deliverables | 3 |
@@ -122,7 +122,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-08-03` | `PKG-08` | `COMMITTED` `50f947a` | 11 | Warnings, assumptions, and provenance report section |
 | `DEL-08-04` | `PKG-08` | `COMMITTED` `3e33ea4` | 11 | Result export format |
 | `DEL-08-05` | `PKG-08` | `COMMITTED` `69adffa` | 10 | Report protected-content linter |
-| `DEL-08-06` | `PKG-08` | `MISSING_EVIDENCE` | 22 | State, comparison, and handoff report sections |
+| `DEL-08-06` | `PKG-08` | `WORKING_TREE` `WORKING_TREE` | 22 | State, comparison, and handoff report sections |
 | `DEL-09-01` | `PKG-09` | `COMMITTED` `b34ecd6` | 9 | Mechanics benchmark suite |
 | `DEL-09-02` | `PKG-09` | `COMMITTED` `bf1dc20` | 8 | Stress recovery benchmark suite |
 | `DEL-09-03` | `PKG-09` | `COMMITTED` `abdecbd` | 6 | Nonlinear support regression suite |
