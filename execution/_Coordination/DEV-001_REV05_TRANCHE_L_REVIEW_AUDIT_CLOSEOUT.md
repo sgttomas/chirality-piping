@@ -1,18 +1,31 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-L-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_evidence_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-08
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
 graph_authority: execution/_DAG/DAG-002/
 implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_L_IMPLEMENTATION_HANDOFF.md
 scope_review_audit: execution/_Coordination/DEV-001_REV05_TRANCHE_L_SCOPE_REVIEW_AUDIT.md
-implementation_commit: not_committed
-evidence_promotion: not_authorized
+implementation_commit: 6e0b8f4
+evidence_promotion: completed
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_L_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche L Review/Audit Closeout
+
+## Post-Closeout Promotion
+
+The closeout preparation below was later superseded by authorized Tranche L
+implementation commit and evidence promotion:
+
+- implementation commit: `6e0b8f4` (`core: implement tranche l gui contracts`);
+- promotion handoff:
+  `execution/_Coordination/DEV-001_REV05_TRANCHE_L_PROMOTION_HANDOFF.md`;
+- promoted deliverables: `DEL-07-02`, `DEL-07-03`, `DEL-07-04`,
+  `DEL-07-05`, and `DEL-07-07`;
+- promoted evidence state: `COMMITTED`.
 
 ## Boundary
 

@@ -36,11 +36,11 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
 | Implementation evidence records | 79 |
-| Committed implementation evidence | 74 |
+| Committed implementation evidence | 79 |
 | Filesystem lifecycle `SEMANTIC_READY` (display only) | 13 |
 | PKG-00 architecture-basis edges satisfied | 521 |
-| Implementation `UNBLOCKED` deliverables | 89 |
-| Implementation `BLOCKED` deliverables | 3 |
+| Implementation `UNBLOCKED` deliverables | 92 |
+| Implementation `BLOCKED` deliverables | 0 |
 
 ## Package Summary
 
@@ -53,11 +53,11 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | `PKG-04` | 6 | 0 |
 | `PKG-05` | 5 | 0 |
 | `PKG-06` | 5 | 0 |
-| `PKG-07` | 6 | 2 |
+| `PKG-07` | 8 | 0 |
 | `PKG-08` | 6 | 0 |
 | `PKG-09` | 5 | 0 |
 | `PKG-10` | 5 | 0 |
-| `PKG-11` | 4 | 1 |
+| `PKG-11` | 5 | 0 |
 | `PKG-12` | 5 | 0 |
 | `PKG-13` | 4 | 0 |
 | `PKG-14` | 5 | 0 |
@@ -112,11 +112,13 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-04` | `PKG-06` | `COMMITTED` `ad270f6` | 9 | Private rule-pack lifecycle and checksum handling |
 | `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
 | `DEL-07-01` | `PKG-07` | `COMMITTED` `4785806` | 15 | 3D viewport and centerline editor |
-| `DEL-07-02` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 10 | Model tree and property inspector |
-| `DEL-07-03` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 13 | Material, component, and rule-pack editors |
-| `DEL-07-04` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 11 | Missing-data warning and blocking UX |
-| `DEL-07-05` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 10 | Results viewer |
-| `DEL-07-07` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-07-02` | `PKG-07` | `COMMITTED` `6e0b8f4` | 10 | Model tree and property inspector |
+| `DEL-07-03` | `PKG-07` | `COMMITTED` `6e0b8f4` | 13 | Material, component, and rule-pack editors |
+| `DEL-07-04` | `PKG-07` | `COMMITTED` `6e0b8f4` | 11 | Missing-data warning and blocking UX |
+| `DEL-07-05` | `PKG-07` | `COMMITTED` `6e0b8f4` | 10 | Results viewer |
+| `DEL-07-06` | `PKG-07` | `MISSING_EVIDENCE` | 13 | Accessibility and usability baseline |
+| `DEL-07-07` | `PKG-07` | `COMMITTED` `6e0b8f4` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-07-08` | `PKG-07` | `MISSING_EVIDENCE` | 21 | Design-authoring state and comparison workspace |
 | `DEL-08-01` | `PKG-08` | `COMMITTED` `9e21716` | 14 | Calculation report generator |
 | `DEL-08-02` | `PKG-08` | `COMMITTED` `061f1af` | 9 | Audit manifest and model hash |
 | `DEL-08-03` | `PKG-08` | `COMMITTED` `50f947a` | 11 | Warnings, assumptions, and provenance report section |
@@ -133,6 +135,7 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-10-03` | `PKG-10` | `COMMITTED` `abdecbd` | 11 | Local FEA handoff data contract |
 | `DEL-10-04` | `PKG-10` | `COMMITTED` `daaff87` | 11 | Build, packaging, and CI/CD pipeline |
 | `DEL-10-05` | `PKG-10` | `COMMITTED` `9de5e9b` | 13 | Headless CLI and structured I/O analysis runner |
+| `DEL-11-01` | `PKG-11` | `MISSING_EVIDENCE` | 10 | User guide skeleton |
 | `DEL-11-02` | `PKG-11` | `COMMITTED` `abdecbd` | 11 | Developer guide for solver and rule packs |
 | `DEL-11-03` | `PKG-11` | `COMMITTED` `abdecbd` | 9 | Theory notes: classical to modern centerline analysis |
 | `DEL-11-04` | `PKG-11` | `COMMITTED` `abdecbd` | 10 | Invented educational example models |
@@ -162,21 +165,11 @@ These deliverables have no active upstream implementation dependency below the `
 
 ## Blocked Items Grouped By Missing Upstream
 
-| Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
-|---|---|---|---:|---|---|
-| `DEL-07-02` - Model tree and property inspector | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0507`; `DAG-002-E0841` |
-| `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-002-E0508`; `DAG-002-E0576` |
-| `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
-| `DEL-07-05` - Results viewer | `PKG-07` | `WORKING_TREE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
-| `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `WORKING_TREE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
+No blocked items were found under the implementation-readiness threshold.
 
 ## Per-Deliverable Blocked Items
 
-| DeliverableID | PackageID | Missing upstream count | Missing upstream deliverables | Name |
-|---|---|---:|---|---|
-| `DEL-07-06` | `PKG-07` | 5 | `DEL-07-02`; `DEL-07-03`; `DEL-07-04`; `DEL-07-05`; `DEL-07-07` | Accessibility and usability baseline |
-| `DEL-07-08` | `PKG-07` | 3 | `DEL-07-02`; `DEL-07-04`; `DEL-07-05` | Design-authoring state and comparison workspace |
-| `DEL-11-01` | `PKG-11` | 2 | `DEL-07-03`; `DEL-07-05` | User guide skeleton |
+No per-deliverable implementation blockers were found.
 
 ## Candidate Edges Excluded
 
