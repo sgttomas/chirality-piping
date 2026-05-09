@@ -1,7 +1,7 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-M-IMPLEMENTATION-HANDOFF
 doc_kind: coordination.implementation_handoff
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-09
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
@@ -13,10 +13,11 @@ sealed_briefs:
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-01.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-05.md
   - execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-12-04.md
-implementation_commit: not_committed
-evidence_promotion: not_authorized
+implementation_commit: bfb3931
+evidence_promotion: completed
 closeout_status: prepared
 closeout_surface: execution/_Coordination/DEV-001_REV05_TRANCHE_M_REVIEW_AUDIT_CLOSEOUT.md
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche M Implementation Handoff
@@ -148,14 +149,17 @@ that closeout moved `DEL-07-06`, `DEL-07-08`, `DEL-11-01`, `DEL-11-05`, and
 `DEL-12-04` to `CHECKING` / `WORKING_TREE` and rebuilt the queue under the
 unchanged `COMMITTED` threshold.
 
-## Current Closeout Non-Actions
+Implementation commit and evidence promotion were later authorized and
+recorded at
+`execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md`; that
+promotion moved the five Tranche M evidence rows to `COMMITTED` using
+implementation commit `bfb3931`.
 
-- No implementation commit.
-- No `COMMITTED` evidence promotion.
+## Current Promotion Non-Actions
+
 - No dependency mirror refresh or local `Dependencies.csv` edit.
 - No aggregate `DAG-002` mutation.
 - No candidate-edge promotion.
-- No push of Tranche M worker outputs or closeout surfaces.
 - No live GUI runtime, full GUI/runtime completion claim, live solver/prover
   execution, cloud service behavior, external secret-manager integration,
   encryption/key-management finalization, protected data, private project
@@ -163,11 +167,11 @@ unchanged `COMMITTED` threshold.
 
 ## Recommended Next Gate
 
-Closeout preparation has now been authorized. The next guarded action is:
+Implementation commit and evidence promotion have now been authorized. The
+next guarded action is:
 
 ```text
-APPROVE: commit DEV-001 revision 0.5 Tranche M working-tree implementation and
-closeout patch, then promote DEL-07-06, DEL-07-08, DEL-11-01, DEL-11-05, and
-DEL-12-04 implementation evidence from WORKING_TREE to COMMITTED using the
-resulting commit hash and rebuild the blocker queue. Push remains separate.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche M
+completion and next-step assessment from the current approved DAG-002
+readiness state and Tranche M committed evidence.
 ```

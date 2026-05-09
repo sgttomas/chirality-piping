@@ -1,23 +1,37 @@
 ---
 doc_id: DEV-001-REV05-TRANCHE-M-REVIEW-AUDIT-CLOSEOUT
 doc_kind: coordination.review_audit_change_closeout
-status: working_tree_closeout_prepared
+status: committed_evidence_promoted
 created: 2026-05-09
 prepared_by: ORCHESTRATOR
 decomposition_revision: "0.5"
 graph_authority: execution/_DAG/DAG-002/
 source_assessment: execution/_Coordination/DEV-001_REV05_POST_TRANCHE_L_NEXT_STEP_ASSESSMENT.md
 implementation_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_M_IMPLEMENTATION_HANDOFF.md
-implementation_commit: not_committed
-evidence_promotion: not_authorized
+implementation_commit: bfb3931
+evidence_promotion: completed
 pre_closeout_queue: 92_unblocked_0_blocked
 post_closeout_queue: 92_unblocked_0_blocked
+post_promotion_queue: 92_unblocked_0_blocked
 evidence_records: 84
-committed_evidence_records: 79
-working_tree_evidence_records: 5
+committed_evidence_records: 84
+working_tree_evidence_records: 0
+promotion_handoff: execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md
 ---
 
 # DEV-001 Revision 0.5 Tranche M Review/Audit Closeout
+
+## Post-Closeout Promotion
+
+The closeout preparation below was later completed by authorized Tranche M
+implementation commit and evidence promotion:
+
+- implementation commit: `bfb3931` (`core: implement tranche m contracts`);
+- promotion handoff:
+  `execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md`;
+- promoted deliverables: `DEL-07-06`, `DEL-07-08`, `DEL-11-01`,
+  `DEL-11-05`, and `DEL-12-04`;
+- promoted evidence state: `COMMITTED`.
 
 ## Authorization
 
@@ -105,22 +119,22 @@ Dependency status for all five deliverables remains unchanged:
 
 ## Queue Result
 
-After closeout preparation:
+After promotion:
 
 | Fact | State |
 |---|---:|
 | Implementation evidence records | 84 |
-| Committed implementation evidence records | 79 |
-| Working-tree implementation evidence records | 5 |
+| Committed implementation evidence records | 84 |
+| Working-tree implementation evidence records | 0 |
 | Queue state | 92 unblocked / 0 blocked |
 | Candidate edges excluded | 8 |
 | Lifecycle `CHECKING` | 84 |
 | Lifecycle `SEMANTIC_READY` | 8 |
 
-Because the blocker satisfaction threshold remains `COMMITTED`, the five
-Tranche M `WORKING_TREE` rows do not satisfy downstream blockers yet. The
-current approved active graph has no blocked deliverables after Tranche L
-promotion, so the queue remains 92 unblocked / 0 blocked.
+The five Tranche M rows now satisfy the `COMMITTED` threshold using
+implementation commit `bfb3931`. The current approved active graph had no
+blocked deliverables before promotion, so the queue remains 92 unblocked / 0
+blocked and no direct downstream consumers were newly unblocked.
 
 ## Verification
 
@@ -163,14 +177,16 @@ output claim or bundled protected/private data was found.
 
 ## Commit And Promotion
 
-Commit and `COMMITTED` evidence promotion are not authorized by this closeout.
-Tranche M implementation and closeout remain working-tree state only.
+The Tranche M implementation and closeout patch was committed as `bfb3931`
+(`core: implement tranche m contracts`). `DEL-07-06`, `DEL-07-08`,
+`DEL-11-01`, `DEL-11-05`, and `DEL-12-04` evidence was promoted from
+`WORKING_TREE` to `COMMITTED` using that commit hash. The blocker queue was
+rebuilt after promotion, remaining at 92 unblocked / 0 blocked.
 
 ## Recommended Next Gate
 
 ```text
-APPROVE: commit DEV-001 revision 0.5 Tranche M working-tree implementation and
-closeout patch, then promote DEL-07-06, DEL-07-08, DEL-11-01, DEL-11-05, and
-DEL-12-04 implementation evidence from WORKING_TREE to COMMITTED using the
-resulting commit hash and rebuild the blocker queue. Push remains separate.
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 post-Tranche M
+completion and next-step assessment from the current approved DAG-002
+readiness state and Tranche M committed evidence.
 ```

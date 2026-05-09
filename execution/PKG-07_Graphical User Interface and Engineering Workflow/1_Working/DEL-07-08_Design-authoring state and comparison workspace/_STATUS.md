@@ -8,3 +8,4 @@
 - 2026-05-03 - State set to INITIALIZED (TASK+four-documents)
 - 2026-05-03 - State set to SEMANTIC_READY (TASK+semantic-matrix-build)
 - 2026-05-09 - State set to CHECKING by CHANGE-managed Tranche M closeout preparation using WORKING_TREE implementation evidence.
+- 2026-05-09 - Evidence promoted to COMMITTED by CHANGE-managed Tranche M promotion using implementation commit bfb3931.
