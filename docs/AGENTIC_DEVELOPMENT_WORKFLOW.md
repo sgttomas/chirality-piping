@@ -12,6 +12,11 @@ refs:
 
 # Agentic Development Workflow
 
+For a contributor-facing walkthrough of this workflow, see
+`docs/contributor_guide/index.md`. That guide explains the existing process; it
+does not add authority beyond this workflow, the governing contract, sealed
+briefs, or human project-authority decisions.
+
 ## 1. Roles
 
 | Role | Function | Authority |

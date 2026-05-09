@@ -30,6 +30,7 @@ This package is written from the perspective of `SOFTWARE_DECOMP`: it converts t
 | `IP_AND_DATA_BOUNDARY.md` | Data/IP policy | Public/private data rules, contributor certification, provenance, and quarantine policy. |
 | `VALIDATION_STRATEGY.md` | Verification and validation | Benchmark and release-quality strategy. |
 | `AGENTIC_DEVELOPMENT_WORKFLOW.md` | Agent workflow | How Type 1/Type 2 agents should consume this package and produce deliverables. |
+| `user_guide/index.md` | User guide | Draft user-facing workflow skeleton, limitations, data boundaries, and current `TBD`s. |
 | `_Decomposition/SOFTWARE_DECOMP.md` | Working surface | SSOW, objectives, packages, deliverables, scope ledger summary, telemetry, open issues. |
 | `_Registers/ScopeLedger.csv` | Authoritative companion register | Machine-readable scope-to-package/deliverable mapping. |
 | `_Registers/Deliverables.csv` | Authoritative companion register | Machine-readable deliverable catalog. |

@@ -19,6 +19,11 @@ OpenPipeStress accepts contributions only within the project boundaries in
 `docs/CONTRACT.md`, `docs/DIRECTIVE.md`, `docs/IP_AND_DATA_BOUNDARY.md`, and
 `docs/PROFESSIONAL_BOUNDARY.md`.
 
+New contributors should start with the tutorial path in
+`docs/contributor_guide/index.md` before changing files. The tutorial is a
+navigation aid only; the governance documents above, an assigned sealed brief,
+and human project-authority decisions remain controlling when they conflict.
+
 This workflow is project governance. It is not legal advice, professional
 engineering approval, certification, sealing, standards-body endorsement, or a
 code-compliance determination.
