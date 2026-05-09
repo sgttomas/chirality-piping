@@ -3,7 +3,7 @@ doc_id: DEV-001-BLOCKER-QUEUE
 doc_kind: coordination.blocker_queue
 status: computed_active_edges_only
 created: 2026-04-30
-updated: 2026-05-07
+updated: 2026-05-09
 source_graph: execution/_DAG/DAG-002/DependencyEdges.csv
 implementation_evidence_source: execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv
 implementation_threshold: COMMITTED
@@ -35,9 +35,9 @@ This blocker queue is an advisory implementation-readiness view only. It is not 
 | Deliverable nodes represented | 92 |
 | Active edges included | 859 |
 | Candidate edges excluded | 8 |
-| Implementation evidence records | 74 |
+| Implementation evidence records | 79 |
 | Committed implementation evidence | 74 |
-| Filesystem lifecycle `SEMANTIC_READY` (display only) | 18 |
+| Filesystem lifecycle `SEMANTIC_READY` (display only) | 13 |
 | PKG-00 architecture-basis edges satisfied | 521 |
 | Implementation `UNBLOCKED` deliverables | 89 |
 | Implementation `BLOCKED` deliverables | 3 |
@@ -112,11 +112,11 @@ These deliverables have no active upstream implementation dependency below the `
 | `DEL-06-04` | `PKG-06` | `COMMITTED` `ad270f6` | 9 | Private rule-pack lifecycle and checksum handling |
 | `DEL-06-05` | `PKG-06` | `COMMITTED` `73506b7` | 11 | Invented non-code example rule pack |
 | `DEL-07-01` | `PKG-07` | `COMMITTED` `4785806` | 15 | 3D viewport and centerline editor |
-| `DEL-07-02` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Model tree and property inspector |
-| `DEL-07-03` | `PKG-07` | `MISSING_EVIDENCE` | 13 | Material, component, and rule-pack editors |
-| `DEL-07-04` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Missing-data warning and blocking UX |
-| `DEL-07-05` | `PKG-07` | `MISSING_EVIDENCE` | 10 | Results viewer |
-| `DEL-07-07` | `PKG-07` | `MISSING_EVIDENCE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
+| `DEL-07-02` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 10 | Model tree and property inspector |
+| `DEL-07-03` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 13 | Material, component, and rule-pack editors |
+| `DEL-07-04` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 11 | Missing-data warning and blocking UX |
+| `DEL-07-05` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 10 | Results viewer |
+| `DEL-07-07` | `PKG-07` | `WORKING_TREE` `WORKING_TREE` | 11 | Solve execution UX: progress, cancellation, and diagnostics |
 | `DEL-08-01` | `PKG-08` | `COMMITTED` `9e21716` | 14 | Calculation report generator |
 | `DEL-08-02` | `PKG-08` | `COMMITTED` `061f1af` | 9 | Audit manifest and model hash |
 | `DEL-08-03` | `PKG-08` | `COMMITTED` `50f947a` | 11 | Warnings, assumptions, and provenance report section |
@@ -164,11 +164,11 @@ These deliverables have no active upstream implementation dependency below the `
 
 | Missing upstream | PackageID | Evidence state | Blocked consumers | Consumer IDs | Edge IDs |
 |---|---|---|---:|---|---|
-| `DEL-07-02` - Model tree and property inspector | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0507`; `DAG-002-E0841` |
-| `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-002-E0508`; `DAG-002-E0576` |
-| `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `MISSING_EVIDENCE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
-| `DEL-07-05` - Results viewer | `PKG-07` | `MISSING_EVIDENCE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
-| `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `MISSING_EVIDENCE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
+| `DEL-07-02` - Model tree and property inspector | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0507`; `DAG-002-E0841` |
+| `DEL-07-03` - Material, component, and rule-pack editors | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-11-01` | `DAG-002-E0508`; `DAG-002-E0576` |
+| `DEL-07-04` - Missing-data warning and blocking UX | `PKG-07` | `WORKING_TREE` | 2 | `DEL-07-06`; `DEL-07-08` | `DAG-002-E0509`; `DAG-002-E0842` |
+| `DEL-07-05` - Results viewer | `PKG-07` | `WORKING_TREE` | 3 | `DEL-07-06`; `DEL-07-08`; `DEL-11-01` | `DAG-002-E0510`; `DAG-002-E0577`; `DAG-002-E0843` |
+| `DEL-07-07` - Solve execution UX: progress, cancellation, and diagnostics | `PKG-07` | `WORKING_TREE` | 1 | `DEL-07-06` | `DAG-002-E0511` |
 
 ## Per-Deliverable Blocked Items
 
