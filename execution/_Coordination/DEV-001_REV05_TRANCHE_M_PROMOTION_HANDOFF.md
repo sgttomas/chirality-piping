@@ -15,7 +15,8 @@ package_ids: PKG-07; PKG-11; PKG-12
 evidence_promotion: completed
 queue_after_promotion: 92_unblocked_0_blocked
 candidate_edges: excluded
-push_status: authorized_after_promotion_commit
+promotion_handoff_commit: b44ba77
+push_status: pushed_after_promotion_commit
 ---
 
 # DEV-001 Revision 0.5 Tranche M Promotion Handoff

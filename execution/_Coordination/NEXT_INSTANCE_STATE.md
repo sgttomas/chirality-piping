@@ -144,7 +144,7 @@ row explicitly says otherwise.
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state task | `DEV-001 revision 0.5 Tranche M implementation commit and evidence promotion` |
-| Latest state commit | Tranche M implementation/closeout committed as `bfb3931`; promotion handoff state is being finalized under the current human authorization. |
+| Latest state commit | Tranche M implementation/closeout committed as `bfb3931`; promotion handoff committed and pushed as `b44ba77`. |
 | Latest cleanup commit | Coordination artifact hygiene committed as `9341402` (`coordination: align tranche j handoff state`) and handoff completion committed as `d93d00d` (`coordination: complete tranche j hygiene handoff`). |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche M review/audit closeout preparation` archived in compact history by this handoff update. |
 | Current authorized item | Human approved committing and pushing after Tranche M closeout. ORCHESTRATOR committed implementation/closeout as `bfb3931`, promoted `DEL-07-06`, `DEL-07-08`, `DEL-11-01`, `DEL-11-05`, and `DEL-12-04` evidence to `COMMITTED`, rebuilt the blocker queue to 92 unblocked / 0 blocked, and recorded `execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md`. No dependency mirror refresh, aggregate DAG mutation, candidate promotion, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, full GUI/runtime completion claim, or Chirality corpus promotion occurred. |
@@ -771,8 +771,8 @@ Commit / push:
 
 - Implementation/closeout commit: `bfb3931`
   (`core: implement tranche m contracts`).
-- Promotion handoff state is being finalized under the current human
-  authorization.
+- Promotion handoff commit: `b44ba77`
+  (`coordination: promote tranche m evidence`), pushed to `origin/main`.
 
 Control-state non-actions:
 
