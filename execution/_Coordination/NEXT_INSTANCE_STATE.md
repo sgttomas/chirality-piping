@@ -143,11 +143,11 @@ row explicitly says otherwise.
 | Pilot commit | `7650cf6 docs: tighten maintainer governance gates` |
 | Pilot pattern | Accepted and used for `DEL-02-01`; future execution may proceed by bounded parallel tranche after explicit human approval |
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
-| Latest state commit | Tranche M implementation/closeout committed as `bfb3931`; promotion handoff committed and pushed as `b44ba77`. |
+| Latest state commit | DEV-001 revision `0.5` final acceptance/archive record committed locally as `c0303c4` (`coordination: accept dev001 rev05 evidence closure`); push was separately approved by the latest human gate after this handoff correction. |
 | Latest cleanup commit | Coordination artifact hygiene committed as `9341402` (`coordination: align tranche j handoff state`) and handoff completion committed as `d93d00d` (`coordination: complete tranche j hygiene handoff`). |
 | Previous completed task archive status | `DEV-001 revision 0.5 Tranche M implementation commit and evidence promotion` archived in compact history by this handoff update. |
 | Latest state task | `DEV-001 revision 0.5 final acceptance/archive record` |
-| Current authorized item | Human approved creating a DEV-001 revision `0.5` final acceptance/archive record for bounded implementation-evidence closure. ORCHESTRATOR prepared `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md`, accepting DEV-001 revision `0.5` only as bounded implementation-evidence closed using closeout commit `8760bb9`, current `COMMITTED` evidence counts, approved `DAG-002` active-edge authority, and recorded residual boundaries. No `DAG-002` mutation, candidate-edge promotion, dependency mirror refresh, lifecycle/evidence state change, professional acceptance claim, commit, push, live CI/signing/publishing, autonomous mutation workflow, full GUI/runtime completion claim, release/production readiness claim, or Chirality corpus promotion occurred. |
+| Current authorized item | Human approved updating this coordination handoff state to record local acceptance/archive commit `c0303c4` before push, then pushing. This correction records that `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md` was committed locally as `c0303c4` after the acceptance/archive gate. No `DAG-002` mutation, candidate-edge promotion, dependency mirror refresh, lifecycle/evidence state change, professional acceptance claim, live CI/signing/publishing, autonomous mutation workflow, full GUI/runtime completion claim, release/production readiness claim, or Chirality corpus promotion is authorized by this handoff correction. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -742,6 +742,10 @@ Completed output:
   to point to the acceptance record.
 - Updated `_COORDINATION.md` and this handoff state to make the acceptance
   record the current control-plane surface.
+- Committed the acceptance/archive record and coordination updates locally as
+  `c0303c4` (`coordination: accept dev001 rev05 evidence closure`).
+- Human then approved this handoff correction to record `c0303c4` before push,
+  followed by pushing the resulting `main` state.
 - Preserved `DAG-002`, candidate rows, dependency mirrors, lifecycle/evidence
   state, professional acceptance, release readiness, production readiness,
   full GUI/runtime completion, and Chirality corpus boundaries as non-actions.
@@ -766,26 +770,26 @@ Verification:
   `COMMITTED` implementation rows, 8 `ARCHITECTURE_BASELINE` rows, 92
   unblocked, 84 synchronized non-`PKG-00` dependency mirrors, and 8 `PKG-00`
   register-exempt rows.
-- `git diff --check` should be run before any later commit gate.
+- `git diff --check origin/main..HEAD` passed for local acceptance commit
+  `c0303c4`.
 
 Control-state non-actions:
 
 - No `DAG-002` mutation, candidate-edge promotion, dependency mirror refresh,
   deliverable-local dependency edit, lifecycle/evidence state change,
   professional acceptance claim, release readiness claim, production-readiness
-  claim, full GUI/runtime completion claim, Type 2 dispatch, commit, push,
+  claim, full GUI/runtime completion claim, Type 2 dispatch,
   live CI/signing/publishing, autonomous mutation workflow, or Chirality corpus
-  promotion occurred.
+  promotion occurred. The local coordination commit `c0303c4` is file-state
+  evidence only; push is authorized separately by the latest human gate.
 
 ## Immediate Next Actions
 
-Recommended next guarded action:
+Current guarded action:
 
 ```text
-APPROVE: CHANGE commit the DEV-001 revision 0.5 final archive/acceptance
-record and coordination handoff updates. Do not mutate DAG-002, promote
-candidate edges, refresh dependency mirrors, claim professional acceptance, or
-push without a separate gate.
+APPROVE: update coordination handoff state to record local acceptance commit
+c0303c4 before any push. and then push
 ```
 
 Do not start open-ended broad DAG execution. Parallel fan-out remains bounded
