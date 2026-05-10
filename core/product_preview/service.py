@@ -9,6 +9,7 @@ model mutations.
 from __future__ import annotations
 
 from copy import deepcopy
+from hashlib import sha256
 import json
 from pathlib import Path
 from typing import Any, Mapping
@@ -92,6 +93,110 @@ def build_analysis_run_preview(model: Mapping[str, Any] | None = None) -> dict[s
             }
         ],
     )
+
+
+def build_report_packet_preview(model: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Materialize read-only report-packet context for the preview workflow.
+
+    This is a structured handoff of the same computed context shown in the
+    desktop report packet. It is not a rendered calculation report, export
+    adapter payload, compliance result, or professional acceptance record.
+    """
+
+    model_record = deepcopy(dict(model or load_preview_model()))
+    mechanics_result = run_preview_mechanics(model_record)
+    analysis_run = build_analysis_run_preview(model_record)
+    proposal_preview = build_agent_proposal_preview()
+    selected_result_refs = _selected_result_refs(mechanics_result)
+    result_hashes = [
+        hash_ref(
+            {"object_type": "Result", "ref": item["id"]},
+            "result_value",
+            item,
+        )
+        for item in sorted(
+            mechanics_result.get("results", []),
+            key=lambda result: result.get("id", ""),
+        )
+    ]
+    packet = {
+        "schema_version": "0.1.0",
+        "document_kind": "openpipestress.product_preview.report_packet",
+        "packet_id": f"report-packet:{mechanics_result['run_id']}",
+        "model_ref": mechanics_result["model_ref"],
+        "source_run_ref": {
+            "object_type": "AnalysisRun",
+            "ref": analysis_run["analysis_run"]["run_id"],
+        },
+        "source_result_envelope_ref": {
+            "object_type": "ResultEnvelope",
+            "ref": f"result-envelope:{mechanics_result['run_id']}",
+        },
+        "status": deepcopy(mechanics_result["status"]),
+        "selected_result_refs": selected_result_refs,
+        "diagnostic_refs": [
+            {
+                "object_type": "Diagnostic",
+                "ref": item.get("id", f"diagnostic:{item.get('code', 'unknown')}"),
+            }
+            for item in mechanics_result.get("diagnostics", [])
+        ],
+        "analysis_run_context": {
+            "deliverable_id": analysis_run["deliverable_id"],
+            "run_id": analysis_run["analysis_run"]["run_id"],
+            "immutability_policy": deepcopy(analysis_run["analysis_run"]["immutability_policy"]),
+            "result_value_hash_count": len(result_hashes),
+            "result_envelope_hash_refs": [
+                deepcopy(item)
+                for item in analysis_run["analysis_run"]["hashes"]
+                if item.get("payload_scope") == "result_envelope"
+            ],
+            "reproducibility_notes": deepcopy(
+                analysis_run["analysis_run"]["reproducibility"]["determinism_notes"]
+            ),
+        },
+        "proposal_context": {
+            "proposal_ref": {
+                "object_type": "AgentProposal",
+                "ref": proposal_preview["proposal"]["proposal_id"],
+            },
+            "application_status": proposal_preview["application_status"],
+            "accepted_model_state_mutated": proposal_preview["accepted_model_state_mutated"],
+        },
+        "hash_refs": [
+            hash_ref(
+                {"object_type": "ReportPacket", "ref": f"report-packet:{mechanics_result['run_id']}"},
+                "report_packet_context",
+                {
+                    "model_ref": mechanics_result["model_ref"],
+                    "run_id": mechanics_result["run_id"],
+                    "selected_result_refs": selected_result_refs,
+                    "diagnostic_ids": [
+                        item.get("id", f"diagnostic:{item.get('code', 'unknown')}")
+                        for item in mechanics_result.get("diagnostics", [])
+                    ],
+                    "result_hash_count": len(result_hashes),
+                },
+            )
+        ],
+        "professional_boundary": deepcopy(PROFESSIONAL_BOUNDARY),
+        "privacy_boundary": {
+            "classification": "invented_public_example",
+            "private_payload_embedded": False,
+            "protected_payload_embedded": False,
+            "telemetry_allowed": False,
+        },
+        "report_packet_status": {
+            "materialization": "read_only_context_packet",
+            "rendered_calculation_report": False,
+            "result_export_payload": False,
+            "external_handoff_payload": False,
+            "professional_acceptance_record": False,
+        },
+        "diagnostics": [],
+    }
+    packet["hash_refs"].extend(result_hashes)
+    return packet
 
 
 def build_agent_proposal_preview() -> dict[str, Any]:
@@ -189,6 +294,27 @@ def validate_preview_model(model: Mapping[str, Any] | None = None) -> dict[str, 
 
 def canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+
+
+def hash_ref(payload_ref: Mapping[str, str], payload_scope: str, payload: Any) -> dict[str, Any]:
+    return {
+        "algorithm": "sha256",
+        "canonicalization": "JCS",
+        "payload_ref": dict(payload_ref),
+        "payload_scope": payload_scope,
+        "value": sha256(canonical_json(payload).encode("utf-8")).hexdigest(),
+    }
+
+
+def _selected_result_refs(mechanics_result: Mapping[str, Any]) -> list[str]:
+    results = mechanics_result.get("results", [])
+    result_ids = [str(item.get("id", "")) for item in results if isinstance(item, Mapping)]
+    selected = [
+        mechanics_result.get("summary", {}).get("max_displacement", {}).get("result_ref"),
+        mechanics_result.get("summary", {}).get("max_open_formula_stress", {}).get("result_ref"),
+        "result:force:pipe-P-120:axial" if "result:force:pipe-P-120:axial" in result_ids else None,
+    ]
+    return [item for item in selected if item]
 
 
 def _read_json(path: Path) -> dict[str, Any]:

@@ -2,13 +2,13 @@
 
 ## Active Phase
 
-**Phase:** `TP-MAC-02 Physics-First Application`
+**Phase:** `TP-MAC-03 Result Interpretation And Review Workflow` closed
 **Last updated:** 2026-05-10
-**Current posture:** TP-MAC-02 live browser smoke has passed; result metadata is covered by DEL-08-04; preview mechanics results can now produce DEL-14-02 immutable analysis-run records. Continue physics-first product development by selecting one bounded continuation if needed.
+**Current posture:** TP-MAC-03 is implemented and closed for the current desktop preview workflow. Result rows and diagnostics can be selected, selected results and diagnostics derive read-only interpretation view models, affected refs select model/viewport context where possible, selected-target review narratives remain non-mutating, and a mechanics gap ledger records deferred/unsupported capabilities. The workspace is ready for a new governed plan.
 
 The previous `_Coordination/` root was dominated by REV05 evidence-closure and TP-MAC-01 desktop-hardening material. That material is now historical context for this phase unless a future task explicitly asks for DAG/evidence/lifecycle reconciliation.
 
-## Completed In Current Phase
+## Completed Baseline
 
 The TP-MAC-02 implementation slice is present in the working tree:
 
@@ -50,6 +50,113 @@ The TP-MAC-02 implementation slice is present in the working tree:
 - added a read-only desktop report-packet panel that consumes computed result
   IDs, diagnostics, proposal status, and professional-boundary status without
   exporting private data or claiming acceptance.
+- surfaced DEL-14-02 analysis-run reproducibility/audit context in the desktop
+  report packet, including the run ID, read-only immutability policy,
+  result-value hash count, result-envelope hash presence, and professional
+  boundary summary.
+- checked current report/UI/review/export consumers for endpoint-j demand; no
+  active workflow requires both element ends yet, so endpoint-j force/moment
+  recovery remains deferred until a concrete consumer needs it.
+- added `core.product_preview.build_report_packet_preview()` to materialize a
+  deterministic read-only report-packet context outside the desktop UI, with
+  selected computed result refs, diagnostic refs, DEL-14-02 run context, hashes,
+  proposal status, privacy boundary, and explicit non-report/non-export status.
+
+## Closed Tranche
+
+**Tranche:** `TP-MAC-03 Result Interpretation And Review Workflow`
+
+**Plan:** `plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`
+
+**Purpose:** Move from "computed preview results exist" to "a user can inspect,
+understand, and review result meaning."
+
+**Closeout posture:** The TP-MAC-03 acceptance path is satisfied. Continue the
+TP-MAC physics-first product path with a new governed plan. Do not start
+endpoint-j force/moment recovery until the new plan defines a concrete consumer
+for both element ends.
+
+**Scope:**
+
+- Add desktop result selection and detail review.
+- Derive a `ResultInterpretation` view model from current
+  `MechanicsResult.results[]`.
+- Show result metadata: family, entity ref, value/unit, component, coordinate
+  system, endpoint/location, recovery basis, sign convention, diagnostics,
+  linked knowledge, source run/audit context, and professional boundary.
+- Link selected result rows to model/viewport context using `entity_ref`.
+- Extend review-only proposal/context flow so selected results can produce
+  read-only review explanations.
+- Add a mechanics gap ledger covering endpoint-j recovery, station recovery,
+  pressure-to-frame load conversion, thermal behavior, support stiffness
+  completeness, load combinations, and protected rule/code checks.
+- Preserve all TP-MAC boundaries: invented/cleared data only, no hidden
+  defaults, no acceptance mutation, no compliance/certification/sealing/
+  approval/release/production claims.
+
+**Deferred:**
+
+- Endpoint-j force/moment recovery remains deferred until this interpretation
+  workflow creates a concrete consumer for both element ends.
+- Formal DEL-08 report-generator/report-section promotion remains deferred
+  unless a governed calculation-report artifact is explicitly needed.
+
+**Acceptance checks:**
+
+- Clicking `result:force:pipe-P-120:axial` renders a result detail panel with
+  `axial_force`, `element_local`, `end_i`, recovery basis, sign convention, and
+  `pipe:P-120`.
+- Selecting a result highlights/selects its model entity where possible.
+- Review narrative references the selected computed result id and remains
+  non-mutating.
+- Mechanics gap ledger lists endpoint-j recovery as deferred/not implemented,
+  not as a compliance failure.
+- Existing report-packet and DEL-14-02 audit context remain intact.
+
+## TP-MAC-03 Implementation Slice Completed
+
+The first result-interpretation slice is present in the working tree:
+
+- added desktop-only `SelectedReviewTarget`, `ResultInterpretation`, and
+  `MechanicsGap` types;
+- added `apps/desktop/src/features/results/resultInterpretation.ts` to derive
+  result details from `MechanicsResult.results[]` without changing public
+  solver/result contracts;
+- selecting `result:force:pipe-P-120:axial` renders a result detail panel with
+  family, `pipe:P-120`, value/unit, `axial_force`, `element_local`, `end_i`,
+  recovery basis, sign convention, linked diagnostics/knowledge, DEL-14-02 run
+  context, result-value hash status, envelope-hash status, and professional
+  boundary;
+- selected result rows resolve `entity_ref` to known model entities and update
+  model tree/property/viewport context when possible;
+- review-only proposal generation now uses the selected result or diagnostic
+  review target and continues to keep acceptance disabled;
+- diagnostics can be selected as review targets without mutating accepted model
+  state;
+- selected diagnostics now render a detail panel with diagnostic ID/code,
+  severity, source, affected refs, linked computed results, linked knowledge,
+  review-only explanation, and professional boundary;
+- selecting `diagnostic:physics:high-displacement-review` selects
+  `node:N-140` / Terminal tie-in through affected refs and links back to
+  `result:disp:node-N-140`;
+- the mechanics gap ledger lists endpoint-j recovery, station recovery,
+  pressure-to-frame load conversion, thermal behavior, support stiffness
+  completeness, load combinations, and protected rule/code checks as deferred,
+  not implemented, or requiring private inputs.
+
+## Recommended Next Plan
+
+Create a new governed plan for an endpoint/station recovery consumer before
+adding new solver output. The next plan should decide how users will inspect
+both element ends and station-level results in the desktop/report workflow, then
+scope endpoint-j or station recovery against that concrete consumer.
+
+Keep deferred unless explicitly scoped by the new plan:
+
+- endpoint-j local force/moment recovery;
+- intermediate station recovery;
+- governed calculation-report generation;
+- protected rule/code checks and private criteria handling.
 
 ## Primary Files For Next Work
 
@@ -58,27 +165,28 @@ Read these first:
 1. `AGENTS.md`
 2. `docs/CONTRACT.md`
 3. `docs/IP_AND_DATA_BOUNDARY.md`
-4. `plans/TP-MAC-02_PHYSICS_FIRST_APPLICATION_PLAN.md`
-5. `core/product_physics/src/lib.rs`
-6. `core/product_physics/src/validation.rs`
-7. `fixtures/product_preview/invented_preview_model.json`
-8. `fixtures/product_preview/invented_mechanics_result.json`
-9. `apps/desktop/src-tauri/src/lib.rs`
-10. `apps/desktop/src/App.tsx`
-11. `apps/desktop/src/features/results/ResultsPanel.tsx`
-12. `apps/desktop/src/features/knowledge/KnowledgePanel.tsx`
-13. `apps/desktop/src/features/agent-proposals/AgentProposalPanel.tsx`
-14. `apps/desktop/src/services/previewService.ts`
-15. `apps/desktop/src/types.ts`
-16. `apps/desktop/src/features/report/ReportPanel.tsx`
-17. `core/product_preview/service.py`
-18. `core/analysis_runs/records.py`
-19. `schemas/analysis_run.schema.json`
-20. `tests/product_preview/test_product_preview_service.py`
-21. `tests/test_analysis_run_records.py`
-22. `apps/desktop/src/App.test.tsx`
-23. `package.json`
-24. `apps/desktop/SMOKE.md`
+4. `plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`
+5. `plans/TP-MAC-02_PHYSICS_FIRST_APPLICATION_PLAN.md`
+6. `core/product_physics/src/lib.rs`
+7. `core/product_physics/src/validation.rs`
+8. `fixtures/product_preview/invented_preview_model.json`
+9. `fixtures/product_preview/invented_mechanics_result.json`
+10. `apps/desktop/src-tauri/src/lib.rs`
+11. `apps/desktop/src/App.tsx`
+12. `apps/desktop/src/features/results/ResultsPanel.tsx`
+13. `apps/desktop/src/features/knowledge/KnowledgePanel.tsx`
+14. `apps/desktop/src/features/agent-proposals/AgentProposalPanel.tsx`
+15. `apps/desktop/src/services/previewService.ts`
+16. `apps/desktop/src/types.ts`
+17. `apps/desktop/src/features/report/ReportPanel.tsx`
+18. `core/product_preview/service.py`
+19. `core/analysis_runs/records.py`
+20. `schemas/analysis_run.schema.json`
+21. `tests/product_preview/test_product_preview_service.py`
+22. `tests/test_analysis_run_records.py`
+23. `apps/desktop/src/App.test.tsx`
+24. `package.json`
+25. `apps/desktop/SMOKE.md`
 
 Only read REV05 tranche/DAG/evidence files if the current task is specifically about governance traceability, evidence closure, dependency graph status, or archival cleanup.
 
@@ -180,6 +288,52 @@ Additional check after adding DEL-14-02 preview analysis-run records:
 - `python3 -m pytest tests/test_analysis_run_records.py tests/product_preview/test_product_preview_service.py`
 - `python3 tests/test_analysis_run_schema.py`
 
+Additional check after surfacing DEL-14-02 analysis-run context in the desktop
+report packet:
+
+- `python3 -m pytest tests/test_analysis_run_records.py tests/product_preview/test_product_preview_service.py`
+- `npm test --workspace apps/desktop`
+- `npm run build --workspace apps/desktop`
+- `git diff --check`
+- `npm run dev --workspace apps/desktop`
+- opened `http://127.0.0.1:5173/` in the in-app browser
+- smoke result: PASS for the computed results, diagnostics, knowledge,
+  DEL-14-02 report-packet audit context, review-only proposal, disabled accept
+  control, and professional-boundary footer
+
+Additional check after adding the read-only report-packet materialization path:
+
+- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py`
+- `npm test --workspace apps/desktop`
+- `npm run build --workspace apps/desktop`
+- `git diff --check`
+
+Additional check after adding the TP-MAC-03 result-interpretation slice:
+
+- `npm test --workspace apps/desktop`
+- `npm run build --workspace apps/desktop`
+- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py`
+- `git diff --check`
+- `npm run dev --workspace apps/desktop -- --host 127.0.0.1`
+- opened `http://127.0.0.1:5173/` in the in-app browser
+- smoke result: PASS for axial result selection, result detail metadata,
+  `pipe:P-120` model/viewport context selection, selected-result review-only
+  proposal narrative, disabled accept control, DEL-14-02 audit context, and
+  endpoint-j recovery listed as a deferred mechanics gap
+
+Additional check after adding the TP-MAC-03 diagnostic-interpretation slice:
+
+- `npm test --workspace apps/desktop`
+- `npm run build --workspace apps/desktop`
+- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py`
+- `git diff --check`
+- `npm run dev --workspace apps/desktop -- --host 127.0.0.1`
+- opened `http://127.0.0.1:5173/` in the in-app browser
+- smoke result: PASS for `HIGH_DISPLACEMENT_REVIEW` diagnostic selection,
+  linked `result:disp:node-N-140` value context, `node:N-140` model/viewport
+  context selection, selected-diagnostic review-only proposal narrative, and
+  disabled accept control
+
 ## Active Boundaries
 
 - No protected standards/code data, proprietary values, private project data, real secrets, private libraries, allowables, SIF/flexibility tables, or compliance criteria.
@@ -202,13 +356,21 @@ Historical REV05 files still in `_Coordination/` are retained as audit records.
 
 ## Browser Smoke Result
 
-The live desktop smoke checklist has been run and passed. If future UI changes touch this workflow, rerun `apps/desktop/SMOKE.md`; if a checklist item fails, fix only that bounded workflow issue and rerun the affected desktop checks.
+The live desktop smoke checklist has been run and passed after surfacing the
+DEL-14-02 report-packet context. The rendered workflow showed the preview
+shell/header, solve status, computed result groups, axial force result row,
+diagnostics, knowledge context, report packet context including
+`DEL-14-02; run:preview-linear-static-001`, result-value hash count,
+`result_envelope` hash scope, generated review proposal, disabled accept
+control, and technical-preview boundary text. If future UI changes touch this
+workflow, rerun `apps/desktop/SMOKE.md`; if a checklist item fails, fix only
+that bounded workflow issue and rerun the affected desktop checks.
 
 ## Recommended Next Work
 
-Select one bounded continuation only if needed, for example:
+Create a new governed plan before adding more mechanics output.
 
-- surface the DEL-14-02 analysis-run record in the desktop report packet only
-  as read-only reproducibility/audit context.
-- add endpoint-j force/moment result components only if the report/UI/review
-  workflow needs both element ends.
+Recommended next plan: endpoint/station recovery consumer. Define how users
+will inspect both element ends and station-level results in the desktop/report
+workflow, then scope endpoint-j or station recovery against that concrete
+consumer.

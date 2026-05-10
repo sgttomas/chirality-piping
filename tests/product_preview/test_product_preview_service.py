@@ -13,6 +13,7 @@ from core.product_preview import (  # noqa: E402
     build_analysis_run_preview,
     build_agent_proposal_preview,
     build_model_tree,
+    build_report_packet_preview,
     load_design_knowledge,
     load_preview_model,
     run_preview_mechanics,
@@ -82,6 +83,45 @@ def test_analysis_run_preview_binds_mechanics_results_to_immutable_run_record():
     assert result_refs["result:force:pipe-P-120:axial"]["result_family"] == "force"
     assert result_refs["result:force:pipe-P-120:axial"]["hash_refs"][0]["payload_scope"] == "result_value"
     assert run["professional_boundary"]["software_makes_compliance_claim"] is False
+
+
+def test_report_packet_preview_materializes_read_only_audit_context():
+    packet = build_report_packet_preview()
+
+    assert packet["document_kind"] == "openpipestress.product_preview.report_packet"
+    assert packet["packet_id"] == "report-packet:run:preview-linear-static-001"
+    assert packet["source_run_ref"] == {
+        "object_type": "AnalysisRun",
+        "ref": "run:preview-linear-static-001",
+    }
+    assert "result:disp:node-N-140" in packet["selected_result_refs"]
+    assert "result:force:pipe-P-120:axial" in packet["selected_result_refs"]
+    assert packet["analysis_run_context"]["deliverable_id"] == "DEL-14-02"
+    assert packet["analysis_run_context"]["immutability_policy"]["run_record_is_read_only"] is True
+    assert packet["analysis_run_context"]["result_value_hash_count"] >= 1
+    assert packet["analysis_run_context"]["result_envelope_hash_refs"][0]["payload_scope"] == "result_envelope"
+    assert packet["proposal_context"]["application_status"] == "not_applied"
+    assert packet["proposal_context"]["accepted_model_state_mutated"] is False
+    assert packet["report_packet_status"] == {
+        "materialization": "read_only_context_packet",
+        "rendered_calculation_report": False,
+        "result_export_payload": False,
+        "external_handoff_payload": False,
+        "professional_acceptance_record": False,
+    }
+    assert packet["professional_boundary"]["software_makes_compliance_claim"] is False
+    assert packet["privacy_boundary"]["private_payload_embedded"] is False
+    assert packet["privacy_boundary"]["protected_payload_embedded"] is False
+    assert any(item["payload_scope"] == "report_packet_context" for item in packet["hash_refs"])
+    assert any(
+        item["payload_ref"] == {
+            "object_type": "Result",
+            "ref": "result:force:pipe-P-120:axial",
+        }
+        for item in packet["hash_refs"]
+    )
+    assert "code compliant" not in canonical_json(packet).lower()
+    assert "professional approval" not in canonical_json(packet).lower()
 
 
 def test_preview_validation_blocks_empty_ids_and_missing_provenance():

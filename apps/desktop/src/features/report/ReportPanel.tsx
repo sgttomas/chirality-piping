@@ -1,17 +1,22 @@
 import { FileText } from "lucide-react";
-import type { AgentProposal, MechanicsResult, PreviewModel } from "../../types";
+import type { AgentProposal, AnalysisRunEnvelope, MechanicsResult, PreviewModel } from "../../types";
 
 export function ReportPanel({
   model,
   result,
+  analysisRun,
   proposal
 }: {
   model: PreviewModel;
   result: MechanicsResult | null;
+  analysisRun: AnalysisRunEnvelope | null;
   proposal: AgentProposal | null;
 }) {
   const resultRefs = result ? selectedResultRefs(result) : [];
   const diagnostics = result?.diagnostics ?? [];
+  const run = analysisRun?.analysis_run;
+  const resultHashCount = run?.result_refs.reduce((count, item) => count + item.hash_refs.length, 0) ?? 0;
+  const envelopeHash = run?.hashes.find((item) => item.payload_scope === "result_envelope");
   return (
     <section className="panel report-panel" aria-label="Report packet" data-testid="report-panel">
       <div className="panel-title">
@@ -26,6 +31,15 @@ export function ReportPanel({
           <ReportLine label="Professional acceptance" value={result.status.professional_acceptance.replaceAll("_", " ")} />
           <ReportLine label="Selected result refs" value={resultRefs.join(", ")} testId="report-selected-result-refs" />
           <ReportLine label="Diagnostics" value={`${diagnostics.length} computed finding${diagnostics.length === 1 ? "" : "s"}`} />
+          {run ? (
+            <>
+              <ReportLine label="Analysis run" value={`${analysisRun.deliverable_id}; ${run.run_id}`} testId="report-analysis-run" />
+              <ReportLine label="Run immutability" value={run.immutability_policy.mutation_policy.replaceAll("_", " ")} />
+              <ReportLine label="Result hashes" value={`${resultHashCount} result value hash${resultHashCount === 1 ? "" : "es"}`} />
+              <ReportLine label="Envelope hash" value={envelopeHash ? `${envelopeHash.algorithm}; ${envelopeHash.payload_scope}` : "not available"} />
+              <ReportLine label="Run boundary" value={boundarySummary(run.professional_boundary)} />
+            </>
+          ) : null}
           <ReportLine label="Proposal" value={proposal?.proposal_id ?? "not generated"} />
           <ReportLine label="Boundary" value="technical preview only; human review required; no compliance or professional approval claim" />
         </div>
@@ -56,4 +70,17 @@ function selectedResultRefs(result: MechanicsResult): string[] {
     result.summary.max_open_formula_stress?.result_ref,
     result.results.find((item) => item.id === "result:force:pipe-P-120:axial")?.id
   ].filter((value): value is string => Boolean(value));
+}
+
+function boundarySummary(boundary: Record<string, boolean>): string {
+  if (
+    boundary.human_review_required &&
+    !boundary.software_makes_compliance_claim &&
+    !boundary.software_makes_certification_claim &&
+    !boundary.software_makes_sealing_claim &&
+    !boundary.software_makes_approval_claim
+  ) {
+    return "human review required; no compliance, certification, sealing, or approval claim";
+  }
+  return "review boundary requires attention";
 }

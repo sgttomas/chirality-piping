@@ -104,6 +104,110 @@ export type MechanicsResult = {
   diagnostics: Diagnostic[];
 };
 
+export type SelectedReviewTarget =
+  | { target_type: "result"; id: string }
+  | { target_type: "diagnostic"; id: string }
+  | { target_type: "model_entity"; id: string };
+
+export type ResultInterpretation = {
+  result_id: string;
+  family: string;
+  entity_ref: string;
+  value_label: string;
+  component: string;
+  coordinate_system: string;
+  location: string;
+  recovery_basis: string;
+  sign_convention: string;
+  linked_diagnostics: Diagnostic[];
+  linked_knowledge: KnowledgeRecord[];
+  source_run: {
+    run_id: string;
+    model_ref: string;
+    audit_ref: string;
+    result_hash_count: number;
+    envelope_hash_available: boolean;
+  };
+  professional_boundary: string;
+};
+
+export type DiagnosticInterpretation = {
+  diagnostic_id: string;
+  code: string;
+  severity: Diagnostic["severity"];
+  source: string;
+  message: string;
+  affected_refs: string[];
+  linked_results: Array<{
+    id: string;
+    kind: string;
+    entity_ref: string;
+    value_label: string;
+  }>;
+  linked_knowledge: KnowledgeRecord[];
+  review_explanation: string;
+  professional_boundary: string;
+};
+
+export type MechanicsGap = {
+  id: string;
+  capability: string;
+  status: "deferred" | "not_implemented" | "requires_private_inputs";
+  review_note: string;
+};
+
+export type ObjectRef = {
+  object_type: string;
+  ref: string;
+};
+
+export type AnalysisRunEnvelope = {
+  schema_version: string;
+  deliverable_id: "DEL-14-02";
+  package_id: "PKG-14";
+  scope_item: string;
+  objectives: string[];
+  run_contract_status: Record<string, string>;
+  analysis_run: {
+    run_id: string;
+    run_name: string;
+    run_kind: string;
+    model_state_ref: ObjectRef;
+    result_refs: Array<{
+      result_ref: ObjectRef;
+      result_family: string;
+      hash_refs: Array<{
+        algorithm: "sha256";
+        canonicalization: string;
+        payload_ref: ObjectRef;
+        payload_scope: string;
+        value: string;
+      }>;
+      privacy_classification: string;
+    }>;
+    hashes: Array<{
+      algorithm: "sha256";
+      canonicalization: string;
+      payload_ref: ObjectRef;
+      payload_scope: string;
+      value: string;
+    }>;
+    analysis_status: string[];
+    reproducibility: {
+      input_manifest_refs: ObjectRef[];
+      determinism_notes: string[];
+      unresolved_tbd: string[];
+    };
+    immutability_policy: {
+      run_record_is_read_only: boolean;
+      mutation_policy: string;
+      new_run_required_for_change: boolean;
+      hash_invalidates_external_acceptance: boolean;
+    };
+    professional_boundary: Record<string, boolean>;
+  };
+};
+
 export type AgentProposal = {
   schema_version: string;
   document_kind: string;

@@ -9,22 +9,34 @@ import { ModelTree } from "./features/model-tree/ModelTree";
 import { PropertyInspector } from "./features/model-tree/PropertyInspector";
 import { ReportPanel } from "./features/report/ReportPanel";
 import { ResultsPanel } from "./features/results/ResultsPanel";
+import { resolveDiagnosticEntitySelection, resolveEntitySelection } from "./features/results/resultInterpretation";
 import { SolvePanel } from "./features/solve/SolvePanel";
 import { PipeViewport } from "./features/viewport/PipeViewport";
 import {
+  buildAnalysisRunPreview,
   loadDesignKnowledge,
   loadPreviewModel,
   loadSampleProposal,
   runPreviewMechanics
 } from "./services/previewService";
-import type { AgentProposal, DesignKnowledge, EntityRef, MechanicsResult, PreviewModel } from "./types";
+import type {
+  AgentProposal,
+  AnalysisRunEnvelope,
+  DesignKnowledge,
+  EntityRef,
+  MechanicsResult,
+  PreviewModel,
+  SelectedReviewTarget
+} from "./types";
 
 export function App() {
   const [model, setModel] = useState<PreviewModel | null>(null);
   const [knowledge, setKnowledge] = useState<DesignKnowledge | null>(null);
   const [selection, setSelection] = useState<EntityRef | null>(null);
   const [result, setResult] = useState<MechanicsResult | null>(null);
+  const [analysisRun, setAnalysisRun] = useState<AnalysisRunEnvelope | null>(null);
   const [proposal, setProposal] = useState<AgentProposal | null>(null);
+  const [selectedReviewTarget, setSelectedReviewTarget] = useState<SelectedReviewTarget | null>(null);
   const [running, setRunning] = useState(false);
 
   useEffect(() => {
@@ -42,13 +54,40 @@ export function App() {
 
   async function handleRun() {
     setRunning(true);
-    const output = await runPreviewMechanics();
-    setResult(output);
-    setRunning(false);
+    setAnalysisRun(null);
+    try {
+      const output = await runPreviewMechanics();
+      const runRecord = await buildAnalysisRunPreview(output);
+      setResult(output);
+      setAnalysisRun(runRecord);
+      setSelectedReviewTarget(null);
+      setProposal(null);
+    } finally {
+      setRunning(false);
+    }
   }
 
   async function handleProposal() {
-    setProposal(await loadSampleProposal(result));
+    setProposal(await loadSampleProposal(result, selectedReviewTarget));
+  }
+
+  function handleSelectResult(resultId: string) {
+    setSelectedReviewTarget({ target_type: "result", id: resultId });
+    const item = result?.results.find((candidate) => candidate.id === resultId);
+    if (!item || !model) return;
+    const entitySelection = resolveEntitySelection(model, item.entity_ref);
+    if (entitySelection) {
+      setSelection(entitySelection);
+    }
+  }
+
+  function handleSelectDiagnostic(diagnosticId: string) {
+    setSelectedReviewTarget({ target_type: "diagnostic", id: diagnosticId });
+    if (!model) return;
+    const entitySelection = resolveDiagnosticEntitySelection({ model, result, knowledge, diagnosticId });
+    if (entitySelection) {
+      setSelection(entitySelection);
+    }
   }
 
   if (!model || !selection) {
@@ -79,15 +118,32 @@ export function App() {
           <PipeViewport model={model} selection={selection} />
           <div className="bottom-panels">
             <KnowledgePanel knowledge={knowledge} result={result} />
-            <DiagnosticsPanel model={model} knowledge={knowledge} result={result} />
+            <DiagnosticsPanel
+              model={model}
+              knowledge={knowledge}
+              result={result}
+              selectedDiagnosticId={selectedReviewTarget?.target_type === "diagnostic" ? selectedReviewTarget.id : null}
+              onSelectDiagnostic={handleSelectDiagnostic}
+            />
           </div>
         </section>
 
         <aside className="right-rail">
           <SolvePanel model={model} result={result} running={running} onRun={handleRun} />
-          <ResultsPanel result={result} />
-          <AgentProposalPanel proposal={proposal} mechanicsReady={Boolean(result)} onLoad={handleProposal} />
-          <ReportPanel model={model} result={result} proposal={proposal} />
+          <ResultsPanel
+            result={result}
+            knowledge={knowledge}
+            analysisRun={analysisRun}
+            selectedResultId={selectedReviewTarget?.target_type === "result" ? selectedReviewTarget.id : null}
+            onSelectResult={handleSelectResult}
+          />
+          <AgentProposalPanel
+            proposal={proposal}
+            mechanicsReady={Boolean(result)}
+            selectedReviewTarget={selectedReviewTarget}
+            onLoad={handleProposal}
+          />
+          <ReportPanel model={model} result={result} analysisRun={analysisRun} proposal={proposal} />
         </aside>
       </section>
 

@@ -29,7 +29,7 @@ export function KnowledgePanel({ knowledge, result }: { knowledge: DesignKnowled
   );
 }
 
-function physicsRecords(result: MechanicsResult | null): KnowledgeRecord[] {
+export function physicsRecords(result: MechanicsResult | null): KnowledgeRecord[] {
   if (!result) return [];
 
   const records: KnowledgeRecord[] = result.diagnostics

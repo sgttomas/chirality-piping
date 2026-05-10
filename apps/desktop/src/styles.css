@@ -277,11 +277,22 @@ button:focus-visible {
 
 .record-row,
 .diagnostic,
-.diff-list article {
+.diff-list article,
+.result-detail-panel,
+.diagnostic-detail-panel,
+.mechanics-gap-ledger,
+.gap-list article {
   padding: 9px;
   border: 1px solid #d9dfdb;
   border-radius: 4px;
   background: #ffffff;
+}
+
+.diagnostic {
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 .record-row strong,
@@ -326,6 +337,11 @@ button:focus-visible {
   background: #eef7fb;
 }
 
+.diagnostic.active {
+  outline: 2px solid #2d5b50;
+  outline-offset: -2px;
+}
+
 .status-grid {
   display: grid;
   gap: 8px;
@@ -368,6 +384,82 @@ button:focus-visible {
   color: #465450;
   font-size: 12px;
   font-weight: 700;
+}
+
+.result-group tbody tr {
+  cursor: pointer;
+}
+
+.selected-result-row {
+  background: #e8f1ed;
+  box-shadow: inset 3px 0 0 #2d5b50;
+}
+
+.result-detail-panel,
+.diagnostic-detail-panel,
+.mechanics-gap-ledger {
+  display: grid;
+  gap: 8px;
+}
+
+.result-detail-panel h3,
+.diagnostic-detail-panel h3,
+.mechanics-gap-ledger h3 {
+  margin: 0;
+  color: #465450;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.result-detail-panel dl,
+.diagnostic-detail-panel dl {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.result-detail-panel dl div,
+.diagnostic-detail-panel dl div {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.result-detail-panel dt,
+.diagnostic-detail-panel dt,
+.gap-list small {
+  color: #65716c;
+  font-size: 11px;
+}
+
+.result-detail-panel dd,
+.diagnostic-detail-panel dd {
+  margin: 0;
+  color: #25312f;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.gap-list {
+  display: grid;
+  gap: 7px;
+}
+
+.gap-list strong {
+  display: block;
+  font-size: 12px;
+}
+
+.gap-list small {
+  display: block;
+  margin-top: 2px;
+}
+
+.gap-list p {
+  margin: 5px 0 0;
+  color: #3a4643;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .primary-action,

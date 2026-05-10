@@ -1,13 +1,15 @@
 import { CheckSquare, Wand2 } from "lucide-react";
-import type { AgentProposal } from "../../types";
+import type { AgentProposal, SelectedReviewTarget } from "../../types";
 
 export function AgentProposalPanel({
   proposal,
   mechanicsReady,
+  selectedReviewTarget,
   onLoad
 }: {
   proposal: AgentProposal | null;
   mechanicsReady: boolean;
+  selectedReviewTarget: SelectedReviewTarget | null;
   onLoad: () => void;
 }) {
   return (
@@ -17,6 +19,12 @@ export function AgentProposalPanel({
         <Wand2 size={16} />
         Generate review proposal
       </button>
+      {selectedReviewTarget ? (
+        <div className="status-pill" data-testid="selected-review-target">
+          <span>Review target</span>
+          <strong>{`${selectedReviewTarget.target_type}: ${selectedReviewTarget.id}`}</strong>
+        </div>
+      ) : null}
       {proposal ? (
         <div className="proposal-body" data-testid="proposal-body">
           <h2>{proposal.proposal_id}</h2>
