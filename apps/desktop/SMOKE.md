@@ -47,43 +47,66 @@ Open the Vite URL printed by the command, normally
     paired `result:stress:pipe-P-120:end-i:torsional-shear`.
 11. Confirm the model context selects `pipe:P-120` and the property inspector
    (`aria-label="Property inspector"`) shows `Rack span`.
-12. Confirm `data-testid="mechanics-gap-ledger"` includes
+12. Click `data-testid="result-row-result:force:pipe-P-120:midspan:axial"`
+    and confirm `data-testid="result-detail-panel"` shows `midspan`,
+    `interpolated_from_endpoint_resultants`, and no endpoint-pair table.
+13. Results include
+    `data-testid="result-row-result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"`.
+    Click it and confirm `data-testid="result-detail-panel"` shows
+    `explicit_user_linear_combination`, `combination:combination:C-OPER-ALT`,
+    source result refs for `result:force:pipe-P-120:axial` and
+    `result:loadcase:load-L-200:force:pipe-P-120:axial`, and no compliance
+    or professional approval claim.
+14. Confirm `data-testid="mechanics-gap-ledger"` includes
    `data-testid="gap:endpoint-j-recovery"` with status `implemented`; this is
    not a compliance failure.
-13. Confirm `data-testid="mechanics-gap-ledger"` includes
+15. Confirm `data-testid="mechanics-gap-ledger"` includes
     `data-testid="gap:endpoint-stress-components"` with status `implemented`;
     this is not a compliance failure.
-14. Diagnostics render `data-testid="diagnostics-panel"` and include
+16. Confirm `data-testid="mechanics-gap-ledger"` includes
+    `data-testid="gap:station-recovery"` with status `implemented`, with
+    arbitrary station sweeps and exact internal diagrams deferred.
+17. Confirm `data-testid="mechanics-gap-ledger"` includes
+    `data-testid="gap:thermal-behavior"` with status `implemented`, with
+    broader thermal combinations and temperature-dependent properties deferred.
+18. Confirm `data-testid="mechanics-gap-ledger"` includes
+    `data-testid="gap:load-combinations"` with status `implemented`, with
+    code/rule combinations still deferred.
+19. Diagnostics render `data-testid="diagnostics-panel"` and include
    `diagnostic-HIGH_DISPLACEMENT_REVIEW` and
    `diagnostic-RULE_CHECK_INPUTS_MISSING`.
-15. Click `data-testid="diagnostic-HIGH_DISPLACEMENT_REVIEW"` and confirm
+20. Click `data-testid="diagnostic-HIGH_DISPLACEMENT_REVIEW"` and confirm
    `data-testid="diagnostic-detail-panel"` shows
    `diagnostic:physics:high-displacement-review`,
    `result:disp:node-N-140`, `node:N-140`, linked result value context, and the
    review-only professional boundary.
-16. Confirm the model context selects `node:N-140` and the property inspector
+21. Confirm the model context selects `node:N-140` and the property inspector
    (`aria-label="Property inspector"`) shows `Terminal tie-in`.
-17. Knowledge renders `data-testid="knowledge-panel"` and includes computed
+22. Knowledge renders `data-testid="knowledge-panel"` and includes computed
    context for `result:disp:node-N-140` and
    `result:force:pipe-P-120:axial`.
-18. Report packet renders `data-testid="report-panel"` and
+23. Report packet renders `data-testid="report-panel"` and
    `data-testid="report-packet-body"` with selected result refs including
    `result:disp:node-N-140`, `result:force:pipe-P-120:axial`, and
-   `result:force:pipe-P-120:axial:end-j`, and
+   `result:force:pipe-P-120:axial:end-j`,
+   `result:force:pipe-P-120:midspan:axial`, and
+   `result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial`, and
    `result:stress:pipe-P-120:end-j:torsional-shear`.
-19. Report packet includes `data-testid="report-analysis-run"` with `DEL-14-02`
+24. Report packet includes `data-testid="report-analysis-run"` with `DEL-14-02`
    and `run:preview-linear-static-001`; `data-testid="report-packet-body"`
    includes the result-value hash and `result_envelope` audit context.
-20. Click `data-testid="generate-review-proposal"`.
-21. Proposal renders `data-testid="proposal-body"` and references the selected
+25. Report packet includes `data-testid="report-load-basis-refs"` with
+    `load:L-100`, `load:L-200`, and `combination:C-OPER-ALT`.
+26. Click `data-testid="generate-review-proposal"`.
+27. Proposal renders `data-testid="proposal-body"` and references the selected
    review target `result:stress:pipe-P-120:end-j:torsional-shear` if the
    endpoint stress row remains selected.
-22. After selecting `diagnostic-HIGH_DISPLACEMENT_REVIEW`, generating a proposal
+28. After selecting `diagnostic-HIGH_DISPLACEMENT_REVIEW`, generating a proposal
    references `diagnostic:physics:high-displacement-review` and uses diagnostic
    review wording.
-23. `data-testid="accept-proposal-disabled"` is disabled; the proposal must
+29. `data-testid="accept-proposal-disabled"` is disabled; the proposal must
     remain review-only and must not mutate accepted model state.
-24. Footer retains the technical-preview boundary text and does not claim
+30. Footer retains the technical-preview boundary text and does not claim
     production readiness, release readiness, certification, sealing, code
     compliance, or licensed engineering reliance.
 
@@ -122,3 +145,10 @@ the fixture-backed browser path remains intact, endpoint force and endpoint
 stress result interpretation still works, report-packet audit context remains
 visible, selected diagnostic proposals remain review-only, and the disabled
 accept control does not mutate accepted model state.
+
+TP-MAC-08 load-combination smoke passed on 2026-05-10. The run confirmed the
+explicit mechanics-basis combination row renders, the detail panel shows
+`explicit_user_linear_combination`, `combination:C-OPER-ALT`, and source result
+refs for both load cases, the mechanics gap ledger marks explicit load
+combinations implemented, and the report packet load-basis refs include
+`load:L-100`, `load:L-200`, and `combination:C-OPER-ALT`.

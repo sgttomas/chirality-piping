@@ -1,8 +1,4 @@
 import { invoke } from "@tauri-apps/api/core";
-import agentProposalFixture from "../../../../fixtures/product_preview/invented_agent_proposal.json";
-import knowledgeFixture from "../../../../fixtures/product_preview/invented_design_knowledge.json";
-import mechanicsFixture from "../../../../fixtures/product_preview/invented_mechanics_result.json";
-import modelFixture from "../../../../fixtures/product_preview/invented_preview_model.json";
 import type {
   AgentProposal,
   AnalysisRunEnvelope,
@@ -13,27 +9,27 @@ import type {
   SelectedReviewTarget
 } from "../types";
 
-async function invokeOrFixture<T>(command: string, fixture: T, args?: Record<string, unknown>): Promise<T> {
+async function invokeOrFixture<T>(command: string, fixture: () => Promise<T>, args?: Record<string, unknown>): Promise<T> {
   if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) {
-    return fixture;
+    return fixture();
   }
   try {
     return await invoke<T>(command, args);
   } catch {
-    return fixture;
+    return fixture();
   }
 }
 
 export async function loadPreviewModel(): Promise<PreviewModel> {
-  return invokeOrFixture("load_preview_model", modelFixture as PreviewModel);
+  return invokeOrFixture("load_preview_model", loadModelFixture);
 }
 
 export async function loadDesignKnowledge(): Promise<DesignKnowledge> {
-  return invokeOrFixture("load_design_knowledge", knowledgeFixture as DesignKnowledge);
+  return invokeOrFixture("load_design_knowledge", loadKnowledgeFixture);
 }
 
 export async function runPreviewMechanics(model?: PreviewModel | null): Promise<MechanicsResult> {
-  return invokeOrFixture("run_preview_mechanics", mechanicsFixture as MechanicsResult, model ? { model } : undefined);
+  return invokeOrFixture("run_preview_mechanics", loadMechanicsFixture, model ? { model } : undefined);
 }
 
 export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<AnalysisRunEnvelope> {
@@ -65,6 +61,7 @@ export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<
   ].filter(Boolean));
   const resultIds = result.results.map((item) => item.id).sort();
   const diagnosticIds = result.diagnostics.map((item) => item.id ?? "diagnostic:unknown").sort();
+  const loadBasisRefs = loadBasisRefsFor(result);
 
   return {
     schema_version: "0.1.0",
@@ -84,6 +81,7 @@ export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<
       run_name: `${result.run_id} preview mechanics run`,
       run_kind: "mechanics_solve",
       model_state_ref: ref("ModelState", `state:${result.model_ref}:preview`),
+      load_basis_refs: loadBasisRefs,
       result_refs: resultRefs,
       hashes: [
         {
@@ -96,6 +94,7 @@ export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<
               run_id: result.run_id,
               model_ref: result.model_ref,
               status: result.status,
+              load_basis_refs: loadBasisRefs,
               result_ids: resultIds,
               diagnostic_ids: diagnosticIds
             })
@@ -136,14 +135,53 @@ export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<
   };
 }
 
+function loadBasisRefsFor(result: MechanicsResult): ObjectRef[] {
+  const seen = new Set<string>();
+  const refs: ObjectRef[] = [];
+  for (const item of result.results) {
+    const basis = item.basis_ref;
+    if (!basis) continue;
+    const objectType = basis.ref_type === "combination" ? "Combination" : "LoadCase";
+    const key = `${objectType}:${basis.ref_id}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    refs.push(ref(objectType, basis.ref_id));
+  }
+  return refs;
+}
+
 export async function loadSampleProposal(
   mechanicsResult?: MechanicsResult | null,
   selectedTarget?: SelectedReviewTarget | null
 ): Promise<AgentProposal> {
-  const response = await invokeOrFixture<{ proposal: AgentProposal }>("sample_agent_proposal", {
-    proposal: buildProposalFromMechanics(mechanicsResult ?? (mechanicsFixture as MechanicsResult), selectedTarget)
-  });
-  return response.proposal;
+  if (typeof window !== "undefined" && "__TAURI_INTERNALS__" in window) {
+    try {
+      return (await invoke<{ proposal: AgentProposal }>("sample_agent_proposal")).proposal;
+    } catch {
+      // Fall through to the local fixture-backed proposal below.
+    }
+  }
+  return buildProposalFromMechanics(
+    mechanicsResult ?? (await loadMechanicsFixture()),
+    await loadAgentProposalFixture(),
+    selectedTarget
+  );
+}
+
+async function loadModelFixture(): Promise<PreviewModel> {
+  return (await import("../../../../fixtures/product_preview/invented_preview_model.json")).default as PreviewModel;
+}
+
+async function loadKnowledgeFixture(): Promise<DesignKnowledge> {
+  return (await import("../../../../fixtures/product_preview/invented_design_knowledge.json")).default as DesignKnowledge;
+}
+
+async function loadMechanicsFixture(): Promise<MechanicsResult> {
+  return (await import("../../../../fixtures/product_preview/invented_mechanics_result.json")).default as MechanicsResult;
+}
+
+async function loadAgentProposalFixture(): Promise<AgentProposal> {
+  return (await import("../../../../fixtures/product_preview/invented_agent_proposal.json")).default as AgentProposal;
 }
 
 function ref(objectType: string, value: string): ObjectRef {
@@ -195,7 +233,11 @@ async function sha256(payload: string): Promise<string> {
   return `sha256-unavailable-${(hash >>> 0).toString(16).padStart(8, "0")}`;
 }
 
-function buildProposalFromMechanics(result: MechanicsResult, selectedTarget?: SelectedReviewTarget | null): AgentProposal {
+function buildProposalFromMechanics(
+  result: MechanicsResult,
+  agentProposalFixture: AgentProposal,
+  selectedTarget?: SelectedReviewTarget | null
+): AgentProposal {
   const forceResult =
     result.results.find((item) => item.id === "result:force:pipe-P-120:axial") ??
     result.results.find((item) => item.kind === "element_local_axial_force");
@@ -213,11 +255,11 @@ function buildProposalFromMechanics(result: MechanicsResult, selectedTarget?: Se
   const targetKind = selectedTarget?.target_type.replaceAll("_", " ") ?? "computed mechanics";
 
   return {
-    ...(agentProposalFixture as AgentProposal),
+    ...agentProposalFixture,
     proposal_id: "proposal:physics-diagnostic-review",
     prompt: "Review current computed mechanics diagnostics and suggest a non-mutating follow-up.",
     operation: {
-      ...(agentProposalFixture as AgentProposal).operation,
+      ...agentProposalFixture.operation,
       operation_id: "op:review-computed-diagnostic",
       operation_kind: "attach_design_knowledge",
       affected_entity_ids: [targetRef],
@@ -233,7 +275,7 @@ function buildProposalFromMechanics(result: MechanicsResult, selectedTarget?: Se
     },
     rationale: `Generated from current preview mechanics context; selected review reference is ${targetRef}. This narrative is review-only and does not mutate accepted model state.`,
     validation: {
-      ...(agentProposalFixture as AgentProposal).validation,
+      ...agentProposalFixture.validation,
       constraint_validation: "warning_computed_context_requires_human_review",
       diff_preview_status: "generated_from_computed_context"
     }

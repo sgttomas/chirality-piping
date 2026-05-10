@@ -8,6 +8,20 @@ export default defineConfig({
     port: 5173,
     strictPort: false
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (id.includes("/three/")) return "vendor-three";
+          if (id.includes("/react/") || id.includes("/react-dom/")) return "vendor-react";
+          if (id.includes("/lucide-react/")) return "vendor-icons";
+          if (id.includes("/@tauri-apps/")) return "vendor-tauri";
+          return "vendor";
+        }
+      }
+    }
+  },
   test: {
     environment: "jsdom",
     globals: true,

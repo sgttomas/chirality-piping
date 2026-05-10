@@ -11,6 +11,7 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -71,7 +72,8 @@ def run_preview_mechanics(model: Mapping[str, Any] | None = None) -> dict[str, A
 def build_analysis_run_preview(model: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Build an immutable analysis-run record from the preview mechanics result."""
 
-    mechanics_result = run_preview_mechanics(model)
+    model_record = deepcopy(dict(model or load_preview_model()))
+    mechanics_result = run_preview_mechanics(model_record)
     return build_preview_analysis_run_envelope(
         mechanics_result,
         model_state_ref={
@@ -86,12 +88,7 @@ def build_analysis_run_preview(model: Mapping[str, Any] | None = None) -> dict[s
             "object_type": "UnitSystem",
             "ref": "SI-preview-units",
         },
-        load_basis_refs=[
-            {
-                "object_type": "LoadCase",
-                "ref": "loadcase:LC-OPERATING-PREVIEW",
-            }
-        ],
+        load_basis_refs=_load_basis_refs(model_record),
     )
 
 
@@ -256,12 +253,24 @@ def validate_preview_model(model: Mapping[str, Any] | None = None) -> dict[str, 
     if not record.get("nodes") or not record.get("pipe_segments"):
         diagnostics.append(_diagnostic("PREVIEW_GEOMETRY_INCOMPLETE", "blocking", "model"))
 
-    for collection_name in ("nodes", "pipe_segments", "supports", "materials", "load_cases"):
+    for collection_name in ("nodes", "pipe_segments", "supports", "materials", "load_cases", "combinations"):
         for item in record.get(collection_name, []):
             _validate_identity_and_provenance(item, collection_name, diagnostics)
             if collection_name == "load_cases":
                 for load in item.get("primitive_loads", []):
                     _validate_identity_and_provenance(load, "primitive_loads", diagnostics)
+            if collection_name == "combinations":
+                if item.get("basis") != "mechanics":
+                    diagnostics.append(_diagnostic("PREVIEW_COMBINATION_BASIS_UNSUPPORTED", "blocking", item.get("id", "combination:TBD")))
+                if not item.get("terms"):
+                    diagnostics.append(_diagnostic("PREVIEW_COMBINATION_TERMS_EMPTY", "blocking", item.get("id", "combination:TBD")))
+                load_case_ids = {case.get("id") for case in record.get("load_cases", [])}
+                for term in item.get("terms", []):
+                    if term.get("load_case") not in load_case_ids:
+                        diagnostics.append(_diagnostic("PREVIEW_COMBINATION_LOAD_CASE_UNKNOWN", "blocking", item.get("id", "combination:TBD")))
+                    factor = term.get("factor")
+                    if not isinstance(factor, (int, float)) or not math.isfinite(factor):
+                        diagnostics.append(_diagnostic("PREVIEW_COMBINATION_FACTOR_INVALID", "blocking", item.get("id", "combination:TBD")))
 
     node_ids = {node.get("id") for node in record.get("nodes", [])}
     for segment in record.get("pipe_segments", []):
@@ -316,11 +325,31 @@ def _selected_result_refs(mechanics_result: Mapping[str, Any]) -> list[str]:
         "result:force:pipe-P-120:axial:end-j"
         if "result:force:pipe-P-120:axial:end-j" in result_ids
         else None,
+        "result:force:pipe-P-120:midspan:axial"
+        if "result:force:pipe-P-120:midspan:axial" in result_ids
+        else None,
+        "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"
+        if "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial" in result_ids
+        else None,
         "result:stress:pipe-P-120:end-j:torsional-shear"
         if "result:stress:pipe-P-120:end-j:torsional-shear" in result_ids
         else None,
     ]
     return [item for item in selected if item]
+
+
+def _load_basis_refs(model: Mapping[str, Any]) -> list[dict[str, str]]:
+    refs = [
+        {"object_type": "LoadCase", "ref": str(item["id"])}
+        for item in model.get("load_cases", [])
+        if isinstance(item, Mapping) and item.get("id")
+    ]
+    refs.extend(
+        {"object_type": "Combination", "ref": str(item["id"])}
+        for item in model.get("combinations", [])
+        if isinstance(item, Mapping) and item.get("id")
+    )
+    return refs or [{"object_type": "LoadCase", "ref": "loadcase:preview"}]
 
 
 def _read_json(path: Path) -> dict[str, Any]:

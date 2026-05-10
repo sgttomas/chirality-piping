@@ -26,6 +26,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "open_pipe_stress_load_case_algebra"
+version = "0.1.0"
+dependencies = [
+ "open_pipe_stress_primitive_loads",
+]
+
+[[package]]
 name = "open_pipe_stress_primitive_loads"
 version = "0.1.0"
 dependencies = [
@@ -39,6 +46,7 @@ version = "0.1.0"
 dependencies = [
  "open_pipe_stress_frame_kernel",
  "open_pipe_stress_linear_supports",
+ "open_pipe_stress_load_case_algebra",
  "open_pipe_stress_primitive_loads",
  "open_pipe_stress_straight_pipe",
  "open_pipe_stress_stress_recovery",

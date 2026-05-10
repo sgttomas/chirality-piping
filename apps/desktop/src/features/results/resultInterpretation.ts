@@ -46,8 +46,9 @@ export function buildResultInterpretation({
     component: item.metadata?.component ?? item.kind,
     coordinate_system: item.metadata?.coordinate_system ?? "result_envelope",
     location: item.metadata?.location ?? "summary",
-    recovery_basis: item.metadata?.basis ?? "reported_result_value",
+    recovery_basis: basisLabel(item),
     sign_convention: item.metadata?.sign_convention ?? "not specified in result metadata",
+    source_result_refs: item.source_result_refs ?? [],
     linked_diagnostics: linkedDiagnostics,
     linked_knowledge: linkedKnowledge,
     source_run: {
@@ -152,7 +153,7 @@ export function mechanicsGaps(): MechanicsGap[] {
       capability: "Endpoint-j local force/moment recovery",
       status: "implemented",
       review_note:
-        "End-i and end-j local force/moment preview results are emitted and paired in result detail; intermediate stations remain deferred."
+        "End-i and end-j local force/moment preview results are emitted and paired in result detail; arbitrary station sweeps remain deferred."
     },
     {
       id: "gap:endpoint-stress-components",
@@ -164,8 +165,9 @@ export function mechanicsGaps(): MechanicsGap[] {
     {
       id: "gap:station-recovery",
       capability: "Intermediate station result recovery",
-      status: "not_implemented",
-      review_note: "No station sweep is computed in this preview interpretation layer."
+      status: "implemented",
+      review_note:
+        "Midspan preview force, moment, and stress rows are emitted from interpolated endpoint resultants; arbitrary station sweeps and exact internal diagrams remain deferred."
     },
     {
       id: "gap:pressure-frame-load",
@@ -176,8 +178,9 @@ export function mechanicsGaps(): MechanicsGap[] {
     {
       id: "gap:thermal-behavior",
       capability: "Thermal behavior",
-      status: "not_implemented",
-      review_note: "Thermal strain, expansion cases, and temperature-dependent properties are outside this slice."
+      status: "implemented",
+      review_note:
+        "Uniform axial temperature-change loads for straight preview pipes are implemented with explicit material expansion input; temperature-dependent properties and thermal combinations remain deferred."
     },
     {
       id: "gap:support-stiffness",
@@ -188,8 +191,9 @@ export function mechanicsGaps(): MechanicsGap[] {
     {
       id: "gap:load-combinations",
       capability: "Load combinations",
-      status: "not_implemented",
-      review_note: "Only the active invented primitive-load preview case is interpreted."
+      status: "implemented",
+      review_note:
+        "Explicit mechanics-basis user load combinations are emitted from matching scalar load-case result rows; code/rule combinations remain deferred/private."
     },
     {
       id: "gap:protected-rule-checks",
@@ -283,4 +287,10 @@ function resultFamily(result: MechanicsResult["results"][number]): string {
   if (kind.includes("stress") || id.includes("stress")) return "stress";
   if (kind.includes("ratio") || id.includes("ratio")) return "ratio";
   return "TBD";
+}
+
+function basisLabel(result: MechanicsResult["results"][number]): string {
+  const basis = result.metadata?.basis ?? "reported_result_value";
+  const ref = result.basis_ref;
+  return ref ? `${basis}; ${ref.ref_type}:${ref.ref_id}` : basis;
 }

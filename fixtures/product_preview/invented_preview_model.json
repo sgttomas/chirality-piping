@@ -24,6 +24,7 @@
       "label": "Invented carbon-steel-like material",
       "elastic_modulus": { "value": 200000000000, "unit": "Pa" },
       "shear_modulus": { "value": 77000000000, "unit": "Pa" },
+      "thermal_expansion_coefficient": { "value": 0.000012, "unit": "1/degC" },
       "provenance": "invented_example_no_material_standard"
     }
   ],
@@ -123,9 +124,66 @@
           "magnitude": { "value": 1200000, "unit": "Pa" },
           "dimension": "pressure",
           "provenance": "invented_example_user_input"
+        },
+        {
+          "id": "load:L-100-T",
+          "category": "thermal",
+          "target": { "type": "element", "pipe": "pipe:P-120" },
+          "direction": "global_z",
+          "magnitude": { "value": 12.5, "unit": "degC" },
+          "dimension": "temperature_change",
+          "provenance": "invented_example_user_input"
         }
       ],
       "provenance": "invented_example_no_code_combination"
+    },
+    {
+      "id": "load:L-200",
+      "label": "Invented alternate gravity and pressure preview",
+      "kind": "primitive_user_load",
+      "status": "preview_only",
+      "primitive_loads": [
+        {
+          "id": "load:L-200-Z",
+          "category": "weight",
+          "target": { "type": "element", "pipe": "pipe:P-120" },
+          "direction": "global_z",
+          "magnitude": { "value": -95, "unit": "N/m" },
+          "dimension": "force_per_length",
+          "provenance": "invented_example_user_input"
+        },
+        {
+          "id": "load:L-200-Y",
+          "category": "occasional",
+          "target": { "type": "node", "node": "node:N-140" },
+          "direction": "global_y",
+          "magnitude": { "value": 125, "unit": "N" },
+          "dimension": "force",
+          "provenance": "invented_example_user_input"
+        },
+        {
+          "id": "load:L-200-P",
+          "category": "pressure",
+          "target": { "type": "element", "pipe": "pipe:P-120" },
+          "direction": "global_x",
+          "magnitude": { "value": 600000, "unit": "Pa" },
+          "dimension": "pressure",
+          "provenance": "invented_example_user_input"
+        }
+      ],
+      "provenance": "invented_example_no_code_combination"
+    }
+  ],
+  "combinations": [
+    {
+      "id": "combination:C-OPER-ALT",
+      "label": "Invented explicit operating plus alternate preview",
+      "basis": "mechanics",
+      "terms": [
+        { "load_case": "load:L-100", "factor": 1.0 },
+        { "load_case": "load:L-200", "factor": 0.5 }
+      ],
+      "provenance": "invented_example_user_defined_mechanics_combination_no_code_default"
     }
   ],
   "diagnostics": [

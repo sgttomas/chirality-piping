@@ -104,6 +104,15 @@ function ResultDetail({ interpretation }: { interpretation: ResultInterpretation
         <DetailLine label="Recovery basis" value={interpretation.recovery_basis} testId="selected-result-recovery-basis" />
         <DetailLine label="Sign convention" value={interpretation.sign_convention} testId="selected-result-sign-convention" />
         <DetailLine
+          label="Source results"
+          value={
+            interpretation.source_result_refs.length > 0
+              ? interpretation.source_result_refs.join(", ")
+              : "not a combined result"
+          }
+          testId="selected-result-source-refs"
+        />
+        <DetailLine
           label="Diagnostics"
           value={
             interpretation.linked_diagnostics.length > 0

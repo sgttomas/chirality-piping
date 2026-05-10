@@ -1,5 +1,6 @@
+use crate::LoadTargetInput;
 use crate::{diag, parse_dof, stable_suffix, Diagnostic, MaterialInput, PreviewModel, Quantity};
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 pub(crate) fn validate_model_inputs(
     model: &PreviewModel,
@@ -10,6 +11,8 @@ pub(crate) fn validate_model_inputs(
     validate_ids(model, materials, diagnostics);
     validate_provenance(model, materials, diagnostics);
     validate_units(model, materials, diagnostics);
+    validate_thermal_inputs(model, materials, diagnostics);
+    validate_combinations(model, diagnostics);
 }
 
 fn validate_required_collections(model: &PreviewModel, diagnostics: &mut Vec<Diagnostic>) {
@@ -100,6 +103,14 @@ fn validate_ids(
                 .map(|item| item.id.as_str())
                 .collect::<Vec<_>>(),
         ),
+        (
+            "combination",
+            model
+                .combinations
+                .iter()
+                .map(|item| item.id.as_str())
+                .collect::<Vec<_>>(),
+        ),
     ] {
         detect_duplicate_ids(entity, ids.iter().copied(), diagnostics);
         detect_empty_ids(entity, ids.iter().copied(), diagnostics);
@@ -149,6 +160,14 @@ fn validate_provenance(
             );
         }
     }
+    for combination in &model.combinations {
+        expect_public_preview_provenance(
+            "combination",
+            &combination.id,
+            combination.provenance.as_deref(),
+            diagnostics,
+        );
+    }
 }
 
 fn validate_units(
@@ -177,6 +196,21 @@ fn validate_units(
             vec![material.id.clone(), "shear_modulus".to_string()],
             diagnostics,
         );
+        if let Some(coefficient) = &material.thermal_expansion_coefficient {
+            expect_unit(
+                coefficient,
+                "1/degC",
+                &format!(
+                    "diagnostic:unit:material:{}:thermal-expansion",
+                    stable_suffix(&material.id)
+                ),
+                vec![
+                    material.id.clone(),
+                    "thermal_expansion_coefficient".to_string(),
+                ],
+                diagnostics,
+            );
+        }
     }
     for pipe in &model.pipe_segments {
         expect_unit(
@@ -348,5 +382,126 @@ fn expected_load_unit(dimension: &str) -> Option<&'static str> {
         "displacement" => Some("m"),
         "rotation" => Some("rad"),
         _ => None,
+    }
+}
+
+fn validate_thermal_inputs(
+    model: &PreviewModel,
+    materials: &[MaterialInput],
+    diagnostics: &mut Vec<Diagnostic>,
+) {
+    let material_map = materials
+        .iter()
+        .map(|material| (material.id.as_str(), material))
+        .collect::<HashMap<_, _>>();
+    let pipe_map = model
+        .pipe_segments
+        .iter()
+        .map(|pipe| (pipe.id.as_str(), pipe))
+        .collect::<HashMap<_, _>>();
+
+    for load in model
+        .load_cases
+        .iter()
+        .flat_map(|case| case.primitive_loads.iter())
+        .filter(|load| load.category == "thermal")
+    {
+        let LoadTargetInput::Element { pipe } = &load.target else {
+            continue;
+        };
+        let Some(pipe_input) = pipe_map.get(pipe.as_str()) else {
+            continue;
+        };
+        let Some(material) = material_map.get(pipe_input.material.as_str()) else {
+            continue;
+        };
+        let Some(coefficient) = &material.thermal_expansion_coefficient else {
+            diagnostics.push(diag(
+                &format!(
+                    "diagnostic:thermal:material:{}:expansion-missing",
+                    stable_suffix(&material.id)
+                ),
+                "THERMAL_EXPANSION_INPUT_MISSING",
+                "blocking",
+                "thermal temperature-change loads require explicit material thermal_expansion_coefficient; no hidden material defaults are applied",
+                vec![load.id.clone(), pipe_input.id.clone(), material.id.clone()],
+            ));
+            continue;
+        };
+        if !coefficient.value.is_finite() {
+            diagnostics.push(diag(
+                &format!(
+                    "diagnostic:thermal:material:{}:expansion-invalid",
+                    stable_suffix(&material.id)
+                ),
+                "THERMAL_EXPANSION_INPUT_INVALID",
+                "blocking",
+                "thermal_expansion_coefficient value must be finite for thermal preview mechanics",
+                vec![load.id.clone(), pipe_input.id.clone(), material.id.clone()],
+            ));
+        }
+    }
+}
+
+fn validate_combinations(model: &PreviewModel, diagnostics: &mut Vec<Diagnostic>) {
+    let load_case_ids = model
+        .load_cases
+        .iter()
+        .map(|case| case.id.as_str())
+        .collect::<HashSet<_>>();
+
+    for combination in &model.combinations {
+        if combination.basis != "mechanics" {
+            diagnostics.push(diag(
+                &format!(
+                    "diagnostic:combination:{}:basis",
+                    stable_suffix(&combination.id)
+                ),
+                "LOAD_COMBINATION_BASIS_UNSUPPORTED",
+                "blocking",
+                "TP-MAC-08 supports only mechanics-basis user-defined load combinations; code/rule and owner-basis combinations remain private/deferred",
+                vec![combination.id.clone(), combination.basis.clone()],
+            ));
+        }
+        if combination.terms.is_empty() {
+            diagnostics.push(diag(
+                &format!(
+                    "diagnostic:combination:{}:terms-empty",
+                    stable_suffix(&combination.id)
+                ),
+                "LOAD_COMBINATION_TERMS_EMPTY",
+                "blocking",
+                "load combination requires at least one explicit load-case term",
+                vec![combination.id.clone()],
+            ));
+        }
+        for term in &combination.terms {
+            if !term.factor.is_finite() {
+                diagnostics.push(diag(
+                    &format!(
+                        "diagnostic:combination:{}:{}:factor",
+                        stable_suffix(&combination.id),
+                        stable_suffix(&term.load_case)
+                    ),
+                    "LOAD_COMBINATION_FACTOR_INVALID",
+                    "blocking",
+                    "load combination factor must be finite and explicitly user supplied",
+                    vec![combination.id.clone(), term.load_case.clone()],
+                ));
+            }
+            if !load_case_ids.contains(term.load_case.as_str()) {
+                diagnostics.push(diag(
+                    &format!(
+                        "diagnostic:combination:{}:{}:load-case",
+                        stable_suffix(&combination.id),
+                        stable_suffix(&term.load_case)
+                    ),
+                    "LOAD_COMBINATION_LOAD_CASE_UNKNOWN",
+                    "blocking",
+                    "load combination term references a load case that is not present in the preview model",
+                    vec![combination.id.clone(), term.load_case.clone()],
+                ));
+            }
+        }
     }
 }

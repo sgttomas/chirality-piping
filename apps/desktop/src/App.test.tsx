@@ -35,11 +35,14 @@ describe("OpenPipeStress desktop preview", () => {
     expect(within(results).getByTestId("result-group-moment")).toBeInTheDocument();
     expect(within(results).getByTestId("result-row-result:force:pipe-P-120:axial")).toBeInTheDocument();
     expect(within(results).getByTestId("result-row-result:force:pipe-P-120:axial:end-j")).toBeInTheDocument();
+    expect(within(results).getByTestId("result-row-result:force:pipe-P-120:midspan:axial")).toBeInTheDocument();
+    expect(within(results).getByTestId("result-row-result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial")).toBeInTheDocument();
     expect(within(results).getByTestId("result-row-result:stress:pipe-P-120")).toBeInTheDocument();
     expect(within(results).getByTestId("result-row-result:stress:pipe-P-120:end-j:torsional-shear")).toBeInTheDocument();
+    expect(within(results).getByTestId("result-row-result:stress:pipe-P-120:midspan:torsional-shear")).toBeInTheDocument();
     expect(within(results).getByText("result:disp:node-N-140")).toBeInTheDocument();
     expect(within(results).getByText("result:force:pipe-P-120:axial")).toBeInTheDocument();
-    expect(within(results).getByText(/26.120937 mm/i)).toBeInTheDocument();
+    expect(within(results).getByText(/26.445463 mm/i)).toBeInTheDocument();
 
     fireEvent.click(within(results).getByTestId("result-row-result:force:pipe-P-120:axial"));
     const detail = within(results).getByTestId("result-detail-panel");
@@ -49,7 +52,9 @@ describe("OpenPipeStress desktop preview", () => {
     expect(within(detail).getByTestId("selected-result-location").textContent).toContain("end_i");
     expect(within(detail).getByTestId("selected-result-entity-ref").textContent).toContain("pipe:P-120");
     expect(within(detail).getByTestId("selected-result-recovery-basis").textContent).toContain("recovered_from_local_element_stiffness");
+    expect(within(detail).getByTestId("selected-result-recovery-basis").textContent).toContain("load_case:load:L-100");
     expect(within(detail).getByTestId("selected-result-sign-convention").textContent).toContain("positive value follows");
+    expect(within(detail).getByTestId("selected-result-source-refs").textContent).toContain("not a combined result");
     expect(within(detail).getByTestId("endpoint-pair-table").textContent).toContain("end_i");
     expect(within(detail).getByTestId("endpoint-pair-table").textContent).toContain("result:force:pipe-P-120:axial:end-j");
     expect(await screen.findByRole("heading", { name: "Rack span" })).toBeInTheDocument();
@@ -59,6 +64,33 @@ describe("OpenPipeStress desktop preview", () => {
     expect(within(detail).getByTestId("selected-result-location").textContent).toContain("end_j");
     expect(within(detail).getByTestId("selected-result-sign-convention").textContent).toContain("j-end");
     expect(within(detail).getByTestId("endpoint-pair-table").textContent).toContain("result:force:pipe-P-120:axial");
+
+    fireEvent.click(within(results).getByTestId("result-row-result:force:pipe-P-120:midspan:axial"));
+    expect(within(detail).getByTestId("selected-result-id").textContent).toContain(
+      "result:force:pipe-P-120:midspan:axial"
+    );
+    expect(within(detail).getByTestId("selected-result-location").textContent).toContain("midspan");
+    expect(within(detail).getByTestId("selected-result-recovery-basis").textContent).toContain(
+      "interpolated_from_endpoint_resultants"
+    );
+    expect(within(detail).queryByTestId("endpoint-pair-table")).not.toBeInTheDocument();
+
+    fireEvent.click(within(results).getByTestId("result-row-result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"));
+    expect(within(detail).getByTestId("selected-result-id").textContent).toContain(
+      "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"
+    );
+    expect(within(detail).getByTestId("selected-result-recovery-basis").textContent).toContain(
+      "explicit_user_linear_combination"
+    );
+    expect(within(detail).getByTestId("selected-result-recovery-basis").textContent).toContain(
+      "combination:combination:C-OPER-ALT"
+    );
+    expect(within(detail).getByTestId("selected-result-source-refs").textContent).toContain(
+      "result:force:pipe-P-120:axial"
+    );
+    expect(within(detail).getByTestId("selected-result-source-refs").textContent).toContain(
+      "result:loadcase:load-L-200:force:pipe-P-120:axial"
+    );
 
     fireEvent.click(within(results).getByTestId("result-row-result:stress:pipe-P-120:end-j:torsional-shear"));
     expect(within(detail).getByTestId("selected-result-id").textContent).toContain(
@@ -78,11 +110,14 @@ describe("OpenPipeStress desktop preview", () => {
     const gapLedger = within(results).getByTestId("mechanics-gap-ledger");
     expect(within(gapLedger).getByTestId("gap:endpoint-j-recovery").textContent).toContain("implemented");
     expect(within(gapLedger).getByTestId("gap:endpoint-stress-components").textContent).toContain("implemented");
+    expect(within(gapLedger).getByTestId("gap:station-recovery").textContent).toContain("implemented");
+    expect(within(gapLedger).getByTestId("gap:thermal-behavior").textContent).toContain("implemented");
+    expect(within(gapLedger).getByTestId("gap:load-combinations").textContent).toContain("implemented");
     expect(within(gapLedger).getByTestId("gap:endpoint-j-recovery").textContent).not.toContain("compliance failure");
 
     const knowledge = await screen.findByLabelText("Design knowledge");
     expect(within(knowledge).getByText(/HIGH DISPLACEMENT REVIEW/i)).toBeInTheDocument();
-    expect(within(knowledge).getByText(/result:disp:node-N-140 is 26.120937 mm/i)).toBeInTheDocument();
+    expect(within(knowledge).getByText(/result:disp:node-N-140 is 26.445463 mm/i)).toBeInTheDocument();
     expect(within(knowledge).getByText(/result:force:pipe-P-120:axial is/i)).toBeInTheDocument();
 
     const report = await screen.findByLabelText("Report packet");
@@ -91,17 +126,26 @@ describe("OpenPipeStress desktop preview", () => {
     expect(within(report).getByTestId("report-selected-result-refs").textContent).toContain("result:force:pipe-P-120:axial");
     expect(within(report).getByTestId("report-selected-result-refs").textContent).toContain("result:force:pipe-P-120:axial:end-j");
     expect(within(report).getByTestId("report-selected-result-refs").textContent).toContain(
+      "result:force:pipe-P-120:midspan:axial"
+    );
+    expect(within(report).getByTestId("report-selected-result-refs").textContent).toContain(
+      "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"
+    );
+    expect(within(report).getByTestId("report-selected-result-refs").textContent).toContain(
       "result:stress:pipe-P-120:end-j:torsional-shear"
     );
     expect(within(report).getByTestId("report-analysis-run").textContent).toContain("DEL-14-02");
     expect(within(report).getByTestId("report-analysis-run").textContent).toContain("run:preview-linear-static-001");
+    expect(within(report).getByTestId("report-load-basis-refs").textContent).toContain("load:L-100");
+    expect(within(report).getByTestId("report-load-basis-refs").textContent).toContain("load:L-200");
+    expect(within(report).getByTestId("report-load-basis-refs").textContent).toContain("combination:C-OPER-ALT");
     expect(within(report).getByText(/result value hashes/i)).toBeInTheDocument();
     expect(within(report).getByText(/result_envelope/i)).toBeInTheDocument();
     expect(within(report).getByText(/no compliance or professional approval claim/i)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /Generate review proposal/i }));
     const proposal = await screen.findByLabelText("Agentic proposal");
-    expect(within(proposal).getByText("proposal:physics-diagnostic-review")).toBeInTheDocument();
+    expect(await within(proposal).findByText("proposal:physics-diagnostic-review")).toBeInTheDocument();
     expect(within(proposal).getByTestId("selected-review-target").textContent).toContain(
       "result: result:stress:pipe-P-120:end-j:torsional-shear"
     );
@@ -109,7 +153,7 @@ describe("OpenPipeStress desktop preview", () => {
     expect(within(proposal).getByText(/review-only and does not mutate accepted model state/i)).toBeInTheDocument();
     expect(within(proposal).getByRole("button", { name: /Accept disabled/i })).toBeDisabled();
 
-    expect(within(report).getByText("proposal:physics-diagnostic-review")).toBeInTheDocument();
+    expect(await within(report).findByText("proposal:physics-diagnostic-review")).toBeInTheDocument();
   });
 
   it("links selected diagnostics to affected result and model context", async () => {
@@ -139,6 +183,7 @@ describe("OpenPipeStress desktop preview", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Generate review proposal/i }));
     const proposal = await screen.findByLabelText("Agentic proposal");
+    expect(await within(proposal).findByText("proposal:physics-diagnostic-review")).toBeInTheDocument();
     expect(within(proposal).getByTestId("selected-review-target").textContent).toContain(
       "diagnostic: diagnostic:physics:high-displacement-review"
     );

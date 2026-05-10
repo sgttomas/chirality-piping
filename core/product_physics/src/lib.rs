@@ -12,6 +12,10 @@ use open_pipe_stress_frame_kernel::{
 use open_pipe_stress_linear_supports::{
     prepare_boundary, FrameDof, LinearSupport, QuantityDimension, SupportFamily, SupportQuantity,
 };
+use open_pipe_stress_load_case_algebra::{
+    evaluate_linear_combination, AlgebraOperand, AlgebraQuantity,
+    AnalysisStatus as AlgebraAnalysisStatus, CombinationTerm, FindingCode,
+};
 use open_pipe_stress_primitive_loads::{
     prepare_loads, LoadDimension, LoadDirection, LoadQuantity, PrimitiveLoad, PrimitiveLoadCategory,
 };
@@ -40,6 +44,8 @@ pub struct PreviewModel {
     pub materials: Vec<MaterialInput>,
     #[serde(default)]
     pub load_cases: Vec<PreviewLoadCase>,
+    #[serde(default)]
+    pub combinations: Vec<PreviewCombination>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -124,6 +130,25 @@ pub struct PreviewLoadCase {
 }
 
 #[derive(Debug, Clone, Deserialize)]
+pub struct PreviewCombination {
+    pub id: String,
+    #[serde(default)]
+    #[allow(dead_code)]
+    pub label: Option<String>,
+    pub basis: String,
+    #[serde(default)]
+    pub terms: Vec<PreviewCombinationTerm>,
+    #[serde(default)]
+    pub provenance: Option<String>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct PreviewCombinationTerm {
+    pub load_case: String,
+    pub factor: f64,
+}
+
+#[derive(Debug, Clone, Deserialize)]
 pub struct PreviewPrimitiveLoad {
     pub id: String,
     pub category: String,
@@ -147,6 +172,8 @@ pub struct MaterialInput {
     pub id: String,
     pub elastic_modulus: Quantity,
     pub shear_modulus: Quantity,
+    #[serde(default)]
+    pub thermal_expansion_coefficient: Option<Quantity>,
     #[serde(default)]
     pub provenance: Option<String>,
 }
@@ -198,10 +225,20 @@ pub struct ResultItem {
     pub unit: String,
     pub entity_ref: String,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub basis_ref: Option<ResultBasisRef>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub source_result_refs: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub metadata: Option<ResultMetadata>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct ResultBasisRef {
+    pub ref_type: String,
+    pub ref_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
 pub struct ResultMetadata {
     pub component: String,
     pub coordinate_system: String,
@@ -237,8 +274,21 @@ struct BuiltModel {
     pipes: Vec<StraightPipeElement>,
     frame_elements: Vec<FrameElement>,
     supports: Vec<LinearSupport>,
-    loads: Vec<PrimitiveLoad>,
     sections: HashMap<String, DerivedSection>,
+}
+
+#[derive(Debug, Clone)]
+struct LoadCaseSolve {
+    load_case_id: String,
+    results: Vec<ResultItem>,
+    max_displacement: Option<LocatedQuantity>,
+    max_stress: Option<LocatedQuantity>,
+}
+
+#[derive(Debug, Clone, Copy)]
+struct ThermalElementLoad {
+    element_index: usize,
+    axial_load: f64,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -317,37 +367,13 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
             ],
         ));
     }
-    for finding in boundary.findings {
+    for finding in &boundary.findings {
         diagnostics.push(diag(
             &format!("diagnostic:support:{}", finding.support_id),
             "SUPPORT_INPUT_INVALID",
             "blocking",
-            finding.message,
-            vec![finding.support_id],
-        ));
-    }
-
-    let load_application = prepare_loads(built.nodes.len(), built.pipes.len(), &built.loads);
-    for finding in &load_application.findings {
-        diagnostics.push(diag(
-            &format!("diagnostic:load:{}", finding.load_id),
-            "LOAD_INPUT_INVALID",
-            "blocking",
             finding.message.clone(),
-            vec![finding.load_id.clone()],
-        ));
-    }
-    if load_application
-        .element_uniform_loads
-        .iter()
-        .any(|item| item.magnitude.dimension == LoadDimension::Pressure)
-    {
-        diagnostics.push(diag(
-            "diagnostic:physics:pressure-not-applied",
-            "PRESSURE_LOAD_NOT_APPLIED_TO_FRAME_VECTOR",
-            "warning",
-            "pressure primitive loads are retained for stress recovery context but are not converted to frame nodal loads in this preview slice",
-            vec![],
+            vec![finding.support_id.clone()],
         ));
     }
     if has_blocking(&diagnostics) {
@@ -358,176 +384,58 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
         Ok(stiffness) => stiffness,
         Err(error) => return solver_blocked(model, diagnostics, error),
     };
-    for spring in boundary.springs {
+    for spring in &boundary.springs {
         stiffness[spring.node_dof.global_index()][spring.node_dof.global_index()] +=
             spring.stiffness.value;
     }
 
-    let mut force = load_application.global_load_vector(built.nodes.len());
-    add_uniform_element_loads(
-        &mut force,
-        &model,
-        &load_application.element_uniform_loads,
-        &built.pipes,
-    );
-
-    let reduced = match reduce_system(&stiffness, &force, &boundary.restrained_dofs) {
-        Ok(reduced) => reduced,
-        Err(error) => return solver_blocked(model, diagnostics, error),
-    };
-    let reduced_displacements = match solve_dense(&reduced.stiffness, &reduced.force) {
-        Ok(solution) => solution,
-        Err(error) => return solver_blocked(model, diagnostics, error),
-    };
-
-    let mut displacements = vec![0.0; built.nodes.len() * DOF_PER_NODE];
-    for (index, dof) in reduced.free_dofs.iter().enumerate() {
-        displacements[*dof] = reduced_displacements[index];
+    let mut load_case_solves = Vec::new();
+    for load_case in &model.load_cases {
+        match solve_load_case(
+            &model,
+            &built,
+            &materials,
+            &stiffness,
+            &boundary.restrained_dofs,
+            load_case,
+            &mut diagnostics,
+        ) {
+            Ok(solve) => load_case_solves.push(solve),
+            Err(error) => return solver_blocked(model, diagnostics, error),
+        }
+        if has_blocking(&diagnostics) {
+            return blocked_envelope(model, diagnostics);
+        }
     }
 
+    let max_displacement = load_case_solves
+        .first()
+        .and_then(|solve| solve.max_displacement.clone());
+    let max_stress = load_case_solves
+        .first()
+        .and_then(|solve| solve.max_stress.clone());
     let mut results = Vec::new();
-    let mut max_displacement = None;
-    for node in &model.nodes {
-        let node_index = node_index(&model, &node.id).unwrap();
-        let magnitude = displacement_magnitude(&displacements, node_index);
-        let result_id = format!("result:disp:{}", stable_suffix(&node.id));
-        if max_displacement
-            .as_ref()
-            .map(|q: &LocatedQuantity| magnitude * 1000.0 > q.value)
-            .unwrap_or(true)
-        {
-            max_displacement = Some(LocatedQuantity {
-                value: round6(magnitude * 1000.0),
-                unit: "mm".to_string(),
-                location_ref: node.id.clone(),
-                result_ref: result_id.clone(),
+    let mut rows_by_base_id: HashMap<String, HashMap<String, ResultItem>> = HashMap::new();
+    for (index, solve) in load_case_solves.into_iter().enumerate() {
+        let is_default = index == 0;
+        let load_case_id = solve.load_case_id.clone();
+        for mut result in solve.results {
+            let base_id = result.id.clone();
+            result.basis_ref = Some(ResultBasisRef {
+                ref_type: "load_case".to_string(),
+                ref_id: load_case_id.clone(),
             });
-        }
-        results.push(ResultItem {
-            id: result_id,
-            kind: "displacement_magnitude".to_string(),
-            value: round6(magnitude * 1000.0),
-            unit: "mm".to_string(),
-            entity_ref: node.id.clone(),
-            metadata: None,
-        });
-    }
-
-    let reactions = multiply_matrix_vector(&stiffness, &displacements)
-        .into_iter()
-        .zip(force.iter())
-        .map(|(internal, applied)| internal - applied)
-        .collect::<Vec<_>>();
-    for support in &model.supports {
-        if let Some(index) = node_index(&model, &support.node) {
-            let magnitude = support
-                .restraints
-                .iter()
-                .filter_map(|dof| parse_dof(dof).ok())
-                .map(|dof| {
-                    let global = index * DOF_PER_NODE + dof_index(dof);
-                    reactions[global] * reactions[global]
-                })
-                .sum::<f64>()
-                .sqrt();
-            results.push(ResultItem {
-                id: format!("result:reaction:{}", stable_suffix(&support.id)),
-                kind: "reaction_resultant".to_string(),
-                value: round6(magnitude),
-                unit: "N".to_string(),
-                entity_ref: support.id.clone(),
-                metadata: None,
-            });
+            if !is_default {
+                result.id = qualified_load_case_result_id(&load_case_id, &base_id);
+            }
+            rows_by_base_id
+                .entry(base_id)
+                .or_default()
+                .insert(load_case_id.clone(), result.clone());
+            results.push(result);
         }
     }
-
-    let mut max_stress = None;
-    for (pipe_index, pipe) in built.pipes.iter().enumerate() {
-        let local = match pipe.recover_local_forces_from_global_model(&displacements) {
-            Ok(local) => local,
-            Err(error) => {
-                diagnostics.push(diag(
-                    &format!("diagnostic:stress:{}", stable_suffix(&pipe.element_id)),
-                    "ELEMENT_FORCE_RECOVERY_FAILED",
-                    "warning",
-                    error.to_string(),
-                    vec![pipe.element_id.clone()],
-                ));
-                continue;
-            }
-        };
-        append_element_force_results(&mut results, &pipe.element_id, &local.local_forces);
-        let section = built
-            .sections
-            .get(&pipe.element_id)
-            .expect("section exists for pipe");
-        let pressure = pressure_for_pipe(&model, pipe_index, &pipe.element_id);
-        let end_i_stress = recover_endpoint_stress(&local.local_forces, 0, section, pressure);
-        let end_j_stress =
-            recover_endpoint_stress(&local.local_forces, DOF_PER_NODE, section, pressure);
-        for (location, stress) in [("end_i", &end_i_stress), ("end_j", &end_j_stress)] {
-            for finding in &stress.findings {
-                diagnostics.push(diag(
-                    &format!(
-                        "diagnostic:stress:{}:{}:{:?}",
-                        stable_suffix(&pipe.element_id),
-                        location.replace('_', "-"),
-                        finding.code
-                    ),
-                    "STRESS_RECOVERY_LIMITED",
-                    "warning",
-                    finding.message.clone(),
-                    vec![pipe.element_id.clone()],
-                ));
-            }
-        }
-        if end_i_stress.findings.is_empty() {
-            append_endpoint_stress_results(
-                &mut results,
-                &pipe.element_id,
-                "end_i",
-                &end_i_stress.components,
-                pressure.is_some(),
-            );
-        }
-        if end_j_stress.findings.is_empty() {
-            append_endpoint_stress_results(
-                &mut results,
-                &pipe.element_id,
-                "end_j",
-                &end_j_stress.components,
-                pressure.is_some(),
-            );
-        }
-        let summary_value = [end_i_stress.summary, end_j_stress.summary]
-            .into_iter()
-            .flatten()
-            .map(|summary| summary.max_normal.abs().max(summary.min_normal.abs()) / 1_000_000.0)
-            .reduce(f64::max);
-        if let Some(value) = summary_value {
-            let result_id = format!("result:stress:{}", stable_suffix(&pipe.element_id));
-            if max_stress
-                .as_ref()
-                .map(|q: &LocatedQuantity| value > q.value)
-                .unwrap_or(true)
-            {
-                max_stress = Some(LocatedQuantity {
-                    value: round6(value),
-                    unit: "MPa".to_string(),
-                    location_ref: pipe.element_id.clone(),
-                    result_ref: result_id.clone(),
-                });
-            }
-            results.push(ResultItem {
-                id: result_id,
-                kind: "open_formula_stress_summary".to_string(),
-                value: round6(value),
-                unit: "MPa".to_string(),
-                entity_ref: pipe.element_id.clone(),
-                metadata: None,
-            });
-        }
-    }
+    append_combination_results(&model, &rows_by_base_id, &mut results, &mut diagnostics);
 
     if let Some(maximum) = &max_displacement {
         if maximum.value > 5.0 {
@@ -571,6 +479,269 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
         professional_boundary: professional_boundary(),
         accepted_model_state_mutated: false,
     }
+}
+
+fn solve_load_case(
+    model: &PreviewModel,
+    built: &BuiltModel,
+    materials: &[MaterialInput],
+    stiffness: &[Vec<f64>],
+    restrained_dofs: &[usize],
+    load_case: &PreviewLoadCase,
+    diagnostics: &mut Vec<Diagnostic>,
+) -> Result<LoadCaseSolve, FrameKernelError> {
+    let loads = build_load_case_primitive_loads(model, load_case, diagnostics);
+    let load_application = prepare_loads(built.nodes.len(), built.pipes.len(), &loads);
+    for finding in &load_application.findings {
+        diagnostics.push(diag(
+            &format!("diagnostic:load:{}", finding.load_id),
+            "LOAD_INPUT_INVALID",
+            "blocking",
+            finding.message.clone(),
+            vec![finding.load_id.clone(), load_case.id.clone()],
+        ));
+    }
+    if load_application
+        .element_uniform_loads
+        .iter()
+        .any(|item| item.magnitude.dimension == LoadDimension::Pressure)
+    {
+        let pressure_diag_id = if model.load_cases.first().map(|case| case.id.as_str())
+            == Some(load_case.id.as_str())
+        {
+            "diagnostic:physics:pressure-not-applied".to_string()
+        } else {
+            format!(
+                "diagnostic:physics:pressure-not-applied:{}",
+                stable_suffix(&load_case.id)
+            )
+        };
+        diagnostics.push(diag(
+            &pressure_diag_id,
+            "PRESSURE_LOAD_NOT_APPLIED_TO_FRAME_VECTOR",
+            "warning",
+            "pressure primitive loads are retained for stress recovery context but are not converted to frame nodal loads in this preview slice",
+            vec![load_case.id.clone()],
+        ));
+    }
+    if has_blocking(diagnostics) {
+        return Ok(LoadCaseSolve {
+            load_case_id: load_case.id.clone(),
+            results: Vec::new(),
+            max_displacement: None,
+            max_stress: None,
+        });
+    }
+
+    let pipe_map = model
+        .pipe_segments
+        .iter()
+        .enumerate()
+        .map(|(i, p)| (p.id.as_str(), i))
+        .collect::<HashMap<_, _>>();
+    let material_map = materials
+        .iter()
+        .map(|m| (m.id.as_str(), m))
+        .collect::<HashMap<_, _>>();
+    let thermal_loads =
+        build_thermal_element_loads(model, load_case, &material_map, &pipe_map, &built.sections);
+
+    let mut force = load_application.global_load_vector(built.nodes.len());
+    add_uniform_element_loads(
+        &mut force,
+        model,
+        &load_application.element_uniform_loads,
+        &built.pipes,
+    );
+    add_thermal_equivalent_loads(&mut force, &thermal_loads, &built.pipes);
+
+    let reduced = reduce_system(stiffness, &force, restrained_dofs)?;
+    let reduced_displacements = solve_dense(&reduced.stiffness, &reduced.force)?;
+
+    let mut displacements = vec![0.0; built.nodes.len() * DOF_PER_NODE];
+    for (index, dof) in reduced.free_dofs.iter().enumerate() {
+        displacements[*dof] = reduced_displacements[index];
+    }
+
+    let mut results = Vec::new();
+    let mut max_displacement = None;
+    for node in &model.nodes {
+        let node_index = node_index(&model, &node.id).unwrap();
+        let magnitude = displacement_magnitude(&displacements, node_index);
+        let result_id = format!("result:disp:{}", stable_suffix(&node.id));
+        if max_displacement
+            .as_ref()
+            .map(|q: &LocatedQuantity| magnitude * 1000.0 > q.value)
+            .unwrap_or(true)
+        {
+            max_displacement = Some(LocatedQuantity {
+                value: round6(magnitude * 1000.0),
+                unit: "mm".to_string(),
+                location_ref: node.id.clone(),
+                result_ref: result_id.clone(),
+            });
+        }
+        results.push(ResultItem {
+            id: result_id,
+            kind: "displacement_magnitude".to_string(),
+            value: round6(magnitude * 1000.0),
+            unit: "mm".to_string(),
+            entity_ref: node.id.clone(),
+            basis_ref: None,
+            source_result_refs: Vec::new(),
+            metadata: None,
+        });
+    }
+
+    let reactions = multiply_matrix_vector(&stiffness, &displacements)
+        .into_iter()
+        .zip(force.iter())
+        .map(|(internal, applied)| internal - applied)
+        .collect::<Vec<_>>();
+    for support in &model.supports {
+        if let Some(index) = node_index(&model, &support.node) {
+            let magnitude = support
+                .restraints
+                .iter()
+                .filter_map(|dof| parse_dof(dof).ok())
+                .map(|dof| {
+                    let global = index * DOF_PER_NODE + dof_index(dof);
+                    reactions[global] * reactions[global]
+                })
+                .sum::<f64>()
+                .sqrt();
+            results.push(ResultItem {
+                id: format!("result:reaction:{}", stable_suffix(&support.id)),
+                kind: "reaction_resultant".to_string(),
+                value: round6(magnitude),
+                unit: "N".to_string(),
+                entity_ref: support.id.clone(),
+                basis_ref: None,
+                source_result_refs: Vec::new(),
+                metadata: None,
+            });
+        }
+    }
+
+    let mut max_stress = None;
+    for (pipe_index, pipe) in built.pipes.iter().enumerate() {
+        let local = match pipe.recover_local_forces_from_global_model(&displacements) {
+            Ok(local) => local,
+            Err(error) => {
+                diagnostics.push(diag(
+                    &format!("diagnostic:stress:{}", stable_suffix(&pipe.element_id)),
+                    "ELEMENT_FORCE_RECOVERY_FAILED",
+                    "warning",
+                    error.to_string(),
+                    vec![pipe.element_id.clone()],
+                ));
+                continue;
+            }
+        };
+        let corrected_local_forces =
+            corrected_local_forces_for_thermal(&local.local_forces, pipe_index, &thermal_loads);
+        append_element_force_results(&mut results, &pipe.element_id, &corrected_local_forces);
+        let midspan_resultants = midspan_resultants_from_endpoints(&corrected_local_forces);
+        append_midspan_force_results(&mut results, &pipe.element_id, &midspan_resultants);
+        let section = built
+            .sections
+            .get(&pipe.element_id)
+            .expect("section exists for pipe");
+        let pressure = pressure_for_pipe(model, load_case, pipe_index, &pipe.element_id);
+        let end_i_stress = recover_endpoint_stress(&corrected_local_forces, 0, section, pressure);
+        let end_j_stress =
+            recover_endpoint_stress(&corrected_local_forces, DOF_PER_NODE, section, pressure);
+        let midspan_stress = recover_midspan_stress(&midspan_resultants, section, pressure);
+        for (location, stress) in [
+            ("end_i", &end_i_stress),
+            ("end_j", &end_j_stress),
+            ("midspan", &midspan_stress),
+        ] {
+            for finding in &stress.findings {
+                diagnostics.push(diag(
+                    &format!(
+                        "diagnostic:stress:{}:{}:{:?}",
+                        stable_suffix(&pipe.element_id),
+                        location.replace('_', "-"),
+                        finding.code
+                    ),
+                    "STRESS_RECOVERY_LIMITED",
+                    "warning",
+                    finding.message.clone(),
+                    vec![pipe.element_id.clone()],
+                ));
+            }
+        }
+        if end_i_stress.findings.is_empty() {
+            append_endpoint_stress_results(
+                &mut results,
+                &pipe.element_id,
+                "end_i",
+                &end_i_stress.components,
+                pressure.is_some(),
+            );
+        }
+        if end_j_stress.findings.is_empty() {
+            append_endpoint_stress_results(
+                &mut results,
+                &pipe.element_id,
+                "end_j",
+                &end_j_stress.components,
+                pressure.is_some(),
+            );
+        }
+        if midspan_stress.findings.is_empty() {
+            append_station_stress_results(
+                &mut results,
+                &pipe.element_id,
+                "midspan",
+                &midspan_stress.components,
+                pressure.is_some(),
+                "interpolated_from_endpoint_resultants",
+            );
+        }
+        let summary_value = [
+            end_i_stress.summary,
+            end_j_stress.summary,
+            midspan_stress.summary,
+        ]
+        .into_iter()
+        .flatten()
+        .map(|summary| summary.max_normal.abs().max(summary.min_normal.abs()) / 1_000_000.0)
+        .reduce(f64::max);
+        if let Some(value) = summary_value {
+            let result_id = format!("result:stress:{}", stable_suffix(&pipe.element_id));
+            if max_stress
+                .as_ref()
+                .map(|q: &LocatedQuantity| value > q.value)
+                .unwrap_or(true)
+            {
+                max_stress = Some(LocatedQuantity {
+                    value: round6(value),
+                    unit: "MPa".to_string(),
+                    location_ref: pipe.element_id.clone(),
+                    result_ref: result_id.clone(),
+                });
+            }
+            results.push(ResultItem {
+                id: result_id,
+                kind: "open_formula_stress_summary".to_string(),
+                value: round6(value),
+                unit: "MPa".to_string(),
+                entity_ref: pipe.element_id.clone(),
+                basis_ref: None,
+                source_result_refs: Vec::new(),
+                metadata: None,
+            });
+        }
+    }
+
+    Ok(LoadCaseSolve {
+        load_case_id: load_case.id.clone(),
+        results,
+        max_displacement,
+        max_stress,
+    })
 }
 
 fn build_model(
@@ -745,16 +916,36 @@ fn build_model(
         })
         .collect::<Vec<_>>();
 
+    Some(BuiltModel {
+        nodes,
+        pipes,
+        frame_elements,
+        supports,
+        sections,
+    })
+}
+
+fn build_load_case_primitive_loads(
+    model: &PreviewModel,
+    load_case: &PreviewLoadCase,
+    diagnostics: &mut Vec<Diagnostic>,
+) -> Vec<PrimitiveLoad> {
+    let node_map = model
+        .nodes
+        .iter()
+        .enumerate()
+        .map(|(i, n)| (n.id.as_str(), i))
+        .collect::<HashMap<_, _>>();
     let pipe_map = model
         .pipe_segments
         .iter()
         .enumerate()
         .map(|(i, p)| (p.id.as_str(), i))
         .collect::<HashMap<_, _>>();
-    let loads = model
-        .load_cases
+
+    load_case
+        .primitive_loads
         .iter()
-        .flat_map(|case| case.primitive_loads.iter())
         .filter_map(|load| {
             let category = parse_category(&load.category);
             let direction = parse_direction(&load.direction);
@@ -767,7 +958,7 @@ fn build_model(
                             "LOAD_MAGNITUDE_INVALID",
                             "blocking",
                             "load magnitude must be finite",
-                            vec![load.id.clone()],
+                            vec![load.id.clone(), load_case.id.clone()],
                         ));
                         return None;
                     };
@@ -779,7 +970,7 @@ fn build_model(
                                     "LOAD_NODE_UNKNOWN",
                                     "blocking",
                                     "load target node is not present in preview model",
-                                    vec![load.id.clone(), node.clone()],
+                                    vec![load.id.clone(), node.clone(), load_case.id.clone()],
                                 ));
                                 return None;
                             };
@@ -794,7 +985,7 @@ fn build_model(
                                     "LOAD_PIPE_UNKNOWN",
                                     "blocking",
                                     "load target pipe is not present in preview model",
-                                    vec![load.id.clone(), pipe.clone()],
+                                    vec![load.id.clone(), pipe.clone(), load_case.id.clone()],
                                 ));
                                 return None;
                             };
@@ -810,22 +1001,13 @@ fn build_model(
                         "LOAD_INPUT_INVALID",
                         "blocking",
                         "load category, direction, and dimension must use supported preview values",
-                        vec![load.id.clone()],
+                        vec![load.id.clone(), load_case.id.clone()],
                     ));
                     None
                 }
             }
         })
-        .collect::<Vec<_>>();
-
-    Some(BuiltModel {
-        nodes,
-        pipes,
-        frame_elements,
-        supports,
-        loads,
-        sections,
-    })
+        .collect()
 }
 
 fn derive_pipe_section(
@@ -866,7 +1048,10 @@ fn add_uniform_element_loads(
     pipes: &[StraightPipeElement],
 ) {
     for load in loads {
-        if load.magnitude.dimension == LoadDimension::Pressure {
+        if matches!(
+            load.magnitude.dimension,
+            LoadDimension::Pressure | LoadDimension::TemperatureChange
+        ) {
             continue;
         }
         let Ok(length) = pipes[load.element_index].length() else {
@@ -884,6 +1069,92 @@ fn add_uniform_element_loads(
         force[i * DOF_PER_NODE + dof] += share;
         force[j * DOF_PER_NODE + dof] += share;
     }
+}
+
+fn build_thermal_element_loads(
+    model: &PreviewModel,
+    load_case: &PreviewLoadCase,
+    material_map: &HashMap<&str, &MaterialInput>,
+    pipe_map: &HashMap<&str, usize>,
+    sections: &HashMap<String, DerivedSection>,
+) -> Vec<ThermalElementLoad> {
+    let mut loads = Vec::new();
+    for load in &load_case.primitive_loads {
+        if load.category != "thermal" || load.dimension != "temperature_change" {
+            continue;
+        }
+        let LoadTargetInput::Element { pipe } = &load.target else {
+            continue;
+        };
+        let Some(&element_index) = pipe_map.get(pipe.as_str()) else {
+            continue;
+        };
+        let Some(pipe_input) = model.pipe_segments.get(element_index) else {
+            continue;
+        };
+        let Some(material) = material_map.get(pipe_input.material.as_str()) else {
+            continue;
+        };
+        let Some(alpha) = material
+            .thermal_expansion_coefficient
+            .as_ref()
+            .map(|quantity| quantity.value)
+        else {
+            continue;
+        };
+        let Some(section) = sections.get(&pipe_input.id) else {
+            continue;
+        };
+        let epsilon_th = alpha * load.magnitude.value;
+        loads.push(ThermalElementLoad {
+            element_index,
+            axial_load: material.elastic_modulus.value * section.area * epsilon_th,
+        });
+    }
+    loads
+}
+
+fn add_thermal_equivalent_loads(
+    force: &mut [f64],
+    thermal_loads: &[ThermalElementLoad],
+    pipes: &[StraightPipeElement],
+) {
+    for load in thermal_loads {
+        let Some(pipe) = pipes.get(load.element_index) else {
+            continue;
+        };
+        let Ok(frame_element) = pipe.frame_element() else {
+            continue;
+        };
+        let Ok(orientation) = frame_element.orientation() else {
+            continue;
+        };
+        let local_x = orientation.local_axes[0];
+        let i_base = pipe.node_i.index * DOF_PER_NODE;
+        let j_base = pipe.node_j.index * DOF_PER_NODE;
+        for axis in 0..3 {
+            force[i_base + axis] -= load.axial_load * local_x[axis];
+            force[j_base + axis] += load.axial_load * local_x[axis];
+        }
+    }
+}
+
+fn corrected_local_forces_for_thermal(
+    local_forces: &[f64],
+    element_index: usize,
+    thermal_loads: &[ThermalElementLoad],
+) -> Vec<f64> {
+    let mut corrected = local_forces.to_vec();
+    let axial_load = thermal_loads
+        .iter()
+        .filter(|load| load.element_index == element_index)
+        .map(|load| load.axial_load)
+        .sum::<f64>();
+    if axial_load != 0.0 && corrected.len() >= DOF_PER_NODE + UX + 1 {
+        corrected[UX] += axial_load;
+        corrected[DOF_PER_NODE + UX] -= axial_load;
+    }
+    corrected
 }
 
 fn append_element_force_results(
@@ -952,6 +1223,66 @@ fn append_element_force_results(
     }
 }
 
+fn midspan_resultants_from_endpoints(local_forces: &[f64]) -> [f64; 4] {
+    [
+        (local_forces[UX] + local_forces[DOF_PER_NODE + UX]) / 2.0,
+        (local_forces[RX] + local_forces[DOF_PER_NODE + RX]) / 2.0,
+        (local_forces[RY] + local_forces[DOF_PER_NODE + RY]) / 2.0,
+        (local_forces[RZ] + local_forces[DOF_PER_NODE + RZ]) / 2.0,
+    ]
+}
+
+fn append_midspan_force_results(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    resultants: &[f64; 4],
+) {
+    let suffix = stable_suffix(pipe_id);
+    let components = [
+        (
+            format!("result:force:{suffix}:midspan:axial"),
+            "element_local_axial_force",
+            "axial_force",
+            resultants[0],
+            "N",
+        ),
+        (
+            format!("result:moment:{suffix}:midspan:torsion"),
+            "element_local_torsional_moment",
+            "torsional_moment",
+            resultants[1],
+            "N*m",
+        ),
+        (
+            format!("result:moment:{suffix}:midspan:bending-y"),
+            "element_local_bending_moment_y",
+            "bending_moment_y",
+            resultants[2],
+            "N*m",
+        ),
+        (
+            format!("result:moment:{suffix}:midspan:bending-z"),
+            "element_local_bending_moment_z",
+            "bending_moment_z",
+            resultants[3],
+            "N*m",
+        ),
+    ];
+    for (id, kind, component, value, unit) in components {
+        append_station_force_result(
+            results,
+            pipe_id,
+            &id,
+            kind,
+            component,
+            value,
+            unit,
+            "midspan",
+            "positive value is linearly interpolated from endpoint element-local resultants",
+        );
+    }
+}
+
 fn append_endpoint_force_result(
     results: &mut Vec<ResultItem>,
     pipe_id: &str,
@@ -969,11 +1300,42 @@ fn append_endpoint_force_result(
         value: round6(value),
         unit: unit.to_string(),
         entity_ref: pipe_id.to_string(),
+        basis_ref: None,
+        source_result_refs: Vec::new(),
         metadata: Some(ResultMetadata {
             component: component.to_string(),
             coordinate_system: "element_local".to_string(),
             location: location.to_string(),
             basis: "recovered_from_local_element_stiffness".to_string(),
+            sign_convention: sign_convention.to_string(),
+        }),
+    });
+}
+
+fn append_station_force_result(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    id: &str,
+    kind: &str,
+    component: &str,
+    value: f64,
+    unit: &str,
+    location: &str,
+    sign_convention: &str,
+) {
+    results.push(ResultItem {
+        id: id.to_string(),
+        kind: kind.to_string(),
+        value: round6(value),
+        unit: unit.to_string(),
+        entity_ref: pipe_id.to_string(),
+        basis_ref: None,
+        source_result_refs: Vec::new(),
+        metadata: Some(ResultMetadata {
+            component: component.to_string(),
+            coordinate_system: "element_local".to_string(),
+            location: location.to_string(),
+            basis: "interpolated_from_endpoint_resultants".to_string(),
             sign_convention: sign_convention.to_string(),
         }),
     });
@@ -991,6 +1353,36 @@ fn recover_endpoint_stress(
             Some(local_forces[offset + RY]),
             Some(local_forces[offset + RZ]),
             Some(local_forces[offset + RX]),
+        ),
+        section: StressSectionProperties::new(
+            Some(section.area),
+            Some(section.section_modulus),
+            Some(section.section_modulus),
+            Some(section.torsion_constant),
+            Some(section.torsion_radius),
+        ),
+        pressure: pressure.map(|p| {
+            PressureBasis::new(
+                Some(p),
+                Some(section.membrane_radius),
+                Some(section.wall_thickness),
+            )
+        }),
+        statuses: vec![AnalysisStatus::MechanicsSolved],
+    })
+}
+
+fn recover_midspan_stress(
+    resultants: &[f64; 4],
+    section: &DerivedSection,
+    pressure: Option<f64>,
+) -> open_pipe_stress_stress_recovery::StressRecoveryResult {
+    recover_stresses(&StressRecoveryInput {
+        resultants: ForceResultants::new(
+            Some(resultants[0]),
+            Some(resultants[2]),
+            Some(resultants[3]),
+            Some(resultants[1]),
         ),
         section: StressSectionProperties::new(
             Some(section.area),
@@ -1100,6 +1492,98 @@ fn append_endpoint_stress_results(
     }
 }
 
+fn append_station_stress_results(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    location: &str,
+    components: &StressComponents,
+    include_pressure: bool,
+    basis: &str,
+) {
+    let suffix = stable_suffix(pipe_id);
+    let local_components = [
+        (
+            "axial-normal",
+            "element_local_axial_normal_stress",
+            "axial_normal_stress",
+            components.axial_normal,
+            "positive normal stress follows the interpolated element-local axial resultant at this station",
+        ),
+        (
+            "bending-normal-y",
+            "element_local_bending_normal_stress_y",
+            "bending_normal_stress_y",
+            components.bending_normal_y,
+            "positive bending normal stress follows the interpolated element-local y bending resultant at this station",
+        ),
+        (
+            "bending-normal-z",
+            "element_local_bending_normal_stress_z",
+            "bending_normal_stress_z",
+            components.bending_normal_z,
+            "positive bending normal stress follows the interpolated element-local z bending resultant at this station",
+        ),
+        (
+            "torsional-shear",
+            "element_local_torsional_shear_stress",
+            "torsional_shear_stress",
+            components.torsional_shear,
+            "positive torsional shear stress follows the interpolated element-local torsional resultant at this station",
+        ),
+    ];
+    for (id_tail, kind, component, value, sign_convention) in local_components {
+        if let Some(value) = value {
+            append_station_stress_result(
+                results,
+                pipe_id,
+                &format!("result:stress:{suffix}:{location}:{id_tail}"),
+                kind,
+                component,
+                value,
+                "element_local",
+                location,
+                basis,
+                sign_convention,
+            );
+        }
+    }
+
+    if include_pressure {
+        let pressure_components = [
+            (
+                "pressure-hoop",
+                "pipe_section_pressure_hoop_stress",
+                "pressure_hoop_stress",
+                components.pressure_hoop,
+                "positive pressure membrane hoop stress follows the explicit pipe pressure basis at this station",
+            ),
+            (
+                "pressure-longitudinal",
+                "pipe_section_pressure_longitudinal_stress",
+                "pressure_longitudinal_stress",
+                components.pressure_longitudinal,
+                "positive pressure membrane longitudinal stress follows the explicit pipe pressure basis at this station",
+            ),
+        ];
+        for (id_tail, kind, component, value, sign_convention) in pressure_components {
+            if let Some(value) = value {
+                append_station_stress_result(
+                    results,
+                    pipe_id,
+                    &format!("result:stress:{suffix}:{location}:{id_tail}"),
+                    kind,
+                    component,
+                    value,
+                    "pipe_section",
+                    location,
+                    basis,
+                    sign_convention,
+                );
+            }
+        }
+    }
+}
+
 fn append_endpoint_stress_result(
     results: &mut Vec<ResultItem>,
     pipe_id: &str,
@@ -1117,11 +1601,43 @@ fn append_endpoint_stress_result(
         value: round6(value_pa / 1_000_000.0),
         unit: "MPa".to_string(),
         entity_ref: pipe_id.to_string(),
+        basis_ref: None,
+        source_result_refs: Vec::new(),
         metadata: Some(ResultMetadata {
             component: component.to_string(),
             coordinate_system: coordinate_system.to_string(),
             location: location.to_string(),
             basis: "recovered_from_open_mechanics_stress_components".to_string(),
+            sign_convention: sign_convention.to_string(),
+        }),
+    });
+}
+
+fn append_station_stress_result(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    id: &str,
+    kind: &str,
+    component: &str,
+    value_pa: f64,
+    coordinate_system: &str,
+    location: &str,
+    basis: &str,
+    sign_convention: &str,
+) {
+    results.push(ResultItem {
+        id: id.to_string(),
+        kind: kind.to_string(),
+        value: round6(value_pa / 1_000_000.0),
+        unit: "MPa".to_string(),
+        entity_ref: pipe_id.to_string(),
+        basis_ref: None,
+        source_result_refs: Vec::new(),
+        metadata: Some(ResultMetadata {
+            component: component.to_string(),
+            coordinate_system: coordinate_system.to_string(),
+            location: location.to_string(),
+            basis: basis.to_string(),
             sign_convention: sign_convention.to_string(),
         }),
     });
@@ -1133,6 +1649,216 @@ fn endpoint_id_location(location: &str) -> &str {
         "end_j" => "end-j",
         other => other,
     }
+}
+
+fn append_combination_results(
+    model: &PreviewModel,
+    rows_by_base_id: &HashMap<String, HashMap<String, ResultItem>>,
+    results: &mut Vec<ResultItem>,
+    diagnostics: &mut Vec<Diagnostic>,
+) {
+    let mut base_ids = rows_by_base_id.keys().cloned().collect::<Vec<_>>();
+    base_ids.sort();
+
+    for combination in &model.combinations {
+        for base_id in &base_ids {
+            let Some(source_rows) = rows_by_base_id.get(base_id) else {
+                continue;
+            };
+            let Some(first_term) = combination.terms.first() else {
+                continue;
+            };
+            let Some(reference_row) = source_rows.get(&first_term.load_case) else {
+                diagnostics.push(combination_diag(
+                    combination,
+                    base_id,
+                    "LOAD_COMBINATION_SOURCE_RESULT_MISSING",
+                    "warning",
+                    format!(
+                        "combination source result {base_id} is not available for load case {}",
+                        first_term.load_case
+                    ),
+                    vec![combination.id.clone(), first_term.load_case.clone()],
+                ));
+                continue;
+            };
+            if reference_row.kind == "open_formula_stress_summary" {
+                diagnostics.push(combination_diag(
+                    combination,
+                    base_id,
+                    "COMBINATION_STRESS_SUMMARY_SKIPPED",
+                    "warning",
+                    "open-formula stress summary rows are not linearly combined in TP-MAC-08; combine inspectable stress component rows instead",
+                    vec![combination.id.clone(), reference_row.id.clone()],
+                ));
+                continue;
+            }
+            let Some(dimension) = algebra_dimension(reference_row) else {
+                diagnostics.push(combination_diag(
+                    combination,
+                    base_id,
+                    "LOAD_COMBINATION_RESULT_DIMENSION_UNSUPPORTED",
+                    "warning",
+                    "result row unit is not supported for TP-MAC-08 scalar load-combination algebra",
+                    vec![combination.id.clone(), reference_row.id.clone()],
+                ));
+                continue;
+            };
+
+            let mut operands = Vec::new();
+            let mut source_result_refs = Vec::new();
+            let mut source_identity_mismatch = false;
+            for term in &combination.terms {
+                let Some(source) = source_rows.get(&term.load_case) else {
+                    continue;
+                };
+                if !combination_source_identity_matches(reference_row, source) {
+                    source_identity_mismatch = true;
+                    diagnostics.push(combination_diag(
+                        combination,
+                        base_id,
+                        "LOAD_COMBINATION_SOURCE_RESULT_MISMATCH",
+                        "warning",
+                        "combination source rows must match kind, unit, entity, and result metadata",
+                        vec![
+                            combination.id.clone(),
+                            reference_row.id.clone(),
+                            source.id.clone(),
+                        ],
+                    ));
+                    continue;
+                }
+                operands.push(AlgebraOperand::new(
+                    term.load_case.clone(),
+                    term.load_case.clone(),
+                    AlgebraQuantity::new(source.value, dimension)
+                        .expect("result values are finite preview mechanics outputs"),
+                    vec![
+                        AlgebraAnalysisStatus::MechanicsSolved,
+                        AlgebraAnalysisStatus::HumanReviewRequired,
+                    ],
+                ));
+                source_result_refs.push(source.id.clone());
+            }
+            if source_identity_mismatch {
+                continue;
+            }
+            let terms = combination
+                .terms
+                .iter()
+                .filter_map(|term| CombinationTerm::new(term.load_case.clone(), term.factor).ok())
+                .collect::<Vec<_>>();
+            let operand_by_id = operands
+                .iter()
+                .map(|operand| (operand.operand_id.as_str(), operand))
+                .collect::<HashMap<_, _>>();
+            let algebra = evaluate_linear_combination(&operand_by_id, &terms);
+            if algebra.is_blocked() {
+                for finding in algebra.findings {
+                    diagnostics.push(combination_diag(
+                        combination,
+                        base_id,
+                        algebra_finding_diagnostic_code(finding.code),
+                        "warning",
+                        finding.message,
+                        vec![combination.id.clone(), finding.subject_id],
+                    ));
+                }
+                continue;
+            }
+            let Some(quantity) = algebra.quantity else {
+                continue;
+            };
+            let mut combined = reference_row.clone();
+            combined.id = qualified_combination_result_id(&combination.id, base_id);
+            combined.value = round6(quantity.value);
+            combined.basis_ref = Some(ResultBasisRef {
+                ref_type: "combination".to_string(),
+                ref_id: combination.id.clone(),
+            });
+            combined.source_result_refs = source_result_refs;
+            if let Some(metadata) = combined.metadata.as_mut() {
+                metadata.basis = "explicit_user_linear_combination".to_string();
+                metadata.sign_convention =
+                    "positive value follows explicit user linear combination of matching source result sign conventions"
+                        .to_string();
+            }
+            results.push(combined);
+        }
+    }
+}
+
+fn combination_source_identity_matches(reference: &ResultItem, candidate: &ResultItem) -> bool {
+    reference.kind == candidate.kind
+        && reference.unit == candidate.unit
+        && reference.entity_ref == candidate.entity_ref
+        && reference.metadata == candidate.metadata
+}
+
+fn algebra_dimension(result: &ResultItem) -> Option<LoadDimension> {
+    match result.unit.as_str() {
+        "mm" => Some(LoadDimension::Displacement),
+        "N" => Some(LoadDimension::Force),
+        "N*m" => Some(LoadDimension::Moment),
+        "MPa" => Some(LoadDimension::Pressure),
+        _ => None,
+    }
+}
+
+fn algebra_finding_diagnostic_code(code: FindingCode) -> &'static str {
+    match code {
+        FindingCode::MissingOperand => "LOAD_COMBINATION_SOURCE_RESULT_MISSING",
+        FindingCode::EmptyExpression => "LOAD_COMBINATION_TERMS_EMPTY",
+        FindingCode::NonFiniteFactor => "LOAD_COMBINATION_FACTOR_INVALID",
+        FindingCode::DimensionMismatch => "LOAD_COMBINATION_DIMENSION_MISMATCH",
+        FindingCode::DuplicateOperand => "LOAD_COMBINATION_DUPLICATE_TERM",
+        FindingCode::UnsupportedExpressionShape => "LOAD_COMBINATION_UNSUPPORTED_EXPRESSION",
+        FindingCode::MissingResultState => "LOAD_COMBINATION_SOURCE_RESULT_MISSING",
+        FindingCode::StatusBoundaryViolation => "LOAD_COMBINATION_STATUS_BOUNDARY_VIOLATION",
+    }
+}
+
+fn combination_diag(
+    combination: &PreviewCombination,
+    base_id: &str,
+    code: &str,
+    severity: &str,
+    message: impl Into<String>,
+    mut affected_refs: Vec<String>,
+) -> Diagnostic {
+    affected_refs.push(base_id.to_string());
+    diag(
+        &format!(
+            "diagnostic:combination:{}:{}:{}",
+            stable_suffix(&combination.id),
+            stable_suffix(base_id),
+            stable_suffix(code)
+        ),
+        code,
+        severity,
+        message,
+        affected_refs,
+    )
+}
+
+fn qualified_load_case_result_id(load_case_id: &str, base_id: &str) -> String {
+    format!(
+        "result:loadcase:{}:{}",
+        stable_suffix(load_case_id),
+        result_tail(base_id)
+    )
+}
+
+fn qualified_combination_result_id(combination_id: &str, base_id: &str) -> String {
+    format!(
+        "result:combination:{}:{}",
+        stable_suffix(combination_id),
+        result_tail(base_id)
+    )
+}
+
+fn result_tail(base_id: &str) -> &str {
+    base_id.strip_prefix("result:").unwrap_or(base_id)
 }
 
 fn blocked_envelope(model: PreviewModel, diagnostics: Vec<Diagnostic>) -> MechanicsEnvelope {
@@ -1176,11 +1902,15 @@ fn solver_blocked(
     blocked_envelope(model, diagnostics)
 }
 
-fn pressure_for_pipe(model: &PreviewModel, pipe_index: usize, pipe_id: &str) -> Option<f64> {
-    model
-        .load_cases
+fn pressure_for_pipe(
+    model: &PreviewModel,
+    load_case: &PreviewLoadCase,
+    pipe_index: usize,
+    pipe_id: &str,
+) -> Option<f64> {
+    load_case
+        .primitive_loads
         .iter()
-        .flat_map(|case| &case.primitive_loads)
         .find_map(|load| match &load.target {
             LoadTargetInput::Element { pipe }
                 if pipe == pipe_id && load.dimension == "pressure" =>
@@ -1411,6 +2141,10 @@ mod tests {
                 value: 77_000_000_000.0,
                 unit: "Pa".to_string(),
             },
+            thermal_expansion_coefficient: Some(Quantity {
+                value: 0.000012,
+                unit: "1/degC".to_string(),
+            }),
             provenance: Some("invented_example_no_material_standard".to_string()),
         }]
     }
@@ -1422,6 +2156,63 @@ mod tests {
             .iter()
             .find(|item| item["id"] == id)
             .unwrap_or_else(|| panic!("missing result {id}"))
+    }
+
+    fn fixed_fixed_thermal_request(direction: &str) -> LinearStaticPreviewRequest {
+        let mut request = request();
+        request.model.nodes.truncate(2);
+        request.model.nodes[0].id = "node:N-100".to_string();
+        request.model.nodes[0].position = Vec3 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        };
+        request.model.nodes[1].id = "node:N-110".to_string();
+        request.model.nodes[1].position = Vec3 {
+            x: 2.0,
+            y: 0.0,
+            z: 0.0,
+        };
+        request.model.pipe_segments.truncate(1);
+        request.model.pipe_segments[0].id = "pipe:P-100".to_string();
+        request.model.pipe_segments[0].from = "node:N-100".to_string();
+        request.model.pipe_segments[0].to = "node:N-110".to_string();
+        request.model.pipe_segments[0].y_reference = Some(Vec3 {
+            x: 0.0,
+            y: 1.0,
+            z: 0.0,
+        });
+        request.model.supports.truncate(2);
+        request.model.supports[0].id = "support:S-100".to_string();
+        request.model.supports[0].node = "node:N-100".to_string();
+        request.model.supports[0].restraints = vec![
+            "UX".to_string(),
+            "UY".to_string(),
+            "UZ".to_string(),
+            "RX".to_string(),
+            "RY".to_string(),
+            "RZ".to_string(),
+        ];
+        request.model.supports[1].id = "support:S-110".to_string();
+        request.model.supports[1].node = "node:N-110".to_string();
+        request.model.supports[1].restraints = vec!["UX".to_string()];
+        request.model.load_cases.truncate(1);
+        request.model.combinations.clear();
+        request.model.load_cases[0].primitive_loads = vec![PreviewPrimitiveLoad {
+            id: "load:L-THERMAL".to_string(),
+            category: "thermal".to_string(),
+            target: LoadTargetInput::Element {
+                pipe: "pipe:P-100".to_string(),
+            },
+            direction: direction.to_string(),
+            magnitude: Quantity {
+                value: 10.0,
+                unit: "degC".to_string(),
+            },
+            dimension: "temperature_change".to_string(),
+            provenance: Some("invented_example_user_input".to_string()),
+        }];
+        request
     }
 
     #[test]
@@ -1454,6 +2245,10 @@ mod tests {
         assert!(result_ids.contains("result:moment:pipe-P-120:bending-y:end-j"));
         assert!(result_ids.contains("result:moment:pipe-P-120:bending-z"));
         assert!(result_ids.contains("result:moment:pipe-P-120:bending-z:end-j"));
+        assert!(result_ids.contains("result:force:pipe-P-120:midspan:axial"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:midspan:torsion"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:midspan:bending-y"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:midspan:bending-z"));
         assert!(result.results.iter().any(|item| {
             item.id == "result:force:pipe-P-120:axial"
                 && item.kind == "element_local_axial_force"
@@ -1483,6 +2278,21 @@ mod tests {
                     })
                     .unwrap_or(false)
         }));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:force:pipe-P-120:midspan:axial"
+                && item.kind == "element_local_axial_force"
+                && item.unit == "N"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "axial_force"
+                            && metadata.coordinate_system == "element_local"
+                            && metadata.location == "midspan"
+                            && metadata.basis == "interpolated_from_endpoint_resultants"
+                    })
+                    .unwrap_or(false)
+        }));
     }
 
     #[test]
@@ -1501,6 +2311,12 @@ mod tests {
         assert!(result_ids.contains("result:stress:pipe-P-120:end-j:axial-normal"));
         assert!(result_ids.contains("result:stress:pipe-P-120:end-j:torsional-shear"));
         assert!(result_ids.contains("result:stress:pipe-P-120:end-j:pressure-longitudinal"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:axial-normal"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:bending-normal-y"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:bending-normal-z"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:torsional-shear"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:pressure-hoop"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:midspan:pressure-longitudinal"));
         assert!(result.results.iter().any(|item| {
             item.id == "result:stress:pipe-P-120:end-j:torsional-shear"
                 && item.kind == "element_local_torsional_shear_stress"
@@ -1530,6 +2346,154 @@ mod tests {
                     })
                     .unwrap_or(false)
         }));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:stress:pipe-P-120:midspan:torsional-shear"
+                && item.kind == "element_local_torsional_shear_stress"
+                && item.unit == "MPa"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "torsional_shear_stress"
+                            && metadata.coordinate_system == "element_local"
+                            && metadata.location == "midspan"
+                            && metadata.basis == "interpolated_from_endpoint_resultants"
+                    })
+                    .unwrap_or(false)
+        }));
+    }
+
+    #[test]
+    fn valid_invented_model_exposes_explicit_load_combination_results() {
+        let result = run_linear_static_preview(request());
+        let combination_id = "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial";
+        let alternate_load_case_id = "result:loadcase:load-L-200:force:pipe-P-120:axial";
+        let combination = result
+            .results
+            .iter()
+            .find(|item| item.id == combination_id)
+            .expect("combination result should be emitted");
+        let alternate = result
+            .results
+            .iter()
+            .find(|item| item.id == alternate_load_case_id)
+            .expect("non-default load-case result should be emitted");
+
+        assert_eq!(result.summary.load_case_count, 2);
+        assert_eq!(
+            alternate
+                .basis_ref
+                .as_ref()
+                .map(|basis| basis.ref_id.as_str()),
+            Some("load:L-200")
+        );
+        assert_eq!(
+            combination
+                .basis_ref
+                .as_ref()
+                .map(|basis| basis.ref_id.as_str()),
+            Some("combination:C-OPER-ALT")
+        );
+        assert_eq!(
+            combination.source_result_refs,
+            vec![
+                "result:force:pipe-P-120:axial".to_string(),
+                "result:loadcase:load-L-200:force:pipe-P-120:axial".to_string(),
+            ]
+        );
+        assert_eq!(
+            combination
+                .metadata
+                .as_ref()
+                .map(|metadata| metadata.basis.as_str()),
+            Some("explicit_user_linear_combination")
+        );
+    }
+
+    #[test]
+    fn combination_stress_summary_rows_are_skipped_with_diagnostics() {
+        let result = run_linear_static_preview(request());
+
+        assert!(!result
+            .results
+            .iter()
+            .any(|item| item.id == "result:combination:combination-C-OPER-ALT:stress:pipe-P-120"));
+        assert!(result.diagnostics.iter().any(|item| item.code
+            == "COMBINATION_STRESS_SUMMARY_SKIPPED"
+            && item
+                .affected_refs
+                .contains(&"result:stress:pipe-P-120".to_string())));
+    }
+
+    #[test]
+    fn fixed_fixed_thermal_load_applies_axial_fixed_end_correction() {
+        let request = fixed_fixed_thermal_request("global_z");
+        let area = derive_pipe_section(
+            &request.model.pipe_segments[0].section,
+            "pipe:P-100",
+            &mut Vec::new(),
+        )
+        .unwrap()
+        .area;
+        let expected_force = 200_000_000_000.0 * area * 0.000012 * 10.0;
+        let result = run_linear_static_preview(request);
+        let axial_i = result
+            .results
+            .iter()
+            .find(|item| item.id == "result:force:pipe-P-100:axial")
+            .unwrap();
+        let axial_j = result
+            .results
+            .iter()
+            .find(|item| item.id == "result:force:pipe-P-100:axial:end-j")
+            .unwrap();
+        let stress_i = result
+            .results
+            .iter()
+            .find(|item| item.id == "result:stress:pipe-P-100:end-i:axial-normal")
+            .unwrap();
+
+        assert_eq!(result.status.mechanics, "MECHANICS_SOLVED");
+        assert!((axial_i.value - round6(expected_force)).abs() < 1.0e-6);
+        assert!((axial_j.value + round6(expected_force)).abs() < 1.0e-6);
+        assert!((stress_i.value - round6(expected_force / area / 1_000_000.0)).abs() < 1.0e-6);
+    }
+
+    #[test]
+    fn thermal_load_direction_does_not_change_thermal_magnitude_or_sign() {
+        let global = run_linear_static_preview(fixed_fixed_thermal_request("global_z"));
+        let legacy = run_linear_static_preview(fixed_fixed_thermal_request("RZ"));
+        let global_axial = global
+            .results
+            .iter()
+            .find(|item| item.id == "result:force:pipe-P-100:axial")
+            .unwrap()
+            .value;
+        let legacy_axial = legacy
+            .results
+            .iter()
+            .find(|item| item.id == "result:force:pipe-P-100:axial")
+            .unwrap()
+            .value;
+
+        assert_eq!(global.status.mechanics, "MECHANICS_SOLVED");
+        assert_eq!(legacy.status.mechanics, "MECHANICS_SOLVED");
+        assert_eq!(global_axial, legacy_axial);
+    }
+
+    #[test]
+    fn thermal_load_requires_explicit_material_expansion_coefficient() {
+        let mut request = request();
+        request.materials[0].thermal_expansion_coefficient = None;
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "THERMAL_EXPANSION_INPUT_MISSING"));
+        assert!(result.results.is_empty());
     }
 
     #[test]
@@ -1547,6 +2511,12 @@ mod tests {
         assert_eq!(generated_force["metadata"], fixture_force["metadata"]);
         let fixture_force_end_j = find_result(&fixture, "result:force:pipe-P-120:axial:end-j");
         assert_eq!(fixture_force_end_j["metadata"]["location"], "end_j");
+        let fixture_force_midspan = find_result(&fixture, "result:force:pipe-P-120:midspan:axial");
+        assert_eq!(fixture_force_midspan["metadata"]["location"], "midspan");
+        assert_eq!(
+            fixture_force_midspan["metadata"]["basis"],
+            "interpolated_from_endpoint_resultants"
+        );
         assert!(find_result(&fixture, "result:moment:pipe-P-120:bending-z")
             .get("metadata")
             .is_some());
@@ -1650,6 +2620,40 @@ mod tests {
             .diagnostics
             .iter()
             .any(|item| item.code == "EMPTY_ID"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn invalid_combination_records_block_with_diagnostics() {
+        let mut request = request();
+        request.model.combinations[0].basis = "owner_design_basis".to_string();
+        request.model.combinations[0]
+            .terms
+            .push(PreviewCombinationTerm {
+                load_case: "load:missing".to_string(),
+                factor: f64::NAN,
+            });
+        request.model.combinations.push(PreviewCombination {
+            id: "".to_string(),
+            label: None,
+            basis: "mechanics".to_string(),
+            terms: Vec::new(),
+            provenance: Some("invented_example_user_defined_combination".to_string()),
+        });
+
+        let result = run_linear_static_preview(request);
+        let codes = result
+            .diagnostics
+            .iter()
+            .map(|item| item.code.as_str())
+            .collect::<HashSet<_>>();
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(codes.contains("LOAD_COMBINATION_BASIS_UNSUPPORTED"));
+        assert!(codes.contains("LOAD_COMBINATION_LOAD_CASE_UNKNOWN"));
+        assert!(codes.contains("LOAD_COMBINATION_FACTOR_INVALID"));
+        assert!(codes.contains("LOAD_COMBINATION_TERMS_EMPTY"));
+        assert!(codes.contains("EMPTY_ID"));
         assert!(result.results.is_empty());
     }
 

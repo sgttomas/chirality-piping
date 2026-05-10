@@ -13,7 +13,7 @@
           "ref_kind": "project_persistence"
         },
         "payload_scope": "project_payload",
-        "value": "4fabb80a116ae6f362f5c43a92fbbc0ca93ec5184b0b1be41abd3540a5e0e6f7"
+        "value": "0c0038dd9f9f1c80f12bdca064cbae7021200a3e6a38874fbbd5be9b0fad5ee4"
       },
       {
         "algorithm": "sha256",
@@ -23,7 +23,7 @@
           "ref_kind": "model_payload"
         },
         "payload_scope": "model_payload",
-        "value": "70f5e57d9642a56e831b1e2b94ebfbd406af476cda37130f323eca1278d676ab"
+        "value": "4e0359bf65b2cde55e15ea01751f5967c9412f17ac5373e50cf7f360181aebbc"
       },
       {
         "algorithm": "sha256",
@@ -33,7 +33,7 @@
           "ref_kind": "project_persistence"
         },
         "payload_scope": "project_envelope",
-        "value": "fd18c9c85a47bed7e8cf88c1dfcd9370f302c4725d2b46ca883c2b1ff432218b"
+        "value": "b73ca088043f1ff3bb8e1e23cc1066a8dca022c828d47d3496077dea4e57f7b2"
       }
     ],
     "payload_partition_status": "json_payloads_defined",
@@ -45,7 +45,7 @@
         "ref_kind": "project_persistence"
       },
       "payload_scope": "project_payload",
-      "value": "4fabb80a116ae6f362f5c43a92fbbc0ca93ec5184b0b1be41abd3540a5e0e6f7"
+      "value": "0c0038dd9f9f1c80f12bdca064cbae7021200a3e6a38874fbbd5be9b0fad5ee4"
     }
   },
   "migration": {
@@ -84,7 +84,38 @@
                 "object_type": "AnalysisRun"
               }
             ],
-            "combinations": [],
+            "combinations": [
+              {
+                "basis": "mechanics",
+                "id": "combination:C-OPER-ALT",
+                "name": "Invented explicit operating plus alternate preview",
+                "provenance": {
+                  "contributor": "OpenPipeStress",
+                  "contributor_certification": "invented non-engineering example",
+                  "redistribution_status": "public_permissive",
+                  "review_status": "accepted",
+                  "source_license": "project invented",
+                  "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                  "source_name": "invented canonical persistence fixture"
+                },
+                "terms": [
+                  {
+                    "factor": 1.0,
+                    "load_case_ref": {
+                      "id": "loadcase:L100",
+                      "object_type": "LoadCase"
+                    }
+                  },
+                  {
+                    "factor": 0.5,
+                    "load_case_ref": {
+                      "id": "loadcase:L200",
+                      "object_type": "LoadCase"
+                    }
+                  }
+                ]
+              }
+            ],
             "comparison_refs": [],
             "components": [],
             "constraint_refs": [],
@@ -196,9 +227,116 @@
                       "id": "element:P120",
                       "object_type": "Element"
                     }
+                  },
+                  {
+                    "direction": "legacy_ignored_for_uniform_axial_thermal_preview",
+                    "id": "load:L100-T",
+                    "provenance": {
+                      "contributor": "OpenPipeStress",
+                      "contributor_certification": "invented non-engineering example",
+                      "redistribution_status": "public_permissive",
+                      "review_status": "accepted",
+                      "source_license": "project invented",
+                      "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                      "source_name": "invented canonical persistence fixture"
+                    },
+                    "quantity": {
+                      "dimension": "temperature_change",
+                      "provenance": {
+                        "contributor": "OpenPipeStress",
+                        "contributor_certification": "invented non-engineering example",
+                        "redistribution_status": "public_permissive",
+                        "review_status": "accepted",
+                        "source_license": "project invented",
+                        "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                        "source_name": "invented canonical persistence fixture"
+                      },
+                      "unit": "degC",
+                      "value": 12.5
+                    },
+                    "target_ref": {
+                      "id": "element:P120",
+                      "object_type": "Element"
+                    }
                   }
                 ],
-                "name": "Invented gravity and pressure preview",
+                "name": "Invented gravity, pressure, and thermal preview",
+                "provenance": {
+                  "contributor": "OpenPipeStress",
+                  "contributor_certification": "invented non-engineering example",
+                  "redistribution_status": "public_permissive",
+                  "review_status": "accepted",
+                  "source_license": "project invented",
+                  "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                  "source_name": "invented canonical persistence fixture"
+                }
+              },
+              {
+                "id": "loadcase:L200",
+                "load_type": "other",
+                "loads": [
+                  {
+                    "direction": "UZ",
+                    "provenance": {
+                      "contributor": "OpenPipeStress",
+                      "contributor_certification": "invented non-engineering example",
+                      "redistribution_status": "public_permissive",
+                      "review_status": "accepted",
+                      "source_license": "project invented",
+                      "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                      "source_name": "invented canonical persistence fixture"
+                    },
+                    "quantity": {
+                      "dimension": "force",
+                      "provenance": {
+                        "contributor": "OpenPipeStress",
+                        "contributor_certification": "invented non-engineering example",
+                        "redistribution_status": "public_permissive",
+                        "review_status": "accepted",
+                        "source_license": "project invented",
+                        "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                        "source_name": "invented canonical persistence fixture"
+                      },
+                      "unit": "N/m",
+                      "value": -95
+                    },
+                    "target_ref": {
+                      "id": "element:P120",
+                      "object_type": "Element"
+                    }
+                  },
+                  {
+                    "direction": "UY",
+                    "provenance": {
+                      "contributor": "OpenPipeStress",
+                      "contributor_certification": "invented non-engineering example",
+                      "redistribution_status": "public_permissive",
+                      "review_status": "accepted",
+                      "source_license": "project invented",
+                      "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                      "source_name": "invented canonical persistence fixture"
+                    },
+                    "quantity": {
+                      "dimension": "force",
+                      "provenance": {
+                        "contributor": "OpenPipeStress",
+                        "contributor_certification": "invented non-engineering example",
+                        "redistribution_status": "public_permissive",
+                        "review_status": "accepted",
+                        "source_license": "project invented",
+                        "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                        "source_name": "invented canonical persistence fixture"
+                      },
+                      "unit": "N",
+                      "value": 125
+                    },
+                    "target_ref": {
+                      "id": "node:N140",
+                      "object_type": "Node"
+                    }
+                  }
+                ],
+                "name": "Invented alternate gravity and pressure preview",
                 "provenance": {
                   "contributor": "OpenPipeStress",
                   "contributor_certification": "invented non-engineering example",
@@ -242,6 +380,20 @@
                     },
                     "unit": "Pa",
                     "value": 77000000000
+                  },
+                  "thermal_expansion_coefficient": {
+                    "dimension": "inverse_temperature",
+                    "provenance": {
+                      "contributor": "OpenPipeStress",
+                      "contributor_certification": "invented non-engineering example",
+                      "redistribution_status": "public_permissive",
+                      "review_status": "accepted",
+                      "source_license": "project invented",
+                      "source_location": "fixtures/persistence/invented_persisted_preview_project.json",
+                      "source_name": "invented canonical persistence fixture"
+                    },
+                    "unit": "1/degC",
+                    "value": 1.2e-05
                   }
                 },
                 "provenance": {
@@ -549,6 +701,14 @@
         },
         {
           "ref": "result:force:pipe-P-120:axial:end-j",
+          "ref_kind": "result"
+        },
+        {
+          "ref": "result:force:pipe-P-120:midspan:axial",
+          "ref_kind": "result"
+        },
+        {
+          "ref": "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial",
           "ref_kind": "result"
         }
       ]

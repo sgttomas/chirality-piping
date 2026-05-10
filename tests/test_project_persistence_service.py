@@ -44,6 +44,15 @@ def test_invented_persistence_fixture_validates_with_run_history_refs():
     assert "result:stress:pipe-P-120:end-j:torsional-shear" in {
         item["ref"] for item in run_history["result_refs"]
     }
+    assert "result:force:pipe-P-120:midspan:axial" in {
+        item["ref"] for item in run_history["result_refs"]
+    }
+    assert "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial" in {
+        item["ref"] for item in run_history["result_refs"]
+    }
+    model = envelope["project"]["model_payload"]["project"]["models"][0]
+    assert "loadcase:L200" in {item["id"] for item in model["load_cases"]}
+    assert "combination:C-OPER-ALT" in {item["id"] for item in model["combinations"]}
 
 
 def test_canonical_hashes_are_stable_and_cover_project_payloads():

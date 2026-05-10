@@ -407,7 +407,7 @@ fn prepare_element_load(
         return;
     }
 
-    if load.direction.is_rotational() {
+    if load.category != PrimitiveLoadCategory::Thermal && load.direction.is_rotational() {
         findings.push(LoadFinding::new(
             FindingCode::InvalidLoadDirection,
             &load.load_id,
@@ -518,12 +518,7 @@ fn valid_element_dimension(category: PrimitiveLoadCategory, dimension: LoadDimen
                 LoadDimension::Pressure | LoadDimension::ForcePerLength
             )
         }
-        PrimitiveLoadCategory::Thermal => {
-            matches!(
-                dimension,
-                LoadDimension::TemperatureChange | LoadDimension::ForcePerLength
-            )
-        }
+        PrimitiveLoadCategory::Thermal => dimension == LoadDimension::TemperatureChange,
         PrimitiveLoadCategory::ImposedDisplacement => false,
     }
 }
@@ -616,18 +611,38 @@ mod tests {
             "thermal-1",
             PrimitiveLoadCategory::Thermal,
             0,
-            LoadDirection::GlobalX,
+            LoadDirection::Dof(FrameDof::Rz),
             q(55.0, LoadDimension::TemperatureChange),
         );
 
         let prepared = prepare_loads(2, 1, &[load]);
 
         assert!(!prepared.is_blocked());
+        assert_eq!(
+            prepared.element_uniform_loads[0].direction,
+            LoadDirection::Dof(FrameDof::Rz)
+        );
         assert_eq!(prepared.element_uniform_loads[0].magnitude.value, 55.0);
         assert_eq!(
             prepared.element_uniform_loads[0].magnitude.dimension,
             LoadDimension::TemperatureChange
         );
+    }
+
+    #[test]
+    fn thermal_load_rejects_force_per_length_fallthrough() {
+        let load = PrimitiveLoad::uniform_element_load(
+            "thermal-line-load",
+            PrimitiveLoadCategory::Thermal,
+            0,
+            LoadDirection::GlobalX,
+            q(12.0, LoadDimension::ForcePerLength),
+        );
+
+        let prepared = prepare_loads(2, 1, &[load]);
+
+        assert!(prepared.is_blocked());
+        assert_eq!(prepared.findings[0].code, FindingCode::InvalidLoadDimension);
     }
 
     #[test]

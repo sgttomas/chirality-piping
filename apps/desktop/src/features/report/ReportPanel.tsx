@@ -17,6 +17,7 @@ export function ReportPanel({
   const run = analysisRun?.analysis_run;
   const resultHashCount = run?.result_refs.reduce((count, item) => count + item.hash_refs.length, 0) ?? 0;
   const envelopeHash = run?.hashes.find((item) => item.payload_scope === "result_envelope");
+  const loadBasisRefs = run?.load_basis_refs?.map((item) => item.ref).join(", ") ?? "not generated";
   return (
     <section className="panel report-panel" aria-label="Report packet" data-testid="report-panel">
       <div className="panel-title">
@@ -34,6 +35,7 @@ export function ReportPanel({
           {run ? (
             <>
               <ReportLine label="Analysis run" value={`${analysisRun.deliverable_id}; ${run.run_id}`} testId="report-analysis-run" />
+              <ReportLine label="Load basis refs" value={loadBasisRefs} testId="report-load-basis-refs" />
               <ReportLine label="Run immutability" value={run.immutability_policy.mutation_policy.replaceAll("_", " ")} />
               <ReportLine label="Result hashes" value={`${resultHashCount} result value hash${resultHashCount === 1 ? "" : "es"}`} />
               <ReportLine label="Envelope hash" value={envelopeHash ? `${envelopeHash.algorithm}; ${envelopeHash.payload_scope}` : "not available"} />
@@ -70,6 +72,8 @@ function selectedResultRefs(result: MechanicsResult): string[] {
     result.summary.max_open_formula_stress?.result_ref,
     result.results.find((item) => item.id === "result:force:pipe-P-120:axial")?.id,
     result.results.find((item) => item.id === "result:force:pipe-P-120:axial:end-j")?.id,
+    result.results.find((item) => item.id === "result:force:pipe-P-120:midspan:axial")?.id,
+    result.results.find((item) => item.id === "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial")?.id,
     result.results.find((item) => item.id === "result:stress:pipe-P-120:end-j:torsional-shear")?.id
   ].filter((value): value is string => Boolean(value));
 }

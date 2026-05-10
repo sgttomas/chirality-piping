@@ -2,16 +2,39 @@
 
 ## Active Phase
 
-**Phase:** `TP-PER-01 Project Persistence And Run History Spine` implemented
+**Phase:** `Post TP-MAC-08`
 **Last updated:** 2026-05-10
-**Current posture:** TP-PER-01 has been implemented from the closed TP-MAC-05
-mechanics and TP-RUN-01 runtime baselines. The next instance should preserve
-the TP-MAC-05/TP-RUN-01/TP-PER-01 product-preview baseline unless a new
-governed tranche is opened.
+**Current posture:** TP-MAC-08 has been implemented and closed as the first
+governed explicit mechanics-basis load-combination preview slice. The
+product-preview baseline now includes per-load-case solves, qualified
+non-default load-case result rows, and explicit user linear combination rows
+while preserving the closed TP-MAC-07 midspan, TP-MAC-06 thermal mechanics,
+TP-MAC-05 endpoint mechanics, TP-RUN-01 runtime, and TP-PER-01 persistence
+baselines.
 
 Historical REV05 evidence-closure and TP-MAC-01 desktop-hardening material is
 retained for audit traceability only. Do not reload it unless a future task
 explicitly asks for DAG/evidence/lifecycle reconciliation.
+
+## Latest Closed Plan
+
+**TP-MAC-08 Code-Neutral Load Combination Preview**
+Plan: `plans/TP-MAC-08_CODE_NEUTRAL_LOAD_COMBINATION_PREVIEW_PLAN.md`
+Purpose: Add explicit user-defined mechanics-basis load-combination preview
+rows using the existing load-case algebra crate and no code defaults.
+
+Implemented:
+
+- independent solves for every `load_cases[]` record;
+- legacy unqualified result IDs preserved for the first/default load case;
+- qualified non-default load-case rows under
+  `result:loadcase:{load_case_suffix}:{base_result_tail}`;
+- explicit combination rows under
+  `result:combination:{combination_suffix}:{base_result_tail}`;
+- `basis_ref` and `source_result_refs` audit metadata;
+- combination scalar algebra through `core/loads/load_case_algebra`;
+- structured diagnostics for invalid combinations and skipped stress summaries;
+- desktop result/report display of explicit combination basis and source refs.
 
 ## Completed Baseline
 
@@ -25,8 +48,16 @@ The TP-MAC physics-first product path now includes:
   force/moment endpoint components, endpoint stress component rows,
   open-formula stress summaries where supported, and explicit diagnostics for
   unsupported paths;
+- explicit material thermal expansion input, uniform axial thermal equivalent
+  loads, and thermal fixed-end correction for straight-pipe temperature-change
+  preview loads;
+- deterministic midspan force, moment, and stress rows recovered from
+  interpolated endpoint resultants;
+- explicit mechanics-basis user load-combination rows from matching scalar
+  load-case result rows;
 - `ResultItem.metadata` for local force/moment and stress components,
   coordinate system, endpoint location, recovery basis, and sign convention;
+- `ResultItem.basis_ref` and combination `source_result_refs`;
 - generated fallback fixture workflow:
   `npm run generate:product-preview-mechanics`;
 - desktop result grouping, result selection, diagnostic selection,
@@ -61,6 +92,22 @@ Purpose: Exposed open-mechanics stress components at pipe end-i and end-j in
 the product preview workflow while preserving the existing pipe-level stress
 summary result.
 
+**TP-MAC-06 Uniform Thermal Axial Preview**
+Plan: `plans/TP-MAC-06_UNIFORM_THERMAL_AXIAL_PREVIEW_PLAN.md`
+Purpose: Added explicit invented material thermal expansion input, uniform
+axial thermal equivalent loads, and thermal fixed-end correction for
+straight-pipe temperature-change preview loads.
+
+**TP-MAC-07 Midspan Station Preview**
+Plan: `plans/TP-MAC-07_MIDSPAN_STATION_PREVIEW_PLAN.md`
+Purpose: Added deterministic midspan force, moment, and stress rows for solved
+straight-pipe preview elements using interpolated endpoint resultants.
+
+**TP-MAC-08 Code-Neutral Load Combination Preview**
+Plan: `plans/TP-MAC-08_CODE_NEUTRAL_LOAD_COMBINATION_PREVIEW_PLAN.md`
+Purpose: Added explicit mechanics-basis user load-combination result rows over
+solved preview load cases using existing load-case algebra.
+
 **TP-RUN-01 Preview Runtime Spine**
 Plan: `plans/TP-RUN-01_PREVIEW_RUNTIME_SPINE_PLAN.md`
 Purpose: Unify desktop and headless preview runtime execution around
@@ -78,12 +125,14 @@ Delivered:
 - Runner results carry metadata, deterministic result refs, audit-manifest
   refs, privacy/professional-boundary flags, and hashes/checksums.
 - Final CLI syntax, persistence, project containers, external execution, new
-  mechanics, and release/professional claims remain out of scope.
+  mechanics outside governed TP-MAC plans, and release/professional claims
+  remain out of scope.
 
 **TP-PER-01 Project Persistence And Run History Spine**
 Plan: `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
-Purpose: Added a schema-shaped persistence service for invented/cleared project
-payloads, run-history refs, deterministic hashes, and round-trip validation.
+Purpose: Added a schema-shaped persistence service for invented/cleared
+project payloads, run-history refs, deterministic hashes, and round-trip
+validation.
 
 Delivered:
 
@@ -100,26 +149,29 @@ Delivered:
   migrations, external storage, and professional acceptance remain out of
   scope.
 
-## Active Plan
+## Selected Next Gate
 
-No successor implementation tranche is open in this compact state. Open a new
-governed plan before adding desktop save/open UX, final CLI syntax, physical
-project containers, migrations, external execution, new mechanics, or
-professional acceptance workflows.
+No next governed tranche is selected after TP-MAC-08 closeout. Open a new
+assessment or governed plan only when the next user request scopes one.
+
+Latest prior assessment:
+`execution/_Coordination/TP-MAC-08_NEXT_TRANCHE_ASSESSMENT.md`
 
 ## Deferred
 
-Keep deferred unless a new governed plan explicitly scopes them:
+Keep deferred unless a future governed plan explicitly scopes them:
 
-- intermediate station recovery;
+- temperature-dependent material interpolation;
+- code/rule combinations and protected combination criteria;
+- code/rule thermal criteria, allowables, and protected checks;
+- expansion-joint behavior;
+- arbitrary station sweeps and exact internal force diagrams;
 - shear force recovery;
 - pressure-to-frame load conversion;
 - equivalent/principal stress;
-- thermal behavior;
 - support stiffness completeness beyond current preview restraints;
-- load-case algebra and user combinations;
 - governed calculation-report generation;
-- protected rule/code checks and private criteria handling.
+- protected rule/code checks and private criteria handling;
 - final CLI binary, command syntax, and package-script contract;
 - desktop save/open UX, physical project containers, migrations, external
   storage, and durable stored run history beyond schema-shaped envelopes;
@@ -132,26 +184,24 @@ Keep deferred unless a new governed plan explicitly scopes them:
 
 Read these first:
 
-1. `AGENTS.md`
-2. `docs/CONTRACT.md`
-3. `docs/IP_AND_DATA_BOUNDARY.md`
-4. `plans/TP-RUN-01_PREVIEW_RUNTIME_SPINE_PLAN.md`
-5. `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
-6. `plans/TP-MAC-05_ENDPOINT_STRESS_COMPONENT_RESULTS_PLAN.md`
-7. `core/product_physics/src/lib.rs`
-8. `core/runner/headless/src/lib.rs`
-9. `core/project_persistence/service.py`
-10. `schemas/project_persistence.schema.yaml`
-11. `fixtures/persistence/invented_persisted_preview_project.json`
-12. `fixtures/product_preview/invented_preview_model.json`
+1. `plans/TP-MAC-08_CODE_NEUTRAL_LOAD_COMBINATION_PREVIEW_PLAN.md`
+2. `plans/TP-MAC-07_MIDSPAN_STATION_PREVIEW_PLAN.md`
+3. `plans/TP-MAC-06_UNIFORM_THERMAL_AXIAL_PREVIEW_PLAN.md`
+4. `AGENTS.md`
+5. `docs/CONTRACT.md`
+6. `docs/IP_AND_DATA_BOUNDARY.md`
+7. `plans/TP-MAC-05_ENDPOINT_STRESS_COMPONENT_RESULTS_PLAN.md`
+8. `plans/TP-RUN-01_PREVIEW_RUNTIME_SPINE_PLAN.md`
+9. `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
+10. `core/loads/load_case_algebra/src/lib.rs`
+11. `core/product_physics/src/lib.rs`
+12. `schemas/results.schema.yaml`
 13. `fixtures/product_preview/invented_mechanics_result.json`
-14. `schemas/headless_runner.schema.yaml`
-15. `schemas/results.schema.yaml`
-16. `tests/test_project_persistence_service.py`
-17. `tests/test_persistence_schema.py`
-18. `tests/test_headless_runner_contract.py`
-19. `tests/product_preview/test_product_preview_service.py`
-20. `tests/test_analysis_run_records.py`
+14. `fixtures/persistence/invented_persisted_preview_project.json`
+15. `tests/product_preview/test_product_preview_service.py`
+16. `tests/test_analysis_run_records.py`
+17. `tests/test_results_schema.py`
+18. `tests/test_project_persistence_service.py`
 
 Only read REV05 tranche/DAG/evidence files if the current task is specifically
 about governance traceability, evidence closure, dependency graph status, or
@@ -159,34 +209,20 @@ archival cleanup.
 
 ## Verification Baseline
 
-The following commands passed after TP-MAC-05:
+Final TP-MAC-08 verification:
 
-- `npm run generate:product-preview-mechanics`
-- `cargo fmt --manifest-path core/product_physics/Cargo.toml`
+- `cargo test --manifest-path core/loads/load_case_algebra/Cargo.toml`
 - `cargo test --manifest-path core/product_physics/Cargo.toml`
-- `cargo test --manifest-path core/loads/stress_recovery/Cargo.toml`
-- `cargo test --manifest-path validation/benchmarks/stress/Cargo.toml`
-- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py tests/test_results_schema.py`
+- `npm run generate:product-preview-mechanics`
+- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py tests/test_results_schema.py tests/test_project_persistence_service.py`
 - `python3 tests/test_results_schema.py`
 - `npm test --workspace apps/desktop`
 - `npm run build --workspace apps/desktop`
-- browser smoke against `http://127.0.0.1:5173/` using `apps/desktop/SMOKE.md`
+- desktop browser smoke at `http://127.0.0.1:5173/`
 - `git diff --check`
 
-`npm run build --workspace apps/desktop` may report the existing Vite
-chunk-size warning; that warning is not specific to TP-MAC-05.
-
-The following commands passed after TP-RUN-01:
-
-- `cargo test --manifest-path core/product_physics/Cargo.toml`
-- `cargo test --manifest-path core/runner/headless/Cargo.toml`
-- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_analysis_run_records.py tests/test_results_schema.py`
-- `python3 tests/test_headless_runner_contract.py`
-- `cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml`
-- `npm test --workspace apps/desktop`
-- `npm run build --workspace apps/desktop`
-- browser smoke against `http://127.0.0.1:5173/` using `apps/desktop/SMOKE.md`
-- `git diff --check`
+The desktop build no longer emits the prior Vite chunk-size warning after lazy
+fixture loading and vendor chunk splitting.
 
 The following commands passed after TP-PER-01:
 

@@ -220,6 +220,8 @@ def main():
         "recovered_from_open_mechanics_stress_components"
         in set(metadata["basis"]["enum"])
     )
+    assert "interpolated_from_endpoint_resultants" in set(metadata["basis"]["enum"])
+    assert "explicit_user_linear_combination" in set(metadata["basis"]["enum"])
     quantity_condition = defs["QuantityResult"]["allOf"][0]
     assert set(quantity_condition["if"]["properties"]["family"]["enum"]) == {
         "force",
@@ -239,12 +241,28 @@ def main():
         for result in preview_result["results"]
         if result["id"] == "result:force:pipe-P-120:axial:end-j"
     )
+    axial_force_midspan = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:force:pipe-P-120:midspan:axial"
+    )
     axial_metadata = axial_force["metadata"]
     axial_end_j_metadata = axial_force_end_j["metadata"]
+    axial_midspan_metadata = axial_force_midspan["metadata"]
     torsional_stress_end_j = next(
         result
         for result in preview_result["results"]
         if result["id"] == "result:stress:pipe-P-120:end-j:torsional-shear"
+    )
+    torsional_stress_midspan = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:stress:pipe-P-120:midspan:torsional-shear"
+    )
+    combination_axial_force = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:combination:combination-C-OPER-ALT:force:pipe-P-120:axial"
     )
     pressure_hoop = next(
         result
@@ -257,6 +275,7 @@ def main():
         if result["id"] == "result:stress:pipe-P-120"
     )
     assert axial_force["unit"] == "N"
+    assert axial_force["basis_ref"] == {"ref_type": "load_case", "ref_id": "load:L-100"}
     assert axial_metadata["component"] in metadata["component"]["enum"]
     assert axial_metadata["coordinate_system"] in metadata["coordinate_system"]["enum"]
     assert axial_metadata["location"] in metadata["location"]["enum"]
@@ -268,6 +287,11 @@ def main():
     assert axial_end_j_metadata["location"] == "end_j"
     assert axial_end_j_metadata["basis"] in metadata["basis"]["enum"]
     assert "j-end" in axial_end_j_metadata["sign_convention"]
+    assert axial_force_midspan["unit"] == "N"
+    assert axial_midspan_metadata["component"] == "axial_force"
+    assert axial_midspan_metadata["coordinate_system"] == "element_local"
+    assert axial_midspan_metadata["location"] == "midspan"
+    assert axial_midspan_metadata["basis"] == "interpolated_from_endpoint_resultants"
     assert stress_summary["kind"] == "open_formula_stress_summary"
     assert "metadata" not in stress_summary
     assert torsional_stress_end_j["unit"] == "MPa"
@@ -278,9 +302,28 @@ def main():
         torsional_stress_end_j["metadata"]["basis"]
         == "recovered_from_open_mechanics_stress_components"
     )
+    assert torsional_stress_midspan["unit"] == "MPa"
+    assert torsional_stress_midspan["metadata"]["component"] == "torsional_shear_stress"
+    assert torsional_stress_midspan["metadata"]["coordinate_system"] == "element_local"
+    assert torsional_stress_midspan["metadata"]["location"] == "midspan"
+    assert (
+        torsional_stress_midspan["metadata"]["basis"]
+        == "interpolated_from_endpoint_resultants"
+    )
     assert pressure_hoop["unit"] == "MPa"
     assert pressure_hoop["metadata"]["component"] == "pressure_hoop_stress"
     assert pressure_hoop["metadata"]["coordinate_system"] == "pipe_section"
+    assert combination_axial_force["unit"] == "N"
+    assert combination_axial_force["basis_ref"] == {
+        "ref_type": "combination",
+        "ref_id": "combination:C-OPER-ALT",
+    }
+    assert combination_axial_force["source_result_refs"] == [
+        "result:force:pipe-P-120:axial",
+        "result:loadcase:load-L-200:force:pipe-P-120:axial",
+    ]
+    assert combination_axial_force["metadata"]["basis"] == "explicit_user_linear_combination"
+    assert combination_axial_force["metadata"]["basis"] in metadata["basis"]["enum"]
 
     diagnostic_required = required_at(schema, "Diagnostic")
     assert {

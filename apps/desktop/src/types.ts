@@ -20,6 +20,7 @@ export type PreviewModel = {
     label: string;
     elastic_modulus: { value: number; unit: string };
     shear_modulus: { value: number; unit: string };
+    thermal_expansion_coefficient?: { value: number; unit: string };
     provenance: string;
   }>;
   nodes: Array<{ id: string; label: string; position: Vec3; provenance: string }>;
@@ -41,6 +42,13 @@ export type PreviewModel = {
     status: string;
     provenance: string;
     primitive_loads?: Array<Record<string, unknown>>;
+  }>;
+  combinations?: Array<{
+    id: string;
+    label: string;
+    basis: string;
+    terms: Array<{ load_case: string; factor: number }>;
+    provenance: string;
   }>;
   diagnostics: Diagnostic[];
 };
@@ -93,6 +101,8 @@ export type MechanicsResult = {
     value: number;
     unit: string;
     entity_ref: string;
+    basis_ref?: ResultBasisRef;
+    source_result_refs?: string[];
     metadata?: {
       component: string;
       coordinate_system: string;
@@ -102,6 +112,11 @@ export type MechanicsResult = {
     };
   }>;
   diagnostics: Diagnostic[];
+};
+
+export type ResultBasisRef = {
+  ref_type: "load_case" | "combination" | string;
+  ref_id: string;
 };
 
 export type SelectedReviewTarget =
@@ -119,6 +134,7 @@ export type ResultInterpretation = {
   location: string;
   recovery_basis: string;
   sign_convention: string;
+  source_result_refs: string[];
   linked_diagnostics: Diagnostic[];
   linked_knowledge: KnowledgeRecord[];
   source_run: {
@@ -185,6 +201,7 @@ export type AnalysisRunEnvelope = {
     run_name: string;
     run_kind: string;
     model_state_ref: ObjectRef;
+    load_basis_refs: ObjectRef[];
     result_refs: Array<{
       result_ref: ObjectRef;
       result_family: string;

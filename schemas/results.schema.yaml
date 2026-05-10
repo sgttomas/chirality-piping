@@ -454,6 +454,8 @@
           "enum": [
             "recovered_from_local_element_stiffness",
             "recovered_from_open_mechanics_stress_components",
+            "interpolated_from_endpoint_resultants",
+            "explicit_user_linear_combination",
             "stress_recovery_summary",
             "rule_pack_evaluation",
             "TBD"
