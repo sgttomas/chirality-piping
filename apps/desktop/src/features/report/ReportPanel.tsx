@@ -68,7 +68,9 @@ function selectedResultRefs(result: MechanicsResult): string[] {
   return [
     result.summary.max_displacement?.result_ref,
     result.summary.max_open_formula_stress?.result_ref,
-    result.results.find((item) => item.id === "result:force:pipe-P-120:axial")?.id
+    result.results.find((item) => item.id === "result:force:pipe-P-120:axial")?.id,
+    result.results.find((item) => item.id === "result:force:pipe-P-120:axial:end-j")?.id,
+    result.results.find((item) => item.id === "result:stress:pipe-P-120:end-j:torsional-shear")?.id
   ].filter((value): value is string => Boolean(value));
 }
 

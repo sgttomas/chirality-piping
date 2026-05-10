@@ -63,11 +63,41 @@ def test_mechanics_result_keeps_status_boundaries_separate():
     assert "RULE_CHECK_INPUTS_MISSING" in {item["code"] for item in result["diagnostics"]}
     assert result["summary"]["max_displacement"]["result_ref"] == "result:disp:node-N-140"
     assert "result:force:pipe-P-120:axial" in result_ids
+    assert "result:force:pipe-P-120:axial:end-j" in result_ids
     assert "result:moment:pipe-P-120:bending-z" in result_ids
+    assert "result:moment:pipe-P-120:bending-z:end-j" in result_ids
+    assert "result:stress:pipe-P-120" in result_ids
+    assert "result:stress:pipe-P-120:end-i:axial-normal" in result_ids
+    assert "result:stress:pipe-P-120:end-j:torsional-shear" in result_ids
+    assert "result:stress:pipe-P-120:end-i:pressure-hoop" in result_ids
     axial = next(item for item in result["results"] if item["id"] == "result:force:pipe-P-120:axial")
+    axial_end_j = next(item for item in result["results"] if item["id"] == "result:force:pipe-P-120:axial:end-j")
+    torsional_stress_end_j = next(
+        item
+        for item in result["results"]
+        if item["id"] == "result:stress:pipe-P-120:end-j:torsional-shear"
+    )
+    pressure_hoop = next(
+        item
+        for item in result["results"]
+        if item["id"] == "result:stress:pipe-P-120:end-i:pressure-hoop"
+    )
     assert axial["metadata"]["coordinate_system"] == "element_local"
     assert axial["metadata"]["location"] == "end_i"
     assert axial["metadata"]["component"] == "axial_force"
+    assert axial_end_j["metadata"]["coordinate_system"] == "element_local"
+    assert axial_end_j["metadata"]["location"] == "end_j"
+    assert axial_end_j["metadata"]["component"] == "axial_force"
+    assert torsional_stress_end_j["unit"] == "MPa"
+    assert torsional_stress_end_j["metadata"]["coordinate_system"] == "element_local"
+    assert torsional_stress_end_j["metadata"]["location"] == "end_j"
+    assert torsional_stress_end_j["metadata"]["component"] == "torsional_shear_stress"
+    assert (
+        torsional_stress_end_j["metadata"]["basis"]
+        == "recovered_from_open_mechanics_stress_components"
+    )
+    assert pressure_hoop["metadata"]["coordinate_system"] == "pipe_section"
+    assert pressure_hoop["metadata"]["component"] == "pressure_hoop_stress"
 
 
 def test_analysis_run_preview_binds_mechanics_results_to_immutable_run_record():
@@ -80,8 +110,12 @@ def test_analysis_run_preview_binds_mechanics_results_to_immutable_run_record():
     assert run["immutability_policy"]["run_record_is_read_only"] is True
     assert "HUMAN_REVIEW_REQUIRED" in run["analysis_status"]
     assert "result:force:pipe-P-120:axial" in result_refs
+    assert "result:force:pipe-P-120:axial:end-j" in result_refs
+    assert "result:stress:pipe-P-120:end-j:torsional-shear" in result_refs
     assert result_refs["result:force:pipe-P-120:axial"]["result_family"] == "force"
     assert result_refs["result:force:pipe-P-120:axial"]["hash_refs"][0]["payload_scope"] == "result_value"
+    assert result_refs["result:force:pipe-P-120:axial:end-j"]["result_family"] == "force"
+    assert result_refs["result:stress:pipe-P-120:end-j:torsional-shear"]["result_family"] == "stress"
     assert run["professional_boundary"]["software_makes_compliance_claim"] is False
 
 
@@ -96,6 +130,8 @@ def test_report_packet_preview_materializes_read_only_audit_context():
     }
     assert "result:disp:node-N-140" in packet["selected_result_refs"]
     assert "result:force:pipe-P-120:axial" in packet["selected_result_refs"]
+    assert "result:force:pipe-P-120:axial:end-j" in packet["selected_result_refs"]
+    assert "result:stress:pipe-P-120:end-j:torsional-shear" in packet["selected_result_refs"]
     assert packet["analysis_run_context"]["deliverable_id"] == "DEL-14-02"
     assert packet["analysis_run_context"]["immutability_policy"]["run_record_is_read_only"] is True
     assert packet["analysis_run_context"]["result_value_hash_count"] >= 1
@@ -117,6 +153,20 @@ def test_report_packet_preview_materializes_read_only_audit_context():
         item["payload_ref"] == {
             "object_type": "Result",
             "ref": "result:force:pipe-P-120:axial",
+        }
+        for item in packet["hash_refs"]
+    )
+    assert any(
+        item["payload_ref"] == {
+            "object_type": "Result",
+            "ref": "result:force:pipe-P-120:axial:end-j",
+        }
+        for item in packet["hash_refs"]
+    )
+    assert any(
+        item["payload_ref"] == {
+            "object_type": "Result",
+            "ref": "result:stress:pipe-P-120:end-j:torsional-shear",
         }
         for item in packet["hash_refs"]
     )

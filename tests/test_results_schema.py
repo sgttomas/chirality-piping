@@ -203,11 +203,21 @@ def main():
         "torsional_moment",
         "bending_moment_y",
         "bending_moment_z",
+        "axial_normal_stress",
+        "bending_normal_stress_y",
+        "bending_normal_stress_z",
+        "torsional_shear_stress",
+        "pressure_hoop_stress",
+        "pressure_longitudinal_stress",
     } <= set(metadata["component"]["enum"])
-    assert "element_local" in set(metadata["coordinate_system"]["enum"])
+    assert {"element_local", "pipe_section"} <= set(metadata["coordinate_system"]["enum"])
     assert {"end_i", "end_j"} <= set(metadata["location"]["enum"])
     assert (
         "recovered_from_local_element_stiffness"
+        in set(metadata["basis"]["enum"])
+    )
+    assert (
+        "recovered_from_open_mechanics_stress_components"
         in set(metadata["basis"]["enum"])
     )
     quantity_condition = defs["QuantityResult"]["allOf"][0]
@@ -224,13 +234,53 @@ def main():
         for result in preview_result["results"]
         if result["id"] == "result:force:pipe-P-120:axial"
     )
+    axial_force_end_j = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:force:pipe-P-120:axial:end-j"
+    )
     axial_metadata = axial_force["metadata"]
+    axial_end_j_metadata = axial_force_end_j["metadata"]
+    torsional_stress_end_j = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:stress:pipe-P-120:end-j:torsional-shear"
+    )
+    pressure_hoop = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:stress:pipe-P-120:end-i:pressure-hoop"
+    )
+    stress_summary = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:stress:pipe-P-120"
+    )
     assert axial_force["unit"] == "N"
     assert axial_metadata["component"] in metadata["component"]["enum"]
     assert axial_metadata["coordinate_system"] in metadata["coordinate_system"]["enum"]
     assert axial_metadata["location"] in metadata["location"]["enum"]
     assert axial_metadata["basis"] in metadata["basis"]["enum"]
     assert axial_metadata["sign_convention"]
+    assert axial_force_end_j["unit"] == "N"
+    assert axial_end_j_metadata["component"] == "axial_force"
+    assert axial_end_j_metadata["coordinate_system"] == "element_local"
+    assert axial_end_j_metadata["location"] == "end_j"
+    assert axial_end_j_metadata["basis"] in metadata["basis"]["enum"]
+    assert "j-end" in axial_end_j_metadata["sign_convention"]
+    assert stress_summary["kind"] == "open_formula_stress_summary"
+    assert "metadata" not in stress_summary
+    assert torsional_stress_end_j["unit"] == "MPa"
+    assert torsional_stress_end_j["metadata"]["component"] == "torsional_shear_stress"
+    assert torsional_stress_end_j["metadata"]["coordinate_system"] == "element_local"
+    assert torsional_stress_end_j["metadata"]["location"] == "end_j"
+    assert (
+        torsional_stress_end_j["metadata"]["basis"]
+        == "recovered_from_open_mechanics_stress_components"
+    )
+    assert pressure_hoop["unit"] == "MPa"
+    assert pressure_hoop["metadata"]["component"] == "pressure_hoop_stress"
+    assert pressure_hoop["metadata"]["coordinate_system"] == "pipe_section"
 
     diagnostic_required = required_at(schema, "Diagnostic")
     assert {

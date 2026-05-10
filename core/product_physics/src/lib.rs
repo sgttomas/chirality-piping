@@ -17,8 +17,8 @@ use open_pipe_stress_primitive_loads::{
 };
 use open_pipe_stress_straight_pipe::{StraightPipeElement, StraightPipeSectionProperties};
 use open_pipe_stress_stress_recovery::{
-    recover_stresses, AnalysisStatus, ForceResultants, PressureBasis, StressRecoveryInput,
-    StressSectionProperties,
+    recover_stresses, AnalysisStatus, ForceResultants, PressureBasis, StressComponents,
+    StressRecoveryInput, StressSectionProperties,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
@@ -462,44 +462,49 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
             .get(&pipe.element_id)
             .expect("section exists for pipe");
         let pressure = pressure_for_pipe(&model, pipe_index, &pipe.element_id);
-        let stress = recover_stresses(&StressRecoveryInput {
-            resultants: ForceResultants::new(
-                Some(local.local_forces[UX]),
-                Some(local.local_forces[RY]),
-                Some(local.local_forces[RZ]),
-                Some(local.local_forces[RX]),
-            ),
-            section: StressSectionProperties::new(
-                Some(section.area),
-                Some(section.section_modulus),
-                Some(section.section_modulus),
-                Some(section.torsion_constant),
-                Some(section.torsion_radius),
-            ),
-            pressure: pressure.map(|p| {
-                PressureBasis::new(
-                    Some(p),
-                    Some(section.membrane_radius),
-                    Some(section.wall_thickness),
-                )
-            }),
-            statuses: vec![AnalysisStatus::MechanicsSolved],
-        });
-        for finding in stress.findings {
-            diagnostics.push(diag(
-                &format!(
-                    "diagnostic:stress:{}:{:?}",
-                    stable_suffix(&pipe.element_id),
-                    finding.code
-                ),
-                "STRESS_RECOVERY_LIMITED",
-                "warning",
-                finding.message,
-                vec![pipe.element_id.clone()],
-            ));
+        let end_i_stress = recover_endpoint_stress(&local.local_forces, 0, section, pressure);
+        let end_j_stress =
+            recover_endpoint_stress(&local.local_forces, DOF_PER_NODE, section, pressure);
+        for (location, stress) in [("end_i", &end_i_stress), ("end_j", &end_j_stress)] {
+            for finding in &stress.findings {
+                diagnostics.push(diag(
+                    &format!(
+                        "diagnostic:stress:{}:{}:{:?}",
+                        stable_suffix(&pipe.element_id),
+                        location.replace('_', "-"),
+                        finding.code
+                    ),
+                    "STRESS_RECOVERY_LIMITED",
+                    "warning",
+                    finding.message.clone(),
+                    vec![pipe.element_id.clone()],
+                ));
+            }
         }
-        if let Some(summary) = stress.summary {
-            let value = summary.max_normal.abs().max(summary.min_normal.abs()) / 1_000_000.0;
+        if end_i_stress.findings.is_empty() {
+            append_endpoint_stress_results(
+                &mut results,
+                &pipe.element_id,
+                "end_i",
+                &end_i_stress.components,
+                pressure.is_some(),
+            );
+        }
+        if end_j_stress.findings.is_empty() {
+            append_endpoint_stress_results(
+                &mut results,
+                &pipe.element_id,
+                "end_j",
+                &end_j_stress.components,
+                pressure.is_some(),
+            );
+        }
+        let summary_value = [end_i_stress.summary, end_j_stress.summary]
+            .into_iter()
+            .flatten()
+            .map(|summary| summary.max_normal.abs().max(summary.min_normal.abs()) / 1_000_000.0)
+            .reduce(f64::max);
+        if let Some(value) = summary_value {
             let result_id = format!("result:stress:{}", stable_suffix(&pipe.element_id));
             if max_stress
                 .as_ref()
@@ -890,50 +895,243 @@ fn append_element_force_results(
     let components = [
         (
             format!("result:force:{suffix}:axial"),
+            format!("result:force:{suffix}:axial:end-j"),
             "element_local_axial_force",
             "axial_force",
-            local_forces[UX],
+            UX,
             "N",
         ),
         (
             format!("result:moment:{suffix}:torsion"),
+            format!("result:moment:{suffix}:torsion:end-j"),
             "element_local_torsional_moment",
             "torsional_moment",
-            local_forces[RX],
+            RX,
             "N*m",
         ),
         (
             format!("result:moment:{suffix}:bending-y"),
+            format!("result:moment:{suffix}:bending-y:end-j"),
             "element_local_bending_moment_y",
             "bending_moment_y",
-            local_forces[RY],
+            RY,
             "N*m",
         ),
         (
             format!("result:moment:{suffix}:bending-z"),
+            format!("result:moment:{suffix}:bending-z:end-j"),
             "element_local_bending_moment_z",
             "bending_moment_z",
-            local_forces[RZ],
+            RZ,
             "N*m",
         ),
     ];
-    for (id, kind, component, value, unit) in components {
-        results.push(ResultItem {
-            id,
-            kind: kind.to_string(),
-            value: round6(value),
-            unit: unit.to_string(),
-            entity_ref: pipe_id.to_string(),
-            metadata: Some(ResultMetadata {
-                component: component.to_string(),
-                coordinate_system: "element_local".to_string(),
-                location: "end_i".to_string(),
-                basis: "recovered_from_local_element_stiffness".to_string(),
-                sign_convention:
-                    "positive value follows the element-local DOF at the i-end force vector"
-                        .to_string(),
-            }),
-        });
+    for (end_i_id, end_j_id, kind, component, dof, unit) in components {
+        append_endpoint_force_result(
+            results,
+            pipe_id,
+            &end_i_id,
+            kind,
+            component,
+            local_forces[dof],
+            unit,
+            "end_i",
+            "positive value follows the element-local DOF at the i-end force vector",
+        );
+        append_endpoint_force_result(
+            results,
+            pipe_id,
+            &end_j_id,
+            kind,
+            component,
+            local_forces[DOF_PER_NODE + dof],
+            unit,
+            "end_j",
+            "positive value follows the element-local DOF at the j-end force vector",
+        );
+    }
+}
+
+fn append_endpoint_force_result(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    id: &str,
+    kind: &str,
+    component: &str,
+    value: f64,
+    unit: &str,
+    location: &str,
+    sign_convention: &str,
+) {
+    results.push(ResultItem {
+        id: id.to_string(),
+        kind: kind.to_string(),
+        value: round6(value),
+        unit: unit.to_string(),
+        entity_ref: pipe_id.to_string(),
+        metadata: Some(ResultMetadata {
+            component: component.to_string(),
+            coordinate_system: "element_local".to_string(),
+            location: location.to_string(),
+            basis: "recovered_from_local_element_stiffness".to_string(),
+            sign_convention: sign_convention.to_string(),
+        }),
+    });
+}
+
+fn recover_endpoint_stress(
+    local_forces: &[f64],
+    offset: usize,
+    section: &DerivedSection,
+    pressure: Option<f64>,
+) -> open_pipe_stress_stress_recovery::StressRecoveryResult {
+    recover_stresses(&StressRecoveryInput {
+        resultants: ForceResultants::new(
+            Some(local_forces[offset + UX]),
+            Some(local_forces[offset + RY]),
+            Some(local_forces[offset + RZ]),
+            Some(local_forces[offset + RX]),
+        ),
+        section: StressSectionProperties::new(
+            Some(section.area),
+            Some(section.section_modulus),
+            Some(section.section_modulus),
+            Some(section.torsion_constant),
+            Some(section.torsion_radius),
+        ),
+        pressure: pressure.map(|p| {
+            PressureBasis::new(
+                Some(p),
+                Some(section.membrane_radius),
+                Some(section.wall_thickness),
+            )
+        }),
+        statuses: vec![AnalysisStatus::MechanicsSolved],
+    })
+}
+
+fn append_endpoint_stress_results(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    location: &str,
+    components: &StressComponents,
+    include_pressure: bool,
+) {
+    let suffix = stable_suffix(pipe_id);
+    let id_location = endpoint_id_location(location);
+    let local_components = [
+        (
+            "axial-normal",
+            "element_local_axial_normal_stress",
+            "axial_normal_stress",
+            components.axial_normal,
+            "positive normal stress follows the element-local axial resultant at this endpoint",
+        ),
+        (
+            "bending-normal-y",
+            "element_local_bending_normal_stress_y",
+            "bending_normal_stress_y",
+            components.bending_normal_y,
+            "positive bending normal stress follows the element-local y bending resultant at this endpoint",
+        ),
+        (
+            "bending-normal-z",
+            "element_local_bending_normal_stress_z",
+            "bending_normal_stress_z",
+            components.bending_normal_z,
+            "positive bending normal stress follows the element-local z bending resultant at this endpoint",
+        ),
+        (
+            "torsional-shear",
+            "element_local_torsional_shear_stress",
+            "torsional_shear_stress",
+            components.torsional_shear,
+            "positive torsional shear stress follows the element-local torsional resultant at this endpoint",
+        ),
+    ];
+    for (id_tail, kind, component, value, sign_convention) in local_components {
+        if let Some(value) = value {
+            append_endpoint_stress_result(
+                results,
+                pipe_id,
+                &format!("result:stress:{suffix}:{id_location}:{id_tail}"),
+                kind,
+                component,
+                value,
+                "element_local",
+                location,
+                sign_convention,
+            );
+        }
+    }
+
+    if include_pressure {
+        let pressure_components = [
+            (
+                "pressure-hoop",
+                "pipe_section_pressure_hoop_stress",
+                "pressure_hoop_stress",
+                components.pressure_hoop,
+                "positive pressure membrane hoop stress follows the explicit pipe pressure basis",
+            ),
+            (
+                "pressure-longitudinal",
+                "pipe_section_pressure_longitudinal_stress",
+                "pressure_longitudinal_stress",
+                components.pressure_longitudinal,
+                "positive pressure membrane longitudinal stress follows the explicit pipe pressure basis",
+            ),
+        ];
+        for (id_tail, kind, component, value, sign_convention) in pressure_components {
+            if let Some(value) = value {
+                append_endpoint_stress_result(
+                    results,
+                    pipe_id,
+                    &format!("result:stress:{suffix}:{id_location}:{id_tail}"),
+                    kind,
+                    component,
+                    value,
+                    "pipe_section",
+                    location,
+                    sign_convention,
+                );
+            }
+        }
+    }
+}
+
+fn append_endpoint_stress_result(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    id: &str,
+    kind: &str,
+    component: &str,
+    value_pa: f64,
+    coordinate_system: &str,
+    location: &str,
+    sign_convention: &str,
+) {
+    results.push(ResultItem {
+        id: id.to_string(),
+        kind: kind.to_string(),
+        value: round6(value_pa / 1_000_000.0),
+        unit: "MPa".to_string(),
+        entity_ref: pipe_id.to_string(),
+        metadata: Some(ResultMetadata {
+            component: component.to_string(),
+            coordinate_system: coordinate_system.to_string(),
+            location: location.to_string(),
+            basis: "recovered_from_open_mechanics_stress_components".to_string(),
+            sign_convention: sign_convention.to_string(),
+        }),
+    });
+}
+
+fn endpoint_id_location(location: &str) -> &str {
+    match location {
+        "end_i" => "end-i",
+        "end_j" => "end-j",
+        other => other,
     }
 }
 
@@ -1249,9 +1447,13 @@ mod tests {
             .collect::<HashSet<_>>();
 
         assert!(result_ids.contains("result:force:pipe-P-120:axial"));
+        assert!(result_ids.contains("result:force:pipe-P-120:axial:end-j"));
         assert!(result_ids.contains("result:moment:pipe-P-120:torsion"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:torsion:end-j"));
         assert!(result_ids.contains("result:moment:pipe-P-120:bending-y"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:bending-y:end-j"));
         assert!(result_ids.contains("result:moment:pipe-P-120:bending-z"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:bending-z:end-j"));
         assert!(result.results.iter().any(|item| {
             item.id == "result:force:pipe-P-120:axial"
                 && item.kind == "element_local_axial_force"
@@ -1262,6 +1464,68 @@ mod tests {
                     .map(|metadata| {
                         metadata.component == "axial_force"
                             && metadata.coordinate_system == "element_local"
+                            && metadata.location == "end_i"
+                    })
+                    .unwrap_or(false)
+        }));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:force:pipe-P-120:axial:end-j"
+                && item.kind == "element_local_axial_force"
+                && item.unit == "N"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "axial_force"
+                            && metadata.coordinate_system == "element_local"
+                            && metadata.location == "end_j"
+                            && metadata.sign_convention.contains("j-end")
+                    })
+                    .unwrap_or(false)
+        }));
+    }
+
+    #[test]
+    fn valid_invented_model_exposes_endpoint_stress_components() {
+        let result = run_linear_static_preview(request());
+        let result_ids = result
+            .results
+            .iter()
+            .map(|item| item.id.as_str())
+            .collect::<HashSet<_>>();
+
+        assert!(result_ids.contains("result:stress:pipe-P-120"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-i:axial-normal"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-i:torsional-shear"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-i:pressure-hoop"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-j:axial-normal"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-j:torsional-shear"));
+        assert!(result_ids.contains("result:stress:pipe-P-120:end-j:pressure-longitudinal"));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:stress:pipe-P-120:end-j:torsional-shear"
+                && item.kind == "element_local_torsional_shear_stress"
+                && item.unit == "MPa"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "torsional_shear_stress"
+                            && metadata.coordinate_system == "element_local"
+                            && metadata.location == "end_j"
+                            && metadata.basis == "recovered_from_open_mechanics_stress_components"
+                    })
+                    .unwrap_or(false)
+        }));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:stress:pipe-P-120:end-i:pressure-hoop"
+                && item.kind == "pipe_section_pressure_hoop_stress"
+                && item.unit == "MPa"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "pressure_hoop_stress"
+                            && metadata.coordinate_system == "pipe_section"
                             && metadata.location == "end_i"
                     })
                     .unwrap_or(false)
@@ -1281,9 +1545,18 @@ mod tests {
         assert_eq!(generated_force["kind"], fixture_force["kind"]);
         assert_eq!(generated_force["unit"], fixture_force["unit"]);
         assert_eq!(generated_force["metadata"], fixture_force["metadata"]);
+        let fixture_force_end_j = find_result(&fixture, "result:force:pipe-P-120:axial:end-j");
+        assert_eq!(fixture_force_end_j["metadata"]["location"], "end_j");
         assert!(find_result(&fixture, "result:moment:pipe-P-120:bending-z")
             .get("metadata")
             .is_some());
+        let fixture_stress_end_j =
+            find_result(&fixture, "result:stress:pipe-P-120:end-j:torsional-shear");
+        assert_eq!(fixture_stress_end_j["metadata"]["location"], "end_j");
+        assert_eq!(
+            fixture_stress_end_j["metadata"]["basis"],
+            "recovered_from_open_mechanics_stress_components"
+        );
     }
 
     #[test]

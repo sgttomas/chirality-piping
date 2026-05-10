@@ -440,6 +440,18 @@ button:focus-visible {
   overflow-wrap: anywhere;
 }
 
+.endpoint-pair {
+  display: grid;
+  gap: 6px;
+}
+
+.endpoint-pair h4 {
+  margin: 0;
+  color: #465450;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .gap-list {
   display: grid;
   gap: 7px;

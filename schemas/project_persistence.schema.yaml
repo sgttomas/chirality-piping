@@ -48,6 +48,9 @@
       "items": {
         "$ref": "#/$defs/Diagnostic"
       }
+    },
+    "professional_boundary": {
+      "$ref": "#/$defs/ProfessionalBoundary"
     }
   },
   "$defs": {
@@ -65,6 +68,11 @@
             "schema",
             "model_payload",
             "rule_pack",
+            "project_persistence",
+            "model_state",
+            "analysis_run",
+            "result_envelope",
+            "result",
             "private_library",
             "report",
             "external_file",
@@ -121,6 +129,10 @@
             "input_manifest",
             "report_manifest",
             "external_artifact",
+            "model_state_record",
+            "analysis_run_record",
+            "result_envelope",
+            "result_value",
             "TBD"
           ]
         },
@@ -492,6 +504,9 @@
           "items": {
             "$ref": "#/$defs/HumanAcceptanceRef"
           }
+        },
+        "run_history": {
+          "$ref": "#/$defs/RunHistory"
         }
       }
     },
@@ -598,6 +613,93 @@
               "documented_volatile_field_exclusion",
               "TBD"
             ]
+          }
+        }
+      }
+    },
+    "ProfessionalBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_review_required",
+        "software_makes_compliance_claim",
+        "software_makes_certification_claim",
+        "software_makes_sealing_claim",
+        "software_makes_approval_claim",
+        "software_makes_authentication_claim"
+      ],
+      "properties": {
+        "human_review_required": {
+          "const": true
+        },
+        "software_makes_compliance_claim": {
+          "const": false
+        },
+        "software_makes_certification_claim": {
+          "const": false
+        },
+        "software_makes_sealing_claim": {
+          "const": false
+        },
+        "software_makes_approval_claim": {
+          "const": false
+        },
+        "software_makes_authentication_claim": {
+          "const": false
+        }
+      }
+    },
+    "RunHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_state_refs",
+        "analysis_run_refs",
+        "result_envelope_refs",
+        "result_refs",
+        "hash_manifest"
+      ],
+      "properties": {
+        "model_state_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactRef"
+          }
+        },
+        "model_state_records": {
+          "type": "array",
+          "items": {
+            "$ref": "model_state.schema.json"
+          }
+        },
+        "analysis_run_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactRef"
+          }
+        },
+        "analysis_run_records": {
+          "type": "array",
+          "items": {
+            "$ref": "analysis_run.schema.json"
+          }
+        },
+        "result_envelope_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactRef"
+          }
+        },
+        "result_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactRef"
+          }
+        },
+        "hash_manifest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Checksum"
           }
         }
       }

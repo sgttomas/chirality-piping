@@ -98,6 +98,20 @@
       }
     },
     {
+      "id": "result:force:pipe-P-100:axial:end-j",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-100:torsion",
       "kind": "element_local_torsional_moment",
       "value": -404.469018,
@@ -109,6 +123,20 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-100:torsion:end-j",
+      "kind": "element_local_torsional_moment",
+      "value": 404.469018,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
       }
     },
     {
@@ -126,6 +154,20 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-100:bending-y:end-j",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-100:bending-z",
       "kind": "element_local_bending_moment_z",
       "value": 273.24131,
@@ -140,9 +182,135 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-100:bending-z:end-j",
+      "kind": "element_local_bending_moment_z",
+      "value": -1839.2,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-i:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-i:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-i:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": 1.996962,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-i:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": -1.478015,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-j:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-j:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-j:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": -13.441647,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100:end-j:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": 1.478015,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
       "id": "result:stress:pipe-P-100",
       "kind": "open_formula_stress_summary",
-      "value": 1.996962,
+      "value": 13.441647,
       "unit": "MPa",
       "entity_ref": "pipe:P-100"
     },
@@ -161,6 +329,20 @@
       }
     },
     {
+      "id": "result:force:pipe-P-110:axial:end-j",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-110:torsion",
       "kind": "element_local_torsional_moment",
       "value": -1839.2,
@@ -172,6 +354,20 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-110:torsion:end-j",
+      "kind": "element_local_torsional_moment",
+      "value": 1839.2,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
       }
     },
     {
@@ -189,6 +385,20 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-110:bending-y:end-j",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-110:bending-z",
       "kind": "element_local_bending_moment_z",
       "value": -404.469018,
@@ -203,9 +413,135 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-110:bending-z:end-j",
+      "kind": "element_local_bending_moment_z",
+      "value": -770.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-i:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-i:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-i:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": -2.95603,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-i:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": -6.720824,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-j:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-j:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-j:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": -5.627484,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110:end-j:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": 6.720824,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
       "id": "result:stress:pipe-P-110",
       "kind": "open_formula_stress_summary",
-      "value": 2.95603,
+      "value": 5.627484,
       "unit": "MPa",
       "entity_ref": "pipe:P-110"
     },
@@ -224,6 +560,20 @@
       }
     },
     {
+      "id": "result:force:pipe-P-120:axial:end-j",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-120:torsion",
       "kind": "element_local_torsional_moment",
       "value": 770.0,
@@ -235,6 +585,20 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-120:torsion:end-j",
+      "kind": "element_local_torsional_moment",
+      "value": -770.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
       }
     },
     {
@@ -252,6 +616,20 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-120:bending-y:end-j",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-120:bending-z",
       "kind": "element_local_bending_moment_z",
       "value": 1839.2,
@@ -263,6 +641,188 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-120:bending-z:end-j",
+      "kind": "element_local_bending_moment_z",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": 13.441647,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": 2.813742,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:pressure-hoop",
+      "kind": "pipe_section_pressure_hoop_stress",
+      "value": 13.8,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "pressure_hoop_stress",
+        "coordinate_system": "pipe_section",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive pressure membrane hoop stress follows the explicit pipe pressure basis"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-i:pressure-longitudinal",
+      "kind": "pipe_section_pressure_longitudinal_stress",
+      "value": 6.9,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "pressure_longitudinal_stress",
+        "coordinate_system": "pipe_section",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive pressure membrane longitudinal stress follows the explicit pipe pressure basis"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": -2.813742,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:pressure-hoop",
+      "kind": "pipe_section_pressure_hoop_stress",
+      "value": 13.8,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "pressure_hoop_stress",
+        "coordinate_system": "pipe_section",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive pressure membrane hoop stress follows the explicit pipe pressure basis"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120:end-j:pressure-longitudinal",
+      "kind": "pipe_section_pressure_longitudinal_stress",
+      "value": 6.9,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "pressure_longitudinal_stress",
+        "coordinate_system": "pipe_section",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive pressure membrane longitudinal stress follows the explicit pipe pressure basis"
       }
     },
     {
@@ -287,6 +847,20 @@
       }
     },
     {
+      "id": "result:force:pipe-P-130:axial:end-j",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-130:torsion",
       "kind": "element_local_torsional_moment",
       "value": 0.0,
@@ -298,6 +872,20 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-130:torsion:end-j",
+      "kind": "element_local_torsional_moment",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
       }
     },
     {
@@ -315,6 +903,20 @@
       }
     },
     {
+      "id": "result:moment:pipe-P-130:bending-y:end-j",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
       "id": "result:moment:pipe-P-130:bending-z",
       "kind": "element_local_bending_moment_z",
       "value": -770.0,
@@ -326,6 +928,132 @@
         "location": "end_i",
         "basis": "recovered_from_local_element_stiffness",
         "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-130:bending-z:end-j",
+      "kind": "element_local_bending_moment_z",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the j-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-i:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-i:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-i:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": -5.627484,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-i:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-j:axial-normal",
+      "kind": "element_local_axial_normal_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "axial_normal_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive normal stress follows the element-local axial resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-j:bending-normal-y",
+      "kind": "element_local_bending_normal_stress_y",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_normal_stress_y",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local y bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-j:bending-normal-z",
+      "kind": "element_local_bending_normal_stress_z",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_normal_stress_z",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive bending normal stress follows the element-local z bending resultant at this endpoint"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130:end-j:torsional-shear",
+      "kind": "element_local_torsional_shear_stress",
+      "value": 0.0,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "torsional_shear_stress",
+        "coordinate_system": "element_local",
+        "location": "end_j",
+        "basis": "recovered_from_open_mechanics_stress_components",
+        "sign_convention": "positive torsional shear stress follows the element-local torsional resultant at this endpoint"
       }
     },
     {

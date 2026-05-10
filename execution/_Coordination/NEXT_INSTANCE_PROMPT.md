@@ -1,42 +1,73 @@
-# NEXT INSTANCE PROMPT - Post TP-MAC-03 Planning
+# NEXT INSTANCE PROMPT - TP-PER-01 Closeout Baseline
 
-Continue OpenPipeStress development after closing TP-MAC-03 result
-interpretation and review workflow implementation.
+Continue OpenPipeStress development from the implemented TP-PER-01 project
+persistence spine, the implemented TP-RUN-01 preview runtime spine, and the
+closed TP-MAC-05 mechanics baseline.
 
 This file is the handoff entry point. Use it to orient first, then read the
-linked plan and supporting documents below.
+compact active context below.
 
 ## Required Reading
 
 After this file, read only the compact active context in this order:
 
-1. `plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`
-2. `AGENTS.md`
-3. `docs/CONTRACT.md`
-4. `docs/IP_AND_DATA_BOUNDARY.md`
-5. `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-6. `execution/_Coordination/_COORDINATION.md`
-7. `plans/TP-MAC-02_PHYSICS_FIRST_APPLICATION_PLAN.md`
+1. `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
+2. `plans/TP-RUN-01_PREVIEW_RUNTIME_SPINE_PLAN.md`
+3. `plans/TP-MAC-05_ENDPOINT_STRESS_COMPONENT_RESULTS_PLAN.md`
+4. `execution/_Coordination/NEXT_INSTANCE_STATE.md`
+5. `execution/_Coordination/_COORDINATION.md`
+6. `AGENTS.md`
+7. `docs/CONTRACT.md`
+8. `docs/IP_AND_DATA_BOUNDARY.md`
 
 Then read only the implementation files needed for the requested task.
 
 Do not reload the full REV05 tranche/DAG/evidence history by default. Those
 files are retained for audit traceability, not as the normal starting context
-for the next TP-MAC plan.
+for current product-preview work.
 
 ## Active Objective
 
-TP-MAC-03 is closed. The next objective is to create a new governed plan before
-adding more mechanics output.
+Preserve the implemented schema-shaped persistence and preview runtime
+baselines unless a new governed tranche explicitly changes them:
 
-The recommended next plan is an endpoint/station recovery consumer tranche:
+- `core/project_persistence` builds, validates, hashes, and round-trips
+  `openpipestress.project_persistence` envelopes;
+- persistence envelopes may carry run-history refs or records for model states,
+  analysis runs, result envelopes, result refs, and hash manifests;
+- the invented persisted-preview fixture uses a canonical-model payload and
+  carries TP-RUN-01 result-envelope and endpoint-stress refs;
+- the Tauri preview mechanics command accepts optional preview model input and
+  keeps the zero-argument invented fixture fallback;
+- the loaded React preview model is passed into the desktop runtime solve when
+  Tauri is available;
+- the in-memory headless runner bridge accepts structured runner metadata plus
+  `LinearStaticPreviewRequest`;
+- preserve TP-MAC-05 result IDs and mechanics behavior.
 
-- define how users inspect both element ends and station-level results;
-- identify the desktop/report consumer before adding endpoint-j solver output;
-- preserve the existing result/diagnostic interpretation workflow as the
-  consumer surface;
-- keep endpoint-j and station recovery deferred until the new plan explicitly
-  scopes them.
+Do not implement desktop save/open UX, final CLI syntax, physical project
+containers, migrations, external storage, external execution, new mechanics,
+release claims, or professional acceptance workflows without a new governed
+plan.
+
+## Current Baseline
+
+TP-PER-01 is implemented and closed in
+`plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`.
+
+The persistence baseline now includes:
+
+- schema-shaped project persistence service helpers;
+- deterministic canonical JSON and SHA-256 hash manifests;
+- validation diagnostics for missing provenance, private-data boundary,
+  professional-boundary, run-history refs, and hash mismatches;
+- optional schema support for model-state refs/records, analysis-run
+  refs/records, result-envelope refs, result refs, and hash manifests;
+- invented persisted-preview fixture with canonical model payload and
+  TP-RUN-01 endpoint stress result refs.
+
+TP-RUN-01 remains the closed runtime baseline. TP-MAC-05 remains the closed
+mechanics baseline.
 
 ## Guardrails
 
@@ -45,44 +76,46 @@ The recommended next plan is an endpoint/station recovery consumer tranche:
   data, allowables, SIF/flexibility tables, code criteria, or hidden
   engineering defaults.
 - Do not claim compliance, certification, sealing, professional approval,
-  release readiness, or production readiness.
+  release readiness, production readiness, or durable storage readiness.
 - Do not allow agent proposals or review explanations to mutate accepted model
   state.
 - Return explicit diagnostics or gap-ledger entries for unsupported or
-  incomplete mechanics paths.
-- Preserve `ResultItem.metadata` semantics when adding or consuming local
-  force/moment result items.
+  incomplete mechanics/persistence paths.
+- Preserve existing result IDs unless a future governed plan explicitly adds a
+  new ID pattern.
 
-## Current Gate
+## Deferred
 
-TP-MAC-02 live browser smoke passed on 2026-05-10 and forms the implementation
-baseline. Local force/moment result metadata is covered by DEL-08-04, preview
-mechanics results can produce DEL-14-02 immutable analysis-run records, and the
-desktop report packet surfaces read-only DEL-14-02 audit context.
+Keep deferred unless a new governed plan explicitly scopes them:
 
-TP-MAC-03 is implemented and closed in
-`plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`.
+- desktop save/open UX;
+- physical project containers and package formats;
+- migrations and external storage;
+- final CLI syntax and package-script contract;
+- intermediate station recovery;
+- shear force recovery;
+- pressure-to-frame load conversion;
+- equivalent/principal stress;
+- protected rule/code checks and private criteria handling;
+- governed calculation-report generation;
+- professional acceptance workflows.
 
-The desktop interpretation workflow is implemented: result rows can be selected,
-`ResultInterpretation` details are derived from
-`MechanicsResult.results[]`, selected result rows update model/viewport context
-through `entity_ref`, selected-result review narratives remain non-mutating,
-diagnostics can be selected with affected-ref/linked-result detail, selected
-diagnostics update model/viewport context where possible, selected-diagnostic
-review narratives remain non-mutating, and the mechanics gap ledger lists
-endpoint-j recovery as deferred.
+## Closeout State
 
-Endpoint-j force/moment recovery is important but remains deferred until the
-next plan creates a concrete consumer for both element ends.
+TP-PER-01 verification passed on 2026-05-10:
 
-## Closeout
+- `python3 tests/test_persistence_schema.py`
+- `python3 -m pytest tests/test_project_persistence_service.py`
+- `python3 tests/test_model_state_schema.py`
+- `python3 tests/test_analysis_run_schema.py`
+- `python3 tests/test_analysis_run_records.py`
+- `python3 tests/test_headless_runner_contract.py`
+- `python3 -m pytest tests/product_preview/test_product_preview_service.py tests/test_results_schema.py`
+- `python3 tests/test_results_schema.py`
+- `python3 -m py_compile core/project_persistence/service.py core/project_persistence/__init__.py`
+- `git diff --check`
 
-When a task changes coordination state, update:
-
-- `execution/_Coordination/NEXT_INSTANCE_STATE.md`
-- `execution/_Coordination/_COORDINATION.md` only if the durable coordination
-  posture changes
-
-Keep active handoff concise. Archive bulky superseded phase material under
-`execution/_Coordination/_Archive/` instead of expanding the active root
-context.
+No successor implementation tranche is open in this prompt; open a governed
+plan before adding desktop save/open UX, final CLI syntax, physical project
+containers, migrations, external storage, external execution, new mechanics,
+release/professional claims, or professional acceptance workflows.

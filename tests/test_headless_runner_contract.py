@@ -170,6 +170,7 @@ def main():
         "job",
         "analysis_status",
         "result_envelope_ref",
+        "result_refs",
         "audit_manifest_ref",
         "checksums",
         "diagnostics",
@@ -181,6 +182,10 @@ def main():
     result_ref = defs["ResultEnvelopeRef"]["properties"]
     assert result_ref["schema_ref"]["const"] == "schemas/results.schema.yaml"
     assert result_ref["compatibility"]["const"] == "schema_first_json_result_envelope"
+    assert (
+        defs["HeadlessRunnerResult"]["properties"]["result_refs"]["items"]["$ref"]
+        == "#/$defs/Reference"
+    )
 
     status = enum_at(schema, "AnalysisStatus")
     assert {

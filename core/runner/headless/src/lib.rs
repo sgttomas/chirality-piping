@@ -6,7 +6,14 @@
 //! filesystem, run GUI/report/adapter/local-FEA workflows, or emit professional
 //! or code-compliance claims.
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+use open_pipe_stress_product_physics::{
+    run_linear_static_preview, LinearStaticPreviewRequest, MechanicsEnvelope,
+};
+use serde::Serialize;
+use serde_json::{Map, Value};
+use sha2::{Digest, Sha256};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum AnalysisStatus {
     ModelIncomplete,
     MechanicsSolved,
@@ -16,7 +23,7 @@ pub enum AnalysisStatus {
     HumanReviewRequired,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum DiagnosticClass {
     SolveBlocking,
     RuleCheckBlocking,
@@ -30,14 +37,14 @@ pub enum DiagnosticClass {
     PrivacyWarning,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum DiagnosticSeverity {
     Info,
     Warning,
     Blocking,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum RunnerOperation {
     Solve,
     ValidateInput,
@@ -47,7 +54,7 @@ pub enum RunnerOperation {
     Tbd,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum JobStateKind {
     Queued,
     Running,
@@ -57,7 +64,7 @@ pub enum JobStateKind {
     Tbd,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum PrivacyClass {
     PublicMetadata,
     PrivateProjectData,
@@ -67,7 +74,7 @@ pub enum PrivacyClass {
     Tbd,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub enum RedistributionStatus {
     PublicPermissive,
     PrivateOnly,
@@ -77,7 +84,7 @@ pub enum RedistributionStatus {
     Tbd,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Reference {
     pub ref_type: String,
     pub ref_id: String,
@@ -96,7 +103,7 @@ impl Reference {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Provenance {
     pub source_name: String,
     pub source_location: String,
@@ -118,7 +125,7 @@ impl Provenance {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ChecksumRef {
     pub algorithm: String,
     pub canonicalization: String,
@@ -136,7 +143,7 @@ impl ChecksumRef {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct PrivacyContext {
     pub local_only: bool,
     pub telemetry_allowed: bool,
@@ -161,7 +168,7 @@ impl PrivacyContext {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub struct ProfessionalBoundary {
     pub human_review_required: bool,
     pub software_makes_compliance_claim: bool,
@@ -193,7 +200,7 @@ impl ProfessionalBoundary {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct Diagnostic {
     pub code: String,
     pub class: DiagnosticClass,
@@ -224,7 +231,7 @@ impl Diagnostic {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 pub struct TbdDecisions {
     pub final_cli_command_syntax: bool,
     pub package_scripts: bool,
@@ -268,7 +275,7 @@ impl TbdDecisions {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RunnerRequest {
     pub request_id: String,
     pub operation: RunnerOperation,
@@ -285,7 +292,7 @@ pub struct RunnerRequest {
     pub tbd_decisions: TbdDecisions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct JobState {
     pub job_id: String,
     pub state: JobStateKind,
@@ -295,7 +302,7 @@ pub struct JobState {
     pub cancellation_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct ResultEnvelopeRef {
     pub schema_ref: String,
     pub envelope_ref: Reference,
@@ -318,12 +325,13 @@ impl ResultEnvelopeRef {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RunnerResult {
     pub run_id: String,
     pub job: JobState,
     pub analysis_status: Vec<AnalysisStatus>,
     pub result_envelope_ref: ResultEnvelopeRef,
+    pub result_refs: Vec<Reference>,
     pub audit_manifest_ref: Reference,
     pub checksums: Vec<ChecksumRef>,
     pub diagnostics: Vec<Diagnostic>,
@@ -332,7 +340,7 @@ pub struct RunnerResult {
     pub professional_boundary: ProfessionalBoundary,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct RunnerValidation {
     pub diagnostics: Vec<Diagnostic>,
 }
@@ -460,6 +468,19 @@ pub fn validate_result(result: &RunnerResult) -> RunnerValidation {
         ));
     }
 
+    if result.result_refs.is_empty()
+        || result
+            .result_refs
+            .iter()
+            .any(|reference| !reference.is_complete())
+    {
+        diagnostics.push(Diagnostic::runner_blocking(
+            "HEADLESS_RUNNER_RESULT_REFS_MISSING",
+            Reference::new("runner_result", &result.run_id),
+            "runner result must include deterministic references for computed result rows",
+        ));
+    }
+
     if !result.audit_manifest_ref.is_complete()
         || result.checksums.is_empty()
         || result
@@ -484,6 +505,110 @@ pub fn validate_result(result: &RunnerResult) -> RunnerValidation {
     );
 
     RunnerValidation { diagnostics }
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct PreviewRunnerOutput {
+    pub runner_result: RunnerResult,
+    pub mechanics_envelope: Option<MechanicsEnvelope>,
+}
+
+pub fn run_preview_in_memory(
+    request: RunnerRequest,
+    preview_request: LinearStaticPreviewRequest,
+) -> PreviewRunnerOutput {
+    let request_validation = validate_request(&request);
+    let run_id = format!("run:headless-preview:{}", request.request_id);
+
+    if request_validation.has_blocking_diagnostics() {
+        return PreviewRunnerOutput {
+            runner_result: RunnerResult {
+                run_id: run_id.clone(),
+                job: JobState {
+                    job_id: format!("job:{}", request.request_id),
+                    state: JobStateKind::Failed,
+                    current_step: 1,
+                    total_steps: 1,
+                    cancellation_supported: true,
+                    cancellation_requested: false,
+                },
+                analysis_status: vec![
+                    AnalysisStatus::ModelIncomplete,
+                    AnalysisStatus::HumanReviewRequired,
+                ],
+                result_envelope_ref: ResultEnvelopeRef::result_export(Reference::new(
+                    "result_envelope",
+                    format!("result-envelope:{run_id}:not-produced"),
+                )),
+                result_refs: vec![Reference::new(
+                    "runner_validation",
+                    format!("runner-validation:{}", request.request_id),
+                )],
+                audit_manifest_ref: Reference::new(
+                    "audit_manifest",
+                    format!("audit-manifest:{run_id}:blocked"),
+                ),
+                checksums: vec![checksum_ref(
+                    "runner_request",
+                    &request.request_id,
+                    &request,
+                )],
+                diagnostics: request_validation.diagnostics,
+                privacy: request.privacy,
+                provenance: request.provenance,
+                professional_boundary: request.professional_boundary,
+            },
+            mechanics_envelope: None,
+        };
+    }
+
+    let mechanics = run_linear_static_preview(preview_request);
+    let result_refs = mechanics
+        .results
+        .iter()
+        .map(|item| Reference::new("result", item.id.clone()))
+        .collect::<Vec<_>>();
+    let mut analysis_status = vec![AnalysisStatus::HumanReviewRequired];
+    if mechanics.status.mechanics == "MECHANICS_SOLVED" {
+        analysis_status.push(AnalysisStatus::MechanicsSolved);
+    } else {
+        analysis_status.push(AnalysisStatus::ModelIncomplete);
+    }
+    if mechanics.status.rule_check == "RULE_INPUTS_INCOMPLETE" {
+        analysis_status.push(AnalysisStatus::RuleInputsIncomplete);
+    }
+
+    let runner_result = RunnerResult {
+        run_id: run_id.clone(),
+        job: JobState {
+            job_id: format!("job:{}", request.request_id),
+            state: JobStateKind::Completed,
+            current_step: 3,
+            total_steps: 3,
+            cancellation_supported: true,
+            cancellation_requested: false,
+        },
+        analysis_status,
+        result_envelope_ref: ResultEnvelopeRef::result_export(Reference::new(
+            "result_envelope",
+            format!("result-envelope:{run_id}"),
+        )),
+        result_refs,
+        audit_manifest_ref: Reference::new("audit_manifest", format!("audit-manifest:{run_id}")),
+        checksums: vec![
+            checksum_ref("runner_request", &request.request_id, &request),
+            checksum_ref("result_envelope", &run_id, &mechanics),
+        ],
+        diagnostics: Vec::new(),
+        privacy: request.privacy,
+        provenance: request.provenance,
+        professional_boundary: request.professional_boundary,
+    };
+
+    PreviewRunnerOutput {
+        runner_result,
+        mechanics_envelope: Some(mechanics),
+    }
 }
 
 fn validate_shared_boundaries(
@@ -519,6 +644,41 @@ fn validate_shared_boundaries(
             "runner output must not make compliance, certification, sealing, approval, or authentication claims",
         ));
     }
+}
+
+fn checksum_ref<T: Serialize>(ref_type: &str, ref_id: &str, value: &T) -> ChecksumRef {
+    ChecksumRef {
+        algorithm: "sha256".to_string(),
+        canonicalization: "JCS-compatible-json".to_string(),
+        payload_ref: Reference::new(ref_type, ref_id),
+        value: sha256_hex(&canonical_json(value)),
+    }
+}
+
+fn canonical_json<T: Serialize>(value: &T) -> String {
+    let value = serde_json::to_value(value).expect("runner values must serialize");
+    serde_json::to_string(&sort_json(value)).expect("runner values must encode as JSON")
+}
+
+fn sort_json(value: Value) -> Value {
+    match value {
+        Value::Array(items) => Value::Array(items.into_iter().map(sort_json).collect()),
+        Value::Object(object) => {
+            let mut sorted = Map::new();
+            let mut entries = object.into_iter().collect::<Vec<_>>();
+            entries.sort_by(|left, right| left.0.cmp(&right.0));
+            for (key, value) in entries {
+                sorted.insert(key, sort_json(value));
+            }
+            Value::Object(sorted)
+        }
+        scalar => scalar,
+    }
+}
+
+fn sha256_hex(payload: &str) -> String {
+    let digest = Sha256::digest(payload.as_bytes());
+    digest.iter().map(|byte| format!("{byte:02x}")).collect()
 }
 
 fn invented_provenance() -> Provenance {
@@ -580,6 +740,16 @@ mod tests {
         }
     }
 
+    fn preview_request() -> LinearStaticPreviewRequest {
+        LinearStaticPreviewRequest {
+            model: serde_json::from_str(include_str!(
+                "../../../../fixtures/product_preview/invented_preview_model.json"
+            ))
+            .expect("invented preview model fixture should parse"),
+            materials: Vec::new(),
+        }
+    }
+
     fn result() -> RunnerResult {
         RunnerResult {
             run_id: "run-1".to_string(),
@@ -599,6 +769,7 @@ mod tests {
                 "result_envelope",
                 "result-envelope-1",
             )),
+            result_refs: vec![Reference::new("result", "result:disp:N-100")],
             audit_manifest_ref: Reference::new("audit_manifest", "manifest-1"),
             checksums: vec![checksum("input-manifest")],
             diagnostics: Vec::new(),
@@ -663,5 +834,51 @@ mod tests {
             .collect();
         assert!(codes.contains(&"HEADLESS_RUNNER_PRIVACY_BOUNDARY_VIOLATION"));
         assert!(codes.contains(&"HEADLESS_RUNNER_PROFESSIONAL_BOUNDARY_VIOLATION"));
+    }
+
+    #[test]
+    fn preview_bridge_executes_product_physics_with_deterministic_refs() {
+        let output = run_preview_in_memory(request(), preview_request());
+        let mechanics = output
+            .mechanics_envelope
+            .as_ref()
+            .expect("valid request should produce mechanics envelope");
+
+        assert_eq!(mechanics.status.mechanics, "MECHANICS_SOLVED");
+        assert!(output
+            .runner_result
+            .analysis_status
+            .contains(&AnalysisStatus::MechanicsSolved));
+        assert!(output
+            .runner_result
+            .result_refs
+            .iter()
+            .any(|reference| reference.ref_id == "result:stress:pipe-P-120:end-j:torsional-shear"));
+        assert!(output
+            .runner_result
+            .checksums
+            .iter()
+            .any(
+                |checksum| checksum.payload_ref.ref_type == "result_envelope"
+                    && checksum.value.len() == 64
+            ));
+
+        let validation = validate_result(&output.runner_result);
+        assert!(!validation.has_blocking_diagnostics(), "{validation:?}");
+    }
+
+    #[test]
+    fn preview_bridge_blocks_invalid_runner_metadata_before_solve() {
+        let mut invalid = request();
+        invalid.request_id.clear();
+        let output = run_preview_in_memory(invalid, preview_request());
+
+        assert!(output.mechanics_envelope.is_none());
+        assert_eq!(output.runner_result.job.state, JobStateKind::Failed);
+        assert!(output
+            .runner_result
+            .diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.code == "HEADLESS_RUNNER_REQUEST_ID_MISSING"));
     }
 }

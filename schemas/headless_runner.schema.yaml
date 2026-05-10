@@ -250,6 +250,7 @@
         "job",
         "analysis_status",
         "result_envelope_ref",
+        "result_refs",
         "audit_manifest_ref",
         "checksums",
         "diagnostics",
@@ -277,6 +278,13 @@
         },
         "result_envelope_ref": {
           "$ref": "#/$defs/ResultEnvelopeRef"
+        },
+        "result_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/Reference"
+          }
         },
         "audit_manifest_ref": {
           "$ref": "#/$defs/Reference"

@@ -1,159 +1,124 @@
 # Coordination Record
 
-**Active phase:** `TP-MAC-03 Result Interpretation And Review Workflow` closed
-**Active objective:** TP-MAC-03 moved the desktop workflow from computed preview results to selectable result/diagnostic interpretation and review-only context. The tranche is implemented and closed; the workspace is ready for a new governed plan.
-**Active plan:** `plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`
+**Active phase:** `TP-PER-01 Project Persistence And Run History Spine` implemented
+**Active objective:** Preserve the implemented schema-shaped persistence
+baseline together with the closed TP-MAC-05 mechanics and TP-RUN-01 runtime
+behavior.
+**Active plan:** `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
 **Latest state:** `execution/_Coordination/NEXT_INSTANCE_STATE.md`
 **Historical archive:** `execution/_Coordination/_Archive/`
 
 ## Current Authority
 
-The current development phase is no longer the `RT-1` evidence archive route or the `TP-MAC-01` desktop-hardening tranche. Those routes are historical context only.
+The current development phase is no longer the `RT-1` evidence archive route,
+the `TP-MAC-01` desktop-hardening tranche, an open TP-MAC-03 continuation, or
+an open TP-MAC-04 continuation. Those routes are historical context only.
 
-The latest closed implementation authority is the TP-MAC-03 result
-interpretation plan, with TP-MAC-02 as the completed baseline:
+TP-PER-01 is the latest implemented persistence-spine authority:
 
+- `plans/TP-PER-01_PROJECT_PERSISTENCE_AND_RUN_HISTORY_PLAN.md`
+
+TP-RUN-01 is the latest implemented runtime-spine authority:
+
+- `plans/TP-RUN-01_PREVIEW_RUNTIME_SPINE_PLAN.md`
+
+TP-MAC-05, TP-MAC-04, TP-MAC-03, and TP-MAC-02 are completed mechanics and
+desktop baselines:
+
+- `plans/TP-MAC-05_ENDPOINT_STRESS_COMPONENT_RESULTS_PLAN.md`
+- `plans/TP-MAC-04_ENDPOINT_RESULT_CONSUMER_AND_END_J_RECOVERY_PLAN.md`
 - `plans/TP-MAC-03_RESULT_INTERPRETATION_AND_REVIEW_WORKFLOW_PLAN.md`
 - `plans/TP-MAC-02_PHYSICS_FIRST_APPLICATION_PLAN.md`
 - `docs/CONTRACT.md`
 - `docs/IP_AND_DATA_BOUNDARY.md`
 - `AGENTS.md`
 
-Historical REV05/DAG coordination files remain available in this folder for audit traceability, but they are not the first context surface for TP-MAC-03 work. Do not reload the full historical coordination stack unless the next task explicitly asks for DAG/evidence/lifecycle reconciliation.
+Historical REV05/DAG coordination files remain available in this folder for
+audit traceability, but they are not the first context surface for TP-RUN-01
+work. Do not reload the full historical coordination stack unless the next
+task explicitly asks for DAG/evidence/lifecycle reconciliation.
 
 ## Active Product Context
 
-TP-MAC-02 introduced a bounded product physics adapter:
+The bounded product physics adapter consumes invented preview data and existing
+mechanics crates:
 
 - `core/product_physics/`
-- `core/product_physics/src/validation.rs`
-- stable entrypoint: `run_linear_static_preview(request)`
-- repo-level fixture generation command: `npm run generate:product-preview-mechanics`
-- Tauri command: `run_preview_mechanics`
-- invented model fixture: `fixtures/product_preview/invented_preview_model.json`
-- computed fallback result fixture: `fixtures/product_preview/invented_mechanics_result.json`
-- browser smoke checklist: `apps/desktop/SMOKE.md`
-- desktop app: `apps/desktop/`
-- read-only report-packet consumer with DEL-14-02 audit context: `apps/desktop/src/features/report/ReportPanel.tsx`
-- read-only report-packet materialization service: `core/product_preview/service.py`
-
-The current computed result envelope includes:
-
-- displacement magnitudes;
-- support reaction resultants;
-- local element force and moment components with metadata for component, coordinate system, endpoint location, recovery basis, and sign convention;
-- open-formula stress summaries where the explicit preview inputs support them;
-- explicit diagnostics for unsupported, incomplete, or review-required paths;
-- professional-boundary and non-mutation fields.
-
-The desktop flow now groups result rows by displacement, reaction, force, moment, and stress. Knowledge/proposal/report context is linked to computed result IDs, with `result:force:pipe-P-120:axial` as the current deterministic proposal target when available.
-
-The formal DEL-08-04 result export surface now covers local force/moment
-metadata in `schemas/results.schema.yaml` and validates required metadata in
-`core/reporting/result_export`.
-
-The DEL-14-02 analysis-run surface now includes `core/analysis_runs`, schema
-support for individual `Result` references and `result_value` hashes, and a
-`core/product_preview.build_analysis_run_preview()` service hook that binds
-computed preview mechanics result IDs to immutable run records. The desktop
-report packet also displays the current run ID, read-only immutability policy,
-result-value hash count, result-envelope hash presence, and professional
-boundary summary without export, acceptance, or compliance claims.
-
-The current report/UI/review/export consumers do not require endpoint-j local
-force/moment results. Endpoint-j recovery remains deferred until a concrete
-consumer needs both element ends. The current externalized preview report
-packet is deliberately a read-only context packet, not a rendered calculation
-report, result export payload, external handoff payload, or professional
-acceptance record.
-
-TP-MAC-03 built the interpretation layer around that baseline:
-
-- desktop result selection and detail review are implemented for current
-  preview results;
-- a desktop-only `ResultInterpretation` view model is derived from
-  `MechanicsResult.results[]`;
-- linked result metadata, diagnostics, knowledge, source run/audit context, and
-  professional-boundary display are surfaced in the result detail panel;
-- selected result rows resolve `entity_ref` to known model entities in the tree
-  and viewport where possible;
-- review-only explanations can target selected results or diagnostics;
-- selected diagnostics display affected refs, linked computed results, linked
-  knowledge, and review-only explanation context;
-- selected diagnostics can resolve affected model refs into model tree/property/
-  viewport selection, as shown by `HIGH_DISPLACEMENT_REVIEW` selecting
-  `node:N-140`;
-- a mechanics gap ledger records deferred capabilities such as endpoint-j
-  recovery, station recovery, pressure-to-frame load conversion, thermal
-  behavior, support stiffness completeness, load combinations, and protected
-  rule/code checks.
-
-The adapter consumes invented preview data and existing mechanics crates:
-
 - `core/solver/frame_kernel`
 - `core/solver/straight_pipe`
 - `core/solver/linear_supports`
 - `core/loads/primitive_loads`
 - `core/loads/stress_recovery`
 
+The current computed result envelope includes:
+
+- displacement magnitudes;
+- support reaction resultants;
+- local element force and moment components at end-i and end-j with structured
+  metadata;
+- open-mechanics endpoint stress components at end-i and end-j with structured
+  metadata;
+- pipe-level open-formula stress summaries where explicit preview inputs
+  support them;
+- explicit diagnostics for unsupported, incomplete, or review-required paths;
+- professional-boundary and non-mutation fields.
+
+The desktop workflow now includes:
+
+- result grouping by displacement, reaction, force, moment, and stress;
+- selectable result rows and diagnostic rows;
+- result detail interpretation with metadata, linked diagnostics, linked
+  knowledge, DEL-14-02 run context, and professional-boundary messaging;
+- endpoint-pair display for selected local endpoint force/moment and stress
+  component results;
+- selected-result and selected-diagnostic review-only proposal narratives;
+- read-only report-packet context including selected result refs and
+  analysis-run hashes;
+- a mechanics gap ledger that marks endpoint-j local force/moment and endpoint
+  stress component preview recovery implemented and keeps remaining unsupported
+  mechanics explicit.
+
+TP-RUN-01 should connect the runtime surfaces to this product-physics baseline.
+The desktop Tauri command now accepts an optional preview model payload while
+preserving fixture fallback. The React preview service passes the loaded model
+into the desktop runtime when Tauri is available. The headless runner now has
+an in-memory bridge that executes product physics and returns runner metadata,
+deterministic result refs, audit context, and hashes.
+
+TP-PER-01 adds the schema-shaped project persistence baseline:
+
+- `core/project_persistence` builds, validates, hashes, and round-trips
+  `openpipestress.project_persistence` envelopes;
+- `schemas/project_persistence.schema.yaml` carries optional run-history refs
+  or records for model states, analysis runs, result envelopes, result refs,
+  and hash manifests;
+- `fixtures/persistence/invented_persisted_preview_project.json` is the
+  invented persisted-preview fixture with a canonical-model payload;
+- physical project container format, desktop save/open UX, final CLI syntax,
+  migrations, external storage, and professional acceptance remain deferred.
+
 ## Boundaries
 
-The active phase must preserve these constraints:
+The active posture must preserve these constraints:
 
 - invented or cleared public example data only;
-- no protected standards tables, owner data, private project data, allowables, SIF/flexibility tables, compliance checks, certification, sealing, approval, release, or production-readiness claims;
+- no protected standards tables, owner data, private project data, allowables,
+  SIF/flexibility tables, compliance checks, certification, sealing, approval,
+  release, or production-readiness claims;
 - no autonomous accepted-model mutation from agent proposals;
-- unsupported mechanics paths return explicit diagnostics instead of defaults;
-- model validation blocks missing primitive loads, missing pipe orientation, invalid units, duplicate/empty IDs, missing invented/cleared provenance, and unsupported references;
-- professional status remains `NOT_PROVIDED` / human review required.
-
-## Archived Or Superseded Context
-
-The TP-MAC-01 desktop assembly plan and sealed briefs have been moved to:
-
-`execution/_Coordination/_Archive/TP-MAC-01_DESKTOP_ASSEMBLY_2026-05-10/`
-
-The pre-compaction active coordination entrypoints were copied to:
-
-`execution/_Coordination/_Archive/TP-MAC-02_SUPERSEDED_ACTIVE_STATE_2026-05-10/`
-
-Older REV05 tranche, evidence, blocker, dependency, and DAG files remain in this directory as historical evidence. Treat them as audit records, not active implementation instructions for the physics-first phase.
+- unsupported mechanics paths return explicit diagnostics or gap-ledger entries
+  instead of hidden defaults;
+- professional status remains `NOT_PROVIDED` / human review required;
+- pressure primitive loads may support stress recovery context but remain
+  unapplied to the frame load vector until a separate governed plan changes
+  that behavior;
+- persistence envelopes remain schema-shaped application-service records and
+  do not choose a physical container, external storage, desktop file UX, or
+  professional acceptance workflow.
 
 ## Next Gate
 
-The live browser smoke gate has passed:
-
-1. started `npm run dev --workspace apps/desktop`;
-2. opened `http://127.0.0.1:5173/` in the in-app browser;
-3. ran `apps/desktop/SMOKE.md`;
-4. recorded result: PASS.
-
-The first TP-MAC-03 live browser smoke has passed:
-
-1. started `npm run dev --workspace apps/desktop -- --host 127.0.0.1`;
-2. opened `http://127.0.0.1:5173/` in the in-app browser;
-3. ran the TP-MAC-03 result-interpretation checks from `apps/desktop/SMOKE.md`;
-4. recorded result: PASS for axial result selection, detail metadata,
-   `pipe:P-120` model/viewport context selection, selected-result review-only
-   proposal narrative, disabled accept control, DEL-14-02 audit context, and
-   endpoint-j recovery listed as a deferred mechanics gap.
-
-The TP-MAC-03 diagnostic-interpretation live browser smoke has also passed:
-
-1. selected `diagnostic-HIGH_DISPLACEMENT_REVIEW`;
-2. confirmed diagnostic detail context for
-   `diagnostic:physics:high-displacement-review`, `result:disp:node-N-140`,
-   and `node:N-140`;
-3. confirmed model/viewport context selects `node:N-140` / Terminal tie-in;
-4. generated a selected-diagnostic review-only proposal narrative;
-5. verified the accept control remains disabled.
-
-TP-MAC-03 is closed. Any further implementation should start from a new
-governed plan, not from open-ended TP-MAC-03 continuation:
-
-1. prefer a small endpoint/station recovery consumer plan that defines how
-   users will inspect both element ends before adding endpoint-j solver output;
-2. keep endpoint-j recovery deferred until that consumer exists;
-3. keep report-generator/report-section promotion deferred unless the new plan
-   explicitly needs a governed calculation-report artifact;
-4. only revisit UI polish where it directly supports the next physics workflow.
+No successor implementation gate is open in this coordination record. A new
+governed plan is required before adding desktop save/open UX, final CLI syntax,
+physical project containers, migrations, external execution, new mechanics,
+release/professional claims, or professional acceptance workflows.

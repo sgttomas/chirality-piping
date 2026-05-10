@@ -56,7 +56,7 @@ export function App() {
     setRunning(true);
     setAnalysisRun(null);
     try {
-      const output = await runPreviewMechanics();
+      const output = await runPreviewMechanics(model);
       const runRecord = await buildAnalysisRunPreview(output);
       setResult(output);
       setAnalysisRun(runRecord);

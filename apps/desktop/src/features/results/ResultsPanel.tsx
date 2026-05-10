@@ -129,6 +129,35 @@ function ResultDetail({ interpretation }: { interpretation: ResultInterpretation
         />
         <DetailLine label="Boundary" value={interpretation.professional_boundary} />
       </dl>
+      {interpretation.endpoint_pair ? <EndpointPairTable interpretation={interpretation} /> : null}
+    </section>
+  );
+}
+
+function EndpointPairTable({ interpretation }: { interpretation: ResultInterpretation }) {
+  if (!interpretation.endpoint_pair) return null;
+
+  return (
+    <section className="endpoint-pair" aria-label="Endpoint pair results" data-testid="endpoint-pair-table">
+      <h4>Endpoint Pair</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Result</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {interpretation.endpoint_pair.values.map((item) => (
+            <tr key={item.result_id}>
+              <td>{item.location}</td>
+              <td>{item.result_id}</td>
+              <td>{item.value_label}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }

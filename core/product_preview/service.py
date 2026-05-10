@@ -313,6 +313,12 @@ def _selected_result_refs(mechanics_result: Mapping[str, Any]) -> list[str]:
         mechanics_result.get("summary", {}).get("max_displacement", {}).get("result_ref"),
         mechanics_result.get("summary", {}).get("max_open_formula_stress", {}).get("result_ref"),
         "result:force:pipe-P-120:axial" if "result:force:pipe-P-120:axial" in result_ids else None,
+        "result:force:pipe-P-120:axial:end-j"
+        if "result:force:pipe-P-120:axial:end-j" in result_ids
+        else None,
+        "result:stress:pipe-P-120:end-j:torsional-shear"
+        if "result:stress:pipe-P-120:end-j:torsional-shear" in result_ids
+        else None,
     ]
     return [item for item in selected if item]
 

@@ -128,6 +128,18 @@ export type ResultInterpretation = {
     result_hash_count: number;
     envelope_hash_available: boolean;
   };
+  endpoint_pair?: {
+    entity_ref: string;
+    component: string;
+    coordinate_system: string;
+    recovery_basis: string;
+    values: Array<{
+      result_id: string;
+      location: string;
+      value_label: string;
+      sign_convention: string;
+    }>;
+  };
   professional_boundary: string;
 };
 
@@ -152,7 +164,7 @@ export type DiagnosticInterpretation = {
 export type MechanicsGap = {
   id: string;
   capability: string;
-  status: "deferred" | "not_implemented" | "requires_private_inputs";
+  status: "implemented" | "deferred" | "not_implemented" | "requires_private_inputs";
   review_note: string;
 };
 

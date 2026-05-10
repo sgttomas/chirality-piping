@@ -47,14 +47,32 @@ def test_result_refs_bind_computed_result_ids_to_hashes():
     refs = {item["result_ref"]["ref"]: item for item in run["result_refs"]}
 
     assert "result:force:pipe-P-120:axial" in refs
+    assert "result:force:pipe-P-120:axial:end-j" in refs
+    assert "result:stress:pipe-P-120:end-j:torsional-shear" in refs
     axial = refs["result:force:pipe-P-120:axial"]
+    axial_end_j = refs["result:force:pipe-P-120:axial:end-j"]
+    torsional_stress_end_j = refs["result:stress:pipe-P-120:end-j:torsional-shear"]
     assert axial["result_ref"]["object_type"] == "Result"
     assert axial["result_family"] == "force"
+    assert axial_end_j["result_family"] == "force"
+    assert torsional_stress_end_j["result_family"] == "stress"
     assert axial["privacy_classification"] == "invented_public_example"
+    assert axial_end_j["privacy_classification"] == "invented_public_example"
+    assert torsional_stress_end_j["privacy_classification"] == "invented_public_example"
     assert axial["hash_refs"][0]["payload_scope"] == "result_value"
+    assert axial_end_j["hash_refs"][0]["payload_scope"] == "result_value"
+    assert torsional_stress_end_j["hash_refs"][0]["payload_scope"] == "result_value"
     assert axial["hash_refs"][0]["payload_ref"] == {
         "object_type": "Result",
         "ref": "result:force:pipe-P-120:axial",
+    }
+    assert axial_end_j["hash_refs"][0]["payload_ref"] == {
+        "object_type": "Result",
+        "ref": "result:force:pipe-P-120:axial:end-j",
+    }
+    assert torsional_stress_end_j["hash_refs"][0]["payload_ref"] == {
+        "object_type": "Result",
+        "ref": "result:stress:pipe-P-120:end-j:torsional-shear",
     }
     assert any(item["payload_scope"] == "result_envelope" for item in run["hashes"])
     assert any(item["payload_scope"] == "analysis_run_record" for item in run["hashes"])

@@ -33,10 +33,13 @@ fn load_design_knowledge() -> Result<Value, String> {
 }
 
 #[tauri::command]
-fn run_preview_mechanics() -> Result<Value, String> {
+fn run_preview_mechanics(model: Option<Value>) -> Result<Value, String> {
+    let model_payload = match model {
+        Some(value) => value,
+        None => read_fixture("invented_preview_model.json")?,
+    };
     let model: open_pipe_stress_product_physics::PreviewModel =
-        serde_json::from_value(read_fixture("invented_preview_model.json")?)
-            .map_err(|error| error.to_string())?;
+        serde_json::from_value(model_payload).map_err(|error| error.to_string())?;
     serde_json::to_value(run_linear_static_preview(LinearStaticPreviewRequest {
         model,
         materials: vec![],
@@ -46,7 +49,7 @@ fn run_preview_mechanics() -> Result<Value, String> {
 
 #[tauri::command]
 fn sample_agent_proposal() -> Result<Value, String> {
-    let result = run_preview_mechanics()?;
+    let result = run_preview_mechanics(None)?;
     let diagnostics = result
         .get("diagnostics")
         .and_then(Value::as_array)

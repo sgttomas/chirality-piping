@@ -32,6 +32,7 @@ def main():
     assert ref_name(properties["hash"]["$ref"]) == "HashMetadata"
     assert ref_name(properties["migration"]["$ref"]) == "MigrationStatus"
     assert ref_name(properties["validation_profile"]["$ref"]) == "ValidationProfile"
+    assert ref_name(properties["professional_boundary"]["$ref"]) == "ProfessionalBoundary"
     assert (
         ref_name(properties["service_operations"]["items"]["$ref"])
         == "PersistenceOperation"
@@ -46,6 +47,7 @@ def main():
         ref_name(project["properties"]["human_acceptance_refs"]["items"]["$ref"])
         == "HumanAcceptanceRef"
     )
+    assert ref_name(project["properties"]["run_history"]["$ref"]) == "RunHistory"
 
     model_payload_ref = project["properties"]["model_payload"]["$ref"]
     assert ref_name(model_payload_ref) == "ModelPayload"
@@ -74,6 +76,10 @@ def main():
         "input_manifest",
         "report_manifest",
         "external_artifact",
+        "model_state_record",
+        "analysis_run_record",
+        "result_envelope",
+        "result_value",
         "TBD",
     } <= set(checksum["properties"]["payload_scope"]["enum"])
 
@@ -167,6 +173,29 @@ def main():
     )
     assert "external_human_review" in set(
         human_acceptance["properties"]["authority_kind"]["enum"]
+    )
+
+    boundary = defs["ProfessionalBoundary"]["properties"]
+    assert boundary["human_review_required"]["const"] is True
+    assert boundary["software_makes_compliance_claim"]["const"] is False
+    assert boundary["software_makes_certification_claim"]["const"] is False
+    assert boundary["software_makes_sealing_claim"]["const"] is False
+    assert boundary["software_makes_approval_claim"]["const"] is False
+    assert boundary["software_makes_authentication_claim"]["const"] is False
+
+    run_history = defs["RunHistory"]
+    assert {
+        "model_state_refs",
+        "analysis_run_refs",
+        "result_envelope_refs",
+        "result_refs",
+        "hash_manifest",
+    } <= set(run_history["required"])
+    assert ref_name(run_history["properties"]["model_state_records"]["items"]["$ref"]) == (
+        "model_state.schema.json"
+    )
+    assert ref_name(run_history["properties"]["analysis_run_records"]["items"]["$ref"]) == (
+        "analysis_run.schema.json"
     )
 
     rule_pack_ref = defs["RulePackRef"]

@@ -421,6 +421,12 @@
             "torsional_moment",
             "bending_moment_y",
             "bending_moment_z",
+            "axial_normal_stress",
+            "bending_normal_stress_y",
+            "bending_normal_stress_z",
+            "torsional_shear_stress",
+            "pressure_hoop_stress",
+            "pressure_longitudinal_stress",
             "TBD"
           ]
         },
@@ -429,6 +435,7 @@
           "enum": [
             "global",
             "element_local",
+            "pipe_section",
             "TBD"
           ]
         },
@@ -446,6 +453,7 @@
           "type": "string",
           "enum": [
             "recovered_from_local_element_stiffness",
+            "recovered_from_open_mechanics_stress_components",
             "stress_recovery_summary",
             "rule_pack_evaluation",
             "TBD"

@@ -13,12 +13,12 @@ import type {
   SelectedReviewTarget
 } from "../types";
 
-async function invokeOrFixture<T>(command: string, fixture: T): Promise<T> {
+async function invokeOrFixture<T>(command: string, fixture: T, args?: Record<string, unknown>): Promise<T> {
   if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) {
     return fixture;
   }
   try {
-    return await invoke<T>(command);
+    return await invoke<T>(command, args);
   } catch {
     return fixture;
   }
@@ -32,8 +32,8 @@ export async function loadDesignKnowledge(): Promise<DesignKnowledge> {
   return invokeOrFixture("load_design_knowledge", knowledgeFixture as DesignKnowledge);
 }
 
-export async function runPreviewMechanics(): Promise<MechanicsResult> {
-  return invokeOrFixture("run_preview_mechanics", mechanicsFixture as MechanicsResult);
+export async function runPreviewMechanics(model?: PreviewModel | null): Promise<MechanicsResult> {
+  return invokeOrFixture("run_preview_mechanics", mechanicsFixture as MechanicsResult, model ? { model } : undefined);
 }
 
 export async function buildAnalysisRunPreview(result: MechanicsResult): Promise<AnalysisRunEnvelope> {

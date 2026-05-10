@@ -57,6 +57,7 @@ export function buildResultInterpretation({
       result_hash_count: resultHashes,
       envelope_hash_available: envelopeHashAvailable
     },
+    endpoint_pair: endpointPairFor(result, item),
     professional_boundary: "human review required; review-only interpretation; no compliance or professional approval claim"
   };
 }
@@ -149,8 +150,16 @@ export function mechanicsGaps(): MechanicsGap[] {
     {
       id: "gap:endpoint-j-recovery",
       capability: "Endpoint-j local force/moment recovery",
-      status: "deferred",
-      review_note: "Deferred until workflows require both element ends; current results retain end_i metadata."
+      status: "implemented",
+      review_note:
+        "End-i and end-j local force/moment preview results are emitted and paired in result detail; intermediate stations remain deferred."
+    },
+    {
+      id: "gap:endpoint-stress-components",
+      capability: "Endpoint stress component recovery",
+      status: "implemented",
+      review_note:
+        "End-i and end-j open-mechanics stress component preview results are emitted and paired when stress recovery succeeds."
     },
     {
       id: "gap:station-recovery",
@@ -201,6 +210,51 @@ function allDiagnostics(
   result: MechanicsResult | null
 ): Diagnostic[] {
   return [...model.diagnostics, ...(knowledge?.diagnostics ?? []), ...(result?.diagnostics ?? [])];
+}
+
+function endpointPairFor(
+  result: MechanicsResult,
+  item: MechanicsResult["results"][number]
+): ResultInterpretation["endpoint_pair"] {
+  const metadata = item.metadata;
+  if (!metadata || !["end_i", "end_j"].includes(metadata.location)) return undefined;
+  const family = resultFamily(item);
+  if (family !== "force" && family !== "moment" && family !== "stress") return undefined;
+
+  const values = result.results
+    .filter((candidate) => {
+      const candidateMetadata = candidate.metadata;
+      if (!candidateMetadata) return false;
+      return (
+        candidate.entity_ref === item.entity_ref &&
+        candidateMetadata.component === metadata.component &&
+        candidateMetadata.coordinate_system === metadata.coordinate_system &&
+        candidateMetadata.basis === metadata.basis &&
+        ["end_i", "end_j"].includes(candidateMetadata.location)
+      );
+    })
+    .sort((left, right) => endpointOrder(left.metadata?.location) - endpointOrder(right.metadata?.location))
+    .map((candidate) => ({
+      result_id: candidate.id,
+      location: candidate.metadata?.location ?? "summary",
+      value_label: `${candidate.value} ${candidate.unit}`,
+      sign_convention: candidate.metadata?.sign_convention ?? "not specified in result metadata"
+    }));
+
+  if (values.length < 2) return undefined;
+  return {
+    entity_ref: item.entity_ref,
+    component: metadata.component,
+    coordinate_system: metadata.coordinate_system,
+    recovery_basis: metadata.basis,
+    values
+  };
+}
+
+function endpointOrder(location: string | undefined): number {
+  if (location === "end_i") return 0;
+  if (location === "end_j") return 1;
+  return 2;
 }
 
 function diagnosticExplanation(
