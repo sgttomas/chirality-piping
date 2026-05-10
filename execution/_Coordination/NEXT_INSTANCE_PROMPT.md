@@ -23,6 +23,7 @@ Build out the real engineering workflow around the invented preview model:
 
 - product physics adapter first;
 - computed mechanics results and diagnostics;
+- local force/moment result metadata with explicit coordinate system, endpoint location, basis, and sign convention;
 - design knowledge linked to actual result/diagnostic IDs;
 - review-only agent proposals generated from computed context;
 - desktop/Tauri polish only where it supports the physics workflow.
@@ -34,6 +35,17 @@ Build out the real engineering workflow around the invented preview model:
 - Do not claim compliance, certification, sealing, professional approval, release readiness, or production readiness.
 - Do not allow agent proposals to mutate accepted model state.
 - Return explicit diagnostics for unsupported or incomplete mechanics paths.
+- Preserve `ResultItem.metadata` semantics when adding or consuming local force/moment result items.
+
+## Current Gate
+
+The live browser smoke gate passed on 2026-05-10. Local force/moment result
+metadata has been promoted into the DEL-08-04 result export contract, and
+preview mechanics results can now produce DEL-14-02 immutable analysis-run
+records. Choose one bounded continuation only:
+
+- surface the DEL-14-02 analysis-run record in the desktop report packet only as read-only reproducibility/audit context;
+- endpoint-j force/moment result components only if report/UI/review workflows require both element ends.
 
 ## Closeout
 

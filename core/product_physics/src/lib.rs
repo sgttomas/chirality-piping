@@ -21,8 +21,11 @@ use open_pipe_stress_stress_recovery::{
     StressSectionProperties,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::f64::consts::PI;
+
+mod validation;
+use validation::validate_model_inputs;
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct PreviewModel {
@@ -55,6 +58,8 @@ pub struct StatusEnvelope {
 pub struct PreviewNode {
     pub id: String,
     pub position: Vec3,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, Deserialize)]
@@ -73,6 +78,8 @@ pub struct PreviewPipe {
     pub material: String,
     #[serde(default)]
     pub y_reference: Option<Vec3>,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -97,6 +104,8 @@ pub struct PreviewSupport {
     pub family: Option<String>,
     #[serde(default)]
     pub stiffness: Option<SupportStiffnessInput>,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -110,6 +119,8 @@ pub struct PreviewLoadCase {
     pub id: String,
     #[serde(default)]
     pub primitive_loads: Vec<PreviewPrimitiveLoad>,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -120,6 +131,8 @@ pub struct PreviewPrimitiveLoad {
     pub direction: String,
     pub magnitude: Quantity,
     pub dimension: String,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -134,6 +147,8 @@ pub struct MaterialInput {
     pub id: String,
     pub elastic_modulus: Quantity,
     pub shear_modulus: Quantity,
+    #[serde(default)]
+    pub provenance: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -182,6 +197,17 @@ pub struct ResultItem {
     pub value: f64,
     pub unit: String,
     pub entity_ref: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub metadata: Option<ResultMetadata>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ResultMetadata {
+    pub component: String,
+    pub coordinate_system: String,
+    pub location: String,
+    pub basis: String,
+    pub sign_convention: String,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -235,6 +261,7 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
     };
     let mut diagnostics = Vec::new();
 
+    validate_model_inputs(&model, &materials, &mut diagnostics);
     if model.document_kind != "openpipestress.product_preview.model" {
         diagnostics.push(diag(
             "diagnostic:physics:document-kind",
@@ -253,6 +280,9 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
             vec!["model".to_string()],
         ));
     }
+    if has_blocking(&diagnostics) {
+        return blocked_envelope(model, diagnostics);
+    }
 
     let built = build_model(&model, &materials, &mut diagnostics);
     if has_blocking(&diagnostics) {
@@ -270,12 +300,21 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
             vec!["supports".to_string()],
         ));
     } else if boundary.restrained_dofs.len() < DOF_PER_NODE {
+        let (restrained, missing) = support_restraint_summary(&boundary.restrained_dofs);
+        let support_map = support_contribution_summary(&model);
         diagnostics.push(diag(
             "diagnostic:physics:under-restrained",
             "SOLVER_SYSTEM_BLOCKED",
             "blocking",
-            "linear-static preview has fewer than six rigid restraints; treat as under-restrained before dense solve",
-            vec!["supports".to_string()],
+            format!(
+                "linear-static preview has fewer than six rigid restraints; restrained global DOF classes: {restrained}; missing global rigid-body DOF classes: {missing}; support contributions: {support_map}"
+            ),
+            vec![
+                "supports".to_string(),
+                format!("restrained:{restrained}"),
+                format!("missing:{missing}"),
+                format!("support_contributions:{support_map}"),
+            ],
         ));
     }
     for finding in boundary.findings {
@@ -370,6 +409,7 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
             value: round6(magnitude * 1000.0),
             unit: "mm".to_string(),
             entity_ref: node.id.clone(),
+            metadata: None,
         });
     }
 
@@ -396,6 +436,7 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
                 value: round6(magnitude),
                 unit: "N".to_string(),
                 entity_ref: support.id.clone(),
+                metadata: None,
             });
         }
     }
@@ -415,6 +456,7 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
                 continue;
             }
         };
+        append_element_force_results(&mut results, &pipe.element_id, &local.local_forces);
         let section = built
             .sections
             .get(&pipe.element_id)
@@ -477,6 +519,7 @@ pub fn run_linear_static_preview(request: LinearStaticPreviewRequest) -> Mechani
                 value: round6(value),
                 unit: "MPa".to_string(),
                 entity_ref: pipe.element_id.clone(),
+                metadata: None,
             });
         }
     }
@@ -581,6 +624,16 @@ fn build_model(
         let Some(derived) = derive_pipe_section(&pipe.section, &pipe.id, diagnostics) else {
             continue;
         };
+        let Some(y_reference) = pipe.y_reference else {
+            diagnostics.push(diag(
+                &format!("diagnostic:pipe-orientation:{}", stable_suffix(&pipe.id)),
+                "PIPE_ORIENTATION_INPUT_MISSING",
+                "blocking",
+                "pipe orientation requires an explicit y_reference vector; no default orientation is applied",
+                vec![pipe.id.clone()],
+            ));
+            continue;
+        };
         let section = match StraightPipeSectionProperties::new(
             material.elastic_modulus.value,
             material.shear_modulus.value,
@@ -602,10 +655,7 @@ fn build_model(
                 continue;
             }
         };
-        let y_ref = pipe
-            .y_reference
-            .map(|v| [v.x, v.y, v.z])
-            .unwrap_or([0.0, 0.0, 1.0]);
+        let y_ref = [y_reference.x, y_reference.y, y_reference.z];
         let element =
             match StraightPipeElement::new(&pipe.id, nodes[from], nodes[to], section, y_ref) {
                 Ok(element) => element,
@@ -831,6 +881,62 @@ fn add_uniform_element_loads(
     }
 }
 
+fn append_element_force_results(
+    results: &mut Vec<ResultItem>,
+    pipe_id: &str,
+    local_forces: &[f64],
+) {
+    let suffix = stable_suffix(pipe_id);
+    let components = [
+        (
+            format!("result:force:{suffix}:axial"),
+            "element_local_axial_force",
+            "axial_force",
+            local_forces[UX],
+            "N",
+        ),
+        (
+            format!("result:moment:{suffix}:torsion"),
+            "element_local_torsional_moment",
+            "torsional_moment",
+            local_forces[RX],
+            "N*m",
+        ),
+        (
+            format!("result:moment:{suffix}:bending-y"),
+            "element_local_bending_moment_y",
+            "bending_moment_y",
+            local_forces[RY],
+            "N*m",
+        ),
+        (
+            format!("result:moment:{suffix}:bending-z"),
+            "element_local_bending_moment_z",
+            "bending_moment_z",
+            local_forces[RZ],
+            "N*m",
+        ),
+    ];
+    for (id, kind, component, value, unit) in components {
+        results.push(ResultItem {
+            id,
+            kind: kind.to_string(),
+            value: round6(value),
+            unit: unit.to_string(),
+            entity_ref: pipe_id.to_string(),
+            metadata: Some(ResultMetadata {
+                component: component.to_string(),
+                coordinate_system: "element_local".to_string(),
+                location: "end_i".to_string(),
+                basis: "recovered_from_local_element_stiffness".to_string(),
+                sign_convention:
+                    "positive value follows the element-local DOF at the i-end force vector"
+                        .to_string(),
+            }),
+        });
+    }
+}
+
 fn blocked_envelope(model: PreviewModel, diagnostics: Vec<Diagnostic>) -> MechanicsEnvelope {
     MechanicsEnvelope {
         schema_version: "0.1.0".to_string(),
@@ -899,6 +1005,72 @@ fn displacement_magnitude(displacements: &[f64], node_index: usize) -> f64 {
         + displacements[base + UY].powi(2)
         + displacements[base + UZ].powi(2))
     .sqrt()
+}
+
+fn support_restraint_summary(restrained_dofs: &[usize]) -> (String, String) {
+    let restrained = restrained_dofs
+        .iter()
+        .map(|global| global % DOF_PER_NODE)
+        .collect::<HashSet<_>>();
+    let all = [
+        (UX, "UX"),
+        (UY, "UY"),
+        (UZ, "UZ"),
+        (RX, "RX"),
+        (RY, "RY"),
+        (RZ, "RZ"),
+    ];
+    let present = all
+        .iter()
+        .filter_map(|(index, name)| restrained.contains(index).then_some(*name))
+        .collect::<Vec<_>>();
+    let missing = all
+        .iter()
+        .filter_map(|(index, name)| (!restrained.contains(index)).then_some(*name))
+        .collect::<Vec<_>>();
+    (join_dofs(&present), join_dofs(&missing))
+}
+
+fn support_contribution_summary(model: &PreviewModel) -> String {
+    let contributions = model
+        .supports
+        .iter()
+        .map(|support| {
+            let mut dofs = support
+                .restraints
+                .iter()
+                .filter_map(|value| parse_dof(value).ok())
+                .map(dof_name)
+                .collect::<Vec<_>>();
+            dofs.sort_unstable();
+            dofs.dedup();
+            format!("{}@{}={}", support.id, support.node, join_dofs(&dofs))
+        })
+        .collect::<Vec<_>>();
+    if contributions.is_empty() {
+        "none".to_string()
+    } else {
+        contributions.join(";")
+    }
+}
+
+fn dof_name(dof: FrameDof) -> &'static str {
+    match dof {
+        FrameDof::Ux => "UX",
+        FrameDof::Uy => "UY",
+        FrameDof::Uz => "UZ",
+        FrameDof::Rx => "RX",
+        FrameDof::Ry => "RY",
+        FrameDof::Rz => "RZ",
+    }
+}
+
+fn join_dofs(values: &[&str]) -> String {
+    if values.is_empty() {
+        "none".to_string()
+    } else {
+        values.join(",")
+    }
 }
 
 fn multiply_matrix_vector(matrix: &[Vec<f64>], vector: &[f64]) -> Vec<f64> {
@@ -1007,7 +1179,12 @@ fn stable_suffix(id: &str) -> String {
 }
 
 fn round6(value: f64) -> f64 {
-    (value * 1_000_000.0).round() / 1_000_000.0
+    let rounded = (value * 1_000_000.0).round() / 1_000_000.0;
+    if rounded == 0.0 {
+        0.0
+    } else {
+        rounded
+    }
 }
 
 #[cfg(test)]
@@ -1036,7 +1213,17 @@ mod tests {
                 value: 77_000_000_000.0,
                 unit: "Pa".to_string(),
             },
+            provenance: Some("invented_example_no_material_standard".to_string()),
         }]
+    }
+
+    fn find_result<'a>(envelope: &'a serde_json::Value, id: &str) -> &'a serde_json::Value {
+        envelope["results"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|item| item["id"] == id)
+            .unwrap_or_else(|| panic!("missing result {id}"))
     }
 
     #[test]
@@ -1050,6 +1237,53 @@ mod tests {
             .results
             .iter()
             .any(|item| item.id == "result:disp:node-N-140"));
+    }
+
+    #[test]
+    fn valid_invented_model_exposes_element_force_components() {
+        let result = run_linear_static_preview(request());
+        let result_ids = result
+            .results
+            .iter()
+            .map(|item| item.id.as_str())
+            .collect::<HashSet<_>>();
+
+        assert!(result_ids.contains("result:force:pipe-P-120:axial"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:torsion"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:bending-y"));
+        assert!(result_ids.contains("result:moment:pipe-P-120:bending-z"));
+        assert!(result.results.iter().any(|item| {
+            item.id == "result:force:pipe-P-120:axial"
+                && item.kind == "element_local_axial_force"
+                && item.unit == "N"
+                && item
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| {
+                        metadata.component == "axial_force"
+                            && metadata.coordinate_system == "element_local"
+                            && metadata.location == "end_i"
+                    })
+                    .unwrap_or(false)
+        }));
+    }
+
+    #[test]
+    fn generated_result_surface_matches_fallback_fixture_force_metadata() {
+        let generated = serde_json::to_value(run_linear_static_preview(request())).unwrap();
+        let fixture: serde_json::Value = serde_json::from_str(include_str!(
+            "../../../fixtures/product_preview/invented_mechanics_result.json"
+        ))
+        .unwrap();
+        let generated_force = find_result(&generated, "result:force:pipe-P-120:axial");
+        let fixture_force = find_result(&fixture, "result:force:pipe-P-120:axial");
+
+        assert_eq!(generated_force["kind"], fixture_force["kind"]);
+        assert_eq!(generated_force["unit"], fixture_force["unit"]);
+        assert_eq!(generated_force["metadata"], fixture_force["metadata"]);
+        assert!(find_result(&fixture, "result:moment:pipe-P-120:bending-z")
+            .get("metadata")
+            .is_some());
     }
 
     #[test]
@@ -1085,6 +1319,115 @@ mod tests {
     }
 
     #[test]
+    fn missing_all_primitive_loads_blocks_with_diagnostic() {
+        let mut request = request();
+        for case in &mut request.model.load_cases {
+            case.primitive_loads.clear();
+        }
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "LOAD_INPUT_MISSING"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn missing_pipe_orientation_blocks_with_diagnostic() {
+        let mut request = request();
+        request.model.pipe_segments[0].y_reference = None;
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "PIPE_ORIENTATION_INPUT_MISSING"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn duplicate_ids_block_with_diagnostic() {
+        let mut request = request();
+        request.model.nodes[1].id = request.model.nodes[0].id.clone();
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "DUPLICATE_ID"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn empty_ids_block_with_diagnostic() {
+        let mut request = request();
+        request.model.pipe_segments[0].id.clear();
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "EMPTY_ID"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn missing_public_preview_provenance_blocks_with_diagnostic() {
+        let mut request = request();
+        request.model.load_cases[0].primitive_loads[0].provenance = None;
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result
+            .diagnostics
+            .iter()
+            .any(|item| item.code == "PROVENANCE_INPUT_MISSING"));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn invalid_material_unit_blocks_with_diagnostic() {
+        let mut request = request();
+        request.materials[0].elastic_modulus.unit = "MPa".to_string();
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result.diagnostics.iter().any(|item| {
+            item.code == "UNIT_INPUT_INVALID"
+                && item.affected_refs.contains(&"elastic_modulus".to_string())
+        }));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
+    fn invalid_load_unit_blocks_with_diagnostic() {
+        let mut request = request();
+        request.model.load_cases[0].primitive_loads[0]
+            .magnitude
+            .unit = "kg/m".to_string();
+        let load_id = request.model.load_cases[0].primitive_loads[0].id.clone();
+
+        let result = run_linear_static_preview(request);
+
+        assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
+        assert!(result.diagnostics.iter().any(|item| {
+            item.code == "UNIT_INPUT_INVALID" && item.affected_refs.contains(&load_id)
+        }));
+        assert!(result.results.is_empty());
+    }
+
+    #[test]
     fn under_restrained_model_reports_solver_diagnostic() {
         let mut request = request();
         request.model.supports.truncate(1);
@@ -1093,10 +1436,17 @@ mod tests {
         let result = run_linear_static_preview(request);
 
         assert_eq!(result.status.mechanics, "MODEL_INCOMPLETE");
-        assert!(result
+        let diagnostic = result
             .diagnostics
             .iter()
-            .any(|item| item.code == "SOLVER_SYSTEM_BLOCKED"));
+            .find(|item| item.code == "SOLVER_SYSTEM_BLOCKED")
+            .expect("under-restraint diagnostic should be present");
+        assert!(diagnostic
+            .message
+            .contains("restrained global DOF classes: UZ"));
+        assert!(diagnostic
+            .message
+            .contains("missing global rigid-body DOF classes: UX,UY,RX,RY,RZ"));
     }
 
     #[test]

@@ -7,6 +7,7 @@ import { KnowledgePanel } from "./features/knowledge/KnowledgePanel";
 import { defaultSelection } from "./features/model-workspace/modelView";
 import { ModelTree } from "./features/model-tree/ModelTree";
 import { PropertyInspector } from "./features/model-tree/PropertyInspector";
+import { ReportPanel } from "./features/report/ReportPanel";
 import { ResultsPanel } from "./features/results/ResultsPanel";
 import { SolvePanel } from "./features/solve/SolvePanel";
 import { PipeViewport } from "./features/viewport/PipeViewport";
@@ -55,7 +56,7 @@ export function App() {
   }
 
   return (
-    <main className="app-shell">
+    <main className="app-shell" data-testid="desktop-preview-shell">
       <header className="topbar">
         <div>
           <h1>OpenPipeStress Technical Preview</h1>
@@ -86,6 +87,7 @@ export function App() {
           <SolvePanel model={model} result={result} running={running} onRun={handleRun} />
           <ResultsPanel result={result} />
           <AgentProposalPanel proposal={proposal} mechanicsReady={Boolean(result)} onLoad={handleProposal} />
+          <ReportPanel model={model} result={result} proposal={proposal} />
         </aside>
       </section>
 

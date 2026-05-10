@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+from core.analysis_runs import build_preview_analysis_run_envelope
+
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURE_DIR = ROOT / "fixtures" / "product_preview"
@@ -63,6 +65,33 @@ def run_preview_mechanics(model: Mapping[str, Any] | None = None) -> dict[str, A
     result["professional_boundary"] = deepcopy(PROFESSIONAL_BOUNDARY)
     result["accepted_model_state_mutated"] = False
     return result
+
+
+def build_analysis_run_preview(model: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Build an immutable analysis-run record from the preview mechanics result."""
+
+    mechanics_result = run_preview_mechanics(model)
+    return build_preview_analysis_run_envelope(
+        mechanics_result,
+        model_state_ref={
+            "object_type": "ModelState",
+            "ref": f"state:{mechanics_result['model_ref']}:preview",
+        },
+        settings_ref={
+            "object_type": "SolverSettings",
+            "ref": "settings:preview-linear-static",
+        },
+        unit_system_ref={
+            "object_type": "UnitSystem",
+            "ref": "SI-preview-units",
+        },
+        load_basis_refs=[
+            {
+                "object_type": "LoadCase",
+                "ref": "loadcase:LC-OPERATING-PREVIEW",
+            }
+        ],
+    )
 
 
 def build_agent_proposal_preview() -> dict[str, Any]:
@@ -122,6 +151,13 @@ def validate_preview_model(model: Mapping[str, Any] | None = None) -> dict[str, 
     if not record.get("nodes") or not record.get("pipe_segments"):
         diagnostics.append(_diagnostic("PREVIEW_GEOMETRY_INCOMPLETE", "blocking", "model"))
 
+    for collection_name in ("nodes", "pipe_segments", "supports", "materials", "load_cases"):
+        for item in record.get(collection_name, []):
+            _validate_identity_and_provenance(item, collection_name, diagnostics)
+            if collection_name == "load_cases":
+                for load in item.get("primitive_loads", []):
+                    _validate_identity_and_provenance(load, "primitive_loads", diagnostics)
+
     node_ids = {node.get("id") for node in record.get("nodes", [])}
     for segment in record.get("pipe_segments", []):
         if segment.get("from") not in node_ids or segment.get("to") not in node_ids:
@@ -178,6 +214,17 @@ def _properties(item: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 def _diagnostic(code: str, severity: str, target_ref: str) -> dict[str, str]:
     return {"code": code, "severity": severity, "target_ref": str(target_ref)}
+
+
+def _validate_identity_and_provenance(
+    item: Mapping[str, Any], collection_name: str, diagnostics: list[dict[str, str]]
+) -> None:
+    item_id = str(item.get("id", ""))
+    if not item_id.strip():
+        diagnostics.append(_diagnostic("PREVIEW_ID_MISSING", "blocking", collection_name))
+    provenance = str(item.get("provenance", "")).lower()
+    if "invented" not in provenance and "cleared" not in provenance:
+        diagnostics.append(_diagnostic("PREVIEW_PROVENANCE_MISSING", "blocking", item_id or collection_name))
 
 
 def _stable(items: list[Mapping[str, Any]]) -> list[dict[str, Any]]:

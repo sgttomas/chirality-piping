@@ -330,6 +330,28 @@
     "QuantityResult": {
       "type": "object",
       "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "family": {
+                "enum": [
+                  "force",
+                  "moment"
+                ]
+              }
+            },
+            "required": [
+              "family"
+            ]
+          },
+          "then": {
+            "required": [
+              "metadata"
+            ]
+          }
+        }
+      ],
       "required": [
         "result_id",
         "family",
@@ -369,11 +391,69 @@
         "provenance": {
           "$ref": "#/$defs/Provenance"
         },
+        "metadata": {
+          "$ref": "#/$defs/ResultMetadata"
+        },
         "diagnostics": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/Diagnostic"
           }
+        }
+      }
+    },
+    "ResultMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Structured metadata for result values whose sign and recovery basis are not self-evident from family, object, and unit alone. Local element force and moment components require this metadata.",
+      "required": [
+        "component",
+        "coordinate_system",
+        "location",
+        "basis",
+        "sign_convention"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "enum": [
+            "axial_force",
+            "torsional_moment",
+            "bending_moment_y",
+            "bending_moment_z",
+            "TBD"
+          ]
+        },
+        "coordinate_system": {
+          "type": "string",
+          "enum": [
+            "global",
+            "element_local",
+            "TBD"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "enum": [
+            "end_i",
+            "end_j",
+            "midspan",
+            "summary",
+            "TBD"
+          ]
+        },
+        "basis": {
+          "type": "string",
+          "enum": [
+            "recovered_from_local_element_stiffness",
+            "stress_recovery_summary",
+            "rule_pack_evaluation",
+            "TBD"
+          ]
+        },
+        "sign_convention": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },

@@ -87,7 +87,20 @@ export type MechanicsResult = {
     max_displacement?: { value: number; unit: string; location_ref: string; result_ref: string } | null;
     max_open_formula_stress?: { value: number; unit: string; location_ref: string; result_ref: string } | null;
   };
-  results: Array<{ id: string; kind: string; value: number; unit: string; entity_ref: string }>;
+  results: Array<{
+    id: string;
+    kind: string;
+    value: number;
+    unit: string;
+    entity_ref: string;
+    metadata?: {
+      component: string;
+      coordinate_system: string;
+      location: string;
+      basis: string;
+      sign_convention: string;
+    };
+  }>;
   diagnostics: Diagnostic[];
 };
 

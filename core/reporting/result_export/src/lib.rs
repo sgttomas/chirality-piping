@@ -141,6 +141,7 @@ pub struct QuantityResult {
     pub magnitude: f64,
     pub unit: String,
     pub dimension: DimensionId,
+    pub metadata: Option<ResultMetadata>,
     pub provenance: Provenance,
 }
 
@@ -152,6 +153,29 @@ impl QuantityResult {
             self.object_ref.ref_id.as_str(),
             self.result_id.as_str(),
         )
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ResultMetadata {
+    pub component: String,
+    pub coordinate_system: String,
+    pub location: String,
+    pub basis: String,
+    pub sign_convention: String,
+}
+
+impl ResultMetadata {
+    fn is_complete(&self) -> bool {
+        !self.component.trim().is_empty()
+            && !self.component.trim().eq_ignore_ascii_case("TBD")
+            && !self.coordinate_system.trim().is_empty()
+            && !self.coordinate_system.trim().eq_ignore_ascii_case("TBD")
+            && !self.location.trim().is_empty()
+            && !self.location.trim().eq_ignore_ascii_case("TBD")
+            && !self.basis.trim().is_empty()
+            && !self.basis.trim().eq_ignore_ascii_case("TBD")
+            && !self.sign_convention.trim().is_empty()
     }
 }
 
@@ -444,6 +468,20 @@ fn check_result_sets(envelope: &ResultEnvelope, diagnostics: &mut Vec<Diagnostic
                     "result values must carry object, basis, finite magnitude, unit, dimension, and provenance metadata",
                 ));
             }
+
+            if matches!(value.family, ResultFamily::Force | ResultFamily::Moment)
+                && value
+                    .metadata
+                    .as_ref()
+                    .map(|metadata| !metadata.is_complete())
+                    .unwrap_or(true)
+            {
+                diagnostics.push(Diagnostic::export_blocking(
+                    "RESULT_EXPORT_FORCE_MOMENT_METADATA_INCOMPLETE",
+                    Reference::new("result_value", &value.result_id),
+                    "force and moment results must carry component, coordinate system, endpoint location, recovery basis, and sign convention metadata",
+                ));
+            }
         }
     }
 }
@@ -500,6 +538,30 @@ mod tests {
             magnitude: 1.25,
             unit: unit.to_string(),
             dimension,
+            metadata: None,
+            provenance: provenance(),
+        }
+    }
+
+    fn local_force_quantity(id: &str) -> QuantityResult {
+        QuantityResult {
+            result_id: id.to_string(),
+            family: ResultFamily::Force,
+            object_ref: Reference::new("pipe", "pipe:P-120"),
+            basis_ref: Reference::new("load_case", "LC1"),
+            station_ref: None,
+            magnitude: 120.0,
+            unit: "N".to_string(),
+            dimension: DimensionId::Force,
+            metadata: Some(ResultMetadata {
+                component: "axial_force".to_string(),
+                coordinate_system: "element_local".to_string(),
+                location: "end_i".to_string(),
+                basis: "recovered_from_local_element_stiffness".to_string(),
+                sign_convention:
+                    "positive value follows the element-local DOF at the i-end force vector"
+                        .to_string(),
+            }),
             provenance: provenance(),
         }
     }
@@ -533,6 +595,7 @@ mod tests {
                         "N",
                         DimensionId::Force,
                     ),
+                    local_force_quantity("result:force:pipe-P-120:axial"),
                 ],
             }],
             diagnostics: Vec::new(),
@@ -579,6 +642,25 @@ mod tests {
             .diagnostics
             .iter()
             .any(|diagnostic| diagnostic.code == "RESULT_EXPORT_VALUE_METADATA_INCOMPLETE"));
+    }
+
+    #[test]
+    fn local_force_and_moment_metadata_is_mandatory() {
+        let mut envelope = envelope();
+        let force = envelope
+            .result_sets
+            .iter_mut()
+            .flat_map(|set| set.values.iter_mut())
+            .find(|value| value.result_id == "result:force:pipe-P-120:axial")
+            .expect("fixture force result exists");
+        force.metadata = None;
+
+        let validation = validate_result_envelope(&envelope);
+
+        assert!(validation.has_blocking_diagnostics());
+        assert!(validation.diagnostics.iter().any(|diagnostic| {
+            diagnostic.code == "RESULT_EXPORT_FORCE_MOMENT_METADATA_INCOMPLETE"
+        }));
     }
 
     #[test]
@@ -645,6 +727,14 @@ mod tests {
             .map(|value| value.result_id.as_str())
             .collect();
 
-        assert_eq!(ids, vec!["disp-1", "reaction-1", "stress-1"]);
+        assert_eq!(
+            ids,
+            vec![
+                "disp-1",
+                "result:force:pipe-P-120:axial",
+                "reaction-1",
+                "stress-1"
+            ]
+        );
     }
 }

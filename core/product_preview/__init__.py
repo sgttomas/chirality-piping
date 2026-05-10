@@ -1,6 +1,7 @@
 """Local product-preview service for the macOS technical preview."""
 
 from .service import (
+    build_analysis_run_preview,
     build_agent_proposal_preview,
     build_model_tree,
     load_design_knowledge,
@@ -10,6 +11,7 @@ from .service import (
 )
 
 __all__ = [
+    "build_analysis_run_preview",
     "build_agent_proposal_preview",
     "build_model_tree",
     "load_design_knowledge",

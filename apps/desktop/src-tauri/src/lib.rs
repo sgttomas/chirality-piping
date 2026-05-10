@@ -52,12 +52,44 @@ fn sample_agent_proposal() -> Result<Value, String> {
         .and_then(Value::as_array)
         .cloned()
         .unwrap_or_default();
-    let primary_ref = diagnostics
+    let results = result
+        .get("results")
+        .and_then(Value::as_array)
+        .cloned()
+        .unwrap_or_default();
+    let primary_ref = results
+        .iter()
+        .find(|item| {
+            item.get("id").and_then(Value::as_str) == Some("result:force:pipe-P-120:axial")
+        })
+        .and_then(|item| item.get("id").and_then(Value::as_str))
+        .or_else(|| {
+            results
+                .iter()
+                .find(|item| {
+                    item.get("kind").and_then(Value::as_str) == Some("element_local_axial_force")
+                })
+                .and_then(|item| item.get("id").and_then(Value::as_str))
+        })
+        .or_else(|| {
+            diagnostics
+                .iter()
+                .find(|item| item.get("severity").and_then(Value::as_str) == Some("warning"))
+                .and_then(|item| item.get("id").and_then(Value::as_str))
+        })
+        .unwrap_or("diagnostic:physics:rule-inputs-missing")
+        .to_string();
+    let diagnostic_ref = diagnostics
         .iter()
         .find(|item| item.get("severity").and_then(Value::as_str) == Some("warning"))
         .and_then(|item| item.get("id").and_then(Value::as_str))
-        .unwrap_or("diagnostic:physics:rule-inputs-missing")
-        .to_string();
+        .unwrap_or("diagnostic:physics:rule-inputs-missing");
+    let rationale_ref = if primary_ref.starts_with("result:force:") {
+        primary_ref.as_str()
+    } else {
+        diagnostic_ref
+    }
+    .to_string();
     let proposal = json!({
         "schema_version": "0.1.0",
         "document_kind": "openpipestress.product_preview.agent_proposal",
@@ -74,12 +106,12 @@ fn sample_agent_proposal() -> Result<Value, String> {
                     "change_id": "change:add-review-note",
                     "change_kind": "attach_design_knowledge",
                     "target_ref": primary_ref,
-                    "before": "No computed mechanics review note attached.",
-                    "after": "Attach review note referencing the current computed preview diagnostic/result context."
+                    "before": "No computed mechanics force review note attached.",
+                    "after": "Attach review note referencing the current computed preview force, stress, and diagnostic context."
                 }
             ]
         },
-        "rationale": format!("Generated from current preview mechanics context; primary reference is {primary_ref}."),
+        "rationale": format!("Generated from current preview mechanics context; primary reference is {rationale_ref}."),
         "assumptions": [
             "The model is invented and not a project basis.",
             "No protected criteria, allowables, or owner-standard values are available."

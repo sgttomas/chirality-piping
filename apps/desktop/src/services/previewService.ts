@@ -36,12 +36,16 @@ export async function loadSampleProposal(mechanicsResult?: MechanicsResult | nul
 }
 
 function buildProposalFromMechanics(result: MechanicsResult): AgentProposal {
-  const primary =
+  const forceResult =
+    result.results.find((item) => item.id === "result:force:pipe-P-120:axial") ??
+    result.results.find((item) => item.kind === "element_local_axial_force");
+  const primaryDiagnostic =
     result.diagnostics.find((item) => item.severity === "warning" || item.severity === "blocking") ??
     result.diagnostics[0];
   const targetRef =
-    primary?.id ??
-    primary?.affected_refs?.[0] ??
+    forceResult?.id ??
+    primaryDiagnostic?.id ??
+    primaryDiagnostic?.affected_refs?.[0] ??
     result.summary.max_displacement?.result_ref ??
     result.results[0]?.id ??
     "diagnostic:physics:context-unavailable";
@@ -60,8 +64,8 @@ function buildProposalFromMechanics(result: MechanicsResult): AgentProposal {
           change_id: "change:add-review-note",
           change_kind: "attach_design_knowledge",
           target_ref: targetRef,
-          before: "No computed mechanics review note attached.",
-          after: "Attach review note referencing the current computed preview diagnostic/result context."
+          before: "No computed mechanics force review note attached.",
+          after: "Attach review note referencing the current computed preview force, stress, and diagnostic context."
         }
       ]
     },

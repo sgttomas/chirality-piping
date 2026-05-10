@@ -16,14 +16,14 @@ export function DiagnosticsPanel({
     ...(result?.diagnostics ?? [])
   ];
   return (
-    <section className="panel diagnostics-panel" aria-label="Diagnostics">
+    <section className="panel diagnostics-panel" aria-label="Diagnostics" data-testid="diagnostics-panel">
       <div className="panel-title">
         <AlertTriangle size={16} />
         Diagnostics
       </div>
       <div className="diagnostic-list">
         {diagnostics.map((item, index) => (
-          <div className={`diagnostic ${item.severity}`} key={`${item.code}-${index}`}>
+          <div className={`diagnostic ${item.severity}`} data-testid={`diagnostic-${item.code}`} key={`${item.code}-${index}`}>
             <strong>{item.code}</strong>
             <p>{item.message}</p>
           </div>

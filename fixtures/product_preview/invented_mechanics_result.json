@@ -27,18 +27,314 @@
     }
   },
   "results": [
-    { "id": "result:disp:node-N-100", "kind": "displacement_magnitude", "value": 0.0, "unit": "mm", "entity_ref": "node:N-100" },
-    { "id": "result:disp:node-N-110", "kind": "displacement_magnitude", "value": 1.771233, "unit": "mm", "entity_ref": "node:N-110" },
-    { "id": "result:disp:node-N-120", "kind": "displacement_magnitude", "value": 0.0, "unit": "mm", "entity_ref": "node:N-120" },
-    { "id": "result:disp:node-N-130", "kind": "displacement_magnitude", "value": 22.605585, "unit": "mm", "entity_ref": "node:N-130" },
-    { "id": "result:disp:node-N-140", "kind": "displacement_magnitude", "value": 26.120937, "unit": "mm", "entity_ref": "node:N-140" },
-    { "id": "result:reaction:support-S-100", "kind": "reaction_resultant", "value": 691.181058, "unit": "N", "entity_ref": "support:S-100" },
-    { "id": "result:reaction:support-S-120", "kind": "reaction_resultant", "value": 1325.362091, "unit": "N", "entity_ref": "support:S-120" },
-    { "id": "result:reaction:support-S-130", "kind": "reaction_resultant", "value": 350.0, "unit": "N", "entity_ref": "support:S-130" },
-    { "id": "result:stress:pipe-P-100", "kind": "open_formula_stress_summary", "value": 1.996962, "unit": "MPa", "entity_ref": "pipe:P-100" },
-    { "id": "result:stress:pipe-P-110", "kind": "open_formula_stress_summary", "value": 2.95603, "unit": "MPa", "entity_ref": "pipe:P-110" },
-    { "id": "result:stress:pipe-P-120", "kind": "open_formula_stress_summary", "value": 20.341647, "unit": "MPa", "entity_ref": "pipe:P-120" },
-    { "id": "result:stress:pipe-P-130", "kind": "open_formula_stress_summary", "value": 5.627484, "unit": "MPa", "entity_ref": "pipe:P-130" }
+    {
+      "id": "result:disp:node-N-100",
+      "kind": "displacement_magnitude",
+      "value": 0.0,
+      "unit": "mm",
+      "entity_ref": "node:N-100"
+    },
+    {
+      "id": "result:disp:node-N-110",
+      "kind": "displacement_magnitude",
+      "value": 1.771233,
+      "unit": "mm",
+      "entity_ref": "node:N-110"
+    },
+    {
+      "id": "result:disp:node-N-120",
+      "kind": "displacement_magnitude",
+      "value": 0.0,
+      "unit": "mm",
+      "entity_ref": "node:N-120"
+    },
+    {
+      "id": "result:disp:node-N-130",
+      "kind": "displacement_magnitude",
+      "value": 22.605585,
+      "unit": "mm",
+      "entity_ref": "node:N-130"
+    },
+    {
+      "id": "result:disp:node-N-140",
+      "kind": "displacement_magnitude",
+      "value": 26.120937,
+      "unit": "mm",
+      "entity_ref": "node:N-140"
+    },
+    {
+      "id": "result:reaction:support-S-100",
+      "kind": "reaction_resultant",
+      "value": 691.181058,
+      "unit": "N",
+      "entity_ref": "support:S-100"
+    },
+    {
+      "id": "result:reaction:support-S-120",
+      "kind": "reaction_resultant",
+      "value": 1325.362091,
+      "unit": "N",
+      "entity_ref": "support:S-120"
+    },
+    {
+      "id": "result:reaction:support-S-130",
+      "kind": "reaction_resultant",
+      "value": 350.0,
+      "unit": "N",
+      "entity_ref": "support:S-130"
+    },
+    {
+      "id": "result:force:pipe-P-100:axial",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-100:torsion",
+      "kind": "element_local_torsional_moment",
+      "value": -404.469018,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-100:bending-y",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-100:bending-z",
+      "kind": "element_local_bending_moment_z",
+      "value": 273.24131,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-100",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-100",
+      "kind": "open_formula_stress_summary",
+      "value": 1.996962,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-100"
+    },
+    {
+      "id": "result:force:pipe-P-110:axial",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-110:torsion",
+      "kind": "element_local_torsional_moment",
+      "value": -1839.2,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-110:bending-y",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-110:bending-z",
+      "kind": "element_local_bending_moment_z",
+      "value": -404.469018,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-110",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-110",
+      "kind": "open_formula_stress_summary",
+      "value": 2.95603,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-110"
+    },
+    {
+      "id": "result:force:pipe-P-120:axial",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-120:torsion",
+      "kind": "element_local_torsional_moment",
+      "value": 770.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-120:bending-y",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-120:bending-z",
+      "kind": "element_local_bending_moment_z",
+      "value": 1839.2,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-120",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-120",
+      "kind": "open_formula_stress_summary",
+      "value": 20.341647,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-120"
+    },
+    {
+      "id": "result:force:pipe-P-130:axial",
+      "kind": "element_local_axial_force",
+      "value": 0.0,
+      "unit": "N",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "axial_force",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-130:torsion",
+      "kind": "element_local_torsional_moment",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "torsional_moment",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-130:bending-y",
+      "kind": "element_local_bending_moment_y",
+      "value": 0.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_moment_y",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:moment:pipe-P-130:bending-z",
+      "kind": "element_local_bending_moment_z",
+      "value": -770.0,
+      "unit": "N*m",
+      "entity_ref": "pipe:P-130",
+      "metadata": {
+        "component": "bending_moment_z",
+        "coordinate_system": "element_local",
+        "location": "end_i",
+        "basis": "recovered_from_local_element_stiffness",
+        "sign_convention": "positive value follows the element-local DOF at the i-end force vector"
+      }
+    },
+    {
+      "id": "result:stress:pipe-P-130",
+      "kind": "open_formula_stress_summary",
+      "value": 5.627484,
+      "unit": "MPa",
+      "entity_ref": "pipe:P-130"
+    }
   ],
   "diagnostics": [
     {
@@ -54,7 +350,10 @@
       "severity": "warning",
       "message": "computed preview displacement exceeds the invented review threshold; inspect support/load inputs before relying on trends",
       "source": "core/product_physics",
-      "affected_refs": ["result:disp:node-N-140", "node:N-140"]
+      "affected_refs": [
+        "result:disp:node-N-140",
+        "node:N-140"
+      ]
     },
     {
       "id": "diagnostic:physics:rule-inputs-missing",

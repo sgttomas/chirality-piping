@@ -219,6 +219,7 @@
             "solver_settings",
             "load_basis",
             "result_envelope",
+            "result_value",
             "audit_manifest",
             "external_reference",
             "TBD"
@@ -474,6 +475,7 @@
             "UnitSystem",
             "LoadCase",
             "LoadCombination",
+            "Result",
             "ResultEnvelope",
             "RulePack",
             "Library",

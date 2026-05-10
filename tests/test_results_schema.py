@@ -7,6 +7,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "schemas" / "results.schema.yaml"
+PRODUCT_PREVIEW_RESULT_PATH = (
+    ROOT / "fixtures" / "product_preview" / "invented_mechanics_result.json"
+)
 
 REQUIRED_ROOT = {
     "schema_version",
@@ -32,6 +35,7 @@ REQUIRED_DEFS = {
     "Reproducibility",
     "ResultEnvelope",
     "ResultFamily",
+    "ResultMetadata",
     "ResultSet",
     "RulePackRef",
     "SolverVersion",
@@ -79,6 +83,11 @@ FORBIDDEN_FORMAT_COMMITMENTS = {
 def load_schema():
     with SCHEMA_PATH.open(encoding="utf-8") as schema_file:
         return json.load(schema_file)
+
+
+def load_product_preview_result():
+    with PRODUCT_PREVIEW_RESULT_PATH.open(encoding="utf-8") as fixture_file:
+        return json.load(fixture_file)
 
 
 def required_at(schema, definition_name):
@@ -176,7 +185,52 @@ def main():
         "dimension",
         "provenance",
     } <= quantity_required
+    assert "metadata" not in quantity_required
+    assert (
+        defs["QuantityResult"]["properties"]["metadata"]["$ref"]
+        == "#/$defs/ResultMetadata"
+    )
+    assert {
+        "component",
+        "coordinate_system",
+        "location",
+        "basis",
+        "sign_convention",
+    } <= required_at(schema, "ResultMetadata")
+    metadata = defs["ResultMetadata"]["properties"]
+    assert {
+        "axial_force",
+        "torsional_moment",
+        "bending_moment_y",
+        "bending_moment_z",
+    } <= set(metadata["component"]["enum"])
+    assert "element_local" in set(metadata["coordinate_system"]["enum"])
+    assert {"end_i", "end_j"} <= set(metadata["location"]["enum"])
+    assert (
+        "recovered_from_local_element_stiffness"
+        in set(metadata["basis"]["enum"])
+    )
+    quantity_condition = defs["QuantityResult"]["allOf"][0]
+    assert set(quantity_condition["if"]["properties"]["family"]["enum"]) == {
+        "force",
+        "moment",
+    }
+    assert "metadata" in quantity_condition["then"]["required"]
     assert REQUIRED_FAMILIES <= enum_at(schema, "ResultFamily")
+
+    preview_result = load_product_preview_result()
+    axial_force = next(
+        result
+        for result in preview_result["results"]
+        if result["id"] == "result:force:pipe-P-120:axial"
+    )
+    axial_metadata = axial_force["metadata"]
+    assert axial_force["unit"] == "N"
+    assert axial_metadata["component"] in metadata["component"]["enum"]
+    assert axial_metadata["coordinate_system"] in metadata["coordinate_system"]["enum"]
+    assert axial_metadata["location"] in metadata["location"]["enum"]
+    assert axial_metadata["basis"] in metadata["basis"]["enum"]
+    assert axial_metadata["sign_convention"]
 
     diagnostic_required = required_at(schema, "Diagnostic")
     assert {

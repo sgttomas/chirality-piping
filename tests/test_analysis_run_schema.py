@@ -176,6 +176,7 @@ def main():
         "solver_settings",
         "load_basis",
         "result_envelope",
+        "result_value",
         "audit_manifest",
     } <= set(defs["Checksum"]["properties"]["payload_scope"]["enum"])
 
@@ -193,6 +194,7 @@ def main():
         "determinism_notes",
         "unresolved_tbd",
     } <= required_at(schema, "Reproducibility")
+    assert "Result" in set(defs["Reference"]["properties"]["object_type"]["enum"])
     assert {
         "result_ref",
         "result_family",

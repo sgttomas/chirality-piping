@@ -11,14 +11,14 @@ export function AgentProposalPanel({
   onLoad: () => void;
 }) {
   return (
-    <section className="panel agent-panel" aria-label="Agentic proposal">
+    <section className="panel agent-panel" aria-label="Agentic proposal" data-testid="agent-proposal-panel">
       <div className="panel-title">Proposal</div>
-      <button className="secondary-action" onClick={onLoad} disabled={!mechanicsReady} type="button">
+      <button className="secondary-action" data-testid="generate-review-proposal" onClick={onLoad} disabled={!mechanicsReady} type="button">
         <Wand2 size={16} />
         Generate review proposal
       </button>
       {proposal ? (
-        <div className="proposal-body">
+        <div className="proposal-body" data-testid="proposal-body">
           <h2>{proposal.proposal_id}</h2>
           <p>{proposal.rationale}</p>
           <div className="status-pill">
@@ -35,7 +35,7 @@ export function AgentProposalPanel({
               </article>
             ))}
           </div>
-          <button className="review-action" disabled type="button" title="Review-only until accepted mutation is implemented">
+          <button className="review-action" data-testid="accept-proposal-disabled" disabled type="button" title="Review-only until accepted mutation is implemented">
             <CheckSquare size={16} />
             Accept disabled
           </button>
