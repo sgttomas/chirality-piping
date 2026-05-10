@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.1.0",
+  "document_kind": "openpipestress.product_preview.mechanics_result",
+  "run_id": "run:preview-linear-static-001",
+  "model_ref": "project:invented-loop-01",
+  "status": {
+    "mechanics": "MECHANICS_SOLVED",
+    "rule_check": "RULE_INPUTS_INCOMPLETE",
+    "professional_acceptance": "NOT_PROVIDED"
+  },
+  "summary": {
+    "node_count": 5,
+    "segment_count": 4,
+    "support_count": 3,
+    "load_case_count": 1,
+    "max_displacement": {
+      "value": 26.120937,
+      "unit": "mm",
+      "location_ref": "node:N-140",
+      "result_ref": "result:disp:node-N-140"
+    },
+    "max_open_formula_stress": {
+      "value": 20.341647,
+      "unit": "MPa",
+      "location_ref": "pipe:P-120",
+      "result_ref": "result:stress:pipe-P-120"
+    }
+  },
+  "results": [
+    { "id": "result:disp:node-N-100", "kind": "displacement_magnitude", "value": 0.0, "unit": "mm", "entity_ref": "node:N-100" },
+    { "id": "result:disp:node-N-110", "kind": "displacement_magnitude", "value": 1.771233, "unit": "mm", "entity_ref": "node:N-110" },
+    { "id": "result:disp:node-N-120", "kind": "displacement_magnitude", "value": 0.0, "unit": "mm", "entity_ref": "node:N-120" },
+    { "id": "result:disp:node-N-130", "kind": "displacement_magnitude", "value": 22.605585, "unit": "mm", "entity_ref": "node:N-130" },
+    { "id": "result:disp:node-N-140", "kind": "displacement_magnitude", "value": 26.120937, "unit": "mm", "entity_ref": "node:N-140" },
+    { "id": "result:reaction:support-S-100", "kind": "reaction_resultant", "value": 691.181058, "unit": "N", "entity_ref": "support:S-100" },
+    { "id": "result:reaction:support-S-120", "kind": "reaction_resultant", "value": 1325.362091, "unit": "N", "entity_ref": "support:S-120" },
+    { "id": "result:reaction:support-S-130", "kind": "reaction_resultant", "value": 350.0, "unit": "N", "entity_ref": "support:S-130" },
+    { "id": "result:stress:pipe-P-100", "kind": "open_formula_stress_summary", "value": 1.996962, "unit": "MPa", "entity_ref": "pipe:P-100" },
+    { "id": "result:stress:pipe-P-110", "kind": "open_formula_stress_summary", "value": 2.95603, "unit": "MPa", "entity_ref": "pipe:P-110" },
+    { "id": "result:stress:pipe-P-120", "kind": "open_formula_stress_summary", "value": 20.341647, "unit": "MPa", "entity_ref": "pipe:P-120" },
+    { "id": "result:stress:pipe-P-130", "kind": "open_formula_stress_summary", "value": 5.627484, "unit": "MPa", "entity_ref": "pipe:P-130" }
+  ],
+  "diagnostics": [
+    {
+      "id": "diagnostic:physics:pressure-not-applied",
+      "code": "PRESSURE_LOAD_NOT_APPLIED_TO_FRAME_VECTOR",
+      "severity": "warning",
+      "message": "pressure primitive loads are retained for stress recovery context but are not converted to frame nodal loads in this preview slice",
+      "source": "core/product_physics"
+    },
+    {
+      "id": "diagnostic:physics:high-displacement-review",
+      "code": "HIGH_DISPLACEMENT_REVIEW",
+      "severity": "warning",
+      "message": "computed preview displacement exceeds the invented review threshold; inspect support/load inputs before relying on trends",
+      "source": "core/product_physics",
+      "affected_refs": ["result:disp:node-N-140", "node:N-140"]
+    },
+    {
+      "id": "diagnostic:physics:rule-inputs-missing",
+      "code": "RULE_CHECK_INPUTS_MISSING",
+      "severity": "warning",
+      "message": "rule-check inputs and protected criteria are absent; no compliance result is produced",
+      "source": "core/product_physics"
+    }
+  ],
+  "professional_boundary": {
+    "human_review_required": true,
+    "software_makes_compliance_claim": false,
+    "software_makes_certification_claim": false,
+    "software_makes_sealing_claim": false,
+    "software_makes_approval_claim": false
+  },
+  "accepted_model_state_mutated": false
+}

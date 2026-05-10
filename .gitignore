@@ -4,6 +4,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.tsbuildinfo
 
 .pytest_cache/
 .mypy_cache/
@@ -15,6 +16,8 @@ node_modules/
 .next/
 dist/
 build/
+target/
+apps/desktop/src-tauri/gen/
 
 .env
 .env.*
