@@ -78,11 +78,12 @@ completed task archive remains historical pre-SCA-002 DEV-001 state unless a
 row explicitly says otherwise.
 
 **Last Updated:** 2026-05-09
-**Actor:** ORCHESTRATOR DEV-001 revision 0.5 final acceptance/archive record
+**Actor:** ORCHESTRATOR DEV-001 revision 0.5 RT-1 evidence archive release review plan
 **Current Decomposition:** `execution/_Decomposition/SOFTWARE_DECOMP.md` revision `0.5` accepted for downstream refresh planning
 **Current Mode:** `DAG-002` revision `0.5` active edge set approved; all 84 non-`PKG-00` dependency mirrors refreshed; 8 `PKG-00` registers exempt; lifecycle projection is now 84 `CHECKING`, 8 `SEMANTIC_READY`, 0 `OPEN`; Tranche A through M implementation evidence is committed through `DEL-12-04`; Tranche M implementation/closeout is committed as `bfb3931`; implementation evidence now has 84 records with 84 `COMMITTED` and 0 `WORKING_TREE`; blocker queue remains 92 unblocked / 0 blocked under the unchanged `COMMITTED` threshold; no dependency mirror refresh, aggregate DAG mutation, candidate promotion, live CI/signing/publishing, professional acceptance claim, autonomous mutation workflow, full GUI/runtime completion claim, or Chirality corpus promotion is authorized by promotion
-**Current Planning Surface:** `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md`, `execution/_Coordination/DEV-001_REV05_FINAL_ARCHIVE_ACCEPTANCE_GATE_RECOMMENDATION.md`, `execution/_Coordination/DEV-001_REV05_FINAL_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_M_COMPLETION_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_L_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-06.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-08.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-01.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-05.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-12-04.md`, `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`, `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`, `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`, `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`, and `execution/_Coordination/DEV-001_REV05_TRANCHE_L_PROMOTION_HANDOFF.md`
-**Latest Assessment Surface:** `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_M_COMPLETION_ASSESSMENT.md`
+**Current Planning Surface:** `execution/_Coordination/DEV-001_REV05_RT1_EVIDENCE_ARCHIVE_RELEASE_REVIEW_PLAN.md`, `execution/_Coordination/DEV-001_REV05_RELEASE_TARGET_EVALUATION.md`, `execution/_Coordination/DEV-001_REV05_RELEASE_READINESS_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_REV05_RELEASE_READINESS_PLANNING.md`, `execution/_Coordination/DEV-001_REV05_RUNTIME_PRODUCT_GAP_LEDGER.md`, `execution/_Coordination/DEV-001_REV05_SCOPE_CHANGE_TRIAGE.md`, `execution/_Coordination/DEV-001_REV05_POST_CANDIDATE_RECONCILIATION_RELEASE_RUNTIME_SCOPE_PLAN.md`, `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-09_DEV001_REV05_CANDIDATE_EDGE_RECONCILIATION.md`, `execution/_Coordination/DEV-001_REV05_POST_ACCEPTANCE_NEXT_PHASE_OPTIONS.md`, `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md`, `execution/_Coordination/DEV-001_REV05_FINAL_ARCHIVE_ACCEPTANCE_GATE_RECOMMENDATION.md`, `execution/_Coordination/DEV-001_REV05_FINAL_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_M_COMPLETION_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_PROMOTION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_REVIEW_AUDIT_CLOSEOUT.md`, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_IMPLEMENTATION_HANDOFF.md`, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_L_NEXT_STEP_ASSESSMENT.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-06.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-08.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-01.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-05.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-12-04.md`, `execution/_DAG/DAG-002/`, `execution/_DAG/DAG-002/APPROVAL_RECORD.md`, `execution/_DAG/DAG-002/DAG-002_Mermaid.md`, `execution/_DAG/DAG-002/DAG-002_APPROVAL_REVIEW_PACKET.md`, `execution/_Coordination/DEV-001_IMPLEMENTATION_EVIDENCE.csv`, `execution/_Coordination/DEV-001_BLOCKER_QUEUE.md`, `execution/_Coordination/REV05_LIFECYCLE_STATE_SNAPSHOT.csv`, `execution/_Coordination/DEV-001_REV05_IMPLEMENTATION_EVIDENCE_STATUS.csv`, `execution/_Coordination/DEV-001_REV05_DEPENDENCY_REGISTER_STATUS.csv`, and `execution/_Coordination/DEV-001_REV05_TRANCHE_L_PROMOTION_HANDOFF.md`
+**Latest Reconciliation Surface:** `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-09_DEV001_REV05_CANDIDATE_EDGE_RECONCILIATION.md`
+**Latest Assessment Surface:** `execution/_Coordination/DEV-001_REV05_RT1_EVIDENCE_ARCHIVE_RELEASE_REVIEW_PLAN.md`
 **Latest Post-Promotion Assessment Surface:** `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_M_COMPLETION_ASSESSMENT.md`
 **Latest Tranche M Scope Surfaces:** `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-06.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-07-08.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-01.md`, `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-11-05.md`, and `execution/_Coordination/DEV-001_REV05_SEALED_BRIEF_DEL-12-04.md`
 **Latest Tranche M Implementation Handoff Surface:** `execution/_Coordination/DEV-001_REV05_TRANCHE_M_IMPLEMENTATION_HANDOFF.md`
@@ -145,9 +146,9 @@ row explicitly says otherwise.
 | Parallel dispatch policy | Intended Type 2 path is human-approved bounded parallel tranches: one sealed brief per deliverable, readiness evidence, acceptance criteria, guardrails, explicit write scope, and disjoint or explicitly coordinated worker ownership |
 | Latest state commit | DEV-001 revision `0.5` final acceptance/archive record committed locally as `c0303c4` (`coordination: accept dev001 rev05 evidence closure`); push was separately approved by the latest human gate after this handoff correction. |
 | Latest cleanup commit | Coordination artifact hygiene committed as `9341402` (`coordination: align tranche j handoff state`) and handoff completion committed as `d93d00d` (`coordination: complete tranche j hygiene handoff`). |
-| Previous completed task archive status | `DEV-001 revision 0.5 Tranche M implementation commit and evidence promotion` archived in compact history by this handoff update. |
-| Latest state task | `DEV-001 revision 0.5 final acceptance/archive record` |
-| Current authorized item | Human approved updating this coordination handoff state to record local acceptance/archive commit `c0303c4` before push, then pushing. This correction records that `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md` was committed locally as `c0303c4` after the acceptance/archive gate. No `DAG-002` mutation, candidate-edge promotion, dependency mirror refresh, lifecycle/evidence state change, professional acceptance claim, live CI/signing/publishing, autonomous mutation workflow, full GUI/runtime completion claim, release/production readiness claim, or Chirality corpus promotion is authorized by this handoff correction. |
+| Previous completed task archive status | `DEV-001 revision 0.5 release target evaluation` archived in compact history by this handoff update. |
+| Latest state task | `DEV-001 revision 0.5 RT-1 evidence archive release review plan` |
+| Current authorized item | Human approved preparing a proposal-only DEV-001 revision `0.5` `RT-1` evidence archive release review plan from the release target evaluation. ORCHESTRATOR prepared `execution/_Coordination/DEV-001_REV05_RT1_EVIDENCE_ARCHIVE_RELEASE_REVIEW_PLAN.md`. No archive or tag was created, no release target was selected or approved, and no Type 2 dispatch, `DAG-002` mutation, candidate-edge promotion, dependency mirror refresh, lifecycle/evidence state change, professional acceptance claim, release/production readiness claim, full GUI/runtime completion claim, or Chirality corpus promotion occurred. |
 | Current dispatch brief | Historical `execution/_Coordination/DEV-001_DISPATCH_DEL-07-01.md`; stale for revision `0.5` and not reusable |
 | Root next-session prompt posture | Stable bootstrap; delegate current objective discovery to coordination state and latest human gate |
 | Next-instance prompt posture | Stable protocol; derive current objective from this file, `_COORDINATION.md`, the latest DAG pointer, current blocker/evidence/dependency status surfaces, and the latest human gate |
@@ -547,6 +548,13 @@ Universal historical guardrails preserved across the completed bounded items:
 
 | Task | Result / commit | Primary changed surfaces | Verification summary | Remaining notable TBDs |
 |---|---|---|---|---|
+| `DEV-001 revision 0.5 release target evaluation` | Completed; not committed | `execution/_Coordination/DEV-001_REV05_RELEASE_TARGET_EVALUATION.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | RT-0 through RT-5 evaluated against accepted evidence closure, missing gates, governance risk, and near-term viability; `git diff --check` passed before later RT-1 review plan preparation | Recommended `RT-1` for the next review plan. Did not select or approve a release target, authorize Type 2 dispatch, mutate graph, promote candidates, refresh dependencies, change lifecycle/evidence, claim release/product/professional readiness, or promote Chirality corpus material. |
+| `DEV-001 revision 0.5 release-readiness review packet` | Completed; not committed | `execution/_Coordination/DEV-001_REV05_RELEASE_READINESS_REVIEW_PACKET.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Review packet prepared from release-readiness plan, runtime/product gap ledger, and scope-change triage; `git diff --check` passed before later release target evaluation | Recommended evaluation of release targets and identified `RT-1` as lowest-risk near-term review target. Did not authorize release selection, Type 2 dispatch, graph mutation, candidate promotion, dependency refresh, lifecycle/evidence changes, release claims, full runtime claims, professional acceptance, or Chirality corpus promotion. |
+| `DEV-001 revision 0.5 next-phase planning route` | Completed; not committed | `execution/_Coordination/DEV-001_REV05_RELEASE_READINESS_PLANNING.md`, `execution/_Coordination/DEV-001_REV05_RUNTIME_PRODUCT_GAP_LEDGER.md`, `execution/_Coordination/DEV-001_REV05_SCOPE_CHANGE_TRIAGE.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Three planning artifacts prepared from release/runtime/scope route; `git diff --check` passed before later review-packet preparation | Recommended a release-readiness review packet with release target options, gate checklist, missing evidence, waiver candidates, and non-claims. Did not authorize Type 2 dispatch, graph mutation, candidate promotion, dependency refresh, lifecycle/evidence changes, release claims, full runtime claims, professional acceptance, or Chirality corpus promotion. |
+| `DEV-001 revision 0.5 post-candidate reconciliation release/runtime/scope planning` | Completed; not committed | `execution/_Coordination/DEV-001_REV05_POST_CANDIDATE_RECONCILIATION_RELEASE_RUNTIME_SCOPE_PLAN.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Plan prepared from accepted evidence-closure state and candidate reconciliation summary; it organized release-readiness, runtime/product gap, and scope-change triage routes | Did not authorize Type 2 dispatch, graph mutation, candidate promotion, dependency refresh, lifecycle/evidence changes, release claims, full runtime claims, professional acceptance, or Chirality corpus promotion. |
+| `DEV-001 revision 0.5 post-acceptance next-phase options assessment` | Completed; not committed | `execution/_Coordination/DEV-001_REV05_POST_ACCEPTANCE_NEXT_PHASE_OPTIONS.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Assessment prepared from accepted evidence-closure state, accepted `DAG-002`, candidate rows, blocker/evidence/dependency status, and residual boundaries; `git diff --check` passed before later candidate reconciliation | Recommended candidate-edge reconciliation first, then runtime/product gap planning, release-readiness planning, and scope-change triage as needed. Did not authorize Type 2 dispatch, graph mutation, candidate promotion, dependency refresh, lifecycle/evidence changes, release claims, or Chirality corpus promotion. |
+| `DEV-001 revision 0.5 candidate-edge reconciliation` | Completed; not committed | `execution/_Reconciliation/Reconciliation_Run_Summary_2026-05-09_DEV001_REV05_CANDIDATE_EDGE_RECONCILIATION.md`, `execution/_Reconciliation/_LATEST.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Eight retained `DAG-002` candidates reconciled against active graph, candidate-layer SCC warnings, accepted evidence-closure state, and implementation boundary evidence | Recommends seven retirements and one retained non-gating release-security review candidate. Did not authorize Type 2 dispatch, graph mutation, candidate promotion, dependency refresh, lifecycle/evidence changes, release claims, or Chirality corpus promotion. |
+| `DEV-001 revision 0.5 final acceptance/archive record` | Completed; acceptance commit `c0303c4`, handoff correction/push `cdd164c` | `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md`, final archive recommendation, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Acceptance record captured 84 committed non-`PKG-00` evidence rows, 92 unblocked / 0 blocked, 84 synchronized non-`PKG-00` mirrors, and retained candidate boundaries; `git diff --check` passed before handoff correction commit | Accepted only bounded implementation-evidence closure. Professional acceptance, release readiness, production readiness, full GUI/runtime completion, candidate reconciliation, scope-change topics, and Chirality corpus promotion remain future gated work. |
 | `DEV-001 revision 0.5 Tranche M REVIEW/AUDIT closeout preparation` | Completed; implementation/closeout `bfb3931` | Five deliverable status files, `DEV-001_IMPLEMENTATION_EVIDENCE.csv`, implementation-evidence projection, lifecycle snapshot, blocker queue, Tranche M closeout artifact, coordination handoff surfaces | REVIEW/AUDIT accepted outputs; focused Tranche M tests, adjacent checks, dependency schema validation, strict DAG audit, blocker queue rebuild, `git diff --check`, and focused scans passed | Human then authorized commit, `COMMITTED` evidence promotion, blocker queue rebuild, promotion handoff, and push. Closeout itself did not authorize dependency mirror refresh, aggregate DAG mutation, candidate promotion, live CI/signing/publishing, professional acceptance claims, autonomous mutation workflows, full GUI/runtime completion claim, or Chirality promotion. |
 | `DEV-001 revision 0.5 Tranche M implementation dispatch and handoff` | Completed; not committed | Tranche M worker outputs, `execution/_Coordination/DEV-001_REV05_TRANCHE_M_IMPLEMENTATION_HANDOFF.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Five bounded workers returned scoped outputs; ORCHESTRATOR reran focused and adjacent checks; `git diff --check`, py_compile, trailing-whitespace scan, and focused boundary scans passed | Human later authorized post-worker REVIEW/AUDIT and CHANGE-managed closeout preparation using `WORKING_TREE` evidence. Dispatch itself did not authorize lifecycle/evidence/blocker/dependency/DAG changes, candidate promotion, commit, push, live CI/signing/publishing, professional acceptance claims, autonomous mutation workflows, full GUI/runtime completion claim, or Chirality promotion. |
 | `DEV-001 revision 0.5 Tranche M sealed brief preparation` | Completed; not committed | Five Tranche M sealed briefs, `execution/_Coordination/DEV-001_REV05_POST_TRANCHE_L_NEXT_STEP_ASSESSMENT.md`, `_COORDINATION.md`, `NEXT_INSTANCE_STATE.md` | Briefs prepared from approved `DAG-002`, current blocker/evidence/lifecycle/dependency status surfaces, deliverable contexts, and contract invariants; `git diff --check` passed after preparation | Human later authorized bounded Tranche M worker dispatch. Brief preparation itself did not authorize worker launch until that later gate, lifecycle/evidence/blocker/dependency/DAG changes, candidate promotion, commit, push, live CI/signing/publishing, professional acceptance claims, autonomous mutation workflows, full GUI/runtime completion claim, or Chirality promotion. |
@@ -727,51 +735,32 @@ Human project authority accepted objective-neutral bootstrap/control-loop postur
 - It removes ambiguous wording around "current blocker evidence" and states
   that queue refresh is driven by DAG/evidence changes.
 
-## Latest State - DEV-001 Revision 0.5 Final Acceptance/Archive Record
+## Latest State - DEV-001 Revision 0.5 RT-1 Evidence Archive Release Review Plan
 
-Human approved creating a DEV-001 revision `0.5` final acceptance/archive
-record for bounded implementation-evidence closure using final closeout commit
-`8760bb9`, current `COMMITTED` evidence counts, approved `DAG-002`
-active-edge authority, and recorded residual boundaries.
+Human approved preparing a proposal-only DEV-001 revision `0.5` `RT-1`
+evidence archive release review plan from the release target evaluation.
 
 Completed output:
 
-- Prepared `execution/_Coordination/DEV-001_REV05_ACCEPTANCE_RECORD.md`.
-- Updated
-  `execution/_Coordination/DEV-001_REV05_FINAL_ARCHIVE_ACCEPTANCE_GATE_RECOMMENDATION.md`
-  to point to the acceptance record.
-- Updated `_COORDINATION.md` and this handoff state to make the acceptance
-  record the current control-plane surface.
-- Committed the acceptance/archive record and coordination updates locally as
-  `c0303c4` (`coordination: accept dev001 rev05 evidence closure`).
-- Human then approved this handoff correction to record `c0303c4` before push,
-  followed by pushing the resulting `main` state.
+- Prepared
+  `execution/_Coordination/DEV-001_REV05_RT1_EVIDENCE_ARCHIVE_RELEASE_REVIEW_PLAN.md`.
+- Updated `_COORDINATION.md` and this handoff state to make the `RT-1` review
+  plan the current planning surface.
 - Preserved `DAG-002`, candidate rows, dependency mirrors, lifecycle/evidence
   state, professional acceptance, release readiness, production readiness,
   full GUI/runtime completion, and Chirality corpus boundaries as non-actions.
 
-Acceptance result:
+Plan result:
 
-- DEV-001 revision `0.5` is accepted only as bounded implementation-evidence
-  closed.
-- Accepted scope: 84 non-`PKG-00` committed implementation-evidence rows and
-  92 unblocked / 0 blocked queue state.
-- `PKG-00` remains architecture-basis context, not implementation evidence.
-- Candidate rows remain deferred and non-gating: 8 retained candidates and 1
-  retired candidate row.
-- Explicit non-claims are recorded for professional acceptance, release
-  readiness, production readiness, code compliance, full GUI/runtime
-  completion, and Chirality corpus promotion.
-
-Verification:
-
-- Source closeout was read from committed coordination state at `8760bb9`.
-- Current counts were reconfirmed before acceptance record preparation: 84
-  `COMMITTED` implementation rows, 8 `ARCHITECTURE_BASELINE` rows, 92
-  unblocked, 84 synchronized non-`PKG-00` dependency mirrors, and 8 `PKG-00`
-  register-exempt rows.
-- `git diff --check origin/main..HEAD` passed for local acceptance commit
-  `c0303c4`.
+- Defined proposed included and excluded artifact groups for `RT-1`.
+- Defined immutable archive/tag method constraints without creating a tag.
+- Drafted required non-claim wording for an evidence/archive release.
+- Defined private/protected-data scan requirements.
+- Defined candidate posture disclosure.
+- Defined release owner/authority fields and live CI/signing/publishing waiver
+  record.
+- No archive or tag was created, and no release target was selected or
+  approved.
 
 Control-state non-actions:
 
@@ -780,16 +769,20 @@ Control-state non-actions:
   professional acceptance claim, release readiness claim, production-readiness
   claim, full GUI/runtime completion claim, Type 2 dispatch,
   live CI/signing/publishing, autonomous mutation workflow, or Chirality corpus
-  promotion occurred. The local coordination commit `c0303c4` is file-state
-  evidence only; push is authorized separately by the latest human gate.
+  promotion occurred.
 
 ## Immediate Next Actions
 
-Current guarded action:
+Recommended next guarded action:
 
 ```text
-APPROVE: update coordination handoff state to record local acceptance commit
-c0303c4 before any push. and then push
+APPROVE: prepare a proposal-only DEV-001 revision 0.5 RT-1 evidence archive
+release review packet from the RT-1 evidence archive release review plan.
+Include archive artifact checklist, non-claim notice, private/protected-data
+scan checklist, candidate posture disclosure, waiver table, and archive
+authority fields. Do not create an archive, tag a commit, dispatch Type 2 work,
+mutate DAG-002, promote candidate edges, refresh dependency mirrors, or change
+lifecycle/evidence state.
 ```
 
 Do not start open-ended broad DAG execution. Parallel fan-out remains bounded
